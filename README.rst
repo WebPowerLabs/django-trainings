@@ -3,7 +3,6 @@ cookiecutter-project
 
 DTF project
 
-
 LICENSE: BSD
 
 Settings
