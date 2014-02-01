@@ -1,7 +1,7 @@
 cookiecutter-project
 ==============================
 
-Django-cookiecutter project
+DTF project
 
 
 LICENSE: BSD
