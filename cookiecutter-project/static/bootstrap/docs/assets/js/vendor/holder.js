@@ -1,12 +1,18 @@
 /*!
 
+<<<<<<< HEAD
 Holder - 2.3.1 - client side image placeholders
 (c) 2012-2014 Ivan Malopinsky / http://imsky.co
+=======
+Holder - 2.2 - client side image placeholders
+(c) 2012-2013 Ivan Malopinsky / http://imsky.co
+>>>>>>> be364f8... Adds latest design changes
 
 Provided under the MIT License.
 Commercial use requires attribution.
 
 */
+<<<<<<< HEAD
 var Holder = Holder || {};
 (function (app, win) {
 var system_config = {
@@ -16,28 +22,48 @@ var system_config = {
 };
 var instance_config = {};
 var preempted = false;
+=======
+
+var Holder = Holder || {};
+(function (app, win) {
+
+var preempted = false,
+fallback = false,
+>>>>>>> be364f8... Adds latest design changes
 canvas = document.createElement('canvas');
 var dpr = 1, bsr = 1;
 var resizable_images = [];
 
 if (!canvas.getContext) {
+<<<<<<< HEAD
 	system_config.use_fallback = true;
+=======
+	fallback = true;
+>>>>>>> be364f8... Adds latest design changes
 } else {
 	if (canvas.toDataURL("image/png")
 		.indexOf("data:image/png") < 0) {
 		//Android doesn't support data URI
+<<<<<<< HEAD
 		system_config.use_fallback = true;
+=======
+		fallback = true;
+>>>>>>> be364f8... Adds latest design changes
 	} else {
 		var ctx = canvas.getContext("2d");
 	}
 }
 
+<<<<<<< HEAD
 if(!!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect){
 	system_config.use_svg = true;
 	system_config.use_canvas = false;
 }
 
 if(!system_config.use_fallback){
+=======
+if(!fallback){
+>>>>>>> be364f8... Adds latest design changes
     dpr = window.devicePixelRatio || 1,
     bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
 }
@@ -137,6 +163,49 @@ app.flags = {
 	}
 }
 
+<<<<<<< HEAD
+=======
+//getElementsByClassName polyfill
+document.getElementsByClassName||(document.getElementsByClassName=function(e){var t=document,n,r,i,s=[];if(t.querySelectorAll)return t.querySelectorAll("."+e);if(t.evaluate){r=".//*[contains(concat(' ', @class, ' '), ' "+e+" ')]",n=t.evaluate(r,t,null,0,null);while(i=n.iterateNext())s.push(i)}else{n=t.getElementsByTagName("*"),r=new RegExp("(^|\\s)"+e+"(\\s|$)");for(i=0;i<n.length;i++)r.test(n[i].className)&&s.push(n[i])}return s})
+
+//getComputedStyle polyfill
+window.getComputedStyle||(window.getComputedStyle=function(e){return this.el=e,this.getPropertyValue=function(t){var n=/(\-([a-z]){1})/g;return t=="float"&&(t="styleFloat"),n.test(t)&&(t=t.replace(n,function(){return arguments[2].toUpperCase()})),e.currentStyle[t]?e.currentStyle[t]:null},this})
+
+//http://javascript.nwbox.com/ContentLoaded by Diego Perini with modifications
+function contentLoaded(n,t){var l="complete",s="readystatechange",u=!1,h=u,c=!0,i=n.document,a=i.documentElement,e=i.addEventListener?"addEventListener":"attachEvent",v=i.addEventListener?"removeEventListener":"detachEvent",f=i.addEventListener?"":"on",r=function(e){(e.type!=s||i.readyState==l)&&((e.type=="load"?n:i)[v](f+e.type,r,u),!h&&(h=!0)&&t.call(n,null))},o=function(){try{a.doScroll("left")}catch(n){setTimeout(o,50);return}r("poll")};if(i.readyState==l)t.call(n,"lazy");else{if(i.createEventObject&&a.doScroll){try{c=!n.frameElement}catch(y){}c&&o()}i[e](f+"DOMContentLoaded",r,u),i[e](f+s,r,u),n[e](f+"load",r,u)}}
+
+//https://gist.github.com/991057 by Jed Schmidt with modifications
+function selector(a){
+	a=a.match(/^(\W)?(.*)/);var b=document["getElement"+(a[1]?a[1]=="#"?"ById":"sByClassName":"sByTagName")](a[2]);
+	var ret=[];	b!==null&&(b.length?ret=b:b.length===0?ret=b:ret=[b]);	return ret;
+}
+
+//shallow object property extend
+function extend(a,b){
+	var c={};
+	for(var i in a){
+		if(a.hasOwnProperty(i)){
+			c[i]=a[i];
+		}
+	}
+	for(var i in b){
+		if(b.hasOwnProperty(i)){
+			c[i]=b[i];
+		}
+	}
+	return c
+}
+
+//hasOwnProperty polyfill
+if (!Object.prototype.hasOwnProperty)
+    /*jshint -W001, -W103 */
+    Object.prototype.hasOwnProperty = function(prop) {
+		var proto = this.__proto__ || this.constructor.prototype;
+		return (prop in this) && (!(prop in proto) || proto[prop] !== this[prop]);
+	}
+    /*jshint +W001, +W103 */
+
+>>>>>>> be364f8... Adds latest design changes
 function text_size(width, height, template) {
 	height = parseInt(height, 10);
 	width = parseInt(width, 10);
@@ -149,6 +218,7 @@ function text_size(width, height, template) {
 	}
 }
 
+<<<<<<< HEAD
 var svg_el = (function(){
 	//Prevent IE <9 from initializing SVG renderer
 	if(!window.XMLSerializer) return;
@@ -205,12 +275,26 @@ function draw_canvas(args) {
 		holder = args.holder,
 		literal = holder.textmode == "literal",
 		exact = holder.textmode == "exact";
+=======
+function draw(args) {
+	var ctx = args.ctx;
+	var dimensions = args.dimensions;
+	var template = args.template;
+	var ratio = args.ratio;
+	var holder = args.holder;
+	var literal = holder.textmode == "literal";
+	var exact = holder.textmode == "exact";
+>>>>>>> be364f8... Adds latest design changes
 
 	var ts = text_size(dimensions.width, dimensions.height, template);
 	var text_height = ts.height;
 	var width = dimensions.width * ratio,
 		height = dimensions.height * ratio;
+<<<<<<< HEAD
 	var font = template.font ? template.font : "Arial,Helvetica,sans-serif";
+=======
+	var font = template.font ? template.font : "sans-serif";
+>>>>>>> be364f8... Adds latest design changes
 	canvas.width = width;
 	canvas.height = height;
 	ctx.textAlign = "center";
@@ -238,6 +322,7 @@ function draw_canvas(args) {
 	return canvas.toDataURL("image/png");
 }
 
+<<<<<<< HEAD
 function draw_svg(args){
 	var dimensions = args.dimensions,
 		template = args.template,
@@ -282,6 +367,10 @@ function draw(args) {
 }
 
 function render(mode, el, holder, src) {
+=======
+function render(mode, el, holder, src) {
+	
+>>>>>>> be364f8... Adds latest design changes
 	var dimensions = holder.dimensions,
 		theme = holder.theme,
 		text = holder.text ? decodeURIComponent(holder.text) : holder.text;
@@ -298,11 +387,19 @@ function render(mode, el, holder, src) {
 	
 	if (mode == "image") {
 		el.setAttribute("alt", text ? text : theme.text ? theme.text + " [" + dimensions_caption + "]" : dimensions_caption);
+<<<<<<< HEAD
 		if (instance_config.use_fallback || !holder.auto) {
 			el.style.width = dimensions.width + "px";
 			el.style.height = dimensions.height + "px";
 		}
 		if (instance_config.use_fallback) {
+=======
+		if (fallback || !holder.auto) {
+			el.style.width = dimensions.width + "px";
+			el.style.height = dimensions.height + "px";
+		}
+		if (fallback) {
+>>>>>>> be364f8... Adds latest design changes
 			el.style.backgroundColor = theme.background;
 		} else {
 			el.setAttribute("src", draw({ctx: ctx, dimensions: dimensions, template: theme, ratio:ratio, holder: holder}));
@@ -314,7 +411,11 @@ function render(mode, el, holder, src) {
 			
 		}
 	} else if (mode == "background") {
+<<<<<<< HEAD
 		if (!instance_config.use_fallback) {
+=======
+		if (!fallback) {
+>>>>>>> be364f8... Adds latest design changes
 			el.style.backgroundImage = "url(" + draw({ctx:ctx, dimensions: dimensions, template: theme, ratio: ratio, holder: holder}) + ")";
 			el.style.backgroundSize = dimensions.width + "px " + dimensions.height + "px";
 		}
@@ -322,21 +423,33 @@ function render(mode, el, holder, src) {
 		el.setAttribute("alt", text ? text : theme.text ? theme.text + " [" + dimensions_caption + "]" : dimensions_caption);
 		if (dimensions.height.slice(-1) == "%") {
 			el.style.height = dimensions.height
+<<<<<<< HEAD
 		} else if(holder.auto == null || !holder.auto){
+=======
+		} else {
+>>>>>>> be364f8... Adds latest design changes
 			el.style.height = dimensions.height + "px"
 		}
 		if (dimensions.width.slice(-1) == "%") {
 			el.style.width = dimensions.width
+<<<<<<< HEAD
 		} else if(holder.auto == null || !holder.auto){
+=======
+		} else {
+>>>>>>> be364f8... Adds latest design changes
 			el.style.width = dimensions.width + "px"
 		}
 		if (el.style.display == "inline" || el.style.display === "" || el.style.display == "none") {
 			el.style.display = "block";
 		}
+<<<<<<< HEAD
 		
 		set_initial_dimensions(el)
 		
 		if (instance_config.use_fallback) {
+=======
+		if (fallback) {
+>>>>>>> be364f8... Adds latest design changes
 			el.style.backgroundColor = theme.background;
 		} else {
 			resizable_images.push(el);
@@ -351,6 +464,7 @@ function dimension_check(el, callback) {
 		width: el.clientWidth
 	};
 	if (!dimensions.height && !dimensions.width) {
+<<<<<<< HEAD
 		el.setAttribute("data-holder-invisible", true)
 		callback.call(this, el)
 	}
@@ -381,6 +495,21 @@ function set_initial_dimensions(el){
 			}
 		}
 	}
+=======
+		if (el.hasAttribute("data-holder-invisible")) {
+			throw new Error("Holder: placeholder is not visible");
+		} else {
+			el.setAttribute("data-holder-invisible", true)
+			setTimeout(function () {
+				callback.call(this, el)
+			}, 1)
+			return null;
+		}
+	} else {
+		el.removeAttribute("data-holder-invisible")
+	}
+	return dimensions;
+>>>>>>> be364f8... Adds latest design changes
 }
 
 function resizable_update(element) {
@@ -397,6 +526,7 @@ function resizable_update(element) {
 		var el = images[i]
 		if (el.holder_data) {
 			var holder = el.holder_data;
+<<<<<<< HEAD
 			var dimensions = dimension_check(el, app.invisible_error_fn( resizable_update))
 			if(dimensions){
 				if(holder.fluid){
@@ -410,6 +540,11 @@ function resizable_update(element) {
 							break;
 						}
 					}
+=======
+			var dimensions = dimension_check(el, resizable_update)
+			if(dimensions){
+				if(holder.fluid){
+>>>>>>> be364f8... Adds latest design changes
 					el.setAttribute("src", draw({
 						ctx: ctx,
 						dimensions: dimensions,
@@ -438,7 +573,11 @@ function parse_flags(flags, options) {
 		theme: extend(settings.themes.gray, {})
 	};
 	var render = false;
+<<<<<<< HEAD
 	for (var fl = flags.length, j = 0; j < fl; j++) {
+=======
+	for (sl = flags.length, j = 0; j < sl; j++) {
+>>>>>>> be364f8... Adds latest design changes
 		var flag = flags[j];
 		if (app.flags.dimensions.match(flag)) {
 			render = true;
@@ -473,6 +612,7 @@ for (var flag in app.flags) {
 		return val.match(this.regex)
 	}
 }
+<<<<<<< HEAD
 
 app.invisible_error_fn = function(fn){
 	return function(el){
@@ -482,11 +622,16 @@ app.invisible_error_fn = function(fn){
 	}
 }
 
+=======
+>>>>>>> be364f8... Adds latest design changes
 app.add_theme = function (name, theme) {
 	name != null && theme != null && (settings.themes[name] = theme);
 	return app;
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> be364f8... Adds latest design changes
 app.add_image = function (src, el) {
 	var node = selector(el);
 	if (node.length) {
@@ -498,31 +643,45 @@ app.add_image = function (src, el) {
 	}
 	return app;
 };
+<<<<<<< HEAD
 
 app.run = function (o) {
 	instance_config = extend({}, system_config)
 	preempted = true;
 
+=======
+app.run = function (o) {
+	preempted = true;
+	
+>>>>>>> be364f8... Adds latest design changes
 	var options = extend(settings, o),
 		images = [],
 		imageNodes = [],
 		bgnodes = [];
+<<<<<<< HEAD
 		
 	if(options.use_canvas != null && options.use_canvas){
 		instance_config.use_canvas = true;
 		instance_config.use_svg = false;
 	}
 		
+=======
+>>>>>>> be364f8... Adds latest design changes
 	if (typeof (options.images) == "string") {
 		imageNodes = selector(options.images);
 	} else if (window.NodeList && options.images instanceof window.NodeList) {
 		imageNodes = options.images;
 	} else if (window.Node && options.images instanceof window.Node) {
 		imageNodes = [options.images];
+<<<<<<< HEAD
 	} else if(window.HTMLCollection && options.images instanceof window.HTMLCollection){
 		imageNodes = options.images
 	}
 
+=======
+	}
+	
+>>>>>>> be364f8... Adds latest design changes
 	if (typeof (options.bgnodes) == "string") {
 		bgnodes = selector(options.bgnodes);
 	} else if (window.NodeList && options.elements instanceof window.NodeList) {
@@ -577,7 +736,12 @@ app.run = function (o) {
 			src = attr_datasrc;
 		}
 		if (src) {
+<<<<<<< HEAD
 			var holder = parse_flags(src.substr(src.lastIndexOf(options.domain) + options.domain.length + 1).split("/"), options);
+=======
+			var holder = parse_flags(src.substr(src.lastIndexOf(options.domain) + options.domain.length + 1)
+				.split("/"), options);
+>>>>>>> be364f8... Adds latest design changes
 			if (holder) {
 				if (holder.fluid) {
 					render("fluid", images[i], holder, src)
@@ -589,7 +753,10 @@ app.run = function (o) {
 	}
 	return app;
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> be364f8... Adds latest design changes
 contentLoaded(win, function () {
 	if (window.addEventListener) {
 		window.addEventListener("resize", resizable_update, false);
@@ -597,7 +764,11 @@ contentLoaded(win, function () {
 	} else {
 		window.attachEvent("onresize", resizable_update)
 	}
+<<<<<<< HEAD
 	preempted || app.run({});
+=======
+	preempted || app.run();
+>>>>>>> be364f8... Adds latest design changes
 });
 if (typeof define === "function" && define.amd) {
 	define([], function () {
@@ -605,6 +776,7 @@ if (typeof define === "function" && define.amd) {
 	});
 }
 
+<<<<<<< HEAD
 //github.com/davidchambers/Base64.js
 (function(){function t(t){this.message=t}var e="undefined"!=typeof exports?exports:this,r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";t.prototype=Error(),t.prototype.name="InvalidCharacterError",e.btoa||(e.btoa=function(e){for(var o,n,a=0,i=r,c="";e.charAt(0|a)||(i="=",a%1);c+=i.charAt(63&o>>8-8*(a%1))){if(n=e.charCodeAt(a+=.75),n>255)throw new t("'btoa' failed");o=o<<8|n}return c}),e.atob||(e.atob=function(e){if(e=e.replace(/=+$/,""),1==e.length%4)throw new t("'atob' failed");for(var o,n,a=0,i=0,c="";n=e.charAt(i++);~n&&(o=a%4?64*o+n:n,a++%4)?c+=String.fromCharCode(255&o>>(6&-2*a)):0)n=r.indexOf(n);return c})})();
 
@@ -645,4 +817,6 @@ if (!Object.prototype.hasOwnProperty)
 	}
     /*jshint +W001, +W103 */
 
+=======
+>>>>>>> be364f8... Adds latest design changes
 })(Holder, window);

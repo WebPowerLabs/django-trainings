@@ -1,6 +1,10 @@
 /* FileSaver.js
  * A saveAs() FileSaver implementation.
+<<<<<<< HEAD
  * 2014-01-24
+=======
+ * 2013-12-27
+>>>>>>> be364f8... Adds latest design changes
  *
  * By Eli Grey, http://eligrey.com
  * License: X11/MIT
@@ -14,6 +18,7 @@
 /*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
 
 var saveAs = saveAs
+<<<<<<< HEAD
   // IE 10+ (native saveAs)
   || (navigator.msSaveOrOpenBlob && navigator.msSaveOrOpenBlob.bind(navigator))
   // Everyone else
@@ -23,6 +28,11 @@ var saveAs = saveAs
 	if (/MSIE [1-9]\./.test(navigator.userAgent)) {
 		return;
 	}
+=======
+  || (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob && navigator.msSaveOrOpenBlob.bind(navigator))
+  || (function(view) {
+	"use strict";
+>>>>>>> be364f8... Adds latest design changes
 	var
 		  doc = view.document
 		  // only get URL when necessary in case BlobBuilder.js hasn't overridden it yet

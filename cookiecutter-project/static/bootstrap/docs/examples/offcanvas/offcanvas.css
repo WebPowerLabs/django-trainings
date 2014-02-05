@@ -20,6 +20,7 @@ footer {
 @media screen and (max-width: 767px) {
   .row-offcanvas {
     position: relative;
+<<<<<<< HEAD
     -webkit-transition: all .25s ease-out;
        -moz-transition: all .25s ease-out;
             transition: all .25s ease-out;
@@ -31,6 +32,11 @@ footer {
 
   .row-offcanvas-left {
     left: 0;
+=======
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+>>>>>>> be364f8... Adds latest design changes
   }
 
   .row-offcanvas-right

@@ -1,6 +1,11 @@
 .container {
+<<<<<<< HEAD
   padding-right: 15px;
   padding-left: 15px;
+=======
+  padding-left: 15px;
+  padding-right: 15px;
+>>>>>>> be364f8... Adds latest design changes
 }
 
 h4 {
@@ -17,12 +22,21 @@ h4 {
   padding-top: 15px;
   padding-bottom: 15px;
   background-color: #eee;
+<<<<<<< HEAD
   background-color: rgba(86,61,124,.15);
   border: 1px solid #ddd;
+=======
+  border: 1px solid #ddd;
+  background-color: rgba(86,61,124,.15);
+>>>>>>> be364f8... Adds latest design changes
   border: 1px solid rgba(86,61,124,.2);
 }
 
 hr {
   margin-top: 40px;
   margin-bottom: 40px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> be364f8... Adds latest design changes

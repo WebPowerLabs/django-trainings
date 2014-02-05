@@ -11,7 +11,11 @@
     {% include nav-main.html %}
 
     <!-- Docs page layout -->
+<<<<<<< HEAD
     <div class="bs-docs-header" id="content">
+=======
+    <div class="bs-header" id="content">
+>>>>>>> be364f8... Adds latest design changes
       <div class="container">
         <h1>{{ page.title }}</h1>
         <p>{{ page.lead }}</p>
@@ -26,8 +30,13 @@
           {{ content }}
         </div>
         <div class="col-md-3">
+<<<<<<< HEAD
           <div class="bs-docs-sidebar hidden-print" role="complementary">
             <ul class="nav bs-docs-sidenav">
+=======
+          <div class="bs-sidebar hidden-print" role="complementary">
+            <ul class="nav bs-sidenav">
+>>>>>>> be364f8... Adds latest design changes
               {% if page.slug == "getting-started" %}
                 {% include nav-getting-started.html %}
               {% elsif page.slug == "css" %}
@@ -44,9 +53,12 @@
                 {% include nav-migration.html %}
               {% endif %}
             </ul>
+<<<<<<< HEAD
             <a class="back-to-top" href="#top">
               Back to top
             </a>
+=======
+>>>>>>> be364f8... Adds latest design changes
           </div>
         </div>
       </div>

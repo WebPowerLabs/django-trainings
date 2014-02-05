@@ -18,20 +18,34 @@ body {
 }
 .form-signin .form-control {
   position: relative;
+<<<<<<< HEAD
   height: auto;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
+=======
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+>>>>>>> be364f8... Adds latest design changes
 }
 .form-signin .form-control:focus {
   z-index: 2;
 }
 .form-signin input[type="email"] {
   margin-bottom: -1px;
+<<<<<<< HEAD
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+=======
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+>>>>>>> be364f8... Adds latest design changes
 }
 .form-signin input[type="password"] {
   margin-bottom: 10px;

@@ -6,14 +6,22 @@
  * details, see http://creativecommons.org/licenses/by/3.0/.
  */
 
+<<<<<<< HEAD
 /* jshint multistr: true */
+=======
+/* jshint multistr:true */
+>>>>>>> be364f8... Adds latest design changes
 
 window.onload = function () { // wait for load in a dumb way because B-0
   var cw = '/*!\n' +
            ' * Bootstrap v3.1.0 (http://getbootstrap.com)\n' +
            ' * Copyright 2011-2014 Twitter, Inc.\n' +
            ' * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n' +
+<<<<<<< HEAD
            ' */\n\n'
+=======
+           ' */\n\n';
+>>>>>>> be364f8... Adds latest design changes
 
   function showError(msg, err) {
     $('<div id="bsCustomizerAlert" class="bs-customizer-alert">\
@@ -40,9 +48,15 @@ window.onload = function () { // wait for load in a dumb way because B-0
   }
 
   function getQueryParam(key) {
+<<<<<<< HEAD
     key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, '\\$&') // escape RegEx meta chars
     var match = location.search.match(new RegExp('[?&]' + key + '=([^&]+)(&|$)'))
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
+=======
+    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, '\\$&'); // escape RegEx meta chars
+    var match = location.search.match(new RegExp('[?&]' + key + '=([^&]+)(&|$)'));
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+>>>>>>> be364f8... Adds latest design changes
   }
 
   function createGist(configJson) {
