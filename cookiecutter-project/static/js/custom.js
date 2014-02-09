@@ -835,31 +835,6 @@
 					});
 				}
 				
-				self.nav.on('click', 'a', function (e) {
-					var $this = $(this).parent('li'),
-						$href = $this.children('a').attr('href');
-					if (!self.checkHashLink($href)) {
-						e.preventDefault();
-						if (self.touch) {
-							if (self.nav.hasClass('active')) {
-								self.nav.stop(true, true).slideUp('fast').removeClass('active');
-							}
-						}	
-						self.sectionAnimate($($href));
-					}
-				});
-				
-				self.navButton.on('click', function (e) {
-					var $this = $(e.target);
-					if (!self.nav.hasClass('active')) {
-						self.nav.stop(true, true).slideDown('normal', function () {
-						}).css('display', 'inline-block').addClass('active');
-					} else {
-						self.nav.stop(true, true).slideUp('normal').removeClass('active');
-					}
-					e.preventDefault();
-				});
-				
 				$(window).on('resize', function (e) { self.removeAttrNav.call(self); });
 				
 			},

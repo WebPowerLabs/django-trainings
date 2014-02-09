@@ -4,14 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <title>{% block title %}Decide to Fly | You were made for more!{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <!-- Google Web Fonts
     ================================================== -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,700|Julius+Sans+One|Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
+    <!-- Font Awesome Icons
+    ================================================== -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <!-- Favicons
     ================================================== -->
@@ -30,7 +33,7 @@
     {% if debug %}
     <!--link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet"-->
     <!--link href="{% static 'bootstrap/dist/css/bootstrap-theme.css' %}" rel="stylesheet"-->
-    <link rel="stylesheet/less" href="{% static 'bootstrap/less/bootstrap.less' %}">
+    <link rel="stylesheet/less" href="{% static 'bootstrap/less/zak-bootstrap.less' %}">
     <script type="text/javascript">
       less = {
         env: "development", // or "production"
@@ -84,11 +87,13 @@
   <body data-spy="scroll" data-target="#navigation" class="{% block page-class %}home{% endblock page-class %}">
 
     {% block nav %}
-      <header id="header">
+      <header id="header" class="header-main">
   
         <div class="header-in">
     
-          <h1 id="logo"><a href="{% url 'home' %}">Accio</a></h1>
+          <a href="{% url 'home' %}">
+            <img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}">
+          </a>
     
           <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
     
@@ -97,9 +102,15 @@
             <ul>
               <li><a href="{% url 'home' %}">Home</a></li>
               <li><a href="{% url 'about' %}">About</a></li>
-              <li><a href="{% url 'virtual-mentoring' %}">Virtual Mentoring</a></li>
-              <li><a href="{% url 'retreats' %}">Retreats</a></li>
+              <li><a class="inactive-link" href="#">Virtual Mentoring</a>               
+                <ul>
+                  <li><a href="{% url 'd2f-community' %}">Our Community</a></li>
+                  <li><a href="{% url 'courage-to-soar' %}">Courage to Soar</a></li>
+                  <li><a href="{% url 'accelerate-your-destiny' %}">Accelerate Your Destiny</a></li>
+                </ul>
+              </li>
               <li><a href="#">Blog</a></li>
+              <li><a href="#">Signup / Login</a></li>
             </ul>
 
           </nav><!--/ #navigation-->
@@ -113,43 +124,131 @@
       <p>Use this document as a way to quick start any new project.</p>
     {% endblock content %}
 
-    {% comment %}
-    <div class="header navbar navbar-default">
-      <div class="container">
-        <a class="navbar-brand" href="/"
-        style="padding: 0 15px;">
-          <img src="{% static 'images/logo.png' %}"
-          style="max-height: 50px;width:auto;">
-        </a>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'demo' %}">Demo</a></li>
-          <li><a href="{% url 'original' %}">Original</a></li>
-
-          {% if request.user.is_authenticated %}
-            <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
-            <li><a href="{% url 'account_logout' %}">{% trans "Logout" %}</a></li>
-          {% else %}
-            <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
-            <li><a href="{% url 'account_login' %}">{% trans "Log In" %}</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-        
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
-          {% endfor %}
-      {% endif %}
-
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+    {% block footer %}
+  <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
+  
+  <footer id="footer" class="footer-main">
     
-    {% block modal %}{% endblock modal %}
-    {% endcomment %}
+    <section class="section parallax parallax-bg-4">
+      
+      <div class="full-bg-image"></div>
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-12 align-center">
+            
+            <div class="widget widget_social opacity">
+              
+              <ul class="social-icons">
+                <li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
+                <li class="facebook"><a href="http://facebook.com/decidetofly"><i class="icon-facebook"></i>Facebook</a></li>
+                <li class="pinterest"><a href="http://www.pinterest.com/decidetofly"><i class="icon-pinterest-circled"></i>Pinterest</a></li>
+                <li class="rss"><a href="#"><i class="icon-rss"></i>Rss</a></li>
+                <li class="youtube"><a href="http://www.youtube.com/DecidetoFly"><i class="icon-youtube"></i>Youtube</a></li>
+                <li class="instagram"><a href="#"><i class="icon-instagramm"></i>Instagram</a></li>
+              </ul><!--/ .social-icons-->
+              
+            </div><!--/ .widget-->
+            
+          </div>
+
+        </div><!--/ .row-->
+
+      </div><!--/ .container-->
+
+    </section><!--/ .section--> 
+    
+    <div class="logo-in-footer">
+      
+      <div class="container">
+        
+        <div class="row">
+
+          <div class="col-md-4">
+            <h2>Site Navigation</h2>
+            <ul>
+              <li><a href="{% url 'home' %}">Homepage</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li>Virtual Mentoring
+                <ul>
+                  <li><a href="{% url 'd2f-community' %}">Our Community</a></li>
+                  <li><a href="{% url 'courage-to-soar' %}">Courage to Soar</a></li>
+                  <li><a href="{% url 'accelerate-your-destiny' %}">Accelerate Your Destiny</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4">
+            <h2>Contact Us</h2>
+              <p>DECIDE TO FLY&trade;</p>
+              <p>123 East Main Street</br>Tucson, Arizona 85707</p>
+              <p><a href="tel:8001234567">(800) 123-4567</a></p>
+              <p><a href="mailto:ask@decidetofly.com">ask@decidetofly.com</a></p>
+          </div>
+
+          <div class="col-md-4">
+            <h2>Free Product Offer</h2>
+
+            <p style="margin-bottom: 15px;">Lorem ipsum dolor amet, pellentesque ut lacus at velit consequat ut posuere neque in molestie gravida!</p>
+
+            <form class="contact-form" method="post" action="/">
+
+              <p class="input-block">
+                <input type="text" name="name" id="name" placeholder="Name *" />
+              </p>
+
+              <p class="input-block">
+                <input type="email" name="email" id="email" placeholder="Email *" />
+              </p>
+
+              <div class="btn btn-lg btn-block btn-success">Submit!</div>
+
+            </form><!--/ .contact-form-->
+
+          </div>
+  
+        </div><!--/ .row-->
+        
+      </div><!--/ .container-->
+      
+    </div><!--/ .logo-in-footer-->
+
+    <div class="bottom-footer clearfix">
+
+      <div class="container">
+        
+        <div class="row">
+          
+          <div class="col-sm-6">
+            
+            <div class="copyright">
+              Copyright &copy; 2014 <a href="{% url 'home' %}">Decide to Fly&trade;</a>. All rights reserved
+            </div><!--/ .cppyright-->
+            
+          </div>
+          
+          <div class="col-sm-3 col-sm-offset-3">
+            
+            <div class="developed">
+              Designed by <a target="_blank" href="http://rabbitholestud.io/">Rabbit Hole Studio</a>
+            </div><!--/ .developed-->
+            
+          </div>
+          
+        </div><!--/ .row-->
+        
+      </div><!--/ .container-->
+
+    </div><!--/ .bottom-footer-->
+    
+  </footer><!--/ #footer-->
+  
+  <!-- - - - - - - - - - - - - end Footer - - - - - - - - - - - - - - - -->
+    {% endblock footer %}
 
     <!-- Le javascript
     ================================================== -->

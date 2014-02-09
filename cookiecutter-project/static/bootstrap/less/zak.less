@@ -1,0 +1,663 @@
+//-------------------------------------------------------------------------//
+//--------------------------------- ZAK'S ---------------------------------//
+//---------------------------------- LESS ---------------------------------//
+//--------------------------------- STYLES --------------------------------//
+//-------------------------------------------------------------------------//
+
+
+
+//--------------------------------------//
+//-------------- Homepage --------------//
+//--------------------------------------//
+
+/* -------------------- General -------------------- */
+
+ a {
+ 	color: @brand-dtf;
+ 	-webkit-transition: all .25s ease;
+	transition: all .25s ease;
+ }
+
+ .section-title h2 {
+	text-transform: none;
+}
+
+/* -------------------- Buttons -------------------- */
+.btn {
+	-webkit-transition: all .25s ease;
+	transition: all .25s ease;
+}
+
+.btn-success:hover {
+	background-color: #009B87;
+}
+.btn-danger:hover {
+	background-color: #B04747;
+}
+.btn-default {
+	color:  @brand-dtf;
+	border: 2px solid  @brand-dtf;
+	background: transparent;
+}
+	.btn-default:hover {
+		color: #5b5e60;
+		border: 2px solid #5b5e60;
+		background: transparent;
+	}
+
+
+
+/* -------------------- Nav Menu Block -------------------- */
+
+header a:hover {
+	text-decoration: none;
+}
+
+#header.header-main {
+	background-color:  @brand-dtf;
+}
+
+#header.header-main .navigation > ul > li > a {
+	color: #fff;
+}
+	#header.header-main .navigation > ul > .downarrowclass > a:after {
+		color: #fff;
+	}
+
+// ------Free Product Block ------ //
+
+#home h1 {
+	margin-bottom: 30px;
+	color: #fff;
+	font-size: 72px;
+	font-family: 'Julius Sans One', sans-serif;
+	text-transform: uppercase;
+}
+
+#home h2 {
+	margin-bottom: 30px;
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	line-height: 1.3em;
+	font-weight: 300;
+}
+
+.video-full-entry .button {
+	margin: 0;
+}
+
+#home input {
+	color: #fff;
+	border-color: #eee;
+}
+	#home input:focus {
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		background-color: rgba(255, 255, 255, 0.3);
+	}
+	input[type="placeholder"] {
+		color: #fff;
+	}
+	#home input::-webkit-input-placeholder, #home textarea::-webkit-input-placeholder {
+		color: #fff;
+	}
+	#home input:-moz-placeholder, #home textarea:-moz-placeholder {
+		color: #fff;
+	}
+
+#home .parallax-overlay {
+	background-color: rgba(0, 0, 0, 0.3);
+	background-image: none;
+}
+
+input, textarea, select, button {
+	-webkit-transition: all .25s ease;
+	transition: all .25s ease;
+}
+
+.header-shrink #logo {
+	height: 30px;
+}
+
+#home .btn-success {
+	margin-top: 25px;
+}
+	#home .btn-success:hover {
+		color:  @brand-dtf;
+		background-color: #fff;
+	}
+
+
+// ------ D2F Community Intro Block ------ //
+
+.community-items {
+	padding: 0 5%;
+}
+
+#community h2.entry-title {
+	font-size: 19px;
+	font-weight: 400;
+}
+
+#community p {
+	font-size: 14px;
+	line-height: 1.5em;
+}
+
+#community .icon {
+	text-align: center;
+	margin: 19px auto 16px;
+}
+#community .top {
+	width: 70px;
+	height: 70px;
+	background: transparent;
+	border: 2px solid #5b5e60;
+	border-radius: 100px;
+	padding: 20px 0;
+	position: relative;
+}
+	#community .top i {
+		font-size: 30px;
+		color: #5b5e60;
+	}
+
+#community .section-title {
+	margin-bottom: 60px;
+}
+
+#community .entry {
+	padding: 0 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	height: auto;
+	min-height: 276px;
+	background: #fff;
+	float: left;
+	cursor: pointer;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+	#community .entry:hover {
+		background:  @brand-dtf;
+		color: #fff;
+	}
+		#community .entry:hover h2 {
+			color: #fff;
+		}
+		#community .entry:hover .top {
+			border: 2px solid  @brand-dtf;
+			background: #fff;
+		}
+			#community .entry .top:after {
+				position: absolute;
+				background: transparent;
+				content: '';
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				border-radius: 500px;
+				-webkit-transition: all 0.4s;
+				-moz-transition: all 0.4s;
+				transition: all 0.4s;
+			}
+		#community .entry:hover .top i {
+			color:  @brand-dtf;
+		}
+			#community .entry:hover .top:after {
+				border: 2px solid white;
+				-webkit-transform: scale(1.2);
+				-moz-transform: scale(1.2);
+				-ms-transform: scale(1.2);
+			}
+	#community .entry .icon {
+		text-align: center;
+		margin: 19px auto 16px;
+	}
+		#community .entry .icon.top {
+			margin-top: 23px;
+		}
+	#community .entry .bottom i {
+		width: 31px;
+		height: 31px;
+		padding-top: 6px;
+		font-size: 20px;
+		color: #5b5e60;
+		background: transparent;
+		border: 1px solid #5b5e60;
+		border-radius: 100px;
+	}
+		#community .entry:hover .bottom i {
+			border: 1px solid #fff;
+			color: #fff;
+		}
+
+// ------ Virtual Mentoring Block ------ //
+.vm-item-1 h1, .vm-item-2 h1 {
+	color:  @brand-dtf;
+	font-weight: 100;
+	font-size: 48px;
+	line-height: 1.1em;
+}
+
+.vm-item-1 {
+	margin-bottom: 80px;
+}
+.vm-item-2 {
+	margin-bottom: 60px;
+}
+
+.vm-item-1 .btn-lg, .vm-item-2 .btn-lg {
+	width: 180px;
+}
+
+#virtual-mentoring .slogan h1 {
+	text-transform: uppercase;
+}
+
+.vm-item-1, .vm-item-2 {
+	text-align: center;
+}
+
+@media (min-width: @screen-md-min) {
+	.vm-item-1 {
+		text-align: right;
+	}
+
+	.vm-item-2 {
+		text-align: left;
+	}
+}
+
+
+// ------ Jami Amidon Intro Block ------ //
+
+#about .list li {
+	margin-left: 30px;
+}
+
+#about .btn-lg {
+	margin-top: 24px;
+	height: 55px;
+	line-height: 1.74;
+}
+
+
+// ------ Contact Block ------ //
+
+#footer {
+	.section {
+		background-color: rgba(0,0,0,.5);
+	}
+
+	h2 {
+		color: #a0a0a0;
+		text-transform: uppercase;
+		font-weight: 300;
+	}
+
+	.parallax-bg-4 .full-bg-image {
+		background-image: url(../../images/ventana-meeting.jpg);
+	}
+	
+	ul.social-icons li a {
+		border-radius: 25px;
+	}
+}
+
+#contacts {
+	.section {
+		padding-top: 70px
+	}
+
+	.section-title {
+		padding-bottom: 5px;
+
+		:after {
+			visibility: hidden;
+		}
+	}
+
+	.fa {
+		font-size: 62px;
+		color:  @brand-dtf;
+		-webkit-transition: all .25s ease;
+		transition: all .25s ease;
+	}
+}
+
+
+// ------ About D2F Block ------ //
+
+@media (min-width: @screen-md-min) {
+	#about-d2f {
+		.about-left li, .about-right li {
+			text-align: center;
+			padding: 80px 0;
+		}
+
+		.about-content {
+			background: url(../../images/mandala.png) center top no-repeat;
+			margin-bottom: 20px;
+			background-size: 246px 275px;
+			background-position-y: 20px;
+		}
+
+		.about-left li {
+			text-align: right;
+			padding: 0 80px 0 0;
+		}
+		.about-right li {
+			text-align: left;
+			padding: 0 0 0 80px;
+		}
+
+		.about-item-1 {
+			background: url(../../images/icons/comments.png) right top no-repeat;
+			margin-bottom: 60px;
+		}
+		.about-item-2 {
+			background: url(../../images/icons/notebook.png) right top no-repeat;
+			margin: 0 50px 60px 0;
+		}
+		.about-item-3 {
+			background: url(../../images/icons/camera.png) right top no-repeat;
+		}
+		.about-item-4 {
+			background: url(../../images/icons/users.png) left top no-repeat;
+			margin-bottom: 60px;
+		}
+		.about-item-5 {
+			background: url(../../images/icons/calendar.png) left top no-repeat;
+			margin: 0 0 60px 50px;
+		}
+		.about-item-6 {
+			background: url(../../images/icons/film.png) left top no-repeat;
+		}
+	}
+}
+
+#about-d2f {
+	.section.about-title {
+		padding-top: 155px;
+	}
+
+	h2 {
+		padding-top: 5px;
+		margin-bottom: 0;
+	}
+
+	.btn-lg {
+		height: 60px;
+		margin-top: 80px;
+		line-height: 36px;
+	}
+
+	.about-left li, .about-right li  {
+		line-height: 1.4em;
+		height: 64px;
+	}
+	.about-left {
+		text-align: right;
+	}
+}
+
+.about-content {
+	background: none;
+}
+
+.about-left li, .about-right li {
+	text-align: center;
+	padding: 80px 0 100px;
+}
+
+.about-item-1 {
+	background: url(../../images/icons/comments.png) center top no-repeat;
+}
+.about-item-2 {
+	background: url(../../images/icons/notebook.png) center top no-repeat;
+	margin: 0;
+}
+.about-item-3 {
+	background: url(../../images/icons/camera.png) center top no-repeat;
+}
+.about-item-4 {
+	background: url(../../images/icons/users.png) center top no-repeat;
+}
+.about-item-5 {
+	background: url(../../images/icons/calendar.png) center top no-repeat;
+	margin: 0;
+}
+.about-item-6 {
+	background: url(../../images/icons/film.png) center top no-repeat;
+}
+
+
+// ------ D2F Team Block ------ //
+
+#team {
+	.team-nav {
+		visibility: hidden;
+	}
+
+	.team-contents {
+		width: 100%;
+	}
+	.contents {
+		width: 100%;
+	}
+
+	.team-entry {
+		padding: 20px 20px;
+		width: 100%;
+	}
+
+	.team-plus-icon .curtain {
+		-webkit-transition: none;
+		transition: none;
+	}
+	.team-plus-icon:hover .curtain {
+		margin-left: -200px;
+	}
+	.single-image.team-img {
+		cursor: default;
+	}
+
+	.team-member article {
+		margin: 0 0 40px;
+		width: 100%;
+		
+		:hover {
+			.team-group {
+				border: 1px solid #e0e0e0;
+				background-color: #fff;
+			}
+			.team-title {
+				color: #5b5e60;
+			}
+			.team-position {
+				color: #aeaeae;
+			}
+		}
+	}
+
+	.team-info {
+		width: 100%;
+	}
+	.team-image {
+		width: 40%;
+		margin-right: 3%;
+	}
+	.team-group {
+		width: 57%;
+	}
+
+	.team-content {
+		margin: 0;
+		display: table;
+		width: 100%;
+	}
+
+	.team-title {
+		font-size: 20px;
+	}
+}
+
+@media (min-width: @screen-sm-min) {
+	#team {
+		.team-info {
+			width: 250px;
+		}
+		.team-image {
+			width: 100%;
+			margin-right: 0;
+		}
+		.team-group {
+			width: 100%;
+		}
+
+		.team-content {
+			margin-left: 260px;
+			display: block;
+			width: auto;
+		}
+
+		.team-member article {
+			margin: 0 20px 40px;
+		}
+
+		.team-title {
+			font-size: 24px;
+		}
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	#team {
+		.team-contents {
+			width: 50000px;
+		}
+		.contents {
+			width: 250px;
+		}
+
+		.team-plus-icon .curtain {
+			-webkit-transition: all .3s ease-in;
+			transition: all .3s ease-in;
+		}
+		.team-plus-icon:hover .curtain {
+			margin-left: 0;
+		}
+		.single-image.team-img {
+			cursor: pointer;
+		}
+		
+		.team-member article {
+			margin: 0 20px;
+			width: auto;
+
+			:hover {
+				.team-group {
+					border-color: transparent;
+					background-color:  @brand-dtf;
+				}
+				.team-title, .team-position {
+					color: #fff;
+				}
+			}
+		}
+	}
+}
+
+
+// ------ Parallax Image Separators ------ //
+
+.parallax-clouds .full-bg-image {
+	background-image: url(../../images/clouds.jpg);
+}
+
+
+// ------ Footer Main Block ------ //
+
+@media (min-width: @screen-md-min) {
+	#footer.footer-main h2 {
+		margin-top: 0;
+	}
+}
+
+#footer.footer-main {
+	.section {
+		padding: 75px 0;
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.widget {
+		margin-bottom: 0;
+	}
+
+	h2 {
+		margin-top: 40px;
+		color: #a0a0a0;
+	}
+	h4 {
+		text-transform: uppercase;
+		font-weight: 300;
+		color: #a0a0a0;
+	}
+	p, .widget_contacts p {
+		margin: 0;
+	}
+	.contact-form p {
+		margin: 0 0 1em;
+		line-height: 1em;
+	}
+	a {
+		color:  @brand-dtf;
+		text-transform: none;
+
+		:hover {
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+
+	ul {
+		list-style: none;
+	}
+		li ul {
+			padding-left: 25px;
+		}
+	ul.social-icons {
+		margin-top: 0;
+
+		li {
+			margin-right: 40px;
+
+			a {
+				width: 80px;
+				height: 80px;
+				border-radius: 80px;
+			}
+			i {
+				font-size: 40px;
+				line-height: 80px;
+			}
+		}
+	}
+
+	input {
+		border-color: #a0a0a0;
+	}
+
+	.logo-in-footer {
+		text-align: left;
+		padding: 60px 0;
+		background-color: rgba(0,0,0,.7);
+	}
+}
+
+.bottom-footer {
+	color: #888;
+}
