@@ -61,7 +61,6 @@
     .list-group-item {
       border-width: 1px 0;
       border-radius: 0;
-<<<<<<< HEAD
     }
 
     // Add border top radius for first one
@@ -74,12 +73,6 @@
     // Add border bottom radius for last one
     &:last-child {
       .list-group-item:last-child {
-=======
-      &:first-child {
-        border-top: 0;
-      }
-      &:last-child {
->>>>>>> be364f8... Adds latest design changes
         border-bottom: 0;
         .border-bottom-radius((@panel-border-radius - 1));
       }
@@ -119,11 +112,8 @@
   // Add border top radius for first one
   > .table:first-child,
   > .table-responsive:first-child > .table:first-child {
-<<<<<<< HEAD
     .border-top-radius((@panel-border-radius - 1));
 
-=======
->>>>>>> be364f8... Adds latest design changes
     > thead:first-child,
     > tbody:first-child {
       > tr:first-child {
@@ -141,11 +131,8 @@
   // Add border bottom radius for last one
   > .table:last-child,
   > .table-responsive:last-child > .table:last-child {
-<<<<<<< HEAD
     .border-bottom-radius((@panel-border-radius - 1));
 
-=======
->>>>>>> be364f8... Adds latest design changes
     > tbody:last-child,
     > tfoot:last-child {
       > tr:last-child {
@@ -183,7 +170,6 @@
         > td:last-child {
           border-right: 0;
         }
-<<<<<<< HEAD
       }
     }
     > thead,
@@ -200,14 +186,6 @@
       > tr:last-child {
         > td,
         > th {
-=======
-        &:first-child > th,
-        &:first-child > td {
-          border-top: 0;
-        }
-        &:last-child > th,
-        &:last-child > td {
->>>>>>> be364f8... Adds latest design changes
           border-bottom: 0;
         }
       }
