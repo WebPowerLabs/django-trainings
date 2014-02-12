@@ -36,7 +36,7 @@
               		<li><a href="{% url 'accelerate-your-destiny' %}">Accelerate Your Destiny</a></li>
               	</ul>
               </li>
-              <li><a href="#">Blog</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
               <li><a href="#">Signup / Login</a></li>
 			</ul>
 
@@ -55,7 +55,7 @@
 
 <div id="wrapper">
 	
-	<section id="home" class="page">
+	<section id="free-product" class="page">
 		
 		<section class="section parallax padding-off">
 			
@@ -66,11 +66,11 @@
 				
 				<div class="video-full-entry align-center">
 
-					<h1 class="opacity">You were made for more!</h1>
+					<h1>You were made for more!</h1>
 
 					<h2>Enter your name and email to receive our free monthly product:</h2>
 
-					<div class="col-md-4 col-md-offset-4 opacity">
+					<div class="col-md-4 col-md-offset-4 ">
 
 						<form class="contact-form" method="post" action="/">
 
@@ -82,7 +82,7 @@
 								<input type="email" name="email" id="email" placeholder="Email *" />
 							</p>
 
-							<div class="btn btn-lg btn-block btn-success">Submit!</div>
+							<a href="{% url 'free-product' %}"><div class="btn btn-lg btn-block btn-success">Submit!</div></a>
 
 						</form><!--/ .contact-form-->							
 
@@ -100,7 +100,7 @@
 		<section class="section">
 
 			<div class="container">
-					<div class="section-title align-center opacityRun">
+					<div class="section-title align-center">
 						<h1>Our Community</h1>
 						<h2>The world’s leading business and personal development experts at your fingertips, when you need them, all for less than 2 lattes a month.</h2>	
 					</div>
@@ -191,7 +191,7 @@
 				</div><!--/ .row.community-items-->
 
 		</section><!--/ .section-->
-	</section><!--/ #about-->
+	</section><!--/ #community-->
 
 
 	<section id="virtual-mentoring" class="page">
@@ -201,7 +201,7 @@
 			<div class="container">
 
 				<div class="col-xs-12">
-					<div class="slogan align-center opacity">
+					<div class="slogan align-center ">
 						<h1>Virtual Mentoring</h1>
 						<h2>Nulla pharetra tellus arcu, virtual mentoring is awesome!</h2>	
 					</div>	
@@ -213,7 +213,7 @@
 						<h1>Courage to Soar</h1>
 					</div>
 
-					<div class="col-md-5 opacity">
+					<div class="col-md-5 ">
 						<p>
 							<img src="{% static 'images/ribbon-jump-women.jpg' %}" alt="Jami Amidon" />
 						</p>
@@ -221,8 +221,8 @@
 
 					<div class="col-md-7">
 
-						<p class="opacity">Lorem ipsum dolor amet, consectetur adipiscing elit. Pellentesque ut lacus at velit consequat sodales. Ut posuere neque in molestie gravida. Integer neque lementum posuere purus. Nam convallis ipsum. Maecenas a vulputate ipsum.</p>
-						<p class="opacity">Sed quam tellus, scelerisque eget pulvinar sed, mollis vel tortor. Mauris dictum aliquam nunc, vel dapibus mauris accumsan at. Aenean interdum purus a augue bibendum venenatis. Curabitur id elementum turpis, ut pretium ipsum. Pellentesque ac ultricies ipsum. Suspendisse potenti. Nulla rhoncus sem elit, condimentum gravida libero pellentesque id.</p>
+						<p>Lorem ipsum dolor amet, consectetur adipiscing elit. Pellentesque ut lacus at velit consequat sodales. Ut posuere neque in molestie gravida. Integer neque lementum posuere purus. Nam convallis ipsum. Maecenas a vulputate ipsum.</p>
+						<p>Sed quam tellus, scelerisque eget pulvinar sed, mollis vel tortor. Mauris dictum aliquam nunc, vel dapibus mauris accumsan at. Aenean interdum purus a augue bibendum venenatis. Curabitur id elementum turpis, ut pretium ipsum. Pellentesque ac ultricies ipsum. Suspendisse potenti. Nulla rhoncus sem elit, condimentum gravida libero pellentesque id.</p>
 
 						<div class="btn btn-lg btn-default">More Info</div>
 
@@ -236,7 +236,7 @@
 						<h1>Accelerate Your Destiny</h1>
 					</div>
 
-					<div class="col-md-5 col-md-push-7 opacity">
+					<div class="col-md-5 col-md-push-7 ">
 						<p>
 							<img src="{% static 'images/happy-businesswoman.jpg' %}" alt="Jami Amidon" />
 						</p>
@@ -244,9 +244,9 @@
 
 					<div class="col-md-7 col-md-pull-5">
 
-						<p class="opacity">Vivamus imperdiet consequat quam, in dapibus dui blandit dignissim. In hac habitasse platea dictumst. Pellentesque ligula elit, gravida vel orci id, dapibus tempor justo. Vivamus et odio in nulla interdum interdum. Nullam ultricies tortor ut molestie blandit. Aliquam erat volutpat.</p>
-						<p class="opacity">Quisque mollis lectus vitae hendrerit consectetur. Sed ultrices scelerisque leo, vel tincidunt libero bibendum sit amet. In ultricies lacinia ipsum, vitae ultricies turpis eleifend quis. Duis lacinia faucibus ante, eget tristique augue imperdiet ultrices.</p>
-						<p class="opacity">Sed vel euismod tellus, vel luctus dui. Etiam sodales lectus urna, vel scelerisque felis luctus ac. Ut sit amet consectetur orci.</p>
+						<p>Vivamus imperdiet consequat quam, in dapibus dui blandit dignissim. In hac habitasse platea dictumst. Pellentesque ligula elit, gravida vel orci id, dapibus tempor justo. Vivamus et odio in nulla interdum interdum. Nullam ultricies tortor ut molestie blandit. Aliquam erat volutpat.</p>
+						<p>Quisque mollis lectus vitae hendrerit consectetur. Sed ultrices scelerisque leo, vel tincidunt libero bibendum sit amet. In ultricies lacinia ipsum, vitae ultricies turpis eleifend quis. Duis lacinia faucibus ante, eget tristique augue imperdiet ultrices.</p>
+						<p>Sed vel euismod tellus, vel luctus dui. Etiam sodales lectus urna, vel scelerisque felis luctus ac. Ut sit amet consectetur orci.</p>
 
 						<div class="btn btn-lg btn-default">More Info</div>
 
@@ -261,7 +261,7 @@
 	</section><!--/ #virtual-mentoring-->
 
 
-	<section id="about" class="page">
+	<section id="about-jami" class="page">
 		
 		<section class="section">
 
@@ -270,9 +270,9 @@
 				<div class="row">
 					
 					<div class="col-xs-12">
-						<div class="slogan align-center opacity">
+						<div class="slogan align-center ">
 							<h1>Meet <span>Jami</span> Amidon</h1>
-							<h2>we are driving crazy with each and every web-miracle we work on</h2>	
+							<h2>Proin fringilla fermentum urna, sed consequat justo eleifend sit amet.</h2>	
 						</div>	
 					</div>
 
@@ -280,25 +280,25 @@
 
 				<div class="row">
 
-					<div class="col-md-7 opacity">
+					<div class="col-md-6 ">
 						<p>
 							<img src="{% static 'images/jami-amidon.jpg' %}" alt="Jami Amidon" />
 						</p>
 					</div><!--/ .col-md-6-->
 
-					<div class="col-md-5">
+					<div class="col-md-6">
 
-						<p class="opacity">
+						<p>
 							Lorem ipsum dolor amet, consectetur adipiscing elit. Pellentesque ut lacus at velit consequat sodales.
 							Ut posuere neque in molestie gravida. Integer neque lementum posuere purus. Nam convallis ipsum. Maecenas a vulputate ipsum.
 						</p>
 
 						<ul class="list">
-							<li class="type-5">Stunning Parallax Effects</li>
-							<li class="type-5">Totally Responsive & Unbelievably Clean</li>
-							<li class="type-5">Multiple CSS3 Animations</li>
-							<li class="type-5">SEO-Optimised & Valid Code</li>
-							<li class="type-5">Parallax Video Background Effect</li>
+							<li class="type-5">Proin fringilla fermentum urna</li>
+							<li class="type-5">Sed consequat justo eleifend sit amet</li>
+							<li class="type-5">Phasellus eu pulvinar justo</li>
+							<li class="type-5">Vivamus a feugiat leo</li>
+							<li class="type-5">Phasellus pulvinar posuere lorem sit amet rhoncus</li>
 						</ul><!--/ .list-->
 
 						<div class="btn btn-lg btn-success btn-block">Visit JamiAmidon.com</div>
@@ -326,7 +326,7 @@
 						<div class="section-title align-center">
 							<h1>Contact Us</h1>
 							<h2>We look forward to hearing from you!</h2>
-						</hgroup>		
+						</div>		
 					</div>
 					
 				</div><!--/ .row-->
@@ -351,7 +351,7 @@
 
 				<div class="row">
 
-					<div class="col-md-6 opacity">
+					<div class="col-md-6 ">
 
 						<form class="contact-form" method="post" action="/">
 
@@ -381,13 +381,13 @@
 
 					<div class="col-md-6">
 						
-						<div class="widget widget_text opacity">
+						<div class="widget widget_text ">
 							
 							<h2>Decide to Fly</h2>
 							
 						</div><!--/ .widget-->
 						
-						<div class="widget widget_contacts opacity">
+						<div class="widget widget_contacts ">
 							
 								<p>Address: 12 Street, Los Angeles, CA, 94101</p>
 								<p>Phone: (800) 123-4567</p>
@@ -395,7 +395,7 @@
 							
 						</div><!--/ .widget-->
 						
-						<div class="widget widget_social opacity">
+						<div class="widget widget_social ">
 							
 							<ul class="social-icons">
 								<li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>

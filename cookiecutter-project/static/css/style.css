@@ -896,8 +896,6 @@ body {
 		display: none;
 		padding: 10px 0;
 		width: 170px;
-		background-color: #000;
-		background-color: rgba(0,0,0, .5);
 	}
 	
 			.navigation ul ul li { position: relative; }
@@ -1272,12 +1270,10 @@ body {
 				color: #00c2a9;
 				text-transform: uppercase;
 				font-weight: 100;
-				font-size: 60px;
 				line-height: 1.1em;
 			}
 
 			.section-title h2 {
-				text-transform: uppercase;
 				font-weight: 300;
 			}
 		

@@ -8,23 +8,23 @@
 	
 	<section id="about-d2f" class="page">
 		
-		<section class="section about-title bg-gray-color">
+		<section class="section first-title bg-gray-color">
 			<div class="container">
 
 				<div class="row">
 					
 					<div class="col-xs-12">
-						<div class="slogan align-center opacity">
+						<div class="slogan align-center">
 							<h1>Why <span>Decide to Fly&trade;</span>?</h1>
 							<h2>Vivamus eget rhoncus purus. Proin non urna ligula. Nunc scelerisque, nunc eget placerat feugiat, arcu quam fringilla mauris, quis blandit diam neque posuere nulla. Aliquam scelerisque diam ut fermentum bibendum. Ut sed ullamcorper nibh. Praesent sit amet molestie lectus, non faucibus tellus.</h2>	
-						</div>	
+						</div>
 					</div>
 
 				</div><!--/ .row-->
 
 				<div class="row">
 
-					<div class="col-md-12 opacity about-content">
+					<div class="col-md-12 about-content">
 
 						<div class="col-md-5 col-md-offset-0 col-sm-8 col-sm-offset-2 about-left">
 							<ul>
@@ -64,7 +64,7 @@
 					
 					<div class="col-xs-12">
 						
-						<ul class="quotes opacity" data-timeout="6000">
+						<ul class="quotes" data-timeout="6000">
 	
 							<li class="align-center">
 								<blockquote class="quote-text">
@@ -105,10 +105,10 @@
 				<div class="row">
 
 					<div class="col-xs-12">
-						<hgroup class="section-title align-center opacity">
+						<div class="section-title align-center">
 							<h1>Meet Our Team</h1>
 							<h2>We are great team in a stream of web design.</h2>	
-						</hgroup>			
+						</div>			
 					</div>
 					
 				</div><!--/ .row-->
@@ -134,10 +134,10 @@
 												<a class="single-image team-img team-img team-plus-icon" href="#"><img src="{% static 'images/team/jami-amidon.jpg' %}" alt="" /></a>
 											</div>
 
-											<hgroup class="team-group">
+											<div class="team-group">
 												<h2 class="team-title">Jami Amidon</h2>
 												<h5 class="team-position">Web Designer</h5>
-											</hgroup>
+											</div>
 
 										</div><!--/ .team-info-->
 
@@ -175,10 +175,10 @@
 												<a class="single-image team-img team-plus-icon" href="#"><img src="{% static 'images/team/kim-hicks.jpg' %}" alt="" /></a>
 											</div>
 
-											<hgroup class="team-group">
+											<div class="team-group">
 												<h2 class="team-title">Kim Hicks</h2>
 												<h5 class="team-position">Web Designer</h5>
-											</hgroup>
+											</div>
 
 										</div><!--/ .team-info-->
 
@@ -217,10 +217,10 @@
 												<a class="single-image team-img team-plus-icon" href="#"><img src="{% static 'images/team/taylor-wilson.jpg' %}" alt="" /></a>
 											</div>
 
-											<hgroup class="team-group">
+											<div class="team-group">
 												<h2 class="team-title">Taylor Wilson</h2>
 												<h5 class="team-position">Web Designer</h5>
-											</hgroup>
+											</div>
 
 										</div><!--/ .team-info-->
 
@@ -258,10 +258,10 @@
 												<a class="single-image team-img team-plus-icon" href="#"><img src="{% static 'images/team/renee-eastman.jpg' %}" alt="" /></a>
 											</div>
 
-											<hgroup class="team-group">
+											<div class="team-group">
 												<h2 class="team-title">Renee Eastman</h2>
 												<h5 class="team-position">Web Designer</h5>
-											</hgroup>
+											</div>
 
 										</div><!--/ .team-info-->
 
@@ -303,12 +303,10 @@
 		</section><!--/ .section-->
 		
 	</section><!--/ .page-->
+
+	{% include "includes/community-cta.html" %}
 	
 	<section id="faqs" class="page">
-
-		<section class="section parallax parallax-clouds">
-			<div class="full-bg-image"></div>
-		</section><!--/ .section-->
 		
 		<section class="section bg-gray-color">
 			
@@ -317,16 +315,16 @@
 				<div class="row">
 					
 					<div class="col-xs-12">
-						<hgroup class="section-title align-center opacity">
-							<h1 style="text-transform: none;">FAQs</h1>
-						</hgroup>						
+						<div class="section-title align-center">
+							<h1>FAQs</h1>
+						</div>						
 					</div>
 					
 				</div><!--/ .row-->
 
 				<div class="row">
 					
-					<div class="col-sm-6 col-lg-4 slideRight">
+					<div class="col-sm-6 col-lg-4">
 
 						<article class="entry">
 
@@ -340,7 +338,7 @@
 
 					</div>
 
-					<div class="col-sm-6 col-lg-4 slideUp">
+					<div class="col-sm-6 col-lg-4">
 
 						<article class="entry">
 
@@ -354,7 +352,7 @@
 
 					</div>
 
-					<div class="col-sm-6 col-lg-4 slideLeft">
+					<div class="col-sm-6 col-lg-4">
 
 						<article class="entry">
 
@@ -371,7 +369,7 @@
 
 				<div class="row">
 
-					<div class="col-sm-6 col-lg-4 slideDown">
+					<div class="col-sm-6 col-lg-4">
 
 						<article class="entry">
 
@@ -385,7 +383,7 @@
 
 					</div>
 
-					<div class="col-sm-6 col-lg-4 slideRight">
+					<div class="col-sm-6 col-lg-4">
 
 						<article class="entry">
 
@@ -399,7 +397,7 @@
 
 					</div>
 
-					<div class="col-sm-6 col-lg-4 slideUp">
+					<div class="col-sm-6 col-lg-4">
 
 						<article class="entry">
 
