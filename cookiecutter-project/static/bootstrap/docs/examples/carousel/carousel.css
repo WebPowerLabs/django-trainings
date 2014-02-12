@@ -16,33 +16,19 @@ body {
 .navbar-wrapper {
   position: absolute;
   top: 0;
-<<<<<<< HEAD
   right: 0;
   left: 0;
-=======
-  left: 0;
-  right: 0;
->>>>>>> be364f8... Adds latest design changes
   z-index: 20;
 }
 
 /* Flip around the padding for proper display in narrow viewports */
 .navbar-wrapper .container {
-<<<<<<< HEAD
   padding-right: 0;
   padding-left: 0;
 }
 .navbar-wrapper .navbar {
   padding-right: 15px;
   padding-left: 15px;
-=======
-  padding-left: 0;
-  padding-right: 0;
-}
-.navbar-wrapper .navbar {
-  padding-left: 15px;
-  padding-right: 15px;
->>>>>>> be364f8... Adds latest design changes
 }
 
 
@@ -79,36 +65,21 @@ body {
 
 /* Pad the edges of the mobile views a bit */
 .marketing {
-<<<<<<< HEAD
   padding-right: 15px;
   padding-left: 15px;
-=======
-  padding-left: 15px;
-  padding-right: 15px;
->>>>>>> be364f8... Adds latest design changes
 }
 
 /* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
-<<<<<<< HEAD
   margin-bottom: 20px;
   text-align: center;
-=======
-  text-align: center;
-  margin-bottom: 20px;
->>>>>>> be364f8... Adds latest design changes
 }
 .marketing h2 {
   font-weight: normal;
 }
 .marketing .col-lg-4 p {
-<<<<<<< HEAD
   margin-right: 10px;
   margin-left: 10px;
-=======
-  margin-left: 10px;
-  margin-right: 10px;
->>>>>>> be364f8... Adds latest design changes
 }
 
 
@@ -135,13 +106,8 @@ body {
 
   /* Remove the edge padding needed for mobile */
   .marketing {
-<<<<<<< HEAD
     padding-right: 0;
     padding-left: 0;
-=======
-    padding-left: 0;
-    padding-right: 0;
->>>>>>> be364f8... Adds latest design changes
   }
 
   /* Navbar positioning foo */
@@ -149,21 +115,12 @@ body {
     margin-top: 20px;
   }
   .navbar-wrapper .container {
-<<<<<<< HEAD
     padding-right: 15px;
     padding-left:  15px;
   }
   .navbar-wrapper .navbar {
     padding-right: 0;
     padding-left:  0;
-=======
-    padding-left:  15px;
-    padding-right: 15px;
-  }
-  .navbar-wrapper .navbar {
-    padding-left:  0;
-    padding-right: 0;
->>>>>>> be364f8... Adds latest design changes
   }
 
   /* The navbar becomes detached from the top, so we round the corners */
@@ -181,10 +138,6 @@ body {
   .featurette-heading {
     font-size: 50px;
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> be364f8... Adds latest design changes
 }
 
 @media (min-width: 992px) {

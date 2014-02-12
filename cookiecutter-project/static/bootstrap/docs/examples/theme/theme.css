@@ -4,20 +4,11 @@ body {
 }
 
 .theme-dropdown .dropdown-menu {
-<<<<<<< HEAD
   position: static;
   display: block;
-=======
-  display: block;
-  position: static;
->>>>>>> be364f8... Adds latest design changes
   margin-bottom: 20px;
 }
 
 .theme-showcase > p > .btn {
   margin: 5px 0;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> be364f8... Adds latest design changes

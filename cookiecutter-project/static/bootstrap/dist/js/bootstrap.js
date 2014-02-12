@@ -4,11 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-<<<<<<< HEAD
 if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript requires jQuery') }
-=======
-if (typeof jQuery === 'undefined') { throw new Error('Bootstrap requires jQuery') }
->>>>>>> be364f8... Adds latest design changes
 
 /* ========================================================================
  * Bootstrap: transition.js v3.1.0

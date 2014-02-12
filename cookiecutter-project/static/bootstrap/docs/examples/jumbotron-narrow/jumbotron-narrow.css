@@ -8,13 +8,8 @@ body {
 .header,
 .marketing,
 .footer {
-<<<<<<< HEAD
   padding-right: 15px;
   padding-left: 15px;
-=======
-  padding-left: 15px;
-  padding-right: 15px;
->>>>>>> be364f8... Adds latest design changes
 }
 
 /* Custom page header */
@@ -23,17 +18,10 @@ body {
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
-<<<<<<< HEAD
   padding-bottom: 19px;
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
-=======
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
->>>>>>> be364f8... Adds latest design changes
 }
 
 /* Custom page footer */
@@ -59,13 +47,8 @@ body {
   border-bottom: 1px solid #e5e5e5;
 }
 .jumbotron .btn {
-<<<<<<< HEAD
   padding: 14px 24px;
   font-size: 21px;
-=======
-  font-size: 21px;
-  padding: 14px 24px;
->>>>>>> be364f8... Adds latest design changes
 }
 
 /* Supporting marketing content */
@@ -82,13 +65,8 @@ body {
   .header,
   .marketing,
   .footer {
-<<<<<<< HEAD
     padding-right: 0;
     padding-left: 0;
-=======
-    padding-left: 0;
-    padding-right: 0;
->>>>>>> be364f8... Adds latest design changes
   }
   /* Space out the masthead */
   .header {

@@ -15,7 +15,6 @@ lead: "Bring Bootstrap's components to life with over a dozen custom jQuery plug
   <p>Plugins can be included individually (using Bootstrap's individual <code>*.js</code> files), or all at once (using <code>bootstrap.js</code> or the minified <code>bootstrap.min.js</code>).</p>
 
   <div class="bs-callout bs-callout-danger">
-<<<<<<< HEAD
     <h4>Using the compiled JavaScript</h4>
     <p>Both <code>bootstrap.js</code> and <code>bootstrap.min.js</code> contain all plugins in a single file. Include only one.</p>
   </div>
@@ -23,10 +22,6 @@ lead: "Bring Bootstrap's components to life with over a dozen custom jQuery plug
   <div class="bs-callout bs-callout-danger">
     <h4>Component data attributes</h4>
     <p>Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.</p>
-=======
-    <h4>Do not attempt to include both.</h4>
-    <p>Both <code>bootstrap.js</code> and <code>bootstrap.min.js</code> contain all plugins in a single file.</p>
->>>>>>> be364f8... Adds latest design changes
   </div>
 
   <div class="bs-callout bs-callout-danger">
@@ -352,11 +347,7 @@ $('#myModal').on('show.bs.modal', function (e) {
          <td>remote</td>
          <td>path</td>
          <td>false</td>
-<<<<<<< HEAD
          <td><p>If a remote URL is provided, <strong>content will be loaded one time</strong> via jQuery's <code>load</code> method and injected into the <code>.modal-content</code> div. If you're using the data-api, you may alternatively use the <code>href</code> attribute to specify the remote source. An example of this is shown below:</p>
-=======
-         <td><p>If a remote URL is provided, <strong>content will be loaded one time</strong> via jQuery's <code>load</code> method and injected into the root of the modal element. If you're using the data-api, you may alternatively use the <code>href</code> attribute to specify the remote source. An example of this is shown below:</p>
->>>>>>> be364f8... Adds latest design changes
 {% highlight html %}
 <a data-toggle="modal" href="remote.html" data-target="#modal">Click me</a>
 {% endhighlight %}
@@ -562,13 +553,10 @@ $('#myModal').on('hidden.bs.modal', function (e) {
 {% highlight js %}
 $('.dropdown-toggle').dropdown()
 {% endhighlight %}
-<<<<<<< HEAD
   <div class="bs-callout bs-callout-info">
     <h4><code>data-toggle="dropdown"</code> still required</h4>
     <p>Regardless of whether you call your dropdown via JavaScript or instead use the data-api, <code>data-toggle="dropdown"</code> is always required to be present on the dropdown's trigger element.</p>
   </div>
-=======
->>>>>>> be364f8... Adds latest design changes
 
   <h3>Options</h3>
   <p><em>None</em></p>
@@ -578,10 +566,7 @@ $('.dropdown-toggle').dropdown()
   <p>Toggles the dropdown menu of a given navbar or tabbed navigation.</p>
 
   <h3>Events</h3>
-<<<<<<< HEAD
   <p>All dropdown events are fired at the <code>.dropdown-menu</code>'s parent element.</p>
-=======
->>>>>>> be364f8... Adds latest design changes
   <div class="table-responsive">
     <table class="table table-bordered table-striped">
       <thead>
@@ -1459,17 +1444,10 @@ $('#my-alert').bind('closed.bs.alert', function () {
 </button>
 <script>
   $('#loading-example-btn').click(function () {
-<<<<<<< HEAD
     var btn = $(this)
     btn.button('loading')
     $.ajax(...).always(function () {
       btn.button('reset')
-=======
-    var btn = $(this);
-    btn.button('loading');
-    $.ajax(...).always(function () {
-      btn.button('reset');
->>>>>>> be364f8... Adds latest design changes
     });
   });
 </script>
@@ -1574,17 +1552,10 @@ $('.btn').button()
 <button id="loading-example-btn" type="button" class="btn btn-primary" data-loading-text="loading stuff...">...</button>
 <script>
   $('#loading-example-btn').click(function () {
-<<<<<<< HEAD
     var btn = $(this)
     btn.button('loading')
     $.ajax(...).always(function () {
       btn.button('reset')
-=======
-    var btn = $(this);
-    btn.button('loading');
-    $.ajax(...).always(function () {
-      btn.button('reset');
->>>>>>> be364f8... Adds latest design changes
     });
   });
 </script>

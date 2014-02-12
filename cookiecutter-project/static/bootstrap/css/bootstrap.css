@@ -5933,7 +5933,6 @@ header a:hover {
 }
 #community-cta.parallax-clouds .full-bg-image {
   background-image: url(../../images/clouds.jpg);
-  background-image: url(../../../images/clouds.jpg);
 }
 #community-cta h1 {
   margin-bottom: 30px;
@@ -6264,7 +6263,6 @@ header a:hover {
 }
 #footer .parallax-bg-4 .full-bg-image {
   background-image: url(../../images/ventana-meeting.jpg);
-  background-image: url(../../../images/ventana-meeting.jpg);
 }
 #footer ul.social-icons li a {
   border-radius: 25px;
@@ -6318,29 +6316,23 @@ header a:hover {
 }
 .about-item-1 {
   background: url(../../images/icons/comments.png) center top no-repeat;
-  background: url(../../../images/icons/comments.png) center top no-repeat;
 }
 .about-item-2 {
   margin: 0;
   background: url(../../images/icons/notebook.png) center top no-repeat;
-  background: url(../../../images/icons/notebook.png) center top no-repeat;
 }
 .about-item-3 {
   background: url(../../images/icons/camera.png) center top no-repeat;
-  background: url(../../../images/icons/camera.png) center top no-repeat;
 }
 .about-item-4 {
   background: url(../../images/icons/users.png) center top no-repeat;
-  background: url(../../../images/icons/users.png) center top no-repeat;
 }
 .about-item-5 {
   margin: 0;
   background: url(../../images/icons/calendar.png) center top no-repeat;
-  background: url(../../../images/icons/calendar.png) center top no-repeat;
 }
 .about-item-6 {
   background: url(../../images/icons/film.png) center top no-repeat;
-  background: url(../../../images/icons/film.png) center top no-repeat;
 }
 @media (min-width: 768px) {
   #about-d2f .slogan h1 {
@@ -6359,7 +6351,6 @@ header a:hover {
   #about-d2f .about-content {
     margin-bottom: 20px;
     background: url(../../images/mandala.png) center top no-repeat;
-    background: url(../../../images/mandala.png) center top no-repeat;
     background-position-y: 20px;
     background-size: 246px 275px;
   }
@@ -6374,30 +6365,24 @@ header a:hover {
   #about-d2f .about-item-1 {
     margin-bottom: 60px;
     background: url(../../images/icons/comments.png) right top no-repeat;
-    background: url(../../../images/icons/comments.png) right top no-repeat;
   }
   #about-d2f .about-item-2 {
     margin: 0 50px 60px 0;
     background: url(../../images/icons/notebook.png) right top no-repeat;
-    background: url(../../../images/icons/notebook.png) right top no-repeat;
   }
   #about-d2f .about-item-3 {
     background: url(../../images/icons/camera.png) right top no-repeat;
-    background: url(../../../images/icons/camera.png) right top no-repeat;
   }
   #about-d2f .about-item-4 {
     margin-bottom: 60px;
     background: url(../../images/icons/users.png) left top no-repeat;
-    background: url(../../../images/icons/users.png) left top no-repeat;
   }
   #about-d2f .about-item-5 {
     margin: 0 0 60px 50px;
     background: url(../../images/icons/calendar.png) left top no-repeat;
-    background: url(../../../images/icons/calendar.png) left top no-repeat;
   }
   #about-d2f .about-item-6 {
     background: url(../../images/icons/film.png) left top no-repeat;
-    background: url(../../../images/icons/film.png) left top no-repeat;
   }
 }
 #team .team-nav {

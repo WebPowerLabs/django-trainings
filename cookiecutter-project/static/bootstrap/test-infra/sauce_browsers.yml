@@ -5,19 +5,11 @@
     browserName: "safari",
     platform: "OS X 10.9"
   },
-<<<<<<< HEAD
   # {
   #   browserName: "googlechrome",
   #   platform: "OS X 10.9",
   #   version: "31"
   # },
-=======
-  {
-    browserName: "chrome",
-    platform: "OS X 10.9",
-    version: "31"
-  },
->>>>>>> be364f8... Adds latest design changes
   {
     browserName: "firefox",
     platform: "OS X 10.9"
@@ -53,11 +45,7 @@
   # },
 
   {
-<<<<<<< HEAD
     browserName: "googlechrome",
-=======
-    browserName: "chrome",
->>>>>>> be364f8... Adds latest design changes
     platform: "Windows 8.1"
   },
   {
@@ -77,11 +65,7 @@
 
   # Linux (unofficial)
   {
-<<<<<<< HEAD
     browserName: "googlechrome",
-=======
-    browserName: "chrome",
->>>>>>> be364f8... Adds latest design changes
     platform: "Linux"
   },
   {

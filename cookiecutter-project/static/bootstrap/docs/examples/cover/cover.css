@@ -48,13 +48,8 @@ body {
   vertical-align: top;
 }
 .cover-container {
-<<<<<<< HEAD
   margin-right: auto;
   margin-left: auto;
-=======
-  margin-left: auto;
-  margin-right: auto;
->>>>>>> be364f8... Adds latest design changes
 }
 
 /* Padding for spacing */
@@ -78,13 +73,8 @@ body {
   margin-left: 20px;
 }
 .masthead-nav > li > a {
-<<<<<<< HEAD
   padding-right: 0;
   padding-left: 0;
-=======
-  padding-left: 0;
-  padding-right: 0;
->>>>>>> be364f8... Adds latest design changes
   font-size: 16px;
   font-weight: bold;
   color: #fff; /* IE8 proofing */

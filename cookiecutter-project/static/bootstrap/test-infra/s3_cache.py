@@ -87,11 +87,7 @@ if __name__ == '__main__':
     mode, friendly_name, dependencies_file, directory = argv
 
     conn = S3Connection()
-<<<<<<< HEAD
     bucket = conn.lookup(BUCKET_NAME, validate=False)
-=======
-    bucket = conn.lookup(BUCKET_NAME)
->>>>>>> be364f8... Adds latest design changes
     if bucket is None:
         raise SystemExit("Could not access bucket!")
 

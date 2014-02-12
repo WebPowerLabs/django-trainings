@@ -81,11 +81,7 @@ body {
 }
 
 /* Bootstrap "B" icon */
-<<<<<<< HEAD
 .bs-docs-booticon {
-=======
-.bs-booticon {
->>>>>>> be364f8... Adds latest design changes
   display: block;
   font-weight: 500;
   color: #fff;
@@ -94,39 +90,23 @@ body {
   cursor: default;
   text-align: center;
 }
-<<<<<<< HEAD
 .bs-docs-booticon-sm {
-=======
-.bs-booticon-sm {
->>>>>>> be364f8... Adds latest design changes
   width: 30px;
   height: 30px;
   font-size: 20px;
   line-height: 28px;
 }
-<<<<<<< HEAD
 .bs-docs-booticon-lg {
-=======
-.bs-booticon-lg {
->>>>>>> be364f8... Adds latest design changes
   width: 144px;
   height: 144px;
   font-size: 108px;
   line-height: 140px;
 }
-<<<<<<< HEAD
 .bs-docs-booticon-inverse {
   color: #563d7c;
   background-color: #fff;
 }
 .bs-docs-booticon-outline {
-=======
-.bs-booticon-inverse {
-  color: #563d7c;
-  background-color: #fff;
-}
-.bs-booticon-outline {
->>>>>>> be364f8... Adds latest design changes
   background-color: transparent;
   border: 1px solid #cdbfe3;
 }
@@ -176,11 +156,7 @@ body {
  * Separated section of content at the bottom of all pages, save the homepage.
  */
 
-<<<<<<< HEAD
 .bs-docs-footer {
-=======
-.bs-footer {
->>>>>>> be364f8... Adds latest design changes
   padding-top: 40px;
   padding-bottom: 40px;
   margin-top: 100px;
@@ -188,37 +164,21 @@ body {
   text-align: center;
   border-top: 1px solid #e5e5e5;
 }
-<<<<<<< HEAD
 .bs-docs-footer-links {
-=======
-.footer-links {
->>>>>>> be364f8... Adds latest design changes
   margin-top: 20px;
   padding-left: 0;
   color: #999;
 }
-<<<<<<< HEAD
 .bs-docs-footer-links li {
   display: inline;
   padding: 0 2px;
 }
 .bs-docs-footer-links li:first-child {
-=======
-.footer-links li {
-  display: inline;
-  padding: 0 2px;
-}
-.footer-links li:first-child {
->>>>>>> be364f8... Adds latest design changes
   padding-left: 0;
 }
 
 @media (min-width: 768px) {
-<<<<<<< HEAD
   .bs-docs-footer p {
-=======
-  .bs-footer p {
->>>>>>> be364f8... Adds latest design changes
     margin-bottom: 0;
   }
 }
@@ -230,44 +190,25 @@ body {
  * Twitter and GitHub social action buttons (for homepage and footer).
  */
 
-<<<<<<< HEAD
 .bs-docs-social {
   margin-bottom: 20px;
   text-align: center;
 }
 .bs-docs-social-buttons {
-=======
-.bs-social {
-  margin-bottom: 20px;
-  text-align: center;
-}
-.bs-social-buttons {
->>>>>>> be364f8... Adds latest design changes
   display: inline-block;
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
 }
-<<<<<<< HEAD
 .bs-docs-social-buttons li {
-=======
-.bs-social-buttons li {
->>>>>>> be364f8... Adds latest design changes
   display: inline-block;
   line-height: 1;
   padding: 5px 8px;
 }
-<<<<<<< HEAD
 .bs-docs-social-buttons .twitter-follow-button {
   width: 225px !important;
 }
 .bs-docs-social-buttons .twitter-share-button {
-=======
-.bs-social-buttons .twitter-follow-button {
-  width: 225px !important;
-}
-.bs-social-buttons .twitter-share-button {
->>>>>>> be364f8... Adds latest design changes
   width: 98px !important;
 }
 /* Style the GitHub buttons via CSS instead of inline attributes */
@@ -284,13 +225,8 @@ body {
  */
 
 /* Share masthead with page headers */
-<<<<<<< HEAD
 .bs-docs-masthead,
 .bs-docs-header {
-=======
-.bs-masthead,
-.bs-header {
->>>>>>> be364f8... Adds latest design changes
   position: relative;
   padding: 30px 15px;
   color: #cdbfe3;
@@ -304,57 +240,37 @@ body {
 }
 
  /* Masthead (headings and download button) */
-<<<<<<< HEAD
 .bs-docs-masthead .bs-docs-booticon {
   margin: 0 auto 30px;
 }
 .bs-docs-masthead h1 {
-=======
-.bs-masthead .bs-booticon {
-  margin: 0 auto 30px;
-}
-.bs-masthead h1 {
->>>>>>> be364f8... Adds latest design changes
   font-weight: 300;
   line-height: 1;
   color: #fff;
 }
-<<<<<<< HEAD
 .bs-docs-masthead .lead {
-=======
-.bs-masthead .lead {
->>>>>>> be364f8... Adds latest design changes
   margin: 0 auto 30px;
   font-size: 20px;
   color: #fff;
 }
-<<<<<<< HEAD
 .bs-docs-masthead .version {
   margin-top: -15px;
   margin-bottom: 30px;
   color: #9783b9;
 }
 .bs-docs-masthead .btn {
-=======
-.bs-masthead .btn {
->>>>>>> be364f8... Adds latest design changes
   width: 100%;
   padding: 15px 30px;
   font-size: 20px;
 }
 
 @media (min-width: 480px) {
-<<<<<<< HEAD
   .bs-docs-masthead .btn {
-=======
-  .bs-masthead .btn {
->>>>>>> be364f8... Adds latest design changes
     width: auto;
   }
 }
 
 @media (min-width: 768px) {
-<<<<<<< HEAD
   .bs-docs-masthead {
     padding-top: 80px;
     padding-bottom: 80px;
@@ -363,26 +279,12 @@ body {
     font-size: 60px;
   }
   .bs-docs-masthead .lead {
-=======
-  .bs-masthead {
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
-  .bs-masthead h1 {
-    font-size: 60px;
-  }
-  .bs-masthead .lead {
->>>>>>> be364f8... Adds latest design changes
     font-size: 24px;
   }
 }
 
 @media (min-width: 992px) {
-<<<<<<< HEAD
   .bs-docs-masthead .lead {
-=======
-  .bs-masthead .lead {
->>>>>>> be364f8... Adds latest design changes
     width: 80%;
     font-size: 30px;
   }
@@ -396,7 +298,6 @@ body {
  */
 
 /* Page headers */
-<<<<<<< HEAD
 .bs-docs-header {
   margin-bottom: 40px;
   font-size: 20px;
@@ -406,58 +307,30 @@ body {
   color: #fff;
 }
 .bs-docs-header p {
-=======
-.bs-header {
-  margin-bottom: 40px;
-  font-size: 20px;
-}
-.bs-header h1 {
-  margin-top: 0;
-  color: #fff;
-}
-.bs-header p {
->>>>>>> be364f8... Adds latest design changes
   margin-bottom: 0;
   font-weight: 300;
   line-height: 1.4;
 }
-<<<<<<< HEAD
 .bs-docs-header .container {
-=======
-.bs-header .container {
->>>>>>> be364f8... Adds latest design changes
   position: relative;
 }
 
 @media (min-width: 768px) {
-<<<<<<< HEAD
   .bs-docs-header {
-=======
-  .bs-header {
->>>>>>> be364f8... Adds latest design changes
     padding-top: 60px;
     padding-bottom: 60px;
     font-size: 24px;
     text-align: left;
   }
-<<<<<<< HEAD
   .bs-docs-header h1 {
-=======
-  .bs-header h1 {
->>>>>>> be364f8... Adds latest design changes
     font-size: 60px;
     line-height: 1;
   }
 }
 
 @media (min-width: 992px) {
-<<<<<<< HEAD
   .bs-docs-header h1,
   .bs-docs-header p {
-=======
-  .bs-header h1,
-  .bs-header p {
->>>>>>> be364f8... Adds latest design changes
     margin-right: 380px;
   }
 }
@@ -517,11 +390,7 @@ body {
     border-radius: 4px;
     border-width: 1px !important;
   }
-<<<<<<< HEAD
   .bs-docs-masthead .carbonad {
-=======
-  .bs-masthead .carbonad {
->>>>>>> be364f8... Adds latest design changes
     margin: 50px auto 0 !important;
   }
 }
@@ -542,11 +411,7 @@ body {
     padding: 15px !important;
     width: 330px !important;
   }
-<<<<<<< HEAD
   .bs-docs-masthead .carbonad {
-=======
-  .bs-masthead .carbonad {
->>>>>>> be364f8... Adds latest design changes
     position: static;
   }
 }
@@ -558,11 +423,7 @@ body {
  * Reasons to use Bootstrap, entries from the Expo, and more.
  */
 
-<<<<<<< HEAD
 .bs-docs-featurette {
-=======
-.bs-featurette {
->>>>>>> be364f8... Adds latest design changes
   padding-top:    40px;
   padding-bottom: 40px;
   font-size: 16px;
@@ -572,20 +433,12 @@ body {
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
 }
-<<<<<<< HEAD
 .bs-docs-featurette + .bs-docs-footer {
-=======
-.bs-featurette + .bs-footer {
->>>>>>> be364f8... Adds latest design changes
   margin-top: 0;
   border-top: 0;
 }
 
-<<<<<<< HEAD
 .bs-docs-featurette-title {
-=======
-.bs-featurette-title {
->>>>>>> be364f8... Adds latest design changes
   font-size: 30px;
   font-weight: normal;
   color: #333;
@@ -595,70 +448,41 @@ body {
   width: 100px;
   margin: 40px auto;
 }
-<<<<<<< HEAD
 .bs-docs-featurette h3 {
-=======
-.bs-featurette h3 {
->>>>>>> be364f8... Adds latest design changes
   font-weight: normal;
   color: #333;
   margin-bottom: 5px;
 }
-<<<<<<< HEAD
 .bs-docs-featurette-img {
-=======
-.bs-featurette-img {
->>>>>>> be364f8... Adds latest design changes
   display: block;
   margin-bottom: 20px;
   color: #333;
 }
-<<<<<<< HEAD
 .bs-docs-featurette-img:hover {
   text-decoration: none;
   color: #428bca;
 }
 .bs-docs-featurette-img img {
-=======
-.bs-featurette-img:hover {
-  text-decoration: none;
-  color: #428bca;
-}
-.bs-featurette-img img {
->>>>>>> be364f8... Adds latest design changes
   display: block;
   margin-bottom: 15px;
 }
 
 /* Featured sites */
-<<<<<<< HEAD
 .bs-docs-featured-sites {
   margin-left: -1px;
   margin-right: -1px;
 }
 .bs-docs-featured-sites .col-sm-3 {
-=======
-.bs-featured-sites {
-  margin-left: -1px;
-  margin-right: -1px;
-}
-.bs-featured-sites .col-sm-3 {
->>>>>>> be364f8... Adds latest design changes
   padding-left: 1px;
   padding-right: 1px;
 }
 
 @media (min-width: 480px) {
-<<<<<<< HEAD
   .bs-docs-featurette .img-responsive {
-=======
-  .bs-featurette .img-responsive {
->>>>>>> be364f8... Adds latest design changes
     margin-top: 30px;
   }
 }
 @media (min-width: 768px) {
-<<<<<<< HEAD
   .bs-docs-featurette {
     padding-top:    100px;
     padding-bottom: 100px;
@@ -667,42 +491,20 @@ body {
     font-size: 40px;
   }
   .bs-docs-featurette .lead {
-=======
-  .bs-featurette {
-    padding-top:    100px;
-    padding-bottom: 100px;
-  }
-  .bs-featurette-title {
-    font-size: 40px;
-  }
-  .bs-featurette .lead {
->>>>>>> be364f8... Adds latest design changes
     margin-left:  auto;
     margin-right: auto;
     max-width: 80%;
   }
-<<<<<<< HEAD
   .bs-docs-featured-sites .col-sm-3:first-child img {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
   .bs-docs-featured-sites .col-sm-3:last-child img {
-=======
-  .bs-featured-sites .col-sm-3:first-child img {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-  }
-  .bs-featured-sites .col-sm-3:last-child img {
->>>>>>> be364f8... Adds latest design changes
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
   }
 
-<<<<<<< HEAD
   .bs-docs-featurette .img-responsive {
-=======
-  .bs-featurette .img-responsive {
->>>>>>> be364f8... Adds latest design changes
     margin-top: 0;
   }
 }
@@ -716,67 +518,40 @@ body {
  */
 
 /* By default it's not affixed in mobile views, so undo that */
-<<<<<<< HEAD
 .bs-docs-sidebar.affix {
   position: static;
 }
 @media (min-width: 768px) {
   .bs-docs-sidebar {
-=======
-.bs-sidebar.affix {
-  position: static;
-}
-@media (min-width: 768px) {
-  .bs-sidebar {
->>>>>>> be364f8... Adds latest design changes
     padding-left: 20px;
   }
 }
 
 /* First level of nav */
-<<<<<<< HEAD
 .bs-docs-sidenav {
-=======
-.bs-sidenav {
->>>>>>> be364f8... Adds latest design changes
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
 /* All levels of nav */
-<<<<<<< HEAD
 .bs-docs-sidebar .nav > li > a {
-=======
-.bs-sidebar .nav > li > a {
->>>>>>> be364f8... Adds latest design changes
   display: block;
   font-size: 13px;
   font-weight: 500;
   color: #999;
   padding: 4px 20px;
 }
-<<<<<<< HEAD
 .bs-docs-sidebar .nav > li > a:hover,
 .bs-docs-sidebar .nav > li > a:focus {
-=======
-.bs-sidebar .nav > li > a:hover,
-.bs-sidebar .nav > li > a:focus {
->>>>>>> be364f8... Adds latest design changes
   padding-left: 19px;
   color: #563d7c;
   text-decoration: none;
   background-color: transparent;
   border-left: 1px solid #563d7c;
 }
-<<<<<<< HEAD
 .bs-docs-sidebar .nav > .active > a,
 .bs-docs-sidebar .nav > .active:hover > a,
 .bs-docs-sidebar .nav > .active:focus > a {
-=======
-.bs-sidebar .nav > .active > a,
-.bs-sidebar .nav > .active:hover > a,
-.bs-sidebar .nav > .active:focus > a {
->>>>>>> be364f8... Adds latest design changes
   padding-left: 18px;
   font-weight: bold;
   color: #563d7c;
@@ -785,7 +560,6 @@ body {
 }
 
 /* Nav: second level (shown on .active) */
-<<<<<<< HEAD
 .bs-docs-sidebar .nav .nav {
   display: none; /* Hide by default, but at >768px, show it */
   padding-bottom: 10px;
@@ -793,20 +567,10 @@ body {
 .bs-docs-sidebar .nav .nav > li > a {
   padding-top:    1px;
   padding-bottom: 1px;
-=======
-.bs-sidebar .nav .nav {
-  display: none; /* Hide by default, but at >768px, show it */
-  padding-bottom: 10px;
-}
-.bs-sidebar .nav .nav > li > a {
-  padding-top:    2px;
-  padding-bottom: 2px;
->>>>>>> be364f8... Adds latest design changes
   padding-left: 30px;
   font-size: 12px;
   font-weight: normal;
 }
-<<<<<<< HEAD
 .bs-docs-sidebar .nav .nav > li > a:hover,
 .bs-docs-sidebar .nav .nav > li > a:focus {
   padding-left: 29px;
@@ -814,20 +578,10 @@ body {
 .bs-docs-sidebar .nav .nav > .active > a,
 .bs-docs-sidebar .nav .nav > .active:hover > a,
 .bs-docs-sidebar .nav .nav > .active:focus > a {
-=======
-.bs-sidebar .nav .nav > li > a:hover,
-.bs-sidebar .nav .nav > li > a:focus {
-  padding-left: 29px;
-}
-.bs-sidebar .nav .nav > .active > a,
-.bs-sidebar .nav .nav > .active:hover > a,
-.bs-sidebar .nav .nav > .active:focus > a {
->>>>>>> be364f8... Adds latest design changes
   font-weight: 500;
   padding-left: 28px;
 }
 
-<<<<<<< HEAD
 /* Back to top (hidden on mobile) */
 .back-to-top {
   display: none;
@@ -868,40 +622,14 @@ body {
   }
   .bs-docs-sidebar.affix-bottom .bs-docs-sidenav,
   .bs-docs-sidebar.affix .bs-docs-sidenav {
-=======
-/* Show and affix the side nav when space allows it */
-@media (min-width: 992px) {
-  .bs-sidebar .nav > .active > ul {
-    display: block;
-  }
-  /* Widen the fixed sidebar */
-  .bs-sidebar.affix,
-  .bs-sidebar.affix-bottom {
-    width: 213px;
-  }
-  .bs-sidebar.affix {
-    position: fixed; /* Undo the static from mobile first approach */
-    top: 20px;
-  }
-  .bs-sidebar.affix-bottom {
-    position: absolute; /* Undo the static from mobile first approach */
-  }
-  .bs-sidebar.affix-bottom .bs-sidenav,
-  .bs-sidebar.affix .bs-sidenav {
->>>>>>> be364f8... Adds latest design changes
     margin-top: 0;
     margin-bottom: 0;
   }
 }
 @media (min-width: 1200px) {
   /* Widen the fixed sidebar again */
-<<<<<<< HEAD
   .bs-docs-sidebar.affix-bottom,
   .bs-docs-sidebar.affix {
-=======
-  .bs-sidebar.affix-bottom,
-  .bs-sidebar.affix {
->>>>>>> be364f8... Adds latest design changes
     width: 263px;
   }
 }
@@ -1567,11 +1295,7 @@ h1[id] {
 /* Error handling */
 .bs-customizer-alert {
   position: fixed;
-<<<<<<< HEAD
   top: 0;
-=======
-  top: 51px;
->>>>>>> be364f8... Adds latest design changes
   left: 0;
   right: 0;
   z-index: 1030;
@@ -1636,11 +1360,7 @@ h1[id] {
   margin-top: 0;
   margin-bottom: 0;
 }
-<<<<<<< HEAD
 .bs-brand-item .bs-docs-booticon {
-=======
-.bs-brand-item .bs-booticon {
->>>>>>> be364f8... Adds latest design changes
   margin-left: auto;
   margin-right: auto;
 }

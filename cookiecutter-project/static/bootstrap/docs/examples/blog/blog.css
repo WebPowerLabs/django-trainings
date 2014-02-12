@@ -13,17 +13,10 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-<<<<<<< HEAD
   margin-top: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #333;
-=======
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;;
-  font-weight: normal;
-  color: #333;
-  margin-top: 0;
->>>>>>> be364f8... Adds latest design changes
 }
 
 
@@ -48,12 +41,6 @@ h6, .h6 {
 }
 
 /* Nav links */
-<<<<<<< HEAD
-=======
-.blog-nav {
-
-}
->>>>>>> be364f8... Adds latest design changes
 .blog-nav-item {
   position: relative;
   display: inline-block;
@@ -75,25 +62,14 @@ h6, .h6 {
   position: absolute;
   bottom: 0;
   left: 50%;
-<<<<<<< HEAD
-=======
-  display: block;
-  content: " ";
->>>>>>> be364f8... Adds latest design changes
   width: 0;
   height: 0;
   margin-left: -5px;
   vertical-align: middle;
-<<<<<<< HEAD
   content: " ";
   border-right:  5px solid transparent;
   border-bottom: 5px solid;
   border-left:   5px solid transparent;
-=======
-  border-right:  5px solid transparent;
-  border-left:   5px solid transparent;
-  border-bottom: 5px solid;
->>>>>>> be364f8... Adds latest design changes
 }
 
 
@@ -185,7 +161,3 @@ h6, .h6 {
   background-color: #f9f9f9;
   border-top: 1px solid #e5e5e5;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> be364f8... Adds latest design changes
