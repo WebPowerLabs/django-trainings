@@ -867,7 +867,7 @@
 		}
 		
 		/* OnePage Plugin Definition
-		 * ================================== */
+		 * ================================ */
 		
 		$.fn.OnePage = function (option) {
 			return this.each(function () {
