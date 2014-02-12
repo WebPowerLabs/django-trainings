@@ -5818,7 +5818,7 @@ button {
           transition: all .25s ease;
 }
 .btn-success:hover {
-  background-color: #cc4d4d;
+  background-color: #009e8a;
 }
 .btn-danger:hover {
   background-color: #cc4d4d;
@@ -5850,14 +5850,22 @@ header a:hover {
   color: #fff;
 }
 #header.header-main .navigation > ul > li:hover > a {
-  color: #00c2a9;
-  background-color: #fff;
+  color: #fff;
+  background-color: #00e6c8;
+  background-color: rgba(0, 194, 169, .7);
 }
 #header.header-main .navigation > ul > .downarrowclass > a:after {
   color: #fff;
 }
+@media (min-width: 992px) {
+  #header.header-main .navigation > ul > li:hover > a {
+    color: #00c2a9;
+    background-color: #fff;
+  }
+}
 #footer.footer-main .section {
   padding: 75px 0;
+  background-color: #5b5e60;
   background-color: rgba(0, 0, 0, .6);
 }
 #footer.footer-main .widget {
@@ -5915,6 +5923,7 @@ header a:hover {
 #footer.footer-main .logo-in-footer {
   padding: 60px 0;
   text-align: left;
+  background-color: #5b5e60;
   background-color: rgba(0, 0, 0, .7);
 }
 .bottom-footer {
@@ -6047,6 +6056,7 @@ header a:hover {
   border-color: #eee;
 }
 #free-product input:focus {
+  background-color: #5b5e60;
   background-color: rgba(255, 255, 255, .3);
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -6060,6 +6070,7 @@ header a:hover {
   color: #fff;
 }
 #free-product .parallax-overlay {
+  background-color: #5b5e60;
   background-color: rgba(0, 0, 0, .3);
   background-image: none;
 }
@@ -6154,6 +6165,7 @@ header a:hover {
   -webkit-transform: scale(1.2);
      -moz-transform: scale(1.2);
       -ms-transform: scale(1.2);
+          transform: scale(1.2);
 }
 #community .entry .icon {
   margin: 19px auto 16px;
@@ -6245,6 +6257,7 @@ header a:hover {
   }
 }
 #footer .section {
+  background-color: #5b5e60;
   background-color: rgba(0, 0, 0, .5);
 }
 #footer h2 {

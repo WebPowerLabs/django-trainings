@@ -835,6 +835,17 @@
 					});
 				}
 				
+				self.navButton.on('click', function (e) {
+					var $this = $(e.target);
+					if (!self.nav.hasClass('active')) {
+						self.nav.stop(true, true).slideDown('normal', function () {
+						}).css('display', 'inline-block').addClass('active');
+					} else {
+						self.nav.stop(true, true).slideUp('normal').removeClass('active');
+					}
+					e.preventDefault();
+				});
+				
 				$(window).on('resize', function (e) { self.removeAttrNav.call(self); });
 				
 			},

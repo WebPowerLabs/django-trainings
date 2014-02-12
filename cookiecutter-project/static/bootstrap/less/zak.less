@@ -101,12 +101,25 @@ header a:hover {
 		}
 
 		&:hover > a {
-			color: @brand-dtf;
-			background-color: #fff;
+			color: #fff;
+			background-color: @brand-dtf-light;
+			background-color: rgba(0,194,169, .7);
 		}
 	}
 	.navigation > ul > .downarrowclass > a:after {
 		color: #fff;
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	#header.header-main {
+		
+		.navigation > ul > li {
+			&:hover > a {
+				color: @brand-dtf;
+				background-color: #fff;
+			}
+		}
 	}
 }
 
@@ -116,6 +129,7 @@ header a:hover {
 #footer.footer-main {
 	.section {
 		padding: 75px 0;
+		background-color: @brand-gray;
 		background-color: rgba(0, 0, 0, 0.6);
 	}
 
@@ -180,6 +194,7 @@ header a:hover {
 	.logo-in-footer {
 		text-align: left;
 		padding: 60px 0;
+		background-color: @brand-gray;
 		background-color: rgba(0,0,0,.7);
 	}
 }
@@ -364,6 +379,7 @@ header a:hover {
 		&:focus {
 			-webkit-box-shadow: none;
 			box-shadow: none;
+			background-color: @brand-gray;
 			background-color: rgba(255, 255, 255, 0.3);
 		}
 	}
@@ -375,6 +391,7 @@ header a:hover {
 	}
 
 	.parallax-overlay {
+		background-color: @brand-gray;
 		background-color: rgba(0, 0, 0, 0.3);
 		background-image: none;
 	}
@@ -484,6 +501,7 @@ header a:hover {
 				-webkit-transform: scale(1.2);
 				-moz-transform: scale(1.2);
 				-ms-transform: scale(1.2);
+				transform: scale(1.2);
 			}
 	#community .entry .icon {
 		text-align: center;
@@ -606,6 +624,7 @@ header a:hover {
 
 #footer {
 	.section {
+		background-color: @brand-gray;
 		background-color: rgba(0,0,0,.5);
 	}
 

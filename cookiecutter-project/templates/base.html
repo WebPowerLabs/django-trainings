@@ -1,12 +1,6 @@
 {% load staticfiles i18n %}<!DOCTYPE html>
-<html lang="en" ng-app>
+<html class="not-ie no-js" lang="en" ng-app>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <title>{% block title %}Decide to Fly | You were made for more!{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <!-- Google Web Fonts
     ================================================== -->
@@ -15,6 +9,14 @@
     <!-- Font Awesome Icons
     ================================================== -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>{% block title %}Decide to Fly | You were made for more!{% endblock title %}</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <!-- Favicons
     ================================================== -->
@@ -22,6 +24,10 @@
     <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/apple-touch-icon-72x72.png' %}">
     <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114.png' %}">
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -61,12 +67,12 @@
 
     <!-- CSS
     ================================================== -->
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    <link href="{% static 'css/animation.css' %}" rel="stylesheet">
-    <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/grid.css' %}" rel="stylesheet">
     <link href="{% static 'css/layout.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animation.css' %}" rel="stylesheet">
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
     <link href="{% static 'css/tooltipster.css' %}" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'js/layerslider/css/layerslider.css' %}" />
@@ -84,7 +90,10 @@
 
   </head>
 
-  <body data-spy="scroll" data-target="#navigation" class="{% block page-class %}home{% endblock page-class %}">
+  <body data-spy="scroll" data-target="#navigation" class="{% block page-class %}home{% endblock page-class %} animated">
+    <!-- - - - - - - - - - - - - - Loader - - - - - - - - - - - - - - - - -->
+    <div class="loader"></div><!--/ .loader-->
+    <!-- - - - - - - - - - - - - end Loader - - - - - - - - - - - - - - - --> 
 
     {% block nav %}
       <header id="header" class="header-main">
