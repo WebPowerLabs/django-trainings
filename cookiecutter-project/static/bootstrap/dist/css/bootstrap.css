@@ -6030,17 +6030,25 @@ header a:hover {
     font-size: 28px;
   }
 }
+#free-product .full-bg-image {
+  background-image: url(../../images/umbrella-woman.jpg);
+  background-image: url(../../../images/umbrella-woman.jpg);
+}
+#free-product .video-full-entry {
+  display: inline-block;
+  padding: 70px 0 80px;
+}
 #free-product .video-full-entry .button {
   margin: 0;
 }
-#free-product h1 {
+#free-product .video-full-entry h1 {
   margin-bottom: 30px;
   font-family: 'Julius Sans One', sans-serif;
   font-size: 42px;
   color: #fff;
   text-transform: uppercase;
 }
-#free-product h2 {
+#free-product .video-full-entry h2 {
   margin-bottom: 30px;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
@@ -6082,11 +6090,27 @@ header a:hover {
   background-color: #fff;
 }
 @media (min-width: 768px) {
-  #free-product h1 {
-    font-size: 72px;
+  #free-product .video-full-entry {
+    padding: 120px 0 120px;
   }
-  #free-product h2 {
+  #free-product .video-full-entry h1 {
+    font-size: 52px;
+  }
+  #free-product .video-full-entry h2 {
     font-size: 24px;
+  }
+}
+@media (min-width: 992px) {
+  #free-product .video-full-entry {
+    padding: 230px 0 120px;
+  }
+  #free-product .video-full-entry h1 {
+    font-size: 60px;
+  }
+}
+@media (min-width: 1200px) {
+  #free-product .video-full-entry h1 {
+    font-size: 72px;
   }
 }
 .community-items {
@@ -6298,7 +6322,7 @@ header a:hover {
           transition: all .25s ease;
 }
 #about-d2f .first-title {
-  padding-top: 155px;
+  padding-top: 80px;
 }
 #about-d2f .slogan h1 {
   font-size: 42px;
@@ -6362,6 +6386,9 @@ header a:hover {
   #about-d2f .slogan h2 {
     font-size: 24px;
   }
+  #about-d2f .first-title {
+    padding-top: 100px;
+  }
 }
 @media (min-width: 992px) {
   #about-d2f .about-left li,
@@ -6412,6 +6439,17 @@ header a:hover {
     background: url(../../images/icons/film.png) left top no-repeat;
     background: url(../../../images/icons/film.png) left top no-repeat;
   }
+  #about-d2f .first-title {
+    padding-top: 170px;
+  }
+}
+#testimonials li blockquote {
+  font-size: 18px;
+}
+@media (min-width: 768px) {
+  #testimonials li blockquote {
+    font-size: 24px;
+  }
 }
 #team .team-nav {
   visibility: hidden;
@@ -6439,6 +6477,10 @@ header a:hover {
 #team .team-member article {
   width: 100%;
   margin: 0 0 40px;
+}
+#team .team-member article .team-group {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
 }
 #team .team-member article:hover .team-group {
   background-color: #fff;

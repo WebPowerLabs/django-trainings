@@ -349,24 +349,33 @@ header a:hover {
 // ------Free Product Block ------ //
 
 #free-product {
-	.video-full-entry .button {
-		margin: 0;
+	.full-bg-image {
+		background-image: url(../../images/umbrella-woman.jpg);
+		background-image: url(../../../images/umbrella-woman.jpg);
 	}
 
-	h1 {
-		margin-bottom: 30px;
-		color: #fff;
-		font-size: 42px;
-		font-family: 'Julius Sans One', sans-serif;
-		text-transform: uppercase;
-	}
-	h2 {
-		margin-bottom: 30px;
-		color: #fff;
-		font-size: 20px;
-		font-family: 'Roboto', sans-serif;
-		line-height: 1.3em;
-		font-weight: 300;
+	.video-full-entry {
+		display: inline-block;
+		padding: 70px 0 80px;
+
+		.button {
+			margin: 0;
+		}
+		h1 {
+			margin-bottom: 30px;
+			color: #fff;
+			font-size: 42px;
+			font-family: 'Julius Sans One', sans-serif;
+			text-transform: uppercase;
+		}
+		h2 {
+			margin-bottom: 30px;
+			color: #fff;
+			font-size: 20px;
+			font-family: 'Roboto', sans-serif;
+			line-height: 1.3em;
+			font-weight: 300;
+		}
 	}
 
 	input[type="placeholder"] {
@@ -408,11 +417,37 @@ header a:hover {
 
 @media (min-width: @screen-sm-min) {
 	#free-product {
-		h1 {
-			font-size: 72px;
+		.video-full-entry {
+			padding: 120px 0 120px;
+
+			h1 {
+				font-size: 52px;
+			}
+			h2 {
+				font-size: 24px;
+			}
 		}
-		h2 {
-			font-size: 24px;
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	#free-product {
+		.video-full-entry {
+			padding: 230px 0 120px;
+			
+			h1 {
+				font-size: 60px;
+			}
+		}
+	}
+}
+
+@media (min-width: @screen-lg-min) {
+	#free-product {
+		.video-full-entry {
+			h1 {
+				font-size: 72px;
+			}
 		}
 	}
 }
@@ -687,7 +722,7 @@ header a:hover {
 
 #about-d2f {
 	.first-title {
-		padding-top: 155px;
+		padding-top: 80px;
 	}
 
 	.slogan {
@@ -762,6 +797,10 @@ header a:hover {
 				font-size: 24px;
 			}
 		}
+
+		.first-title {
+			padding-top: 100px;
+		}
 	}
 }
 
@@ -817,9 +856,29 @@ header a:hover {
 			background: url(../../images/icons/film.png) left top no-repeat;
 			background: url(../../../images/icons/film.png) left top no-repeat;
 		}
+
+		.first-title {
+			padding-top: 170px;
+		}
 	}
 }
 
+
+// ------ Testimonials Block ------ //
+
+#testimonials {
+	li blockquote {
+		font-size: 18px;
+	}
+}
+
+@media (min-width: @screen-sm-min) {
+	#testimonials {
+		li blockquote {
+			font-size: 24px;
+		}
+	}
+}
 
 // ------ D2F Team Block ------ //
 
@@ -854,6 +913,11 @@ header a:hover {
 	.team-member article {
 		margin: 0 0 40px;
 		width: 100%;
+		
+		.team-group {
+			border: 1px solid #e0e0e0;
+			background-color: #fff;
+		}
 		
 		&:hover {
 			.team-group {
