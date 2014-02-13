@@ -11,30 +11,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$',
-        TemplateView.as_view(template_name='pages/home.html'),
-        name="home"),
-    url(r'^about/$',
-        TemplateView.as_view(template_name='pages/about.html'),
-        name="about"),
-    url(r'^d2f-community/$',
-        TemplateView.as_view(template_name='pages/d2f-community.html'),
-        name="d2f-community"),
-    url(r'^courage-to-soar/$',
-        TemplateView.as_view(template_name='pages/courage-to-soar.html'),
-        name="courage-to-soar"),
-    url(r'^accelerate-your-destiny/$',
-        TemplateView.as_view(template_name='pages/accelerate-your-destiny.html'),
-        name="accelerate-your-destiny"),
-    url(r'^free-product/$',
-        TemplateView.as_view(template_name='pages/free-product.html'),
-        name="free-product"),
-    url(r'^blog/$',
-        TemplateView.as_view(template_name='pages/blog.html'),
-        name="blog"),
-    url(r'^blog-single/$',
-        TemplateView.as_view(template_name='pages/blog-single.html'),
-        name="blog-single"),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
@@ -47,5 +23,7 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     # Your stuff: custom urls go here
+    url(r'^blog/', include("blog.urls", namespace="blog")),
+    url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
