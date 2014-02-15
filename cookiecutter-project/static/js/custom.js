@@ -183,34 +183,33 @@
 			/*	Contact Form										*/
 			/* ---------------------------------------------------- */
 
+
+
+
 			if ($('.contact-form').length) {
 
 				var $form = $('.contact-form'),
 					$loader = '<span>Loader...</span>';
-					$form.append('<div class="hide contact-form-responce" />');
+					$form.append('<div class="contact-form-response" />');
 					
 				$form.each(function () {
 
 					var $this = $(this), 
-						$response = $('.contact-form-responce', $this).append('<p></p>');
+						$response = $('.contact-form-response', $this).append('<div class="alert"></div>');
 
 					$this.submit(function () {
 
 						$response.find('p').html($loader);
 						
-						var data = {
-							action: "contact_form_request",
-							values: $this.serialize()
-						};
+						var data = $this.serialize();
 						
 						//send data to server
-						$.post("php/contact-send.php", data, function (response) {
+						$.post("/contact/", data, function (response) {
 							
 							$('.wrong-data', $this).removeClass("wrong-data");
 							$response.find('span').remove();	
-							
-							response = $.parseJSON(response);
-							
+						
+							/*
 							if (response.is_errors) {
 								
 								var p = $response.find('p');
@@ -222,17 +221,20 @@
 								});
 								$response.show(300);
 							} else {
-								$response.find('p').removeClass().addClass('success');
-								if (response.info === 'success') {
-									$response.find('p').append('Your email has been sent!');
-									$this.find('input, textarea, select').val('').attr('checked', false);
-									$response.show(300).delay(2500).hide(400);
-								}
+								*/
 
-								if (response.info === 'server_fail') {
-									$response.find('p').append('Server failed. Send later!');
+								
+							if (response.success) {
+									$response.find('div').removeClass().addClass('alert alert-success');
+									$response.find('div').text(response.message);
+									$this.find('.form-control').val('').attr('checked', false);
+									$response.show(300).delay(2500).hide(400);
+								} 
+								else {
+									$response.find('div').removeClass().addClass('alert alert-danger');
+									$response.find('div').text(response.message);
 									$response.show(300);
-								}
+								
 							}
 
 							// Scroll to bottom of the form to show respond message

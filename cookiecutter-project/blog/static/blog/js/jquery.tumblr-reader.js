@@ -134,12 +134,12 @@ rendered, see::
     
     $.fn.tumblrReader.parsers.photo = function(post){
         var template = '';
-        template += '<div class="tumblr-reader-post tumblr-reader-post-photo">';
+        template += '<div class="tumblr-reader-post tumblr-reader-post-photo"><div class="thumbnail">';
         template += templates.date;
         template += templates.tags;
-        template += '<div class="tumblr-reader-photo"><img src="${photo}" /></div>';
-        template += '<div class="tumblr-reader-caption">${caption}</div>';
-        template += '</div>'
+        template += '<div class="tumblr-reader-photo"><img class="img-responsive" src="${photo}" /></div>';
+        template += '<div class="tumblr-reader-caption caption">${caption}</div>';
+        template += '</div></div>'
         
         var params = {
             caption: post['photo-caption'],
@@ -154,12 +154,12 @@ rendered, see::
     
     $.fn.tumblrReader.parsers.quote = function(post){
         var template = '';
-        template += '<div class="tumblr-reader-post tumblr-reader-post-quote">';
+        template += '<div class="tumblr-reader-post tumblr-reader-post-quote"><blockquote>';
         template += templates.date;
         template += templates.tags;
-        template += '<div class="tumblr-reader-quote">${quote}</div>';
-        template += '<div class="tumblr-reader-source">${source}</div>';
-        template += '</div>'
+        template += '<p>${quote}</p>';
+        template += '<a class="author">${source}</a>';
+        template += '</blockquote></div>'
         
         var params = {
             quote: post['quote-text'],

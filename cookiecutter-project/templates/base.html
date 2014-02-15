@@ -91,23 +91,16 @@
   </head>
 
   <body data-spy="scroll" data-target="#navigation" class="{% block page-class %}home{% endblock page-class %} animated">
-    <!-- - - - - - - - - - - - - - Loader - - - - - - - - - - - - - - - - -->
-    <div class="loader"></div><!--/ .loader-->
-    <!-- - - - - - - - - - - - - end Loader - - - - - - - - - - - - - - - --> 
+    <div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
 
     {% block nav %}
       <header id="header" class="header-main">
-  
         <div class="header-in">
     
-          <a href="{% url 'home' %}">
-            <img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}">
-          </a>
-    
+          <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
           <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
     
           <nav id="navigation" class="navigation">
-      
             <ul>
               <li><a href="{% url 'home' %}">Home</a></li>
               <li><a href="{% url 'about' %}">About</a></li>
@@ -121,11 +114,9 @@
               <li><a href="{% url 'blog' %}">Blog</a></li>
               <li><a href="#">Signup / Login</a></li>
             </ul>
-
           </nav><!--/ #navigation-->
     
         </div><!--/ .header-in-->
-  
       </header><!--/ #header-->
     {% endblock nav %}
 
@@ -134,22 +125,16 @@
     {% endblock content %}
 
     {% block footer %}
-  <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
-  
-  <footer id="footer" class="footer-main">
-    
-    <section class="section parallax parallax-bg-4">
-      
-      <div class="full-bg-image"></div>
+  <footer class="footer-main"><!-- - - - - - - - FOOTER MAIN BLOCK - - - - - - - -->
 
+    <section class="section parallax parallax-bg-4">
+      <div class="full-bg-image"></div>
       <div class="container">
 
         <div class="row">
-
           <div class="col-md-12 align-center">
-            
             <div class="widget widget_social">
-              
+
               <ul class="social-icons">
                 <li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
                 <li class="facebook"><a href="http://facebook.com/decidetofly"><i class="icon-facebook"></i>Facebook</a></li>
@@ -160,19 +145,14 @@
               </ul><!--/ .social-icons-->
               
             </div><!--/ .widget-->
-            
-          </div>
-
+          </div><!--/ .col-md-12-->
         </div><!--/ .row-->
 
       </div><!--/ .container-->
-
-    </section><!--/ .section--> 
+    </section><!--/ .section-->
     
     <div class="logo-in-footer">
-      
       <div class="container">
-
         <div class="row">
 
           <div class="col-md-4">
@@ -189,7 +169,7 @@
               </li>
               <li><a href="{% url 'blog' %}">Blog</a></li>
             </ul>
-          </div>
+          </div><!--/ .col-md-4-->
 
           <div class="col-md-4">
             <h2>Contact Us</h2>
@@ -197,67 +177,48 @@
               <p>123 East Main Street</br>Tucson, Arizona 85707</p>
               <p><a href="tel:8001234567">(800) 123-4567</a></p>
               <p><a href="mailto:ask@decidetofly.com">ask@decidetofly.com</a></p>
-          </div>
+          </div><!--/ .col-md-4-->
 
           <div class="col-md-4">
-            <h2>Free Product Offer</h2>
 
+            <h2>Free Product Offer</h2>
             <p style="margin-bottom: 15px;">Lorem ipsum dolor amet, pellentesque ut lacus at velit consequat ut posuere neque in molestie gravida!</p>
 
+            {% block footer_form %}
             <form class="contact-form" method="post" action="/">
-
-              <p class="input-block">
-                <input type="text" name="name" id="name" placeholder="Name *" />
-              </p>
-
-              <p class="input-block">
-                <input type="email" name="email" id="email" placeholder="Email *" />
-              </p>
-
+              <p class="input-block"><input type="text" name="name" id="name" placeholder="Name *" /></p>
+              <p class="input-block"><input type="email" name="email" id="email" placeholder="Email *" /></p>
               <a href="{% url 'free-product' %}"><div class="btn btn-lg btn-block btn-success">Submit!</div></a>
-
             </form><!--/ .contact-form-->
+            {% endblock footer_form %}
 
-          </div>
+          </div><!--/ .col-md-4-->
   
         </div><!--/ .row-->
-        
       </div><!--/ .container-->
-      
     </div><!--/ .logo-in-footer-->
 
     <div class="bottom-footer clearfix">
-
       <div class="container">
-        
         <div class="row">
           
           <div class="col-sm-6">
-            
             <div class="copyright">
               Copyright &copy; 2014 <a href="{% url 'home' %}">Decide to Fly&trade;</a>. All rights reserved
-            </div><!--/ .cppyright-->
-            
-          </div>
+            </div>
+          </div><!--/ .col-md-6-->
           
           <div class="col-sm-3 col-sm-offset-3">
-            
             <div class="developed">
               Designed by <a target="_blank" href="http://rabbitholestud.io/">Rabbit Hole Studio</a>
-            </div><!--/ .developed-->
-            
-          </div>
+            </div>
+          </div><!--/ .col-md-3-->
           
         </div><!--/ .row-->
-        
       </div><!--/ .container-->
-
     </div><!--/ .bottom-footer-->
-
     
-  </footer><!--/ #footer-->
-  
-  <!-- - - - - - - - - - - - - end Footer - - - - - - - - - - - - - - - -->
+  </footer><!-- - - - - - - - /FOOTER MAIN BLOCK - - - - - - - -->
     {% endblock footer %}
 
     <!-- Le javascript

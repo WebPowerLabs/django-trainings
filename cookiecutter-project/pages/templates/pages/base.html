@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block footer %}
-{% crispy contact_form %}
-{% endblock footer %}
+{% block footer_form %}
+{% crispy email_form %}
+{% endblock footer_form %}
+
+{% block title %} | Decide to Fly{% endblock title %}
