@@ -228,7 +228,7 @@ footer.footer-main {
 
 // ------ D2F Community CTA Block ------ //
 
-#community-cta {
+.community-cta {
 	text-align: center;
 	
 	&.bg-dark-color .full-bg-image {
@@ -278,7 +278,7 @@ footer.footer-main {
 }
 
 @media (min-width: @screen-sm-min) {
-	#community-cta {
+	.community-cta {
 		h1 {
 			font-size: 60px;
 		}
@@ -297,7 +297,7 @@ footer.footer-main {
 
 // ------ Free Product CTA Block ------ //
 
-#free-product-cta {
+.free-product-cta {
 	.section-title {
 		h1 {
 			text-transform: none;
@@ -342,7 +342,7 @@ footer.footer-main {
 }
 
 @media (min-width: @screen-md-min) {
-	#free-product-cta {
+	.free-product-cta {
 		.entry-image h3 {
 			font-size: 24px;
 		}
@@ -350,12 +350,13 @@ footer.footer-main {
 }
 
 @media (min-width: @screen-lg-min) {
-	#free-product-cta {
+	.free-product-cta {
 		.entry-image h3 {
 			font-size: 28px;
 		}
 	}
 }
+
 
 //--------------------------------------//
 //-------------- Homepage --------------//
@@ -784,7 +785,6 @@ footer.contact-footer {
 }
 
 
-
 //--------------------------------------//
 //------------- About Page -------------//
 //--------------------------------------//
@@ -808,55 +808,9 @@ footer.contact-footer {
 		}
 	}
 
-	.btn-lg {
-		height: 60px;
-		margin-top: 80px;
-		line-height: 36px;
+	.item-02 {
+		margin-top: 60px;
 	}
-
-	.about-left li, .about-right li  {
-		line-height: 1.4em;
-		height: 64px;
-	}
-	.about-left {
-		text-align: right;
-	}
-}
-
-.about-content {
-	background: none;
-}
-
-.about-left li, .about-right li {
-	text-align: center;
-	padding: 80px 0 100px;
-}
-
-.about-item-1 {
-	background: url(../../images/icons/comments.png) center top no-repeat;
-	background: url(../../../images/icons/comments.png) center top no-repeat;
-}
-.about-item-2 {
-	background: url(../../images/icons/notebook.png) center top no-repeat;
-	background: url(../../../images/icons/notebook.png) center top no-repeat;
-	margin: 0;
-}
-.about-item-3 {
-	background: url(../../images/icons/camera.png) center top no-repeat;
-	background: url(../../../images/icons/camera.png) center top no-repeat;
-}
-.about-item-4 {
-	background: url(../../images/icons/users.png) center top no-repeat;
-	background: url(../../../images/icons/users.png) center top no-repeat;
-}
-.about-item-5 {
-	background: url(../../images/icons/calendar.png) center top no-repeat;
-	background: url(../../../images/icons/calendar.png) center top no-repeat;
-	margin: 0;
-}
-.about-item-6 {
-	background: url(../../images/icons/film.png) center top no-repeat;
-	background: url(../../../images/icons/film.png) center top no-repeat;
 }
 
 @media (min-width: @screen-sm-min) {
@@ -878,56 +832,6 @@ footer.contact-footer {
 
 @media (min-width: @screen-md-min) {
 	.about-d2f {
-		.about-left li, .about-right li {
-			text-align: center;
-			padding: 80px 0;
-		}
-
-		.about-content {
-			background: url(../../images/mandala.png) center top no-repeat;
-			background: url(../../../images/mandala.png) center top no-repeat;
-			margin-bottom: 20px;
-			background-position-y: 20px;
-		}
-
-		.about-left li {
-			text-align: right;
-			padding: 0 80px 0 0;
-		}
-		.about-right li {
-			text-align: left;
-			padding: 0 0 0 80px;
-		}
-
-		.about-item-1 {
-			background: url(../../images/icons/comments.png) right top no-repeat;
-			background: url(../../../images/icons/comments.png) right top no-repeat;
-			margin-bottom: 60px;
-		}
-		.about-item-2 {
-			background: url(../../images/icons/notebook.png) right top no-repeat;
-			background: url(../../../images/icons/notebook.png) right top no-repeat;
-			margin: 0 50px 60px 0;
-		}
-		.about-item-3 {
-			background: url(../../images/icons/camera.png) right top no-repeat;
-			background: url(../../../images/icons/camera.png) right top no-repeat;
-		}
-		.about-item-4 {
-			background: url(../../images/icons/users.png) left top no-repeat;
-			background: url(../../../images/icons/users.png) left top no-repeat;
-			margin-bottom: 60px;
-		}
-		.about-item-5 {
-			background: url(../../images/icons/calendar.png) left top no-repeat;
-			background: url(../../../images/icons/calendar.png) left top no-repeat;
-			margin: 0 0 60px 50px;
-		}
-		.about-item-6 {
-			background: url(../../images/icons/film.png) left top no-repeat;
-			background: url(../../../images/icons/film.png) left top no-repeat;
-		}
-
 		.first-title {
 			padding-top: 170px;
 		}
@@ -1102,6 +1006,155 @@ footer.contact-footer {
 }
 
 
+//------------------------------------------------------//
+//----------------- D2F Community Page -----------------//
+//------------------------------------------------------//
+
+
+// ------ About Community Block ------ //
+
+.about-community {
+	.first-title {
+		padding-top: 80px;
+	}
+
+	.slogan {
+		h1 {
+			font-size: 42px;
+		}
+		h2 {
+			font-size: 20px;
+			padding-top: 5px;
+			margin-bottom: 0;
+		}
+	}
+
+	.btn-lg {
+		height: 60px;
+		margin-top: 80px;
+		line-height: 36px;
+	}
+
+	.about-left li, .about-right li  {
+		line-height: 1.4em;
+		height: 64px;
+	}
+	.about-left {
+		text-align: right;
+	}
+}
+
+.about-content {
+	background: none;
+}
+
+.about-left li, .about-right li {
+	text-align: center;
+	padding: 80px 0 100px;
+}
+
+.about-item-1 {
+	background: url(../../images/icons/comments.png) center top no-repeat;
+	background: url(../../../images/icons/comments.png) center top no-repeat;
+}
+.about-item-2 {
+	background: url(../../images/icons/notebook.png) center top no-repeat;
+	background: url(../../../images/icons/notebook.png) center top no-repeat;
+	margin: 0;
+}
+.about-item-3 {
+	background: url(../../images/icons/camera.png) center top no-repeat;
+	background: url(../../../images/icons/camera.png) center top no-repeat;
+}
+.about-item-4 {
+	background: url(../../images/icons/users.png) center top no-repeat;
+	background: url(../../../images/icons/users.png) center top no-repeat;
+}
+.about-item-5 {
+	background: url(../../images/icons/calendar.png) center top no-repeat;
+	background: url(../../../images/icons/calendar.png) center top no-repeat;
+	margin: 0;
+}
+.about-item-6 {
+	background: url(../../images/icons/film.png) center top no-repeat;
+	background: url(../../../images/icons/film.png) center top no-repeat;
+}
+
+@media (min-width: @screen-sm-min) {
+	.about-community {
+		.slogan {
+			h1 {
+				font-size: 60px;
+			}
+			h2 {
+				font-size: 24px;
+			}
+		}
+
+		.first-title {
+			padding-top: 100px;
+		}
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	.about-community {
+		.about-left li, .about-right li {
+			text-align: center;
+			padding: 80px 0;
+		}
+
+		.about-content {
+			background: url(../../images/mandala.png) center top no-repeat;
+			background: url(../../../images/mandala.png) center top no-repeat;
+			margin-bottom: 20px;
+			background-position-y: 20px;
+		}
+
+		.about-left li {
+			text-align: right;
+			padding: 0 80px 0 0;
+		}
+		.about-right li {
+			text-align: left;
+			padding: 0 0 0 80px;
+		}
+
+		.about-item-1 {
+			background: url(../../images/icons/comments.png) right top no-repeat;
+			background: url(../../../images/icons/comments.png) right top no-repeat;
+			margin-bottom: 60px;
+		}
+		.about-item-2 {
+			background: url(../../images/icons/notebook.png) right top no-repeat;
+			background: url(../../../images/icons/notebook.png) right top no-repeat;
+			margin: 0 50px 60px 0;
+		}
+		.about-item-3 {
+			background: url(../../images/icons/camera.png) right top no-repeat;
+			background: url(../../../images/icons/camera.png) right top no-repeat;
+		}
+		.about-item-4 {
+			background: url(../../images/icons/users.png) left top no-repeat;
+			background: url(../../../images/icons/users.png) left top no-repeat;
+			margin-bottom: 60px;
+		}
+		.about-item-5 {
+			background: url(../../images/icons/calendar.png) left top no-repeat;
+			background: url(../../../images/icons/calendar.png) left top no-repeat;
+			margin: 0 0 60px 50px;
+		}
+		.about-item-6 {
+			background: url(../../images/icons/film.png) left top no-repeat;
+			background: url(../../../images/icons/film.png) left top no-repeat;
+		}
+
+		.first-title {
+			padding-top: 170px;
+		}
+	}
+}
+
 
 //-----------------------------------------------//
 //-------------- Free Product Page --------------//
@@ -1110,7 +1163,7 @@ footer.contact-footer {
 
 // ------ Video Player Block ------ //
 
-#video-player {
+.video-player {
 	.slogan {
 		h1 {
 			font-size: 42px;
@@ -1125,7 +1178,7 @@ footer.contact-footer {
 }
 
 @media (min-width: @screen-sm-min) {
-	#video-player {
+	.video-player {
 		.slogan {
 			h1 {
 				font-size: 60px;
@@ -1140,7 +1193,7 @@ footer.contact-footer {
 
 // ------ Speaker Info Block ------ //
 
-#about-speaker {
+.about-speaker {
 	.list li {
 		margin-left: 30px;
 	}
@@ -1155,14 +1208,14 @@ footer.contact-footer {
 
 // ------ Previous Speakers Block ------ //
 
-#past-speakers {
+.past-speakers {
 	h1 {
 		font-size: 42px;
 	}
 }
 
 @media (min-width: @screen-sm-min) {
-	#past-speakers {
+	.past-speakers {
 		.section-title {
 			h1 {
 				font-size: 50px;
@@ -1176,66 +1229,44 @@ footer.contact-footer {
 //----------------- Blog Page -----------------//
 //---------------------------------------------//
 
-#blog {
+.blog {
+	&.section {
+		padding: 80px 0 100px;
+	}
 	.first-title {
-		padding-top: 20px;
-	}
-}
-
-
-//----------------------------------------------------//
-//----------------- Single Post Page -----------------//
-//----------------------------------------------------//
-
-
-// ------ Blog Post Block ------ //
-
-#blog-single {
-	.section-title {
-		margin-bottom: 30px;
-		padding-bottom: 0;
-
-		h1 {
-			font-size: 38px;
-			text-transform: none;
-		}
-
-		.entry-meta {
-			padding-top: 10px;
-		}
-
-		.widget {
-			.tagcloud {
-				padding: 15px 0 10px;
-			}
-		}
-
-		&:after {
-			display: none;
-		}
+		padding-top: 0;
 	}
 
-	.first-title {
-		margin-top: 20px;
+	.tumblr-reader-body img {
+		width: 100%;
 	}
-}
 
-@media (min-width: @screen-sm-min) {
-	#blog-single {
-		.section-title {
-			h1 {
-				font-size: 44px;
-			}
-		}
+	.tumblr-reader-title {
+		margin-bottom: 15px;
+		font-size: 32px;
+		color: #5b5e60;
+		line-height: 38px;
+	}
+
+	.tumblr-reader-post-regular {
+		border-bottom: 1px solid #ececec;
+		padding-bottom: 50px;
+		margin-bottom: 40px;
 	}
 }
 
 @media (min-width: @screen-md-min) {
-	#blog-single {
-		.section-title {
-			h1 {
-				font-size: 50px;
-			}
+	.blog {
+		&.section {
+			padding: 100px 0;
+		}
+		.first-title {
+			padding-top: 60px;
+		}
+		
+		.tumblr-reader-title {
+			font-size: 42px;
+			line-height: 44px;
 		}
 	}
 }

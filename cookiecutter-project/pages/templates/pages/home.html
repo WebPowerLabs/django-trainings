@@ -26,9 +26,9 @@
 		<nav id="navigation" class="navigation">
 			
 			<ul>
-              <li class="current-menu-item"><a href="http://127.0.0.1:8000/about">Home</a></li>
+              <li class="current-menu-item"><a href="{% url 'home' %}">Home</a></li>
               <li><a href="{% url 'about' %}">About</a></li>
-              <li><a class="inactive-link" href="#">Virtual Mentoring</a>              	
+              <li><a href="{% url 'd2f-community' %}">Virtual Mentoring</a>
               	<ul>
               		<li><a href="{% url 'd2f-community' %}">Our Community</a></li>
               		<li><a href="{% url 'courage-to-soar' %}">Courage to Soar</a></li>
@@ -36,7 +36,7 @@
               	</ul>
               </li>
               <li><a href="{% url 'blog' %}">Blog</a></li>
-              <li><a href="#">Signup / Login</a></li>
+              <li><a href="{% url 'free-product' %}">Free Product</a></li>
 			</ul>
 
 		</nav><!--/ #navigation-->

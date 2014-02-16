@@ -5950,24 +5950,24 @@ footer.footer-main .logo-in-footer {
     margin-top: 0;
   }
 }
-#community-cta {
+.community-cta {
   text-align: center;
 }
-#community-cta.bg-dark-color .full-bg-image {
+.community-cta.bg-dark-color .full-bg-image {
   opacity: .8;
 }
-#community-cta.parallax-clouds .full-bg-image {
+.community-cta.parallax-clouds .full-bg-image {
   background-image: url(../../images/clouds.jpg);
   background-image: url(../../../images/clouds.jpg);
 }
-#community-cta h1 {
+.community-cta h1 {
   margin-bottom: 30px;
   font-family: 'Julius Sans One', sans-serif;
   font-size: 35px;
   color: #fff;
   text-transform: uppercase;
 }
-#community-cta h3 {
+.community-cta h3 {
   margin-bottom: 30px;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
@@ -5975,74 +5975,74 @@ footer.footer-main .logo-in-footer {
   line-height: 1.5em;
   color: #fff;
 }
-#community-cta .btn-lg {
+.community-cta .btn-lg {
   width: 200px;
   margin-top: 15px;
 }
-#community-cta .btn-lg.btn-success {
+.community-cta .btn-lg.btn-success {
   margin-left: 0;
 }
-#community-cta .btn-lg.btn-success:hover {
+.community-cta .btn-lg.btn-success:hover {
   color: #00c2a9;
   background-color: #fff;
 }
-#community-cta .btn-lg.btn-danger:hover {
+.community-cta .btn-lg.btn-danger:hover {
   color: #d46969;
   background-color: #fff;
 }
 @media (min-width: 768px) {
-  #community-cta h1 {
+  .community-cta h1 {
     font-size: 60px;
   }
-  #community-cta h3 {
+  .community-cta h3 {
     font-size: 20px;
   }
-  #community-cta .btn-lg.btn-success {
+  .community-cta .btn-lg.btn-success {
     margin-left: 20px;
   }
 }
-#free-product-cta .section-title h1 {
+.free-product-cta .section-title h1 {
   margin-bottom: 15px;
   text-transform: none;
 }
-#free-product-cta .section-title h2 {
+.free-product-cta .section-title h2 {
   margin-bottom: 15px;
   font-size: 24px;
   color: #5b5e60;
 }
-#free-product-cta h2 {
+.free-product-cta h2 {
   margin-bottom: 25px;
   font-size: 42px;
   font-weight: 300;
 }
-#free-product-cta h3 {
+.free-product-cta h3 {
   margin-bottom: 5px;
   font-weight: 300;
 }
-#free-product-cta a {
+.free-product-cta a {
   color: #00c2a9;
 }
-#free-product-cta a:hover {
+.free-product-cta a:hover {
   color: #5b5e60;
 }
-#free-product-cta .main-entry {
+.free-product-cta .main-entry {
   padding-bottom: 0;
   border-bottom: none;
 }
-#free-product-cta .main-entry .entry-image {
+.free-product-cta .main-entry .entry-image {
   margin-bottom: 20px;
 }
-#free-product-cta .entry-image h3 {
+.free-product-cta .entry-image h3 {
   font-size: 28px;
   color: #fff;
 }
 @media (min-width: 992px) {
-  #free-product-cta .entry-image h3 {
+  .free-product-cta .entry-image h3 {
     font-size: 24px;
   }
 }
 @media (min-width: 1200px) {
-  #free-product-cta .entry-image h3 {
+  .free-product-cta .entry-image h3 {
     font-size: 28px;
   }
 }
@@ -6388,52 +6388,8 @@ footer.contact-footer textarea.form-control:focus {
   margin-bottom: 0;
   font-size: 20px;
 }
-.about-d2f .btn-lg {
-  height: 60px;
-  margin-top: 80px;
-  line-height: 36px;
-}
-.about-d2f .about-left li,
-.about-d2f .about-right li {
-  height: 64px;
-  line-height: 1.4em;
-}
-.about-d2f .about-left {
-  text-align: right;
-}
-.about-content {
-  background: none;
-}
-.about-left li,
-.about-right li {
-  padding: 80px 0 100px;
-  text-align: center;
-}
-.about-item-1 {
-  background: url(../../images/icons/comments.png) center top no-repeat;
-  background: url(../../../images/icons/comments.png) center top no-repeat;
-}
-.about-item-2 {
-  margin: 0;
-  background: url(../../images/icons/notebook.png) center top no-repeat;
-  background: url(../../../images/icons/notebook.png) center top no-repeat;
-}
-.about-item-3 {
-  background: url(../../images/icons/camera.png) center top no-repeat;
-  background: url(../../../images/icons/camera.png) center top no-repeat;
-}
-.about-item-4 {
-  background: url(../../images/icons/users.png) center top no-repeat;
-  background: url(../../../images/icons/users.png) center top no-repeat;
-}
-.about-item-5 {
-  margin: 0;
-  background: url(../../images/icons/calendar.png) center top no-repeat;
-  background: url(../../../images/icons/calendar.png) center top no-repeat;
-}
-.about-item-6 {
-  background: url(../../images/icons/film.png) center top no-repeat;
-  background: url(../../../images/icons/film.png) center top no-repeat;
+.about-d2f .item-02 {
+  margin-top: 60px;
 }
 @media (min-width: 768px) {
   .about-d2f .slogan h1 {
@@ -6447,53 +6403,6 @@ footer.contact-footer textarea.form-control:focus {
   }
 }
 @media (min-width: 992px) {
-  .about-d2f .about-left li,
-  .about-d2f .about-right li {
-    padding: 80px 0;
-    text-align: center;
-  }
-  .about-d2f .about-content {
-    margin-bottom: 20px;
-    background: url(../../images/mandala.png) center top no-repeat;
-    background: url(../../../images/mandala.png) center top no-repeat;
-    background-position-y: 20px;
-  }
-  .about-d2f .about-left li {
-    padding: 0 80px 0 0;
-    text-align: right;
-  }
-  .about-d2f .about-right li {
-    padding: 0 0 0 80px;
-    text-align: left;
-  }
-  .about-d2f .about-item-1 {
-    margin-bottom: 60px;
-    background: url(../../images/icons/comments.png) right top no-repeat;
-    background: url(../../../images/icons/comments.png) right top no-repeat;
-  }
-  .about-d2f .about-item-2 {
-    margin: 0 50px 60px 0;
-    background: url(../../images/icons/notebook.png) right top no-repeat;
-    background: url(../../../images/icons/notebook.png) right top no-repeat;
-  }
-  .about-d2f .about-item-3 {
-    background: url(../../images/icons/camera.png) right top no-repeat;
-    background: url(../../../images/icons/camera.png) right top no-repeat;
-  }
-  .about-d2f .about-item-4 {
-    margin-bottom: 60px;
-    background: url(../../images/icons/users.png) left top no-repeat;
-    background: url(../../../images/icons/users.png) left top no-repeat;
-  }
-  .about-d2f .about-item-5 {
-    margin: 0 0 60px 50px;
-    background: url(../../images/icons/calendar.png) left top no-repeat;
-    background: url(../../../images/icons/calendar.png) left top no-repeat;
-  }
-  .about-d2f .about-item-6 {
-    background: url(../../images/icons/film.png) left top no-repeat;
-    background: url(../../../images/icons/film.png) left top no-repeat;
-  }
   .about-d2f .first-title {
     padding-top: 170px;
   }
@@ -6621,70 +6530,190 @@ footer.contact-footer textarea.form-control:focus {
 .faqs .section-title h1 {
   text-transform: none;
 }
-#video-player .slogan h1 {
+.about-community .first-title {
+  padding-top: 80px;
+}
+.about-community .slogan h1 {
   font-size: 42px;
 }
-#video-player .slogan h2 {
+.about-community .slogan h2 {
+  padding-top: 5px;
+  margin-bottom: 0;
   font-size: 20px;
 }
-#video-player .first-title {
+.about-community .btn-lg {
+  height: 60px;
+  margin-top: 80px;
+  line-height: 36px;
+}
+.about-community .about-left li,
+.about-community .about-right li {
+  height: 64px;
+  line-height: 1.4em;
+}
+.about-community .about-left {
+  text-align: right;
+}
+.about-content {
+  background: none;
+}
+.about-left li,
+.about-right li {
+  padding: 80px 0 100px;
+  text-align: center;
+}
+.about-item-1 {
+  background: url(../../images/icons/comments.png) center top no-repeat;
+  background: url(../../../images/icons/comments.png) center top no-repeat;
+}
+.about-item-2 {
+  margin: 0;
+  background: url(../../images/icons/notebook.png) center top no-repeat;
+  background: url(../../../images/icons/notebook.png) center top no-repeat;
+}
+.about-item-3 {
+  background: url(../../images/icons/camera.png) center top no-repeat;
+  background: url(../../../images/icons/camera.png) center top no-repeat;
+}
+.about-item-4 {
+  background: url(../../images/icons/users.png) center top no-repeat;
+  background: url(../../../images/icons/users.png) center top no-repeat;
+}
+.about-item-5 {
+  margin: 0;
+  background: url(../../images/icons/calendar.png) center top no-repeat;
+  background: url(../../../images/icons/calendar.png) center top no-repeat;
+}
+.about-item-6 {
+  background: url(../../images/icons/film.png) center top no-repeat;
+  background: url(../../../images/icons/film.png) center top no-repeat;
+}
+@media (min-width: 768px) {
+  .about-community .slogan h1 {
+    font-size: 60px;
+  }
+  .about-community .slogan h2 {
+    font-size: 24px;
+  }
+  .about-community .first-title {
+    padding-top: 100px;
+  }
+}
+@media (min-width: 992px) {
+  .about-community .about-left li,
+  .about-community .about-right li {
+    padding: 80px 0;
+    text-align: center;
+  }
+  .about-community .about-content {
+    margin-bottom: 20px;
+    background: url(../../images/mandala.png) center top no-repeat;
+    background: url(../../../images/mandala.png) center top no-repeat;
+    background-position-y: 20px;
+  }
+  .about-community .about-left li {
+    padding: 0 80px 0 0;
+    text-align: right;
+  }
+  .about-community .about-right li {
+    padding: 0 0 0 80px;
+    text-align: left;
+  }
+  .about-community .about-item-1 {
+    margin-bottom: 60px;
+    background: url(../../images/icons/comments.png) right top no-repeat;
+    background: url(../../../images/icons/comments.png) right top no-repeat;
+  }
+  .about-community .about-item-2 {
+    margin: 0 50px 60px 0;
+    background: url(../../images/icons/notebook.png) right top no-repeat;
+    background: url(../../../images/icons/notebook.png) right top no-repeat;
+  }
+  .about-community .about-item-3 {
+    background: url(../../images/icons/camera.png) right top no-repeat;
+    background: url(../../../images/icons/camera.png) right top no-repeat;
+  }
+  .about-community .about-item-4 {
+    margin-bottom: 60px;
+    background: url(../../images/icons/users.png) left top no-repeat;
+    background: url(../../../images/icons/users.png) left top no-repeat;
+  }
+  .about-community .about-item-5 {
+    margin: 0 0 60px 50px;
+    background: url(../../images/icons/calendar.png) left top no-repeat;
+    background: url(../../../images/icons/calendar.png) left top no-repeat;
+  }
+  .about-community .about-item-6 {
+    background: url(../../images/icons/film.png) left top no-repeat;
+    background: url(../../../images/icons/film.png) left top no-repeat;
+  }
+  .about-community .first-title {
+    padding-top: 170px;
+  }
+}
+.video-player .slogan h1 {
+  font-size: 42px;
+}
+.video-player .slogan h2 {
+  font-size: 20px;
+}
+.video-player .first-title {
   padding-top: 60px;
 }
 @media (min-width: 768px) {
-  #video-player .slogan h1 {
+  .video-player .slogan h1 {
     font-size: 60px;
   }
-  #video-player .slogan h2 {
+  .video-player .slogan h2 {
     font-size: 24px;
   }
 }
-#about-speaker .list li {
+.about-speaker .list li {
   margin-left: 30px;
 }
-#about-speaker .btn-lg {
+.about-speaker .btn-lg {
   height: 55px;
   margin-top: 24px;
   line-height: 1.74;
 }
-#past-speakers h1 {
+.past-speakers h1 {
   font-size: 42px;
 }
 @media (min-width: 768px) {
-  #past-speakers .section-title h1 {
+  .past-speakers .section-title h1 {
     font-size: 50px;
   }
 }
-#blog .first-title {
-  padding-top: 20px;
+.blog.section {
+  padding: 80px 0 100px;
 }
-#blog-single .section-title {
-  padding-bottom: 0;
-  margin-bottom: 30px;
+.blog .first-title {
+  padding-top: 0;
 }
-#blog-single .section-title h1 {
-  font-size: 38px;
-  text-transform: none;
+.blog .tumblr-reader-body img {
+  width: 100%;
 }
-#blog-single .section-title .entry-meta {
-  padding-top: 10px;
+.blog .tumblr-reader-title {
+  margin-bottom: 15px;
+  font-size: 32px;
+  line-height: 38px;
+  color: #5b5e60;
 }
-#blog-single .section-title .widget .tagcloud {
-  padding: 15px 0 10px;
-}
-#blog-single .section-title:after {
-  display: none;
-}
-#blog-single .first-title {
-  margin-top: 20px;
-}
-@media (min-width: 768px) {
-  #blog-single .section-title h1 {
-    font-size: 44px;
-  }
+.blog .tumblr-reader-post-regular {
+  padding-bottom: 50px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #ececec;
 }
 @media (min-width: 992px) {
-  #blog-single .section-title h1 {
-    font-size: 50px;
+  .blog.section {
+    padding: 100px 0;
+  }
+  .blog .first-title {
+    padding-top: 60px;
+  }
+  .blog .tumblr-reader-title {
+    font-size: 42px;
+    line-height: 44px;
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */

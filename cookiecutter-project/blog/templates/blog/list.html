@@ -3,10 +3,28 @@
 {% load tumblr_reader %}
 
 {% block content %}
-<div id="tumblr-posts"></div>
+	<section class="blog section">
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-title first-title align-center">
+						<h1>Bird's Eye View</h1>
+						<h2>A blog that will show you how tincidunt leo magna, non sodales est tincidunt aliquam.</h2>
+					</div>	
+				</div>
+			</div><!--/ .row-->
+			
+			<div id="main" class="col-md-8 col-md-offset-2">
+				<div id="tumblr-posts"></div>
+			</div>
+
+		</div><!--/ .container-->
+	</section><!--/ .section-->
+
 {% endblock content %}
 
 {% block javascript %}
 {{ block.super }}
-{% tumblr_posts blog="g01dhand" container="tumblr-posts" %}
+{% tumblr_posts blog="decidetofly" container="tumblr-posts" %}
 {% endblock javascript %}
