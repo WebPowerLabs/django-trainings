@@ -94,29 +94,45 @@
     <div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
 
     {% block nav %}
-      <header id="header" class="header-main">
-        <div class="header-in">
-    
-          <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
-          <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
-    
-          <nav id="navigation" class="navigation">
-            <ul>
-              <li><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="{% url 'about' %}">About</a></li>
-              <li><a href="{% url 'd2f-community' %}">Virtual Mentoring</a>
-                <ul>
-                  <li><a href="{% url 'd2f-community' %}">Our Community</a></li>
-                  <li><a href="{% url 'courage-to-soar' %}">Courage to Soar</a></li>
-                  <li><a href="{% url 'accelerate-your-destiny' %}">Accelerate Your Destiny</a></li>
-                </ul>
-              </li>
-              <li><a href="{% url 'blog' %}">Blog</a></li>
-              <li><a href="{% url 'free-product' %}">Free Product</a></li>
-            </ul>
-          </nav><!--/ #navigation-->
-    
-        </div><!--/ .header-in-->
+      <header id="header">
+
+        <div class="header-member">
+          <div class="header-in">
+
+            <nav id="nav-member" class="navigation">
+              <ul>
+                <li><a href="#">Signup</a></li>
+                <li><a href="#">Login</a></li>
+              </ul>
+            </nav><!--/ #navigation-->
+
+          </div><!--/ .header-in-->
+        </div><!--/ .header-member-->
+
+        <div class="header-main">
+          <div class="header-in">
+      
+            <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
+            <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
+      
+            <nav id="navigation" class="navigation">
+              <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'd2f-community' %}">Virtual Mentoring</a>
+                  <ul>
+                    <li><a href="{% url 'd2f-community' %}">Our Community</a></li>
+                    <li><a href="{% url 'courage-to-soar' %}">Courage to Soar</a></li>
+                    <li><a href="{% url 'accelerate-your-destiny' %}">Accelerate Your Destiny</a></li>
+                  </ul>
+                </li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'free-product' %}">Free Product</a></li>
+              </ul>
+            </nav><!--/ #navigation-->
+          </div><!--/ .header-in-->
+        </div><!--/ .header-main-->
+
       </header><!--/ #header-->
     {% endblock nav %}
 

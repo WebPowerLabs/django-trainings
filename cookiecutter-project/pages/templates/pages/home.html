@@ -15,7 +15,20 @@
 <!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->	
 <header id="header" class="transparent">
 	
-	<div class="header-in clearfix">
+    <div class="header-member">
+      <div class="header-in">
+
+        <nav id="nav-member" class="navigation">
+          <ul>
+            <li><a href="#">Signup</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </nav><!--/ #navigation-->
+
+      </div><!--/ .header-in-->
+    </div><!--/ .header-member-->
+
+	<div class="header-in">
 		
 		<a href="{% url 'home' %}">
 			<img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}">

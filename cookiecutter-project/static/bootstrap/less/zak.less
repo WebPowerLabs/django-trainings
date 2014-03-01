@@ -88,38 +88,169 @@ header a:hover {
 	text-decoration: none;
 }
 
-.header-shrink #logo {
-	height: 30px;
-}
-
-#header.header-main {
-	background-color:  @brand-dtf;
-	
-	.navigation > ul > li {
-		& > a {
-			color: #fff;
-		}
-		&:hover > a {
-			color: #fff;
-			background-color: @brand-dtf-light;
-			background-color: rgba(0,194,169, .7);
-		}
+#header {
+	#logo {
+		height: 30px;
 	}
-	.navigation > ul > .downarrowclass > a:after {
-		color: #fff;
+	&.header-shrink #logo {
+		height: 30px;
 	}
-}
 
-@media (min-width: @screen-md-min) {
-	#header.header-main {
-		
-		.navigation > ul > li {
-			&:hover > a {
-				color: @brand-dtf;
-				background-color: #fff;
+	.header-main {
+		background-color:  @brand-dtf;
+
+		#navigation {
+			background-color: @brand-dtf;
+		}
+
+		.navigation {
+			> ul > li {
+				&.downarrowclass {
+					> a:after {
+						color: @brand-dtf;
+					}
+					&:hover > a:after, &:focus > a:after, &:active > a:after {
+						color: #fff;
+					}
+				}
+
+				&:hover > a {
+					color: #fff;
+					background-color: @brand-dtf;
+				}
+			}
+
+			li.downarrowclass ul li:hover > a {
+				color: #fff;
+				background-color: transparent;
+			}
+
+			ul li {
+				float: none;
+				margin: 2px;
+
+				> a {
+					background-color: @brand-gray-bg;
+					border-radius: 3px;
+					color: @brand-dtf
+				}
+				&:hover > a {
+					color: #fff;
+					background-color: @brand-dtf;
+				}
+			}
+			ul ul {
+				background-color: @brand-dtf;
 			}
 		}
 	}
+
+	.header-member {
+		background-color: #777;
+
+		.header-in {
+			text-align: right;
+		}
+
+		.navigation {
+			> ul > li > a {
+				padding: 12px 20px 15px;
+				font-size: 12px;
+				font-weight: 600;
+			}
+			
+			ul li {
+				float: left;
+				margin: 0;
+
+				> a {
+					background-color: transparent;
+					border-radius: 0;
+				}
+			}
+		}
+
+		#nav-member {
+			display: inline-block;
+			vertical-align: middle;
+
+			> ul > li {
+				& > a {
+					color: @brand-gray-bg;
+				}
+				&:hover > a {
+					color: #777;
+					background-color: @brand-gray-bg;
+				}
+			}
+		}
+	}
+
+	&.header-shrink .header-member .navigation > ul > li > a {
+		padding-top: 12px !important;
+		padding-bottom: 15px !important;
+	}
+
+	&.transparent .header-member .navigation {
+		border-bottom: none;
+	}
+	
+
+}
+
+@media (min-width: @screen-md-min) {
+	#header {
+		#logo {
+			height: auto;
+		}
+
+		.header-main {
+			#navigation {
+				background-color: transparent;
+			}
+
+			.navigation {
+				> ul > li {
+					&:hover > a {
+						color: @brand-dtf;
+						background-color: #fff;
+					}
+				}
+
+				ul li {
+					float: left;
+					margin: 0;
+
+					> a {
+						background-color: transparent;
+						border-radius: 0;
+						color: #fff;
+					}
+				}
+
+				ul ul {
+					background-color: @brand-gray;
+				}
+				
+				> ul > li.downarrowclass {
+					> a:after {
+						color: #fff;
+					}
+					&:hover > a:after, &:focus > a:after, &:active > a:after {
+						color: @brand-dtf;
+					}
+				}
+				
+				li.downarrowclass ul li:hover > a {
+					color: @brand-dtf;
+				}
+			}
+		}
+	}
+}
+
+.not-ie .header-member {
+	font: 0/0 a;
 }
 
 
@@ -380,7 +511,6 @@ footer.footer-main {
 			color: #fff;
 			font-size: 42px;
 			font-family: 'Julius Sans One', sans-serif;
-			text-transform: uppercase;
 		}
 		h2 {
 			margin-bottom: 30px;
@@ -514,14 +644,14 @@ footer.footer-main {
 		width: 70px;
 		height: 70px;
 		background: transparent;
-		border: 2px solid #5b5e60;
+		border: 2px solid @brand-gray;
 		border-radius: 100px;
 		padding: 20px 0;
 		position: relative;
 
 		i {
 			font-size: 30px;
-			color: #5b5e60;	
+			color: @brand-gray;	
 		}
 	}
 
@@ -595,9 +725,9 @@ footer.footer-main {
 			height: 31px;
 			padding-top: 6px;
 			font-size: 20px;
-			color: #5b5e60;
+			color: @brand-gray;
 			background: transparent;
-			border: 1px solid #5b5e60;
+			border: 1px solid @brand-gray;
 			border-radius: 100px;
 		}
 	}
@@ -636,6 +766,7 @@ footer.footer-main {
 		}
 		h2 {
 			font-size: 20px;
+			text-transform: none;
 		}
 	}
 }
@@ -833,7 +964,7 @@ footer.contact-footer {
 @media (min-width: @screen-md-min) {
 	.about-d2f {
 		.first-title {
-			padding-top: 170px;
+			padding-top: 205px;
 		}
 	}
 }
@@ -900,7 +1031,7 @@ footer.contact-footer {
 				background-color: #fff;
 			}
 			.team-title {
-				color: #5b5e60;
+				color: @brand-gray;
 			}
 			.team-position {
 				color: #aeaeae;
@@ -1150,7 +1281,192 @@ footer.contact-footer {
 		}
 
 		.first-title {
-			padding-top: 170px;
+			padding-top: 205px;
+		}
+	}
+}
+
+
+//-----------------------------------------------------------------------//
+//----------- Courage to Soar / Accelerate Your Destiny Pages -----------//
+//-----------------------------------------------------------------------//
+
+
+// ------ About VM Products Blocks ------ //
+
+.about-products {
+	text-align: center;
+	margin-top: 107px;
+
+	.section {
+		padding: 80px 0 45px;
+	}
+	
+	.bg-dark-color .full-bg-image {
+		opacity: 0.8;
+	}
+
+	.parallax-clouds .full-bg-image {
+		background-image: url(../../images/clouds.jpg);
+		background-image: url(../../../images/clouds.jpg);
+	}
+
+	.products-title {
+		h1 {
+			margin-bottom: 30px;
+			color: #fff;
+			font-size: 35px;
+			font-family: 'Julius Sans One', sans-serif;
+			font-weight: 600;
+			text-transform: none;
+		}
+		h3 {
+			margin-bottom: 30px;
+			color: #fff;
+			font-size: 16px;
+			font-family: 'Roboto', sans-serif;
+			line-height: 1.5em;
+			font-weight: 300;
+		}
+	}
+	
+	h1 {
+		margin: 10px 0 30px 0;
+		color: @brand-dtf;
+		text-transform: uppercase;
+		font-size: 48px;
+		font-weight: 100;
+		line-height: 1.1em;
+	}
+
+	.btn-lg {
+		width: 200px;
+		margin-top: 15px;
+
+		&.btn-success {
+			margin-left: 0;
+
+			&:hover {
+				background-color: #fff;
+				color: @brand-dtf;
+			}
+		}
+		&.btn-danger {
+			&:hover {
+				background-color: #fff;
+				color: @brand-danger;
+			}
+		}
+	}
+
+	.products-items {
+		padding: 0 5%;
+	}
+
+	h2.entry-title {
+		font-size: 19px;
+		font-weight: 400;
+		padding-top: 10px;
+	}
+	p {
+		font-size: 14px;
+		line-height: 1.5em;
+	}
+
+	.icon {
+		text-align: center;
+		margin: 19px auto 16px;
+	}
+	.top {
+		width: 125px;
+		height: 125px;
+		background: @gray-lighter;
+		border: 2px solid @gray-lighter;
+		border-radius: 100px;
+		padding: 39px 1px 0 0;
+		position: relative;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		transition: all 0.3s;
+
+		i {
+			font-size: 47px;
+			color: #fff;
+		}
+	}
+
+	.entry {
+		padding: 0 10px;
+		margin-bottom: 35px;
+		text-align: center;
+		height: auto;
+		min-height: 276px;
+		background: #fff;
+		float: left;
+
+		&:hover {
+
+			.top {
+				border: 2px solid  @brand-dtf;
+				background: @brand-dtf;
+
+				&:after {
+					border: 2px solid white;
+					-webkit-transform: scale(1.2);
+					-moz-transform: scale(1.2);
+					-ms-transform: scale(1.2);
+					transform: scale(1.2);
+				}
+			}
+		}
+
+		.top:after {
+			position: absolute;
+			background: transparent;
+			content: '';
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 500px;
+			-webkit-transition: all 0.4s;
+			-moz-transition: all 0.4s;
+			transition: all 0.4s;
+		}
+
+		.icon {
+			text-align: center;
+			margin: 19px auto 16px;
+		}
+
+		.bottom i {
+			width: 31px;
+			height: 31px;
+			padding-top: 6px;
+			font-size: 20px;
+			color: @brand-gray;
+			background: transparent;
+			border: 1px solid @brand-gray;
+			border-radius: 100px;
+		}
+	}
+}
+
+@media (min-width: @screen-sm-min) {
+	.about-products {
+		.products-title {
+			h1 {
+				font-size: 68px;
+			}
+			h3 {
+				font-size: 20px;
+			}
+		}
+
+		.btn-lg {
+			&.btn-success {
+				margin-left: 20px;
+			}
 		}
 	}
 }
@@ -1244,7 +1560,7 @@ footer.contact-footer {
 	.tumblr-reader-title {
 		margin-bottom: 15px;
 		font-size: 32px;
-		color: #5b5e60;
+		color: @brand-gray;
 		line-height: 38px;
 	}
 
