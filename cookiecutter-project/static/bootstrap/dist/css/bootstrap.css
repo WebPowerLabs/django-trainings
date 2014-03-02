@@ -5846,6 +5846,9 @@ header a:hover {
 #header.header-shrink #logo {
   height: 30px;
 }
+#header.header-shrink .header-member {
+  display: block;
+}
 #header .header-main {
   background-color: #00c2a9;
 }
@@ -5924,6 +5927,9 @@ header a:hover {
 @media (min-width: 992px) {
   #header #logo {
     height: auto;
+  }
+  #header.header-shrink .header-member {
+    display: none;
   }
   #header .header-main #navigation {
     background-color: transparent;
@@ -6074,17 +6080,6 @@ footer.footer-main .logo-in-footer {
 .community-cta .btn-lg {
   width: 200px;
   margin-top: 15px;
-}
-.community-cta .btn-lg.btn-success {
-  margin-left: 0;
-}
-.community-cta .btn-lg.btn-success:hover {
-  color: #00c2a9;
-  background-color: #fff;
-}
-.community-cta .btn-lg.btn-danger:hover {
-  color: #d46969;
-  background-color: #fff;
 }
 @media (min-width: 768px) {
   .community-cta h1 {
@@ -6748,18 +6743,21 @@ footer.contact-footer textarea.form-control:focus {
   }
 }
 .about-products {
-  margin-top: 107px;
   text-align: center;
 }
-.about-products .section {
-  padding: 80px 0 45px;
+.about-products .section.parallax {
+  padding: 80px 0 85px;
 }
 .about-products .bg-dark-color .full-bg-image {
   opacity: .8;
 }
-.about-products .parallax-clouds .full-bg-image {
-  background-image: url(../../images/clouds.jpg);
-  background-image: url(../../../images/clouds.jpg);
+.about-products .parallax-courage .full-bg-image {
+  background-image: url(../../images/eagle.jpg);
+  background-image: url(../../../images/eagle.jpg);
+}
+.about-products .parallax-accelerate .full-bg-image {
+  background-image: url(../../images/businesswoman.jpg);
+  background-image: url(../../../images/businesswoman.jpg);
 }
 .about-products .products-title h1 {
   margin-bottom: 30px;
@@ -6788,17 +6786,6 @@ footer.contact-footer textarea.form-control:focus {
 .about-products .btn-lg {
   width: 200px;
   margin-top: 15px;
-}
-.about-products .btn-lg.btn-success {
-  margin-left: 0;
-}
-.about-products .btn-lg.btn-success:hover {
-  color: #00c2a9;
-  background-color: #fff;
-}
-.about-products .btn-lg.btn-danger:hover {
-  color: #d46969;
-  background-color: #fff;
 }
 .about-products .products-items {
   padding: 0 5%;
@@ -6837,7 +6824,7 @@ footer.contact-footer textarea.form-control:focus {
   height: auto;
   min-height: 276px;
   padding: 0 10px;
-  margin-bottom: 35px;
+  margin-bottom: 0;
   text-align: center;
   background: #fff;
 }
@@ -6881,13 +6868,57 @@ footer.contact-footer textarea.form-control:focus {
 }
 @media (min-width: 768px) {
   .about-products .products-title h1 {
-    font-size: 68px;
+    font-size: 56px;
   }
   .about-products .products-title h3 {
     font-size: 20px;
   }
   .about-products .btn-lg.btn-success {
     margin-left: 20px;
+  }
+}
+@media (min-width: 992px) {
+  .about-products .section.parallax {
+    padding: 206px 0 85px;
+  }
+}
+@media (min-width: 1200px) {
+  .about-products .products-title h1 {
+    font-size: 68px;
+  }
+}
+.purchase-cta {
+  text-align: center;
+}
+.purchase-cta h1 {
+  font-size: 34px;
+  font-weight: 400;
+  color: #fff;
+}
+.purchase-cta h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.5em;
+  color: #fff;
+}
+.purchase-cta .btn {
+  height: 60px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  line-height: 2;
+}
+@media (min-width: 768px) {
+  .purchase-cta h1 {
+    font-size: 44px;
+  }
+}
+@media (min-width: 992px) {
+  .purchase-cta {
+    text-align: left;
+  }
+  .purchase-cta .btn {
+    margin-top: 63px;
   }
 }
 .video-player .slogan h1 {
@@ -6897,7 +6928,7 @@ footer.contact-footer textarea.form-control:focus {
   font-size: 20px;
 }
 .video-player .first-title {
-  padding-top: 60px;
+  padding-top: 0;
 }
 @media (min-width: 768px) {
   .video-player .slogan h1 {
@@ -6905,6 +6936,11 @@ footer.contact-footer textarea.form-control:focus {
   }
   .video-player .slogan h2 {
     font-size: 24px;
+  }
+}
+@media (min-width: 992px) {
+  .video-player .first-title {
+    padding-top: 100px;
   }
 }
 .about-speaker .list li {
@@ -6948,7 +6984,7 @@ footer.contact-footer textarea.form-control:focus {
     padding: 100px 0;
   }
   .blog .first-title {
-    padding-top: 60px;
+    padding-top: 100px;
   }
   .blog .tumblr-reader-title {
     font-size: 42px;

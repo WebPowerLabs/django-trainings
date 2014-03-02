@@ -92,8 +92,14 @@ header a:hover {
 	#logo {
 		height: 30px;
 	}
-	&.header-shrink #logo {
-		height: 30px;
+	&.header-shrink {
+		#logo {
+			height: 30px;
+		}
+
+		.header-member {
+			display: block;
+		}
 	}
 
 	.header-main {
@@ -202,6 +208,12 @@ header a:hover {
 	#header {
 		#logo {
 			height: auto;
+		}
+		
+		&.header-shrink {
+			.header-member {
+				display: none;
+			}
 		}
 
 		.header-main {
@@ -390,21 +402,6 @@ footer.footer-main {
 	.btn-lg {
 		width: 200px;
 		margin-top: 15px;
-
-		&.btn-success {
-			margin-left: 0;
-
-			&:hover {
-				background-color: #fff;
-				color: @brand-dtf;
-			}
-		}
-		&.btn-danger {
-			&:hover {
-				background-color: #fff;
-				color: @brand-danger;
-			}
-		}
 	}
 }
 
@@ -1296,19 +1293,23 @@ footer.contact-footer {
 
 .about-products {
 	text-align: center;
-	margin-top: 107px;
 
-	.section {
-		padding: 80px 0 45px;
+	.section.parallax {
+		padding: 80px 0 85px;
 	}
 	
 	.bg-dark-color .full-bg-image {
 		opacity: 0.8;
 	}
 
-	.parallax-clouds .full-bg-image {
-		background-image: url(../../images/clouds.jpg);
-		background-image: url(../../../images/clouds.jpg);
+	.parallax-courage .full-bg-image {
+		background-image: url(../../images/eagle.jpg);
+		background-image: url(../../../images/eagle.jpg);
+	}
+	
+	.parallax-accelerate .full-bg-image {
+		background-image: url(../../images/businesswoman.jpg);
+		background-image: url(../../../images/businesswoman.jpg);
 	}
 
 	.products-title {
@@ -1342,21 +1343,6 @@ footer.contact-footer {
 	.btn-lg {
 		width: 200px;
 		margin-top: 15px;
-
-		&.btn-success {
-			margin-left: 0;
-
-			&:hover {
-				background-color: #fff;
-				color: @brand-dtf;
-			}
-		}
-		&.btn-danger {
-			&:hover {
-				background-color: #fff;
-				color: @brand-danger;
-			}
-		}
 	}
 
 	.products-items {
@@ -1397,7 +1383,7 @@ footer.contact-footer {
 
 	.entry {
 		padding: 0 10px;
-		margin-bottom: 35px;
+		margin-bottom: 0;
 		text-align: center;
 		height: auto;
 		min-height: 276px;
@@ -1456,7 +1442,7 @@ footer.contact-footer {
 	.about-products {
 		.products-title {
 			h1 {
-				font-size: 68px;
+				font-size: 56px;
 			}
 			h3 {
 				font-size: 20px;
@@ -1467,6 +1453,70 @@ footer.contact-footer {
 			&.btn-success {
 				margin-left: 20px;
 			}
+		}
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	.about-products {
+		.section.parallax {
+			padding: 206px 0 85px;
+		}
+	}
+}
+
+@media (min-width: @screen-lg-min) {
+	.about-products {
+		.products-title {
+			h1 {
+				font-size: 68px;
+			}
+		}
+	}
+}
+
+
+// ------ Purchase CTA Blocks ------ //
+
+.purchase-cta {
+	text-align: center;
+
+	h1 {
+		color: #fff;
+		font-weight: 400;
+		font-size: 34px;
+	}
+
+	h3 {
+		color: #fff;
+		font-size: 20px;
+		font-family: 'Roboto', sans-serif;
+		line-height: 1.5em;
+		font-weight: 300;
+	}
+
+	.btn {
+		margin-top: 30px;
+		margin-bottom: 10px;
+		height: 60px;
+		line-height: 2;
+	}
+}
+
+@media (min-width: @screen-sm-min) {
+	.purchase-cta {
+		h1 {
+			font-size: 44px;
+		}
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	.purchase-cta {
+		text-align: left;
+
+		.btn {
+			margin-top: 63px;
 		}
 	}
 }
@@ -1489,7 +1539,7 @@ footer.contact-footer {
 		}
 	}
 	.first-title {
-		padding-top: 60px;
+		padding-top: 0;
 	}
 }
 
@@ -1502,6 +1552,14 @@ footer.contact-footer {
 			h2 {
 				font-size: 24px;
 			}
+		}
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	.video-player {
+		.first-title {
+			padding-top: 100px;
 		}
 	}
 }
@@ -1577,7 +1635,7 @@ footer.contact-footer {
 			padding: 100px 0;
 		}
 		.first-title {
-			padding-top: 60px;
+			padding-top: 100px;
 		}
 		
 		.tumblr-reader-title {
