@@ -52,6 +52,8 @@ class Common(Configuration):
         'avatar',  # for user avatars
         'django_extensions',
         'tumblr_reader',
+        'nump3',
+        'nufiles',
     )
 
     # Apps specific for this project go here.
@@ -138,7 +140,7 @@ class Common(Configuration):
 
     ########## GENERAL CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-    TIME_ZONE = 'America/Los_Angeles'
+    TIME_ZONE = 'America/Phoenix'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
     LANGUAGE_CODE = 'en-us'

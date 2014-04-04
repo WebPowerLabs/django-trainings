@@ -25,5 +25,7 @@ urlpatterns = patterns('',
     # Your stuff: custom urls go here
     url(r'^blog/', include("blog.urls", namespace="blog")),
     url(r'^', include('pages.urls')),
+    url(r'^mp3s/', include('nump3.urls', namespace="nump3")),
+    url(r'^files/', include('nufiles.urls', namespace="nufiles")),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
