@@ -3403,14 +3403,21 @@ body {
 /* ---------------------------------------------------------------- */
 
 body {
+	color: #5b5e60;
 	background: none !important;
 	background-color: #fff !important;
 }
 body.default {
-	margin-top: 129px;
+	margin-top: 0;
 }
 body.home {
 	margin-top: 0;
+}
+
+@media (min-width: 992px) {
+	body.default {
+		margin-top: 129px;
+	}
 }
 
 #header.transparent {

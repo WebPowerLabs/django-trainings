@@ -6,19 +6,21 @@
   <div class="container">
 
     <div class="section-title align-center">
-      <h1>Our Community</h1>
-      <h2>The world’s leading business and personal development experts at your fingertips, when you need them, all for less than 2 lattes a month.</h2>  
+      <h1>AYD Sessions</h1>
+      <h2>Nam lacus orci, sagittis et sem eu, ullamcorper auctor nulla. Phasellus sed vestibulum diam. Nunc ultrices facilisis mauris et auctor. Suspendisse mauris sem, tincidunt eu fermentum sit amet, vehicula nec sapien.</h2>  
     </div>
 
     <div class="">
       {% for file in file_list %}
 
         <div class="media nufiles-list">
-          <div class="col-md-4 nufiles-thumb">
-            <img class="media-object img-responsive" src="{{ file.img.url }}" alt="Listen to {{ file.title }}">
+          <div class="col-md-5">
+            <div class="nufiles-thumb">
+              <img class="media-object img-responsive" src="{{ file.img.url }}" alt="Listen to {{ file.title }}">
+            </div>
           </div>
 
-          <div class="col-md-7 col-md-offset-1">
+          <div class="col-md-7">
             <div class="media-body">
               <h4 class="media-heading nufiles-heading">
               		{{ file.title }}
@@ -32,7 +34,7 @@
 
       {% endfor %}
     </div>
-    
+
   </div>
 </section>
 

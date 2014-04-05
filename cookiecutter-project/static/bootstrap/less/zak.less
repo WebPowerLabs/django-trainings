@@ -1645,6 +1645,29 @@ footer.contact-footer {
 	}
 }
 
+//----------------------------------------------------//
+//----------------- Signin Form Page -----------------//
+//----------------------------------------------------//
+
+.sign-in {
+	padding: 60px 0;
+
+	h2 {
+		text-transform: uppercase;
+		font-size: 44px;
+		font-weight: 300;
+		color: @brand-dtf;
+	}
+
+	.btn-lg {
+		padding: 12px 80px;
+	}
+
+	.button {
+		color: @brand-gray;
+	}
+}
+
 
 //------------------------------------------------//
 //----------------- Nufiles Page -----------------//
@@ -1653,17 +1676,37 @@ footer.contact-footer {
 .nufiles {
 	padding: 60px 0;
 
+	.section-title {
+		margin-bottom: 40px;
+
+		&:after {
+			display: none;
+		}
+	}
+
 	.media {
 		margin-top: 0;
 	}
 
 	.nufiles-list {
-		padding: 50px 0 90px;
-		border-bottom: 1px solid #ececec;
+		background-color: @brand-gray-bg;
+		padding: 40px 3%;
+		border-radius: 7px;
+		margin-bottom: 40px;
 
-		&:first-child {
-			padding-top: 50px;
-			border-top: 1px solid #ececec;
+		&:last-child {
+			margin-bottom: 20px;
 		}
+	}
+
+	.nufiles-heading {
+		font-size: 24px;
+	}
+
+	.nufiles-description {
+		font-size: 16px;
+	}
+
+	.nufiles-thumb {
 	}
 }
