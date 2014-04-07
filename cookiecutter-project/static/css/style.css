@@ -137,11 +137,11 @@ a {
 
 a, a > * {
 	text-decoration: none;
-	color: #5b5e60;
+	color: #00c2a9;
 }
 
 a:hover {
-	color: #00c2a9;
+	color: #009e8a;
 }
 
 .not-ie a {

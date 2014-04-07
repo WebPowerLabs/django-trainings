@@ -1645,12 +1645,16 @@ footer.contact-footer {
 	}
 }
 
-//----------------------------------------------------//
-//----------------- Signin Form Page -----------------//
-//----------------------------------------------------//
+//---------------------------------------------------------------//
+//----------------- General Membership Elements -----------------//
+//---------------------------------------------------------------//
 
-.sign-in {
-	padding: 60px 0;
+
+//--------- Signin Form ---------//
+
+.login-wrapper,
+.signup-wrapper {
+	padding: 60px 0 65px;
 
 	h2 {
 		text-transform: uppercase;
@@ -1663,9 +1667,35 @@ footer.contact-footer {
 		padding: 12px 80px;
 	}
 
+	label {
+		margin-bottom: 3px;
+	}
 	.button {
 		color: @brand-gray;
 	}
+}
+
+.signup-wrapper {
+	.btn-lg {
+		margin-top: 20px;
+	}
+}
+
+
+//--------- Verification Email Pages ---------//
+
+.verify-wrapper {
+	padding: 80px 0;
+
+	p {
+		margin-bottom: 0;
+	}
+}
+
+//--------- Verification Email Pages ---------//
+
+.user-detail-wrapper {
+	padding: 80px 0;
 }
 
 
