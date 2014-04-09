@@ -9,24 +9,23 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-4 col-md-offset-4">
-        <h2>{{ object.username }}</h2>
+      <div class="col-md-6">
+        <h2>User: {{ object.username }}</h2>
+
+        {% if object == request.user %}
+          <!-- Action buttons -->
+            <a class="btn btn-danger" href="{% url 'users:update' %}">My Info</a>
+            <a class="btn btn-success" href="{% url 'account_email' %}">E-Mail</a>
+            <a class="btn btn-success" href="{% url 'avatar_change' %}">Avatar</a>
+          <!-- Your Stuff: Custom user template urls -->
+          <!-- End Action buttons -->
+        {% endif %}
+      </div>
+
+      <div class="col-md-6">
+        <h2>Welcome to Accelerate Your Destiny!</h2>
       </div>
     </div>
-
-    {% if object == request.user %}
-      <!-- Action buttons -->     
-      <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-          <a class="btn btn-danger" href="{% url 'users:update' %}">My Info</a>
-          <a class="btn btn-success" href="{% url 'account_email' %}">E-Mail</a>
-          <a class="btn btn-success" href="{% url 'avatar_change' %}">Avatar</a>
-          <!-- Your Stuff: Custom user template urls -->
-        </div>
-
-      </div>
-      <!-- End Action buttons -->
-    {% endif %}
 
   </div>
 </div>
