@@ -7100,4 +7100,17 @@ footer.contact-footer textarea.form-control:focus {
 .nufiles .nufiles-description {
   font-size: 16px;
 }
+.ayd-home {
+  padding: 80px 0 83px;
+  text-align: center;
+}
+.ayd-home .btn {
+  width: 160px;
+}
+.ayd-home h1 {
+  font-size: 36px;
+  font-weight: 300;
+  color: #00c2a9;
+  text-transform: uppercase;
+}
 /*# sourceMappingURL=bootstrap.css.map */

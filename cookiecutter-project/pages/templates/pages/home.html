@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 {% load staticfiles i18n crispy_forms_tags %}
 
+{% comment %}
 {% block nav %}
-
 {% endblock nav %}
+{% endcomment %}
 
 {% block footer %}
-
 {% endblock footer %}
 
+{% block bodyclass %}default{% endblock bodyclass %}
+
+{% comment %}
 {% block bodyclass %}home{% endblock bodyclass %}
+{% endcomment %}
 
 {% block content %}
 
-
+{% comment %}
 <!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->	
 <header id="header" class="transparent">
 	
@@ -60,11 +64,30 @@
 	
 </header><!--/ #header-->
 <!-- - - - - - - - - - - - - end Header - - - - - - - - - - - - - - - -->
+{% endcomment %}
 
 
 <!-- - - - - - - - - - - - - - Wrapper - - - - - - - - - - - - - - - - -->
 <div id="wrapper">
 	
+	<section class="ayd-home">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+
+					<h1>Accelerate Your Destiny</h1>
+					<p>All existing Accelerate Your Destiny members, please click below to create a new account or login to an existing account.</p>
+
+					<a style="margin-right: 20px;" href="{% url 'account_signup' %}" class="btn btn-danger btn-lg">Create Account</a>
+					<a href="{% url 'account_login' %}" class="btn btn-success btn-lg">Login</a>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% comment %}	
 	<section class="free-product page"><!-- - - - - - - - FREE PRODUCT BLOCK - - - - - - - -->
 		<section class="section parallax padding-off">
 
@@ -295,9 +318,9 @@
 			</div><!--/ .container-->
 		</section><!--/ .section-->
 	</section><!-- - - - - - - - /JAMI AMIDON INTRO BLOCK - - - - - - - -->
-
 	
-	<section class="contact-title page"><!-- - - - - - - - CONTACT TITLE BLOCK - - - - - - - -->
+
+	<section class="contact-title"><!-- - - - - - - - CONTACT TITLE BLOCK - - - - - - - -->
 		<section class="section padding-bottom-off bg-gray-color">
 			<div class="container">
 				<div class="row">
@@ -313,7 +336,8 @@
 			</div><!--/ .container-->
 		</section><!--/ .section-->
 	</section><!-- - - - - - - - /CONTACT TITLE BLOCK - - - - - - - -->
-	
+{% endcomment %}
+
 
 	<footer class="contact-footer"><!-- - - - - - - - CONTACT FOOTER BLOCK - - - - - - - -->
 		
