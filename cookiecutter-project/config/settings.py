@@ -52,7 +52,6 @@ class Common(Configuration):
         'avatar',  # for user avatars
         'django_extensions',
         'tumblr_reader',
-        'nump3',
         'nufiles',
     )
 
