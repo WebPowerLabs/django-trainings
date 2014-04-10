@@ -5977,7 +5977,7 @@ footer.footer-main .section {
   background-color: rgba(0, 0, 0, .6);
 }
 footer.footer-main .parallax-bg-4 .full-bg-image {
-  background-image: url(../../images/ventana-meeting.jpg);
+  background-image: url(../../../images/ventana-meeting.jpg);
 }
 footer.footer-main .widget {
   margin-bottom: 0;
@@ -6058,7 +6058,7 @@ footer.footer-main .logo-in-footer {
   opacity: .8;
 }
 .community-cta.parallax-clouds .full-bg-image {
-  background-image: url(../../images/clouds.jpg);
+  background-image: url(../../../images/clouds.jpg);
 }
 .community-cta h1 {
   margin-bottom: 30px;
@@ -6136,7 +6136,7 @@ footer.footer-main .logo-in-footer {
   }
 }
 .free-product .full-bg-image {
-  background-image: url(../../images/umbrella-woman.jpg);
+  background-image: url(../../../images/umbrella-woman.jpg);
 }
 .free-product .video-full-entry {
   display: inline-block;
@@ -6439,7 +6439,7 @@ footer.contact-footer a:hover {
   text-decoration: none;
 }
 footer.contact-footer .parallax-bg-4 .full-bg-image {
-  background-image: url(../../images/ventana-meeting.jpg);
+  background-image: url(../../../images/ventana-meeting.jpg);
 }
 footer.contact-footer ul.social-icons {
   padding-top: 30px;
@@ -6650,24 +6650,24 @@ footer.contact-footer textarea.form-control:focus {
   text-align: center;
 }
 .about-item-1 {
-  background: url(../../images/icons/comments.png) center top no-repeat;
+  background: url(../../../images/icons/comments.png) center top no-repeat;
 }
 .about-item-2 {
   margin: 0;
-  background: url(../../images/icons/notebook.png) center top no-repeat;
+  background: url(../../../images/icons/notebook.png) center top no-repeat;
 }
 .about-item-3 {
-  background: url(../../images/icons/camera.png) center top no-repeat;
+  background: url(../../../images/icons/camera.png) center top no-repeat;
 }
 .about-item-4 {
-  background: url(../../images/icons/users.png) center top no-repeat;
+  background: url(../../../images/icons/users.png) center top no-repeat;
 }
 .about-item-5 {
   margin: 0;
-  background: url(../../images/icons/calendar.png) center top no-repeat;
+  background: url(../../../images/icons/calendar.png) center top no-repeat;
 }
 .about-item-6 {
-  background: url(../../images/icons/film.png) center top no-repeat;
+  background: url(../../../images/icons/film.png) center top no-repeat;
 }
 @media (min-width: 768px) {
   .about-community .slogan h1 {
@@ -6688,7 +6688,7 @@ footer.contact-footer textarea.form-control:focus {
   }
   .about-community .about-content {
     margin-bottom: 20px;
-    background: url(../../images/mandala.png) center top no-repeat;
+    background: url(../../../images/mandala.png) center top no-repeat;
     background-position-y: 20px;
   }
   .about-community .about-left li {
@@ -6701,25 +6701,25 @@ footer.contact-footer textarea.form-control:focus {
   }
   .about-community .about-item-1 {
     margin-bottom: 60px;
-    background: url(../../images/icons/comments.png) right top no-repeat;
+    background: url(../../../images/icons/comments.png) right top no-repeat;
   }
   .about-community .about-item-2 {
     margin: 0 50px 60px 0;
-    background: url(../../images/icons/notebook.png) right top no-repeat;
+    background: url(../../../images/icons/notebook.png) right top no-repeat;
   }
   .about-community .about-item-3 {
-    background: url(../../images/icons/camera.png) right top no-repeat;
+    background: url(../../../images/icons/camera.png) right top no-repeat;
   }
   .about-community .about-item-4 {
     margin-bottom: 60px;
-    background: url(../../images/icons/users.png) left top no-repeat;
+    background: url(../../../images/icons/users.png) left top no-repeat;
   }
   .about-community .about-item-5 {
     margin: 0 0 60px 50px;
-    background: url(../../images/icons/calendar.png) left top no-repeat;
+    background: url(../../../images/icons/calendar.png) left top no-repeat;
   }
   .about-community .about-item-6 {
-    background: url(../../images/icons/film.png) left top no-repeat;
+    background: url(../../../images/icons/film.png) left top no-repeat;
   }
   .about-community .first-title {
     padding-top: 205px;
@@ -6735,10 +6735,10 @@ footer.contact-footer textarea.form-control:focus {
   opacity: .8;
 }
 .about-products .parallax-courage .full-bg-image {
-  background-image: url(../../images/eagle.jpg);
+  background-image: url(../../../images/eagle.jpg);
 }
 .about-products .parallax-accelerate .full-bg-image {
-  background-image: url(../../images/businesswoman.jpg);
+  background-image: url(../../../images/businesswoman.jpg);
 }
 .about-products .products-title h1 {
   margin-bottom: 30px;
