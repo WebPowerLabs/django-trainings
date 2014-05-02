@@ -4,9 +4,6 @@ from .views import PageView
 
 urlpatterns = patterns('pages.views',
     url(r'^$',
-        PageView.as_view(template_name='pages/coming-soon.html'),
-        name="coming-soon"),
-    url(r'^home/$',
         PageView.as_view(template_name='pages/home.html'),
         name="home"),
     url(r'^about/$',
@@ -30,5 +27,8 @@ urlpatterns = patterns('pages.views',
     url(r'^blog-single/$',
         PageView.as_view(template_name='pages/blog-single.html'),
         name="blog-single"),
+    url(r'^coming-soon/$',
+        PageView.as_view(template_name='pages/coming-soon.html'),
+        name="coming-soon"),
     url(r'^contact/$', 'contact', name='contact'),
     )

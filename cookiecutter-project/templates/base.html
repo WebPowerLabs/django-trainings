@@ -112,16 +112,11 @@
         <div class="header-main">
           <div class="header-in">
       
-            <img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}">
-            {% comment %}
             <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
-            {% endcomment %}
             <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
             
             <nav id="navigation" class="navigation">
               <ul>
-                <li><a href="{% url 'account_login' %}">Home</a></li>
-                {% comment %}
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'd2f-community' %}">Virtual Mentoring</a>
@@ -133,7 +128,6 @@
                 </li>
                 <li><a href="{% url 'blog' %}">Blog</a></li>
                 <li><a href="{% url 'free-product' %}">Free Product</a></li>
-                {% endcomment %}
               </ul>
             </nav><!--/ #navigation-->
           </div><!--/ .header-in-->
