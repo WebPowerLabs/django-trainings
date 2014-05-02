@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load staticfiles i18n crispy_forms_tags %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block bodyclass %}default{% endblock bodyclass %}
+{% block content %}
+
+{% block nav %}
+	<header id="header">
+		<div class="header-main">
+		  <div class="header-in" style="text-align: center;">
+		    <img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}" style="padding: 20px 0;">
+		  </div><!--/ .header-in-->
+		</div><!--/ .header-main-->
+	</header><!--/ #header-->
+{% endblock nav %}
+
+<!-- - - - - - - - - - - - - - Wrapper - - - - - - - - - - - - - - - - -->
+<div id="wrapper">
+	
+	<section class="block coming-soon">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+
+					<h1>We'll be back shortly!</h1>
+					<p>We are in the process of rebuilding the Decide to Fly community with a fresh new look and a ton of awesome features. Check back in a couple weeks or contact us below for more information. Thanks!</p>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<footer class="contact-footer"><!-- - - - - - - - CONTACT FOOTER BLOCK - - - - - - - -->
+		
+		<section class="section parallax parallax-bg-4">
+			<div class="full-bg-image"></div>
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-6 ">
+						{% crispy contact_form %}
+					</div>
+
+					<div class="col-md-6">
+
+						<div class="widget widget_text ">
+							<h2>Decide to Fly&trade;</h2>
+						</div><!--/ .widget_text-->
+						
+						<div class="widget widget_contacts ">
+								<p>Address: 12 Street, Los Angeles, CA, 94101</p>
+								<p>Phone: (800) 123-4567</p>
+								<p>Email: <a href="mailto:ask@decidetofly.com">ask@decidetofly.com</a></p>
+						</div><!--/ .widget_contacts-->
+						
+						<div class="widget widget_social ">
+							<ul class="social-icons">
+								<li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
+								<li class="facebook"><a href="http://facebook.com/decidetofly"><i class="icon-facebook"></i>Facebook</a></li>
+								<li class="pinterest"><a href="http://www.pinterest.com/decidetofly"><i class="icon-pinterest-circled"></i>Pinterest</a></li>
+								<!--<li class="rss"><a href="#"><i class="icon-rss"></i>Rss</a></li>-->
+								<li class="youtube"><a href="http://www.youtube.com/DecidetoFly"><i class="icon-youtube"></i>Youtube</a></li>
+								<!--<li class="instagram"><a href="#"><i class="icon-instagramm"></i>Instagram</a></li>-->
+							</ul><!--/ .social-icons-->
+						</div><!--/ .widget_social-->
+						
+					</div><!--/ .col-md-6-->
+
+				</div><!--/ .row-->
+			</div><!--/ .container-->
+		</section><!--/ .section-->		
+
+	    <div class="bottom-footer clearfix">
+	      <div class="container">
+	        <div class="row">
+	          
+	          <div class="col-sm-6">
+	            <div class="copyright">
+	            	Copyright &copy; 2014 Decide to Fly&trade;. All rights reserved.
+	            </div>
+	          </div><!--/ .col-sm-6-->
+	          
+	          <div class="col-sm-3 col-sm-offset-3">
+	            <div class="developed">
+	            	Designed by <a target="_blank" href="http://rabbitholestud.io/">Rabbit Hole Studio</a>
+	            </div>
+	          </div><!--/ .col-sm-3-->
+	          
+	        </div><!--/ .row-->
+	      </div><!--/ .container-->
+	    </div><!--/ .bottom-footer-->
+
+	</footer><!-- - - - - - - - /CONTACT FOOTER BLOCK - - - - - - - -->
+
+</div><!--/ #wrapper-->
+<!-- - - - - - - - - - - - - end Wrapper - - - - - - - - - - - - - - - -->
+
+
+{% endblock content %}
