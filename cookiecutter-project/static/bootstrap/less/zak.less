@@ -524,7 +524,7 @@ footer.footer-main {
 
 	.video-full-entry {
 		display: inline-block;
-		padding: 70px 0 80px;
+		padding: 70px 0 0;
 
 		h1 {
 			margin-bottom: 30px;
@@ -582,10 +582,15 @@ footer.footer-main {
 	}
 
 	.parallax-overlay {
+		z-index: -1;
 		background-color: @brand-gray;
 		background-color: rgba(0, 0, 0, 0.3);
 		background-image: none;
 	}
+	img.swoosh {
+		margin-bottom: -7px;
+	}
+
 
 	input.btn-success {
 		margin-top: 25px;
@@ -600,7 +605,7 @@ footer.footer-main {
 @media (min-width: @screen-sm-min) {
 	.free-product {
 		.video-full-entry {
-			padding: 120px 0 120px;
+			padding: 120px 0 0;
 
 			h1 {
 				font-size: 52px;
@@ -615,7 +620,7 @@ footer.footer-main {
 @media (min-width: @screen-md-min) {
 	.free-product {
 		.video-full-entry {
-			padding: 230px 0 120px;
+			padding: 230px 0 0;
 			
 			h1 {
 				font-size: 60px;
