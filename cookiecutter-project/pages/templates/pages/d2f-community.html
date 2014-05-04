@@ -5,14 +5,14 @@
 {% block content %}
 <div id="wrapper">
 	
-		
-	<section class="about-community"><!-- - - - - - - - ABOUT COMMUNITY BLOCK - - - - - - - -->
-		<section class="section first-title">
+
+	<!-- - - - - - - - ABOUT COMMUNITY BLOCK - - - - - - - -->
+	<section class="about-community section">
 			<div class="container">
 
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="slogan align-center">
+						<div class="section-title-2">
 							<h1>The <span>Decide to Fly&trade;</span>Community</h1>
 							<h2>Vivamus eget rhoncus purus. Proin non urna ligula. Nunc scelerisque, nunc eget placerat feugiat, arcu quam fringilla mauris, quis blandit diam neque posuere nulla. Aliquam scelerisque diam ut fermentum bibendum. Ut sed ullamcorper nibh. Praesent sit amet molestie lectus, non faucibus tellus.</h2>	
 						</div>
@@ -39,17 +39,18 @@
 						</div>
 
 						<div class="col-sm-4 col-sm-offset-4">
-							<a href="#"><div class="btn btn-lg btn-block btn-danger">Member Login</div></a>
+							<a href="#"><button class="btn btn-lg btn-block btn-danger">Member Login</button></a>
 						</div>
 
 					</div><!--/ .col-md-12-->
 				</div><!--/ .row-->
 
 			</div><!--/ .container-->
-		</section><!--/ .section-->
-	</section><!-- - - - - - - - /ABOUT COMMUNITY BLOCK - - - - - - - -->
+	</section>
+	<!-- - - - - - - - /ABOUT COMMUNITY BLOCK - - - - - - - -->
 
 
+	<!-- - - - - - - - PURCHASE CTA BLOCK - - - - - - - -->
 	<section class="purchase-cta section bg-turquoise-color">
 		<div class="container">
 			<div class="row">
@@ -60,19 +61,17 @@
 				</div><!--/ .col-md-8-->
 
 				<div class="col-md-3 col-sm-8 col-xs-10 col-md-offset-1 col-sm-offset-2 col-xs-offset-1">
-					<a href="#"><div class="btn btn-lg btn-block btn-danger">Join the Community!</div></a>
+					<a href="#"><button class="btn btn-lg btn-block btn-danger">Join the Community!</button></a>
 				</div><!--/ .col-md-3-->
 
 			</div><!--/ .row-->
 		</div><!--/ .container-->
 	</section><!--/ .section-->
+	<!-- - - - - - - - /PURCHASE CTA BLOCK - - - - - - - -->
 
 
 	{% include "includes/free-product-cta.html" with free_cta_title="Free Product CTA" free_cta_subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis consectetur mi vel luctus. Sed accumsan convallis nisi. Etiam mauris magna, mattis vel elementum sed, interdum sit amet nulla." %}
-	
+
+
 </div><!--/ #wrapper-->
-
-
-<!-- - - - - - - - - - - - - end Wrapper - - - - - - - - - - - - - - - -->
-
 {% endblock content %}

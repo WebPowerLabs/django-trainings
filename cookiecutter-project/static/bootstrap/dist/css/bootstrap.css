@@ -5792,8 +5792,8 @@ section.block.coming-soon h1 {
   color: #00c2a9;
   text-transform: uppercase;
 }
-section.block {
-  padding: 80px 0 80px;
+body.default #header {
+  border-bottom: none;
 }
 a {
   color: #00c2a9;
@@ -5811,22 +5811,75 @@ button {
   -webkit-transition: all .25s ease;
           transition: all .25s ease;
 }
+.section-title {
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 70px;
+  text-align: center;
+}
+.section-title:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 14%;
+  height: 2px;
+  margin-left: -7%;
+  content: "";
+  background-color: #ececec;
+}
 .section-title h1 {
-  font-size: 42px;
+  margin-bottom: 20px;
+  font-weight: 100;
+  line-height: 1.1em;
+  color: #00c2a9;
+  text-transform: uppercase;
 }
 .section-title h2 {
-  font-size: 20px;
+  font-weight: 300;
   text-transform: none;
 }
+.section-title-2 {
+  margin-bottom: 80px;
+  text-align: center;
+}
+.section-title-2 h1 {
+  font-weight: 100;
+}
+.section-title-2 h1 span {
+  font-weight: 400;
+  color: #00c2a9;
+}
+.section-title-2 h2 {
+  font-weight: 300;
+  color: #aeaeae;
+}
+.section-title h1,
+.section-title-2 h1 {
+  font-size: 42px;
+}
+.section-title h2,
+.section-title-2 h2 {
+  font-size: 20px;
+}
 @media (min-width: 768px) {
-  .section-title h1 {
+  .section-title h1,
+  .section-title-2 h1 {
     font-size: 60px;
   }
-  .section-title h2 {
+  .section-title h2,
+  .section-title-2 h2 {
     font-size: 24px;
   }
 }
+.parallax .section-title:after {
+  background-color: #cfcfcf;
+  background-color: rgba(207, 207, 207, .4);
+}
+.parallax .section-title h2 {
+  color: #fff;
+}
 .btn {
+  font-weight: 300;
   -webkit-transition: all .25s ease;
           transition: all .25s ease;
 }
@@ -5861,6 +5914,9 @@ header a:hover {
 }
 #header.header-shrink .header-member {
   display: block;
+}
+#header.transparent {
+  background-color: #00c2a9;
 }
 #header .header-main {
   background-color: #00c2a9;
@@ -5943,6 +5999,9 @@ header a:hover {
   }
   #header.header-shrink .header-member {
     display: none;
+  }
+  #header.transparent {
+    background-color: transparent;
   }
   #header .header-main #navigation {
     background-color: transparent;
@@ -6103,24 +6162,6 @@ footer.footer-main .logo-in-footer {
     margin-left: 20px;
   }
 }
-.free-product-cta .section-title h1 {
-  margin-bottom: 15px;
-  text-transform: none;
-}
-.free-product-cta .section-title h2 {
-  margin-bottom: 15px;
-  font-size: 24px;
-  color: #5b5e60;
-}
-.free-product-cta h2 {
-  margin-bottom: 25px;
-  font-size: 42px;
-  font-weight: 300;
-}
-.free-product-cta h3 {
-  margin-bottom: 5px;
-  font-weight: 300;
-}
 .free-product-cta a {
   color: #00c2a9;
 }
@@ -6148,20 +6189,20 @@ footer.footer-main .logo-in-footer {
     font-size: 28px;
   }
 }
-.free-product .full-bg-image {
+.welcome-home .full-bg-image {
   background-image: url(../../../images/umbrella-woman.jpg);
 }
-.free-product .video-full-entry {
+.welcome-home .video-full-entry {
   display: inline-block;
-  padding: 70px 0 0;
+  padding: 60px 0 40px;
 }
-.free-product .video-full-entry h1 {
-  margin-bottom: 30px;
+.welcome-home .video-full-entry h1 {
   font-family: 'Julius Sans One', sans-serif;
-  font-size: 42px;
+  font-size: 26px;
   color: #fff;
+  letter-spacing: -2px;
 }
-.free-product .video-full-entry h2 {
+.welcome-home .video-full-entry h2 {
   margin-bottom: 30px;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
@@ -6169,86 +6210,95 @@ footer.footer-main .logo-in-footer {
   line-height: 1.3em;
   color: #fff;
 }
-.free-product .parallax input {
+.welcome-home .video-full-entry p {
+  color: #fff;
+}
+.welcome-home .welcome-title {
+  text-align: center;
+}
+.welcome-home .btn {
+  margin-bottom: 25px;
+}
+.welcome-home .parallax input {
   color: #fff;
   border-color: #fff;
 }
-.free-product .parallax input.form-control {
+.welcome-home .parallax input.form-control {
   height: 50px;
   -webkit-transition: all .25s ease;
           transition: all .25s ease;
 }
-.free-product .parallax input.btn {
+.welcome-home .parallax input.btn {
   border: none;
 }
-.free-product .parallax input:focus {
+.welcome-home .parallax input:focus {
   background-color: #5b5e60;
   background-color: rgba(255, 255, 255, .3);
   -webkit-box-shadow: none;
           box-shadow: none;
 }
-.free-product .parallax input[type="text"] {
+.welcome-home .parallax input[type="text"] {
   border-color: #fff;
 }
-.free-product .parallax input[type="text"]:focus {
+.welcome-home .parallax input[type="text"]:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
-.free-product .parallax input[type="placeholder"] {
+.welcome-home .parallax input[type="placeholder"] {
   color: #fff;
 }
-.free-product .parallax input::-webkit-input-placeholder,
-.free-product textarea::-webkit-input-placeholder {
+.welcome-home .parallax input::-webkit-input-placeholder,
+.welcome-home textarea::-webkit-input-placeholder {
   color: #fff;
 }
-.free-product .parallax input:-moz-placeholder,
-.free-product textarea:-moz-placeholder {
+.welcome-home .parallax input:-moz-placeholder,
+.welcome-home textarea:-moz-placeholder {
   color: #fff;
 }
-.free-product .parallax-overlay {
+.welcome-home .parallax-overlay {
   z-index: -1;
   background-color: #5b5e60;
   background-color: rgba(0, 0, 0, .3);
   background-image: none;
 }
-.free-product img.swoosh {
+.welcome-home img.swoosh {
   margin-bottom: -7px;
 }
-.free-product input.btn-success {
+.welcome-home input.btn-success {
   margin-top: 25px;
 }
-.free-product input.btn-success:hover,
-.free-product input.btn-success:active,
-.free-product input.btn-success:focus {
+.welcome-home input.btn-success:hover,
+.welcome-home input.btn-success:active,
+.welcome-home input.btn-success:focus {
   background-color: #009e8a;
   outline: none;
 }
 @media (min-width: 768px) {
-  .free-product .video-full-entry {
-    padding: 120px 0 0;
+  .welcome-home .video-full-entry {
+    padding: 80px 0 40px;
   }
-  .free-product .video-full-entry h1 {
-    font-size: 52px;
+  .welcome-home .video-full-entry h1 {
+    font-size: 38px;
   }
-  .free-product .video-full-entry h2 {
+  .welcome-home .video-full-entry h2 {
     font-size: 24px;
   }
 }
 @media (min-width: 992px) {
-  .free-product .video-full-entry {
-    padding: 230px 0 0;
+  .welcome-home .video-full-entry {
+    padding: 230px 0 60px;
   }
-  .free-product .video-full-entry h1 {
-    font-size: 60px;
+  .welcome-home .video-full-entry h1 {
+    font-size: 30px;
+  }
+  .welcome-home .welcome-title {
+    text-align: left;
   }
 }
 @media (min-width: 1200px) {
-  .free-product .video-full-entry h1 {
-    font-size: 72px;
+  .welcome-home .video-full-entry h1 {
+    font-size: 38px;
   }
-}
-.community .section-title {
-  margin-bottom: 60px;
 }
 .community .community-items {
   padding: 0 5%;
@@ -6260,6 +6310,7 @@ footer.footer-main .logo-in-footer {
 .community p {
   font-size: 14px;
   line-height: 1.5em;
+  color: #555;
 }
 .community .icon {
   margin: 19px auto 16px;
@@ -6296,6 +6347,9 @@ footer.footer-main .logo-in-footer {
   background: #00c2a9;
 }
 .community .entry:hover h2 {
+  color: #fff;
+}
+.community .entry:hover p {
   color: #fff;
 }
 .community .entry:hover .top {
@@ -6367,24 +6421,6 @@ footer.footer-main .logo-in-footer {
 .vm-item-2 {
   margin-bottom: 60px;
 }
-.virtual-mentoring .slogan {
-  text-transform: uppercase;
-}
-.virtual-mentoring .slogan h1 {
-  font-size: 42px;
-}
-.virtual-mentoring .slogan h2 {
-  font-size: 20px;
-  text-transform: none;
-}
-@media (min-width: 768px) {
-  .virtual-mentoring .slogan h1 {
-    font-size: 60px;
-  }
-  .virtual-mentoring .slogan h2 {
-    font-size: 24px;
-  }
-}
 @media (min-width: 992px) {
   .vm-item-1 {
     text-align: right;
@@ -6401,34 +6437,15 @@ footer.footer-main .logo-in-footer {
   margin-top: 24px;
   line-height: 1.74;
 }
-.about-jami .slogan h1 {
-  font-size: 42px;
-}
-.about-jami .slogan h2 {
-  font-size: 20px;
-}
-@media (min-width: 768px) {
-  .about-jami .slogan h1 {
-    font-size: 60px;
-  }
-  .about-jami .slogan h2 {
-    font-size: 24px;
-  }
-}
-.contact-title .section {
-  padding-top: 70px;
+.contact-title.section {
+  padding: 70px;
 }
 .contact-title .section-title {
-  padding-bottom: 1px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 .contact-title .section-title:after {
   visibility: hidden;
-}
-.contact-title .fa {
-  font-size: 62px;
-  color: #00c2a9;
-  -webkit-transition: all .25s ease;
-          transition: all .25s ease;
 }
 footer.contact-footer {
   position: relative;
@@ -6437,6 +6454,7 @@ footer.contact-footer {
 }
 footer.contact-footer .section {
   position: static;
+  padding-bottom: 50px;
   background-color: #5b5e60;
   background-color: rgba(0, 0, 0, .6);
 }
@@ -6481,35 +6499,8 @@ footer.contact-footer textarea.form-control:focus {
   -webkit-box-shadow: rgba(0, 194, 169, .701961) 0 0 10px 1px;
           box-shadow: rgba(0, 194, 169, .701961) 0 0 10px 1px;
 }
-.about-d2f .first-title {
-  padding-top: 80px;
-}
-.about-d2f .slogan h1 {
-  font-size: 42px;
-}
-.about-d2f .slogan h2 {
-  padding-top: 5px;
-  margin-bottom: 0;
-  font-size: 20px;
-}
 .about-d2f .item-02 {
   margin-top: 60px;
-}
-@media (min-width: 768px) {
-  .about-d2f .slogan h1 {
-    font-size: 60px;
-  }
-  .about-d2f .slogan h2 {
-    font-size: 24px;
-  }
-  .about-d2f .first-title {
-    padding-top: 100px;
-  }
-}
-@media (min-width: 992px) {
-  .about-d2f .first-title {
-    padding-top: 205px;
-  }
 }
 .testimonials li blockquote {
   font-size: 18px;
@@ -6634,17 +6625,6 @@ footer.contact-footer textarea.form-control:focus {
 .faqs .section-title h1 {
   text-transform: none;
 }
-.about-community .first-title {
-  padding-top: 80px;
-}
-.about-community .slogan h1 {
-  font-size: 42px;
-}
-.about-community .slogan h2 {
-  padding-top: 5px;
-  margin-bottom: 0;
-  font-size: 20px;
-}
 .about-community .btn-lg {
   height: 60px;
   margin-top: 80px;
@@ -6685,17 +6665,6 @@ footer.contact-footer textarea.form-control:focus {
 }
 .about-item-6 {
   background: url(../../../images/icons/film.png) center top no-repeat;
-}
-@media (min-width: 768px) {
-  .about-community .slogan h1 {
-    font-size: 60px;
-  }
-  .about-community .slogan h2 {
-    font-size: 24px;
-  }
-  .about-community .first-title {
-    padding-top: 100px;
-  }
 }
 @media (min-width: 992px) {
   .about-community .about-left li,
@@ -6738,15 +6707,9 @@ footer.contact-footer textarea.form-control:focus {
   .about-community .about-item-6 {
     background: url(../../../images/icons/film.png) left top no-repeat;
   }
-  .about-community .first-title {
-    padding-top: 205px;
-  }
 }
 .about-products {
   text-align: center;
-}
-.about-products .section.parallax {
-  padding: 80px 0 85px;
 }
 .about-products .bg-dark-color .full-bg-image {
   opacity: .8;
@@ -6875,11 +6838,6 @@ footer.contact-footer textarea.form-control:focus {
     margin-left: 20px;
   }
 }
-@media (min-width: 992px) {
-  .about-products .section.parallax {
-    padding: 206px 0 85px;
-  }
-}
 @media (min-width: 1200px) {
   .about-products .products-title h1 {
     font-size: 68px;
@@ -6919,28 +6877,6 @@ footer.contact-footer textarea.form-control:focus {
     margin-top: 63px;
   }
 }
-.video-player .slogan h1 {
-  font-size: 42px;
-}
-.video-player .slogan h2 {
-  font-size: 20px;
-}
-.video-player .first-title {
-  padding-top: 0;
-}
-@media (min-width: 768px) {
-  .video-player .slogan h1 {
-    font-size: 60px;
-  }
-  .video-player .slogan h2 {
-    font-size: 24px;
-  }
-}
-@media (min-width: 992px) {
-  .video-player .first-title {
-    padding-top: 100px;
-  }
-}
 .about-speaker .list li {
   margin-left: 30px;
 }
@@ -6949,19 +6885,8 @@ footer.contact-footer textarea.form-control:focus {
   margin-top: 24px;
   line-height: 1.74;
 }
-.past-speakers h1 {
-  font-size: 42px;
-}
-@media (min-width: 768px) {
-  .past-speakers .section-title h1 {
-    font-size: 50px;
-  }
-}
 .blog.section {
   padding: 80px 0 100px;
-}
-.blog .first-title {
-  padding-top: 0;
 }
 .blog .tumblr-reader-body img {
   width: 100%;
@@ -6980,9 +6905,6 @@ footer.contact-footer textarea.form-control:focus {
 @media (min-width: 992px) {
   .blog.section {
     padding: 100px 0;
-  }
-  .blog .first-title {
-    padding-top: 100px;
   }
   .blog .tumblr-reader-title {
     font-size: 42px;

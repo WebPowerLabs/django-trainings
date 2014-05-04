@@ -28,13 +28,11 @@ section.block.coming-soon {
 //--------------------------------------//
 
 
-// First Block //
-section.block {
-	padding: 80px 0 80px;
-}
-
-
 // ------ General ------ //
+
+body.default #header {
+	border-bottom: none;
+}
 
  a {
  	color: @brand-dtf;
@@ -52,18 +50,67 @@ input, textarea, select, button {
 	transition: all .25s ease;
 }
 
+
+// ------ Block Section Title ------ //
 .section-title {
+	position: relative;
+	margin-bottom: 70px;
+	padding-bottom: 15px;
+	text-align: center;
+
+	&:after {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		margin-left: -7%;
+		width: 14%;
+		height: 2px;
+		background-color: #ececec;
+		content: "";
+	}
+
+	h1 {
+		margin-bottom: 20px;
+		color: @brand-dtf;
+		text-transform: uppercase;
+		font-weight: 100;
+		line-height: 1.1em;
+	}
+	h2 {
+		font-weight: 300;
+		text-transform: none;
+	}
+}
+
+.section-title-2 {
+	margin-bottom: 80px;
+	text-align: center;
+
+	h1 {
+		font-weight: 100;
+
+		span { 
+			color: @brand-dtf;
+			font-weight: 400;
+		}
+	}
+	h2 {
+		color: @section-title-gray;
+		font-weight: 300; 
+	}
+}
+
+.section-title, .section-title-2 {
 	h1 {
 		font-size: 42px;
 	}
 	h2 {
 		font-size: 20px;
-		text-transform: none;
 	}
 }
 
 @media (min-width: @screen-sm-min) {
-	.section-title {
+	.section-title, .section-title-2 {
 		h1 {
 			font-size: 60px;
 		}
@@ -73,12 +120,23 @@ input, textarea, select, button {
 	}
 }
 
+// Fix for Parallax //
+.parallax .section-title {
+	&:after {
+		background-color: #cfcfcf;
+		background-color: rgba(207,207,207,.4);
+	}
+
+	h2 { color: #fff; }
+}
+
 
 // ------ Buttons ------ //
 
 .btn {
 	-webkit-transition: all .25s ease;
 	transition: all .25s ease;
+	font-weight: 300;
 }
 
 .btn-success:hover {
@@ -123,6 +181,9 @@ header a:hover {
 		.header-member {
 			display: block;
 		}
+	}
+	&.transparent {
+		background-color: @brand-dtf;
 	}
 
 	.header-main {
@@ -237,6 +298,9 @@ header a:hover {
 			.header-member {
 				display: none;
 			}
+		}
+		&.transparent {
+			background-color: transparent;
 		}
 
 		.header-main {
@@ -449,27 +513,6 @@ footer.footer-main {
 // ------ Free Product CTA Block ------ //
 
 .free-product-cta {
-	.section-title {
-		h1 {
-			text-transform: none;
-			margin-bottom: 15px;
-		}
-		h2 {
-			color: @brand-gray;
-			font-size: 24px;
-			margin-bottom: 15px;
-		}
-	}
-
-	h2 {
-		font-weight: 300;
-		font-size: 42px;
-		margin-bottom: 25px;
-	}
-	h3 {
-		font-weight: 300;
-		margin-bottom: 5px;
-	}
 	a {
 		color: @brand-dtf;
 
@@ -516,7 +559,7 @@ footer.footer-main {
 
 // ------Free Product Block ------ //
 
-.free-product {
+.welcome-home {
 	.full-bg-image {
 		//background-image: url(../../images/umbrella-woman.jpg);
 		background-image: url(../../../images/umbrella-woman.jpg);
@@ -524,12 +567,12 @@ footer.footer-main {
 
 	.video-full-entry {
 		display: inline-block;
-		padding: 70px 0 0;
+		padding: 60px 0 40px;
 
 		h1 {
-			margin-bottom: 30px;
 			color: #fff;
-			font-size: 42px;
+			font-size: 26px;
+			letter-spacing: -2px;
 			font-family: 'Julius Sans One', sans-serif;
 		}
 		h2 {
@@ -540,6 +583,16 @@ footer.footer-main {
 			line-height: 1.3em;
 			font-weight: 300;
 		}
+		p {
+			color: #fff;
+		}
+	}
+	.welcome-title {
+		text-align: center;
+	}
+
+	.btn {
+		margin-bottom: 25px
 	}
 
 	.parallax input {
@@ -603,12 +656,12 @@ footer.footer-main {
 }
 
 @media (min-width: @screen-sm-min) {
-	.free-product {
+	.welcome-home {
 		.video-full-entry {
-			padding: 120px 0 0;
+			padding: 80px 0 40px;
 
 			h1 {
-				font-size: 52px;
+				font-size: 38px;
 			}
 			h2 {
 				font-size: 24px;
@@ -618,22 +671,26 @@ footer.footer-main {
 }
 
 @media (min-width: @screen-md-min) {
-	.free-product {
+	.welcome-home {
 		.video-full-entry {
-			padding: 230px 0 0;
+			padding: 230px 0 60px;
 			
 			h1 {
-				font-size: 60px;
+				font-size: 30px;
 			}
+		}
+
+		.welcome-title {
+			text-align: left;
 		}
 	}
 }
 
 @media (min-width: @screen-lg-min) {
-	.free-product {
+	.welcome-home {
 		.video-full-entry {
 			h1 {
-				font-size: 72px;
+				font-size: 38px;
 			}
 		}
 	}
@@ -644,10 +701,6 @@ footer.footer-main {
 
 
 .community {
-	.section-title {
-		margin-bottom: 60px;
-	}
-
 	.community-items {
 		padding: 0 5%;
 	}
@@ -659,6 +712,7 @@ footer.footer-main {
 	p {
 		font-size: 14px;
 		line-height: 1.5em;
+		color: @gray;
 	}
 
 	.icon {
@@ -698,6 +752,9 @@ footer.footer-main {
 			color: #fff;
 
 			h2 {
+				color: #fff;
+			}
+			p {
 				color: #fff;
 			}
 			.top {
@@ -782,33 +839,6 @@ footer.footer-main {
 	margin-bottom: 60px;
 }
 
-.virtual-mentoring {
-	.slogan {
-		text-transform: uppercase;
-
-		h1 {
-			font-size: 42px;
-		}
-		h2 {
-			font-size: 20px;
-			text-transform: none;
-		}
-	}
-}
-
-@media (min-width: @screen-sm-min) {
-	.virtual-mentoring {
-		.slogan {
-			h1 {
-				font-size: 60px;
-			}
-			h2 {
-				font-size: 24px;
-			}
-		}
-	}
-}
-
 @media (min-width: @screen-md-min) {
 	.vm-item-1 {
 		text-align: right;
@@ -830,50 +860,23 @@ footer.footer-main {
 		height: 55px;
 		line-height: 1.74;
 	}
-	.slogan {
-		h1 {
-			font-size: 42px;
-		}
-		h2 {
-			font-size: 20px;
-		}
-	}
-}
-
-@media (min-width: @screen-sm-min) {
-	.about-jami {
-		.slogan {
-			h1 {
-				font-size: 60px;
-			}
-			h2 {
-				font-size: 24px;
-			}
-		}
-	}
 }
 
 
 // ------ Contact Footer Block ------ //
 
 .contact-title {
-	.section {
-		padding-top: 70px
+	&.section {
+		padding: 70px
 	}
 
 	.section-title {
-		padding-bottom: 1px;
+		margin-bottom: 0;
+		padding-bottom: 0;
 
 		&:after {
 			visibility: hidden;
 		}
-	}
-
-	.fa {
-		font-size: 62px;
-		color:  @brand-dtf;
-		-webkit-transition: all .25s ease;
-		transition: all .25s ease;
 	}
 }
 
@@ -883,6 +886,7 @@ footer.contact-footer {
 	color: @brand-gray-light; 
 
 	.section {
+		padding-bottom: 50px;
 		position: static;
 		background-color: @brand-gray;
 		background-color: rgba(0,0,0,.6);
@@ -949,48 +953,8 @@ footer.contact-footer {
 // ------ About D2F Block ------ //
 
 .about-d2f {
-	.first-title {
-		padding-top: 80px;
-	}
-
-	.slogan {
-		h1 {
-			font-size: 42px;
-		}
-		h2 {
-			font-size: 20px;
-			padding-top: 5px;
-			margin-bottom: 0;
-		}
-	}
-
 	.item-02 {
 		margin-top: 60px;
-	}
-}
-
-@media (min-width: @screen-sm-min) {
-	.about-d2f {
-		.slogan {
-			h1 {
-				font-size: 60px;
-			}
-			h2 {
-				font-size: 24px;
-			}
-		}
-
-		.first-title {
-			padding-top: 100px;
-		}
-	}
-}
-
-@media (min-width: @screen-md-min) {
-	.about-d2f {
-		.first-title {
-			padding-top: 205px;
-		}
 	}
 }
 
@@ -1170,21 +1134,6 @@ footer.contact-footer {
 // ------ About Community Block ------ //
 
 .about-community {
-	.first-title {
-		padding-top: 80px;
-	}
-
-	.slogan {
-		h1 {
-			font-size: 42px;
-		}
-		h2 {
-			font-size: 20px;
-			padding-top: 5px;
-			margin-bottom: 0;
-		}
-	}
-
 	.btn-lg {
 		height: 60px;
 		margin-top: 80px;
@@ -1238,18 +1187,7 @@ footer.contact-footer {
 
 @media (min-width: @screen-sm-min) {
 	.about-community {
-		.slogan {
-			h1 {
-				font-size: 60px;
-			}
-			h2 {
-				font-size: 24px;
-			}
-		}
 
-		.first-title {
-			padding-top: 100px;
-		}
 	}
 }
 
@@ -1305,9 +1243,6 @@ footer.contact-footer {
 			background: url(../../../images/icons/film.png) left top no-repeat;
 		}
 
-		.first-title {
-			padding-top: 205px;
-		}
 	}
 }
 
@@ -1321,10 +1256,6 @@ footer.contact-footer {
 
 .about-products {
 	text-align: center;
-
-	.section.parallax {
-		padding: 80px 0 85px;
-	}
 	
 	.bg-dark-color .full-bg-image {
 		opacity: 0.8;
@@ -1487,9 +1418,6 @@ footer.contact-footer {
 
 @media (min-width: @screen-md-min) {
 	.about-products {
-		.section.parallax {
-			padding: 206px 0 85px;
-		}
 	}
 }
 
@@ -1555,44 +1483,6 @@ footer.contact-footer {
 //-----------------------------------------------//
 
 
-// ------ Video Player Block ------ //
-
-.video-player {
-	.slogan {
-		h1 {
-			font-size: 42px;
-		}
-		h2 {
-			font-size: 20px;
-		}
-	}
-	.first-title {
-		padding-top: 0;
-	}
-}
-
-@media (min-width: @screen-sm-min) {
-	.video-player {
-		.slogan {
-			h1 {
-				font-size: 60px;
-			}
-			h2 {
-				font-size: 24px;
-			}
-		}
-	}
-}
-
-@media (min-width: @screen-md-min) {
-	.video-player {
-		.first-title {
-			padding-top: 100px;
-		}
-	}
-}
-
-
 // ------ Speaker Info Block ------ //
 
 .about-speaker {
@@ -1608,25 +1498,6 @@ footer.contact-footer {
 }
 
 
-// ------ Previous Speakers Block ------ //
-
-.past-speakers {
-	h1 {
-		font-size: 42px;
-	}
-}
-
-@media (min-width: @screen-sm-min) {
-	.past-speakers {
-		.section-title {
-			h1 {
-				font-size: 50px;
-			}
-		}
-	}
-}
-
-
 //---------------------------------------------//
 //----------------- Blog Page -----------------//
 //---------------------------------------------//
@@ -1634,9 +1505,6 @@ footer.contact-footer {
 .blog {
 	&.section {
 		padding: 80px 0 100px;
-	}
-	.first-title {
-		padding-top: 0;
 	}
 
 	.tumblr-reader-body img {
@@ -1661,9 +1529,6 @@ footer.contact-footer {
 	.blog {
 		&.section {
 			padding: 100px 0;
-		}
-		.first-title {
-			padding-top: 100px;
 		}
 		
 		.tumblr-reader-title {

@@ -5,8 +5,10 @@
 {% block content %}
 <div id="wrapper">
 	
+	<!-- - - - - - - - ABOUT AYD BLOCK - - - - - - - -->
 	<section class="about-products">
 
+		<!-- - - PARALLAX BLOCK - - -->
 		<section class="section parallax parallax-accelerate bg-dark-color">
 			<div class="full-bg-image"></div>
 			<div class="container">
@@ -18,8 +20,10 @@
 
 				</div><!--/ .col-md-12-->
 			</div><!--/ .container-->
-		</section><!--/ .section-->
+		</section>
+		<!-- - - /PARALLAX BLOCK - - -->
 
+		<!-- - - INFO BLOCK - - -->
 		<section class="section">
 			<div class="container">
 				<div class="row">
@@ -77,10 +81,14 @@
 							</div><!--/ .entry-->
 					</div><!--/ .col-sm-6.col-lg-3-->
 				</div><!--/ .row.community-items-->
-		</section><!--/ .section-->
-	</section><!--/ .section-->
+		</section>
+		<!-- - - /INFO BLOCK - - -->
+
+	</section>
+	<!-- - - - - - - - /ABOUT AYD BLOCK - - - - - - - -->
 
 
+	<!-- - - - - - - - PURCHASE CTA BLOCK - - - - - - - -->
 	<section class="purchase-cta section bg-turquoise-color">
 		<div class="container">
 			<div class="row">
@@ -97,8 +105,11 @@
 			</div><!--/ .row-->
 		</div><!--/ .container-->
 	</section><!--/ .section-->
+	<!-- - - - - - - - /PURCHASE CTA BLOCK - - - - - - - -->
 
 	
 	{% include "includes/free-product-cta.html" with free_cta_title="Free Product CTA" free_cta_subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis consectetur mi vel luctus. Sed accumsan convallis nisi. Etiam mauris magna, mattis vel elementum sed, interdum sit amet nulla." %}
 
+
+</div><!--/ #wrapper-->
 {% endblock content %}

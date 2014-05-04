@@ -27,8 +27,6 @@ Stylesheet Guide
 
 06. Main
 	1. Section
-		- Slogan Title Group
-		- Slogan Group
 		- Content Title
 		- Parallax
 		- Video Full Container
@@ -438,7 +436,6 @@ body {
 		vertical-align: baseline;
 		text-align: center;
 		text-decoration: none;
-		font: 11px/1.5 Arial;
 		cursor: pointer;
 	}
 
@@ -726,7 +723,6 @@ body {
 
 .home #header, #header.header-shrink { border-bottom-width: 0; }
 
-#header.transparent   { background-color: transparent; }
 #header.header-shrink { background-color: #00c2a9;     }
 
 	.header-in {
@@ -1243,69 +1239,6 @@ body {
 		.padding-top-half-off { padding-top: 50px; }
 
 		.border { border-bottom: 1px solid #ececec; }
-		
-		/* -------------------------------------------------- */
-		/* Slogan Title Group
-		/* -------------------------------------------------- */
-		
-		.section-title {
-			position: relative;
-			margin-bottom: 70px;
-			padding-bottom: 15px;
-		}
-		
-		.section-title:after {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			margin-left: -7%;
-			width: 14%;
-			height: 2px;
-			background-color: #ececec;
-			content: "";
-		}
-
-			.section-title h1 {
-				margin-bottom: 20px;
-				color: #00c2a9;
-				text-transform: uppercase;
-				font-weight: 100;
-				line-height: 1.1em;
-			}
-
-			.section-title h2 {
-				font-weight: 300;
-			}
-		
-		/* Fix for Parallax */	
-			
-		.parallax .section-title:after {
-			background-color: #cfcfcf;
-			background-color: rgba(207,207,207,.4);
-		}	
-			
-			.parallax .section-title h2 { color: #fff; }
-		
-		/* -------------------------------------------------- */
-		/* Slogan Group
-		/* -------------------------------------------------- */
-		
-		.slogan { margin-bottom: 80px; }
-
-			.slogan h1 {
-				font-size: 54px;
-				font-weight: 100;
-			}
-
-				.slogan h1 span { 
-					color: #00c2a9;
-					font-weight: 400;
-				}
-
-			.slogan h2 { 
-				color: #aeaeae;
-				font-weight: 300; 
-			}
 		
 		/* -------------------------------------------------- */
 		/* Content Title
