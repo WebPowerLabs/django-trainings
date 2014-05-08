@@ -5811,6 +5811,9 @@ button {
   -webkit-transition: all .25s ease;
           transition: all .25s ease;
 }
+input {
+  padding: 3px 7px;
+}
 .section-title {
   position: relative;
   padding-bottom: 15px;
@@ -6103,10 +6106,8 @@ footer.footer-main ul.social-icons li i {
 footer.footer-main input {
   border-color: #a0a0a0;
 }
-footer.footer-main input.form-control {
-  height: 45px;
-}
 footer.footer-main input.btn {
+  margin-top: 20px;
   border: none;
 }
 footer.footer-main .logo-in-footer {

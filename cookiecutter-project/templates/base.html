@@ -200,6 +200,7 @@
             <h2>Free Product Offer</h2>
             <p style="margin-bottom: 15px;">Lorem ipsum dolor amet, pellentesque ut lacus at velit consequat ut posuere neque in molestie gravida!</p>
 
+            {% comment %}
             {% block footer_form %}
             <form class="contact-form" method="post" action="/">
               <p class="input-block"><input type="text" name="name" id="name" placeholder="Name *" /></p>
@@ -207,6 +208,27 @@
               <a href="{% url 'free-product' %}"><div class="btn btn-lg btn-block btn-success">Submit!</div></a>
             </form><!--/ .contact-form-->
             {% endblock footer_form %}
+            {% endcomment %}
+            <form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/821716a2ddde2033eebe691bcf96bc1e" class="infusion-form" method="POST">
+                <input name="inf_form_xid" type="hidden" value="821716a2ddde2033eebe691bcf96bc1e" />
+                <input name="inf_form_name" type="hidden" value="Sign up for newsletter" />
+                <input name="infusionsoft_version" type="hidden" value="1.29.11.21" />
+                <div class="infusion-field">
+                    <label for="inf_field_FirstName">First Name *</label>
+                    <input class="infusion-field-input-container" id="inf_field_FirstName" name="inf_field_FirstName" type="text" />
+                </div>
+                <div class="infusion-field">
+                    <label for="inf_field_LastName">Last Name *</label>
+                    <input class="infusion-field-input-container" id="inf_field_LastName" name="inf_field_LastName" type="text" />
+                </div>
+                <div class="infusion-field">
+                    <label for="inf_field_Email">Email *</label>
+                    <input class="infusion-field-input-container" id="inf_field_Email" name="inf_field_Email" type="text" />
+                </div>
+                <div class="infusion-submit">
+                    <input class="btn btn-md btn-block btn-success" type="submit" value="Submit" />
+                </div>
+            </form>
 
           </div><!--/ .col-md-4-->
   
