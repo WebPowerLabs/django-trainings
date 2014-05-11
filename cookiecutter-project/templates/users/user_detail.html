@@ -13,6 +13,7 @@
         <div class="user-detail-box">
 
           {% avatar user %}
+          <img src="{{ object.get_fb_profile_img_url }}">
           <h2>Hello, {{ object.username }}!</h2>
 
           {% if object == request.user %}

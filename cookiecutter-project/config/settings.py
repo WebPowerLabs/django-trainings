@@ -25,7 +25,7 @@ from configurations import Configuration, values
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 USER = pwd.getpwuid(os.getuid())[0]
-PROJECT_NAME = "dtf"
+PROJECT_NAME = os.environ.get('PROJECT_NAME', 'dtf')
 
 
 class Common(Configuration):
@@ -71,6 +71,7 @@ class Common(Configuration):
         'allauth',  # registration
         'allauth.account',  # registration
         'allauth.socialaccount',  # registration
+        'allauth.socialaccount.providers.facebook',
     )
     ########## END APP CONFIGURATION
 
@@ -277,6 +278,27 @@ class Common(Configuration):
 
 
     ########## Your common stuff: Below this line define 3rd party libary settings
+
+    ########## SOCIAL CONFIG
+    SOCIALACCOUNT_PROVIDERS = \
+        { 'facebook':
+              { 'SCOPE': ['email', 'publish_stream',
+                          'user_photos', 'user_hometown', 'user_location', 'photo_upload', 'status_update'],
+                'AUTH_PARAMS': { 'auth_type': 'reauthenticate' },
+                'METHOD': 'js_sdk',
+                'VERIFIED_EMAIL': True
+              }
+        }
+    ########## END SOCIAL CONFIG
+
+    ########## AVATAR CONFIG
+    AVATAR_MAX_AVATARS_PER_USER = 1
+    AVATAR_AUTO_GENERATE_SIZES = (80, 300)
+    AVATAR_HASH_USERDIRNAMES = True
+    AVATAR_CLEANUP_DELETED = True
+    AVATAR_HASH_FILENAMES = True
+    AVATAR_MAX_SIZE = 1048576
+    ########## END AVATAR CONFIG
 
 
 class Local(Common):
