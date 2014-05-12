@@ -48,6 +48,7 @@ def contact(request):
         context,
         context_instance=RequestContext(request))
 
+
 @csrf_exempt
 @json_view
 def contact(request):

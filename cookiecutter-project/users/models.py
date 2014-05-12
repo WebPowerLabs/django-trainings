@@ -20,13 +20,13 @@ class User(AbstractUser):
     def get_fb_profile_img_url(self):
     	fb_uid = SocialAccount.objects.filter(user_id=self.id, provider='facebook')
         if len(fb_uid):
-            return "http://graph.facebook.com/{}/picture?width=40&height=40".format(fb_uid[0].uid)
+            return "http://graph.facebook.com/v2.0/{}/picture?width=40&height=40".format(fb_uid[0].uid)
 
     def fb_photos(self):
         fb_uid = SocialAccount.objects.filter(user_id=self.id, provider='facebook')
 
         if len(fb_uid):
-            return "https://graph.facebook.com/{}/?fields=albums".format(fb_uid[0].uid)
+            return "https://graph.facebook.com/v2.0/{}/?fields=albums".format(fb_uid[0].uid)
 
     def get_fb_access_token(self):
         fb_uid = SocialAccount.objects.filter(user_id=self.id, provider='facebook')

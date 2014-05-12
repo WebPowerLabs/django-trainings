@@ -26,5 +26,6 @@ urlpatterns = patterns('',
     url(r'^blog/', include("blog.urls", namespace="blog")),
     url(r'^', include('pages.urls')),
     url(r'^files/', include('nufiles.urls', namespace="nufiles")),
+    url(r'^groups/', include('facebook_groups.urls', namespace="facebook_groups")),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

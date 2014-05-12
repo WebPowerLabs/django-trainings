@@ -60,6 +60,7 @@ class Common(Configuration):
         'users',  # custom users app
         'pages',
         'blog',
+        'facebook_groups',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
