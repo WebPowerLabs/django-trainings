@@ -8,7 +8,7 @@ class FacebookGroup(models.Model):
 	fb_uid = models.CharField(max_length=255)
 	owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 	name = models.CharField(max_length=255, blank=True)
-	description = models.TextField(blank=True)
+	#description = models.TextField(blank=True)
 	venue = models.TextField(blank=True)
 	privacy = models.CharField(max_length=255, blank=True)
 	icon = models.URLField(max_length=255, blank=True)
@@ -41,7 +41,7 @@ class FacebookGroup(models.Model):
 		if fb_data:
 			fb_data_json = fb_data.json()
 			self.name = fb_data_json["name"]
-			self.description = fb_data_json["description"]
+			#self.description = fb_data_json["description"]
 			self.venue = fb_data_json["venue"]
 			self.privacy = fb_data_json["privacy"]
 			self.icon = fb_data_json["icon"]

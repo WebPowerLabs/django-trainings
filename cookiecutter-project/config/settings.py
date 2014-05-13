@@ -292,6 +292,11 @@ class Common(Configuration):
         }
     ########## END SOCIAL CONFIG
 
+    ########## SESSION CONFIG
+    SESSION_COOKIE_AGE =  3600
+    SESSION_SAVE_EVERY_REQUEST = True
+    ########## SESSION CONFIG
+
     ########## AVATAR CONFIG
     AVATAR_MAX_AVATARS_PER_USER = 1
     AVATAR_AUTO_GENERATE_SIZES = (80, 300)
