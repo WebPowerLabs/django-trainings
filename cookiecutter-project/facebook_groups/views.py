@@ -16,6 +16,18 @@ from jsonview.decorators import json_view
 from .models import FacebookGroup
 
 
+
+@login_required
+def fb_group_list(request):
+    fb_groups = FacebookGroup.objects.all()
+    context = {
+        "facebook_groups": fb_groups,
+    }
+    return render_to_response('facebook_groups/list.html',
+        context,
+        context_instance = RequestContext(request))
+
+
 @login_required
 def sync_fb_data(request, fb_uid):
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
@@ -25,14 +37,12 @@ def sync_fb_data(request, fb_uid):
 
 @login_required
 def fb_group_feed(request, fb_uid):
+    fb_groups = FacebookGroup.objects.all()
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
-    if request.GET.get("page"):
-        print request.GET.get("page")
-        feed = requests.get(request.GET.get("page")).json()
-    else:
-        feed = fb_group.get_fb_feed(request.user)
-    print feed
+    feed = fb_group.get_fb_feed(request.user)
+
     context = {
+        "facebook_groups": fb_groups,
         "facebook_group": fb_group,
         "feed" : feed,
     }

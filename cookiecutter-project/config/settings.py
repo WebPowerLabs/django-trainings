@@ -283,7 +283,7 @@ class Common(Configuration):
     ########## SOCIAL CONFIG
     SOCIALACCOUNT_PROVIDERS = \
         { 'facebook':
-              { 'SCOPE': ['email', 'publish_stream',
+              { 'SCOPE': ['email', 'publish_stream', 'read_stream', 'user_groups',
                           'user_photos', 'user_hometown', 'user_location', 'photo_upload', 'status_update'],
                 'AUTH_PARAMS': { 'auth_type': 'reauthenticate' },
                 'METHOD': 'js_sdk',

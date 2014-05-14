@@ -1,7 +1,9 @@
-{% extends "facebook_groups/base.html" %}
+{% extends "facebook_groups/list.html" %}
 {% load staticfiles i18n %}
 
 {% block title %}{{ facebook_group.name }}{{ block.super }}{% endblock title %}
+
+{% block page_title %}{{ facebook_group.name }}{% endblock page_title %}
 
 {% block css %}
 {{ block.super }}
@@ -69,10 +71,10 @@ $(document).ready(function() {
 </script>
 {% endblock javascript %}
 
-{% block content %}
+
+{% block feed %}
 <section class="facebook-feed">
 <div class="container">
-	<h1 class="page-header">{{ facebook_group.name }}</h1>
 	<div class="col-md-7 col-md-offset-2">
 	<p class="lead">{{ facebook_group.description }}</p>
 	<div class="clearfix"></div>
@@ -191,5 +193,5 @@ $(document).ready(function() {
 </div>
 </section>
 
-{% endblock content %}
+{% endblock feed %}
 

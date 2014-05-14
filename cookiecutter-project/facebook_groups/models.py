@@ -3,17 +3,22 @@ import json, re, requests
 from django.db import models
 from django.conf import settings
 
+from .managers import FBGroupManager
 
 class FacebookGroup(models.Model):
-	fb_uid = models.CharField(max_length=255)
+	fb_uid = models.CharField(max_length=255, unique=True)
 	owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 	name = models.CharField(max_length=255, blank=True)
 	#description = models.TextField(blank=True)
 	venue = models.TextField(blank=True)
 	privacy = models.CharField(max_length=255, blank=True)
 	icon = models.URLField(max_length=255, blank=True)
-	email = models.EmailField(max_length=255)
+	email = models.EmailField(max_length=255, blank=True)
 
+	objects = FBGroupManager()
+
+	def __unicode__(self):
+		return self.name if self.name else self.fb_uid
 
 	def get_fb_data_url(self, user):
 		""" get data about this facebook group

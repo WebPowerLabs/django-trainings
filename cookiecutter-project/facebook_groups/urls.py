@@ -5,6 +5,7 @@ except ImportError:  # django < 1.4
 
 
 urlpatterns = patterns('facebook_groups.views',
+	url(r"^$", "fb_group_list", name="list"),
 	url(r"^(?P<fb_uid>\d+)/$", "fb_group_feed", name="feed"),
 	url(r"^(?P<fb_uid>\d+)/sync/$", "sync_fb_data", name="sync"),
 	)

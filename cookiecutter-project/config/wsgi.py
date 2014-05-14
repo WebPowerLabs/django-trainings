@@ -22,7 +22,7 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 os.environ.setdefault("DJANGO_CONFIGURATION", "Local")
 
-# This application object is used by any WSGI server configured to use this
+ #This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 from configurations.wsgi import get_wsgi_application
