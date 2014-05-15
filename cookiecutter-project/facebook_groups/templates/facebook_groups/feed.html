@@ -45,7 +45,15 @@
 .facebook-feed .fb-comment-form {
 	padding: 10px 0;
 }
-
+.facebook-feed .panel-pinned {
+	
+}
+.facebook-feed .fb-divider {
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	padding-top: 30px;
+	margin-bottom: 50px;
+}
 
 </style>
 {% endblock css %}
@@ -80,7 +88,7 @@ $(document).ready(function() {
 	<div class="clearfix"></div>
 	<div id="facebook-feed-list">
 	{% for post in feed.data %}
-		<div id="post-{{ post.id }}" class="fb-post panel panel-default">
+		<div id="post-{{ post.id }}" class="fb-post panel panel-{% if forloop.first %}primary panel-pinned{% else %}default{% endif %}">
 			<h3 class="fb-post-heading">
 				<img src="https://graph.facebook.com/{{ post.from.id }}/picture?width=40&height=40" class="fb-profile-img">
 				<span class="fb-from-user">{{ post.from.name }}</span>
@@ -139,6 +147,9 @@ $(document).ready(function() {
 				</form>
 			</div>
 		</div>
+		{% if forloop.first %}
+			<div class="fb-divider"></div>
+		{% endif %}
 	{% endfor %}
 	</div>
 	<div class="text-center clearfix">
