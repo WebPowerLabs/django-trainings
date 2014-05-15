@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# cookiecutter-project documentation build configuration file, created by
+# d2f documentation build configuration file, created by
 # sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'cookiecutter-project'
+project = u'd2f'
 copyright = u'2014, Will Farley'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -164,7 +164,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'cookiecutter-projectdoc'
+htmlhelp_basename = 'dtfdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -183,7 +183,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'cookiecutter-project.tex', u'cookiecutter-project Documentation',
+  ('index', 'dtf.tex', u'd2f Documentation',
    u'Will Farley', 'manual'),
 ]
 
@@ -213,7 +213,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'cookiecutter-project', u'cookiecutter-project Documentation',
+    ('index', 'dtf', u'd2f Documentation',
      [u'Will Farley'], 1)
 ]
 
@@ -227,9 +227,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'cookiecutter-project', u'cookiecutter-project Documentation',
-   u'Will Farley', 'cookiecutter-project',
-   'Django-cookiecutter project','Miscellaneous'),
+  ('index', 'dtf', u'd2f Documentation',
+   u'Will Farley', 'd2f',
+   'Decide To Fly','Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
