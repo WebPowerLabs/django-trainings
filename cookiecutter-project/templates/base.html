@@ -102,8 +102,13 @@
 
             <nav id="nav-member" class="navigation">
               <ul>
-                <li><a href="{% url 'account_signup' %}">Signup</a></li>
-                <li><a href="{% url 'account_login' %}">Login</a></li>
+                {% if request.user.is_authenticated %}
+                  <li><a href="{% url 'users:detail' request.user.id %}">My Account</a></li>
+                  <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                {% else %}
+                  <li><a href="{% url 'account_signup' %}">Signup</a></li>
+                  <li><a href="{% url 'account_login' %}">Login</a></li>
+                {% endif %}
               </ul>
             </nav><!--/ #navigation-->
 
@@ -135,6 +140,7 @@
         </div><!--/ .header-main-->
 
       </header><!--/ #header-->
+
     {% endblock nav %}
 
     {% block content %}
@@ -198,41 +204,34 @@
 
           <div class="col-md-4">
 
-            <h2>Free Product Offer</h2>
+            <h2>Mentorship Moments Opt-In</h2>
             <p style="margin-bottom: 15px;">Lorem ipsum dolor amet, pellentesque ut lacus at velit consequat ut posuere neque in molestie gravida!</p>
 
-            {% comment %}
-            {% block footer_form %}
-            <form class="contact-form" method="post" action="/">
-              <p class="input-block"><input type="text" name="name" id="name" placeholder="Name *" /></p>
-              <p class="input-block"><input type="email" name="email" id="email" placeholder="Email *" /></p>
-              <a href="{% url 'free-product' %}"><div class="btn btn-lg btn-block btn-success">Submit!</div></a>
-            </form><!--/ .contact-form-->
-            {% endblock footer_form %}
-            {% endcomment %}
-            <form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/821716a2ddde2033eebe691bcf96bc1e" class="infusion-form" method="POST">
+            <!-- "MENTORSHIP MOMENTS" OPT-IN FORM -->
+              <form role="form" accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/821716a2ddde2033eebe691bcf96bc1e" class="infusion-form" method="POST">
                 <input name="inf_form_xid" type="hidden" value="821716a2ddde2033eebe691bcf96bc1e" />
-                <input name="inf_form_name" type="hidden" value="Sign up for newsletter" />
+                <input name="inf_form_name" type="hidden" value="Opt-in for Mentorship&#a;Moments monthly videos" />
                 <input name="infusionsoft_version" type="hidden" value="1.29.11.21" />
-                <div class="infusion-field">
-                    <label for="inf_field_FirstName">First Name *</label>
-                    <input class="infusion-field-input-container" id="inf_field_FirstName" name="inf_field_FirstName" type="text" />
-                </div>
-                <div class="infusion-field">
-                    <label for="inf_field_LastName">Last Name *</label>
-                    <input class="infusion-field-input-container" id="inf_field_LastName" name="inf_field_LastName" type="text" />
-                </div>
-                <div class="infusion-field">
-                    <label for="inf_field_Email">Email *</label>
-                    <input class="infusion-field-input-container" id="inf_field_Email" name="inf_field_Email" type="text" />
-                </div>
+                <div class="row form-group">
+                  <div class="col-sm-6 infusion-field">
+                    <label for="inf_field_FirstName">First</label>
+                    <input type="text" class="form-control infusion-field-input-container" id="inf_field_FirstName" name="inf_field_FirstName" placeholder="Jane">
+                  </div>
+                  <div class="col-sm-6 infusion-field">
+                    <label for="inf_field_LastName">Last</label>
+                    <input type="text" class="form-control infusion-field-input-container" id="inf_field_LastName" name="inf_field_LastName" placeholder="Doe">
+                  </div>
+                </div><!--/ .row.form-group -->
+                <div class="form-group infusion-field">
+                  <label for="inf_field_Email">Email Address *</label>
+                  <input type="email" class="form-control infusion-field-input-container" id="inf_field_Email" name="inf_field_Email" placeholder="jane@doe.com">
+                </div><!--/ .form-group -->
                 <div class="infusion-submit">
-                    <input class="btn btn-md btn-block btn-success" type="submit" value="Submit" />
+                  <button type="submit" value="Submit" class="btn btn-lg btn-block btn-success">Submit</button>
                 </div>
-            </form>
-
+              </form>
+            <!--/ "MENTORSHIP MOMENTS" OPT-IN FORM -->
           </div><!--/ .col-md-4-->
-  
         </div><!--/ .row-->
       </div><!--/ .container-->
     </div><!--/ .logo-in-footer-->
