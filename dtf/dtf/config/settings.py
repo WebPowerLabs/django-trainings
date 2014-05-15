@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import os, pwd
 from os.path import join
 
 # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
@@ -24,6 +24,8 @@ except ImportError:
 from configurations import Configuration, values
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+USER = pwd.getpwuid(os.getuid())[0]
+PROJECT_NAME = os.environ.get('PROJECT_NAME', 'dtf')
 
 
 class Common(Configuration):
@@ -48,12 +50,17 @@ class Common(Configuration):
         'south',  # Database migration helpers:
         'crispy_forms',  # Form layouts
         'avatar',  # for user avatars
+        'django_extensions',
+        'tumblr_reader',
+        'nufiles',
     )
 
     # Apps specific for this project go here.
     LOCAL_APPS = (
         'users',  # custom users app
-        # Your stuff: custom apps go here
+        'pages',
+        'blog',
+        'facebook_groups',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -65,6 +72,7 @@ class Common(Configuration):
         'allauth',  # registration
         'allauth.account',  # registration
         'allauth.socialaccount',  # registration
+        'allauth.socialaccount.providers.facebook',
     )
     ########## END APP CONFIGURATION
 
@@ -133,7 +141,7 @@ class Common(Configuration):
 
     ########## GENERAL CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-    TIME_ZONE = 'America/Los_Angeles'
+    TIME_ZONE = 'America/Phoenix'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
     LANGUAGE_CODE = 'en-us'
@@ -272,6 +280,31 @@ class Common(Configuration):
 
     ########## Your common stuff: Below this line define 3rd party libary settings
 
+    ########## SOCIAL CONFIG
+    SOCIALACCOUNT_PROVIDERS = \
+        { 'facebook':
+              { 'SCOPE': ['email', 'publish_stream', 'read_stream', 'user_groups',
+                          'user_photos', 'user_hometown', 'user_location', 'photo_upload', 'status_update'],
+                'AUTH_PARAMS': { 'auth_type': 'reauthenticate' },
+                'METHOD': 'js_sdk',
+                'VERIFIED_EMAIL': True
+              }
+        }
+    ########## END SOCIAL CONFIG
+
+    ########## SESSION CONFIG
+    SESSION_COOKIE_AGE =  3600
+    SESSION_SAVE_EVERY_REQUEST = True
+    ########## SESSION CONFIG
+
+    ########## AVATAR CONFIG
+    AVATAR_MAX_AVATARS_PER_USER = 1
+    AVATAR_AUTO_GENERATE_SIZES = (80, 300)
+    AVATAR_HASH_USERDIRNAMES = True
+    AVATAR_CLEANUP_DELETED = True
+    AVATAR_HASH_FILENAMES = True
+    AVATAR_MAX_SIZE = 1048576
+    ########## END AVATAR CONFIG
 
 class Local(Common):
 
@@ -401,6 +434,17 @@ class Production(Common):
         CACHES = memcacheify()
     except ImportError:
         CACHES = values.CacheURLValue(default="memcached://127.0.0.1:11211")
+        os.environ['MEMCACHE_SERVERS'] = os.environ.get('MEMCACHIER_SERVERS', '').replace(',', ';')
+#    os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME', '')
+#    os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD', '')
+#    CACHES = {
+#      'default': {
+#        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+#        'TIMEOUT': 500,
+#        'BINARY': True,
+#        'OPTIONS': { 'tcp_nodelay': True }
+#      }
+#    }
     ########## END CACHING
 
     ########## Your production stuff: Below this line define 3rd party libary settings

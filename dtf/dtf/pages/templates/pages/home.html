@@ -1,17 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles i18n crispy_forms_tags %}
 
-{% block nav %}
-{% endblock nav %}
-
-{% block footer %}
-{% endblock footer %}
-
-{% block bodyclass %}home{% endblock bodyclass %}
-
-
-{% block content %}
-
+{% block header %}
 <!-- - - - - - - - - - - - - - HEADER NAV - - - - - - - - - - - - - - - - -->
 <header id="header" class="transparent">
 	
@@ -58,7 +48,15 @@
 	
 </header><!--/ #header-->
 <!-- - - - - - - - - - - - - /HEADER NAV - - - - - - - - - - - - - - - -->
+{% endblock header %}
 
+{% block footer %}
+{% endblock footer %}
+
+{% block bodyclass %}home{% endblock bodyclass %}
+
+
+{% block content %}
 <div id="wrapper">
 
 

@@ -7,3 +7,4 @@ django-storages==1.1.8
 Collectfast==0.2.0
 gevent==1.0.1
 boto==2.28.0
+django-pylibmc-sasl==0.2.4

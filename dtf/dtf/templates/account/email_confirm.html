@@ -8,30 +8,32 @@
 
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-        <h2>{% trans "Confirm E-mail Address" %}</h2>
+<section class="email-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <h2>{% trans "Confirm E-mail Address" %}</h2>
 
-        {% if confirmation %}
+            {% if confirmation %}
 
-        {% user_display confirmation.email_address.user as user_display %}
-                
-        <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+            {% user_display confirmation.email_address.user as user_display %}
+                    
+            <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
 
-        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-        {% csrf_token %}
-            <button class="submit" type="submit">{% trans 'Confirm' %}</button>
-        </form>
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+            {% csrf_token %}
+                <button class="btn btn-success btn-md submit" type="submit">{% trans 'Confirm' %}</button>
+            </form>
 
-        {% else %}
+            {% else %}
 
-        {% url 'account_email' as email_url %}
+            {% url 'account_email' as email_url %}
 
-        <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+            <p style="margin-bottom: 0;">{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url}}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
 
-        {% endif %}
+            {% endif %}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+</section>
 {% endblock %}
