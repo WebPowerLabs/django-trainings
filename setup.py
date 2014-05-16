@@ -10,21 +10,21 @@ try:
 except ImportError:
     from distutils.core import setup
 
-import cookiecutter-project
-version = cookiecutter-project.__version__
+import dtf
+version = dtf.__version__
 
 setup(
-    name='cookiecutter-project',
+    name='d2f',
     version=version,
     author='',
     author_email='will@django.nu',
     packages=[
-        'cookiecutter-project',
+        'dtf',
     ],
     include_package_data=True,
     install_requires=[
         'Django>=1.6.1',
     ],
     zip_safe=False,
-    scripts=['cookiecutter-project/manage.py'],
+    scripts=['dtf/manage.py'],
 )

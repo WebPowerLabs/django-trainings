@@ -1,0 +1,130 @@
+{% load staticfiles i18n %}<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}d2f{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Google Web Fonts
+    ================================================== -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,700|Julius+Sans+One|Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+
+    <!-- Font Awesome Icons
+    ================================================== -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    {% block css %}
+
+    {% if debug %}
+    <link rel="stylesheet/less" href="{% static 'bootstrap/less/zak-bootstrap.less' %}">
+    <script type="text/javascript">
+      less = {
+        env: "development", // or "production"
+        async: false,       // load imports async
+        fileAsync: false,   // load imports async when in a page under
+        // a file protocol
+        poll: 1000,         // when in watch mode, time in ms between polls
+        functions: {},      // user functions, keyed by name
+        dumpLineNumbers: "comments", // or "mediaquery" or "all"
+        relativeUrls: false,// whether to adjust url's to be relative
+        // if false, url's are already relative to the
+        // entry less file
+        rootpath: ""// a path to add on to the start of every url
+        //resource
+      };
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
+    {% else %}
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+    {% endif %}
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+
+    {% include "includes/css_marketing.html" %}
+
+    <!-- This file store project specific CSS -->
+
+    {% endblock %}
+
+    <!-- HTML5 Shiv
+    ================================================== -->
+    <script src="{% static 'js/jquery.modernizr.js' %}"></script>
+  </head>
+
+  <body class="{% block bodyclass %}default{% endblock bodyclass %} {% block page-class %}home{% endblock page-class %} animated" data-spy="scroll" data-target="#navigation">
+    {% block loader %}
+    <div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
+    {% endblock loader %}
+    {% block header %}
+      <header id="header">
+        <div class="header-member">
+          <div class="header-in">
+            <nav id="nav-member" class="navigation">
+              <ul>
+                {% block nav_user %}
+                  {% include "menus/nav_user.html" %}
+                {% endblock nav_user %}
+              </ul>
+            </nav><!--/ #navigation-->
+          </div><!--/ .header-in-->
+        </div><!--/ .header-member-->              
+        <div class="header-main">
+          <div class="header-in">
+            <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
+            <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
+            <nav id="navigation" class="navigation">
+              <ul>
+                {% block nav %}
+                  {% include "menus/nav_marketing.html" %}
+                {% endblock nav %}
+              </ul>
+            </nav><!--/ #navigation-->
+          </div><!--/ .header-in-->
+        </div><!--/ .header-main-->
+      </header><!--/ #header-->
+    {% endblock header %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}{% endblock content %}
+
+    {% block footer %}
+      {% include "includes/footer.html" %}
+    {% endblock footer %}
+
+    {% block modal %}{% endblock modal %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+      <!-- Latest JQuery -->
+      <!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+      <!-- Your stuff: Third-party javascript libraries go here -->
+
+      <!-- place project specific Javascript in this file -->
+      <script src="{% static 'js/project.js' %}"></script>
+
+      {% include "includes/js_marketing.html" %}
+    {% endblock javascript %}
+  </body>
+</html>
+ 
