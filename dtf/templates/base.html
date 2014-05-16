@@ -26,6 +26,7 @@
 
     {% block css %}
 
+    {% comment %}
     {% if debug %}
     <link rel="stylesheet/less" href="{% static 'bootstrap/less/zak-bootstrap.less' %}">
     <script type="text/javascript">
@@ -46,8 +47,10 @@
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
     {% else %}
-    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     {% endif %}
+    {% endcomment %}
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
 
     {% include "includes/css_marketing.html" %}

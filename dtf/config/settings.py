@@ -61,6 +61,7 @@ class Common(Configuration):
         'pages',
         'blog',
         'facebook_groups',
+        'app',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
