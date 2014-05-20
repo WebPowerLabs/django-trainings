@@ -53,6 +53,7 @@ class Common(Configuration):
         'django_extensions',
         'tumblr_reader',
         'nufiles',
+        'positions'
     )
 
     # Apps specific for this project go here.
@@ -62,6 +63,10 @@ class Common(Configuration):
         'blog',
         'facebook_groups',
         'app',
+        'courses',
+        'lessons',
+        'tags',
+        'resources',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -401,7 +406,8 @@ class Production(Common):
     }
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-    STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    SSTATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
     ########## END STORAGE CONFIGURATION
 
     ########## EMAIL
