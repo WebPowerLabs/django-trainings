@@ -78,7 +78,21 @@ To get live reloading to work you'll probably need to install an `appropriate br
 
 .. _appropriate browser extension: http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-
 
-It's time to write the code!!!
+**Bootstrap setup**
+
+install bower and less
+
+    $ npm install less -g
+    $ npm install bower -g
+
+install bootstrap
+
+    $ bower install bootstrap
+
+to compile bootstrap run
+
+    $ ./tools/css.hs
+
 
 
 Deployment
