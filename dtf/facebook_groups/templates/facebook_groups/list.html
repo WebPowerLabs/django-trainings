@@ -1,11 +1,22 @@
 {% extends "facebook_groups/base.html" %}
 {% load staticfiles i18n %}
 
-{% block title %}Groups {{ block.super }}{% endblock title %}
+{% block title %}Groups{{ block.super }}{% endblock title %}
 
 {% block content %}
 <div class="container">
-	<h1 class="page-header">{% block page_title %}Groups{% endblock page_title %}</h1>
+	<div class="row">
+	<div class="col-md-8">
+		<h1 class="page-header">{% block page_title %}Groups{% endblock page_title %}</h1>
+	</div>
+	<div class="col-md-4">
+		<ul class="nav nav-pills nav-justified">
+			{% block group_actions %}
+			<li><a href="{% url 'facebook_groups:add' %}"><i class="fa fa-plus"></i> Add Group</a></li>
+			{% endblock group_actions %}
+		</ul>
+	</div>
+	</div>
 		<ul class="nav nav-pills nav-justified">
 			{% for fb_group in facebook_groups %}
 				<li><a href="{% url 'facebook_groups:feed' fb_group.fb_uid %}">{{ fb_group.name }}</a></li>
@@ -13,5 +24,6 @@
 		</ul>
 </div>
 {% block feed %}{% endblock feed %}
+{% block fb_form %}{% endblock fb_form %}
 
 {% endblock content %}
