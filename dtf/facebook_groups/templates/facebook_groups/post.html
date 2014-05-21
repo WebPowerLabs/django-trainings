@@ -1,0 +1,10 @@
+{% extends "facebook_groups/list.html" %}
+{% load staticfiles i18n crispy_forms_tags %}
+
+{% block title %}{{ facebook_group.name }}{{ block.super }}{% endblock title %}
+
+{% block page_title %}{{ facebook_group.name }}{% endblock page_title %}
+
+{% block fb_form %}
+{% crispy form %}
+{% endblock fb_form %}
