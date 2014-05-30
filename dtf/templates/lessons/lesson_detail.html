@@ -1,0 +1,125 @@
+{% extends 'lessons/base.html' %}
+{% load crispy_forms_tags query_string %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                Edit lesson
+                           </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <a class='btn btn-danger' href='{% url "lessons:delete" object.slug %}'>Delete</a>
+                            {% crispy form %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="row">
+                <h2>
+                    <a href="{% url 'courses:detail' object.course.slug %}">
+                        <span class="label label-default">{{ object.course }}</span>
+                    </a>
+                </h2>
+                <h3>{{ object.order }}. {{ object.name }}</h3>
+            </div>
+                {% if object.video %}
+                <video width="640" height="480" controls>
+                    <source src="{{ object.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <a href="#" class="btn btn-default">
+                    <i class="fa fa-heart"></i>
+                    watch later
+                </a>
+                {% else %}
+                <img src="{{ object.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
+                {% endif %}
+            <div class="row">
+                {{ object.description }}
+                
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="row">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        <h4 class="list-group-item-heading">Resourses</h4>
+                    </a>
+                    {% for res in object.get_resource %}
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ res.name }}</h4>
+                        <p class="list-group-item-text">
+                            {{ res.description }}
+                        </p>
+                    </a>
+                    {% empty %}
+                    <a href="#" class="list-group-item">
+                        <p class="list-group-item-text">
+                            There are no items yet ;)
+                        </p>
+                    </a>
+                    {% endfor %}
+                </div> 
+            </div>
+            <div class="row">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        <h4 class="list-group-item-heading">Homework</h4>
+                    </a>
+                    {% for res in object.get_homework %}
+                    <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ res.name }}</h4>
+                        <p class="list-group-item-text">
+                            {{ res.description }}
+                        </p>
+                    </a>
+                    {% empty %}
+                    <a href="#" class="list-group-item">
+                        <p class="list-group-item-text">
+                            There are no items yet ;)
+                        </p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% if object.tags.all %}
+            <div class="row">
+                <h4>Tags:</h4>
+                {% for tag in object.tags.all %}
+                <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
+                    <span class="label label-primary">
+                        {{ tag }}
+                    </span>&nbsp;
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <ul class="pager">
+                
+                <li class="previous {% if not prev_url %}disabled{% endif %}">
+                    <a {% if prev_url %}href="{{ prev_url }}{% query_string request.GET %}"{% endif %}><i class="fa fa-arrow-left"></i> Previous</a>
+                </li>
+                
+                <li class="next {% if not next_url %}disabled{% endif %}">
+                    <a {% if next_url %}href="{{ next_url }}{% query_string request.GET %}"{% endif %}>Next <i class="fa fa-arrow-right"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

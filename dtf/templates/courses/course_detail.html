@@ -1,0 +1,57 @@
+{% extends 'courses/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Edit Course
+                        </a>
+                        <a href="{% url 'lessons:add' object.slug %}" class="pull-right">Add Lesson</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <a class='btn btn-danger' href='{% url "courses:delete" object.slug %}'>Delete</a>
+                        {% crispy form %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <img src="{{ object.thumbnail.url }}" class="img-rounded" alt="alt_text">
+            </div>
+            <div class="row">
+                <h2>{{ object.name }}</h2>                
+            </div>
+            <div class="row">
+                <p>{{ object.description }}</p>                
+            </div>
+        </div>
+        <div class="col-md-7">
+            {% for lesson in object.lesson_set.all %}
+            <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}">
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{{ lesson.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
+                        </div>
+                        <div class="col-md-9">
+                            <h2>{{ lesson.name }}</h2>
+                            <span>{{ lesson.description|truncatewords:25 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -36,3 +36,27 @@ media/
 
 # Bower
 bower_components/
+
+# My
+test_db
+local_settings.py
+.settings
+*/static/CACHE
+*.env
+var/
+*~
+salest/static/css
+.sass-cache
+*.sass-cache
+reports/
+*pyc
+*.db
+.sass-cache
+src/
+media/*
+.pydevproject
+.sphinx*
+.project
+static/*
+celery
+celerybeat-schedule

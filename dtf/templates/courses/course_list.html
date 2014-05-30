@@ -1,0 +1,37 @@
+{% extends 'courses/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <h1>COACHING COURSES</h1>
+            <p>
+                Justo enim velit luctus consectetur vitae nisi scelerisque a cras
+                sapien urna? Enim amet - congue praesent rutrum venenatis ipsum
+                varius?
+            </p>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+    {% for course in object_list %}
+        <div class="col-md-4">
+            <a href="{% url 'courses:detail' course.slug %}">
+                <div class="thumbnail">
+                    <img src="{{ course.thumbnail.url }}" class="img-rounded" alt="{{ course.name }}">
+                    <div class="caption">
+                        <h3>{{ course.name }}</h3>
+                        <p>{{ course.description }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row">
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}
