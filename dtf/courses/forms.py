@@ -3,7 +3,6 @@ from django import forms
 from courses.models import Course
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from lessons.models import Lesson
 
 
 class CourseCreateFrom(forms.ModelForm):

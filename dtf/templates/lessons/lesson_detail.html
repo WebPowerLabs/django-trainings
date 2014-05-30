@@ -52,18 +52,13 @@
         <div class="col-sm-5">
             <div class="row">
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">
+                    <a class="list-group-item active">
                         <h4 class="list-group-item-heading">Resourses</h4>
                     </a>
                     {% for res in object.get_resource %}
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">{{ res.name }}</h4>
-                        <p class="list-group-item-text">
-                            {{ res.description }}
-                        </p>
-                    </a>
+                        {% include 'resources/partials/detail.html' with object=res %}
                     {% empty %}
-                    <a href="#" class="list-group-item">
+                    <a class="list-group-item">
                         <p class="list-group-item-text">
                             There are no items yet ;)
                         </p>
@@ -73,18 +68,13 @@
             </div>
             <div class="row">
                 <div class="list-group">
-                    <a href="#" class="list-group-item active">
+                    <a class="list-group-item active">
                         <h4 class="list-group-item-heading">Homework</h4>
                     </a>
                     {% for res in object.get_homework %}
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">{{ res.name }}</h4>
-                        <p class="list-group-item-text">
-                            {{ res.description }}
-                        </p>
-                    </a>
+                        {% include 'resources/partials/detail.html' with object=res %} 
                     {% empty %}
-                    <a href="#" class="list-group-item">
+                    <a class="list-group-item">
                         <p class="list-group-item-text">
                             There are no items yet ;)
                         </p>

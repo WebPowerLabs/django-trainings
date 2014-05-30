@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -25,9 +24,11 @@ urlpatterns = patterns('',
     # Your stuff: custom urls go here
     url(r'^blog/', include("blog.urls", namespace="blog")),
     url(r'^files/', include('nufiles.urls', namespace="nufiles")),
-    url(r'^groups/', include('facebook_groups.urls', namespace="facebook_groups")),
+    url(r'^groups/', include('facebook_groups.urls',
+                                                 namespace="facebook_groups")),
     url(r'^courses/', include('courses.urls', namespace="courses")),
     url(r'^lessons/', include('lessons.urls', namespace="lessons")),
+    url(r'^resources/', include('resources.urls', namespace="resources")),
     url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
