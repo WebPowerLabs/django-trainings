@@ -53,7 +53,8 @@ class Common(Configuration):
         'django_extensions',
         'tumblr_reader',
         'nufiles',
-        'positions'
+        'positions',
+        'django_filters',
     )
 
     # Apps specific for this project go here.
@@ -299,7 +300,7 @@ class Common(Configuration):
     ########## END SOCIAL CONFIG
 
     ########## SESSION CONFIG
-    SESSION_COOKIE_AGE =  3600
+    SESSION_COOKIE_AGE = 3600
     SESSION_SAVE_EVERY_REQUEST = True
     ########## SESSION CONFIG
 
@@ -346,6 +347,12 @@ class Local(Common):
     ########## Your local stuff: Below this line define 3rd party libary settings
 
 
+class LocalAndrew(Local):
+    # Andrews Local settings
+    # $ export DJANGO_CONFIGURATION="LocalAndrew"
+    DATABASES = values.DatabaseURLValue('postgres://postgres:postgres@localhost/dtf')
+
+
 class Production(Common):
 
     ########## INSTALLED_APPS
@@ -357,7 +364,7 @@ class Production(Common):
     ########## END SECRET KEY
 
     ########## django-secure
-    INSTALLED_APPS += ("djangosecure", )
+    INSTALLED_APPS += ("djangosecure",)
 
     # set this to 60 seconds and then to 518400 when you can prove it works
     SECURE_HSTS_SECONDS = 60
@@ -376,7 +383,7 @@ class Production(Common):
     ALLOWED_HOSTS = ["*"]
     ########## END SITE CONFIGURATION
 
-    INSTALLED_APPS += ("gunicorn", )
+    INSTALLED_APPS += ("gunicorn",)
 
     ########## STORAGE CONFIGURATION
     # See: http://django-storages.readthedocs.org/en/latest/index.html
@@ -396,7 +403,7 @@ class Production(Common):
 
     # see: https://github.com/antonagestam/collectfast
     AWS_PRELOAD_METADATA = True
-    INSTALLED_APPS += ("collectfast", )
+    INSTALLED_APPS += ("collectfast",)
 
     # AWS cache settings, don't change unless you know what you're doing:
     AWS_EXPIREY = 60 * 60 * 24 * 7

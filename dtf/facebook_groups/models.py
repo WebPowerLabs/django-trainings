@@ -37,7 +37,7 @@ class FacebookGroup(models.Model):
 	def get_fb_feed_url(self, user):
 		""" get feed for this facebook group
 		"""
-		
+
 		# get the fb token from requesting user
 		fb_token = user.get_fb_access_token()
 		if self.fb_uid:
@@ -75,7 +75,7 @@ class FacebookGroup(models.Model):
 		return post
 
 	def pin_post(self, user, post_fb_uid):
-		try: 
+		try:
 			pin = FacebookPost.objects.get(fb_uid=post_fb_uid)
 		except FacebookPost.DoesNotExist:
 			pin = FacebookPost.objects.fb_create(user=user, fb_uid=post_fb_uid)
