@@ -47,20 +47,3 @@ class Lesson(models.Model):
 
     def get_homework(self):
         return self.resource_set.filter(type='homework')
-
-    @cached_property
-    def next(self):
-        next_lessson = Lesson.objects.filter(course=self.course,
-                                             order__gt=self.order
-                                             ).order_by('order')
-        if next_lessson:
-            return next_lessson[0]
-        return False
-
-    @cached_property
-    def prev(self):
-        prev = Lesson.objects.filter(course=self.course,
-                                     order__lt=self.order).order_by('-order')
-        if prev:
-            return prev[0]
-        return False
