@@ -57,6 +57,7 @@ class Common(Configuration):
         'django_filters',
         'django_nose',
         'djnfusion',
+        'django_comments',
     )
 
     # Apps specific for this project go here.

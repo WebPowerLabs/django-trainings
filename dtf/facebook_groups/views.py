@@ -36,6 +36,20 @@ def sync_fb_data(request, fb_uid):
 
 
 @login_required
+def fb_group_detail(request, fb_uid):
+    fb_groups = FacebookGroup.objects.all()
+    fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
+
+    context = {
+        "facebook_groups": fb_groups,
+        "facebook_group": fb_group
+    }
+    return render_to_response('facebook_groups/detail.html',
+        context,
+        context_instance = RequestContext(request))
+
+
+@login_required
 def fb_group_feed(request, fb_uid):
     fb_groups = FacebookGroup.objects.all()
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)

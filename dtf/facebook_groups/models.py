@@ -1,6 +1,7 @@
 import json, re, requests
 
 from django.db import models
+from django.db.models import permalink
 from django.conf import settings
 
 from jsonfield import JSONField
@@ -24,6 +25,10 @@ class FacebookGroup(models.Model):
 
 	def __unicode__(self):
 		return self.name if self.name else self.fb_uid
+
+	@permalink
+	def get_absolute_url(self):
+		return 'facebook_groups:feed', (), {'fb_uid': self.fb_uid}
 
 	def get_fb_data_url(self, user):
 		""" get data about this facebook group

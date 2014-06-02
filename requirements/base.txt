@@ -42,3 +42,4 @@ git+https://github.com/zachsnow/django-tumblr-reader.git
 git+https://github.com/goldhand/django-nufiles.git
 django-jsonview==0.3.0
 django-positions==0.5.1
+django-contrib-comments==1.5

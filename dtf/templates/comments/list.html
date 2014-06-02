@@ -1,0 +1,54 @@
+{% load comments %}
+
+<div class="fb-comments">
+{% for comment in comment_list %}
+    <div id="comment-{{ comment.id }}" class="media fb-post">
+        <div data-fbuser="{{ comment.user.id }}" class="pull-left img-profile">
+            <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-responsive fb-profil-img">
+        </div>
+        <div class="media-body">
+            <p>
+            <strong class="fb-from-user">{{ comment.user.get_full_name }}</strong> 
+            <span class="fb-message">{{ comment.comment }}</span>
+            </p>
+            <p class="fb-actions">
+                <small class="date">{{ comment.submit_date|date }}</small>
+            </p>
+    {% comment %}
+    <!-- uncommment to add recursive comments -->
+    {% if user.is_authenticated %}
+    {% get_comment_form for comment as form %}
+    <form class="form fb-comment-form" action="{% comment_form_target %}" method="POST" data-access-token="{{ request.user.get_fb_access_token }}">
+        {% csrf_token %}
+        <div class="hidden">{{ form.honeypot }}</div>
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input type="hidden" name="next" value="{% url 'facebook_groups:detail' facebook_group.fb_uid %}" />
+        <div class="">
+            <div class="row">
+                <div class="col-xs-2 col-sm-1 fb-profile-comment-img">
+                    <img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+                </div>
+                <div class="col-xs-10 col-sm-11">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Write a comment..." name="comment" id="id_comment">
+                        <span class="input-group-btn">
+                            <button type="submit" id="id_submit" class="btn btn-primary"/><i class="fa fa-send fa-fw"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% else %}
+        <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
+    {% endif %}
+    {% render_comment_list for comment %}
+    {% endcomment %}
+        </div>
+    </div>
+{% endfor %}
+</div>
+
