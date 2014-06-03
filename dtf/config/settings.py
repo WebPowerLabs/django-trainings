@@ -55,6 +55,7 @@ class Common(Configuration):
         'nufiles',
         'positions',
         'django_filters',
+        'django_nose',
     )
 
     # Apps specific for this project go here.
@@ -82,6 +83,8 @@ class Common(Configuration):
         'allauth.socialaccount.providers.facebook',
     )
     ########## END APP CONFIGURATION
+
+    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
     ########## MIDDLEWARE CONFIGURATION
     MIDDLEWARE_CLASSES = (
