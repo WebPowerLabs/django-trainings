@@ -1,11 +1,13 @@
 from django import template
-from copy import deepcopy
 from django.http.request import QueryDict
 register = template.Library()
 
 
 @register.simple_tag
 def query_string(source=None, **kwargs):
+    """
+    Returns "GET" suffix for URL.
+    """
     q = QueryDict('', True)
     if source:
         q.update(source)
