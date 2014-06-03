@@ -2,7 +2,6 @@ from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
 
 import positions
-from django.utils.functional import cached_property
 from lessons.managers import LessonManager
 
 

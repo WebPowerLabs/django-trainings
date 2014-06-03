@@ -4,6 +4,9 @@ from django.core.urlresolvers import reverse
 
 class LessonManager(models.Manager):
     def get_next_url(self, obj, tag_id=None, course_id=None):
+        """
+        Receive Lesson instance and returns URL to next Lesson object.
+        """
         lessons = self.all()
         if tag_id:
             lessons = lessons.filter(tags=tag_id,
@@ -19,6 +22,9 @@ class LessonManager(models.Manager):
         return None
 
     def get_prev_url(self, obj, tag_id=None, course_id=None):
+        """
+        Receive Lesson instance and returns URL to previous Lesson object.
+        """
         lessons = self.all()
         if tag_id:
             lessons = lessons.filter(tags=tag_id,
