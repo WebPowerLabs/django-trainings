@@ -85,12 +85,10 @@
             </div>
             {% if object.tags.all %}
             <div class="row">
-                <h4>Tags:</h4>
+                <h4>Lesson categories</h4>
                 {% for tag in object.tags.all %}
                 <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
-                    <span class="label label-primary">
-                        {{ tag }}
-                    </span>&nbsp;
+                {% include 'tags/partials/detail.html' with object=tag %}
                 </a>
                 {% endfor %}
             </div>

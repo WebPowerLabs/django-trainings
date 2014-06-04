@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Add Tag
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        {% crispy form %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Lesson Categories</h3>
+        <hr />
+        {% for tag in object_list %}
+            <a href="{% url 'tags:detail' tag.pk %}">
+                {% include 'tags/partials/detail.html' with object=tag %}
+            </a>
+        {% empty %}
+            <h4>There are no items yet ;)</h4>
+        {% endfor %}
+        <hr />
+    </div>
+</div>
+{% endblock content %}

@@ -7,4 +7,3 @@ class ResourceAdmin(admin.ModelAdmin):
     list_filter = ['lesson', 'type']
 
 admin.site.register(Resource, ResourceAdmin)
-

@@ -44,11 +44,9 @@
                     </span>&nbsp;
                 </a>
                 {% for tag in tag_list %}
-                <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
-                    <span class="label label-{% if request.GET.tags == tag.id|stringformat:"i" %}success{% else %}primary{% endif %}">
-                        {{ tag }}
-                    </span>&nbsp;
-                </a>
+                    <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
+                    {% include 'tags/partials/detail.html' with object=tag %}
+                    </a>
                 {% endfor %}
             </div>
             <br />

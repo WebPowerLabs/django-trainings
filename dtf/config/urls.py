@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^courses/', include('courses.urls', namespace="courses")),
     url(r'^lessons/', include('lessons.urls', namespace="lessons")),
     url(r'^resources/', include('resources.urls', namespace="resources")),
+    url(r'^tags/', include('tags.urls', namespace="tags")),
     url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
