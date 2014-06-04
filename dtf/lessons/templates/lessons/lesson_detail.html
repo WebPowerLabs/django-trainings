@@ -1,5 +1,5 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags query_string %}
+{% load crispy_forms_tags query_string video_player%}
 
 {% block content %}
 <div class="container">
@@ -11,7 +11,7 @@
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                 Edit lesson
-                           </a>
+                            </a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse">
@@ -23,6 +23,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-sm-7">
             <div class="row">
                 <h2>
@@ -32,28 +34,27 @@
                 </h2>
                 <h3>{{ object.order }}. {{ object.name }}</h3>
             </div>
-                {% if object.video %}
-                <video width="640" height="480" controls>
-                    <source src="{{ object.video.url }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <a href="#" class="btn btn-default">
-                    <i class="fa fa-heart"></i>
-                    watch later
-                </a>
-                {% else %}
+            {% if object.video %}
+                <div class="row">
+                    {% video_player object %}
+                    <br />
+                    <a href="#" class="btn btn-default">
+                        <i class="fa fa-heart"></i>
+                        watch later
+                    </a>
+                </div>
+            {% else %}
                 <img src="{{ object.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
-                {% endif %}
+            {% endif %}
             <div class="row">
                 {{ object.description }}
-                
             </div>
         </div>
         <div class="col-sm-5">
             <div class="row">
                 <div class="list-group">
                     <a class="list-group-item active">
-                        <h4 class="list-group-item-heading">Resourses</h4>
+                        <h4 class="list-group-item-heading">Resources</h4>
                     </a>
                     {% for res in object.get_resource %}
                         {% include 'resources/partials/detail.html' with object=res %}
@@ -82,7 +83,6 @@
                     {% endfor %}
                 </div>
             </div>
-            
             {% if object.tags.all %}
             <div class="row">
                 <h4>Tags:</h4>

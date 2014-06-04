@@ -1,1 +1,8 @@
-/* Project specific Javascript goes here. */
+$(document).ready(function(){
+    $('.video-js').each(function(){
+        videojs(this, {}, function(){
+        });
+    });
+});
+
+

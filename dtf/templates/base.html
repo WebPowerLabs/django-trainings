@@ -25,7 +25,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     {% block css %}
-
     {% comment %}
     {% if debug %}
     <link rel="stylesheet/less" href="{% static 'bootstrap/less/zak-bootstrap.less' %}">
@@ -50,10 +49,12 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     {% endif %}
     {% endcomment %}
-    <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+        <link href="{% static 'css/project.css' %}" rel="stylesheet">
 
-    {% include "includes/css_marketing.html" %}
+        {% include "includes/css_marketing.html" %}
+        <!-- Video-js style -->
+        <link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
 
     <!-- This file store project specific CSS -->
 
@@ -122,7 +123,10 @@
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
       <!-- Your stuff: Third-party javascript libraries go here -->
-
+      <script src="{% static 'js/video-js/video.js' %}"></script>
+      <script>
+          videojs.options.flash.swf = "{% static 'js/video-js/video-js.swf' %}"
+      </script>
       <!-- place project specific Javascript in this file -->
       <script src="{% static 'js/project.js' %}"></script>
 

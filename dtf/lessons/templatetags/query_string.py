@@ -2,7 +2,6 @@ from django import template
 from django.http.request import QueryDict
 register = template.Library()
 
-
 @register.simple_tag
 def query_string(source=None, **kwargs):
     """

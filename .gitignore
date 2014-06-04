@@ -28,7 +28,7 @@ nosetests.xml
 # npm
 node_modules/
 
-# Campass
+# Compass
 .sass-cache
 
 .DS_Store
@@ -37,7 +37,7 @@ media/
 # Bower
 bower_components/
 
-# My
+# Andrew
 test_db
 local_settings.py
 .settings
@@ -57,6 +57,6 @@ media/*
 .pydevproject
 .sphinx*
 .project
-static/*
+staticfiles/*
 celery
 celerybeat-schedule
