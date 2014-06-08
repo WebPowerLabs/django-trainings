@@ -56,6 +56,7 @@ class Common(Configuration):
         'positions',
         'django_filters',
         'django_nose',
+        'djnfusion',
     )
 
     # Apps specific for this project go here.
@@ -290,6 +291,20 @@ class Common(Configuration):
 
     ########## Your common stuff: Below this line define 3rd party libary settings
 
+    ########## Djnfusion CONFIG
+
+    DJNFUSION_COMPANY = os.environ.get('INFUSIONSOFT_COMPANY_ID', '')
+    DJNFUSION_API_KEY = os.environ.get('INFUSIONSOFT_API_KEY', '')
+
+    DJNFUSION_USERID_FIELD_NAME = 'infusionsoft_uid'
+    #DJNFUSION_USER_ID_VALUE_PREPROCESSOR = lambda id: unicode(id)
+    #DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_CREATE = lambda u: dict()
+    #DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_UPDATE = lambda u: dict()
+    #DJNFUSION_AUTO_OPTIN = False
+    #DJNFUSION_OPTIN_ONLY_IF_ACTIVE = True
+    #DJNFUSION_OPTIN_MESSAGE = 'Auto-optin through the Web application.'
+    #DJNFUSION_DAILY_USER_STATISTICS = {}
+
     ########## SOCIAL CONFIG
     SOCIALACCOUNT_PROVIDERS = \
         { 'facebook':
@@ -465,3 +480,8 @@ class Production(Common):
     ########## END CACHING
 
     ########## Your production stuff: Below this line define 3rd party libary settings
+
+    ########## Djnfusion CONFIG
+    DJNFUSION_COMPANY = values.SecretValue(None)
+    DJNFUSION_API_KEY = values.SecretValue(None)
+    ########## END Djnfusion CONFIG

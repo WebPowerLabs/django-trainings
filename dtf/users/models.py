@@ -13,6 +13,8 @@ from django.utils.translation import ugettext_lazy as _
 # Subclass AbstractUser
 class User(AbstractUser):
 
+    infusionsoft_uid = models.IntegerField(null=True, blank=True, unique=True)
+
     def __unicode__(self):
         return self.username
 
@@ -46,3 +48,15 @@ class User(AbstractUser):
             return fb_uid[0].uid
         else:
             return None
+
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+import djnfusion
+
+
+@receiver(post_save, sender=User)
+def djnfusion_sync_user(sender, **kwargs):
+    user = kwargs['instance']
+    djnfusion.sync_user(user)    
