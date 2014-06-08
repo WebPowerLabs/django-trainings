@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
+import hashlib
 # Import the AbstractUser model
 from django.contrib.auth.models import AbstractUser
-from allauth.socialaccount.models import SocialAccount
-import hashlib
-
-# Import the basic Django ORM models library
 from django.db import models
-
 from django.utils.translation import ugettext_lazy as _
+
+from allauth.socialaccount.models import SocialAccount
 
 
 # Subclass AbstractUser
@@ -17,7 +15,6 @@ class User(AbstractUser):
 
     def __unicode__(self):
         return self.username
-
 
     def get_fb_profile_img_url(self):
     	fb_uid = SocialAccount.objects.filter(user_id=self.id, provider='facebook')
@@ -50,6 +47,7 @@ class User(AbstractUser):
             return None
 
 
+# signal dependencies
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
