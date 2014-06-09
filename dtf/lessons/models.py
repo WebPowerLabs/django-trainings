@@ -32,8 +32,9 @@ class Lesson(models.Model):
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
 
     class Meta:
-        ordering = ['order', ]
+        ordering = ['order']
         get_latest_by = 'order'
+        order_with_respect_to = 'course'
 
     def __init__(self, *args, **kwargs):
         super(Lesson, self).__init__(*args, **kwargs)

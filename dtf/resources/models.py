@@ -34,8 +34,8 @@ class Resource(models.Model):
 
     class Meta:
         ordering = ['order', ]
-        order_with_respect_to = 'lesson'
         get_latest_by = 'order'
+        order_with_respect_to = 'lesson'
 
     def __unicode__(self):
         return "{}[{}]".format(self.name, self.type)

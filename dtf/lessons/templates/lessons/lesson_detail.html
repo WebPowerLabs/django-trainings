@@ -4,21 +4,20 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="row">
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                Edit lesson
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <a class='btn btn-danger' href='{% url "lessons:delete" object.slug %}'>Delete</a>
-                            {% crispy form %}
-                        </div>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Edit lesson
+                        </a>
+                        <a href="{% url 'resources:add' object.slug %}" class="pull-right">Add Resource or Homework</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <a class='btn btn-danger' href='{% url "lessons:delete" object.slug %}'>Delete</a>
+                        {% crispy form %}
                     </div>
                 </div>
             </div>
@@ -52,35 +51,41 @@
         </div>
         <div class="col-sm-5">
             <div class="row">
-                <div class="list-group">
-                    <a class="list-group-item active">
-                        <h4 class="list-group-item-heading">Resources</h4>
-                    </a>
-                    {% for res in object.get_resource %}
-                        {% include 'resources/partials/detail.html' with object=res %}
-                    {% empty %}
-                    <a class="list-group-item">
-                        <p class="list-group-item-text">
-                            There are no items yet ;)
-                        </p>
-                    </a>
-                    {% endfor %}
+                <div class="panel panel-default panel-resource">
+                    <div class="panel-heading">
+                        <span>Resources</span>
+                        <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
+                    </div>
+                    <div class="list-group">
+                        {% for res in object.get_resource %}
+                            {% include 'resources/partials/detail.html' with object=res %}
+                        {% empty %}
+                        <a class="list-group-item">
+                            <p class="list-group-item-text">
+                                There are no items yet ;)
+                            </p>
+                        </a>
+                        {% endfor %}
+                    </div>
                 </div> 
             </div>
             <div class="row">
-                <div class="list-group">
-                    <a class="list-group-item active">
-                        <h4 class="list-group-item-heading">Homework</h4>
-                    </a>
-                    {% for res in object.get_homework %}
-                        {% include 'resources/partials/detail.html' with object=res %} 
-                    {% empty %}
-                    <a class="list-group-item">
-                        <p class="list-group-item-text">
-                            There are no items yet ;)
-                        </p>
-                    </a>
-                    {% endfor %}
+                <div class="panel panel-default panel-resource">
+                    <div class="panel-heading">
+                        <span>Homework</span>
+                        <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
+                    </div>
+                    <div class="list-group">
+                        {% for res in object.get_homework %}
+                            {% include 'resources/partials/detail.html' with object=res %} 
+                        {% empty %}
+                        <a class="list-group-item">
+                            <p class="list-group-item-text">
+                                There are no items yet ;)
+                            </p>
+                        </a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             {% if object.tags.all %}

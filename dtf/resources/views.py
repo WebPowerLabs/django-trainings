@@ -1,8 +1,12 @@
-from resources.models import Resource
-from utils.views import CreateFormBaseView
 from django.core.urlresolvers import reverse_lazy, reverse
-from resources.forms import ResourceCreateFrom
 from django.views.generic.edit import DeleteView, UpdateView
+from django.http.response import HttpResponseRedirect
+
+from lessons.models import Lesson
+from utils.views import CreateFormBaseView
+
+from .forms import ResourceCreateFrom
+from .models import Resource
 
 
 class ResourceListView(CreateFormBaseView):
@@ -25,3 +29,17 @@ class ResourceDetailView(UpdateView):
     def get_success_url(self):
         return reverse('resources:detail', kwargs={
                                                   'slug': self.kwargs['slug']})
+
+class ResourceAddView(CreateFormBaseView):
+    model = Resource
+    template_name = 'resources/resource_create.html'
+    form_class = ResourceCreateFrom
+
+    def get_success_url(self):
+        return reverse('lessons:detail', kwargs={'slug': self.kwargs['slug']})
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.lesson = Lesson.objects.get(slug=self.kwargs['slug'])
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
