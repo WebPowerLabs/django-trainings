@@ -4,7 +4,7 @@ from courses.models import Course
 
 
 class LessonInline(admin.TabularInline):
-    model = Lesson
+    model = Course
 
 
 class CourseAdmin(admin.ModelAdmin):

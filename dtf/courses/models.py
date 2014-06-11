@@ -2,13 +2,15 @@ from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
 
 import positions
-from courses.managers import PublishedManager
+from courses.managers import CourseManager
 
 
 class Course(models.Model):
     """ Course
     Courses are a series of Lessons
     """
+    objects = CourseManager()
+
     id = UUIDField(primary_key=True)
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
@@ -23,8 +25,6 @@ class Course(models.Model):
         height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
     thumbnail_width = models.CharField(max_length=255, blank=True)
-
-    objects = PublishedManager()
 
     class Meta:
         ordering = ['order', ]

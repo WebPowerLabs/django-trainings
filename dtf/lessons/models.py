@@ -21,7 +21,7 @@ class Lesson(models.Model):
         help_text='users will only see published lessons')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    order = positions.PositionField()
+    # order = positions.PositionField()
     thumbnail = models.ImageField(upload_to='lessons/thumbs/%Y/%m/%d',
         height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
@@ -32,8 +32,8 @@ class Lesson(models.Model):
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
 
     class Meta:
-        ordering = ['order']
-        get_latest_by = 'order'
+        ordering = ['_order']
+        get_latest_by = '_order'
         order_with_respect_to = 'course'
 
     def __init__(self, *args, **kwargs):
@@ -42,8 +42,8 @@ class Lesson(models.Model):
     def __unicode__(self):
         return self.name
 
-    def get_resource(self):
-        return self.resource_set.filter(type='resource')
+    def get_resource(self, user):
+        return self.resource_set.get_list(user).filter(type='resource')
 
-    def get_homework(self):
-        return self.resource_set.filter(type='homework')
+    def get_homework(self, user):
+        return self.resource_set.get_list(user).filter(type='homework')

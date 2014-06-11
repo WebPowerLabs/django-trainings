@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class CourseManager(models.Manager):
+class ResourceManager(models.Manager):
     def published(self):
         return self.filter(published=True)
 

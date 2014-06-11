@@ -1,3 +1,5 @@
+from django.contrib.admin.views.decorators import staff_member_required
+
 try:
     from django.conf.urls import *
 except ImportError:  # django < 1.4
@@ -10,8 +12,8 @@ urlpatterns = patterns('',
     url('^$', views.ResourceListView.as_view(), name='list'),
     url('^(?P<slug>[-\w]+)/$', views.ResourceDetailView.as_view(),
                                                                 name='detail'),
-    url('^(?P<slug>[-\w]+)/delete/$', views.ResourceDeleteView.as_view(),
+    url('^(?P<slug>[-\w]+)/delete/$', staff_member_required(views.ResourceDeleteView.as_view()),
                                                                 name='delete'),
-    url('^add/(?P<slug>[-\w]+)/$', views.ResourceAddView.as_view(),
+    url('^add/(?P<slug>[-\w]+)/$', staff_member_required(views.ResourceAddView.as_view()),
                                                                 name='add'),
     )

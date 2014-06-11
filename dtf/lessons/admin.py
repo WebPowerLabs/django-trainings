@@ -11,7 +11,7 @@ class LessonAdmin(admin.ModelAdmin):
     inlines = [ResourceInLine]
     list_filter = ['course']
     list_editable = ['published']
-    list_display = ['name', 'published']
+    list_display = ['name', 'published', '_order']
 
 admin.site.register(Lesson, LessonAdmin)
 

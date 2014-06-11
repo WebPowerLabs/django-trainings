@@ -8,8 +8,8 @@ from crispy_forms.layout import Submit
 class CourseCreateFrom(forms.ModelForm):
     class Meta:
         model = Course
+        fields = ['name', 'description', 'published', 'thumbnail']
 
     helper = FormHelper()
-    helper.form_class = 'form-horizontal'
     helper.add_input(Submit('save_changes', 'Save changes',
                             css_class="btn-success"))
