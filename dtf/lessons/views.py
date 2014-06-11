@@ -12,24 +12,26 @@ from django.http.response import HttpResponseRedirect
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
-    model = Course
+    model = Lesson
     template_name = 'lessons/lesson_detail.html'
     form_class = LessonCreateFrom
     decorators = {'POST': staff_member_required}
 
     def get_queryset(self):
-        return Course.objects.get_list(self.request.user)
+        return Lesson.objects.get_list(self.request.user)
 
     def get_context_data(self, **kwargs):
         tag_id = self.request.GET.get('tags', None)
         course_id = self.request.GET.get('course', None)
         context = super(LessonDetailView, self).get_context_data(**kwargs)
-        context['resource_list'] = Course.get_resource(self.object, self.request.user)
-        context['homework_list'] = Course.get_homework(self.object, self.request.user)
-        context['next_url'] = Course.objects.get_next_url(self.object, tag_id,
-                                                   course_id, self.request.user)
-        context['prev_url'] = Course.objects.get_prev_url(self.object, tag_id,
-                                                   course_id, self.request.user)
+        context['resource_list'] = Lesson.get_resource(self.object,
+                                                       self.request.user)
+        context['homework_list'] = Lesson.get_homework(self.object,
+                                                       self.request.user)
+        context['next_url'] = Lesson.objects.get_next_url(self.object, tag_id,
+                                                course_id, self.request.user)
+        context['prev_url'] = Lesson.objects.get_prev_url(self.object, tag_id,
+                                                course_id, self.request.user)
         return context
 
     def get_success_url(self):
@@ -37,14 +39,14 @@ class LessonDetailView(PermissionMixin, UpdateView):
 
 
 class LessonListView(PermissionMixin, FilterView):
-    model = Course
+    model = Lesson
     template_name = 'lessons/lesson_list.html'
     filterset_class = LessonFilter
-    queryset = Course.objects.select_related('course')
+    queryset = Lesson.objects.select_related('course')
     decorators = {'POST': staff_member_required}
 
     def get_queryset(self):
-        return Course.objects.get_list(self.request.user).order_by('-created')
+        return Lesson.objects.get_list(self.request.user).order_by('-created')
 
     def get_context_data(self, **kwargs):
         context = super(LessonListView, self).get_context_data(**kwargs)
@@ -54,7 +56,7 @@ class LessonListView(PermissionMixin, FilterView):
 
 
 class LessonAddView(CreateFormBaseView):
-    model = Course
+    model = Lesson
     template_name = 'lessons/lesson_create.html'
     form_class = LessonCreateFrom
 
@@ -69,5 +71,5 @@ class LessonAddView(CreateFormBaseView):
 
 
 class LessonDeleteView(DeleteView):
-    model = Course
+    model = Lesson
     success_url = reverse_lazy('lessons:list')

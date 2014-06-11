@@ -11,7 +11,6 @@ from django.core.urlresolvers import get_callable
 
 from djnfusion import settings
 
-
 key = settings.API_KEY
 company = settings.COMPANY
 server = xmlrpclib.ServerProxy("https://%s.infusionsoft.com:443/api/xmlrpc" % company);
@@ -25,7 +24,6 @@ _log = logging.getLogger('djnfusion')
 def _user_or_id(user, user_id):
 
     _log.debug("user_or_id: user = %s, user_id = %s", user, user_id)
-
 
     if user:
         try:
@@ -45,7 +43,6 @@ def _user_or_id(user, user_id):
         raise ValueError("No user specified.")
 
     return user
-
 
 
 def _user_dict(user, create=False, update=False):
@@ -69,7 +66,7 @@ def _user_dict(user, create=False, update=False):
 
 def create_or_update_user(user=None, user_id=None):
     if not settings.COMPANY or not settings.API_KEY:
-        return # do nothing
+        return  # do nothing
 
     user = _user_or_id(user, user_id)
     _log.debug("Syncing user %s with CRM ...", user)
@@ -77,7 +74,7 @@ def create_or_update_user(user=None, user_id=None):
     results = server.DataService.findByField(key, "Contact", 10, 0, "email", user.email, ["Id", "Email"]);
     if len(results) > 1:
         raise ValueError("Found %s users in Infusionsoft for user id %s, not touching anything. Please fix this." % (len(results), user.id))
-    
+
     return_result = results
 
     if len(results) == 0:
@@ -100,7 +97,7 @@ def create_or_update_user(user=None, user_id=None):
 def sync_user(user=None, user_id=None):
 
     if not settings.COMPANY or not settings.API_KEY:
-        return # do nothing
+        return  # do nothing
 
     user = _user_or_id(user, user_id)
     _log.debug("Syncing user %s with CRM ...", user)
@@ -111,13 +108,13 @@ def sync_user(user=None, user_id=None):
     results = create_or_update_user(user=user, user_id=user_id)
 
     if settings.AUTO_OPTIN:
-        
+
         _log.debug("Attempting to opt-in email ...")
         if optin_user(user=user):
             _log.debug("Opt-in succeeded.")
         else:
             _log.debug("Opt-in failed.")
-        
+
 
     return results
 
@@ -140,7 +137,7 @@ def update_user(infusionsoft_user_id, user=None, user_id=None):
     elif djnfusion_id != infusionsoft_user_id:
         # djnfusion_id exists, make sure its the same as infusionsoft_user_id
         raise ValueError('infusionsoft user id: %s does not match %s: %s' % (
-            str(infusionsoft_user_id), settings.USER_ID_FIELD_NAME[:1], 
+            str(infusionsoft_user_id), settings.USER_ID_FIELD_NAME[:1],
             str(djnfusion_id)))
     server.ContactService.update(key, infusionsoft_user_id, _user_dict(user, update=True))
     return True
@@ -149,7 +146,7 @@ def update_user(infusionsoft_user_id, user=None, user_id=None):
 def optin_user(user=None, user_id=None):
 
     if not settings.COMPANY or not settings.API_KEY:
-        return # do nothing
+        return  # do nothing
 
     user = _user_or_id(user, user_id)
     _log.debug("optin_user for user %s", user)
@@ -173,12 +170,12 @@ def optin_user(user=None, user_id=None):
 def daily_statistics(user=None, user_id=None):
 
     if not settings.COMPANY or not settings.API_KEY:
-        return # do nothing
+        return  # do nothing
 
     if not settings.DAILY_USER_STATISTICS:
         return
 
-    user = _user_or_id(user, user_id)    
+    user = _user_or_id(user, user_id)
 
     results = server.DataService.findByField(key, "Contact", 10, 0, settings.USER_ID_FIELD_NAME, settings.USER_ID_VALUE_PREPROCESSOR(user.id), fields)
 
@@ -194,7 +191,7 @@ def daily_statistics(user=None, user_id=None):
     for stat_key, stat_callable_name in settings.DAILY_USER_STATISTICS.iteritems():
         stat_values[stat_key] = get_callable(stat_callable_name)(user)
 
-    #print "updating user %s with values %s" % (infusionsoft_user['Id'], stat_values)
+    # print "updating user %s with values %s" % (infusionsoft_user['Id'], stat_values)
     server.ContactService.update(key, infusionsoft_user['Id'], stat_values)
 
     return True

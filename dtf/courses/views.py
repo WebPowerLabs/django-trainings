@@ -16,6 +16,7 @@ class CourseListView(PermissionMixin, CreateFormBaseView):
     def get_queryset(self):
         return Course.objects.get_list(self.request.user)
 
+
 class CourseDetailView(PermissionMixin, UpdateView):
     model = Course
     template_name = 'courses/course_detail.html'

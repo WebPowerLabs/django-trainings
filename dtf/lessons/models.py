@@ -1,7 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
 
-import positions
+# import positions
 from lessons.managers import LessonManager
 
 
@@ -30,6 +30,15 @@ class Lesson(models.Model):
     homework = models.TextField(blank=True)
     course = models.ForeignKey('courses.Course')
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        order = None
+        if not self.pk:
+            order = self.course.get_lesson_order()
+        super(Lesson, self).save(*args, **kwargs)
+        if order:
+            order.append(self.pk)
+            self.course.set_lesson_order(order)
 
     class Meta:
         ordering = ['_order']

@@ -17,12 +17,12 @@ class Course(models.Model):
     description = models.TextField(blank=True,
         help_text='a brief summary of this course')
     published = models.BooleanField(default=False,
-        help_text='users will only see published courses')
+                            help_text='users will only see published courses')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     order = positions.PositionField()
     thumbnail = models.ImageField(upload_to='courses/thumbs/%Y/%m/%d',
-        height_field='thumbnail_height', width_field='thumbnail_width')
+                height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
     thumbnail_width = models.CharField(max_length=255, blank=True)
 
