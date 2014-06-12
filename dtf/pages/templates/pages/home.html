@@ -1,92 +1,74 @@
 {% extends "base.html" %}
 {% load staticfiles i18n crispy_forms_tags %}
 
+{% comment %}
 {% block header %}
 <!-- - - - - - - - - - - - - - HEADER NAV - - - - - - - - - - - - - - - - -->
 <header id="header" class="transparent">
-	
     <div class="header-member">
       <div class="header-in">
-
         <nav id="nav-member" class="navigation">
           <ul>
-            <li><a href="{% url 'account_signup' %}">Signup</a></li>
-            <li><a href="{% url 'account_login' %}">Login</a></li>
+            {% block nav_user %}
+              {% include "menus/nav_user.html" %}
+            {% endblock nav_user %}
           </ul>
         </nav><!--/ #navigation-->
-
       </div><!--/ .header-in-->
     </div><!--/ .header-member-->
-
 	<div class="header-in">
-		
 		<a href="{% url 'home' %}">
 			<img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}">
 		</a>
-		
 		<a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
-		
 		<nav id="navigation" class="navigation">
-			
 			<ul>
               <li class="current-menu-item"><a href="{% url 'home' %}">Home</a></li>
               <li><a href="{% url 'about' %}">About</a></li>
-              <li><a href="{% url 'd2f-community' %}">Virtual Mentoring</a>
+              <li><a href="{% url 'd2f-community' %}">Our Community</a></li>
+              <li><a>Programs</a>
               	<ul>
-              		<li><a href="{% url 'd2f-community' %}">Our Community</a></li>
               		<li><a href="{% url 'courage-to-soar' %}">Courage to Soar</a></li>
               		<li><a href="{% url 'accelerate-your-destiny' %}">Accelerate Your Destiny</a></li>
               	</ul>
               </li>
               <li><a href="{% url 'blog' %}">Blog</a></li>
-              <li><a href="{% url 'free-product' %}">Free Product</a></li>
 			</ul>
-
 		</nav><!--/ #navigation-->
-		
 	</div><!--/ .header-in-->
-	
 </header><!--/ #header-->
 <!-- - - - - - - - - - - - - /HEADER NAV - - - - - - - - - - - - - - - -->
 {% endblock header %}
+{% endcomment %}
 
 {% block footer %}
 {% endblock footer %}
 
 {% block bodyclass %}home{% endblock bodyclass %}
 
-
 {% block content %}
 <div id="wrapper">
-
 
 	<!-- - - - - - - - WELCOME HOME BLOCK - - - - - - - -->
 	<section class="welcome-home">
 		<section class="section parallax padding-off">
-
 			<div class="full-bg-image"></div>
-			<div class="parallax-overlay"></div>
-			
 			<div class="container">	
 				<div class="video-full-entry">
-
 					<div class="row">
-						<div class="col-md-6 col-md-push-6 welcome-title">
-							<h1>Welcome to <strong>Decide to Fly&trade;</strong></h1>
-							<p>Lorem ipsum dolor sit amet, consectur adipiscing elit. Nam vitae convallis ipsum.Maecenas a vulputate ipsum, vestibulum lobortis enim. Sed nec consequat felis. Proin sit amet sollicitudin neque, a rhoncus nisl. Aliquam malesuada elementum risus, sit amet dictum tempor nec.  Suspendisse lectus massa, consequat at pellentesque sed.</p>
-							<a href=""><button class="btn btn-lg btn-success">Click Here</button></a>
-						</div>
-						<div class="col-md-6 col-md-pull-6">
-							<iframe width="1060" height="590" src="http://www.youtube.com/embed/qGsTlYLbwy4?wmode=transparent&showinfo=0&rel=0&autohide=1" frameborder="0" allowfullscreen></iframe>
-						</div>
+						<div class="col-sm-6">
+							<div class="text-center">
+								<img class="company-logo" src="{% static 'images/decide-to-fly-logo2.png' %}"/>
+							</div>
+							<h2 style="margin-left: 13%;">The community to:</h2>
+							<h1 class="text-center"><em>
+								<span class="red">Connect, </span>
+								<span class="blue">Collaborate </span> &
+								<span class="green"> Create</span>
+							</em></h1>
+							<h2 class="pull-right" style="margin-right: 2%;">the life you REALLY want to live.</h2>
+						</div><!--/ .col-md-6-->
 					</div><!--/ .row-->
-					
-					<!--<h2>Enter your name and email to receive our free monthly product:</h2>
-
-					<div class="col-md-4 col-md-offset-4 ">
-						{% crispy email_form %}
-					</div>-->							
-
 				</div><!--/ .video-full-entry-->
 			</div><!--/ .container-->
 			<img class="swoosh" src="{% static 'images/swoosh.png' %}" />
@@ -94,190 +76,140 @@
 	</section>
 	<!-- - - - - - - - /WELCOME HOME BLOCK - - - - - - - -->
 
-
 	<!-- - - - - - - - D2F COMMUNITY INTRO BLOCK - - - - - - - -->
 	<section class="community section">
-
 		<div class="container">
-				<div class="section-title">
-					<h1>Our Community</h1>
-					<h2>The world’s leading business and personal development experts at your fingertips, when you need them, all for less than 2 lattes a month.</h2>	
-				</div>
+			<div class="section-title">
+				<h1>Our Community</h1>
+				<h2>The world’s leading business and personal development experts at your fingertips, when you need them, all for less than 2 lattes a month.</h2>	
+			</div><!--/ .section-title-->
 		</div><!--/ .container-->
-
 		<div class="row community-items">
-
 				<div class="col-sm-6 col-lg-3 slideRight">
 					<a href="{% url 'd2f-community' %}">
 						<div class="entry">
-
 							<div class="icon top">
 								<i class="fa fa-desktop"></i>
-							</div>
-
+							</div><!--/ .icon-->
 							<h2 class="entry-title">Online Mentoring</h2>
-
 							<div class="entry-body">
 								<p>Curabitur consequat iaculis neque a faucibus. Sed in rhoncus tellus. Mauris tortor nibh, convallis quis sagittis ut, ornare eget metus. Phasellus vel varius ante.</p>
 							</div><!--/ .entry-body-->
-
 							<div class="icon bottom">
 								<i class="fa fa-plus "></i>
-							</div>
-
+							</div><!--/ .icon-->
 						</div><!--/ .entry-->
 					</a>
-				</div><!--/ .col-sm-6.col-lg-3-->
-
+				</div><!--/ .col-sm-6-->
 				<div class="col-sm-6 col-lg-3 slideUp">
 					<a href="{% url 'd2f-community' %}">
 						<div class="entry">
-
 							<div class="icon top">
 								<i class="fa fa-comments"></i>
-							</div>
-
+							</div><!--/ .icon-->
 							<h2 class="entry-title">Live Discussion Boards</h2>
-
 							<div class="entry-body">
 								<p>Curabitur consequat iaculis neque a faucibus. Sed in rhoncus tellus. Mauris tortor nibh, convallis quis sagittis ut, ornare eget metus. Phasellus vel varius ante.</p>
 							</div><!--/ .entry-body-->
-
 							<div class="icon bottom">
 								<i class="fa fa-plus "></i>
-							</div>
-
+							</div><!--/ .icon-->
 						</div><!--/ .entry-->
 					</a>			
-				</div><!--/ .col-sm-6.col-lg-3-->
-
+				</div><!--/ .col-sm-6-->
 				<div class="col-sm-6 col-lg-3 slideLeft">
 					<a href="{% url 'd2f-community' %}">
 						<div class="entry">
-
 							<div class="icon top">
 								<i class="fa fa-users"></i>
-							</div>
-
+							</div><!--/ .icon-->
 							<h2 class="entry-title">Connect With Peers</h2>
-
 							<div class="entry-body">
 								<p>Curabitur consequat iaculis neque a faucibus. Sed in rhoncus tellus. Mauris tortor nibh, convallis quis sagittis ut, ornare eget metus. Phasellus vel varius ante.</p>
 							</div><!--/ .entry-body-->
-
 							<div class="icon bottom">
 								<i class="fa fa-plus "></i>
-							</div>
-
+							</div><!--/ .icon-->
 						</div><!--/ .entry-->
 					</a>
-				</div><!--/ .col-sm-6.col-lg-3-->
-
+				</div><!--/ .col-sm-6-->
 				<div class="col-sm-6 col-lg-3 slideDown">
 					<a href="{% url 'd2f-community' %}">
 						<div class="entry">
-
 							<div class="icon top">
 								<i class="fa fa-book"></i>
-							</div>
-
+							</div><!--/ .icon-->
 							<h2 class="entry-title">Empowering Resources</h2>
-
 							<div class="entry-body">
 								<p>Curabitur consequat iaculis neque a faucibus. Sed in rhoncus tellus. Mauris tortor nibh, convallis quis sagittis ut, ornare eget metus. Phasellus vel varius ante.</p>
 							</div><!--/ .entry-body-->
-
 							<div class="icon bottom">
 								<i class="fa fa-plus "></i>
-							</div>
-
+							</div><!--/ .icon-->
 						</div><!--/ .entry-->
 					</a>
-				</div><!--/ .col-sm-6.col-lg-3-->
-				
-			</div><!--/ .row.community-items-->
-
+				</div><!--/ .col-sm-6-->
+			</div><!--/ .row-->
 	</section>
 	<!-- - - - - - - - /D2F COMMUNITY INTRO BLOCK - - - - - - - -->
-
 
 	<!-- - - - - - - - VIRTUAL MENTORING INTRO BLOCK - - - - - - - -->
 	<section class="virtual-mentoring section bg-gray-color">
 		<div class="container">
-
 			<div class="col-xs-12">
 				<div class="section-title">
 					<h1>Virtual Mentoring</h1>
 					<h2>Nulla pharetra tellus arcu, virtual mentoring is awesome!</h2>	
-				</div>	
+				</div><!--/ .section-title-->
 			</div><!--/ .col-xs-12-->
-
 			<div class="row vm-item-1">
 				<div class="col-md-12">
 					<h1>Courage to Soar</h1>
-				</div>
-
-				<div class="col-md-5 ">
+				</div><!--/ .col-md-12-->
+				<div class="col-md-5">
 					<p><img src="{% static 'images/ribbon-jump-women.jpg' %}" alt="Jami Amidon" /></p>
-				</div>
-
+				</div><!--/ .col-md-5-->
 				<div class="col-md-7">
 					<p>Lorem ipsum dolor amet, consectetur adipiscing elit. Pellentesque ut lacus at velit consequat sodales. Ut posuere neque in molestie gravida. Integer neque lementum posuere purus. Nam convallis ipsum. Maecenas a vulputate ipsum.</p>
 					<p>Sed quam tellus, scelerisque eget pulvinar sed, mollis vel tortor. Mauris dictum aliquam nunc, vel dapibus mauris accumsan at. Aenean interdum purus a augue bibendum venenatis. Curabitur id elementum turpis, ut pretium ipsum. Pellentesque ac ultricies ipsum. Suspendisse potenti. Nulla rhoncus sem elit, condimentum gravida libero pellentesque id.</p>
-
-					<div class="btn btn-lg btn-default">More Info</div>
-
+					<button class="btn btn-lg btn-default">More Info</button>
 				</div><!--/ .col-md-7-->
-			</div><!--/ .row.vm-item-1-->
-
+			</div><!--/ .row-->
 			<div class="row vm-item-2">
 				<div class="col-md-12">
 					<h1>Accelerate Your Destiny</h1>
-				</div>
-
+				</div><!--/ .col-md-12-->
 				<div class="col-md-5 col-md-push-7 ">
 					<p><img src="{% static 'images/happy-businesswoman.jpg' %}" alt="Jami Amidon" /></p>
-				</div>
-
+				</div><!--/ .col-md-5-->
 				<div class="col-md-7 col-md-pull-5">
 					<p>Vivamus imperdiet consequat quam, in dapibus dui blandit dignissim. In hac habitasse platea dictumst. Pellentesque ligula elit, gravida vel orci id, dapibus tempor justo. Vivamus et odio in nulla interdum interdum. Nullam ultricies tortor ut molestie blandit. Aliquam erat volutpat.</p>
 					<p>Quisque mollis lectus vitae hendrerit consectetur. Sed ultrices scelerisque leo, vel tincidunt libero bibendum sit amet. In ultricies lacinia ipsum, vitae ultricies turpis eleifend quis. Duis lacinia faucibus ante, eget tristique augue imperdiet ultrices.</p>
 					<p>Sed vel euismod tellus, vel luctus dui. Etiam sodales lectus urna, vel scelerisque felis luctus ac. Ut sit amet consectetur orci.</p>
-
-					<div class="btn btn-lg btn-default">More Info</div>
-
+					<button class="btn btn-lg btn-default">More Info</button>
 				</div><!--/ .col-md-7-->
-			</div><!--/ .row.vm-item-2-->
-
+			</div><!--/ .row-->
 		</div><!--/ .container-->	
 	</section>
 	<!-- - - - - - - - /VIRTUAL MENTORING INTRO BLOCK - - - - - - - -->
 
-
 	<!-- - - - - - - - JAMI AMIDON INTRO BLOCK - - - - - - - -->
 	<section class="about-jami section">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-xs-12">
-
 					<div class="section-title-2">
 						<h1>Meet <span>Jami</span> Amidon</h1>
 						<h2>Proin fringilla fermentum urna, sed consequat justo eleifend sit amet.</h2>	
-					</div>
-
+					</div><!--/ .section-title-2-->
 				</div><!--/ .col-xs-12-->
 			</div><!--/ .row-->
-
 			<div class="row">
-
-				<div class="col-md-6 ">
+				<div class="col-md-6">
 					<p><img src="{% static 'images/jami-amidon.jpg' %}" alt="Jami Amidon" /></p>
-				</div>
-
+				</div><!--/ .col-md-6-->
 				<div class="col-md-6">
 					<p>Lorem ipsum dolor amet, consectetur adipiscing elit. Pellentesque ut lacus at velit consequat sodales. Ut posuere neque in molestie gravida. Integer neque lementum posuere purus. Nam convallis ipsum. Maecenas a vulputate ipsum.</p>
-
 					<ul class="list">
 						<li class="type-5">Proin fringilla fermentum urna</li>
 						<li class="type-5">Sed consequat justo eleifend sit amet</li>
@@ -285,29 +217,22 @@
 						<li class="type-5">Vivamus a feugiat leo</li>
 						<li class="type-5">Phasellus pulvinar posuere lorem sit amet rhoncus</li>
 					</ul><!--/ .list-->
-
-					<a href="http://jamiamidon.com"><div class="btn btn-lg btn-success btn-block">Visit JamiAmidon.com</div></a>
-
+					<a href="http://jamiamidon.com"><button class="btn btn-lg btn-success btn-block">Visit JamiAmidon.com</button></a>
 				</div><!--/ .col-md-6-->
-
 			</div><!--/ .row-->
-
 		</div><!--/ .container-->
 	</section>
 	<!-- - - - - - - - /JAMI AMIDON INTRO BLOCK - - - - - - - -->
-	
 
 	<!-- - - - - - - - CONTACT FOOTER TITLE BLOCK - - - - - - - -->
 	<section class="contact-title section bg-gray-color">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
-
 					<div class="section-title align-center">
 						<h1>Contact Us</h1>
 						<h2>We look forward to hearing from you!</h2>
-					</div>
-
+					</div><!--/ .section-title-->
 				</div><!--/ .col-xs-12-->
 			</div><!--/ .row-->
 		</div><!--/ .container-->
@@ -320,23 +245,18 @@
 			<div class="full-bg-image"></div>
 			<div class="container">
 				<div class="row">
-
 					<div class="col-md-6 ">
 						{% crispy contact_form %}
-					</div>
-
+					</div><!--/ .col-md-6-->
 					<div class="col-md-6">
-
 						<div class="widget widget_text ">
 							<h2>Decide to Fly&trade;</h2>
 						</div><!--/ .widget_text-->
-						
 						<div class="widget widget_contacts ">
-								<p>Address: 12 Street, Los Angeles, CA, 94101</p>
-								<p>Phone: (800) 123-4567</p>
-								<p>Email: <a href="mailto:ask@decidetofly.com">ask@decidetofly.com</a></p>
+							<p>Address: 12 Street, Los Angeles, CA, 94101</p>
+							<p>Phone: (800) 123-4567</p>
+							<p>Email: <a href="mailto:ask@decidetofly.com">ask@decidetofly.com</a></p>
 						</div><!--/ .widget_contacts-->
-						
 						<div class="widget widget_social ">
 							<ul class="social-icons">
 								<li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
@@ -347,33 +267,26 @@
 								<li class="instagram"><a href="#"><i class="icon-instagramm"></i>Instagram</a></li>
 							</ul><!--/ .social-icons-->
 						</div><!--/ .widget_social-->
-						
 					</div><!--/ .col-md-6-->
-
 				</div><!--/ .row-->
 			</div><!--/ .container-->
 		</section><!--/ .section-->		
-
 	    <div class="bottom-footer clearfix">
 	      <div class="container">
 	        <div class="row">
-	          
 	          <div class="col-sm-6">
 	            <div class="copyright">
 	            	Copyright &copy; 2014 <a href="{% url 'home' %}">Decide to Fly&trade;</a>. All rights reserved
-	            </div>
+	            </div><!--/ .copyright-->
 	          </div><!--/ .col-sm-6-->
-	          
 	          <div class="col-sm-3 col-sm-offset-3">
 	            <div class="developed">
 	            	Designed by <a target="_blank" href="http://rabbitholestud.io/">Rabbit Hole Studio</a>
-	            </div>
+	            </div><!--/ .developed-->
 	          </div><!--/ .col-sm-3-->
-	          
 	        </div><!--/ .row-->
 	      </div><!--/ .container-->
 	    </div><!--/ .bottom-footer-->
-
 	</footer><!-- - - - - - - - /CONTACT FOOTER BLOCK - - - - - - - -->
 
 </div><!--/ #wrapper-->
