@@ -484,6 +484,6 @@ class Production(Common):
     ########## Your production stuff: Below this line define 3rd party libary settings
 
     ########## Djnfusion CONFIG
-    DJNFUSION_COMPANY = values.SecretValue(None)
-    DJNFUSION_API_KEY = values.SecretValue(None)
+    DJNFUSION_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
+    DJNFUSION_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_API_KEY")
     ########## END Djnfusion CONFIG

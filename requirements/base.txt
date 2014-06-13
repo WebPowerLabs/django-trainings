@@ -45,3 +45,5 @@ django-positions==0.5.1
 django-contrib-comments==1.5
 django-filter==0.7
 jsonfield==0.9.20
+django-nose==1.2
+factory_boy==2.3.1

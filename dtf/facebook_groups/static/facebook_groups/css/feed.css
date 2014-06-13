@@ -69,3 +69,15 @@
 	font-size: 12px;
 	color: #5b5e60;
 }
+.pin-post {
+	padding: 5px 15px;
+}
+.pin-post a:hover > * {
+	color: #cc0a66;
+}
+.fb-post .pin-post {
+	visibility: hidden;
+}
+.fb-post:hover .pin-post {
+	visibility: visible;
+}

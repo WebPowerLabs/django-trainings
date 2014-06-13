@@ -38,14 +38,17 @@ class FBGroupManager(models.Manager):
 		# set the fb_uid to user if a user that exists was given and has a fb_uid else user Will's fb_uid
 		fb_uid = user.fb_uid if user and user.fb_uid else u'100003511777674'
 
-		post_url = "https://graph.facebook.com/v2.0/{0}/groups?admin={1}&name={2}&description={3}&privacy={4}&access_token={5}".format(
+		post_url = "https://graph.facebook.com/v2.0/{0}/groups?&name={2}&description={3}&privacy={4}&access_token={5}".format(
 			client_id, fb_uid, name, description, privacy, access_token)
 		print post_url
 		new_group = requests.post(post_url)
+		if not user:
+			user = User.objects.filter(is_superuser=True)[0]
 		if new_group.ok:
-			if not user:
-				user = User.objects.filter(is_superuser=True)[0]
 			new_group = self.create(fb_uid=new_group.json()["id"], owner=user)
+		else:
+			new_group = self.create(owner=user)
+
 		return new_group
 
 
