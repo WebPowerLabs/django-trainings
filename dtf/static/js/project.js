@@ -45,12 +45,23 @@ $.ajaxSetup({
 });
 // end CSRF for AJAX request.
 $(document).ready(function(){
+    // AJAX request to FavouriteAddView.
+    $('body').on('click', '.favourite_add', function(event){
+        event.preventDefault();
+        var $this = $(this);
+        var url = $this.attr('data-url');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',
+        });
+    });
     // Renders element with class 'video-js' to HTML5 video player.
     $('.video-js').each(function(){
         videojs(this, {}, function(){
         });
     });
-    // Adds drag&drop reordering functionality to element with class 'sortable'. 
+    // Adds drag&drop reordering functionality to element with class 'sortable'.
     $('.sortable').each(function() {
         var $this = $(this);
         var url = $this.attr('data-url');

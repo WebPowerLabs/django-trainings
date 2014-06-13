@@ -23,10 +23,9 @@ class LessonViewTest(FastFixtureTestCase):
 
     def test_order_view(self):
         self.client.login(username=self.username, password=self.password)
-        new_order = [
-                       self.lesson_one.pk,
-                       self.lesson_three.pk,
-                       self.lesson_two.pk]
+        new_order = [self.lesson_one.pk,
+                     self.lesson_three.pk,
+                     self.lesson_two.pk]
 
         req_data = json.dumps({'new_order': new_order})
         resp = self.client.post(reverse('lessons:order', kwargs={

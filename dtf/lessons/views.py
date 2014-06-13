@@ -12,6 +12,7 @@ from django.http.response import HttpResponseRedirect
 from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic.base import View
 import json
+from profiles.models import History
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
@@ -39,6 +40,12 @@ class LessonDetailView(PermissionMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('lessons:detail', kwargs={'slug': self.kwargs['slug']})
+
+    def get(self, request, *args, **kwargs):
+        history = History(content_object=self.get_object(),
+                          user=self.request.user)
+        history.save()
+        return UpdateView.get(self, request, *args, **kwargs)
 
 
 class LessonListView(PermissionMixin, FilterView):

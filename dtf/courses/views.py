@@ -8,6 +8,7 @@ from utils.views import CreateFormBaseView, PermissionMixin
 from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic.base import View
 import json
+from profiles.models import History
 
 
 class CourseListView(PermissionMixin, CreateFormBaseView):
@@ -37,6 +38,12 @@ class CourseDetailView(PermissionMixin, UpdateView):
         course = self.get_object()
         context['lesson_list'] = course.lesson_set.get_list(self.request.user)
         return context
+
+    def get(self, request, *args, **kwargs):
+        history = History(content_object=self.get_object(),
+                          user=self.request.user)
+        history.save()
+        return UpdateView.get(self, request, *args, **kwargs)
 
 
 class CourseDeleteView(DeleteView):

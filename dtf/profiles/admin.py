@@ -1,11 +1,21 @@
 from django.contrib import admin
 
-from .models import (CourseProfile, LessonProfile, FacebookProfile, 
-	InfusionsoftProfile,) #PackageProfile
+from .models import FacebookProfile, History, InfusionsoftProfile
+from profiles.models import Favourite
+# 				    PackageProfile
 
 
-admin.site.register(CourseProfile)
-admin.site.register(LessonProfile)
+class HistoryAdmin(admin.ModelAdmin):
+    list_display = ['content_object', 'created', 'content_type']
+    list_filter = ['user']
+
+
+class FavouriteAdmin(admin.ModelAdmin):
+    list_display = ['content_object', 'created', 'content_type']
+    list_filter = ['user']
+
+admin.site.register(Favourite, FavouriteAdmin)
+admin.site.register(History, HistoryAdmin)
 admin.site.register(FacebookProfile)
 admin.site.register(InfusionsoftProfile)
-#admin.site.register(PackageProfile)
+# admin.site.register(PackageProfile)

@@ -39,7 +39,7 @@
             {% if object.video %}
                 {% video_player object %}
                 <br />
-                <a href="#" class="btn btn-default">
+                <a class="btn btn-primary favourite_add" data-url="{% url 'profiles:add_favourite' 'lesson' object.pk %}">
                     <i class="fa fa-heart"></i>
                     watch later
                 </a>

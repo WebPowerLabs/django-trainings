@@ -1,29 +1,47 @@
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
+from django_extensions.db.fields import UUIDField
 from django.db import models
 from django.conf import settings
 
-from jsonfield import JSONField
+
+class History(models.Model):
+    """
+    for storing history for lessons and courses.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    content_type = models.ForeignKey(ContentType)
+    object_id = UUIDField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    def __unicode__(self):
+        return self.content_object
+
+    class Meta:
+        ordering = ['created']
+        verbose_name_plural = 'History'
 
 
-class CourseProfile(models.Model):
-    ''' 
-    for storing information about courses
-    '''
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    history = JSONField(default="{}")
-    favorites = JSONField(default="{}")
+class Favourite(models.Model):
+    """
+    for storing favourites for lessons and courses.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    content_type = models.ForeignKey(ContentType)
+    object_id = UUIDField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    def __unicode__(self):
+        return self.content_object
+
+    class Meta:
+        ordering = ['created']
 
 
-class LessonProfile(models.Model):
-    ''' 
-    for storing information about Lessons
-    '''
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    history = JSONField(default="{}")
-    favorites = JSONField(default="{}")
-
-
-#class PackageProfile(models.Model):
-#    ''' 
+# class PackageProfile(models.Model):
+#    '''
 #    for storing information about Packages
 #    '''
 #    user = models.OneToOneField(settings.AUTH_USER_MODEL)
