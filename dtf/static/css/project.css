@@ -1,3 +1,16 @@
 body {
   background: url(../images/bg.jpg);
 }
+
+/*!!!custom styles!!!*/
+.sortable_item .caption{
+  height: 200px;
+  overflow: hidden;
+}
+.no_transition{
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+/*!!!end custom styles!!!*/

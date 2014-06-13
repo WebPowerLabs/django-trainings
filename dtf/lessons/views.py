@@ -9,6 +9,9 @@ from tags.models import Tag
 from courses.models import Course
 from utils.views import CreateFormBaseView, PermissionMixin
 from django.http.response import HttpResponseRedirect
+from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
+from django.views.generic.base import View
+import json
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
@@ -73,3 +76,11 @@ class LessonAddView(CreateFormBaseView):
 class LessonDeleteView(DeleteView):
     model = Lesson
     success_url = reverse_lazy('lessons:list')
+
+
+class LessonOrderView(AjaxResponseMixin, JSONResponseMixin, View):
+    def post_ajax(self, request, *args, **kwargs):
+        data = json.loads(request.read())
+        course = Course.objects.get(pk=self.kwargs['course_pk'])
+        course.set_lesson_order(data.get('new_order', None))
+        return self.render_json_response({'success': True})

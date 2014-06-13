@@ -41,14 +41,14 @@ class LessonManager(models.Manager):
         if tag_id:
             lessons = lessons.filter(tags=tag_id,
                                      created__gt=obj.created).order_by(
-                                                                  'created')[:1]
+                                                                'created')[:1]
         elif course_id:
             lessons = lessons.filter(course_id=course_id,
                                        _order__lt=obj._order).order_by(
-                                                                  '-_order')[:1]
+                                                                '-_order')[:1]
         else:
             lessons = lessons.filter(created__gt=obj.created).order_by(
-                                                                  'created')[:1]
+                                                                'created')[:1]
         if lessons:
             return reverse('lessons:detail', kwargs={'slug': lessons[0].slug})
         return None

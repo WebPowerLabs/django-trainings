@@ -4,16 +4,26 @@ import string
 from lessons.models import Lesson
 from courses.models import Course
 from tags.models import Tag
+from django.conf import settings
 
 
 def random_string(length=8):
     return u''.join(random.choice(string.ascii_letters) for _ in range(length))
 
 
+class UserFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = settings.AUTH_USER_MODEL
+    first_name = factory.Sequence(lambda n: "First%s" % n)
+    last_name = factory.Sequence(lambda n: "Last%s" % n)
+    email = factory.Sequence(lambda n: "email%s@example.com" % n)
+    is_staff = True
+
+
 class CourseFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Course
     # fields
     name = factory.LazyAttribute(lambda t: random_string())
+    order = 0
 
 
 class TagFactory(factory.django.DjangoModelFactory):

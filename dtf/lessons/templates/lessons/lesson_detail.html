@@ -1,5 +1,5 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags query_string video_player%}
+{% load crispy_forms_tags query_string video_player thumbnail %}
 
 {% block content %}
 <div class="container">
@@ -35,18 +35,20 @@
                 </h2>
                 <h3>{{ object.name }}</h3>
             </div>
+            <div class="row">
             {% if object.video %}
-                <div class="row">
-                    {% video_player object %}
-                    <br />
-                    <a href="#" class="btn btn-default">
-                        <i class="fa fa-heart"></i>
-                        watch later
-                    </a>
-                </div>
+                {% video_player object %}
+                <br />
+                <a href="#" class="btn btn-default">
+                    <i class="fa fa-heart"></i>
+                    watch later
+                </a>
             {% else %}
-                <img src="{{ object.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
+                {% thumbnail object.thumbnail '640x480' crop='center' as im %}
+                <img src="{{ im.url }}" class="img-rounded" alt="{{ object.name }}">
+                {% endthumbnail %}
             {% endif %}
+            </div>
             <div class="row">
                 {{ object.description }}
             </div>
@@ -60,7 +62,7 @@
                         <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div>
-                    <div class="list-group">
+                    <div class="list-group  {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
                         {% for res in resource_list %}
                             {% include 'resources/partials/detail.html' with object=res %}
                         {% empty %}
@@ -81,7 +83,7 @@
                         <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div>
-                    <div class="list-group">
+                    <div class="list-group  {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
                         {% for res in homework_list %}
                             {% include 'resources/partials/detail.html' with object=res %} 
                         {% empty %}

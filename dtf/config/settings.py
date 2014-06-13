@@ -58,6 +58,7 @@ class Common(Configuration):
         'django_nose',
         'djnfusion',
         'django_comments',
+        'sorl.thumbnail',
     )
 
     # Apps specific for this project go here.

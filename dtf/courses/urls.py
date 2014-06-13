@@ -8,10 +8,12 @@ except ImportError:  # django < 1.4
 from courses import views
 
 urlpatterns = patterns('',
+    url('^order/$', staff_member_required(views.CourseOrderView.as_view()),
+                                                                 name='order'),
     url('^$', views.CourseListView.as_view(), name='list'),
     url('^(?P<slug>[-\w]+)/$', views.CourseDetailView.as_view(),
-                                                                 name='detail'),
+                                                                name='detail'),
     url('^(?P<slug>[-\w]+)/delete/$', staff_member_required(
-                                              views.CourseDeleteView.as_view()),
-                                                                 name='delete'),
+                                             views.CourseDeleteView.as_view()),
+                                                                name='delete'),
 )

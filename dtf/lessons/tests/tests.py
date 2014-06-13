@@ -1,8 +1,43 @@
 from django_nose.testcases import FastFixtureTestCase
-from lessons.tests.factories import TagFactory, LessonFactory, CourseFactory
+from lessons.tests.factories import (TagFactory, LessonFactory, CourseFactory,
+                                     UserFactory)
 from lessons.models import Lesson
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
+from django.test.client import Client
+from users.models import User
+import json
+
+
+class LessonViewTest(FastFixtureTestCase):
+    def setUp(self):
+        self.username = 'testuser'
+        self.password = 'password'
+        self.client = Client()
+        self.course = CourseFactory()
+        self.lesson_one = LessonFactory(course=self.course)
+        self.lesson_two = LessonFactory(course=self.course)
+        self.lesson_three = LessonFactory(course=self.course)
+        self.user = UserFactory(username=self.username)
+        self.user.set_password(self.password)
+        self.user.save()
+
+    def test_order_view(self):
+        self.client.login(username=self.username, password=self.password)
+        new_order = [
+                       self.lesson_one.pk,
+                       self.lesson_three.pk,
+                       self.lesson_two.pk]
+
+        req_data = json.dumps({'new_order': new_order})
+        resp = self.client.post(reverse('lessons:order', kwargs={
+                                        'course_pk': self.course.pk}),
+                                        req_data,
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        self.assertEqual(self.course.get_lesson_order(), map(str, new_order))
+        self.assertTrue(resp_data['success'])
+
 
 class LessonManagerTest(FastFixtureTestCase):
     def setUp(self):
@@ -10,10 +45,10 @@ class LessonManagerTest(FastFixtureTestCase):
         self.course_pub = CourseFactory(published=True)
         self.course_not_pub = CourseFactory(published=False)
         self.lesson_of_not_pub_course = LessonFactory(published=True,
-                                                     course=self.course_not_pub)
+                                                  course=self.course_not_pub)
         self.lesson_first_pub = LessonFactory(tags=[self.tag],
-                                             course=self.course_pub,
-                                             published=True)
+                                              course=self.course_pub,
+                                              published=True)
         self.lesson_curr_not_pub = LessonFactory(tags=[self.tag],
                                                  course=self.course_pub,
                                                  published=False)
@@ -22,6 +57,7 @@ class LessonManagerTest(FastFixtureTestCase):
                                              published=True)
         self.fake_staff_user = User(username="staff", is_staff=True)
         self.fake_user = User(username="user", is_staff=False)
+
     # User is staff
     def test_get_list_user_is_staff(self):
         total_count = Lesson.objects.all().count()
@@ -83,6 +119,7 @@ class LessonManagerTest(FastFixtureTestCase):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           user=self.fake_staff_user)
         self.assertFalse(url)
+
     # User is not staff
     def test_get_list_user_is_not_staff(self):
         total_count = Lesson.objects.published().filter(
@@ -145,6 +182,7 @@ class LessonManagerTest(FastFixtureTestCase):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           user=self.fake_user)
         self.assertFalse(url)
+
     # No user
     def test_get_list_no_user(self):
         total_count = Lesson.objects.published().filter(

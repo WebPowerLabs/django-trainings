@@ -8,6 +8,9 @@ from utils.views import CreateFormBaseView, PermissionMixin
 
 from .forms import ResourceCreateFrom
 from .models import Resource
+from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
+from django.views.generic.base import View
+import json
 
 
 class ResourceListView(PermissionMixin, CreateFormBaseView):
@@ -36,7 +39,9 @@ class ResourceDetailView(PermissionMixin, UpdateView):
         return Resource.objects.get_list(self.request.user)
 
     def get_success_url(self):
-        return reverse('resources:detail', kwargs={'slug': self.kwargs['slug']})
+        return reverse('resources:detail', kwargs={'slug': self.kwargs['slug']
+                                                   })
+
 
 class ResourceAddView(CreateFormBaseView):
     model = Resource
@@ -51,3 +56,11 @@ class ResourceAddView(CreateFormBaseView):
         self.object.lesson = Lesson.objects.get(slug=self.kwargs['slug'])
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class ResourceOrderView(AjaxResponseMixin, JSONResponseMixin, View):
+    def post_ajax(self, request, *args, **kwargs):
+        data = json.loads(request.read())
+        lesson = Lesson.objects.get(pk=self.kwargs['lesson_pk'])
+        lesson.set_resource_order(data.get('new_order', None))
+        return self.render_json_response({'success': True})
