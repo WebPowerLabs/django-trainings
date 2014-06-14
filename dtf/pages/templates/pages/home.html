@@ -382,8 +382,13 @@
 
 {% endblock content %}
 
+{% block loader %}
+<div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
+{% endblock loader %}
+
 {% block javascript %}
 {{ block.super }}
+{% include "includes/js_marketing.html" %}
 <script type="text/javascript">
 $('#contact-form #submit').click(function(e) {
 	e.preventDefault();
@@ -391,3 +396,7 @@ $('#contact-form #submit').click(function(e) {
 });
 </script>
 {% endblock javascript %}
+{% block css %}
+{{ block.super }}
+{% include "includes/css_marketing.html" %}
+{% endblock css %}

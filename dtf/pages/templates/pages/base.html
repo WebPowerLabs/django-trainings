@@ -6,3 +6,17 @@
 {% endblock footer_form %}
 
 {% block title %} | Decide to Fly{% endblock title %}
+
+{% block javascript %}
+{{ block.super }}
+{% include "includes/js_marketing.html" %}
+{% endblock javascript %}
+
+{% block css %}
+{{ block.super }}
+{% include "includes/css_marketing.html" %}
+{% endblock css %}
+
+{% block loader %}
+<div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
+{% endblock loader %}

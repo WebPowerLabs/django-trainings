@@ -70,7 +70,7 @@
 	color: #5b5e60;
 }
 .pin-post {
-	padding: 5px 15px;
+	padding: 5px 15px 5px 0;
 }
 .pin-post a:hover > * {
 	color: #cc0a66;
@@ -79,5 +79,18 @@
 	visibility: hidden;
 }
 .fb-post:hover .pin-post {
+	visibility: visible;
+}
+.comment-actions {
+	padding: 5px 10px 5px 0;
+	visibility: hidden;
+}
+.comment-actions a {
+	padding-left: 5px;
+}
+.comment-actions a:hover > * {
+	color: #cc0a66;
+}
+.comment-post:hover .comment-actions {
 	visibility: visible;
 }

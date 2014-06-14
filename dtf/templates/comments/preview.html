@@ -1,46 +1,36 @@
-{% load staticfiles comments %}
-<div id="c{{ comment.id }}" style="position:relative;bottom: 120px;"></div>
-<div id="post-{{ comment.id }}" class="fb-post panel panel-default">
-	<h3 class="fb-post-heading">
-		<img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
-		<a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>
-		<small class="date">{{ comment.submit_date|date }}</small>
-	</h3>
-	<div class="panel-body">
-		<p>{{ comment.comment }}</p>
-	</div>
-	<div class="panel-footer">
+{% extends "comments/base.html" %}
+{% load i18n %}
 
-	{% render_comment_list for comment %}
+{% block title %}{% trans "Preview your comment" %}{% endblock %}
 
-    {% if user.is_authenticated %}
-    {% get_comment_form for comment as form %}
-	<form class="form fb-comment-form" action="{% comment_form_target %}" method="POST" data-access-token="{{ request.user.get_fb_access_token }}">
-		{% csrf_token %}
-		<div class="hidden">{{ form.honeypot }}</div>
-		{{ form.content_type }}
-		{{ form.object_pk }}
-	    {{ form.timestamp }}
-	    {{ form.security_hash }}
-	    <input type="hidden" name="next" value="{% url 'facebook_groups:detail' facebook_group.fb_uid %}" />
-	    <div class="">
-	        <div class="row">
-	            <div class="col-xs-2 col-sm-1 fb-profile-comment-img">
-	                <img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
-	            </div>
-	            <div class="col-xs-10 col-sm-11">
-	            	<div class="input-group">
-		                <input type="text" class="form-control" placeholder="Write a comment..." name="comment" id="id_comment">
-		                <span class="input-group-btn">
-		                	<button type="submit" id="id_submit" class="btn btn-primary"/><i class="fa fa-send fa-fw"></i></button>
-		                </span>
-		            </div>
-	            </div>
-	        </div>
-	    </div>
-	</form>
-	{% else %}
-	    <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
-	{% endif %}
-	</div>
-</div>
+{% block content %}
+  {% load comments %}
+  <form action="{% comment_form_target %}" method="post">{% csrf_token %}
+    {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
+    {% if form.errors %}
+    <h1>{% blocktrans count counter=form.errors|length %}Please correct the error below{% plural %}Please correct the errors below{% endblocktrans %}</h1>
+    {% else %}
+    <h1>{% trans "Preview your comment" %}</h1>
+      <blockquote>{{ comment|linebreaks }}</blockquote>
+      <p>
+      {% trans "and" %} <input type="submit" name="submit" class="submit-post" value="{% trans "Post your comment" %}" id="submit" /> {% trans "or make changes" %}:
+      </p>
+    {% endif %}
+    {% for field in form %}
+      {% if field.is_hidden %}
+        <div>{{ field }}</div>
+      {% else %}
+        {% if field.errors %}{{ field.errors }}{% endif %}
+        <p
+          {% if field.errors %} class="error"{% endif %}
+          {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+          {{ field.label_tag }} {{ field }}
+        </p>
+      {% endif %}
+    {% endfor %}
+    <p class="submit">
+    <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}" />
+    <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+    </p>
+  </form>
+{% endblock %}

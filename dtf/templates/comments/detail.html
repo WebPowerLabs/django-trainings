@@ -1,5 +1,14 @@
 {% load staticfiles comments %}
 <div id="c{{ comment.id }}" style="position:relative;bottom: 50px;"></div>
+<div class="comment-post">
+<div class="pull-right comment-actions">
+	<a href="{% url 'comments-delete' comment.id %}?next={{ request.path }}">
+		<i class="fa fa-times-circle-o"></i>
+	</a>
+	<a href="{% url 'comments-flag' comment.id %}?next={{ request.path }}">
+		<i class="fa fa-flag"></i>
+	</a>
+</div>
 	<h3 class="fb-post-heading">
 		<img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
 		<a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>
@@ -44,3 +53,4 @@
 	    <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
 	{% endif %}
 	</div>
+</div>
