@@ -28,6 +28,17 @@ section.block.coming-soon {
 //--------------------------------------//
 
 
+// ------ Import Marina Font ------ //
+@font-face {
+	font-family: Marina;
+	src: url(../../fonts/marina.ttf);
+}
+
+// ------ Background Colors ------ //
+.bg-transparent.section {
+	background-color: transparent;
+}
+
 // ------ General ------ //
 
 body.default #header {
@@ -52,6 +63,11 @@ input, textarea, select, button {
 
 input {
 	padding: 3px 7px;
+}
+
+.thumbnail > img {
+	border: 5px solid @brand-gray-bg;
+	border-radius: 0;
 }
 
 
@@ -559,81 +575,44 @@ footer.footer-main {
 //--------------------------------------//
 
 
-// ------Free Product Block ------ //
+// ------Welcome Block ------ //
 
 .welcome-home {
 	.full-bg-image {
-		background-image: url(../../images/umbrella-woman.jpg);
-		//background-image: url(../../../images/umbrella-woman.jpg);
+		background-image: url(../../images/decide-to-fly-home-banner.jpg);
+		//background-image: url(../../../images/decide-to-fly-home-banner.jpg);
 	}
 
 	.video-full-entry {
 		display: inline-block;
-		padding: 60px 0 40px;
+		padding: 60px 0 60px;
 
 		h1 {
-			color: #fff;
-			font-size: 26px;
-			letter-spacing: -2px;
-			font-family: 'Julius Sans One', sans-serif;
+			margin-bottom: 0;
+			color: #5b5e60;
+			font-size: 29px;
+			font-weight: 600;
+			font-family: Garamond, sans-serif;
+			text-shadow: 2px 2px 3px fadeout(#000, 65%);
+			line-height: 1.1em;
+
+			span.red { color: #be2046; }
+			span.blue { color: #0a708f; }
+			span.green { color: #6d8021; }
 		}
 		h2 {
-			margin-bottom: 30px;
-			color: #fff;
-			font-size: 20px;
-			font-family: 'Roboto', sans-serif;
-			line-height: 1.3em;
-			font-weight: 300;
+			margin-bottom: 0;
+			font-family: Marina, sans-serif;
 		}
-		p {
-			color: #fff;
+
+		img.company-logo {
+			margin-bottom: 20px;
+			max-width: 200px;
 		}
-	}
-	.welcome-title {
-		text-align: center;
 	}
 
 	.btn {
 		margin-bottom: 25px
-	}
-
-	.parallax input {
-		color: #fff;
-		border-color: #fff;
-
-		&.form-control {
-			height: 50px;
-			-webkit-transition: all .25s ease;
-			transition: all .25s ease;
-		}
-
-		&.btn {
-			border: none;
-		}
-
-		&:focus {
-			-webkit-box-shadow: none;
-			box-shadow: none;
-			background-color: @brand-gray;
-			background-color: rgba(255, 255, 255, 0.3);
-		}
-	}
-	.parallax input[type="text"] {
-		border-color: #fff;
-
-		&:focus {
-			-webkit-box-shadow: none;
-			box-shadow: none;
-		}
-	}
-	.parallax input[type="placeholder"] {
-		color: #fff;
-	}
-	.parallax input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-		color: #fff;
-	}
-	.parallax input:-moz-placeholder, textarea:-moz-placeholder {
-		color: #fff;
 	}
 
 	.parallax-overlay {
@@ -642,18 +621,9 @@ footer.footer-main {
 		background-color: rgba(0, 0, 0, 0.3);
 		background-image: none;
 	}
+
 	img.swoosh {
 		margin-bottom: -7px;
-	}
-
-
-	input.btn-success {
-		margin-top: 25px;
-
-		&:hover, &:active, &:focus {
-			background-color: @brand-dtf-dark;
-			outline: none;
-		}
 	}
 }
 
@@ -663,10 +633,10 @@ footer.footer-main {
 			padding: 80px 0 40px;
 
 			h1 {
-				font-size: 38px;
+				font-size: 29px;
 			}
 			h2 {
-				font-size: 24px;
+				font-size: 20px;
 			}
 		}
 	}
@@ -678,7 +648,10 @@ footer.footer-main {
 			padding: 230px 0 60px;
 			
 			h1 {
-				font-size: 30px;
+				font-size: 38px;
+			}
+			h2 {
+				font-size: 24px;
 			}
 		}
 
@@ -692,7 +665,7 @@ footer.footer-main {
 	.welcome-home {
 		.video-full-entry {
 			h1 {
-				font-size: 38px;
+				font-size: 48px;
 			}
 		}
 	}
@@ -1725,22 +1698,68 @@ footer.contact-footer {
 	}
 }
 
-//---------------------------------------------------//
-//----------------- AYD Home (TEMP) -----------------//
-//---------------------------------------------------//
+//----------------------------------------------------//
+//----------------- LESSONS/COURSES APP --------------//
+//----------------------------------------------------//
 
-.ayd-home {
-	padding: 80px 0 83px;
-	text-align: center;
-
-	.btn {
-		width: 160px;
+section.course-list {
+	.section-title {
+		margin-bottom: 40px;
 	}
 
-	h1 {
-		color: @brand-dtf;
-		font-weight: 300;
-		font-size: 36px;
-		text-transform: uppercase;
+	.course-item {
+		.thumbnail {
+			display: block;
+			padding: 25px 10px 0;
+			border-radius: 0;
+
+			img {
+				max-width: 200px;
+				max-height: 160px;
+			}
+			.caption {
+				padding: 16px 9px 9px;
+			}
+		}
+
+		&:hover {
+			.thumbnail {
+				background-color: @brand-dtf;
+				border-color: @brand-dtf;
+
+				.caption {
+					h3, p {
+						color: white;
+					 	-webkit-transition: all .25s ease;
+						transition: all .25s ease;
+					}
+				}
+			}
+		}
+	}
+}
+
+section.course-detail {
+	background-color: @brand-dtf;
+
+	.section {
+		padding-top: 50px;
+	}
+
+	.course-info {
+		h1, p {
+			color: #fff;
+		}
+		h1 {
+			font-size: 44px;
+		}
+		p {
+			line-height: 20px;
+		}
+
+		hr {
+			border-top: 1px solid #eee;
+			width: 60%;
+		}
 	}
 }

@@ -2,54 +2,64 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3 text-center">
-            <h1>COACHING COURSES</h1>
-            <p>
-                Justo enim velit luctus consectetur vitae nisi scelerisque a cras
-                sapien urna? Enim amet - congue praesent rutrum venenatis ipsum
-                varius?
-            </p>
-            <hr />
-        </div>
-    </div>
-    <div class="row">
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            Add Course
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        {% crispy form %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-    {% for course in object_list %}
-        <div class="col-md-4">
-            <a href="{% url 'courses:detail' course.slug %}">
-                <div class="thumbnail">
-                    <img src="{{ course.thumbnail.url }}" class="img-rounded" alt="{{ course.name }}">
-                    <div class="caption">
-                        <h3>{{ course.name }}</h3>
-                        <p>{{ course.description }}</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        {% if forloop.counter|divisibleby:3 %}
-    </div>
-    <div class="row">
-        {% endif %}
-    {% endfor %}
-    </div>
-</div>
+<section class="course-list section bg-gray-color">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 section-title">
+                <h1>Coaching Courses</h1>
+                <h2>Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h2>
+            </div><!--/ .col-xs-12-->
+        </div><!--/ .row-->
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <!-- Add Course Modal Button -->
+                <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#addCourse">
+                  Add a Course
+                </button>
+            </div><!--/ .col-xs-12-->
+        </div><!--/ .row-->
+        <div class="row">
+        {% for course in object_list %}
+            <div class="col-md-4 text-center">
+                <a class="course-item" href="{% url 'courses:detail' course.slug %}">
+                    <div class="thumbnail">
+                        <img src="{{ course.thumbnail.url }}" class="img-rounded" alt="{{ course.name }}">
+                        <div class="caption">
+                            <h3>{{ course.name }}</h3>
+                            <p>{{ course.description }}</p>
+                        </div><!--/ .caption-->
+                    </div><!--/ .thumbnail-->
+                </a><!--/ .course-item-->
+            </div><!--/ .col-md-4-->
+            {% if forloop.counter|divisibleby:3 %}
+        </div><!--/ .row-->
+        <div class="row">
+            {% endif %}
+        {% endfor %}
+        </div><!--/ .row-->
+    </div><!--/ .container-->
+</section>
 {% endblock content %}
+
+{% block modal %}
+    <!-- Add Course Modal -->
+    <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="addCourseLabel">Add a Course</h4>
+          </div><!--/ .modal-header-->
+          <div class="modal-body">
+            <div class="col-md-12">
+                {% crispy form %}
+            </div><!--/ .col-md-12-->
+          </div><!--/ .modal-body-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success">Save changes</button>
+          </div><!--/ .modal-footer-->
+        </div><!--/ .modal-content-->
+      </div><!--/ .modal-dialog-->
+    </div><!--/ .modal-->
+{% endblock modal %}
