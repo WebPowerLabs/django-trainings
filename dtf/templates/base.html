@@ -50,13 +50,13 @@
     {% endif %}
     {% endcomment %}
         <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
-        <link href="{% static 'css/project.css' %}" rel="stylesheet">
-
-        {% include "includes/css_marketing.html" %}
+        <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
         <!-- Video-js style -->
         <link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
-
     <!-- This file store project specific CSS -->
+        <link href="{% static 'css/project.css' %}" rel="stylesheet">
+
 
     {% endblock %}
 
@@ -71,7 +71,6 @@
 
   <body class="{% block bodyclass %}default{% endblock bodyclass %} {% block page-class %}home{% endblock page-class %} animated" data-spy="scroll" data-target="#navigation">
     {% block loader %}
-    <div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
     {% endblock loader %}
     {% block header %}
       <header id="header">
@@ -121,10 +120,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     {% block javascript %}
       <!-- Latest JQuery -->
-      <!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
       <!-- Latest compiled and minified JavaScript -->
-      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
       <!-- Your stuff: Third-party javascript libraries go here -->
       <script src="{% static 'js/video-js/video.js' %}"></script>
@@ -134,7 +133,7 @@
       <!-- place project specific Javascript in this file -->
       <script src="{% static 'js/project.js' %}"></script>
 
-      {% include "includes/js_marketing.html" %}
+
     {% endblock javascript %}
   </body>
 </html>
