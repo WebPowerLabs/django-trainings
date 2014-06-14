@@ -2,56 +2,59 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<section class="course-detail section">
-    <div class="container">
-        <div class="row">
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                Edit Course
-                            </a>
-                            <a href="{% url 'lessons:add' object.slug %}" class="pull-right">Add Lesson</a>
-                        </h4><!--/ .panel-title-->
-                    </div><!--/ .panel-heading-->
-                    <div id="collapseOne" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <a class='btn btn-danger' href='{% url "courses:delete" object.slug %}'>Delete</a>
-                            {% crispy form %}
-                        </div><!--/ .panel-body-->
-                    </div><!--/ .panel-heading-->
-                </div><!--/ .panel-collapse-->
-            </div><!--/ .panel-group-->
-        </div><!--/ .row-->
-        <div class="row">
-            <div class="col-md-5 bg-turquoise-color">
-                {% comment %}
-                <div class="row">
-                    <img src="{{ object.thumbnail.url }}" class="img-rounded" alt="alt_text">
-                </div><!--/ .row-->
-                {% endcomment %}
-                    <h2>{{ object.name }}</h2>                
+<section class="course-detail">
+    <div class="row">
+        <div class="col-md-6 bg-transparent section">
+            <div class="course-info row">
+                <div class="col-md-10 col-md-offset-1">
+                    {% comment %}
+                    <div class="row">
+                        <img src="{{ object.thumbnail.url }}" class="img-rounded" alt="alt_text">
+                    </div><!--/ .row-->
+                    {% endcomment %}
+                    <h1>{{ object.name }}</h1> 
+                    <hr>               
                     <p>{{ object.description }}</p>
-            </div><!--/ .col-md-5-->
-            <div class="col-md-7">
-                {% for lesson in object.lesson_set.all %}
-                <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}">
-                    <div class="alert alert-info">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="{{ lesson.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
-                            </div><!--/ .col-md-3-->
-                            <div class="col-md-9">
-                                <h2>{{ lesson.name }}</h2>
-                                <span>{{ lesson.description|truncatewords:25 }}</span>
-                            </div><!--/ .col-md-9-->
-                        </div><!--/ .row-->
-                    </div><!--/ .alert-->
-                </a>
-                {% endfor %}
-            </div><!--/ .col-md-7-->
-        </div><!--/ .row-->
-    </div><!--/ .container-->
+                </div><!--/ .col-md-9-->
+            </div><!--/ .course-info-->
+        </div><!--/ .col-md-6-->
+        <div class="col-md-6 section">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit Course</a>
+                                    <a href="{% url 'lessons:add' object.slug %}" class="pull-right">Add Lesson</a>
+                                </h4><!--/ .panel-title-->
+                            </div><!--/ .panel-heading-->
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <a class='btn btn-danger' href='{% url "courses:delete" object.slug %}'>Delete</a>
+                                    {% crispy form %}
+                                </div><!--/ .panel-body-->
+                            </div><!--/ .panel-heading-->
+                        </div><!--/ .panel-collapse-->
+                    </div><!--/ .panel-group-->
+                    {% for lesson in object.lesson_set.all %}
+                    <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}">
+                        <div class="alert alert-info">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="{{ lesson.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
+                                </div><!--/ .col-md-3-->
+                                <div class="col-md-9">
+                                    <h2>{{ lesson.name }}</h2>
+                                    <span>{{ lesson.description|truncatewords:25 }}</span>
+                                </div><!--/ .col-md-9-->
+                            </div><!--/ .row-->
+                        </div><!--/ .alert-->
+                    </a>
+                    {% endfor %}
+                </div><!--/ .col-md-11-->
+            </div><!--/ .row-->
+        </div><!--/ .col-md-6-->
+    </div><!--/ .row-->
 </section>
 {% endblock content %}

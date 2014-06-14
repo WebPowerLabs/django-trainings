@@ -34,6 +34,11 @@ section.block.coming-soon {
 	src: url(../../fonts/marina.ttf);
 }
 
+// ------ Background Colors ------ //
+.bg-transparent.section {
+	background-color: transparent;
+}
+
 // ------ General ------ //
 
 body.default #header {
@@ -1730,6 +1735,31 @@ section.course-list {
 					}
 				}
 			}
+		}
+	}
+}
+
+section.course-detail {
+	background-color: @brand-dtf;
+
+	.section {
+		padding-top: 50px;
+	}
+
+	.course-info {
+		h1, p {
+			color: #fff;
+		}
+		h1 {
+			font-size: 44px;
+		}
+		p {
+			line-height: 20px;
+		}
+
+		hr {
+			border-top: 1px solid #eee;
+			width: 60%;
 		}
 	}
 }
