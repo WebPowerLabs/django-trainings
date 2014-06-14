@@ -1,6 +1,15 @@
 {% extends 'courses/base.html' %}
 {% load crispy_forms_tags %}
 
+{% block nav_actions %}
+{{ block.super }}
+{% if user.is_staff %}
+<li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit Course</a></li>
+<li><a href="{% url 'lessons:add' object.slug %}" class="pull-right">Add Lesson</a></li>
+<li><a class="" href='{% url "courses:delete" object.slug %}'>Delete</a></li>
+{% endif %}
+{% endblock nav_actions %}
+
 {% block content %}
 <section class="course-detail">
     <div class="row">
@@ -21,22 +30,9 @@
         <div class="col-md-6 section">
             <div class="row">
                 <div class="col-md-11">
-                    <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit Course</a>
-                                    <a href="{% url 'lessons:add' object.slug %}" class="pull-right">Add Lesson</a>
-                                </h4><!--/ .panel-title-->
-                            </div><!--/ .panel-heading-->
-                            <div id="collapseOne" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <a class='btn btn-danger' href='{% url "courses:delete" object.slug %}'>Delete</a>
-                                    {% crispy form %}
-                                </div><!--/ .panel-body-->
-                            </div><!--/ .panel-heading-->
-                        </div><!--/ .panel-collapse-->
-                    </div><!--/ .panel-group-->
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        {% crispy form %}
+                    </div><!--/ .panel-collapse-->
                     {% for lesson in object.lesson_set.all %}
                     <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}">
                         <div class="alert alert-info">

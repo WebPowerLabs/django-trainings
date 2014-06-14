@@ -49,12 +49,13 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     {% endif %}
     {% endcomment %}
-        <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+        
         <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
         <!-- Video-js style -->
         <link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
-    <!-- This file store project specific CSS -->
+        <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+        <!-- This file store project specific CSS -->
         <link href="{% static 'css/project.css' %}" rel="stylesheet">
 
 
@@ -69,43 +70,90 @@
     <script src="{% static 'js/jquery.modernizr.js' %}"></script>
   </head>
 
-  <body class="{% block bodyclass %}default{% endblock bodyclass %} {% block page-class %}home{% endblock page-class %} animated" data-spy="scroll" data-target="#navigation">
+  <body class="{% block bodyclass %}app{% endblock bodyclass %} {% block page-class %}home{% endblock page-class %} animated" data-spy="scroll" data-target="#navigation">
     {% block loader %}
     {% endblock loader %}
     {% block header %}
-      <header id="header">
-        <div class="header-member">
-          <div class="header-in">
-            <nav id="nav-member" class="navigation">
-              <ul>
+      <header id="app-header">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="nav-main">
+              <ul class="nav navbar-nav">
+                {% block nav %}
+                  {% include "menus/nav_app.html" %}
+                {% endblock nav %}
+              </ul>
+              <!-- 
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              -->
+              <ul class="nav navbar-nav navbar-right">
                 {% block nav_user %}
                   {% include "menus/nav_user.html" %}
                 {% endblock nav_user %}
               </ul>
-            </nav><!--/ #navigation-->
-          </div><!--/ .header-in-->
-        </div><!--/ .header-member-->              
-        <div class="header-main">
-          <div class="header-in">
-            <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
-            <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
-            <nav id="navigation" class="navigation">
-              <ul>
-                {% block nav %}
-                  {% include "menus/nav_marketing.html" %}
-                {% endblock nav %}
-              </ul>
-            </nav><!--/ #navigation-->
-          </div><!--/ .header-in-->
-        </div><!--/ .header-main-->
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
       </header><!--/ #header-->
     {% endblock header %}
 
+    {% block sub_header %}
+ <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-secondary">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="nav-secondary">
+              <ul class="nav navbar-nav">
+                {% block nav_secondary %}
+                  {% include "menus/nav_secondary.html" %}
+                {% endblock nav_secondary %}
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                {% block nav_actions %}
+                  {% include "menus/nav_actions.html" %}
+                {% endblock nav_actions %}
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+    {% endblock sub_header %}
+
+    {% block messages %}
     {% if messages %}
+    <div class="app-messages">
         {% for message in messages %}
             <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
         {% endfor %}
+    </div>
     {% endif %}
+    {% endblock messages %}
 
     {% block content %}{% endblock content %}
 

@@ -40,7 +40,36 @@
 <!-- - - - - - - - - - - - - /HEADER NAV - - - - - - - - - - - - - - - -->
 {% endblock header %}
 {% endcomment %}
-
+{% block header %}
+  <header id="header">
+    <div class="header-member">
+      <div class="header-in">
+        <nav id="nav-member" class="navigation">
+          <ul>
+            {% block nav_user %}
+              {% include "menus/nav_user.html" %}
+            {% endblock nav_user %}
+          </ul>
+        </nav><!--/ #navigation-->
+      </div><!--/ .header-in-->
+    </div><!--/ .header-member-->              
+    <div class="header-main">
+      <div class="header-in">
+        <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
+        <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
+        <nav id="navigation" class="navigation">
+          <ul>
+            {% block nav %}
+              {% include "menus/nav_marketing.html" %}
+            {% endblock nav %}
+          </ul>
+        </nav><!--/ #navigation-->
+      </div><!--/ .header-in-->
+    </div><!--/ .header-main-->
+  </header><!--/ #header-->
+{% endblock header %}
+{% block sub_header %}
+{% endblock sub_header %}
 {% block footer %}
 {% endblock footer %}
 

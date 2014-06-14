@@ -1,27 +1,17 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags query_string video_player%}
+{% load crispy_forms_tags query_string video_player %}
+
+{% block nav_actions %}
+{{ block.super }}
+<li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit lesson</a></li>
+<li><a href="{% url 'resources:add' object.slug %}" class="">Add Resource or Homework</a></li>
+<li><a class="" href='{% url "lessons:delete" object.slug %}'>Delete</a></li>
+{% endblock nav_actions %}
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            Edit lesson
-                        </a>
-                        <a href="{% url 'resources:add' object.slug %}" class="pull-right">Add Resource or Homework</a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <a class='btn btn-danger' href='{% url "lessons:delete" object.slug %}'>Delete</a>
-                        {% crispy form %}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+        {% crispy form %}
     </div>
     <div class="row">
         <div class="col-sm-7">
