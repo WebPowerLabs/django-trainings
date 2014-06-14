@@ -7,6 +7,7 @@ from lessons.filters import LessonFilter
 from django_filters.views import FilterView
 from tags.models import Tag
 from courses.models import Course
+from users.models import User
 from utils.views import CreateFormBaseView, PermissionMixin
 from django.http.response import HttpResponseRedirect
 from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
@@ -42,9 +43,10 @@ class LessonDetailView(PermissionMixin, UpdateView):
         return reverse('lessons:detail', kwargs={'slug': self.kwargs['slug']})
 
     def get(self, request, *args, **kwargs):
-        history = History(content_object=self.get_object(),
-                          user=self.request.user)
-        history.save()
+        if isinstance(self.request.user, User):
+            history = History(content_object=self.get_object(),
+                              user=self.request.user)
+            history.save()
         return UpdateView.get(self, request, *args, **kwargs)
 
 

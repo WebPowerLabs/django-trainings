@@ -18,7 +18,7 @@ class Course(models.Model):
                             help_text='users will only see published courses')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    order = models.IntegerField(editable=False)
+    order = models.IntegerField(editable=False, default=0)
     thumbnail = models.ImageField(upload_to='courses/thumbs/%Y/%m/%d',
                 height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)

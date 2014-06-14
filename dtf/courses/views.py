@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from courses.models import Course
 from django.views.generic import DeleteView
 from courses.forms import CourseCreateFrom
+from users.models import User
 from utils.views import CreateFormBaseView, PermissionMixin
 from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic.base import View
@@ -40,9 +41,10 @@ class CourseDetailView(PermissionMixin, UpdateView):
         return context
 
     def get(self, request, *args, **kwargs):
-        history = History(content_object=self.get_object(),
-                          user=self.request.user)
-        history.save()
+        if isinstance(self.request.user, User):
+            history = History(content_object=self.get_object(),
+                              user=self.request.user)
+            history.save()
         return UpdateView.get(self, request, *args, **kwargs)
 
 

@@ -54,6 +54,11 @@ $(document).ready(function(){
             url: url,
             type: 'POST',
             contentType: 'application/json',
+            statusCode: {
+                200: function () {
+                    alert("Successfully added.");
+                }
+            }
         });
     });
     // Renders element with class 'video-js' to HTML5 video player.

@@ -39,9 +39,11 @@
             {% if object.video %}
                 {% video_player object %}
                 <br />
-                <a class="btn btn-primary favourite_add" data-url="{% url 'profiles:add_favourite' 'lesson' object.pk %}">
+                {% if user.is_authenticated %}
+                    <a class="btn btn-primary favourite_add" data-url="{% url 'profiles:add_favourite' 'lesson' object.pk %}">
                     <i class="fa fa-heart"></i>
                     watch later
+                {% endif %}
                 </a>
             {% else %}
                 {% thumbnail object.thumbnail '640x480' crop='center' as im %}
