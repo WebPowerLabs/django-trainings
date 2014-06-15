@@ -13,3 +13,9 @@ body.app {
 .navbar {
 	margin-bottom: 0;
 }
+.app-messages .alert {
+	margin-bottom: 0;
+	border-radius: 0;
+	/* have to override style 707 */
+	line-height: 1.42857143 !important;
+}
