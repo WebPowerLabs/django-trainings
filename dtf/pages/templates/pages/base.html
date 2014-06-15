@@ -29,6 +29,10 @@
     {% block header %}
       <header id="header">
         <div class="header-member">
+
+	    {% block messages %}
+			{% include "includes/messages.html" %}
+	    {% endblock messages %}
           <div class="header-in">
             <nav id="nav-member" class="navigation">
               <ul>

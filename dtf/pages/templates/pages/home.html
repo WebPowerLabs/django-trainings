@@ -42,6 +42,9 @@
 {% endcomment %}
 {% block header %}
   <header id="header">
+       	    {% block messages %}
+		{% include "includes/messages.html" %}
+    {% endblock messages %}
     <div class="header-member">
       <div class="header-in">
         <nav id="nav-member" class="navigation">
