@@ -42,9 +42,8 @@ class CourseDetailView(PermissionMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         if isinstance(self.request.user, User):
-            history = History(content_object=self.get_object(),
-                              user=self.request.user)
-            history.save()
+            History.objects.create(content_object=self.get_object(),
+                                                        user=self.request.user)
         return UpdateView.get(self, request, *args, **kwargs)
 
 

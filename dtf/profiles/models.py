@@ -15,9 +15,6 @@ class History(models.Model):
     object_id = UUIDField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    def __unicode__(self):
-        return self.content_object
-
     class Meta:
         ordering = ['created']
         verbose_name_plural = 'History'
@@ -32,9 +29,6 @@ class Favourite(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = UUIDField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-
-    def __unicode__(self):
-        return self.content_object
 
     class Meta:
         ordering = ['created']
