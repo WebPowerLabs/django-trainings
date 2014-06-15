@@ -12,8 +12,9 @@ class Command(BaseCommand):
             email = args[0]
         except IndexError:
             raise CommandError("Pass email address as parameter.")
- 
+
         results = server.DataService.findByField(key, "Contact", 10, 0, "email", email, ["Id", "Email"]);
+        
         print "Found %d results." % len(results)
         for r in results:
             print r

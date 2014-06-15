@@ -93,7 +93,31 @@ def create_or_update_user(user=None, user_id=None):
 
     return return_result
 
+# *****************************************************************
 
+
+def get_user_groups(user=None, user_id=None):
+    '''
+    gets all groups for a contact email
+    '''
+    if not settings.COMPANY or not settings.API_KEY:
+        return # do nothing
+    user = _user_or_id(user, user_id)
+    results = server.DataService.findByField(key, "Contact", 10, 0, "email", 
+        user.email, ["Groups",]);
+    return results
+
+
+def get_group_contacts(group_id):
+    '''
+    gets all contacts from a group id
+    '''
+    if not settings.COMPANY or not settings.API_KEY:
+        return # do nothing
+    
+    results = server.DataService.findByField(key, "ContactGroupAssign", 10, 0, "GroupId", group_id, ["ContactId"]);
+
+    return results
 
 # *****************************************************************
 
