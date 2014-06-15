@@ -9,100 +9,92 @@
 {% endblock nav_actions %}
 
 {% block content %}
-<div class="container">
-    <div id="collapseOne" class="panel-collapse collapse">
-        {% crispy form %}
-    </div>
-    <div class="row">
-        <div class="col-sm-7">
-            <div class="row">
-                <h2>
+<section class="lesson-detail section">
+    <div class="container">
+        <div id="collapseOne" class="panel-collapse collapse">
+            {% crispy form %}
+        </div><!--/ .panel-collapse-->
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>
                     <a href="{% url 'courses:detail' object.course.slug %}">
-                        <span class="label label-default">{{ object.course }}</span>
+                        <span class="label label-success">{{ object.course }}</span>
                     </a>
-                </h2>
-                <h3>{{ object.order }}. {{ object.name }}</h3>
+                </h4>
+                <h2>{{ object.name }}</h2>
             </div>
-            {% if object.video %}
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                {% if object.video %}
+                        {% video_player object %}
+                        <br />
+                        <a href="#" class="btn btn-default">
+                            <i class="fa fa-heart"></i>
+                            watch later
+                        </a>
+                {% else %}
+                    <img src="{{ object.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
+                {% endif %}
+                <p>{{ object.description }}</p>
+            </div><!--/ .col-sm-7-->
+            <div class="col-sm-5">
                 <div class="row">
-                    {% video_player object %}
-                    <br />
-                    <a href="#" class="btn btn-default">
-                        <i class="fa fa-heart"></i>
-                        watch later
-                    </a>
-                </div>
-            {% else %}
-                <img src="{{ object.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
-            {% endif %}
-            <div class="row">
-                {{ object.description }}
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="row">
-                <div class="panel panel-default panel-resource">
-                    <div class="panel-heading">
-                        <span>Resources</span>
-                        <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
-                    </div>
-                    <div class="list-group">
-                        {% for res in object.get_resource %}
-                            {% include 'resources/partials/detail.html' with object=res %}
-                        {% empty %}
-                        <a class="list-group-item">
-                            <p class="list-group-item-text">
-                                There are no items yet ;)
-                            </p>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div> 
-            </div>
-            <div class="row">
-                <div class="panel panel-default panel-resource">
-                    <div class="panel-heading">
-                        <span>Homework</span>
-                        <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
-                    </div>
-                    <div class="list-group">
-                        {% for res in object.get_homework %}
-                            {% include 'resources/partials/detail.html' with object=res %} 
-                        {% empty %}
-                        <a class="list-group-item">
-                            <p class="list-group-item-text">
-                                There are no items yet ;)
-                            </p>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% if object.tags.all %}
-            <div class="row">
-                <h4>Lesson categories</h4>
-                {% for tag in object.tags.all %}
-                <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
-                {% include 'tags/partials/detail.html' with object=tag %}
-                </a>
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <ul class="pager">
-                
-                <li class="previous {% if not prev_url %}disabled{% endif %}">
-                    <a {% if prev_url %}href="{{ prev_url }}{% query_string request.GET %}"{% endif %}><i class="fa fa-arrow-left"></i> Previous</a>
-                </li>
-                
-                <li class="next {% if not next_url %}disabled{% endif %}">
-                    <a {% if next_url %}href="{{ next_url }}{% query_string request.GET %}"{% endif %}>Next <i class="fa fa-arrow-right"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+                    <div class="panel panel-default panel-resource">
+                        <div class="panel-heading">
+                            <span>Resources</span>
+                            <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
+                        </div><!--/ .panel-heading-->
+                        <div class="list-group">
+                            {% for res in object.get_resource %}
+                                {% include 'resources/partials/detail.html' with object=res %}
+                            {% empty %}
+                            <a class="list-group-item">
+                                <p class="list-group-item-text">There are no items yet ;)</p>
+                            </a><!--/ .list-group-item-->
+                            {% endfor %}
+                        </div><!--/ .list-group-->
+                    </div><!--/ .panel-->
+                </div><!--/ .row-->
+                <div class="row">
+                    <div class="panel panel-default panel-resource">
+                        <div class="panel-heading">
+                            <span>Homework</span>
+                            <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
+                        </div><!--/ .panel-heading-->
+                        <div class="list-group">
+                            {% for res in object.get_homework %}
+                                {% include 'resources/partials/detail.html' with object=res %} 
+                            {% empty %}
+                            <a class="list-group-item">
+                                <p class="list-group-item-text">There are no items yet ;)</p>
+                            </a><!--/ .list-group-item-->
+                            {% endfor %}
+                        </div><!--/ .list-group-->
+                    </div><!--/ .panel-->
+                </div><!--/ .row-->
+                {% if object.tags.all %}
+                <div class="row">
+                    <h4>Lesson categories</h4>
+                    {% for tag in object.tags.all %}
+                        <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">{% include 'tags/partials/detail.html' with object=tag %}</a>
+                    {% endfor %}
+                </div><!--/ .row-->
+                {% endif %}
+            </div><!--/ .col-sm-5-->
+        </div><!--/ .row-->
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <ul class="pager">
+                    <li class="previous {% if not prev_url %}disabled{% endif %}">
+                        <a {% if prev_url %}href="{{ prev_url }}{% query_string request.GET %}"{% endif %}><i class="fa fa-arrow-left"></i> Previous</a>
+                    </li>
+                    <li class="next {% if not next_url %}disabled{% endif %}">
+                        <a {% if next_url %}href="{{ next_url }}{% query_string request.GET %}"{% endif %}>Next <i class="fa fa-arrow-right"></i></a>
+                    </li>
+                </ul>
+            </div><!--/ .col-md-4-->
+        </div><!--/ .row-->
+    </div><!--/ .container-->
+</section>
 {% endblock content %}

@@ -12,45 +12,44 @@
 
 {% block content %}
 <section class="course-detail">
-    <div class="row">
-        <div class="col-md-6 bg-transparent section">
-            <div class="course-info row">
-                <div class="col-md-10 col-md-offset-1">
-                    {% comment %}
-                    <div class="row">
-                        <img src="{{ object.thumbnail.url }}" class="img-rounded" alt="alt_text">
-                    </div><!--/ .row-->
-                    {% endcomment %}
-                    <h1>{{ object.name }}</h1> 
-                    <hr>               
-                    <p>{{ object.description }}</p>
-                </div><!--/ .col-md-9-->
-            </div><!--/ .course-info-->
-        </div><!--/ .col-md-6-->
-        <div class="col-md-6 section">
-            <div class="row">
-                <div class="col-md-11">
-                    <div id="collapseOne" class="panel-collapse collapse">
-                        {% crispy form %}
-                    </div><!--/ .panel-collapse-->
-                    {% for lesson in object.lesson_set.all %}
+    <div class="col-md-6 bg-transparent section">
+        <div class="course-info row">
+            <div class="col-md-10 col-md-offset-1">
+                {% comment %}
+                <div class="row">
+                    <img src="{{ object.thumbnail.url }}" class="img-rounded" alt="alt_text">
+                </div><!--/ .row-->
+                {% endcomment %}
+                <h1>{{ object.name }}</h1> 
+                <hr>               
+                <p>{{ object.description }}</p>
+            </div><!--/ .col-md-9-->
+        </div><!--/ .course-info-->
+    </div><!--/ .col-md-6-->
+    <div class="col-md-6 section">
+            <div class="col-md-12">
+                <div id="collapseOne" class="panel-collapse collapse">
+                    {% crispy form %}
+                </div><!--/ .panel-collapse-->
+                <div class="list-group">
+                {% for lesson in object.lesson_set.all %}
                     <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}">
-                        <div class="alert alert-info">
+                        <div class="course-lesson">
                             <div class="row">
                                 <div class="col-md-3">
                                     <img src="{{ lesson.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
                                 </div><!--/ .col-md-3-->
                                 <div class="col-md-9">
-                                    <h2>{{ lesson.name }}</h2>
-                                    <span>{{ lesson.description|truncatewords:25 }}</span>
+                                    <h3 class="list-group-item-heading">{{ lesson.name }}</h3>
+                                    <p class="list-group-item-text">{{ lesson.description|truncatewords:25 }}</p>
                                 </div><!--/ .col-md-9-->
                             </div><!--/ .row-->
-                        </div><!--/ .alert-->
+                        </div><!--/ .course-lesson-->
                     </a>
-                    {% endfor %}
-                </div><!--/ .col-md-11-->
-            </div><!--/ .row-->
-        </div><!--/ .col-md-6-->
-    </div><!--/ .row-->
+                {% endfor %}
+                </div>
+            </div><!--/ .col-md-12-->
+    </div><!--/ .col-md-6-->
+    <div class="clearfix"></div>
 </section>
 {% endblock content %}

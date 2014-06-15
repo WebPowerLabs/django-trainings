@@ -621,10 +621,6 @@ footer.footer-main {
 		background-color: rgba(0, 0, 0, 0.3);
 		background-image: none;
 	}
-
-	img.swoosh {
-		margin-bottom: -7px;
-	}
 }
 
 @media (min-width: @screen-sm-min) {
@@ -1702,6 +1698,7 @@ footer.contact-footer {
 //----------------- LESSONS/COURSES APP --------------//
 //----------------------------------------------------//
 
+//-------- Course List -------//
 section.course-list {
 	.section-title {
 		margin-bottom: 40px;
@@ -1739,6 +1736,7 @@ section.course-list {
 	}
 }
 
+//-------- Course Detail -------//
 section.course-detail {
 	background-color: @brand-dtf;
 
@@ -1755,11 +1753,40 @@ section.course-detail {
 		}
 		p {
 			line-height: 20px;
+			font-weight: 400;
 		}
 
 		hr {
 			border-top: 1px solid #eee;
 			width: 60%;
 		}
+	}
+
+	.course-lesson {
+		padding: 20px;
+		border-bottom: 1px solid @gray-lighter;
+	 	-webkit-transition: all .25s ease;
+		transition: all .25s ease;
+
+		h3, p {
+			color: @brand-gray;
+		}
+		.list-group-item-heading {
+			margin: 0 0 10px;
+		}
+		.list-group-item-text {
+			line-height: 1.5;
+		}
+
+		&:hover {
+			background-color: darken(#fff, 10%);
+		}
+	}
+}
+
+//-------- Lesson Detail -------//
+section.lesson-detail {
+	&.section {
+		padding-top: 50px;
 	}
 }
