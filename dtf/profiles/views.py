@@ -12,6 +12,6 @@ class FavouriteAddView(AjaxResponseMixin, JSONResponseMixin, View):
                      'course': Course}
         model = model_map[self.kwargs['model_name']]
         obj = model.objects.get(pk=self.kwargs['pk'])
-	ctype = ContentType.objects.get_for_model(model)
+        ctype = ContentType.objects.get_for_model(model)
         Favourite.objects.get_or_create(content_type=ctype, object_id=obj.pk, user=self.request.user)
         return self.render_json_response({'success': True})
