@@ -1,6 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
 from courses.managers import CourseManager
+from django.conf import settings
 
 
 class Course(models.Model):
@@ -38,3 +39,28 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class CourseHistory(models.Model):
+    """
+    For storing history.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey('Course')
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = 'Course history'
+
+
+class CourseFavourite(models.Model):
+    """
+    For storing favourites.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey('Course')
+
+    class Meta:
+        ordering = ['-created']

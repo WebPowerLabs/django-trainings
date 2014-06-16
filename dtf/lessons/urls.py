@@ -1,4 +1,5 @@
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 
 try:
     from django.conf.urls import *
@@ -9,6 +10,9 @@ except ImportError:  # django < 1.4
 from lessons import views
 
 urlpatterns = patterns('',
+    url('^add_favourite/(?P<pk>[-\w]+)$', login_required(
+                                    views.LessonFavouriteAddView.as_view()),
+                                    name='add_favourite'),
     url('^order/(?P<course_pk>[-\w]+)$', staff_member_required(
                                views.LessonOrderView.as_view()), name='order'),
     url('^$', views.LessonListView.as_view(), name='list'),

@@ -1,19 +1,18 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.edit import DeleteView, UpdateView
-from lessons.models import Lesson
+from lessons.models import Lesson, LessonFavourite
 from django.core.urlresolvers import reverse_lazy, reverse
 from lessons.forms import LessonCreateFrom
 from lessons.filters import LessonFilter
 from django_filters.views import FilterView
 from tags.models import Tag
 from courses.models import Course
-from users.models import User
 from utils.views import CreateFormBaseView, PermissionMixin
 from django.http.response import HttpResponseRedirect
 from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic.base import View
 import json
-from profiles.models import History
+from lessons.signals import view_lesson_signal
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
@@ -37,15 +36,20 @@ class LessonDetailView(PermissionMixin, UpdateView):
                                                 course_id, self.request.user)
         context['prev_url'] = Lesson.objects.get_prev_url(self.object, tag_id,
                                                 course_id, self.request.user)
+        try:
+            context['in_favourites'] = LessonFavourite.objects.get(
+                                                     lesson=self.object,
+                                                     user=self.request.user)
+        except LessonFavourite.DoesNotExist:
+            pass
         return context
 
     def get_success_url(self):
         return reverse('lessons:detail', kwargs={'slug': self.kwargs['slug']})
 
     def get(self, request, *args, **kwargs):
-        if isinstance(self.request.user, User):
-            History.objects.create(content_object=self.get_object(),
-                                    user=self.request.user)
+        view_lesson_signal.send(sender=self.get_object(),
+                                user=self.request.user)
         return UpdateView.get(self, request, *args, **kwargs)
 
 
@@ -91,4 +95,12 @@ class LessonOrderView(AjaxResponseMixin, JSONResponseMixin, View):
         data = json.loads(request.read())
         course = Course.objects.get(pk=self.kwargs['course_pk'])
         course.set_lesson_order(data.get('new_order', None))
+        return self.render_json_response({'success': True})
+
+
+class LessonFavouriteAddView(AjaxResponseMixin, JSONResponseMixin, View):
+    def post_ajax(self, request, *args, **kwargs):
+        lesson = Lesson.objects.get(pk=self.kwargs['pk'])
+        LessonFavourite.objects.get_or_create(lesson=lesson,
+                                              user=self.request.user)
         return self.render_json_response({'success': True})

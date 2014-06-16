@@ -1,5 +1,5 @@
 from django_nose.testcases import FastFixtureTestCase
-from courses.models import Course
+from courses.models import Course, CourseFavourite, CourseHistory
 from courses.tests.factories import CourseFactory, UserFactory
 from django.contrib.auth.models import User
 from django.test.client import Client
@@ -35,7 +35,7 @@ class CourseManagerTest(FastFixtureTestCase):
         self.assertEqual(Course.objects.get_order(), new_order)
 
 
-class LessonViewTest(FastFixtureTestCase):
+class CourseViewTest(FastFixtureTestCase):
     def setUp(self):
         self.username = 'testuser'
         self.password = 'password'
@@ -60,3 +60,24 @@ class LessonViewTest(FastFixtureTestCase):
         resp_data = json.loads(resp.content)
         self.assertEqual(Course.objects.get_order(), map(str, new_order))
         self.assertTrue(resp_data['success'])
+
+    def test_course_add_favourite_view(self):
+        self.client.login(username=self.username, password=self.password)
+        resp = self.client.post(reverse('courses:add_favourite', kwargs={
+                                                    'pk': self.course_one.pk}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        self.assertTrue(CourseFavourite.objects.get(
+                                    course=self.course_one,
+                                    user=self.client.session['_auth_user_id']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
+
+    def test_course_detail_view_create_history_object(self):
+        self.client.login(username=self.username, password=self.password)
+        self.client.get(reverse('courses:detail', kwargs={
+                                              'slug': self.course_one.slug}))
+        self.assertTrue(CourseHistory.objects.get(course=self.course_one,
+                                  user=self.client.session['_auth_user_id']))
+

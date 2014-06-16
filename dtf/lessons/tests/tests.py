@@ -1,7 +1,7 @@
 from django_nose.testcases import FastFixtureTestCase
 from lessons.tests.factories import (TagFactory, LessonFactory, CourseFactory,
                                      UserFactory)
-from lessons.models import Lesson
+from lessons.models import Lesson, LessonFavourite, LessonHistory
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from users.models import User
@@ -36,6 +36,26 @@ class LessonViewTest(FastFixtureTestCase):
         resp_data = json.loads(resp.content)
         self.assertEqual(self.course.get_lesson_order(), map(str, new_order))
         self.assertTrue(resp_data['success'])
+
+    def test_lesson_add_favourite_view(self):
+        self.client.login(username=self.username, password=self.password)
+        resp = self.client.post(reverse('lessons:add_favourite', kwargs={
+                                                    'pk': self.lesson_one.pk}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        self.assertTrue(LessonFavourite.objects.get(
+                                    lesson=self.lesson_one,
+                                    user=self.client.session['_auth_user_id']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
+
+    def test_lesson_detail_view_create_history_object(self):
+        self.client.login(username=self.username, password=self.password)
+        self.client.get(reverse('lessons:detail', kwargs={
+                                              'slug': self.lesson_one.slug}))
+        self.assertTrue(LessonHistory.objects.get(lesson=self.lesson_one,
+                                  user=self.client.session['_auth_user_id']))
 
 
 class LessonManagerTest(FastFixtureTestCase):

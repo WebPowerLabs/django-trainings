@@ -1,6 +1,6 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
-
+from django.conf import settings
 # import positions
 from lessons.managers import LessonManager
 
@@ -56,3 +56,28 @@ class Lesson(models.Model):
 
     def get_homework(self, user):
         return self.resource_set.get_list(user).filter(type='homework')
+
+
+class LessonHistory(models.Model):
+    """
+    For storing history.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    lesson = models.ForeignKey('Lesson')
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = 'Lesson history'
+
+
+class LessonFavourite(models.Model):
+    """
+    For storing favourites.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    lesson = models.ForeignKey('Lesson')
+
+    class Meta:
+        ordering = ['-created']

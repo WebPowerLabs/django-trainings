@@ -1,15 +1,15 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.edit import UpdateView
 from django.core.urlresolvers import reverse_lazy, reverse
-from courses.models import Course
+from courses.models import Course, CourseHistory, CourseFavourite
 from django.views.generic import DeleteView
 from courses.forms import CourseCreateFrom
-from users.models import User
 from utils.views import CreateFormBaseView, PermissionMixin
 from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic.base import View
 import json
-from profiles.models import History
+from users.models import User
+from courses.signals import view_course_signal
 
 
 class CourseListView(PermissionMixin, CreateFormBaseView):
@@ -41,9 +41,8 @@ class CourseDetailView(PermissionMixin, UpdateView):
         return context
 
     def get(self, request, *args, **kwargs):
-        if isinstance(self.request.user, User):
-            History.objects.create(content_object=self.get_object(),
-                                                        user=self.request.user)
+        view_course_signal.send(sender=self.get_object(),
+                                user=self.request.user)
         return UpdateView.get(self, request, *args, **kwargs)
 
 
@@ -56,4 +55,12 @@ class CourseOrderView(AjaxResponseMixin, JSONResponseMixin, View):
     def post_ajax(self, request, *args, **kwargs):
         data = json.loads(request.read())
         Course.objects.set_order(data.get('new_order', None))
+        return self.render_json_response({'success': True})
+
+
+class CourseFavouriteAddView(AjaxResponseMixin, JSONResponseMixin, View):
+    def post_ajax(self, request, *args, **kwargs):
+        course = Course.objects.get(pk=self.kwargs['pk'])
+        CourseFavourite.objects.get_or_create(course=course,
+                                              user=self.request.user)
         return self.render_json_response({'success': True})

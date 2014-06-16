@@ -57,6 +57,7 @@ $(document).ready(function(){
             statusCode: {
                 200: function () {
                     alert("Successfully added.");
+                    $this.addClass('disabled');
                 }
             }
         });
