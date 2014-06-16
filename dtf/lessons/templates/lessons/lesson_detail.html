@@ -32,10 +32,17 @@
                     {% video_player object %}
                     <br />
                     {% if user.is_authenticated %}
-                        <button class="btn btn-primary {% if in_favourites %}disabled{% endif %} favourite_add" data-url="{% url 'lessons:add_favourite' object.pk %}">
-                            <i class="fa fa-heart"></i>
-                            watch later
-                        </button>
+                        {% if in_favourites %}
+                            <button class="btn btn-danger disabled favourite_add" data-url="{% url 'lessons:add_favourite' object.pk %}">
+                                <i class="fa fa-check"></i>
+                                Saved
+                            </button>
+                        {% else %}
+                            <button class="btn btn-danger favourite_add" data-url="{% url 'lessons:add_favourite' object.pk %}">
+                                <i class="fa fa-heart"></i>
+                                Watch Later
+                            </button>
+                        {% endif %}
                     {% endif %}
                     {% else %}
                         {% thumbnail object.thumbnail '640x480' crop='center' as im %}
