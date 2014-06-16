@@ -1,30 +1,34 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
-
-import positions
-from courses.managers import PublishedManager
+from courses.managers import CourseManager
+from django.conf import settings
 
 
 class Course(models.Model):
     """ Course
     Courses are a series of Lessons
     """
+    objects = CourseManager()
+
     id = UUIDField(primary_key=True)
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
     description = models.TextField(blank=True,
         help_text='a brief summary of this course')
     published = models.BooleanField(default=False,
-        help_text='users will only see published courses')
+                            help_text='users will only see published courses')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    order = positions.PositionField()
+    order = models.IntegerField(editable=False, default=0)
     thumbnail = models.ImageField(upload_to='courses/thumbs/%Y/%m/%d',
-        height_field='thumbnail_height', width_field='thumbnail_width')
+                height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
     thumbnail_width = models.CharField(max_length=255, blank=True)
 
-    objects = PublishedManager()
+    def save(self, *args, **kwargs):
+        if self.order is None:
+            self.order = Course.objects.get_max_order() + 1
+        super(Course, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['order', ]
@@ -35,3 +39,28 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class CourseHistory(models.Model):
+    """
+    For storing history.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey('Course')
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = 'Course history'
+
+
+class CourseFavourite(models.Model):
+    """
+    For storing favourites.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey('Course')
+
+    class Meta:
+        ordering = ['-created']

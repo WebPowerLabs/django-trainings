@@ -58,6 +58,7 @@ class Common(Configuration):
         'django_nose',
         'djnfusion',
         'django_comments',
+        'sorl.thumbnail',
     )
 
     # Apps specific for this project go here.
@@ -299,13 +300,13 @@ class Common(Configuration):
     DJNFUSION_API_KEY = os.environ.get('INFUSIONSOFT_API_KEY', '')
 
     DJNFUSION_USERID_FIELD_NAME = 'infusionsoft_uid'
-    #DJNFUSION_USER_ID_VALUE_PREPROCESSOR = lambda id: unicode(id)
-    #DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_CREATE = lambda u: dict()
-    #DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_UPDATE = lambda u: dict()
-    #DJNFUSION_AUTO_OPTIN = False
-    #DJNFUSION_OPTIN_ONLY_IF_ACTIVE = True
-    #DJNFUSION_OPTIN_MESSAGE = 'Auto-optin through the Web application.'
-    #DJNFUSION_DAILY_USER_STATISTICS = {}
+    # DJNFUSION_USER_ID_VALUE_PREPROCESSOR = lambda id: unicode(id)
+    # DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_CREATE = lambda u: dict()
+    # DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_UPDATE = lambda u: dict()
+    # DJNFUSION_AUTO_OPTIN = False
+    # DJNFUSION_OPTIN_ONLY_IF_ACTIVE = True
+    # DJNFUSION_OPTIN_MESSAGE = 'Auto-optin through the Web application.'
+    # DJNFUSION_DAILY_USER_STATISTICS = {}
 
     ########## SOCIAL CONFIG
     SOCIALACCOUNT_PROVIDERS = \

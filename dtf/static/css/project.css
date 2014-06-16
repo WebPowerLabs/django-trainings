@@ -1,6 +1,7 @@
 body {
   background: url(../images/bg.jpg);
 }
+
 body.app {
 	padding-top: 50px;
 }
@@ -19,3 +20,16 @@ body.app {
 	/* have to override style 707 */
 	line-height: 1.42857143 !important;
 }
+
+/*!!!custom styles!!!*/
+.sortable_item .caption{
+  height: 200px;
+  overflow: hidden;
+}
+.no_transition{
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+/*!!!end custom styles!!!*/

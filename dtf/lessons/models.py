@@ -1,7 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
-
-import positions
+from django.conf import settings
+# import positions
 from lessons.managers import LessonManager
 
 
@@ -21,7 +21,7 @@ class Lesson(models.Model):
         help_text='users will only see published lessons')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    order = positions.PositionField()
+    # order = positions.PositionField()
     thumbnail = models.ImageField(upload_to='lessons/thumbs/%Y/%m/%d',
         height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
@@ -31,9 +31,18 @@ class Lesson(models.Model):
     course = models.ForeignKey('courses.Course')
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        order = None
+        if not self.pk:
+            order = self.course.get_lesson_order()
+        super(Lesson, self).save(*args, **kwargs)
+        if order:
+            order.append(self.pk)
+            self.course.set_lesson_order(order)
+
     class Meta:
-        ordering = ['order']
-        get_latest_by = 'order'
+        ordering = ['_order']
+        get_latest_by = '_order'
         order_with_respect_to = 'course'
 
     def __init__(self, *args, **kwargs):
@@ -42,8 +51,33 @@ class Lesson(models.Model):
     def __unicode__(self):
         return self.name
 
-    def get_resource(self):
-        return self.resource_set.filter(type='resource')
+    def get_resource(self, user):
+        return self.resource_set.get_list(user).filter(type='resource')
 
-    def get_homework(self):
-        return self.resource_set.filter(type='homework')
+    def get_homework(self, user):
+        return self.resource_set.get_list(user).filter(type='homework')
+
+
+class LessonHistory(models.Model):
+    """
+    For storing history.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    lesson = models.ForeignKey('Lesson')
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = 'Lesson history'
+
+
+class LessonFavourite(models.Model):
+    """
+    For storing favourites.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(auto_now_add=True)
+    lesson = models.ForeignKey('Lesson')
+
+    class Meta:
+        ordering = ['-created']
