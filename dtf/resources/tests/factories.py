@@ -1,10 +1,10 @@
 import factory
 import random
 import string
+from django.conf import settings
+from resources.models import Resource
 from lessons.models import Lesson
 from courses.models import Course
-from tags.models import Tag
-from django.conf import settings
 
 
 def random_string(length=8):
@@ -26,23 +26,17 @@ class CourseFactory(factory.django.DjangoModelFactory):
     order = 0
 
 
-class TagFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = Tag
-    # fields
-    name = factory.LazyAttribute(lambda t: random_string())
-
-
 class LessonFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Lesson
     # fields
+    name = factory.LazyAttribute(lambda t: random_string())
     course = factory.SubFactory(CourseFactory)
+
+
+class ResourceFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = Resource
+    lesson = factory.SubFactory(LessonFactory)
+    # fields
     name = factory.LazyAttribute(lambda t: random_string())
 
-    @factory.post_generation
-    def tags(self, create, extracted, **kwargs):
-        if not create:
-            return
 
-        if extracted:
-            for tag in extracted:
-                self.tags.add(tag)

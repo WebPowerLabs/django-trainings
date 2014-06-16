@@ -8,8 +8,8 @@ from resources.models import Resource
 class ResourceCreateFrom(forms.ModelForm):
     class Meta:
         model = Resource
+        fields = ['name', 'description', 'published', 'thumbnail', 'type', 'lesson', 'file']
 
     helper = FormHelper()
-    helper.form_class = 'form-horizontal'
     helper.add_input(Submit('save_changes', 'Save changes',
                             css_class="btn-success"))

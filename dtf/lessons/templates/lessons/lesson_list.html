@@ -1,5 +1,5 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags query_string %}
+{% load crispy_forms_tags query_string thumbnail %}
 
 {% block content %}
 <div class="container">
@@ -21,7 +21,9 @@
                     <div class="alert alert-info">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="{{lesson.thumbnail.url}}" class="img-rounded">
+                                {% thumbnail lesson.thumbnail '170x150' crop='center' as im %}
+                                <img src="{{ im.url }}" class="img-rounded" alt="{{ lesson.name }}">
+                                {% endthumbnail %}
                             </div>
                             <div class="col-md-9">
                                 <h2>{{ lesson.name }}</h2>
