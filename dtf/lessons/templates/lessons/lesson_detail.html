@@ -18,29 +18,29 @@
             <div class="col-xs-12">
                 <h4>
                     <a href="{% url 'courses:detail' object.course.slug %}">
-                        <span class="label label-success">{{ object.course }}</span>
+                        <button class="btn btn-sm btn-success course-label"><i class="fa fa-arrow-left"></i> {{ object.course }}</button>
                     </a>
                 </h4>
                 <h2>{{ object.name }}</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-7">
+            <div class="content col-sm-7">
                 {% if object.video %}
                         {% video_player object %}
                         <br />
-                        <a href="#" class="btn btn-default">
+                        <button href="#" class="btn btn-danger favorite">
                             <i class="fa fa-heart"></i>
                             watch later
-                        </a>
+                        </button>
                 {% else %}
                     <img src="{{ object.thumbnail.url }}" alt="kind of no_video_blank image"  class="img-rounded" >
                 {% endif %}
                 <p>{{ object.description }}</p>
-            </div><!--/ .col-sm-7-->
+            </div><!--/ .content-->
             <div class="col-sm-5">
                 <div class="row">
-                    <div class="panel panel-default panel-resource">
+                    <div class="panel panel-primary panel-resource">
                         <div class="panel-heading">
                             <span>Resources</span>
                             <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
@@ -57,7 +57,7 @@
                     </div><!--/ .panel-->
                 </div><!--/ .row-->
                 <div class="row">
-                    <div class="panel panel-default panel-resource">
+                    <div class="panel panel-success panel-resource">
                         <div class="panel-heading">
                             <span>Homework</span>
                             <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
@@ -75,7 +75,7 @@
                 </div><!--/ .row-->
                 {% if object.tags.all %}
                 <div class="row">
-                    <h4>Lesson categories</h4>
+                    <h3>Category Tags</h3>
                     {% for tag in object.tags.all %}
                         <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">{% include 'tags/partials/detail.html' with object=tag %}</a>
                     {% endfor %}

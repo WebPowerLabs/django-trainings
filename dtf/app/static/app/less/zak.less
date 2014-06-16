@@ -70,8 +70,32 @@ input {
 	border-radius: 0;
 }
 
+// ------ Pager ------ //
+ul.pager {
+	.previous, .next {
+		a {
+			font-weight: 400;
+			color: #fff;
+			background-color: @brand-dtf;
+			border-color: @brand-dtf;
+			i { color: #fff; }
 
-// ------ Block Section Title ------ //
+			&:hover {
+				background-color: darken(@brand-dtf, 8%);
+				border-color: darken(@brand-dtf, 8%);
+			}
+		}
+
+		&.disabled a, {
+			color: @gray-light;
+			background-color: @gray-lighter;
+			border-color: @gray-lighter;
+			i { color: @gray-light; }
+		}
+	}
+}
+
+// ------ Section Title ------ //
 .section-title {
 	position: relative;
 	margin-bottom: 70px;
@@ -1789,4 +1813,72 @@ section.lesson-detail {
 	&.section {
 		padding-top: 50px;
 	}
+
+	button.course-label {
+		font-weight: 500;
+		
+		i {
+			padding-right: 5px;
+		}
+	}
+
+	.content {
+		button.favorite {
+			text-transform: uppercase;
+			margin-bottom: 30px;
+			font-weight: 600;
+			color: @brand-danger;
+			background-color: transparent;
+			border: 2px solid @brand-danger;
+
+			i {
+				padding-right: 4px;
+				vertical-align: middle;
+				font-size: 18px;
+			}
+
+			&:hover {
+				background-color: hardlight(@brand-danger, #f5f5f5);
+			}
+		}
+	}
+
+	.panel {
+		box-shadow: 1px 1px 8px rgba(0,0,0,0.15);
+		
+		.panel-heading {
+			span {
+				font-size: 22px;
+				text-transform: uppercase;
+				font-weight: 400;
+				line-height: 24px;
+			}
+			i {
+				color: #fff;
+				line-height: 24px;
+			}
+		}
+		.list-group-item-text {
+			color: @brand-gray;
+		}
+	}
+
+	.panel-primary {
+		.list-group-item {
+			border: 1px solid hardlight(@brand-primary, #ddd);
+
+			&:hover {
+				background-color: hardlight(@brand-primary, #f5f5f5);
+			}
+		}
+	}
+	.panel-success {
+		.list-group-item {
+			border: 1px solid hardlight(@brand-success, #ddd);
+
+			&:hover {
+				background-color: hardlight(@brand-success, #eee);
+			}			
+		}
+	}	
 }
