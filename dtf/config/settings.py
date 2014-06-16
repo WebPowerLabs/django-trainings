@@ -74,8 +74,8 @@ class Common(Configuration):
         'tags',
         'resources',
         'profiles',
-        'features',
         'dtf_comments',
+        'packages',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -302,7 +302,8 @@ class Common(Configuration):
 
 
     ########## Your common stuff: Below this line define 3rd party libary settings
-
+    INFUSIONSOFT_COMPANY = os.environ.get('INFUSIONSOFT_API_KEY', '')
+    INFUSIONSOFT_API_KEY = os.environ.get('INFUSIONSOFT_API_KEY', '')
     ########## Djnfusion CONFIG
 
     DJNFUSION_COMPANY = os.environ.get('INFUSIONSOFT_COMPANY_ID', '')
@@ -497,3 +498,7 @@ class Production(Common):
     DJNFUSION_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
     DJNFUSION_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_API_KEY")
     ########## END Djnfusion CONFIG
+
+
+    INFUSIONSOFT_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
+    INFUSIONSOFT_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")

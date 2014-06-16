@@ -46,15 +46,16 @@ class User(AbstractUser):
         else:
             return None
 
-
+'''
 # signal dependencies
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 import djnfusion
 
+@receiver(post_save, sender=User)
+def djnfusion_sync_user(sender, **kwargs):
+    user = kwargs['instance']
+    djnfusion.sync_user(user)
+'''    
 
-#@receiver(post_save, sender=User)
-#def djnfusion_sync_user(sender, **kwargs):
-#    user = kwargs['instance']
-#    djnfusion.sync_user(user)    
