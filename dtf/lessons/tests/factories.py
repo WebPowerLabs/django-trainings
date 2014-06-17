@@ -1,7 +1,7 @@
 import factory
 import random
 import string
-from lessons.models import Lesson
+from lessons.models import Lesson, LessonFavourite, LessonHistory
 from courses.models import Course
 from tags.models import Tag
 from django.conf import settings
@@ -46,3 +46,11 @@ class LessonFactory(factory.django.DjangoModelFactory):
         if extracted:
             for tag in extracted:
                 self.tags.add(tag)
+
+
+class LessonFavouriteFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = LessonFavourite
+
+
+class LessonHistoryFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = LessonHistory

@@ -14,7 +14,7 @@
 <section class="lesson-detail section">
     <div class="container">
         <div id="collapseOne" class="panel-collapse collapse">
-            {% crispy form %}
+            {% if user.is_staff %}{% crispy form %}{% endif %}
         </div><!--/ .panel-collapse-->
         <div class="row">
             <div class="col-xs-12">
@@ -32,17 +32,16 @@
                     {% video_player object %}
                     <br />
                     {% if user.is_authenticated %}
-                        {% if in_favourites %}
-                            <button class="btn btn-danger disabled favourite_add" data-url="{% url 'lessons:add_favourite' object.pk %}">
+                        <button class="btn btn-danger ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.pk %}" >
+                            <span class='state-1'>
                                 <i class="fa fa-check"></i>
                                 Saved
-                            </button>
-                        {% else %}
-                            <button class="btn btn-danger favourite_add" data-url="{% url 'lessons:add_favourite' object.pk %}">
+                            </span>
+                            <span class='state-2'>
                                 <i class="fa fa-heart"></i>
                                 Watch Later
-                            </button>
-                        {% endif %}
+                            </span>
+                        </button>
                     {% endif %}
                     {% else %}
                         {% thumbnail object.thumbnail '640x480' crop='center' as im %}

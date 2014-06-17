@@ -24,6 +24,7 @@ class TagDetailView(PermissionMixin, UpdateView):
         return reverse('tags:detail', kwargs={'pk': self.kwargs['pk']})
 
 
-class TagDeleteView(DeleteView):
+class TagDeleteView(DeleteView, PermissionMixin):
+    decorators = {'POST': staff_member_required}
     model = Tag
     success_url = reverse_lazy('tags:list')

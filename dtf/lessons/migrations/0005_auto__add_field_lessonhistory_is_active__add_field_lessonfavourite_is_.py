@@ -8,31 +8,23 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'LessonHistory'
-        db.create_table(u'lessons_lessonhistory', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('lesson', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['lessons.Lesson'])),
-        ))
-        db.send_create_signal(u'lessons', ['LessonHistory'])
+        # Adding field 'LessonHistory.is_active'
+        db.add_column(u'lessons_lessonhistory', 'is_active',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
 
-        # Adding model 'LessonFavourite'
-        db.create_table(u'lessons_lessonfavourite', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('lesson', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['lessons.Lesson'])),
-        ))
-        db.send_create_signal(u'lessons', ['LessonFavourite'])
+        # Adding field 'LessonFavourite.is_active'
+        db.add_column(u'lessons_lessonfavourite', 'is_active',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'LessonHistory'
-        db.delete_table(u'lessons_lessonhistory')
+        # Deleting field 'LessonHistory.is_active'
+        db.delete_column(u'lessons_lessonhistory', 'is_active')
 
-        # Deleting model 'LessonFavourite'
-        db.delete_table(u'lessons_lessonfavourite')
+        # Deleting field 'LessonFavourite.is_active'
+        db.delete_column(u'lessons_lessonfavourite', 'is_active')
 
 
     models = {
@@ -90,16 +82,18 @@ class Migration(SchemaMigration):
         },
         u'lessons.lessonfavourite': {
             'Meta': {'ordering': "['-created']", 'object_name': 'LessonFavourite'},
-            'lesson': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Lesson']"}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'lesson': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Lesson']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"})
         },
         u'lessons.lessonhistory': {
             'Meta': {'ordering': "['-created']", 'object_name': 'LessonHistory'},
-            'lesson': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Lesson']"}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'lesson': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Lesson']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"})
         },
         u'tags.tag': {

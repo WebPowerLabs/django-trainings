@@ -52,3 +52,13 @@ class LessonManager(models.Manager):
         if lessons:
             return reverse('lessons:detail', kwargs={'slug': lessons[0].slug})
         return None
+
+
+class LessonHistoryManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
+
+
+class LessonFavouriteManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)

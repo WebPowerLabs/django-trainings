@@ -32,4 +32,26 @@ body.app {
   -o-transition-duration: 0s;
   transition-duration: 0s;
 }
+
+.fav_button.is_active .state-1, .fav_button .state-2{
+    display: block;
+}
+.fav_button.is_active .state-2, .fav_button .state-1{
+    display: none;
+}
+
+.history_item.is_active{
+    display: table-row;
+}
+.history_item{
+    display: none;
+}
+
+.favourite_item.is_active{
+    display: table-row;
+}
+.favourite_item{
+    display: none;
+}
 /*!!!end custom styles!!!*/
+

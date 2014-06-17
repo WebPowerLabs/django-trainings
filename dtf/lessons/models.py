@@ -2,7 +2,8 @@ from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
 from django.conf import settings
 # import positions
-from lessons.managers import LessonManager
+from lessons.managers import LessonManager, LessonHistoryManager, \
+    LessonFavouriteManager
 
 
 class Lesson(models.Model):
@@ -62,9 +63,13 @@ class LessonHistory(models.Model):
     """
     For storing history.
     """
+
+    objects = LessonHistoryManager()
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created = models.DateTimeField(auto_now_add=True)
     lesson = models.ForeignKey('Lesson')
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-created']
@@ -75,9 +80,13 @@ class LessonFavourite(models.Model):
     """
     For storing favourites.
     """
+
+    objects = LessonFavouriteManager()
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created = models.DateTimeField(auto_now_add=True)
     lesson = models.ForeignKey('Lesson')
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-created']

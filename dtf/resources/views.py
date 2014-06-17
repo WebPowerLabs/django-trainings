@@ -24,9 +24,10 @@ class ResourceListView(PermissionMixin, CreateFormBaseView):
         return Resource.objects.get_list(self.request.user)
 
 
-class ResourceDeleteView(DeleteView):
+class ResourceDeleteView(DeleteView, PermissionMixin):
     model = Resource
     success_url = reverse_lazy('resources:list')
+    decorators = {'POST': staff_member_required}
 
 
 class ResourceDetailView(PermissionMixin, UpdateView):
@@ -43,10 +44,11 @@ class ResourceDetailView(PermissionMixin, UpdateView):
                                                    })
 
 
-class ResourceAddView(CreateFormBaseView):
+class ResourceAddView(CreateFormBaseView, PermissionMixin):
     model = Resource
     template_name = 'resources/resource_create.html'
     form_class = ResourceCreateFrom
+    decorators = {'POST': staff_member_required}
 
     def get_success_url(self):
         return reverse('lessons:detail', kwargs={'slug': self.kwargs['slug']})
@@ -58,7 +60,10 @@ class ResourceAddView(CreateFormBaseView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ResourceOrderView(AjaxResponseMixin, JSONResponseMixin, View):
+class ResourceOrderView(AjaxResponseMixin, JSONResponseMixin, View,
+                        PermissionMixin):
+    decorators = {'POST': staff_member_required}
+
     def post_ajax(self, request, *args, **kwargs):
         data = json.loads(request.read())
         lesson = Lesson.objects.get(pk=self.kwargs['lesson_pk'])

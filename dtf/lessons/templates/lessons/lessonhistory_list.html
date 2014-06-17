@@ -1,0 +1,37 @@
+{% extends 'lessons/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 section-title">
+            <h1>My Lessons History</h1>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            {% for object in object_list %}
+                <tr id='lesson_history_{{ object.pk }}' class='history_item is_active'>
+                    <td>{{ object.created }}</td>
+                    <td>
+                        <a href="{% url 'lessons:detail' object.lesson.slug %}">
+                            {{ object.lesson }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'lessons:delete_history' object.pk %}" 
+                           class="ajax_action" 
+                           data-target="#lesson_history_{{ object.pk }}"
+                           data-url="{% url 'lessons:delete_history' object.pk %}">
+                        <i class="fa fa-trash-o"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td align="center">There are no favourites yet ;)</td>
+                </tr>                
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

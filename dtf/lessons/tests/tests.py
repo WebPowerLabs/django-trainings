@@ -1,6 +1,7 @@
 from django_nose.testcases import FastFixtureTestCase
 from lessons.tests.factories import (TagFactory, LessonFactory, CourseFactory,
-                                     UserFactory)
+                                     UserFactory, LessonHistoryFactory,
+                                     LessonFavouriteFactory)
 from lessons.models import Lesson, LessonFavourite, LessonHistory
 from django.core.urlresolvers import reverse
 from django.test.client import Client
@@ -20,6 +21,12 @@ class LessonViewTest(FastFixtureTestCase):
         self.user = UserFactory(username=self.username)
         self.user.set_password(self.password)
         self.user.save()
+        self.lesson_his_item = LessonHistoryFactory(user=self.user,
+                                                    lesson=self.lesson_two,
+                                                    is_active=True)
+        self.lesson_fav_item = LessonFavouriteFactory(user=self.user,
+                                                      lesson=self.lesson_one,
+                                                      is_active=True)
 
     def test_order_view(self):
         self.client.login(username=self.username, password=self.password)
@@ -37,9 +44,9 @@ class LessonViewTest(FastFixtureTestCase):
         self.assertEqual(self.course.get_lesson_order(), map(str, new_order))
         self.assertTrue(resp_data['success'])
 
-    def test_lesson_add_favourite_view(self):
+    def test_lesson_action_favourite_view_add_item(self):
         self.client.login(username=self.username, password=self.password)
-        resp = self.client.post(reverse('lessons:add_favourite', kwargs={
+        resp = self.client.post(reverse('lessons:favourite_action', kwargs={
                                                     'pk': self.lesson_one.pk}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
@@ -50,12 +57,37 @@ class LessonViewTest(FastFixtureTestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp_data['success'])
 
+    def test_lesson_favourite_action_view_delete_item(self):
+        self.client.login(username=self.username, password=self.password)
+
+        resp = self.client.post(reverse('lessons:favourite_action', kwargs={
+                                                    'pk': self.lesson_one.pk}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        deleted_item = LessonFavourite.objects.get(pk=self.lesson_fav_item.pk)
+        self.assertFalse(deleted_item.is_active)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
+
     def test_lesson_detail_view_create_history_object(self):
         self.client.login(username=self.username, password=self.password)
         self.client.get(reverse('lessons:detail', kwargs={
                                               'slug': self.lesson_one.slug}))
         self.assertTrue(LessonHistory.objects.get(lesson=self.lesson_one,
                                   user=self.client.session['_auth_user_id']))
+
+    def test_lesson_history_delete_view(self):
+        self.client.login(username=self.username, password=self.password)
+        resp = self.client.post(reverse('lessons:delete_history', kwargs={
+                                            'pk': self.lesson_his_item.pk}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        deleted_item = LessonHistory.objects.get(pk=self.lesson_his_item.pk)
+        self.assertFalse(deleted_item.is_active)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
 
 
 class LessonManagerTest(FastFixtureTestCase):

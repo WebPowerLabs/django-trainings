@@ -33,3 +33,13 @@ class CourseManager(models.Manager):
 
     def get_max_order(self):
         return self.aggregate(max_order=Max('order'))['max_order']
+
+
+class CourseHistoryManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
+
+
+class CourseFavouriteManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
