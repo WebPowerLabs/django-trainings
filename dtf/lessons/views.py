@@ -21,7 +21,7 @@ class LessonDetailView(PermissionMixin, UpdateView):
     model = Lesson
     template_name = 'lessons/lesson_detail.html'
     form_class = LessonCreateFrom
-    decorators = {'POST': staff_member_required}
+    decorators = {'POST': staff_member_required, 'GET': login_required}
 
     def get_queryset(self):
         return Lesson.objects.get_list(self.request.user)
@@ -61,7 +61,7 @@ class LessonListView(PermissionMixin, FilterView):
     template_name = 'lessons/lesson_list.html'
     filterset_class = LessonFilter
     queryset = Lesson.objects.select_related('course')
-    decorators = {'POST': staff_member_required}
+    decorators = {'POST': staff_member_required, 'GET': login_required}
 
     def get_queryset(self):
         return Lesson.objects.get_list(self.request.user).order_by('-created')
