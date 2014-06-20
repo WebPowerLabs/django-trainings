@@ -1,4 +1,3 @@
-from django.contrib.admin.views.decorators import staff_member_required
 from django.views.generic.edit import DeleteView, UpdateView
 from lessons.models import Lesson, LessonFavourite, LessonHistory
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -15,13 +14,16 @@ import json
 from lessons.signals import view_lesson_signal
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
+from utils.decorators import instructor_member_required, can_edit_content
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
     model = Lesson
     template_name = 'lessons/lesson_detail.html'
     form_class = LessonCreateFrom
-    decorators = {'POST': staff_member_required, 'GET': login_required}
+    decorators = {'GET': login_required,
+                  'POST': [instructor_member_required,
+                           can_edit_content(Lesson)]}
 
     def get_queryset(self):
         return Lesson.objects.get_list(self.request.user)
@@ -61,7 +63,7 @@ class LessonListView(PermissionMixin, FilterView):
     template_name = 'lessons/lesson_list.html'
     filterset_class = LessonFilter
     queryset = Lesson.objects.select_related('course')
-    decorators = {'POST': staff_member_required, 'GET': login_required}
+    decorators = {'GET': login_required}
 
     def get_queryset(self):
         return Lesson.objects.get_list(self.request.user).order_by('-created')
@@ -77,7 +79,9 @@ class LessonAddView(CreateFormBaseView, PermissionMixin):
     model = Lesson
     template_name = 'lessons/lesson_create.html'
     form_class = LessonCreateFrom
-    decorators = {'POST': staff_member_required}
+    decorators = {'GET': instructor_member_required,
+                  'POST': [instructor_member_required,
+                           can_edit_content(Course)]}
 
     def get_success_url(self):
         return reverse('courses:detail', kwargs={'slug': self.kwargs['slug']})
@@ -85,6 +89,7 @@ class LessonAddView(CreateFormBaseView, PermissionMixin):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.course = Course.objects.get(slug=self.kwargs['slug'])
+        self.object.owner = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -92,12 +97,15 @@ class LessonAddView(CreateFormBaseView, PermissionMixin):
 class LessonDeleteView(DeleteView, PermissionMixin):
     model = Lesson
     success_url = reverse_lazy('lessons:list')
-    decorators = {'POST': staff_member_required}
+    decorators = {'GET': instructor_member_required,
+                  'POST': [instructor_member_required,
+                           can_edit_content(Lesson)]}
 
 
 class LessonOrderView(AjaxResponseMixin, JSONResponseMixin, View,
                       PermissionMixin):
-    decorators = {'POST': staff_member_required}
+    decorators = {'POST': [instructor_member_required,
+                           can_edit_content(Course)]}
 
     def post_ajax(self, request, *args, **kwargs):
         data = json.loads(request.read())

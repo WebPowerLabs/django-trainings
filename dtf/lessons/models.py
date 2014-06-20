@@ -1,7 +1,6 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
 from django.conf import settings
-# import positions
 from lessons.managers import LessonManager, LessonHistoryManager, \
     LessonFavouriteManager
 
@@ -22,7 +21,6 @@ class Lesson(models.Model):
         help_text='users will only see published lessons')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    # order = positions.PositionField()
     thumbnail = models.ImageField(upload_to='lessons/thumbs/%Y/%m/%d',
         height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
@@ -31,6 +29,7 @@ class Lesson(models.Model):
     homework = models.TextField(blank=True)
     course = models.ForeignKey('courses.Course')
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def save(self, *args, **kwargs):
         order = None

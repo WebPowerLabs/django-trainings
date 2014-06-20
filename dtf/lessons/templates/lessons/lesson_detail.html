@@ -3,7 +3,7 @@
 
 {% block nav_actions %}
 {{ block.super }}
-{% if user.is_staff %}
+{% if user.is_staff or user == object.owner %}
 <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit lesson</a></li>
 <li><a href="{% url 'resources:add' object.slug %}" class="">Add Resource or Homework</a></li>
 <li><a class="" href='{% url "lessons:delete" object.slug %}'>Delete</a></li>
@@ -14,7 +14,7 @@
 <section class="lesson-detail section">
     <div class="container">
         <div id="collapseOne" class="panel-collapse collapse">
-            {% if user.is_staff %}{% crispy form %}{% endif %}
+            {% if user.is_staff or user == object.owner %}{% crispy form %}{% endif %}
         </div><!--/ .panel-collapse-->
         <div class="row">
             <div class="col-xs-12">
@@ -56,11 +56,11 @@
                 <div class="panel panel-primary panel-resource">
                     <div class="panel-heading">
                         <span>Resources</span>
-                        {% if user.is_staff %}
+                        {% if user.is_staff or user == object.owner %}
                             <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div><!--/ .panel-heading-->
-                    <div class="list-group {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
+                    <div class="list-group {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
                         {% for res in resource_list %}
                             {% include 'resources/partials/detail.html' with object=res %}
                         {% empty %}
@@ -73,11 +73,11 @@
                 <div class="panel panel-success panel-resource">
                     <div class="panel-heading">
                         <span>Homework</span>
-                        {% if user.is_staff %}
+                        {% if user.is_staff or user == object.owner %}
                         <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div>
-                    <div class="list-group  {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
+                    <div class="list-group  {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
                         {% for res in homework_list %}
                             {% include 'resources/partials/detail.html' with object=res %} 
                         {% empty %}

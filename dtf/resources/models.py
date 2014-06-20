@@ -1,7 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField, UUIDField
-# import positions
 from resources.managers import ResourceManager
+from django.conf import settings
 
 
 class Resource(models.Model):
@@ -24,7 +24,6 @@ class Resource(models.Model):
         help_text='users will only see published resources')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    # order = positions.PositionField()
     thumbnail = models.FileField(upload_to='resources/thumbs/%Y/%m/%d',
                                                                     blank=True)
     thumbnail_height = models.CharField(max_length=255, blank=True)
@@ -33,6 +32,7 @@ class Resource(models.Model):
         max_length=255)
     lesson = models.ForeignKey('lessons.Lesson', null=255, blank=True)
     file = models.FileField(upload_to='resources/files/%Y/%m/%d', blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def save(self, *args, **kwargs):
         order = None

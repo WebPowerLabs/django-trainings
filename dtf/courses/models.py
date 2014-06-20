@@ -25,6 +25,7 @@ class Course(models.Model):
                 height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
     thumbnail_width = models.CharField(max_length=255, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def save(self, *args, **kwargs):
         if self.order is None:

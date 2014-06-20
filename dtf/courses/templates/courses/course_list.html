@@ -3,7 +3,7 @@
 {% load crispy_forms_tags thumbnail %}
 {% block nav_actions %}
 {{ block.super }}
-{% if user.is_staff %}
+{% if user.is_staff or user.instructorprofile %}
 <li><a class="" href="#" data-toggle="modal" data-target="#addCourse">Add a Course</a></li>
 {% endif %}
 {% endblock nav_actions %}
@@ -39,7 +39,7 @@
 {% endblock content %}
 
 {% block modal %}
-    {% if user.is_staff %}
+    {% if user.is_staff or user.instructorprofile %}
         <!-- Add Course Modal -->
         <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
