@@ -2,8 +2,8 @@ from django_nose.testcases import FastFixtureTestCase
 from courses.models import Course, CourseFavourite, CourseHistory
 from courses.tests.factories import (CourseFactory, UserFactory,
                                      CourseFavouriteFactory,
-                                     CourseHistoryFactory)
-from django.contrib.auth.models import User
+                                     CourseHistoryFactory,
+                                     InstructorProfileFactory)
 from django.test.client import Client
 import json
 from django.core.urlresolvers import reverse
@@ -11,19 +11,35 @@ from django.core.urlresolvers import reverse
 
 class CourseManagerTest(FastFixtureTestCase):
     def setUp(self):
-        self.course_pub = CourseFactory(published=True)
-        self.course_not_pub = CourseFactory(published=False)
-        self.fake_staff_user = User(username="staff", is_staff=True)
-        self.fake_user = User(username="user", is_staff=False)
+        self.password = 'password'
+        self.instructor = UserFactory(username='instructor', is_staff=False)
+        self.instructor.set_password(self.password)
+        self.instructor.save()
+        self.user = UserFactory(username="user", is_staff=False)
+        self.user.set_password(self.password)
+        self.user.save()
+        self.staff_user = UserFactory(username="staff", is_staff=True)
+        self.staff_user.set_password(self.password)
+        self.staff_user.save()
+
+        self.instructor_profile = InstructorProfileFactory(user=self.instructor)
+        self.course_pub = CourseFactory(published=True, owner=self.instructor)
+        self.course_not_pub = CourseFactory(published=False,
+                                            owner=self.instructor)
+
+    def test_get_list_user_had_insrtuctor_profile(self):
+        total_count = Course.objects.all().count()
+        current_count = Course.objects.get_list(self.instructor).count()
+        self.assertEqual(total_count, current_count)
 
     def test_get_list_user_is_staff(self):
         total_count = Course.objects.all().count()
-        current_count = Course.objects.get_list(self.fake_staff_user).count()
+        current_count = Course.objects.get_list(self.staff_user).count()
         self.assertEqual(total_count, current_count)
 
     def test_get_list_user_is_not_staff(self):
         total_count = Course.objects.published().count()
-        current_count = Course.objects.get_list(self.fake_user).count()
+        current_count = Course.objects.get_list(self.user).count()
         self.assertEqual(total_count, current_count)
 
     def test_get_list_no_user(self):
@@ -37,17 +53,19 @@ class CourseManagerTest(FastFixtureTestCase):
         self.assertEqual(Course.objects.get_order(), new_order)
 
 
+
+
 class CourseViewTest(FastFixtureTestCase):
     def setUp(self):
         self.username = 'testuser'
         self.password = 'password'
         self.client = Client()
-        self.course_one = CourseFactory()
-        self.course_two = CourseFactory()
-        self.course_three = CourseFactory()
         self.user = UserFactory(username=self.username)
         self.user.set_password(self.password)
         self.user.save()
+        self.course_one = CourseFactory(owner=self.user)
+        self.course_two = CourseFactory(owner=self.user)
+        self.course_three = CourseFactory(owner=self.user)
         self.course_his_item = CourseHistoryFactory(user=self.user,
                                                     course=self.course_two,
                                                     is_active=True)

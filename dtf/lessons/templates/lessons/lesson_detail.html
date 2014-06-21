@@ -60,7 +60,7 @@
                             <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div><!--/ .panel-heading-->
-                    <div class="list-group {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
+                    <div class="list-group {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
                         {% for res in resource_list %}
                             {% include 'resources/partials/detail.html' with object=res %}
                         {% empty %}
@@ -77,7 +77,7 @@
                         <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div>
-                    <div class="list-group  {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
+                    <div class="list-group  {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
                         {% for res in homework_list %}
                             {% include 'resources/partials/detail.html' with object=res %} 
                         {% empty %}

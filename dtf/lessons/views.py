@@ -6,15 +6,16 @@ from lessons.filters import LessonFilter
 from django_filters.views import FilterView
 from tags.models import Tag
 from courses.models import Course
-from utils.views import CreateFormBaseView, PermissionMixin
+from utils.views import (CreateFormBaseView, PermissionMixin,
+                            AjaxResponsePermissionMixin)
 from django.http.response import HttpResponseRedirect
-from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
+from braces.views._ajax import JSONResponseMixin
 from django.views.generic.base import View
 import json
 from lessons.signals import view_lesson_signal
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
-from utils.decorators import instructor_member_required, can_edit_content
+from utils.decorators import can_edit_content
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
@@ -22,8 +23,7 @@ class LessonDetailView(PermissionMixin, UpdateView):
     template_name = 'lessons/lesson_detail.html'
     form_class = LessonCreateFrom
     decorators = {'GET': login_required,
-                  'POST': [instructor_member_required,
-                           can_edit_content(Lesson)]}
+                  'POST': can_edit_content(Lesson)}
 
     def get_queryset(self):
         return Lesson.objects.get_list(self.request.user)
@@ -43,8 +43,8 @@ class LessonDetailView(PermissionMixin, UpdateView):
         if self.request.user.is_authenticated():
             try:
                 context['in_favourites'] = LessonFavourite.objects.get(
-                                                     lesson=self.object,
-                                                     user=self.request.user)
+                                                        lesson=self.object,
+                                                        user=self.request.user)
             except LessonFavourite.DoesNotExist:
                 pass
         return context
@@ -75,13 +75,12 @@ class LessonListView(PermissionMixin, FilterView):
         return context
 
 
-class LessonAddView(CreateFormBaseView, PermissionMixin):
+class LessonAddView(PermissionMixin, CreateFormBaseView):
     model = Lesson
     template_name = 'lessons/lesson_create.html'
     form_class = LessonCreateFrom
-    decorators = {'GET': instructor_member_required,
-                  'POST': [instructor_member_required,
-                           can_edit_content(Course)]}
+    decorators = {'GET': can_edit_content(Course),
+                  'POST': can_edit_content(Course)}
 
     def get_success_url(self):
         return reverse('courses:detail', kwargs={'slug': self.kwargs['slug']})
@@ -94,28 +93,25 @@ class LessonAddView(CreateFormBaseView, PermissionMixin):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class LessonDeleteView(DeleteView, PermissionMixin):
+class LessonDeleteView(PermissionMixin, DeleteView):
     model = Lesson
     success_url = reverse_lazy('lessons:list')
-    decorators = {'GET': instructor_member_required,
-                  'POST': [instructor_member_required,
-                           can_edit_content(Lesson)]}
+    decorators = {'GET': can_edit_content(Lesson),
+                  'POST': can_edit_content(Lesson)}
 
 
-class LessonOrderView(AjaxResponseMixin, JSONResponseMixin, View,
-                      PermissionMixin):
-    decorators = {'POST': [instructor_member_required,
-                           can_edit_content(Course)]}
+class LessonOrderView(AjaxResponsePermissionMixin, JSONResponseMixin, View):
+    decorators = {'POST': can_edit_content(Course)}
 
     def post_ajax(self, request, *args, **kwargs):
         data = json.loads(request.read())
-        course = Course.objects.get(pk=self.kwargs['course_pk'])
+        course = Course.objects.get(slug=self.kwargs['slug'])
         course.set_lesson_order(data.get('new_order', None))
         return self.render_json_response({'success': True})
 
 
-class LessonFavouriteActionView(AjaxResponseMixin, JSONResponseMixin, View,
-                                PermissionMixin):
+class LessonFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                                View):
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
@@ -145,8 +141,8 @@ class LessonHistoryListView(PermissionMixin, ListView):
         return self.request.user.lessonhistory_set.active()
 
 
-class LessonHistoryDeleteView(AjaxResponseMixin, JSONResponseMixin, View,
-                              PermissionMixin):
+class LessonHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                              View):
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
@@ -154,4 +150,3 @@ class LessonHistoryDeleteView(AjaxResponseMixin, JSONResponseMixin, View,
         obj.is_active = False
         obj.save()
         return self.render_json_response({'success': True})
-

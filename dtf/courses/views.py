@@ -5,8 +5,9 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from courses.models import Course, CourseFavourite, CourseHistory
 from django.views.generic import DeleteView
 from courses.forms import CourseCreateFrom
-from utils.views import CreateFormBaseView, PermissionMixin
-from braces.views._ajax import AjaxResponseMixin, JSONResponseMixin
+from utils.views import (CreateFormBaseView, PermissionMixin,
+                            AjaxResponsePermissionMixin)
+from braces.views._ajax import JSONResponseMixin
 from django.views.generic.base import View
 from courses.signals import view_course_signal
 import json
@@ -35,8 +36,7 @@ class CourseDetailView(PermissionMixin, UpdateView):
     model = Course
     template_name = 'courses/course_detail.html'
     form_class = CourseCreateFrom
-    decorators = {'POST': [instructor_member_required,
-                           can_edit_content(Course)]}
+    decorators = {'POST': can_edit_content(Course)}
 
     def get_queryset(self):
         return Course.objects.get_list(self.request.user)
@@ -56,16 +56,14 @@ class CourseDetailView(PermissionMixin, UpdateView):
         return UpdateView.get(self, request, *args, **kwargs)
 
 
-class CourseDeleteView(DeleteView, PermissionMixin):
+class CourseDeleteView(PermissionMixin, DeleteView):
     model = Course
     success_url = reverse_lazy('courses:list')
-    decorators = {'GET': login_required,
-                  'POST': [instructor_member_required,
-                           can_edit_content(Course)]}
+    decorators = {'GET': can_edit_content(Course), 
+                  'POST': can_edit_content(Course)}
 
 
-class CourseOrderView(AjaxResponseMixin, JSONResponseMixin, View,
-                      PermissionMixin):
+class CourseOrderView(AjaxResponsePermissionMixin, JSONResponseMixin, View):
     decorators = {'POST': staff_member_required}
 
     def post_ajax(self, request, *args, **kwargs):
@@ -74,8 +72,8 @@ class CourseOrderView(AjaxResponseMixin, JSONResponseMixin, View,
         return self.render_json_response({'success': True})
 
 
-class CourseFavouriteActionView(AjaxResponseMixin, JSONResponseMixin, View,
-                                PermissionMixin):
+class CourseFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                                View):
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
@@ -105,8 +103,8 @@ class CourseHistoryListView(PermissionMixin, ListView):
         return self.request.user.coursehistory_set.active()
 
 
-class CourseHistoryDeleteView(AjaxResponseMixin, JSONResponseMixin, View,
-                              PermissionMixin):
+class CourseHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                              View):
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
@@ -114,3 +112,5 @@ class CourseHistoryDeleteView(AjaxResponseMixin, JSONResponseMixin, View,
         obj.is_active = False
         obj.save()
         return self.render_json_response({'success': True})
+
+

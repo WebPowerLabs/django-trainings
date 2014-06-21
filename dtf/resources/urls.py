@@ -7,7 +7,7 @@ from resources import views
 
 
 urlpatterns = patterns('',
-    url('^order/(?P<lesson_pk>[-\w]+)$', views.ResourceOrderView.as_view(),
+    url('^order/(?P<slug>[-\w]+)$', views.ResourceOrderView.as_view(),
                                                                 name='order'),
     url('^$', views.ResourceListView.as_view(), name='list'),
     url('^(?P<slug>[-\w]+)/$', views.ResourceDetailView.as_view(),

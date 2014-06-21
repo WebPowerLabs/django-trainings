@@ -3,7 +3,8 @@ from django.views.generic.edit import DeleteView, UpdateView
 from django.http.response import HttpResponseRedirect
 
 from lessons.models import Lesson
-from utils.views import CreateFormBaseView, PermissionMixin
+from utils.views import (CreateFormBaseView, PermissionMixin,
+                            AjaxResponsePermissionMixin)
 
 from .forms import ResourceCreateFrom
 from .models import Resource
@@ -31,21 +32,18 @@ class ResourceListView(PermissionMixin, CreateFormBaseView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ResourceDeleteView(DeleteView, PermissionMixin):
+class ResourceDeleteView(PermissionMixin, DeleteView):
     model = Resource
     success_url = reverse_lazy('resources:list')
-    decorators = {'GET': login_required,
-                  'POST': [instructor_member_required,
-                           can_edit_content(Resource)]}
+    decorators = {'GET': can_edit_content(Resource),
+                  'POST': can_edit_content(Resource)}
 
 
 class ResourceDetailView(PermissionMixin, UpdateView):
     model = Resource
     template_name = 'resources/detail.html'
     form_class = ResourceCreateFrom
-    decorators = {'POST': [instructor_member_required,
-                           can_edit_content(Resource)],
-                  'GET': login_required}
+    decorators = {'POST': can_edit_content(Resource), 'GET': login_required}
 
     def get_queryset(self):
         return Resource.objects.get_list(self.request.user)
@@ -55,13 +53,12 @@ class ResourceDetailView(PermissionMixin, UpdateView):
                                                    })
 
 
-class ResourceAddView(CreateFormBaseView, PermissionMixin):
+class ResourceAddView(PermissionMixin, CreateFormBaseView, ):
     model = Resource
     template_name = 'resources/resource_create.html'
     form_class = ResourceCreateFrom
-    decorators = {'GET': login_required,
-                  'POST': [instructor_member_required,
-                           can_edit_content(Lesson)]}
+    decorators = {'GET': can_edit_content(Lesson),
+                  'POST': can_edit_content(Lesson)}
 
     def get_success_url(self):
         return reverse('lessons:detail', kwargs={'slug': self.kwargs['slug']})
@@ -74,13 +71,11 @@ class ResourceAddView(CreateFormBaseView, PermissionMixin):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ResourceOrderView(AjaxResponseMixin, JSONResponseMixin, View,
-                        PermissionMixin):
-    decorators = {'POST': [instructor_member_required,
-                           can_edit_content(Lesson)]}
+class ResourceOrderView(AjaxResponsePermissionMixin, JSONResponseMixin, View):
+    decorators = {'POST': can_edit_content(Lesson)}
 
     def post_ajax(self, request, *args, **kwargs):
         data = json.loads(request.read())
-        lesson = Lesson.objects.get(pk=self.kwargs['lesson_pk'])
+        lesson = Lesson.objects.get(slug=self.kwargs['slug'])
         lesson.set_resource_order(data.get('new_order', None))
         return self.render_json_response({'success': True})

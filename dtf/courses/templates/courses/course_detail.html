@@ -23,7 +23,7 @@
         <div id="collapseOne" class="panel-collapse collapse">
             {% crispy form %}
         </div><!--/ .panel-collapse-->
-        <div class="list-group lessons {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'lessons:order' object.pk %}">
+        <div class="list-group lessons {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'lessons:order' object.slug %}">
             {% for lesson in lesson_list %}
                 <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}" class="list-group-item sortable_item no_transition pull-left" data-pk="{{ lesson.pk }}">
                         <div class="row">

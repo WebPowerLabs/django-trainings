@@ -3,6 +3,7 @@ import random
 import string
 from courses.models import Course, CourseFavourite, CourseHistory
 from django.conf import settings
+from profiles.models import InstructorProfile
 
 
 def random_string(length=8):
@@ -15,6 +16,10 @@ class UserFactory(factory.django.DjangoModelFactory):
     last_name = factory.Sequence(lambda n: "Last%s" % n)
     email = factory.Sequence(lambda n: "email%s@example.com" % n)
     is_staff = True
+
+
+class InstructorProfileFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = InstructorProfile
 
 
 class CourseFactory(factory.django.DjangoModelFactory):

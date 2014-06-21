@@ -2,6 +2,7 @@ import factory
 import random
 import string
 from django.conf import settings
+from profiles.models import InstructorProfile
 from resources.models import Resource
 from lessons.models import Lesson
 from courses.models import Course
@@ -17,6 +18,9 @@ class UserFactory(factory.django.DjangoModelFactory):
     last_name = factory.Sequence(lambda n: "Last%s" % n)
     email = factory.Sequence(lambda n: "email%s@example.com" % n)
     is_staff = True
+    
+class InstructorProfileFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = InstructorProfile
 
 
 class CourseFactory(factory.django.DjangoModelFactory):
@@ -24,6 +28,7 @@ class CourseFactory(factory.django.DjangoModelFactory):
     # fields
     name = factory.LazyAttribute(lambda t: random_string())
     order = 0
+    owner = factory.SubFactory(UserFactory)
 
 
 class LessonFactory(factory.django.DjangoModelFactory):
@@ -31,12 +36,10 @@ class LessonFactory(factory.django.DjangoModelFactory):
     # fields
     name = factory.LazyAttribute(lambda t: random_string())
     course = factory.SubFactory(CourseFactory)
+    published = True
 
 
 class ResourceFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Resource
-    lesson = factory.SubFactory(LessonFactory)
     # fields
     name = factory.LazyAttribute(lambda t: random_string())
-
-
