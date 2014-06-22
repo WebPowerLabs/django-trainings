@@ -14,13 +14,15 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 class CourseHistoryAdmin(admin.ModelAdmin):
-    list_display = ['course', 'user', 'created']
+    list_display = ['course', 'user', 'created', 'is_active']
     list_filter = ['created']
+    list_editable = ['is_active']
 
 
 class CourseFavouriteAdmin(admin.ModelAdmin):
-    list_display = ['course', 'user', 'created']
+    list_display = ['course', 'user', 'created', 'is_active']
     list_filter = ['created']
+    list_editable = ['is_active']
 
 admin.site.register(Course, CourseAdmin)
 admin.site.register(CourseHistory, CourseHistoryAdmin)

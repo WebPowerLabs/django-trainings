@@ -1,8 +1,9 @@
 import factory
 import random
 import string
-from lessons.models import Lesson
+from lessons.models import Lesson, LessonFavourite, LessonHistory
 from courses.models import Course
+from profiles.models import InstructorProfile
 from tags.models import Tag
 from django.conf import settings
 
@@ -18,6 +19,9 @@ class UserFactory(factory.django.DjangoModelFactory):
     email = factory.Sequence(lambda n: "email%s@example.com" % n)
     is_staff = True
 
+
+class InstructorProfileFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = InstructorProfile
 
 class CourseFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Course
@@ -35,7 +39,6 @@ class TagFactory(factory.django.DjangoModelFactory):
 class LessonFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Lesson
     # fields
-    course = factory.SubFactory(CourseFactory)
     name = factory.LazyAttribute(lambda t: random_string())
 
     @factory.post_generation
@@ -46,3 +49,11 @@ class LessonFactory(factory.django.DjangoModelFactory):
         if extracted:
             for tag in extracted:
                 self.tags.add(tag)
+
+
+class LessonFavouriteFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = LessonFavourite
+
+
+class LessonHistoryFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = LessonHistory

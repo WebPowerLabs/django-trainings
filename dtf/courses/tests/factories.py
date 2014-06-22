@@ -1,8 +1,9 @@
 import factory
 import random
 import string
-from courses.models import Course
+from courses.models import Course, CourseFavourite, CourseHistory
 from django.conf import settings
+from profiles.models import InstructorProfile
 
 
 def random_string(length=8):
@@ -17,8 +18,19 @@ class UserFactory(factory.django.DjangoModelFactory):
     is_staff = True
 
 
+class InstructorProfileFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = InstructorProfile
+
+
 class CourseFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Course
-    # fields
     name = factory.LazyAttribute(lambda t: random_string())
     order = 0
+
+
+class CourseFavouriteFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = CourseFavourite
+
+
+class CourseHistoryFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = CourseHistory

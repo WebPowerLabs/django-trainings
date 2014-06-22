@@ -60,3 +60,37 @@ class PermissionMixin(object):
         except TypeError:
             handler = decorators(handler)
         return handler(request, *args, **kwargs)
+
+
+class AjaxResponsePermissionMixin(object):
+    """
+    Mixin allows you to define alternative methods for ajax requests. And
+    adds a certain decorator to a specific HTTP method.
+    """
+    decorators = {}
+    def dispatch(self, request, *args, **kwargs):
+        if request.is_ajax() and request.method.lower() in self.http_method_names:
+            handler = getattr(self, u"{0}_ajax".format(request.method.lower()),
+                              self.http_method_not_allowed)
+            self.request = request
+            self.args = args
+            self.kwargs = kwargs
+        decorators = self.decorators.get(request.method, [])
+        try:
+            for decorator in list(decorators):
+                handler = decorator(handler)
+        except TypeError:
+            handler = decorators(handler)
+        return handler(request, *args, **kwargs)
+
+    def get_ajax(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
+    def post_ajax(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    def put_ajax(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
+    def delete_ajax(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)

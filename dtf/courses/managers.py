@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.aggregates import Max
+from profiles.models import InstructorProfile
 
 
 class CourseManager(models.Manager):
@@ -8,10 +9,16 @@ class CourseManager(models.Manager):
 
     def get_list(self, user=None):
         """
-        Returns object list all() if user is staff or published() if not.
+        Returns object list all() if user is staff/instructor
+        or published() if not.
         """
-        if user and user.is_staff:
-            return self.all()
+        if user and user.is_authenticated():
+            try:
+                instructor = user.instructorprofile
+            except InstructorProfile.DoesNotExist:
+                instructor = False
+            if user.is_staff or instructor:
+                return self.all()
         return self.published()
 
     def get_order(self):
@@ -33,3 +40,13 @@ class CourseManager(models.Manager):
 
     def get_max_order(self):
         return self.aggregate(max_order=Max('order'))['max_order']
+
+
+class CourseHistoryManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
+
+
+class CourseFavouriteManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)

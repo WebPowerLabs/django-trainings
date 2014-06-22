@@ -3,7 +3,7 @@
 
 {% block nav_actions %}
 {{ block.super }}
-{% if user.is_staff %}
+{% if user.is_staff or user == object.owner %}
 <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit lesson</a></li>
 <li><a href="{% url 'resources:add' object.slug %}" class="">Add Resource or Homework</a></li>
 <li><a class="" href='{% url "lessons:delete" object.slug %}'>Delete</a></li>
@@ -14,7 +14,7 @@
 <section class="lesson-detail section">
     <div class="container">
         <div id="collapseOne" class="panel-collapse collapse">
-            {% crispy form %}
+            {% if user.is_staff or user == object.owner %}{% crispy form %}{% endif %}
         </div><!--/ .panel-collapse-->
         <div class="row">
             <div class="col-xs-12">
@@ -32,17 +32,16 @@
                     {% video_player object %}
                     <br />
                     {% if user.is_authenticated %}
-                        {% if in_favourites %}
-                            <button class="btn btn-danger disabled favourite_add" data-url="{% url 'lessons:add_favourite' object.pk %}">
+                        <button class="btn btn-danger ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.pk %}" >
+                            <span class='state-1'>
                                 <i class="fa fa-check"></i>
                                 Saved
-                            </button>
-                        {% else %}
-                            <button class="btn btn-danger favourite_add" data-url="{% url 'lessons:add_favourite' object.pk %}">
+                            </span>
+                            <span class='state-2'>
                                 <i class="fa fa-heart"></i>
                                 Watch Later
-                            </button>
-                        {% endif %}
+                            </span>
+                        </button>
                     {% endif %}
                     {% else %}
                         {% thumbnail object.thumbnail '640x480' crop='center' as im %}
@@ -57,11 +56,11 @@
                 <div class="panel panel-primary panel-resource">
                     <div class="panel-heading">
                         <span>Resources</span>
-                        {% if user.is_staff %}
+                        {% if user.is_staff or user == object.owner %}
                             <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div><!--/ .panel-heading-->
-                    <div class="list-group {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
+                    <div class="list-group {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
                         {% for res in resource_list %}
                             {% include 'resources/partials/detail.html' with object=res %}
                         {% empty %}
@@ -74,11 +73,11 @@
                 <div class="panel panel-success panel-resource">
                     <div class="panel-heading">
                         <span>Homework</span>
-                        {% if user.is_staff %}
+                        {% if user.is_staff or user == object.owner %}
                         <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
                         {% endif %}
                     </div>
-                    <div class="list-group  {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'resources:order' object.pk %}">
+                    <div class="list-group  {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
                         {% for res in homework_list %}
                             {% include 'resources/partials/detail.html' with object=res %} 
                         {% empty %}

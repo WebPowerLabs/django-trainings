@@ -15,13 +15,15 @@ class LessonAdmin(admin.ModelAdmin):
 
 
 class LessonHistoryAdmin(admin.ModelAdmin):
-    list_display = ['lesson', 'user', 'created']
+    list_display = ['lesson', 'user', 'created', 'is_active']
     list_filter = ['created']
+    list_editable = ['is_active']
 
 
 class LessonFavouriteAdmin(admin.ModelAdmin):
-    list_display = ['lesson', 'user', 'created']
+    list_display = ['lesson', 'user', 'created', 'is_active']
     list_filter = ['user']
+    list_editable = ['is_active']
 
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(LessonHistory, LessonHistoryAdmin)

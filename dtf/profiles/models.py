@@ -1,7 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-
 # class PackageProfile(models.Model):
 #    '''
 #    for storing information about Packages
@@ -18,3 +17,10 @@ class FacebookProfile(models.Model):
 class InfusionsoftProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     infusionsoft_uid = models.TextField(blank=True)
+
+
+class InstructorProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+
+    def __unicode__(self):
+        return self.user.username

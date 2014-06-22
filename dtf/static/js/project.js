@@ -46,22 +46,29 @@ $.ajaxSetup({
 // end CSRF for AJAX request.
 $(document).ready(function(){
     // AJAX request to FavouriteAddView.
-    $('body').on('click', '.favourite_add', function(event){
+    $('body').on('click', '.ajax_action', function(event){
         event.preventDefault();
         var $this = $(this);
+        var target = $this.attr('data-target');
+        target = target != undefined ? $(target) : $this;
         var url = $this.attr('data-url');
         $.ajax({
             url: url,
             type: 'POST',
             contentType: 'application/json',
-            statusCode: {
-                200: function () {
-                    alert("Successfully added.");
-                    $this.addClass('disabled');
+            dataType: 'json',
+            success: function (data) {
+                if(data.is_active == true){
+                    target.addClass('is_active');
+                }else{
+                    target.removeClass('is_active');
                 }
             }
         });
     });
+
+    
+    
     // Renders element with class 'video-js' to HTML5 video player.
     $('.video-js').each(function(){
         videojs(this, {}, function(){
