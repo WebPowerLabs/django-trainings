@@ -53,6 +53,12 @@ class Common(Configuration):
         'django_extensions',
         'tumblr_reader',
         'nufiles',
+        'positions',
+        'django_filters',
+        'django_nose',
+        'djnfusion',
+        'django_comments',
+        'sorl.thumbnail',
     )
 
     # Apps specific for this project go here.
@@ -62,6 +68,11 @@ class Common(Configuration):
         'blog',
         'facebook_groups',
         'app',
+        'courses',
+        'lessons',
+        'tags',
+        'resources',
+        'profiles',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -76,6 +87,8 @@ class Common(Configuration):
         'allauth.socialaccount.providers.facebook',
     )
     ########## END APP CONFIGURATION
+
+    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
     ########## MIDDLEWARE CONFIGURATION
     MIDDLEWARE_CLASSES = (
@@ -281,6 +294,20 @@ class Common(Configuration):
 
     ########## Your common stuff: Below this line define 3rd party libary settings
 
+    ########## Djnfusion CONFIG
+
+    DJNFUSION_COMPANY = os.environ.get('INFUSIONSOFT_COMPANY_ID', '')
+    DJNFUSION_API_KEY = os.environ.get('INFUSIONSOFT_API_KEY', '')
+
+    DJNFUSION_USERID_FIELD_NAME = 'infusionsoft_uid'
+    # DJNFUSION_USER_ID_VALUE_PREPROCESSOR = lambda id: unicode(id)
+    # DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_CREATE = lambda u: dict()
+    # DJNFUSION_ADDITIONAL_USER_FIELD_PROVIDER_UPDATE = lambda u: dict()
+    # DJNFUSION_AUTO_OPTIN = False
+    # DJNFUSION_OPTIN_ONLY_IF_ACTIVE = True
+    # DJNFUSION_OPTIN_MESSAGE = 'Auto-optin through the Web application.'
+    # DJNFUSION_DAILY_USER_STATISTICS = {}
+
     ########## SOCIAL CONFIG
     SOCIALACCOUNT_PROVIDERS = \
         { 'facebook':
@@ -294,7 +321,7 @@ class Common(Configuration):
     ########## END SOCIAL CONFIG
 
     ########## SESSION CONFIG
-    SESSION_COOKIE_AGE =  3600
+    SESSION_COOKIE_AGE = 3600
     SESSION_SAVE_EVERY_REQUEST = True
     ########## SESSION CONFIG
 
@@ -341,6 +368,12 @@ class Local(Common):
     ########## Your local stuff: Below this line define 3rd party libary settings
 
 
+class LocalAndrew(Local):
+    # Andrews Local settings
+    # $ export DJANGO_CONFIGURATION="LocalAndrew"
+    DATABASES = values.DatabaseURLValue('postgres://postgres:postgres@localhost/dtf')
+
+
 class Production(Common):
 
     ########## INSTALLED_APPS
@@ -352,7 +385,7 @@ class Production(Common):
     ########## END SECRET KEY
 
     ########## django-secure
-    INSTALLED_APPS += ("djangosecure", )
+    INSTALLED_APPS += ("djangosecure",)
 
     # set this to 60 seconds and then to 518400 when you can prove it works
     SECURE_HSTS_SECONDS = 60
@@ -371,7 +404,7 @@ class Production(Common):
     ALLOWED_HOSTS = ["*"]
     ########## END SITE CONFIGURATION
 
-    INSTALLED_APPS += ("gunicorn", )
+    INSTALLED_APPS += ("gunicorn",)
 
     ########## STORAGE CONFIGURATION
     # See: http://django-storages.readthedocs.org/en/latest/index.html
@@ -391,7 +424,7 @@ class Production(Common):
 
     # see: https://github.com/antonagestam/collectfast
     AWS_PRELOAD_METADATA = True
-    INSTALLED_APPS += ("collectfast", )
+    INSTALLED_APPS += ("collectfast",)
 
     # AWS cache settings, don't change unless you know what you're doing:
     AWS_EXPIREY = 60 * 60 * 24 * 7
@@ -401,7 +434,8 @@ class Production(Common):
     }
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-    STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    SSTATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
     ########## END STORAGE CONFIGURATION
 
     ########## EMAIL
@@ -449,3 +483,8 @@ class Production(Common):
     ########## END CACHING
 
     ########## Your production stuff: Below this line define 3rd party libary settings
+
+    ########## Djnfusion CONFIG
+    DJNFUSION_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
+    DJNFUSION_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_API_KEY")
+    ########## END Djnfusion CONFIG

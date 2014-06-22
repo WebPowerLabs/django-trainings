@@ -1,0 +1,47 @@
+{% extends 'courses/base.html' %}
+{% load crispy_forms_tags thumbnail %}
+
+{% block nav_actions %}
+{{ block.super }}
+{% if user.is_staff or user == object.owner %}
+<li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit Course</a></li>
+<li><a href="{% url 'lessons:add' object.slug %}" class="pull-right">Add Lesson</a></li>
+<li><a class="" href='{% url "courses:delete" object.slug %}'>Delete</a></li>
+{% endif %}
+{% endblock nav_actions %}
+
+{% block content %}
+<section class="course-detail">
+    <div class="col-md-6 section bg-turquoise-color">
+        <div class="course-info">
+                <h1>{{ object.name }}</h1> 
+                <hr>               
+                <p>{{ object.description }}</p>
+        </div><!--/ .course-info-->
+    </div><!--/ .col-md-6-->
+    <div class="col-md-6 section bg-white">
+        <div id="collapseOne" class="panel-collapse collapse">
+            {% crispy form %}
+        </div><!--/ .panel-collapse-->
+        <div class="list-group lessons {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'lessons:order' object.slug %}">
+            {% for lesson in lesson_list %}
+                <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}" class="list-group-item sortable_item no_transition pull-left" data-pk="{{ lesson.pk }}">
+                        <div class="row">
+                            <div class="col-md-3">
+                                {% thumbnail lesson.thumbnail '122x117' crop='center' as im %}
+                                    <img src="{{ im.url }}" class="img-rounded" alt="{{ lesson.name }}">
+                                {% endthumbnail %}
+                            </div><!--/ .col-md-3-->
+                            <div class="col-md-9">
+                                <h3 class="list-group-item-heading">{{ lesson.name }}</h3>
+                                <p class="list-group-item-text">{{ lesson.description|truncatewords:25 }}</p>
+                            </div><!--/ .col-md-9-->
+                        </div><!--/ .row-->
+                </a><!--/ .list-group-item-->
+            {% endfor %}
+        </div><!--/ .list-group-->
+    </div><!--/ .col-md-6-->
+    <div class="clearfix"></div>
+</section>
+
+{% endblock content %}

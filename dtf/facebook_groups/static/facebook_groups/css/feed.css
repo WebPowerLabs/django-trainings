@@ -1,0 +1,96 @@
+.facebook-feed .fb-post-heading {
+	clear: both;
+	display: inline-block;
+	margin-bottom: 0;
+	padding: 10px 15px;
+}
+.facebook-feed p {
+	margin-bottom: 5px;
+	line-height: 24px;
+}
+.facebook-feed .img-profile {
+	max-width: 40px;
+}
+.facebook-feed .fb-post-heading .fb-profile-img {
+	max-width: 40px;
+	display: inline-block;
+	float: left;
+}
+.facebook-feed .fb-post-heading .fb-from-user {
+	line-height: 40px;
+	padding-left: 15px;
+	float: left;
+}
+.facebook-feed .fb-post-heading .date {
+	line-height: 34px;
+	float: left;
+	padding: 6px 0 0 10px;
+}
+.facebook-feed .fb-profile-comment-img > img {
+	max-width: 34px;
+}
+.facebook-feed .fb-picture {
+	padding-right: 20px;
+}
+.facebook-feed .fb-comments {
+	width: 100%;
+	clear: both;
+}
+.facebook-feed .fb-comments .media {
+	margin-top: 5px;
+}
+.facebook-feed .fb-comments p {
+	line-height: 22px;
+}
+.facebook-feed .fb-comment-form {
+	padding: 10px 0;
+}
+.facebook-feed .fb-comment-form input {
+	background-color: #fff;
+}
+.facebook-feed .panel-pinned {
+	border-color: #cc0a66;
+	box-shadow: 0 0 10px #cc0a66;
+}
+.facebook-feed .fb-divider {
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	padding-top: 15px;
+	margin-bottom: 35px;
+}
+.facebook-feed .fb-post .panel-body {
+	padding: 0 15px 15px;
+}
+.facebook-feed .panel-footer {
+	background-color: #f8f8f8;
+}
+.facebook-feed .fb-actions {
+	font-weight: 600;
+	font-size: 12px;
+	color: #5b5e60;
+}
+.pin-post {
+	padding: 5px 15px 5px 0;
+}
+.pin-post a:hover > * {
+	color: #cc0a66;
+}
+.fb-post .pin-post {
+	visibility: hidden;
+}
+.fb-post:hover .pin-post {
+	visibility: visible;
+}
+.comment-actions {
+	padding: 5px 10px 5px 0;
+	visibility: hidden;
+}
+.comment-actions a {
+	padding-left: 5px;
+}
+.comment-actions a:hover > * {
+	color: #cc0a66;
+}
+.comment-post:hover .comment-actions {
+	visibility: visible;
+}

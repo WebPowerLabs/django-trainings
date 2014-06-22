@@ -1,0 +1,27 @@
+{% extends "facebook_groups/list.html" %}
+{% load staticfiles i18n crispy_forms_tags comments %}
+
+{% block title %}{{ facebook_group.name }}{{ block.super }}{% endblock title %}
+
+{% block page_title %}{{ facebook_group.name }}{% endblock page_title %}
+
+{% block fb_form %}
+{% crispy form %}
+{% if user.is_authenticated %}
+    {% get_comment_form for facebook_group as form %}
+    <form action="{% comment_form_target %}" method="POST">
+    {% csrf_token %}
+    {{ form.comment }}
+    {{ form.honeypot }}
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
+    {{ form.security_hash }}
+    <input type="hidden" name="next" value="{% url 'facebook_groups:feed' facebook_group.fb_uid %}" />
+    <input type="submit" value="Add comment" id="id_submit" />
+    </form>
+{% else %}
+    <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
+{% endif %}
+
+{% endblock fb_form %}

@@ -1,0 +1,64 @@
+{% extends 'courses/base.html' %}
+
+{% load crispy_forms_tags thumbnail %}
+{% block nav_actions %}
+{{ block.super }}
+{% if user.is_staff or user.instructorprofile %}
+<li><a class="" href="#" data-toggle="modal" data-target="#addCourse">Add a Course</a></li>
+{% endif %}
+{% endblock nav_actions %}
+
+{% block content %}
+<section class="course-list section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 section-title">
+                <h1>Coaching Courses</h1>
+                <h2>Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h2>
+            </div><!--/ .col-xs-12-->
+        </div><!--/ .row-->
+        <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
+            {% for course in object_list %}
+                <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
+                    <a class="course-item" href="{% url 'courses:detail' course.slug %}">
+                        <div class="thumbnail">
+                            {% thumbnail course.thumbnail '284x180' crop='center' as im %}
+                                <img src="{{ im.url }}" class="img-rounded" alt="{{ course.name }}">
+                            {% endthumbnail %}
+                            <div class="caption">
+                                <h3>{{ course.name }}</h3>
+                                <p>{{ course.description }}</p>
+                            </div><!--/ .caption-->
+                        </div><!--/ .thumbnail-->
+                    </a><!--/ .course-item-->
+                </div><!--/ .col-md-4-->
+            {% endfor %}
+        </div><!--/ .row-->
+    </div><!--/ .container-->
+</section>
+{% endblock content %}
+
+{% block modal %}
+    {% if user.is_staff or user.instructorprofile %}
+        <!-- Add Course Modal -->
+        <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="addCourseLabel">Add a Course</h4>
+                    </div><!--/ .modal-header-->
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            {% crispy form %}
+                        </div><!--/ .col-md-12-->
+                    </div><!--/ .modal-body-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success">Save changes</button>
+                    </div><!--/ .modal-footer-->
+                </div><!--/ .modal-content-->
+            </div><!--/ .modal-dialog-->
+        </div><!--/ .modal-->
+    {% endif %}
+{% endblock modal %}

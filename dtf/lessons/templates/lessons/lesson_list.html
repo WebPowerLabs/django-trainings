@@ -1,0 +1,75 @@
+{% extends 'lessons/base.html' %}
+{% load crispy_forms_tags query_string thumbnail %}
+
+{% block content %}
+<section class="lesson-list section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 section-title">
+                <h1>All Lessons</h1>
+                <h2>Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h2>
+            </div><!--/ .col-xs-12-->
+        </div><!--/ .row-->
+        <div class="row">
+            <div class="col-md-9">
+                <div class="list-group lessons">
+                    {% for lesson in object_list %}
+                        <a class="list-group-item" href="{% url 'lessons:detail' lesson.slug %}{% query_string request.GET %}">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {% thumbnail lesson.thumbnail '170x150' crop='center' as im %}
+                                    <img src="{{ im.url }}" class="img-rounded" alt="{{ lesson.name }}">
+                                    {% endthumbnail %}
+                                </div>
+                                <div class="col-md-9">
+                                    <h2 class="list-group-item-heading">{{ lesson.name }}</h2>
+                                    <p class="list-group-item-text">{{ lesson.description|truncatewords:25 }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <h3>Lesson Categories</h3>
+                    <hr />
+                </div>
+                <div class="row">
+                    <a href="{% url 'lessons:list' %}">
+                        <span class="label label-{% if not request.GET.tags %}success{% else %}primary{% endif %}">
+                            All
+                        </span>&nbsp;
+                    </a>
+                    {% for tag in tag_list %}
+                        <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
+                        {% include 'tags/partials/detail.html' with object=tag %}
+                        </a>
+                    {% endfor %}
+                </div><!--/ .row-->
+                <br />
+                <div class="row">
+                    <h3>Browse Courses</h3>
+                    <div class="list-group">
+                        {% for course in course_list %}
+                        <a href="{% url 'courses:detail' course.slug %}" class="list-group-item">
+                            <h4 class="list-group-item-heading">{{ course.name }}</h4>
+                            <p class="list-group-item-text">
+                                {{ course.description|truncatewords:15 }}
+                            </p>
+                        </a>
+                        {% empty %}
+                        <a href="#" class="list-group-item">
+                            <p class="list-group-item-text">
+                                There are no items yet ;)
+                            </p>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div><!--/ .row-->
+    </div><!--/ .container-->
+</section>
+{% endblock content %}
+        

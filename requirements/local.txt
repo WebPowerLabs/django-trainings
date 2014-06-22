@@ -7,3 +7,9 @@ Sphinx
 # django-debug-toolbar that works with Django 1.5+
 django-debug-toolbar==1.2
 ipython==1.2.0
+
+# pygraphviz and pydot to use django_extensions graph_models
+
+# pydot==1.0.2
+# pygraphviz==1.2
+

@@ -1,8 +1,60 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags staticfiles %}
+
+{% block sub_header %}
+{% endblock sub_header %}
 
 {% block footer_form %}
 {% crispy email_form %}
 {% endblock footer_form %}
 
 {% block title %} | Decide to Fly{% endblock title %}
+
+{% block javascript %}
+{{ block.super }}
+{% include "includes/js_marketing.html" %}
+{% endblock javascript %}
+
+{% block css %}
+{{ block.super }}
+{% include "includes/css_marketing.html" %}
+{% endblock css %}
+
+{% block bodyclass %}default{% endblock bodyclass %}
+
+{% block loader %}
+<div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
+{% endblock loader %}
+
+    {% block header %}
+      <header id="header">
+        <div class="header-member">
+
+	    {% block messages %}
+			{% include "includes/messages.html" %}
+	    {% endblock messages %}
+          <div class="header-in">
+            <nav id="nav-member" class="navigation">
+              <ul>
+                {% block nav_user %}
+                  {% include "menus/nav_user.html" %}
+                {% endblock nav_user %}
+              </ul>
+            </nav><!--/ #navigation-->
+          </div><!--/ .header-in-->
+        </div><!--/ .header-member-->              
+        <div class="header-main">
+          <div class="header-in">
+            <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
+            <a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
+            <nav id="navigation" class="navigation">
+              <ul>
+                {% block nav %}
+                  {% include "menus/nav_marketing.html" %}
+                {% endblock nav %}
+              </ul>
+            </nav><!--/ #navigation-->
+          </div><!--/ .header-in-->
+        </div><!--/ .header-main-->
+      </header><!--/ #header-->
+    {% endblock header %}

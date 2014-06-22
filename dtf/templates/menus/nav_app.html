@@ -1,0 +1,8 @@
+{% if user.is_authenticated %}
+  <li><a href="{% url 'facebook_groups:list' %}">Communities</a></li>
+  <li><a href="{% url 'courses:list' %}">Courses</a></li>
+  <li><a href="{% url 'lessons:list' %}">Lessons</a></li>
+{% endif %}
+{% if user.is_staff %}
+	<li><a href="{% url 'admin:index' %}">Admin</a></li>
+{% endif %}

@@ -1,86 +1,18 @@
 {% extends "facebook_groups/list.html" %}
-{% load staticfiles i18n %}
+{% load staticfiles i18n comments %}
 
 {% block title %}{{ facebook_group.name }}{{ block.super }}{% endblock title %}
 
 {% block page_title %}{{ facebook_group.name }}{% endblock page_title %}
 
+{% block group_actions %}
+{{ block.super }}
+<li><a href="{% url 'facebook_groups:feed_post' facebook_group.fb_uid %}"><i class="fa fa-plus"></i> Post</a></li>
+{% endblock group_actions %}
+
 {% block css %}
 {{ block.super }}
-<style>
-.facebook-feed .fb-post-heading {
-	clear: both;
-	display: inline-block;
-	margin-bottom: 0;
-	padding: 10px 15px;
-}
-.facebook-feed p {
-	margin-bottom: 5px;
-	line-height: 24px;
-}
-.facebook-feed .img-profile {
-	max-width: 40px;
-}
-.facebook-feed .fb-post-heading .fb-profile-img {
-	max-width: 40px;
-	display: inline-block;
-	float: left;
-}
-.facebook-feed .fb-post-heading .fb-from-user {
-	line-height: 40px;
-	padding-left: 15px;
-	float: left;
-}
-.facebook-feed .fb-post-heading .date {
-	line-height: 34px;
-	float: left;
-	padding: 6px 0 0 10px;
-}
-.facebook-feed .fb-profile-comment-img > img {
-	max-width: 34px;
-}
-.facebook-feed .fb-picture {
-	padding-right: 20px;
-}
-.facebook-feed .fb-comments {
-	width: 100%;
-	clear: both;
-}
-.facebook-feed .fb-comments .media {
-	margin-top: 5px;
-}
-.facebook-feed .fb-comments p {
-	line-height: 22px;
-}
-.facebook-feed .fb-comment-form {
-	padding: 10px 0;
-}
-.facebook-feed .fb-comment-form input {
-	background-color: #fff;
-}
-.facebook-feed .panel-pinned {
-	border-color: #cc0a66;
-	box-shadow: 0 0 10px #cc0a66;
-}
-.facebook-feed .fb-divider {
-	width: 100%;
-	border-bottom: 1px solid #ddd;
-	padding-top: 15px;
-	margin-bottom: 35px;
-}
-.facebook-feed .fb-post .panel-body {
-	padding: 0 15px 15px;
-}
-.facebook-feed .panel-footer {
-	background-color: #f8f8f8;
-}
-.facebook-feed .fb-actions {
-	font-weight: 600;
-	font-size: 12px;
-	color: #5b5e60;
-}
-
-</style>
+<link rel="stylesheet" href="{% static 'facebook_groups/css/feed.css' %}">
 {% endblock css %}
 
 {% block javascript %}
@@ -112,8 +44,75 @@ $(document).ready(function() {
 	<p class="lead">{{ facebook_group.description }}</p>
 	<div class="clearfix"></div>
 	<div id="facebook-feed-list">
+
+	{% if facebook_group.pinned_post %}
+	{% with facebook_group.pinned_post as post %}
+		<div id="post-{{ post.id }}" class="fb-post panel panel-primary panel-pinned">
+			<h3 class="fb-post-heading">
+				<img src="https://graph.facebook.com/{{ post.from_user.id }}/picture?width=40&height=40" class="fb-profile-img">
+				<span class="fb-from-user">{{ post.from_user.name }}</span>
+				<small class="date" data-date="{{ post.created_time }}"></small>
+			</h3>
+			<div class="panel-body">
+				{% if post.picture and post.link %}
+					<a href="{{ post.link }}" target="_blank" class="pull-left">
+						<img src="{{ post.picture }}" class="img-responsive fb-picture">
+					</a>
+				{% elif post.picture %}
+					<img src="{{ post.picture }}" class="img-responsive pull-left">
+				{% endif %}
+				<p>{{ post.message }}</p>
+				<p class="fb-actions"><small>{{ post.likes|length }} Likes | {{ post.comments|length }} Comments</small></p>
+			</div>
+			<div class="panel-footer">
+				<div class="fb-comments">
+				{% if post.comments.data %}
+					{% for comment in post.comments.data %}
+						<div id="comment-{{ comment.id }}" class="media fb-post">
+							<div data-fbuser="{{ comment.from.id }}" class="pull-left img-profile">
+								<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profil-img">
+							</div>
+							<div class="media-body">
+								<p>
+								<strong class="fb-from-user">{{ comment.from.name }}</strong> 
+								<span class="fb-message">{{ comment.message }}</span>
+									{% if comment.picture and comment.link %}
+										<a href="{{ comment.link }}" target="_blank" class="pull-left">
+											<img src="{{ comment.picture }}" class="img-responsive fb-picture">
+										</a>
+									{% elif comment.picture %}
+										<img src="{{ comment.picture }}" class="img-responsive pull-left fb-picture">
+									{% endif %}
+								
+								<p class="fb-actions">
+									<small>{{ comment.like_count }} Likes</small> | <small class="date" data-date="{{ post.created_time }}"></small>
+								</p>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+				</div>
+				<form class="form fb-comment-form" data-access-token="{{ request.user.get_fb_access_token }}">
+					<div class="">
+						<div class="row">
+							<div class="col-xs-2 col-sm-1 fb-profile-comment-img">
+								<img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+							</div>
+							<div class="col-xs-10 col-sm-11">
+								<input type="text" name="message" class="form-control" placeholder="Write a comment...">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	{% endwith %}
+	{% endif %}
+
+	<div class="fb-divider"></div>
+
 	{% for post in feed.data %}
-		<div id="post-{{ post.id }}" class="fb-post panel panel-{% if forloop.first %}primary panel-pinned{% else %}default{% endif %}">
+		<div id="post-{{ post.id }}" class="fb-post panel panel-default">
 			<h3 class="fb-post-heading">
 				<img src="https://graph.facebook.com/{{ post.from.id }}/picture?width=40&height=40" class="fb-profile-img">
 				<span class="fb-from-user">{{ post.from.name }}</span>
@@ -172,9 +171,6 @@ $(document).ready(function() {
 				</form>
 			</div>
 		</div>
-		{% if forloop.first %}
-			<div class="fb-divider"></div>
-		{% endif %}
 	{% endfor %}
 	</div>
 	<div class="text-center clearfix">
@@ -183,6 +179,9 @@ $(document).ready(function() {
 	</div>
 </div>
 </section>
+
+
+
 <!-- templates for jquery async load -->
 <section id="templates" class="hidden">
 <div id="post-template" class="panel panel-default fb-post">

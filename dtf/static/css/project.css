@@ -1,3 +1,57 @@
 body {
   background: url(../images/bg.jpg);
 }
+
+body.app {
+	padding-top: 50px;
+}
+.app>.top {
+	min-height: 20px;
+	width: 100%;
+	display: block;
+	float: left;
+}
+.navbar {
+	margin-bottom: 0;
+}
+.app-messages .alert {
+	margin-bottom: 0;
+	border-radius: 0;
+	/* have to override style 707 */
+	line-height: 1.42857143 !important;
+}
+
+/*!!!custom styles!!!*/
+.sortable_item .caption{
+  height: 200px;
+  overflow: hidden;
+}
+.no_transition{
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+
+.fav_button.is_active .state-1, .fav_button .state-2{
+    display: block;
+}
+.fav_button.is_active .state-2, .fav_button .state-1{
+    display: none;
+}
+
+.history_item.is_active{
+    display: table-row;
+}
+.history_item{
+    display: none;
+}
+
+.favourite_item.is_active{
+    display: table-row;
+}
+.favourite_item{
+    display: none;
+}
+/*!!!end custom styles!!!*/
+
