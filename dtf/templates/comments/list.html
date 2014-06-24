@@ -4,7 +4,7 @@
 {% for comment in comment_list %}
     <div id="comment-{{ comment.id }}" class="media fb-post">
         <div data-fbuser="{{ comment.user.id }}" class="pull-left img-profile">
-            <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-responsive fb-profil-img">
+            <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-responsive fb-profile-img">
         </div>
         <div class="media-body">
             <p>

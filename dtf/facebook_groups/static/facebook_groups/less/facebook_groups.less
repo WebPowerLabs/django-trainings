@@ -1,0 +1,108 @@
+.feed {
+	// FACEBOOK
+	.fb-post {
+		p {
+			margin-bottom: 5px;
+			line-height: 24px;
+		}
+		.fb-post-heading {
+			clear: both;
+			display: inline-block;
+			margin-bottom: 0;
+			margin-top: 0;
+			padding: 10px 15px;
+			.fb-profile-img {
+				max-width: 40px;
+				display: inline-block;
+				float: left;
+			}
+			.fb-from-user {
+				line-height: 40px;
+				padding-left: 15px;
+				float: left;
+			}
+			.date {
+				line-height: 34px;
+				float: left;
+				padding: 6px 0 0 10px;
+			}
+		}
+		// comments
+		.fb-comments {
+			width: 100%;
+			clear: both;
+			.media {
+				margin-top: 5px;
+			}
+			.fb-profile-img {
+				max-width: 40px;
+			}
+			p {
+				line-height: 22px;
+			}
+			.fb-actions {
+				font-weight: 600;
+				font-size: 12px;
+				color: @brand-gray;
+			}
+		}
+		.fb-comment-form {
+			padding: 10px 0;
+			input {
+				background-color: #fff;
+			}
+		}
+		.fb-profile-comment-img > img {
+			max-width: 34px;
+		}
+		.fb-picture {
+			// image posted in an inline comment
+			padding-right: 20px;
+		}
+		// Pinned posts
+		.pin-post {
+			visibility: hidden;
+			padding: 5px 15px 5px 0;
+			&
+			a:hover > * {
+				color: @brand-danger;
+			}
+		}
+		&:hover {
+			.pin-post {
+				visibility: visible;
+			}
+		}
+	}
+	// CONTRIB-COMMENTS
+	.comment-post {
+		.comment-actions {
+			padding: 5px 10px 5px 0;
+			visibility: hidden;
+		}
+		.comment-actions a {
+			padding-left: 5px;
+		}
+		.comment-actions a:hover > * {
+			color: @brand-danger;
+		}	
+		&:hover {
+			.comment-actions {
+				visibility: visible;
+			}
+		}
+	}
+	// bootstrap panel overrides
+	.panel-pinned {
+		border-color: @brand-danger;
+		box-shadow: 0 0 3px @brand-danger;
+	}
+	.panel-body {
+		padding: 0 15px 15px;
+	}
+	.panel-footer {
+		background-color: @brand-gray-bg;
+	}
+} // END FEED
+
+
