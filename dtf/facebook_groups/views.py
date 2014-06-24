@@ -3,8 +3,15 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse_lazy
 #from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, Http404, HttpResponse
+
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+import django_comments
+Comment = django_comments.get_model()
+
+
 
 from utils.comments import latest_comments
 
@@ -20,6 +27,16 @@ def fb_group_list(request):
     '''
     fb_groups = FacebookGroup.objects.all()
     feed = latest_comments(request) # get latest comments
+    paginator = Paginator(feed, 10) # TODO: add settings var: paginate_by
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+    try:
+        feed = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        feed = paginator.page(paginator.num_pages)
+
     context = {
         "facebook_groups": fb_groups,
         "feed": feed,
@@ -48,10 +65,25 @@ def fb_group_detail(request, fb_uid):
     '''
     fb_groups = FacebookGroup.objects.all()
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
+    content_type_id=ContentType.objects.get_for_model(FacebookGroup)
+    comments = Comment.objects.filter(content_type=content_type_id,
+        object_pk=fb_group.pk).order_by('-submit_date')
+    if fb_group.pinned_comment:
+        comments = comments.exclude(pk=fb_group.pinned_comment.pk)
+    paginator = Paginator(comments, 5)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+    try:
+        comments = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        comments = paginator.page(paginator.num_pages)
 
     context = {
         "facebook_groups": fb_groups,
-        "facebook_group": fb_group
+        "facebook_group": fb_group,
+        "comments": comments
     }
     return render_to_response('facebook_groups/detail.html',
         context,

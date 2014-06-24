@@ -1,0 +1,21 @@
+<ul class="pager">
+  {% if comment_list.has_previous %}
+    <li class="previous">
+      <a href="?page={{ comment_list.previous_page_number }}">&larr; Newer</a>
+    </li>
+  {% else %}
+    <li class="previous disabled">
+      <a href="">&larr; Newer</a>
+    </li>
+  {% endif %}
+  <li>{{ comment_list.number }} of {{ comment_list.paginator.num_pages }}</li>
+  {% if comment_list.has_next %}
+    <li class="next">
+      <a href="?page={{ comment_list.next_page_number }}">Older &rarr;</a>
+    </li>
+  {% else %}
+    <li class="next disabled">
+      <a href="#">Older &rarr;</a>
+    </li>
+  {% endif %}
+</ul>
