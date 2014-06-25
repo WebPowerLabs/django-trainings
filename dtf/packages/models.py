@@ -1,37 +1,47 @@
 from django.db import models
 
 from djnfusion import server, key
-# TODO: change to this. Currently doesnt work. may have something to do with 
+from courses.models import Course
+from django.conf import settings
+# TODO: change to this. Currently doesnt work. may have something to do with
 # the server not in __init__
 # from packages.providers.infusionsoft import server, key
 
 
-class PackageAbstractModel(models.Model):
+class Package(models.Model):
     """
     Base for package classes
     """
     name = models.CharField(max_length=255, blank=True)
-
-    class Meta:
-        abstract = True
+    course = models.ManyToManyField(Course)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return u'{}'.format(self.name)
 
 
-class InfusionsoftPackage(PackageAbstractModel):
+class PackagePurchase(models.Model):
+    """
+    User's purchased packages.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    package = models.ForeignKey('Package')
+
+
+class InfusionsoftPackage(Package):
     """
     Package with infusionsoft api hooks
     """
-    infusionsoft_Id = models.TextField(blank=True)
-    infusionsoft_ProductId = models.TextField(blank=True)
-    infusionsoft_Cycle = models.TextField(blank=True)
-    infusionsoft_Frequency = models.TextField(blank=True)
-    infusionsoft_PreAuthorizeAmount = models.TextField(blank=True)
-    infusionsoft_Prorate = models.TextField(blank=True)
-    infusionsoft_Active = models.TextField(blank=True)
-    infusionsoft_PlanPrice = models.TextField(blank=True)
-    infusionsoft_actionSetId = models.TextField(blank=True)
+    remote_id = models.TextField(blank=True)
+    product_id = models.TextField(blank=True)
+    cycle = models.TextField(blank=True)
+    frequency = models.TextField(blank=True)
+    pre_authorize_amount = models.TextField(blank=True)
+    prorate = models.TextField(blank=True)
+    active = models.TextField(blank=True)
+    plan_price = models.TextField(blank=True)
+    action_set_id = models.TextField(blank=True)
 
     def sync(self):
         sync_data = self._get_sync_data()
@@ -43,9 +53,9 @@ class InfusionsoftPackage(PackageAbstractModel):
         provider_data = self._get_provider_data()
         if provider_data:
             package_data = dict({
-                "id": self.id, 
-                "pk": self.pk, 
-                "infusionsoft_actionSetId": self.infusionsoft_actionSetId,
+                "id": self.id,
+                "pk": self.pk,
+                "action_set_id": self.action_set_id,
                 "name": self.name,
                 })
             prefix = "infusionsoft"
@@ -54,14 +64,14 @@ class InfusionsoftPackage(PackageAbstractModel):
             return package_data
 
     def _get_provider_data(self):
-        if self.infusionsoft_ProductId:
-            results = server.DataService.findByField(key, "SubscriptionPlan", 
-                10, 0, "productid", self.infusionsoft_ProductId, 
-                ["Id", "ProductId", "Cycle", "Frequency", "PreAuthorizeAmount", 
+        if self.product_id:
+            results = server.DataService.findByField(key, "SubscriptionPlan",
+                10, 0, "productid", self.product_id,
+                ["Id", "ProductId", "Cycle", "Frequency", "PreAuthorizeAmount",
                 "Prorate", "Active", "PlanPrice"]);
             return results[0]
 
     def cancel_subscription(self, contactId, actionSetId):
-        results = server.ContactService.runActionSequence(key, contactId, actionSetId)
+        results = server.ContactService.runActionSequence(key, contactId,
+                                                          actionSetId)
         return results
-
