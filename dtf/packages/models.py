@@ -14,8 +14,6 @@ class Package(models.Model):
     """
     name = models.CharField(max_length=255, blank=True)
     course = models.ManyToManyField(Course)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return u'{}'.format(self.name)
@@ -25,8 +23,21 @@ class PackagePurchase(models.Model):
     """
     User's purchased packages.
     """
+    INACTIVE = 0
+    ACTIVE = 1
+    EXPIRED = 2
+    STATUS_CHOICES = [
+                      [INACTIVE, 'Inactive'],
+                      [ACTIVE, 'Active'],
+                      [EXPIRED, 'Expired'],
+                      ]
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     package = models.ForeignKey('Package')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=INACTIVE)
+    data = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class InfusionsoftPackage(Package):

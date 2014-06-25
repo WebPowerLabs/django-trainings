@@ -12,8 +12,6 @@ class Migration(SchemaMigration):
         db.create_table(u'packages_package', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
         db.send_create_signal(u'packages', ['Package'])
 
@@ -31,6 +29,10 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
             ('package', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['packages.Package'])),
+            ('status', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('data', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
         db.send_create_signal(u'packages', ['PackagePurchase'])
 
@@ -250,15 +252,17 @@ class Migration(SchemaMigration):
         u'packages.package': {
             'Meta': {'object_name': 'Package'},
             'course': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['courses.Course']", 'symmetrical': 'False'}),
-            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
-            'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'})
         },
         u'packages.packagepurchase': {
             'Meta': {'object_name': 'PackagePurchase'},
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'data': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'package': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['packages.Package']"}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"})
         },
         u'users.user': {
