@@ -3,6 +3,7 @@ from django.db import models
 from djnfusion import server, key
 from courses.models import Course
 from django.conf import settings
+from jsonfield import JSONField
 # TODO: change to this. Currently doesnt work. may have something to do with
 # the server not in __init__
 # from packages.providers.infusionsoft import server, key
@@ -35,7 +36,7 @@ class PackagePurchase(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     package = models.ForeignKey('Package')
     status = models.IntegerField(choices=STATUS_CHOICES, default=INACTIVE)
-    data = models.TextField(blank=True)
+    data = JSONField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -62,7 +63,7 @@ class InfusionsoftPackage(Package):
 
     def _get_sync_data(self):
         provider_data = self._get_provider_data()
-        if provider_data:
+        if provider_data:remote_id
             package_data = dict({
                 "id": self.id,
                 "pk": self.pk,
