@@ -63,7 +63,7 @@ class InfusionsoftPackage(Package):
 
     def _get_sync_data(self):
         provider_data = self._get_provider_data()
-        if provider_data:remote_id
+        if provider_data:
             package_data = dict({
                 "id": self.id,
                 "pk": self.pk,
