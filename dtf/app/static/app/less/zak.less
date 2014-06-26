@@ -69,6 +69,24 @@ input {
 	border-radius: 0;
 }
 
+// ------ App Navs ------ //
+.primary-nav,
+.secondary-nav {
+	border: none;
+	border-radius: 0;
+
+	.navbar-nav > li > a {
+		color: #fff;
+
+		&:hover {
+			color: darken(@brand-dtf, 31%);
+			background-color: #fff;
+		}
+	}
+}
+.primary-nav { background-color: darken(@brand-dtf, 31%); }
+.secondary-nav { background-color: desaturate(darken(@brand-dtf, 23%), 60%); }
+
 // ------ Background Color Classes ------ //
 .bg-white { background-color: #fff; }
 
