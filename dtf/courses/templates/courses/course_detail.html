@@ -12,7 +12,7 @@
 
 {% block content %}
 <section class="course-detail">
-    <div class="col-md-6 section bg-turquoise-color">
+    <div class="col-md-6 bg-turquoise-color">
         <div class="course-info">
             {% if user.is_authenticated %}
             {% include 'includes/share_button.html' %}
@@ -22,7 +22,7 @@
             <p>{{ object.description }}</p>
         </div><!--/ .course-info-->
     </div><!--/ .col-md-6-->
-    <div class="col-md-6 section bg-white">
+    <div class="col-md-6 bg-white">
         <div id="collapseOne" class="panel-collapse collapse">
             {% crispy form %}
         </div><!--/ .panel-collapse-->
