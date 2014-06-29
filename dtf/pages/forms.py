@@ -7,8 +7,8 @@ from crispy_forms.layout import Layout, Div, Field, Submit, Button, Fieldset, HT
 from crispy_forms.bootstrap import InlineField, StrictButton
 
 class ContactForm(forms.Form):
-	email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-	subject = forms.CharField(max_length=128, widget=forms.TextInput(attrs={'placeholder': 'Subject'}))
+	email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'input-lg', 'placeholder': 'Email'}))
+	subject = forms.CharField(max_length=128, widget=forms.TextInput(attrs={'class': 'input-lg', 'placeholder': 'Subject'}))
 	feedback = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Your Message...'}))
 	next = forms.HiddenInput()
 

@@ -1,0 +1,160 @@
+//------------------------------------------//
+//----------------- WEB APP ----------------//
+//------------------------------------------//
+
+//------------------------------------------//
+//------------- MARKETING SITE -------------//
+//------------------------------------------//
+
+// ------ Primary Footer
+// ---------------------------------------
+footer.footer-main {
+	position: relative;
+	z-index: 1;
+	color: @brand-gray-light;
+
+	.section {
+		position: static;
+		padding: 75px 0;
+		background-color: @brand-gray;
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.parallax-bg-4 .full-bg-image {
+		background-image: url(../../images/ventana-meeting.jpg);
+		//background-image: url(../../../images/ventana-meeting.jpg);
+	}
+
+	.widget {
+		margin-bottom: 0;
+	}
+
+	h2 {
+		margin-top: 40px;
+		color: @brand-gray-light;
+	}
+	h4 {
+		text-transform: uppercase;
+		font-weight: 300;
+		color: @brand-gray-light;
+	}
+	p, .widget_contacts p {
+		margin: 0;
+	}
+	.contact-form p {
+		margin: 0 0 1em;
+		line-height: 1em;
+	}
+	a {
+		color:  @brand-dtf;
+		text-transform: none;
+
+		&:hover {
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+
+	ul {
+		list-style: none;
+	}
+		li ul {
+			padding-left: 25px;
+		}
+	ul.social-icons {
+		margin-top: 0;
+
+		li {
+			margin-right: 40px;
+
+			a {
+				width: 80px;
+				height: 80px;
+				border-radius: 80px;
+			}
+			i {
+				font-size: 40px;
+				line-height: 80px;
+			}
+		}
+	}
+
+	input {
+		border-color: @brand-gray-light;
+
+		&.btn {
+			margin-top: 20px;
+			border: none;
+		}
+	}
+
+	.logo-in-footer {
+		text-align: left;
+		padding: 60px 0;
+		background-color: @brand-gray;
+		background-color: rgba(0,0,0,.7);
+	}
+}
+
+@media (min-width: @screen-md-min) {
+	footer.footer-main h2 {
+		margin-top: 0;
+	}
+}
+
+// ------ Contact Footer
+// ---------------------------------------
+.contact-title {
+	&.section {
+		padding: 70px
+	}
+
+	.section-title {
+		margin-bottom: 0;
+		padding-bottom: 0;
+
+		&:after {
+			visibility: hidden;
+		}
+	}
+}
+
+footer.contact-footer {
+	color: @gray-lighter;
+
+	.section { padding-bottom: 50px; }
+	.footer-bg { background-color: @gray-dark; }
+	
+	h2 {
+		color: @gray-lighter;
+		text-transform: uppercase;
+	}
+	p { margin: 0; }
+	a:hover { color: #fff; }
+
+	ul.social-icons {
+		padding-top: 30px;
+		li a {
+			border-radius: 25px;
+			color: @gray-lighter;
+			border: 1px solid @gray-lighter;
+			&:hover { border-color: transparent; }
+		}
+	}
+
+	input, textarea {
+		border-color: @gray-light;
+		border-radius: 6px;
+		background-color: transparent;
+		&:focus {
+			border-color: @brand-dtf;
+			-webkit-box-shadow: fadeout(@brand-dtf, 70%) 0px 0px 7px 1px;
+			box-shadow: fadeout(@brand-dtf, 70%) 0px 0px 7px 1px;
+		}		
+	}
+
+	.bottom-footer {
+		background-color: darken(@gray-dark, 5%);
+		color: @gray-light;
+	}
+}
