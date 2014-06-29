@@ -1,0 +1,17 @@
+{% load thumbnail %}
+
+{% with content_object as course %}
+
+<a class="media" href="{% url 'courses:detail' course.slug %}" title="Go to {{ course.name }}">
+  <div class="pull-left">
+    {% thumbnail course.thumbnail '120x100' crop='center' as im %}
+    <img src="{{ im.url }}" class="img-rounded media-object" alt="{{ course.name }}">
+    {% endthumbnail %}
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ course.name }}</h4>
+    <p>{{ course.description|truncatewords:25 }}</p>
+  </div>
+</a>
+
+{% endwith %}

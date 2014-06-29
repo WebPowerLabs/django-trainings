@@ -18,7 +18,7 @@
   {% with feed as comments %}
     {% for comment in comments %}
       <div id="post-{{ comment.id }}" class="fb-post panel panel-default">
-        {% include "comments/detail.html" %}
+        {% include "features/comment.html" %}
       </div>
     {% endfor %}
     {% include "comments/pager.html" with comment_list=comments %}

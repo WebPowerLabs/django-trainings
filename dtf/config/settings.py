@@ -73,6 +73,7 @@ class Common(Configuration):
         'tags',
         'resources',
         'profiles',
+        'features',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

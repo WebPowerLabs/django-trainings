@@ -101,6 +101,7 @@ class FacebookGroup(models.Model):
         self.pinned_comment = None
         self.save()
 
+
 class FacebookPost(models.Model):
     fb_uid = models.CharField(max_length=255, unique=True)
     from_user = JSONField(blank=True)
