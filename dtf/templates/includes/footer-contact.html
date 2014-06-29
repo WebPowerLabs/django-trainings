@@ -1,0 +1,63 @@
+{% load staticfiles i18n crispy_forms_tags %}
+
+	<!-- - - - - - - - CONTACT FOOTER TITLE BLOCK - - - - - - - -->
+	<section class="contact-title section">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-title align-center">
+						<h1>Contact Us</h1>
+						<h2>We look forward to hearing from you!</h2>
+					</div><!--/ .section-title-->
+				</div><!--/ .col-xs-12-->
+			</div><!--/ .row-->
+		</div><!--/ .container-->
+	</section>
+	<!-- - - - - - - -/ CONTACT FOOTER TITLE BLOCK - - - - - - - -->
+
+	<!-- - - - - - - - CONTACT FOOTER BLOCK - - - - - - - -->
+	<footer class="contact-footer">
+		<section class="contact-form section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 ">
+						{% crispy contact_form %}
+					</div><!--/ .col-md-6-->
+					<div class="col-md-6">
+						<img class="footer-logo" src="{% static 'images/decide-to-fly-logo.png' %}">
+			            <p>12400-3 Wake Union Church Rd.</br>
+			               PMB #39</br>
+			               Wake Forest, NC 27587</p>
+			            <p><a href="tel:5203690500">(520) 369-0500</a></p>
+			            <p><a href="mailto:info@decidetofly.com">info@decidetofly.com</a></p>
+						<div class="widget widget_social">
+							<ul class="social-icons">
+								<li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
+								<li class="facebook"><a href="http://facebook.com/decidetofly"><i class="icon-facebook"></i>Facebook</a></li>
+								<li class="pinterest"><a href="http://www.pinterest.com/decidetofly"><i class="icon-pinterest-circled"></i>Pinterest</a></li>
+								<li class="rss"><a href="#"><i class="icon-rss"></i>Rss</a></li>
+								<li class="youtube"><a href="http://www.youtube.com/DecidetoFly"><i class="icon-youtube"></i>Youtube</a></li>
+								<li class="instagram"><a href="#"><i class="icon-instagramm"></i>Instagram</a></li>
+							</ul><!--/ .social-icons-->
+						</div><!--/ .widget_social-->
+					</div><!--/ .col-md-6-->
+				</div><!--/ .row-->
+			</div><!--/ .container-->
+		</section><!--/ .contact-form-->
+	    <div class="bottom-footer clearfix">
+	      <div class="container">
+	        <div class="row">
+	          <div class="col-sm-6">
+	            <div class="copyright">
+	            	Copyright &copy; 2014 <a href="{% url 'home' %}">Decide to Fly&trade;</a>. All rights reserved
+	            </div><!--/ .copyright-->
+	          </div><!--/ .col-sm-6-->
+	          <div class="col-sm-3 col-sm-offset-3">
+	            <div class="developed">
+	            	Designed by <a target="_blank" href="http://rabbitholestud.io/">Rabbit Hole Studio</a>
+	            </div><!--/ .developed-->
+	          </div><!--/ .col-sm-3-->
+	        </div><!--/ .row-->
+	      </div><!--/ .container-->
+	    </div><!--/ .bottom-footer-->
+	</footer><!-- - - - - - - -/ CONTACT FOOTER BLOCK - - - - - - - -->

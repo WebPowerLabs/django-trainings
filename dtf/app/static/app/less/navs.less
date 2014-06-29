@@ -1,0 +1,239 @@
+//-------------------------------------------//
+//-------------- WEB APP NAVS ---------------//
+//-------------------------------------------//
+
+.primary-nav,
+.secondary-nav {
+	border: none;
+	border-radius: 0;
+	.navbar-nav > li > a {
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+}
+
+.primary-nav {
+	background-color: @gray-dark;
+	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+	box-shadow: 0 0 10px fadeout(#000, 40%);
+
+	.nav-logo {
+		padding: 5px 10px 0;
+		max-height: 45px;
+	}
+
+	.navbar-nav > li > a {
+		color: @brand-gray-bg;
+		&:hover {
+			color: @gray-dark;
+			background-color: @brand-gray-bg;
+		}
+	}
+}
+.secondary-nav {
+	background-color: @brand-gray-bg;
+	border-bottom: 1px solid @table-border-color;
+	.navbar-nav > li > a {
+		color: @gray;
+		&:hover {
+			background-color: @table-border-color;
+		}
+	}
+}
+
+//-------------------------------------------//
+//----------- MARKETING SITE NAVS -----------//
+//-------------------------------------------//
+
+.navigation ul ul {
+	background-color: @brand-gray;
+	background-color: rgba(91,94,96, .9);
+}
+
+header a:hover {
+	text-decoration: none;
+}
+
+#header {
+	#logo {
+		height: 30px;
+	}
+	&.header-shrink {
+		#logo {
+			height: 30px;
+		}
+
+		.header-member {
+			display: block;
+		}
+	}
+	&.transparent {
+		background-color: @brand-dtf;
+	}
+
+	.header-main {
+		background-color:  @brand-dtf;
+
+		#navigation {
+			background-color: @brand-dtf;
+		}
+
+		.navigation {
+			> ul > li {
+				&.downarrowclass {
+					> a:after {
+						color: @brand-dtf;
+					}
+					&:hover > a:after, &:focus > a:after, &:active > a:after {
+						color: #fff;
+					}
+				}
+
+				&:hover > a {
+					color: #fff;
+					background-color: @brand-dtf;
+				}
+			}
+
+			li.downarrowclass ul li:hover > a {
+				color: #fff;
+				background-color: transparent;
+			}
+
+			ul li {
+				float: none;
+				margin: 2px;
+
+				> a {
+					background-color: @brand-gray-bg;
+					border-radius: 3px;
+					color: @brand-dtf;
+				}
+				&:hover > a {
+					color: #fff;
+					background-color: @brand-dtf;
+				}
+			}
+			ul ul {
+				background-color: @brand-dtf;
+			}
+		}
+	}
+
+	.header-member {
+		background-color: @gray;
+
+		.header-in {
+			text-align: right;
+		}
+
+		.navigation {
+			> ul > li > a {
+				padding: 12px 20px 15px;
+				font-size: 12px;
+				font-weight: 600;
+			}
+			
+			ul li {
+				float: left;
+				margin: 0;
+
+				> a {
+					background-color: transparent;
+					border-radius: 0;
+				}
+			}
+		}
+
+		#nav-member {
+			display: inline-block;
+			vertical-align: middle;
+
+			> ul > li {
+				& > a {
+					color: @brand-gray-bg;
+				}
+				&:hover > a {
+					color: @gray;
+					background-color: @brand-gray-bg;
+				}
+			}
+		}
+	}
+
+	&.header-shrink .header-member .navigation > ul > li > a {
+		padding-top: 12px !important;
+		padding-bottom: 15px !important;
+	}
+
+	&.transparent .header-member .navigation {
+		border-bottom: none;
+	}
+	
+
+}
+
+@media (min-width: @screen-md-min) {
+	#header {
+		#logo {
+			height: auto;
+		}
+		
+		&.header-shrink {
+			.header-member {
+				display: none;
+			}
+		}
+		&.transparent {
+			background-color: transparent;
+		}
+
+		.header-main {
+			#navigation {
+				background-color: transparent;
+			}
+
+			.navigation {
+				> ul > li {
+					&:hover > a {
+						color: @brand-dtf;
+						background-color: #fff;
+					}
+				}
+
+				ul li {
+					float: left;
+					margin: 0;
+
+					> a {
+						background-color: transparent;
+						border-radius: 0;
+						color: #fff;
+					}
+				}
+
+				ul ul {
+					background-color: @brand-gray;
+				}
+				
+				> ul > li.downarrowclass {
+					> a:after {
+						color: #fff;
+					}
+					&:hover > a:after, &:focus > a:after, &:active > a:after {
+						color: @brand-dtf;
+					}
+				}
+				
+				li.downarrowclass ul li:hover > a {
+					color: @brand-dtf;
+				}
+			}
+		}
+	}
+}
+
+.not-ie .header-member {
+	font: 0/0 a;
+}
