@@ -1,45 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles i18n crispy_forms_tags %}
 
-{% comment %}
-{% block header %}
-<!-- - - - - - - - - - - - - - HEADER NAV - - - - - - - - - - - - - - - - -->
-<header id="header" class="transparent">
-    <div class="header-member">
-      <div class="header-in">
-        <nav id="nav-member" class="navigation">
-          <ul>
-            {% block nav_user %}
-              {% include "menus/nav_user.html" %}
-            {% endblock nav_user %}
-          </ul>
-        </nav><!--/ #navigation-->
-      </div><!--/ .header-in-->
-    </div><!--/ .header-member-->
-	<div class="header-in">
-		<a href="{% url 'home' %}">
-			<img id="logo" src="{% static 'images/decide-to-fly-logo.png' %}">
-		</a>
-		<a id="responsive-nav-button" class="responsive-nav-button" href="#"></a>
-		<nav id="navigation" class="navigation">
-			<ul>
-              <li class="current-menu-item"><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="{% url 'about' %}">About</a></li>
-              <li><a href="{% url 'd2f-community' %}">Our Community</a></li>
-              <li><a>Programs</a>
-              	<ul>
-              		<li><a href="{% url 'courage-to-soar' %}">Courage to Soar</a></li>
-              		<li><a href="{% url 'accelerate-your-destiny' %}">Accelerate Your Destiny</a></li>
-              	</ul>
-              </li>
-              <li><a href="{% url 'blog' %}">Blog</a></li>
-			</ul>
-		</nav><!--/ #navigation-->
-	</div><!--/ .header-in-->
-</header><!--/ #header-->
-<!-- - - - - - - - - - - - - /HEADER NAV - - - - - - - - - - - - - - - -->
-{% endblock header %}
-{% endcomment %}
 {% block header %}
   <header id="header">
        	    {% block messages %}
@@ -229,17 +190,19 @@
 
 	<!-- - - - - - - - CONTACT FOOTER BLOCK - - - - - - - -->
 	<footer class="contact-footer">
-		<section class="section footer-bg">
+		<section class="contact-form section">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 ">
 						{% crispy contact_form %}
 					</div><!--/ .col-md-6-->
 					<div class="col-md-6">
-						<h2>Decide to Fly&trade;</h2>
-						<p>Address: 12 Street, Los Angeles, CA, 94101</br>
-						   Phone: (800) 123-4567</br>
-						   Email: <a href="mailto:ask@decidetofly.com">ask@decidetofly.com</a></p>
+						<img class="footer-logo" src="{% static 'images/decide-to-fly-logo.png' %}">
+			            <p>12400-3 Wake Union Church Rd.</br>
+			               PMB #39</br>
+			               Wake Forest, NC 27587</p>
+			            <p><a href="tel:5203690500">(520) 369-0500</a></p>
+			            <p><a href="mailto:info@decidetofly.com">info@decidetofly.com</a></p>
 						<div class="widget widget_social">
 							<ul class="social-icons">
 								<li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
@@ -253,7 +216,7 @@
 					</div><!--/ .col-md-6-->
 				</div><!--/ .row-->
 			</div><!--/ .container-->
-		</section><!--/ .section-->		
+		</section><!--/ .contact-form-->
 	    <div class="bottom-footer clearfix">
 	      <div class="container">
 	        <div class="row">

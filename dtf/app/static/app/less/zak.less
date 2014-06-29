@@ -47,15 +47,13 @@ body.default #header {
 
  a {
  	color: @brand-dtf;
- 	-webkit-transition: all .25s ease;
-	transition: all .25s ease;
 
 	&:hover {
 		text-decoration: none;
 	}
  }
 
-input, textarea, select, button {
+a, input, textarea, select, button {
 	-webkit-transition: all .25s ease;
 	transition: all .25s ease;
 }
@@ -309,7 +307,7 @@ header a:hover {
 	}
 
 	.header-member {
-		background-color: #777;
+		background-color: @gray;
 
 		.header-in {
 			text-align: right;
@@ -342,7 +340,7 @@ header a:hover {
 					color: @brand-gray-bg;
 				}
 				&:hover > a {
-					color: #777;
+					color: @gray;
 					background-color: @brand-gray-bg;
 				}
 			}

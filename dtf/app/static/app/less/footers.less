@@ -11,32 +11,22 @@
 footer.footer-main {
 	position: relative;
 	z-index: 1;
-	color: @brand-gray-light;
+	color: @gray-lighter;
+	background-color: @gray-dark;
 
 	.section {
 		position: static;
 		padding: 75px 0;
-		background-color: @brand-gray;
-		background-color: rgba(0, 0, 0, 0.6);
-	}
-
-	.parallax-bg-4 .full-bg-image {
-		background-image: url(../../images/ventana-meeting.jpg);
-		//background-image: url(../../../images/ventana-meeting.jpg);
+		background-color: transparent;
 	}
 
 	.widget {
 		margin-bottom: 0;
 	}
 
-	h2 {
-		margin-top: 40px;
-		color: @brand-gray-light;
-	}
-	h4 {
+	h3 {
+		color: @gray-lighter;
 		text-transform: uppercase;
-		font-weight: 300;
-		color: @brand-gray-light;
 	}
 	p, .widget_contacts p {
 		margin: 0;
@@ -81,24 +71,22 @@ footer.footer-main {
 
 	input {
 		border-color: @brand-gray-light;
+	}
 
-		&.btn {
-			margin-top: 20px;
-			border: none;
+	.footer-widgets {
+		text-align: left;
+		padding: 60px 0;
+		background-color: fadeout(#000, 70%);
+		box-shadow: 0 0 10px fadeout(#000, 40%);
+
+		.free-gift {
+			p { margin-bottom: 15px; }
 		}
 	}
 
-	.logo-in-footer {
-		text-align: left;
-		padding: 60px 0;
-		background-color: @brand-gray;
-		background-color: rgba(0,0,0,.7);
-	}
-}
-
-@media (min-width: @screen-md-min) {
-	footer.footer-main h2 {
-		margin-top: 0;
+	.bottom-footer {
+		color: @gray-light;
+		background-color: fadeout(#000, 50%);
 	}
 }
 
@@ -122,13 +110,15 @@ footer.footer-main {
 footer.contact-footer {
 	color: @gray-lighter;
 
-	.section { padding-bottom: 50px; }
-	.footer-bg { background-color: @gray-dark; }
-	
-	h2 {
-		color: @gray-lighter;
-		text-transform: uppercase;
+	.section {
+		padding-bottom: 0;
+		&.contact-form {
+			background-color: @gray-dark;
+			box-shadow: 0 0 10px fadeout(#000, 40%);
+		}
 	}
+
+	img.footer-logo { margin-bottom: 10px; }
 	p { margin: 0; }
 	a:hover { color: #fff; }
 
