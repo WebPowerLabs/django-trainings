@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.core.urlresolvers import reverse
 from profiles.models import InstructorProfile
 from polymorphic.manager import PolymorphicManager
@@ -7,6 +8,11 @@ from polymorphic.manager import PolymorphicManager
 class LessonManager(PolymorphicManager):
     def published(self):
         return self.filter(published=True)
+
+    def purchased(self, user):
+        return self.filter(Q(package__packagepurchase__user=user) |
+                           Q(course__package__packagepurchase__user=user)
+                           ).distinct()
 
     def get_list(self, user=None):
         """

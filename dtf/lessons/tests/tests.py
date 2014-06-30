@@ -2,14 +2,16 @@ from django_nose.testcases import FastFixtureTestCase
 from lessons.tests.factories import (TagFactory, LessonFactory, CourseFactory,
                                      UserFactory, LessonHistoryFactory,
                                      LessonFavouriteFactory,
-                                     InstructorProfileFactory)
+                                     InstructorProfileFactory, PackageFactory,
+                                     PackagePurchaseFactory)
 from lessons.models import Lesson, LessonFavourite, LessonHistory
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 import json
+from utils.tests import TestCaseBase
 
 
-class LessonViewTest(FastFixtureTestCase):
+class LessonViewTest(TestCaseBase):
     def setUp(self):
         self.username = 'testuser'
         self.password = 'password'
@@ -18,7 +20,9 @@ class LessonViewTest(FastFixtureTestCase):
         self.user.set_password(self.password)
         self.user.save()
         self.course = CourseFactory(owner=self.user)
-        self.lesson_one = LessonFactory(course=self.course, owner=self.user)
+        self.course_purchased = CourseFactory(owner=self.user)
+        self.lesson_one = LessonFactory(course=self.course_purchased,
+                                        owner=self.user)
         self.lesson_two = LessonFactory(course=self.course, owner=self.user)
         self.lesson_three = LessonFactory(course=self.course, owner=self.user)
         self.lesson_his_item = LessonHistoryFactory(user=self.user,
@@ -27,11 +31,20 @@ class LessonViewTest(FastFixtureTestCase):
         self.lesson_fav_item = LessonFavouriteFactory(user=self.user,
                                                       lesson=self.lesson_one,
                                                       is_active=True)
+        self.package = PackageFactory()
+        self.package.lessons.add(self.lesson_two)
+        self.package.courses.add(self.course_purchased)
+        self.package_purchased = PackagePurchaseFactory(user=self.user,
+                                                        package=self.package)
+
+    def test_purchased(self):
+        purchased = [self.lesson_one, self.lesson_two]
+        res = Lesson.objects.purchased(self.user)
+        self.assertEqualQs(res, purchased)
 
     def test_order_view(self):
         self.client.login(username=self.username, password=self.password)
-        new_order = [self.lesson_one.pk,
-                     self.lesson_three.pk,
+        new_order = [self.lesson_three.pk,
                      self.lesson_two.pk]
 
         req_data = json.dumps({'new_order': new_order})
@@ -103,7 +116,8 @@ class LessonManagerTest(FastFixtureTestCase):
         self.staff_user.set_password(self.password)
         self.staff_user.save()
 
-        self.instructor_profile = InstructorProfileFactory(user=self.instructor)
+        self.instructor_profile = InstructorProfileFactory(
+                                                       user=self.instructor)
         self.tag = TagFactory()
         self.course_pub = CourseFactory(published=True, owner=self.instructor)
         self.course_not_pub = CourseFactory(published=False,
@@ -194,13 +208,13 @@ class LessonManagerTest(FastFixtureTestCase):
     # User is not staff
     def test_get_list_user_is_not_staff(self):
         total_count = Lesson.objects.published().filter(
-                                                 course__published=True).count()
+                                             course__published=True).count()
         current_count = Lesson.objects.get_list(self.user).count()
         self.assertEqual(total_count, current_count)
 
     def test_get_next_url_by_tag_user_is_not_staff(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                            'slug': self.lesson_first_pub.slug})
+                                        'slug': self.lesson_first_pub.slug})
         url = Lesson.objects.get_next_url(obj=self.lesson_last_pub,
                                           tag_id=self.tag.id,
                                           user=self.user)
@@ -208,7 +222,7 @@ class LessonManagerTest(FastFixtureTestCase):
 
     def test_get_prev_url_by_tag_user_is_not_staff(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                             'slug': self.lesson_last_pub.slug})
+                                         'slug': self.lesson_last_pub.slug})
         url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub,
                                           tag_id=self.tag.id,
                                           user=self.user)
@@ -216,7 +230,7 @@ class LessonManagerTest(FastFixtureTestCase):
 
     def test_get_next_url_by_course_user_is_not_staff(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                             'slug': self.lesson_last_pub.slug})
+                                         'slug': self.lesson_last_pub.slug})
         url = Lesson.objects.get_next_url(obj=self.lesson_first_pub,
                                           course_id=self.course_pub.id,
                                           user=self.user)
@@ -224,7 +238,7 @@ class LessonManagerTest(FastFixtureTestCase):
 
     def test_get_prev_url_by_course_user_is_not_staff(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                            'slug': self.lesson_first_pub.slug})
+                                        'slug': self.lesson_first_pub.slug})
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           course_id=self.course_pub.id,
                                           user=self.user)
@@ -232,14 +246,14 @@ class LessonManagerTest(FastFixtureTestCase):
 
     def test_get_next_url_all_user_is_not_staff(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                            'slug': self.lesson_first_pub.slug})
+                                        'slug': self.lesson_first_pub.slug})
         url = Lesson.objects.get_next_url(obj=self.lesson_last_pub,
                                           user=self.user)
         self.assertEqual(actual_url, url)
 
     def test_get_prev_url_all_user_is_not_staff(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                             'slug': self.lesson_last_pub.slug})
+                                         'slug': self.lesson_last_pub.slug})
         url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub,
                                           user=self.user)
         self.assertEqual(actual_url, url)
@@ -257,47 +271,47 @@ class LessonManagerTest(FastFixtureTestCase):
     # No user
     def test_get_list_no_user(self):
         total_count = Lesson.objects.published().filter(
-                                                 course__published=True).count()
+                                             course__published=True).count()
         current_count = Lesson.objects.get_list().count()
         self.assertEqual(total_count, current_count)
 
     def test_get_next_url_by_tag_no_user(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                            'slug': self.lesson_first_pub.slug})
+                                        'slug': self.lesson_first_pub.slug})
         url = Lesson.objects.get_next_url(obj=self.lesson_last_pub,
                                           tag_id=self.tag.id)
         self.assertEqual(actual_url, url)
 
     def test_get_prev_url_by_tag_no_user(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                             'slug': self.lesson_last_pub.slug})
+                                         'slug': self.lesson_last_pub.slug})
         url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub,
                                           tag_id=self.tag.id)
         self.assertEqual(actual_url, url)
 
     def test_get_next_url_by_course_no_user(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                             'slug': self.lesson_last_pub.slug})
+                                         'slug': self.lesson_last_pub.slug})
         url = Lesson.objects.get_next_url(obj=self.lesson_first_pub,
                                           course_id=self.course_pub.id)
         self.assertEqual(actual_url, url)
 
     def test_get_prev_url_by_course_no_user(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                            'slug': self.lesson_first_pub.slug})
+                                        'slug': self.lesson_first_pub.slug})
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           course_id=self.course_pub.id)
         self.assertEqual(actual_url, url)
 
     def test_get_next_url_all_no_user(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                            'slug': self.lesson_first_pub.slug})
+                                        'slug': self.lesson_first_pub.slug})
         url = Lesson.objects.get_next_url(obj=self.lesson_last_pub)
         self.assertEqual(actual_url, url)
 
     def test_get_prev_url_all_no_user(self):
         actual_url = reverse('lessons:detail', kwargs={
-                                             'slug': self.lesson_last_pub.slug})
+                                         'slug': self.lesson_last_pub.slug})
         url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub)
         self.assertEqual(actual_url, url)
 

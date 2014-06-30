@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.db.models.aggregates import Max
 from profiles.models import InstructorProfile
 from polymorphic import PolymorphicManager
@@ -7,6 +8,11 @@ from polymorphic import PolymorphicManager
 class CourseManager(PolymorphicManager):
     def published(self):
         return self.filter(published=True)
+
+    def purchased(self, user):
+        return self.filter(Q(package__packagepurchase__user=user) |
+                           Q(lesson__package__packagepurchase__user=user)
+                           ).distinct()
 
     def get_list(self, user=None):
         """

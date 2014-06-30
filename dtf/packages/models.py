@@ -4,6 +4,7 @@ from djnfusion import server, key
 from courses.models import Course
 from django.conf import settings
 from jsonfield import JSONField
+from lessons.models import Lesson
 # TODO: change to this. Currently doesnt work. may have something to do with
 # the server not in __init__
 # from packages.providers.infusionsoft import server, key
@@ -14,7 +15,8 @@ class Package(models.Model):
     Base for package classes
     """
     name = models.CharField(max_length=255, blank=True)
-    course = models.ManyToManyField(Course)
+    courses = models.ManyToManyField(Course)
+    lessons = models.ManyToManyField(Lesson)
 
     def __unicode__(self):
         return u'{}'.format(self.name)
@@ -36,9 +38,12 @@ class PackagePurchase(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     package = models.ForeignKey('Package')
     status = models.IntegerField(choices=STATUS_CHOICES, default=INACTIVE)
-    data = JSONField(blank=True)
+    data = JSONField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'{0} => {1}'.format(self.user, self.package)
 
 
 class InfusionsoftPackage(Package):
