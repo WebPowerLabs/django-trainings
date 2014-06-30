@@ -11,7 +11,7 @@
 {% endblock nav_actions %}
 
 {% block content %}
-<section class="lesson-detail section">
+<section class="lesson-detail">
     <div class="container">
         <div id="collapseOne" class="panel-collapse collapse">
             {% if user.is_staff or user == object.owner %}{% crispy form %}{% endif %}
@@ -113,5 +113,5 @@
             </div><!--/ .col-md-4-->
         </div><!--/ .row-->
     </div><!--/ .container-->
-</section>
+</section><!--/ .lesson-detail-->
 {% endblock content %}

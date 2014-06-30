@@ -12,7 +12,8 @@
 		text-transform: uppercase;
 	}
 }
-
+// Primary App Navigation
+// ---------------------------------------
 .primary-nav {
 	background-color: @gray-dark;
 	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
@@ -24,15 +25,17 @@
 	}
 
 	.navbar-nav > li > a {
-		color: @brand-gray-bg;
+		color: @gray-lightest;
 		&:hover {
 			color: @gray-dark;
-			background-color: @brand-gray-bg;
+			background-color: @gray-lightest;
 		}
 	}
 }
+// Staff Navigation
+// ---------------------------------------
 .secondary-nav {
-	background-color: @brand-gray-bg;
+	background-color: @gray-lightest;
 	border-bottom: 1px solid @table-border-color;
 	.navbar-nav > li > a {
 		color: @gray;
@@ -46,194 +49,68 @@
 //----------- MARKETING SITE NAVS -----------//
 //-------------------------------------------//
 
-.navigation ul ul {
-	background-color: @brand-gray;
-	background-color: rgba(91,94,96, .9);
+.navbar-member,
+.navbar-marketing {
+	border: none;
+	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+	box-shadow: 0 0 10px fadeout(#000, 40%);
+	.navbar-right { padding-right: 20px; }
+	.navbar-nav > li > a {
+		text-transform: uppercase;
+	}
 }
-
-header a:hover {
-	text-decoration: none;
-}
-
-#header {
-	#logo {
-		height: 30px;
-	}
-	&.header-shrink {
-		#logo {
-			height: 30px;
-		}
-
-		.header-member {
-			display: block;
-		}
-	}
-	&.transparent {
-		background-color: @brand-dtf;
-	}
-
-	.header-main {
-		background-color:  @brand-dtf;
-
-		#navigation {
-			background-color: @brand-dtf;
-		}
-
-		.navigation {
-			> ul > li {
-				&.downarrowclass {
-					> a:after {
-						color: @brand-dtf;
-					}
-					&:hover > a:after, &:focus > a:after, &:active > a:after {
-						color: #fff;
-					}
-				}
-
-				&:hover > a {
-					color: #fff;
-					background-color: @brand-dtf;
-				}
-			}
-
-			li.downarrowclass ul li:hover > a {
-				color: #fff;
-				background-color: transparent;
-			}
-
-			ul li {
-				float: none;
-				margin: 2px;
-
-				> a {
-					background-color: @brand-gray-bg;
-					border-radius: 3px;
-					color: @brand-dtf;
-				}
-				&:hover > a {
-					color: #fff;
-					background-color: @brand-dtf;
-				}
-			}
-			ul ul {
-				background-color: @brand-dtf;
-			}
-		}
-	}
-
-	.header-member {
-		background-color: @gray;
-
-		.header-in {
-			text-align: right;
-		}
-
-		.navigation {
-			> ul > li > a {
-				padding: 12px 20px 15px;
-				font-size: 12px;
-				font-weight: 600;
-			}
-			
-			ul li {
-				float: left;
-				margin: 0;
-
-				> a {
-					background-color: transparent;
-					border-radius: 0;
-				}
-			}
-		}
-
-		#nav-member {
-			display: inline-block;
-			vertical-align: middle;
-
-			> ul > li {
-				& > a {
-					color: @brand-gray-bg;
-				}
-				&:hover > a {
-					color: @gray;
-					background-color: @brand-gray-bg;
-				}
-			}
-		}
-	}
-
-	&.header-shrink .header-member .navigation > ul > li > a {
-		padding-top: 12px !important;
-		padding-bottom: 15px !important;
-	}
-
-	&.transparent .header-member .navigation {
-		border-bottom: none;
-	}
-	
-
-}
-
-@media (min-width: @screen-md-min) {
-	#header {
-		#logo {
-			height: auto;
-		}
-		
-		&.header-shrink {
-			.header-member {
-				display: none;
-			}
-		}
-		&.transparent {
-			background-color: transparent;
-		}
-
-		.header-main {
-			#navigation {
-				background-color: transparent;
-			}
-
-			.navigation {
-				> ul > li {
-					&:hover > a {
-						color: @brand-dtf;
-						background-color: #fff;
-					}
-				}
-
-				ul li {
-					float: left;
-					margin: 0;
-
-					> a {
-						background-color: transparent;
-						border-radius: 0;
-						color: #fff;
-					}
-				}
-
-				ul ul {
-					background-color: @brand-gray;
-				}
-				
-				> ul > li.downarrowclass {
-					> a:after {
-						color: #fff;
-					}
-					&:hover > a:after, &:focus > a:after, &:active > a:after {
-						color: @brand-dtf;
-					}
-				}
-				
-				li.downarrowclass ul li:hover > a {
-					color: @brand-dtf;
-				}
-			}
+// Member Navigation
+// ---------------------------------------
+.navbar-member {
+	background-color: @gray-dark;
+	.navbar-nav > li > a {
+		color: @gray-lightest;
+		font-size: 14px;
+		font-weight: 600;
+		&:hover {
+			color: @gray-dark;
+			background-color: @gray-lightest;
 		}
 	}
 }
-
-.not-ie .header-member {
-	font: 0/0 a;
+// Marketing Navigation
+// ---------------------------------------
+.navbar-marketing {
+	top: 50px;
+	background-color: @brand-dtf;
+	.navbar-nav > li > a {
+		color: #fff;
+		line-height: 40px;
+		font-weight: 400;
+		.caret { color: #fff; }
+		&:hover,
+		&:focus {
+			color: @brand-dtf;
+			background-color: #fff;
+			.caret { color: @brand-dtf; }
+		}
+	}
+	.dropdown-menu {
+		background-color: fadeout(@gray-dark, 20%);
+		> li > a {
+			padding: 3px 30px;
+			color: #fff;
+			line-height: 30px;
+			text-transform: uppercase;
+			&:hover {
+				color: @gray-dark;
+				background-color: #fff;
+			}
+		}
+	}
+	.open {
+		> a, 
+		> a:hover, 
+		> a:focus {
+			color: @brand-dtf;
+			background-color: #fff;
+			border: none;
+			.caret { color: @brand-dtf; }
+		}
+	}
 }

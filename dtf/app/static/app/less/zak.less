@@ -4,25 +4,6 @@
 //--------------------------------- STYLES --------------------------------//
 //-------------------------------------------------------------------------//
 
-
-//--------------------------------------//
-//--------- Temporary Styles -----------//
-//--------------------------------------//
-
-// Coming Soon //
-section.block.coming-soon {
-	padding-top: 50px;
-	text-align: center;
-
-	h1 {
-		color: @brand-dtf;
-		font-weight: 300;
-		font-size: 36px;
-		text-transform: uppercase;
-	}
-}
-
-
 //--------------------------------------//
 //--------- Universal Styles -----------//
 //--------------------------------------//
@@ -41,10 +22,6 @@ section.block.coming-soon {
 
 // ------ General ------ //
 
-body.default #header {
-	border-bottom: none;
-}
-
  a {
  	color: @brand-dtf;
 
@@ -53,9 +30,10 @@ body.default #header {
 	}
  }
 
-a, input, textarea, select, button {
-	-webkit-transition: all .25s ease;
-	transition: all .25s ease;
+a, .btn {
+	-webkit-transition: color .25s ease, background-color .25s ease, border .25s ease;
+	-moz-transition: color .25s ease, background-color .25s ease, border .25s ease;
+	transition: color .25s ease, background-color .25s ease, border .25s ease;
 }
 
 .thumbnail > img {
@@ -173,8 +151,6 @@ ul.pager {
 // ------ Buttons ------ //
 
 .btn {
-	-webkit-transition: all .25s ease;
-	transition: all .25s ease;
 	font-weight: 300;
 }
 
@@ -447,9 +423,9 @@ ul.pager {
 		background: #fff;
 		float: left;
 		cursor: pointer;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
+		-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 
 		&:hover {
 			background:  @brand-dtf;
@@ -492,9 +468,9 @@ ul.pager {
 			width: 100%;
 			height: 100%;
 			border-radius: 500px;
-			-webkit-transition: all 0.4s;
-			-moz-transition: all 0.4s;
-			transition: all 0.4s;
+			-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		}
 
 		.icon {
@@ -618,6 +594,7 @@ ul.pager {
 
 	.team-plus-icon .curtain {
 		-webkit-transition: none;
+		-moz-transition: none;
 		transition: none;
 	}
 	.team-plus-icon:hover .curtain {
@@ -711,8 +688,9 @@ ul.pager {
 		}
 
 		.team-plus-icon .curtain {
-			-webkit-transition: all .3s ease-in;
-			transition: all .3s ease-in;
+			-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		}
 		.team-plus-icon:hover .curtain {
 			margin-left: 0;
@@ -952,9 +930,9 @@ ul.pager {
 		border-radius: 100px;
 		padding: 39px 1px 0 0;
 		position: relative;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
+		-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 
 		i {
 			font-size: 47px;
@@ -996,9 +974,9 @@ ul.pager {
 			width: 100%;
 			height: 100%;
 			border-radius: 500px;
-			-webkit-transition: all 0.4s;
-			-moz-transition: all 0.4s;
-			transition: all 0.4s;
+			-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		}
 
 		.icon {
