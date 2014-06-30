@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^resources/', include('resources.urls', namespace="resources")),
     url(r'^tags/', include('tags.urls', namespace="tags")),
     url(r'^profiles/', include('profiles.urls', namespace="profiles")),
+    url(r'^features/', include('features.urls', namespace="features")),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^', include('pages.urls')),
 

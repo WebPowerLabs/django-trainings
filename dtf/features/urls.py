@@ -5,8 +5,8 @@ except ImportError:  # django < 1.4
 
 
 urlpatterns = patterns('features.views',
-    url(r'^post/$',          'post',       name='post'),
-    url(r'^delete/(\d+)/$',  'moderation.delete',           name='delete'),
+    url(r'^add/$', 'feature_create', name='add'),
+    url(r'^add/(?P<object_pk>.+)/(?P<class_name>.+)/$', 'feature_create_comment', name='add_comment'),
 )
 
 urlpatterns += patterns('',

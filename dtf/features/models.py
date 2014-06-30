@@ -13,7 +13,7 @@ class Feature(models.Model):
     Through model for featuring items in a comment
     '''
     #CHOICES = ContentType.objects.filter(Q(name=u'lesson') | Q(name=u'course'))
-    comment = models.ForeignKey('django_comments.Comment', related_name='features')
+    comment = models.ForeignKey('django_comments.Comment', related_name='features', blank=True, null=True)
     content_type = models.ForeignKey(ContentType,
             verbose_name=_('content type'),
             related_name="content_type_set_for_%(class)s")
@@ -32,7 +32,7 @@ class Feature(models.Model):
         Get a URL suitable for redirecting to the content object.
         """
         return urlresolvers.reverse(
-            "comments-url-redirect",
+            "features:redirect",
             args=(self.content_type_id, self.object_pk)
         )
 
