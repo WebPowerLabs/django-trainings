@@ -2,17 +2,16 @@
 
 {% block community-cta %}
 	<section class="free-product-cta">
-		
 		<section class="section">
-
 			<div class="container">
-				<div class="section-title">
-					<h1>{{ free_cta_title }}</h1>
-					<h2>{{ free_cta_subtitle }}</h2>
-				</div>
-
 				<div class="row">
-
+		            <div class="section-header col-xs-12 text-center">
+		                <h1 class="section-title">{{ free_cta_title }}</h1>
+		                <h3 class="section-subtitle">{{ free_cta_subtitle }}</h3>
+		                <hr>
+		            </div><!--/ .section-header-->
+	            </div><!--/ .row-->
+				<div class="row">
 					<div class="col-md-7 main-entry">
 							<div class="entry-image">
 								<div class="work-item">
@@ -20,36 +19,27 @@
 									<div class="image-extra">
 										<div class="extra-content">
 											<div class="inner-extra">
-												<h3>Just fill out the form to watch the video &#8594;</h3>
+												<h3 class="title">Just fill out the form to watch the video &#8594;</h3>
 											</div><!--/ .inner-extra-->	
 										</div><!--/ .extra-content-->
 									</div><!--/ .image-extra-->	
 								</div><!--/ .work-item-->	
 							</div><!--/ .entry-image-->
 					</div><!--/ .col-md-6-->
-
 					<div class="col-md-5">
 						<h3>This month's speaker:</h3>
 						<h2><a href="http://www.melanieduncan.com/" target="_blank">Jane Doe</a></h2>
-
 			            <form class="contact-form" method="post" action="/">
-
 			              <p class="input-block">
-			                <input type="text" name="name" id="name" placeholder="Name *" />
+			                <input class="input-lg" type="text" name="name" id="name" placeholder="Name *" />
 			              </p>
-
 			              <p class="input-block">
-			                <input type="email" name="email" id="email" placeholder="Email *" />
+			                <input class="input-lg" type="email" name="email" id="email" placeholder="Email *" />
 			              </p>
-
-			              <a href="{% url 'free-product' %}"><button class="btn btn-lg btn-block btn-success">Submit!</button></a>
-
+			              <a href="{% url 'mentorship-moments' %}"><button class="btn btn-lg btn-block btn-success">Submit!</button></a>
 			            </form><!--/ .contact-form-->
-
 					</div><!--/ .col-md-6-->
-						
 				</div><!--/ .row-->
-
 			</div><!--/ .container-->
 		</section><!--/ .section-->
 	</section><!--/ #free-product-cta-->
