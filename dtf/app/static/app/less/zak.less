@@ -8,7 +8,6 @@
 //--------- Universal Styles -----------//
 //--------------------------------------//
 
-
 // ------ Background Colors ------ //
 .bg-transparent.section { background-color: transparent; }
 .bg-white { background-color: #fff; }
@@ -26,11 +25,8 @@ a,
 	transition: color .25s ease, background-color .25s ease, border .25s ease;
 }
 
-// Image Thumbnail
-// ---------------------------------------
-.thumbnail > img {
-	border-radius: 0;
-}
+// ------ Image Thumbnail ------ //
+.thumbnail > img { border-radius: 0; }
 
 // ------ Pager ------ //
 ul.pager {
@@ -56,9 +52,7 @@ ul.pager {
 	}
 }
 
-
 // ------ Buttons ------ //
-
 .btn { font-weight: 300;}
 .btn-success:hover { background-color: @brand-dtf-dark; }
 .btn-danger:hover { background-color: @brand-danger-dark; }
@@ -137,14 +131,11 @@ ul.pager {
 	}
 }
 
-
 //--------------------------------------//
 //-------------- Homepage --------------//
 //--------------------------------------//
 
-
 // ------Welcome Block ------ //
-
 .welcome-home {
 	.section.parallax {
 		padding-top: 0;
@@ -193,7 +184,7 @@ ul.pager {
 @media (min-width: @screen-md-min) {
 	.welcome-home {
 		.video-full-entry {
-			padding: 140px 0 60px;
+			padding: 110px 0 60px;
 			.title { font-size: 38px; }
 			.subtitle { font-size: 24px; }
 		}
@@ -211,6 +202,7 @@ ul.pager {
 
 // ------ D2F Community Intro Block ------ //
 .community {
+	padding-bottom: 40px;
 	.community-items { padding: 0 5%; }
 	.entry-title {
 		font-size: 19px;
@@ -239,12 +231,13 @@ ul.pager {
 		}
 	}
 	.entry {
-		padding: 0 10px;
+		padding: 10px 20px;
 		margin-bottom: 10px;
 		text-align: center;
 		height: auto;
 		min-height: 276px;
 		background: #fff;
+		border-radius: 10px;
 		float: left;
 		cursor: pointer;
 		-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
