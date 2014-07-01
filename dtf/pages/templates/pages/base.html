@@ -35,22 +35,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
-            </div>
-
+              </button><!--/ .navbar-toggle-->
+            </div><!--/ .navbar-header-->
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-              </ul>
               <ul class="nav navbar-nav navbar-right">
                   {% block nav_user %}
                     {% include "menus/nav_user.html" %}
                   {% endblock nav_user %}
-              </ul>
+              </ul><!--/ .nav-->
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
-        </nav>
-
+        </nav><!--/ .navbar-->
         <nav class="navbar navbar-marketing navbar-static-top" role="navigation">
           <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -60,21 +56,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
-              <a href="#"><img class="nav-logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
-            </div>
-
+              </button><!--/ .navbar-toggle-->
+              <a href="{% url 'home' %}"><img class="nav-logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
+            </div><!--/ .navbar-header-->
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-              <ul class="nav navbar-nav">
-              </ul>
               <ul class="nav navbar-nav navbar-right">
                   {% block nav %}
                     {% include "menus/nav_marketing.html" %}
                   {% endblock nav %}
-              </ul>
+              </ul><!--/ .nav-->
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
-        </nav>
+        </nav><!--/ .navbar-->
       </header>
     {% endblock header %}

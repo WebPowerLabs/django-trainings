@@ -11,7 +11,7 @@ footer {
 	&.contact-footer {
 		color: @gray-lighter;
 		a:hover { color: #fff; }
-		p { margin: 0; }
+		.contact-widget p { margin: 0; }
 		input, textarea {
 			border-color: @gray-light;
 			background-color: transparent;
@@ -34,7 +34,7 @@ footer.footer-main {
 		background-color: transparent;
 	}
 	.widget { margin-bottom: 0; }
-	h3 {
+	.widget-title {
 		color: @gray-lighter;
 		text-transform: uppercase;
 	}
@@ -61,7 +61,7 @@ footer.footer-main {
 		background-color: fadeout(#000, 70%);
 		-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
 		box-shadow: 0 0 10px fadeout(#000, 40%);
-		.free-gift p { margin-bottom: 15px; }
+		.widget-subtitle { margin-bottom: 15px; }
 	}
 	.bottom-footer { background-color: fadeout(#000, 50%); }
 }
@@ -86,7 +86,10 @@ footer.contact-footer {
 			box-shadow: 0 0 10px fadeout(#000, 40%);
 		}
 	}
-	img.footer-logo { margin-bottom: 10px; }
+	img.footer-logo {
+		margin-bottom: 10px;
+		max-height: 100px;
+	}
 	ul.social-icons {
 		padding-top: 30px;
 		li a {

@@ -134,65 +134,35 @@ ul.pager {
 
 // ------Welcome Block ------ //
 .welcome-home {
-	.section.parallax {
-		padding-top: 0;
+	.section {
+		padding-top: 40px;
 		padding-bottom: 0;
 	}
 	.full-bg-image {
 		background-image: url(../../images/decide-to-fly-home-banner.jpg);
 		//background-image: url(../../../images/decide-to-fly-home-banner.jpg);
 	}
-	.video-full-entry {
-		display: inline-block;
-		.title {
-			margin-bottom: 0;
-			color: #5b5e60;
-			font-size: 29px;
-			font-weight: 600;
-			font-family: Garamond, sans-serif;
-			text-shadow: 2px 2px 3px fadeout(#000, 65%);
-			line-height: 1.1em;
-			span.red { color: #be2046; }
-			span.blue { color: #0a708f; }
-			span.green { color: #6d8021; }
-		}
-		.subtitle {
-			margin-bottom: 0;
-			font-family: Marina, sans-serif;
-		}
-		img.company-logo {
-			margin-bottom: 20px;
-			max-width: 200px;
+	.content { margin-bottom: 60px; }
+	.video-wrapper {
+		position: relative;
+		padding-bottom: 56.25%; /* 16:9 */
+		padding-top: 25px;
+		margin-bottom: 20px;
+		height: 0;
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
 		}
 	}
-	.btn { margin-bottom: 25px }
 	img.swoosh { margin-bottom: -7px; }
 }
 @media (min-width: @screen-sm-min) {
 	.welcome-home {
-		.section.parallax { padding-top: 100px; }
-		.video-full-entry {
-			padding: 0 0 40px;
-			.title { font-size: 29px; }
-			.subtitle { font-size: 20px; }
-		}
-	}
-}
-@media (min-width: @screen-md-min) {
-	.welcome-home {
-		.video-full-entry {
-			padding: 110px 0 60px;
-			.title { font-size: 38px; }
-			.subtitle { font-size: 24px; }
-		}
-		.welcome-title { text-align: left; }
-	}
-}
-@media (min-width: @screen-lg-min) {
-	.welcome-home {
-		.video-full-entry {
-			.title { font-size: 48px; }
-		}
+		.section { padding-top: 100px; }
 	}
 }
 
