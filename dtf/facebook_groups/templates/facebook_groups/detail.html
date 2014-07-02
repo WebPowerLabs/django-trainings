@@ -12,22 +12,31 @@
   <div class="clearfix"></div>
   <div class="panel">
     {% if user.is_authenticated %}
-      {% get_comment_form for facebook_group as form %}
-      <form action="{% comment_form_target %}" method="POST">
-        {% csrf_token %}
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Write something..." name="{{ form.comment.html_name }}" id="id_comment">
-          <span class="input-group-btn">
-            <button type="submit" id="id_submit" class="btn btn-primary"><i class="fa fa-send fa-fw"></i></button>
-          </span>
-        </div>
-        <div class="hidden">{{ form.honeypot }}</div>
-        {{ form.content_type }}
-        {{ form.object_pk }}
-        {{ form.timestamp }}
-        {{ form.security_hash }}
-        <input type="hidden" name="next" value="{% url 'facebook_groups:detail' facebook_group.fb_uid %}" />
-      </form>
+    {% get_comment_form for facebook_group as form %}
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#tab-write-new" role="tab" data-toggle="tab">Write</a></li>
+        <li><a href="#tab-preview-new" class="tab-preview" data-id='new' data-url="{% url 'facebook_groups:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-write-new">
+          <form action="{% comment_form_target %}" method="POST">
+            {% csrf_token %}
+              <textarea class="form-control" placeholder="Write something..." name="{{ form.comment.html_name }}" id="id_comment"></textarea>
+            <div class="hidden">{{ form.honeypot }}</div>
+            {{ form.content_type }}
+            {{ form.object_pk }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+            <input type="hidden" name="next" value="{% url 'facebook_groups:detail' facebook_group.fb_uid %}" />
+      </div>
+      <div class="tab-pane" id="tab-preview-new"></div>
+      <div class="clearfix">
+        <button type="submit" id="id_submit" class="btn btn-primary"><i class="fa fa-send fa-fw"></i></button>
+      </div>
+          </form>
+    </div>
     {% else %}
       <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
     {% endif %}
@@ -63,3 +72,7 @@
   {% include "comments/pager.html" with comment_list=comments %}
 </section>
 {% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script src="{% static 'bootstrap/js/tab.js' %}"></script>
+{% endblock javascript %}

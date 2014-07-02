@@ -45,6 +45,22 @@ $.ajaxSetup({
 });
 // end CSRF for AJAX request.
 $(document).ready(function(){
+    // AJAX request to preview_comment view
+    $('body').on('click', 'a.tab-preview', function(event){
+        var url = $(this).attr('data-url');
+        var commentId = $(this).attr('data-id');
+        var data = $('#tab-write-' + commentId + ' textarea').val(); 
+        var tabPreview = $('#tab-preview-' + commentId);
+        tabPreview.html('Loading preview...');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {data: data},
+            success: function (data) {
+                tabPreview.html(data);
+            }
+        });        
+    });
     // AJAX request to FavouriteAddView.
     $('body').on('click', '.ajax_action', function(event){
         event.preventDefault();

@@ -1,4 +1,4 @@
-{% load comments %}
+{% load comments markdown %}
 
 <div class="fb-comments">
 {% for comment in comment_list %}
@@ -9,7 +9,7 @@
         <div class="media-body">
             <p>
             <strong class="fb-from-user">{{ comment.user.get_full_name }}</strong> 
-            <span class="fb-message">{{ comment.comment }}</span>
+            <span class="fb-message">{{ comment.comment|markdown }}</span>
             </p>
             <p class="fb-actions">
                 <small class="date">{{ comment.submit_date|date }}</small>

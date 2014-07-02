@@ -1,17 +1,16 @@
-from django.shortcuts import render, render_to_response, get_object_or_404
-#from django.core.mail import mail_admins
+from django.shortcuts import render_to_response, get_object_or_404
+# from django.core.mail import mail_admins
 from django.core.urlresolvers import reverse_lazy
-#from django.contrib import messages
+# from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 import django_comments
+from features.templatetags.markdown import markdown
 Comment = django_comments.get_model()
-
-
 
 from utils.comments import latest_comments
 
@@ -26,8 +25,8 @@ def fb_group_list(request):
     content types
     '''
     fb_groups = FacebookGroup.objects.all()
-    feed = latest_comments(request) # get latest comments
-    paginator = Paginator(feed, 10) # TODO: add settings var: paginate_by
+    feed = latest_comments(request)  # get latest comments
+    paginator = Paginator(feed, 10)  # TODO: add settings var: paginate_by
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -43,7 +42,7 @@ def fb_group_list(request):
     }
     return render_to_response('facebook_groups/list.html',
         context,
-        context_instance = RequestContext(request))
+        context_instance=RequestContext(request))
 
 
 @login_required
@@ -53,7 +52,7 @@ def sync_fb_data(request, fb_uid):
     '''
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
     fb_group.save_fb_profile_data(request.user)
-    return HttpResponseRedirect(reverse_lazy("facebook_groups:detail", 
+    return HttpResponseRedirect(reverse_lazy("facebook_groups:detail",
         kwargs={"fb_uid" : fb_group.fb_uid}))
 
 
@@ -65,7 +64,7 @@ def fb_group_detail(request, fb_uid):
     '''
     fb_groups = FacebookGroup.objects.all()
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
-    content_type_id=ContentType.objects.get_for_model(FacebookGroup)
+    content_type_id = ContentType.objects.get_for_model(FacebookGroup)
     comments = Comment.objects.filter(content_type=content_type_id,
         object_pk=fb_group.pk).order_by('-submit_date')
     if fb_group.pinned_comment:
@@ -87,7 +86,7 @@ def fb_group_detail(request, fb_uid):
     }
     return render_to_response('facebook_groups/detail.html',
         context,
-        context_instance = RequestContext(request))
+        context_instance=RequestContext(request))
 
 
 @login_required
@@ -110,7 +109,7 @@ def unpin_comment(request, fb_uid):
     fb_group.unpin_comment()
     return HttpResponseRedirect(reverse_lazy("facebook_groups:detail",
         kwargs={"fb_uid" : fb_uid}))
-   
+
 
 @login_required
 def fb_group_feed(request, fb_uid):
@@ -129,7 +128,7 @@ def fb_group_feed(request, fb_uid):
     }
     return render_to_response('facebook_groups/feed.html',
         context,
-        context_instance = RequestContext(request))
+        context_instance=RequestContext(request))
 
 
 @login_required
@@ -153,7 +152,7 @@ def fb_group_feed_post(request, fb_uid):
     }
     return render_to_response('facebook_groups/post.html',
         context,
-        context_instance = RequestContext(request))
+        context_instance=RequestContext(request))
 
 
 @login_required
@@ -167,7 +166,7 @@ def fb_group_create(request):
         name = request.POST.get('name')
         description = request.POST.get('description')
         privacy = request.POST.get('privacy')
-        fb_group = FacebookGroup.objects.fb_create(user=request.user.id, 
+        fb_group = FacebookGroup.objects.fb_create(user=request.user.id,
             name=name, description=description, privacy=privacy)
         return HttpResponseRedirect(reverse_lazy("facebook_groups:sync",
             kwargs={"fb_uid" : fb_group.fb_uid}))
@@ -179,4 +178,13 @@ def fb_group_create(request):
     }
     return render_to_response('facebook_groups/add.html',
         context,
-        context_instance = RequestContext(request))
+        context_instance=RequestContext(request))
+
+
+def preview_comment(request):
+    if request.is_ajax():
+        data = request.POST.get('data', None)
+        html = '<p>Nothing to preview</p>'
+        if data:
+            html = markdown(data)
+        return HttpResponse(html)

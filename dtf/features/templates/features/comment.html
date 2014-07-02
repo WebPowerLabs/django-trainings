@@ -1,4 +1,4 @@
-{% load staticfiles comments %}
+{% load staticfiles comments markdown %}
 <div id="c{{ comment.id }}" style="position:relative;bottom: 50px;"></div>
 <div class="comment-post">
 <div class="pull-right comment-actions">
@@ -15,7 +15,7 @@
     <small class="date">{{ comment.submit_date|date }}</small>
   </h3>
   <div class="panel-body">
-    <p>{{ comment.comment }}</p>
+    <p>{{ comment.comment|markdown }}</p>
     {% if comment.features %}
     {% for feature in comment.features.active %}
 
@@ -26,35 +26,44 @@
   <div class="panel-footer">
 
   {% if not hide_comments %}
-  {% render_comment_list for comment %}
+      {% render_comment_list for comment %}
   {% endif %}
 
   {% if user.is_authenticated %}
   {% get_comment_form for comment as form %}
-  <form class="form fb-comment-form" action="{% comment_form_target %}" method="POST" data-access-token="{{ request.user.get_fb_access_token }}">
-    {% csrf_token %}
-    <div class="hidden">{{ form.honeypot }}</div>
-    {{ form.content_type }}
-    {{ form.object_pk }}
-      {{ form.timestamp }}
-      {{ form.security_hash }}
-      <input type="hidden" name="next" value="{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}" />
-      <div class="">
-          <div class="row">
-              <div class="col-xs-2 col-sm-1 fb-profile-comment-img">
-                  <img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#tab-write-{{ comment.pk }}" role="tab" data-toggle="tab">Write</a></li>
+        <li><a href="#tab-preview-{{ comment.pk }}" class="tab-preview" data-id='{{ comment.pk }}' data-url="{% url 'facebook_groups:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-write-{{ comment.pk }}">
+          <form class="form fb-comment-form" action="{% comment_form_target %}" method="POST" data-access-token="{{ request.user.get_fb_access_token }}">
+            {% csrf_token %}
+            <div class="hidden">{{ form.honeypot }}</div>
+            {{ form.content_type }}
+            {{ form.object_pk }}
+              {{ form.timestamp }}
+              {{ form.security_hash }}
+              <input type="hidden" name="next" value="{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}" />
+              <div class="">
+                  <div class="row">
+                      <div class="col-xs-2 col-sm-1 fb-profile-comment-img">
+                          <img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+                      </div>
+                      <div class="col-xs-10 col-sm-11">
+                          <textarea class="form-control" placeholder="Write something..." name="comment" id="id_comment"></textarea>
+                      </div>
+                  </div>
               </div>
-              <div class="col-xs-10 col-sm-11">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Write a comment..." name="comment" id="id_comment">
-                    <span class="input-group-btn">
-                      <button type="submit" id="id_submit" class="btn btn-primary"/><i class="fa fa-send fa-fw"></i></button>
-                    </span>
-                </div>
-              </div>
-          </div>
       </div>
-  </form>
+      <div class="tab-pane" id="tab-preview-{{ comment.pk }}"></div>
+      <div class="clearfix">
+          <button type="submit" id="id_submit" class="btn btn-primary"><i class="fa fa-send fa-fw"></i></button>
+      </div>
+          </form>
+    </div>
   {% else %}
       <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
   {% endif %}
