@@ -45,6 +45,17 @@ $.ajaxSetup({
 });
 // end CSRF for AJAX request.
 $(document).ready(function(){
+    $('select.share').change(function(){
+        var url = $(this).find('option:selected').attr('data-url');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            success: function (data) {
+                console.log('ololo');
+            }
+        }); 
+        
+    });
     // AJAX request to preview_comment view
     $('body').on('click', 'a.tab-preview', function(event){
         var url = $(this).attr('data-url');
@@ -82,9 +93,6 @@ $(document).ready(function(){
             }
         });
     });
-
-    
-    
     // Renders element with class 'video-js' to HTML5 video player.
     $('.video-js').each(function(){
         videojs(this, {}, function(){

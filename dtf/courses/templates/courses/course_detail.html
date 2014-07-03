@@ -1,5 +1,5 @@
 {% extends 'courses/base.html' %}
-{% load crispy_forms_tags thumbnail %}
+{% load crispy_forms_tags thumbnail static %}
 
 {% block nav_actions %}
 {{ block.super }}
@@ -14,9 +14,19 @@
 <section class="course-detail">
     <div class="col-md-6 section bg-turquoise-color">
         <div class="course-info">
-                <h1>{{ object.name }}</h1> 
-                <hr>               
-                <p>{{ object.description }}</p>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <select class="share">
+                      <option value="share" disabled selected>Share</option>
+                      {% for group in fb_group_list %}
+                      <option value="{{ group.pk }}" data-url="{% url 'courses:share' object.slug group.pk %}">{{ group.name }}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <h1>{{ object.name }}</h1>
+            <hr>               
+            <p>{{ object.description }}</p>
         </div><!--/ .course-info-->
     </div><!--/ .col-md-6-->
     <div class="col-md-6 section bg-white">
@@ -43,5 +53,8 @@
     </div><!--/ .col-md-6-->
     <div class="clearfix"></div>
 </section>
-
 {% endblock content %}
+{% block javascript %}
+{{ block.super }}
+<script src="{% static 'bootstrap/js/dropdown.js' %}"></script>
+{% endblock javascript %}

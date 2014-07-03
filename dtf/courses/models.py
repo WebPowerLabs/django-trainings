@@ -3,6 +3,10 @@ from django_extensions.db.fields import AutoSlugField, UUIDField
 from django.conf import settings
 from courses.managers import (CourseManager, CourseHistoryManager,
                               CourseFavouriteManager)
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
+
+
 
 
 class Course(models.Model):
@@ -41,6 +45,12 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        site = Site.objects.get(pk=settings.SITE_ID)
+        return '{0}{1}'.format(site.domain, reverse('courses:detail',
+                                                    kwargs={'slug': self.slug})
+                               )
 
 
 class CourseHistory(models.Model):

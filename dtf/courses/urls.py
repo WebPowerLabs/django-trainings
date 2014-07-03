@@ -21,4 +21,6 @@ urlpatterns = patterns('',
                                                                 name='detail'),
     url('^(?P<slug>[-\w]+)/delete/$', views.CourseDeleteView.as_view(),
                                                                 name='delete'),
+    url('^(?P<slug>[-\w]+)/share/(?P<group_pk>\d+)$',
+                             views.CourseShareView.as_view(), name='share'),
 )

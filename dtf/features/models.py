@@ -8,11 +8,12 @@ from django.template.loader import select_template
 
 from .managers import FeatureManager
 
+
 class Feature(models.Model):
     '''
     Through model for featuring items in a comment
     '''
-    #CHOICES = ContentType.objects.filter(Q(name=u'lesson') | Q(name=u'course'))
+    # CHOICES = ContentType.objects.filter(Q(name=u'lesson') | Q(name=u'course'))
     comment = models.ForeignKey('django_comments.Comment', related_name='features', blank=True, null=True)
     content_type = models.ForeignKey(ContentType,
             verbose_name=_('content type'),

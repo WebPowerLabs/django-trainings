@@ -7,6 +7,7 @@ from django.conf import settings
 
 from jsonfield import JSONField
 
+from django_comments import Comment
 from .managers import FBGroupManager, FBPostManager
 
 

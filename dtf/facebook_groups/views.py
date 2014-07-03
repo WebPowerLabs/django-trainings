@@ -181,6 +181,7 @@ def fb_group_create(request):
         context_instance=RequestContext(request))
 
 
+@login_required
 def preview_comment(request):
     if request.is_ajax():
         data = request.POST.get('data', None)
