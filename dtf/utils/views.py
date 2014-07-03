@@ -23,8 +23,7 @@ class CreateFormBaseView(ModelFormMixin, MultipleObjectMixin, ProcessFormView,
             else:
                 is_empty = len(self.object_list) == 0
             if is_empty:
-                raise Http404(_("Empty list and '%(class_name)s.allow_empty" /
-                                "is False.")
+                raise Http404(_("Empty list and '%(class_name)s.allow_empty is False.")
                         % {'class_name': self.__class__.__name__})
 
     def get(self, *args, **kwargs):
