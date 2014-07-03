@@ -5,15 +5,13 @@ from courses.managers import (CourseManager, CourseHistoryManager,
                               CourseFavouriteManager)
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from polymorphic import PolymorphicModel
 
 
-
-
-class Course(models.Model):
-    """ Course
-    Courses are a series of Lessons
+class Content(PolymorphicModel):
     """
-    objects = CourseManager()
+    Base model for Course, Lesson, Resource
+    """
 
     id = UUIDField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -24,12 +22,21 @@ class Course(models.Model):
                             help_text='users will only see published courses')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    order = models.IntegerField(editable=False, default=0)
     thumbnail = models.ImageField(upload_to='courses/thumbs/%Y/%m/%d',
                 height_field='thumbnail_height', width_field='thumbnail_width')
     thumbnail_height = models.CharField(max_length=255, blank=True)
     thumbnail_width = models.CharField(max_length=255, blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+
+class Course(Content):
+    """ Course
+    Courses are a series of Lessons
+    """
+
+    objects = CourseManager()
+
+    order = models.IntegerField(editable=False, default=0)
 
     def save(self, *args, **kwargs):
         if self.order is None:
@@ -48,12 +55,11 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         site = Site.objects.get(pk=settings.SITE_ID)
-        return '{0}{1}'.format(site.domain, reverse('courses:detail',
-                                                    kwargs={'slug': self.slug})
-                               )
+        return 'http://{0}{1}'.format(site.domain, reverse('courses:detail',
+                                                kwargs={'slug': self.slug}))
 
 
-class CourseHistory(models.Model):
+class History(models.Model):
     """
     For storing history.
     """
@@ -62,15 +68,14 @@ class CourseHistory(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created = models.DateTimeField(auto_now_add=True)
-    course = models.ForeignKey('Course')
     is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-created']
-        verbose_name_plural = 'Course history'
+        verbose_name_plural = 'History'
 
 
-class CourseFavourite(models.Model):
+class Favourite(models.Model):
     """
     For storing favourites.
     """
@@ -79,8 +84,21 @@ class CourseFavourite(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created = models.DateTimeField(auto_now_add=True)
-    course = models.ForeignKey('Course')
     is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['-created']
+
+
+class CourseHistory(History):
+    course = models.ForeignKey('Course')
+
+    class Meta:
+        verbose_name_plural = 'Course History'
+
+
+class CourseFavourite(Favourite):
+    course = models.ForeignKey('Course')
+
+    class Meta:
+        verbose_name_plural = 'Course Favourites'

@@ -59,6 +59,7 @@ class Common(Configuration):
         'djnfusion',
         'django_comments',
         'sorl.thumbnail',
+        'polymorphic',
     )
 
     # Apps specific for this project go here.
@@ -86,6 +87,10 @@ class Common(Configuration):
         'allauth.account',  # registration
         'allauth.socialaccount',  # registration
         'allauth.socialaccount.providers.facebook',
+    )
+    INSTALLED_APPS += (
+        'polymorphic',
+        'django.contrib.contenttypes',
     )
     ########## END APP CONFIGURATION
 

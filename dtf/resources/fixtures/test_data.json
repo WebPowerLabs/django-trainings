@@ -1,1 +1,62 @@
-[{"pk": "04da0b9d-d8d3-48db-a741-8aab05f4deb6", "model": "resources.resource", "fields": {"updated": "2014-06-08T19:43:13.723Z", "_order": 0, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat justo dui, eget condimentum elit tempus in. Aenean consequat lectus odio, et porttitor quam commodo non. Duis velit metus, venenatis et elit sit amet, sagittis venenatis justo. Vestibulum leo mi, consectetur non pulvinar a, fermentum at nisl. Pellentesque fermentum felis nec leo blandit placerat. In porta purus id felis eleifend pulvinar rutrum ultricies erat. Suspendisse risus lectus, ullamcorper dignissim eleifend eu, imperdiet a eros. Morbi auctor cursus posuere. Vivamus dignissim tempus tellus dapibus sagittis. In eleifend, nisl nec tincidunt dapibus, magna velit dictum tortor, id tempor lectus velit eu odio. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi posuere, mauris eget accumsan viverra, nulla odio pellentesque leo, a porta arcu orci vitae nisl. Praesent ut molestie purus. Nam pellentesque, lacus eu cursus fringilla, quam arcu elementum tellus, sit amet egestas mi arcu ac ligula.", "created": "2014-05-29T21:41:35.219Z", "lesson": "c1ebe6f1-6eef-4012-afb3-a101f780efb1", "thumbnail_width": "", "owner": 1, "thumbnail": "resources/thumbs/2014/05/29/wpl_logo-white-black_bg-GOOGLE-PLUS.png", "file": "resources/files/2014/05/29/WPLServicesAgreement_1.pdf", "published": true, "thumbnail_height": "", "type": "homework", "slug": "homework-1", "name": "HomeWork 1"}}, {"pk": "2447ef55-db6b-418c-b9de-c5ed196c6105", "model": "resources.resource", "fields": {"updated": "2014-05-29T21:41:04.031Z", "_order": 1, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat justo dui, eget condimentum elit tempus in. Aenean consequat lectus odio, et porttitor quam commodo non. Duis velit metus, venenatis et elit sit amet, sagittis venenatis justo. Vestibulum leo mi, consectetur non pulvinar a, fermentum at nisl. Pellentesque fermentum felis nec leo blandit placerat. In porta purus id felis eleifend pulvinar rutrum ultricies erat. Suspendisse risus lectus, ullamcorper dignissim eleifend eu, imperdiet a eros. Morbi auctor cursus posuere. Vivamus dignissim tempus tellus dapibus sagittis. In eleifend, nisl nec tincidunt dapibus, magna velit dictum tortor, id tempor lectus velit eu odio. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi posuere, mauris eget accumsan viverra, nulla odio pellentesque leo, a porta arcu orci vitae nisl. Praesent ut molestie purus. Nam pellentesque, lacus eu cursus fringilla, quam arcu elementum tellus, sit amet egestas mi arcu ac ligula.", "created": "2014-05-29T21:41:04.031Z", "lesson": "c1ebe6f1-6eef-4012-afb3-a101f780efb1", "thumbnail_width": "", "owner": 1, "thumbnail": "resources/thumbs/2014/05/29/Screen_Shot_2014-05-28_at_5.05.48_PM.png", "file": "resources/files/2014/05/29/WPLServicesAgreement.pdf", "published": true, "thumbnail_height": "", "type": "resource", "slug": "resource-test-1", "name": "Resource Test 1"}}, {"pk": "57ebcf88-0a85-4300-9512-1b255d155eec", "model": "resources.resource", "fields": {"updated": "2014-06-09T00:58:06.768Z", "_order": 0, "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dolor arcu, vulputate at ullamcorper eu, ultricies vitae sapien. Ut sed risus eget orci porta varius. Nulla suscipit eros odio, ut molestie leo scelerisque luctus. Morbi posuere libero condimentum ornare sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sollicitudin nec elit sed vestibulum. Phasellus in erat a lectus porta malesuada sed eu magna. Nullam nec sapien aliquet, laoreet ligula vel, commodo est. Donec tempor nibh non dignissim suscipit. Sed a metus lectus. Vestibulum elementum quam vitae pellentesque accumsan. Proin dapibus viverra nibh, id placerat sem blandit tempor", "created": "2014-06-09T00:58:06.768Z", "lesson": "871505ae-c51b-4caa-8312-ee0a4d09718f", "thumbnail_width": "", "owner": 1, "thumbnail": "resources/thumbs/2014/06/08/1013918_10151648446232570_1362258900_n.jpg", "file": "resources/files/2014/06/08/Ethics_in_Politics-d2l.csv", "published": false, "thumbnail_height": "", "type": "resource", "slug": "resource-test-3", "name": "Resource Test 3"}}]
+[
+{
+    "pk": "1a8af0e1-a670-4ba5-913d-392a1631c150", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "9276aafa-e41c-4e6a-9ade-9712b67bbc5d", 
+        "_order": 3, 
+        "type": "homework", 
+        "file": ""
+    }
+},
+{
+    "pk": "44cd11bb-5a6c-427f-97c7-30257d5855b5", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "9276aafa-e41c-4e6a-9ade-9712b67bbc5d", 
+        "_order": 4, 
+        "type": "homework", 
+        "file": ""
+    }
+},
+{
+    "pk": "563b50be-f52f-4546-bc9d-732211f36572", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "9276aafa-e41c-4e6a-9ade-9712b67bbc5d", 
+        "_order": 2, 
+        "type": "resource", 
+        "file": ""
+    }
+},
+{
+    "pk": "5d202186-2d76-4214-8983-11f70bae78de", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "9276aafa-e41c-4e6a-9ade-9712b67bbc5d", 
+        "_order": 1, 
+        "type": "resource", 
+        "file": ""
+    }
+},
+{
+    "pk": "bef7064e-d4f9-42a5-9307-74c23c8914dd", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "9276aafa-e41c-4e6a-9ade-9712b67bbc5d", 
+        "_order": 5, 
+        "type": "homework", 
+        "file": ""
+    }
+},
+{
+    "pk": "de558cf3-9a0e-41c2-aaad-2f7e55d37ede", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "9276aafa-e41c-4e6a-9ade-9712b67bbc5d", 
+        "_order": 0, 
+        "type": "resource", 
+        "file": ""
+    }
+}
+]

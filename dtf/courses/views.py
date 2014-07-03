@@ -127,7 +127,6 @@ class CourseShareView(AjaxResponsePermissionMixin, JSONResponseMixin, View):
     def post_ajax(self, request, *args, **kwargs):
         comment_text = 'Check out the [{0}]({1} "{2}...") course.'
         ip = get_real_ip(self.request)
-        import pdb;pdb.set_trace()
         site = Site.objects.get(pk=settings.SITE_ID)
         group = FacebookGroup.objects.get(pk=self.kwargs['group_pk'])
         content_type = ContentType.objects.get_for_model(group)

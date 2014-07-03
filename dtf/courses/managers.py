@@ -1,9 +1,10 @@
 from django.db import models
 from django.db.models.aggregates import Max
 from profiles.models import InstructorProfile
+from polymorphic.manager import PolymorphicManager
 
 
-class CourseManager(models.Manager):
+class CourseManager(PolymorphicManager):
     def published(self):
         return self.filter(published=True)
 

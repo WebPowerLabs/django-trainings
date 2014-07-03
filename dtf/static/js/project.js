@@ -51,7 +51,7 @@ $(document).ready(function(){
             url: url,
             type: 'POST',
             success: function (data) {
-                console.log('ololo');
+                console.log('ok');
             }
         }); 
         

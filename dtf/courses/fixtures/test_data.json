@@ -1,1 +1,288 @@
-[{"pk": "ec9d2e71-c173-4d1c-b1f4-f7745f3f14c4", "model": "courses.course", "fields": {"owner": 1, "updated": "2014-05-29T22:45:48.536Z", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dolor arcu, vulputate at ullamcorper eu, ultricies vitae sapien. Ut sed risus eget orci porta varius. Nulla suscipit eros odio, ut molestie leo scelerisque luctus. Morbi posuere libero condimentum ornare sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sollicitudin nec elit sed vestibulum. Phasellus in erat a lectus porta malesuada sed eu magna. Nullam nec sapien aliquet, laoreet ligula vel, commodo est. Donec tempor nibh non dignissim suscipit. Sed a metus lectus. Vestibulum elementum quam vitae pellentesque accumsan. Proin dapibus viverra nibh, id placerat sem blandit tempor", "created": "2014-05-29T20:48:20.232Z", "thumbnail_width": "2448", "order": 0, "thumbnail": "courses/thumbs/2014/05/29/IMG_0119.jpg", "published": true, "thumbnail_height": "3264", "slug": "course-test-1", "name": "Course Test 1"}}, {"pk": "ef4896b9-a676-45a7-873d-dcd3c1ad5c30", "model": "courses.course", "fields": {"owner": 1, "updated": "2014-06-09T01:25:43.068Z", "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dolor arcu, vulputate at ullamcorper eu, ultricies vitae sapien. Ut sed risus eget orci porta varius. Nulla suscipit eros odio, ut molestie leo scelerisque luctus. Morbi posuere libero condimentum ornare sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sollicitudin nec elit sed vestibulum. Phasellus in erat a lectus porta malesuada sed eu magna. Nullam nec sapien aliquet, laoreet ligula vel, commodo est. Donec tempor nibh non dignissim suscipit. Sed a metus lectus. Vestibulum elementum quam vitae pellentesque accumsan. Proin dapibus viverra nibh, id placerat sem blandit tempor", "created": "2014-06-09T00:38:56.499Z", "thumbnail_width": "720", "order": 1, "thumbnail": "courses/thumbs/2014/06/08/1013918_10151648446232570_1362258900_n.jpg", "published": true, "thumbnail_height": "960", "slug": "course-test-2", "name": "Course Test 2"}}]
+[
+{
+    "pk": "0664dca6-4e92-4b5a-abc9-aeab46d1dfda", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T19:55:07.409Z", 
+        "description": "Mauris vivamus fringilla condimentum tristique etiam tincidunt ut habitant nisl leo urna! Condimentum augue urna iaculis velit? Cras, consequat sed fringilla nibh a pulvinar habitant adipiscing? Lobortis praesent fusce tincidunt lorem iaculis! Ullamcorper quisque nisi etiam tellus dui aliquet convallis urna egestas habitant ornare curabitur quis! Duis vitae dui hendrerit amet purus metus eu lorem malesuada phasellus iaculis!\r\n", 
+        "created": "2014-07-03T19:55:07.409Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_3_10.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 22, 
+        "slug": "test-lesson-2", 
+        "name": "Test Lesson 2"
+    }
+},
+{
+    "pk": "09b2f5e0-c8cc-41a2-876a-6f8ece4f5ec5", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T19:56:31.225Z", 
+        "description": "Tellus tortor rhoncus morbi tristique nisl? Iaculis diam mattis dignissim porttitor ornare mi eros elit? Sit adipiscing vel tempor id consequat ante fusce! Dictum aliquam nisi mi metus vestibulum aliquet justo hendrerit lacus ipsum rutrum? Bibendum sit netus pellentesque sed sagittis blandit, id gravida nullam porttitor. Varius turpis tempus dapibus interdum fermentum.\r\n", 
+        "created": "2014-07-03T19:56:31.225Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_3_13.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 22, 
+        "slug": "mollis-morbi-adipiscing", 
+        "name": "Mollis morbi adipiscing "
+    }
+},
+{
+    "pk": "17b9c804-b0e0-4f43-80f5-f916730f1899", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T19:55:07.465Z", 
+        "description": "Ultrices risus sodales a leo consectetur dui sapien ante ornare? Diam sit tellus - id leo laoreet nisl habitant nam venenatis varius fames et? Fames bibendum adipiscing quam nullam ligula purus vel sodales eleifend mauris condimentum libero,! Praesent ante nunc vitae integer venenatis elit aliquam blandit malesuada? Neque vivamus cursus ultrices at in. Pellentesque adipiscing eros venenatis scelerisque pharetra nulla proin - hendrerit mattis velit sodales interdum ullamcorper!\r\n", 
+        "created": "2014-07-03T19:55:07.465Z", 
+        "thumbnail_width": "241", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_1_4.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "209", 
+        "polymorphic_ctype": 22, 
+        "slug": "test-lesson-3", 
+        "name": "Test Lesson 3"
+    }
+},
+{
+    "pk": "1a8af0e1-a670-4ba5-913d-392a1631c150", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:15:40.467Z", 
+        "description": "Suspendisse porttitor nibh facilisis mattis. Turpis duis nulla ultrices fusce interdum est eros, placerat sagittis quis nullam faucibus? Eget ante vel ultricies bibendum volutpat donec faucibus accumsan lorem tristique quisque varius eu! Sed velit enim eu eros egestas non molestie mauris ante imperdiet erat accumsan convallis. Fusce - nulla ligula lobortis dapibus malesuada est interdum! Sagittis duis augue auctor semper eu bibendum.\r\n", 
+        "created": "2014-07-03T20:15:40.467Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_3_14.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 26, 
+        "slug": "massa-elit-ante", 
+        "name": "Massa elit ante "
+    }
+},
+{
+    "pk": "2bcce4a4-641d-4b63-a139-537d4cf9376b", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T19:56:31.057Z", 
+        "description": "Turpis - habitant pellentesque feugiat tortor suspendisse semper urna ut rutrum curabitur arcu adipiscing duis. Diam molestie lacus ligula commodo iaculis. Erat vestibulum, dui nec tincidunt diam felis congue fermentum feugiat. Sit et diam at scelerisque! Consequat adipiscing sem convallis senectus quis velit elementum! Lectus malesuada - justo auctor vitae nisi venenatis gravida luctus.\r\n", 
+        "created": "2014-07-03T19:56:31.057Z", 
+        "thumbnail_width": "290", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_7_8.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "174", 
+        "polymorphic_ctype": 22, 
+        "slug": "quam-aliquet-venenatis", 
+        "name": "Quam aliquet venenatis "
+    }
+},
+{
+    "pk": "31222874-3501-41d6-9af7-cf0465fa788a", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:01:09.952Z", 
+        "description": "Egestas euismod duis varius turpis elementum elit! Vulputate elit turpis netus orci. Pellentesque interdum iaculis ultrices sagittis! Imperdiet - fames fringilla amet magna non vestibulum tempor! Viverra bibendum tempus id vestibulum habitant! Fermentum eleifend arcu libero accumsan praesent eu cras, donec.\r\nProin accumsan etiam nibh mauris habitant. Feugiat fermentum quam accumsan fames mi vel massa egestas! Tempus ultricies duis condimentum ullamcorper habitant faucibus tempor suscipit libero arcu lorem aliquam neque? Ante - nec aliquam aliquet semper convallis fermentum dignissim id? Mattis in faucibus, enim scelerisque sagittis non consequat risus tortor tristique! Senectus ultrices ullamcorper, nibh nulla congue lectus proin ut ante augue tempus vulputate.\r\n", 
+        "created": "2014-07-03T19:55:07.326Z", 
+        "thumbnail_width": "225", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_4_11.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "225", 
+        "polymorphic_ctype": 17, 
+        "slug": "test-course-1", 
+        "name": "Test Course 1"
+    }
+},
+{
+    "pk": "3e929bd9-09f2-4e16-a843-5cdaf0b8a77b", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T19:56:31.104Z", 
+        "description": "Massa justo egestas blandit ultricies quis tempor elit suspendisse cras urna faucibus aliquet iaculis -. Arcu tincidunt blandit - habitant euismod lorem donec fringilla egestas ornare? Quis fermentum facilisis lobortis venenatis placerat tristique. Nisl habitant tempus faucibus adipiscing lobortis gravida! Orci massa urna morbi convallis proin lacinia consectetur fringilla bibendum - porttitor! Sit nullam risus at dignissim?\r\n", 
+        "created": "2014-07-03T19:56:31.104Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_3_12.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 22, 
+        "slug": "porttitor-ipsum-cras", 
+        "name": "Porttitor ipsum cras "
+    }
+},
+{
+    "pk": "44cd11bb-5a6c-427f-97c7-30257d5855b5", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:15:40.518Z", 
+        "description": "Egestas metus neque risus ullamcorper at faucibus gravida? Egestas ultricies non pellentesque libero duis! Faucibus - viverra aliquet mattis phasellus dolor amet lorem convallis ac! Sit a arcu ipsum morbi egestas ultrices aliquet sem? Accumsan pharetra neque nisi sem placerat congue gravida fringilla fames eros? Leo molestie, vitae lacus convallis felis adipiscing bibendum tristique!\r\n", 
+        "created": "2014-07-03T20:15:40.518Z", 
+        "thumbnail_width": "3872", 
+        "thumbnail": "courses/thumbs/2014/07/03/Hdd_8.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "2592", 
+        "polymorphic_ctype": 26, 
+        "slug": "nullam-placerat-eu", 
+        "name": "Nullam placerat eu "
+    }
+},
+{
+    "pk": "4e46f4ef-54d8-446f-9a5d-11df4bf3325d", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:01:09.973Z", 
+        "description": "Nisi malesuada lobortis in eleifend tempus, gravida integer senectus tortor rhoncus lacinia scelerisque sem? Ipsum congue, vitae tristique nec in blandit leo! Nibh consequat molestie ultrices hendrerit aliquet. Ultrices ultricies nec gravida viverra eu duis placerat at nam metus interdum porttitor? Imperdiet ut volutpat ligula viverra ullamcorper accumsan. Risus et tincidunt vel blandit eget eu.\r\nProin ornare aliquam turpis ipsum ultrices? Praesent lorem nulla lacinia aliquam hendrerit arcu sagittis gravida. Eleifend sodales est luctus in commodo orci nibh scelerisque dapibus? Gravida ac amet mauris eros integer fringilla. Quis nullam nibh lobortis ipsum integer adipiscing. Placerat suspendisse porta tortor sem luctus pharetra duis elementum at metus nisl!\r\n", 
+        "created": "2014-07-03T19:56:31.025Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_3_11.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 17, 
+        "slug": "test-course-2", 
+        "name": "Test Course 2"
+    }
+},
+{
+    "pk": "563b50be-f52f-4546-bc9d-732211f36572", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:15:40.414Z", 
+        "description": "Fusce vulputate eget ultrices faucibus velit ipsum vitae iaculis purus sapien lorem libero lacinia? Lectus pulvinar ut consequat pellentesque adipiscing sem sagittis congue curabitur nisi quisque nec pharetra? Leo dui nec etiam felis enim tristique. Sodales cras ultrices mauris libero laoreet gravida a euismod rhoncus? Fusce eget augue et dictum ante porttitor felis vel ligula? Nullam - eleifend laoreet cras nibh nunc ligula non accumsan fames.\r\n", 
+        "created": "2014-07-03T20:15:40.414Z", 
+        "thumbnail_width": "284", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_6_6.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "177", 
+        "polymorphic_ctype": 26, 
+        "slug": "magna-nunc-justo", 
+        "name": "Magna nunc justo "
+    }
+},
+{
+    "pk": "5d202186-2d76-4214-8983-11f70bae78de", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:15:40.363Z", 
+        "description": "Commodo mauris nibh bibendum ultrices gravida, senectus est auctor turpis egestas! Elit non blandit senectus metus enim vel, ipsum rutrum id fames? Ligula fames pharetra congue risus felis. Porta vitae, nec dui rhoncus senectus hendrerit quam pellentesque diam mattis justo ac! Commodo non elementum massa risus dictum. Lectus arcu ac donec mollis dignissim est nam congue lacinia augue?\r\n", 
+        "created": "2014-07-03T20:15:40.363Z", 
+        "thumbnail_width": "259", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_8_2.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "194", 
+        "polymorphic_ctype": 26, 
+        "slug": "tortor-erat-vehicula", 
+        "name": "Tortor erat vehicula "
+    }
+},
+{
+    "pk": "69d668df-847c-49ff-a977-cf28f7a13d2e", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T19:55:07.527Z", 
+        "description": "Volutpat ipsum donec accumsan consectetur consequat turpis metus sit, molestie vulputate rutrum hendrerit vel. Fusce enim etiam commodo dui lobortis dictum feugiat tempus condimentum,? Laoreet mi - ullamcorper at dictum duis nisi orci imperdiet? Morbi senectus, massa amet accumsan eros molestie adipiscing mollis placerat! Ac turpis aliquet tempor suspendisse porta diam pellentesque dictum, mi blandit vivamus sagittis! Porta nullam commodo molestie lorem?\r\n", 
+        "created": "2014-07-03T19:55:07.527Z", 
+        "thumbnail_width": "258", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_5_2.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "195", 
+        "polymorphic_ctype": 22, 
+        "slug": "test-lesson-4", 
+        "name": "Test Lesson 4"
+    }
+},
+{
+    "pk": "9276aafa-e41c-4e6a-9ade-9712b67bbc5d", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:15:40.283Z", 
+        "description": "Donec molestie, cursus porttitor mauris mattis duis leo ultricies magna. Tristique imperdiet duis - nisl ultricies eget commodo quisque porttitor erat? Arcu amet hendrerit vestibulum sapien purus? Felis ullamcorper tempor morbi arcu egestas. Phasellus ut ultricies curabitur metus etiam orci id scelerisque habitant - placerat! Ipsum lobortis faucibus eleifend libero lorem quam nec tortor ut curabitur!\r\n", 
+        "created": "2014-07-03T19:55:07.361Z", 
+        "thumbnail_width": "225", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_4_12.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "225", 
+        "polymorphic_ctype": 22, 
+        "slug": "test-lesson-1", 
+        "name": "Test Lesson 1 WITH RESOURCES"
+    }
+},
+{
+    "pk": "bef7064e-d4f9-42a5-9307-74c23c8914dd", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:15:40.583Z", 
+        "description": "Dapibus malesuada interdum amet diam et sapien viverra sagittis! Laoreet duis eu integer quis urna ut purus nunc tempor? Tortor habitant dui erat est libero proin sit sem sed senectus! Convallis suspendisse duis netus ultricies! Neque metus - phasellus quisque placerat nullam enim congue! Dictum dui tincidunt etiam arcu ultrices hendrerit leo?\r\n", 
+        "created": "2014-07-03T20:15:40.582Z", 
+        "thumbnail_width": "204", 
+        "thumbnail": "courses/thumbs/2014/07/03/images_1_1.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "204", 
+        "polymorphic_ctype": 26, 
+        "slug": "consequat-sed-eu", 
+        "name": "Consequat sed eu "
+    }
+},
+{
+    "pk": "cb76301f-47a9-4e85-8cdf-a066c88b37a3", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T19:56:31.163Z", 
+        "description": "Sed et hendrerit eleifend dui a ligula proin urna. Sem auctor ligula diam sagittis imperdiet curabitur mauris integer suscipit massa pharetra fusce. Vitae rhoncus nunc tempus porttitor suscipit! Accumsan nibh imperdiet libero vehicula mattis purus enim facilisis turpis porttitor aliquam risus id,. Ornare pulvinar lorem etiam mauris imperdiet! Fringilla sed proin at nullam tellus porttitor!\r\n", 
+        "created": "2014-07-03T19:56:31.163Z", 
+        "thumbnail_width": "241", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_1_5.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "209", 
+        "polymorphic_ctype": 22, 
+        "slug": "enim-netus-cursus", 
+        "name": "Enim netus cursus "
+    }
+},
+{
+    "pk": "de558cf3-9a0e-41c2-aaad-2f7e55d37ede", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-03T20:15:40.326Z", 
+        "description": "Libero justo, elementum est vulputate fusce pellentesque orci pharetra porttitor. Lobortis convallis varius commodo suspendisse augue vehicula ante fames placerat cras morbi luctus. Iaculis fames nunc, gravida laoreet id vitae nam urna interdum egestas condimentum imperdiet suspendisse! Sed vitae, dui nisi tempus turpis dignissim ut! Iaculis erat molestie lacus sagittis eros augue dictum praesent. Nullam mattis turpis consectetur metus semper rutrum!\r\n", 
+        "created": "2014-07-03T20:15:40.326Z", 
+        "thumbnail_width": "241", 
+        "thumbnail": "courses/thumbs/2014/07/03/download_1_6.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "209", 
+        "polymorphic_ctype": 26, 
+        "slug": "nullam-praesent-senectus", 
+        "name": "Nullam praesent senectus "
+    }
+},
+{
+    "pk": "31222874-3501-41d6-9af7-cf0465fa788a", 
+    "model": "courses.course", 
+    "fields": {
+        "order": 0
+    }
+},
+{
+    "pk": "4e46f4ef-54d8-446f-9a5d-11df4bf3325d", 
+    "model": "courses.course", 
+    "fields": {
+        "order": 1
+    }
+}
+]

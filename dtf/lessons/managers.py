@@ -1,9 +1,10 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from profiles.models import InstructorProfile
+from polymorphic.manager import PolymorphicManager
 
 
-class LessonManager(models.Manager):
+class LessonManager(PolymorphicManager):
     def published(self):
         return self.filter(published=True)
 

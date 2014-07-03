@@ -1,35 +1,20 @@
 from django.db import models
-from django_extensions.db.fields import AutoSlugField, UUIDField
-from django.conf import settings
-from lessons.managers import LessonManager, LessonHistoryManager, \
-    LessonFavouriteManager
+from lessons.managers import (LessonManager, LessonHistoryManager,
+                              LessonFavouriteManager)
+from courses.models import Content, History, Favourite
 
 
-class Lesson(models.Model):
+class Lesson(Content):
     """ Lesson
     A series of Lessons makes up a course. Lessons contain instructions,
     a video, and multiple resources/homework resources.
     """
     objects = LessonManager()
 
-    id = UUIDField(primary_key=True)
-    name = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from='name')
-    description = models.TextField(blank=True,
-        help_text='a brief summary of this lesson')
-    published = models.BooleanField(default=False,
-        help_text='users will only see published lessons')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    thumbnail = models.ImageField(upload_to='lessons/thumbs/%Y/%m/%d',
-        height_field='thumbnail_height', width_field='thumbnail_width')
-    thumbnail_height = models.CharField(max_length=255, blank=True)
-    thumbnail_width = models.CharField(max_length=255, blank=True)
     video = models.FileField(upload_to='lessons/videos/%Y/%m/%d', blank=True)
     homework = models.TextField(blank=True)
     course = models.ForeignKey('courses.Course')
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def save(self, *args, **kwargs):
         order = None
@@ -58,34 +43,25 @@ class Lesson(models.Model):
         return self.resource_set.get_list(user).filter(type='homework')
 
 
-class LessonHistory(models.Model):
+class LessonHistory(History):
     """
     For storing history.
     """
-
     objects = LessonHistoryManager()
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    created = models.DateTimeField(auto_now_add=True)
     lesson = models.ForeignKey('Lesson')
-    is_active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-created']
-        verbose_name_plural = 'Lesson history'
+        verbose_name_plural = 'Lesson History'
 
 
-class LessonFavourite(models.Model):
+class LessonFavourite(Favourite):
     """
     For storing favourites.
     """
-
     objects = LessonFavouriteManager()
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    created = models.DateTimeField(auto_now_add=True)
     lesson = models.ForeignKey('Lesson')
-    is_active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-created']
+        verbose_name_plural = 'Lesson Favourites'
