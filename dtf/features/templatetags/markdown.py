@@ -13,7 +13,7 @@ register = template.Library()
 @stringfilter
 def markdown(string):
     '''
-    Receives Markdown-formatted string and returns HTML5-formatted string.
+    Receives Markdown-formatted string and returns it HTML5-formatted.
     '''
     string = re.sub('```\s*?\\n', '```', string)
     html_parser = HTMLParser.HTMLParser()

@@ -7,8 +7,10 @@ from django.conf import settings
 
 from jsonfield import JSONField
 
-from django_comments import Comment
 from .managers import FBGroupManager, FBPostManager
+import dtf_comments
+
+DTFComment = dtf_comments.get_model()
 
 
 class FacebookGroup(models.Model):
@@ -22,7 +24,8 @@ class FacebookGroup(models.Model):
     email = models.EmailField(max_length=255, blank=True)
     feed = models.TextField(blank=True)
     pinned_post = models.OneToOneField('FacebookPost', blank=True, null=True)
-    pinned_comment = models.OneToOneField('django_comments.Comment', blank=True, null=True)
+    pinned_comment = models.OneToOneField('dtf_comments.DTFComment',
+                                          blank=True, null=True)
 
     objects = FBGroupManager()
 
@@ -40,7 +43,8 @@ class FacebookGroup(models.Model):
         # get the fb token from requesting user
         fb_token = user.get_fb_access_token()
         if self.fb_uid:
-            return "https://graph.facebook.com/v2.0/{}?access_token={}".format(self.fb_uid, fb_token.token)
+            return "https://graph.facebook.com/v2.0/{}?access_token={}".format(
+                                                   self.fb_uid, fb_token.token)
 
     def get_fb_feed_url(self, user):
         """ get feed for this facebook group
@@ -73,7 +77,6 @@ class FacebookGroup(models.Model):
         if fb_feed:
             return fb_feed.json()
 
-
     def post_fb_feed(self, user, message):
         """
         post new comment to this groups feed
@@ -92,8 +95,7 @@ class FacebookGroup(models.Model):
         return pin
 
     def pin_comment(self, comment_id):
-        from django_comments.models import Comment
-        pin = get_object_or_404(Comment, id=comment_id)
+        pin = get_object_or_404(DTFComment, id=comment_id)
         self.pinned_comment = pin
         self.save()
         return pin

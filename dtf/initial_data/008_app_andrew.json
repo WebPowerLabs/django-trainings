@@ -1,0 +1,39 @@
+[
+{
+    "pk": 1, 
+    "model": "socialaccount.socialapp", 
+    "fields": {
+        "name": "Decide To Fly - TestA", 
+        "sites": [
+            1
+        ], 
+        "secret": "26fd266ae80e45b3024a826c4fa2ccdb", 
+        "client_id": "239362782938255", 
+        "key": "", 
+        "provider": "facebook"
+    }
+},
+{
+    "pk": 1, 
+    "model": "socialaccount.socialaccount", 
+    "fields": {
+        "uid": "1266309096", 
+        "last_login": "2014-07-04T14:00:07.373Z", 
+        "user": 1, 
+        "provider": "facebook", 
+        "extra_data": "{}", 
+        "date_joined": "2014-07-04T14:00:07.373Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "socialaccount.socialtoken", 
+    "fields": {
+        "app": 1, 
+        "token_secret": "", 
+        "expires_at": null, 
+        "account": 1, 
+        "token": "xzx"
+    }
+}
+]

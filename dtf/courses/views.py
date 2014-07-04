@@ -15,11 +15,12 @@ from django.views.generic.list import ListView
 from django.http.response import HttpResponseRedirect
 from utils.decorators import instructor_member_required, can_edit_content
 from facebook_groups.models import FacebookGroup
-from django_comments import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from ipware.ip import get_real_ip
 from django.contrib.sites.models import Site
+import django_comments
+Comment = django_comments.get_model()
 
 
 class CourseListView(PermissionMixin, CreateFormBaseView):

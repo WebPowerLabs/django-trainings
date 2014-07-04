@@ -75,6 +75,7 @@ class Common(Configuration):
         'resources',
         'profiles',
         'features',
+        'dtf_comments',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -106,6 +107,8 @@ class Common(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
     ########## END MIDDLEWARE CONFIGURATION
+
+    COMMENTS_APP = 'dtf_comments'
 
     ########## DEBUG
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug

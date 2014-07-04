@@ -45,17 +45,31 @@ $.ajaxSetup({
 });
 // end CSRF for AJAX request.
 $(document).ready(function(){
-    $('select.share').change(function(){
-        var url = $(this).find('option:selected').attr('data-url');
+    // $('select.share').change(function(){
+        // var url = $(this).find('option:selected').attr('data-url');
+        // $.ajax({
+            // url: url,
+            // type: 'POST',
+            // success: function (data) {
+                // console.log('ok');
+            // }
+        // }); 
+//         
+    // });
+    $('body').on('click', '.btn-share', function(event){
+        var url = $(this).attr('data-url');
         $.ajax({
             url: url,
-            type: 'POST',
+            type: 'GET',
             success: function (data) {
-                console.log('ok');
+                console.log(data);
             }
-        }); 
-        
+        });        
+
     });
+    
+    
+    
     // AJAX request to preview_comment view
     $('body').on('click', 'a.tab-preview', function(event){
         var url = $(this).attr('data-url');

@@ -13,13 +13,17 @@ class Feature(models.Model):
     '''
     Through model for featuring items in a comment
     '''
-    # CHOICES = ContentType.objects.filter(Q(name=u'lesson') | Q(name=u'course'))
-    comment = models.ForeignKey('django_comments.Comment', related_name='features', blank=True, null=True)
+#     CHOICES = ContentType.objects.filter(Q(name=u'lesson') |
+#                                          Q(name=u'course'))
+    comment = models.ForeignKey('dtf_comments.DTFComment',
+                                related_name='features',
+                                blank=True, null=True)
     content_type = models.ForeignKey(ContentType,
             verbose_name=_('content type'),
             related_name="content_type_set_for_%(class)s")
     object_pk = models.TextField(_('object ID'))
-    content_object = generic.GenericForeignKey(ct_field="content_type", fk_field="object_pk")
+    content_object = generic.GenericForeignKey(ct_field="content_type",
+                                               fk_field="object_pk")
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -42,5 +46,6 @@ class Feature(models.Model):
         Get url to content_type's display
         """
         default_template = "features/feature_object.html"
-        object_template = "features/feature_{}.html".format(self.content_type.name)
+        object_template = "features/feature_{}.html".format(
+                                                        self.content_type.name)
         return select_template([object_template, default_template])
