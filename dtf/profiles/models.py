@@ -1,6 +1,10 @@
 from django.db import models
 from django.conf import settings
 
+from djnfusion import server, key
+
+from packages.models import InfusionsoftTag, PackagePurchase
+
 # class PackageProfile(models.Model):
 #    '''
 #    for storing information about Packages
@@ -13,10 +17,70 @@ class FacebookProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     fb_uid = models.TextField(blank=True)
 
+    def __unicode__(self):
+        return self.user.username
 
 class InfusionsoftProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    infusionsoft_uid = models.TextField(blank=True)
+    remote_id = models.TextField(blank=True)
+    tags = models.ManyToManyField(InfusionsoftTag, 
+        related_name="infusionsoft_profiles", blank=True, null=True)
+
+    def __unicode__(self):
+        return self.user.username
+
+    @property
+    def get_remote_id(self):
+        if not self.remote_id:
+            self.update_profile()
+        return self.remote_id if self.remote_id else None
+
+
+    def update_tags(self):
+        """
+        updates a profiles tags from the infusionsoft server
+        """
+        tags = InfusionsoftTag.objects.by_user(self.user)
+        active_purchases = PackagePurchase.objects.filter(user__id=self.user_id,
+            package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1) # 1 == Active
+
+        for tag in self.tags.all():
+            # loop through profile's tags
+            if tag not in tags:
+                # profile has tag that was removed on infusionsoft, remove tag
+                self.tags.remove(tag)
+                # set past_purchases of this tag to expired
+                active_purchases.filter(package__tag=tag).set_status(2) # 2 == Expired
+
+        for tag in tags:
+            # loop through infusionsoft's tags
+            if tag not in self.tags.all():
+                # profile does not have tag on infusionsoft, add tag
+                self.tags.add(tag)
+                # create a new package purchase for the tags infusionsoft package
+                PackagePurchase.objects.create(
+                    user=self.user, package=tag.infusionsoftpackage, status=1) # 1 == Active
+
+        return self.save()
+
+    def update_profile(self):
+        """
+        updates profile fields from infusionsoft server
+        """
+        provider_data = self._get_provider_data()
+        if len(provider_data):
+            self.remote_id = provider_data["Id"]
+            return self.save()
+
+
+    def _get_provider_data(self):
+        """
+        Gets a profiles user's data from infusionsoft
+        """
+        results = server.DataService.findByField(key, "Contact",
+            10, 0, "email", self.user.email,
+            ["Id",]);
+        return results[0] if len(results) else None
 
 
 class InstructorProfile(models.Model):
