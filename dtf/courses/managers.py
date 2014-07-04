@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.aggregates import Max
 from profiles.models import InstructorProfile
-from polymorphic.manager import PolymorphicManager
+from polymorphic import PolymorphicManager
 
 
 class CourseManager(PolymorphicManager):

@@ -1,0 +1,14 @@
+[
+{
+    "pk": 1,
+    "model": "socialaccount.socialapp", 
+    "fields": {
+        "name": "Decide To Fly - TestA", 
+        "sites": [1], 
+        "secret": "26fd266ae80e45b3024a826c4fa2ccdb", 
+        "client_id": "239362782938255", 
+        "key": "", 
+        "provider": "facebook"
+    }
+}
+]

@@ -1,0 +1,84 @@
+[
+{
+    "pk": "43957a8a-bd94-4fc1-aab3-947b2d4fd798", 
+    "model": "lessons.lesson", 
+    "fields": {
+        "course": "1268f09a-b057-4bb2-802e-b81c4d3ea4c5", 
+        "_order": 0, 
+        "video": "", 
+        "homework": "Donec nunc auctor vestibulum vivamus. Ultrices curabitur rhoncus magna pellentesque ultricies. Arcu orci volutpat dui ultricies donec. Semper placerat augue imperdiet lobortis nunc faucibus netus erat nec eu ullamcorper - ornare! Ligula urna faucibus viverra ultrices gravida. Vestibulum pellentesque etiam aliquam laoreet ut orci rhoncus tempus arcu mauris molestie phasellus enim?\r\n", 
+        "tags": [
+            2, 
+            3
+        ]
+    }
+},
+{
+    "pk": "5baa4845-d64a-4007-8d28-2f5c68e205ad", 
+    "model": "lessons.lesson", 
+    "fields": {
+        "course": "1268f09a-b057-4bb2-802e-b81c4d3ea4c5", 
+        "_order": 1, 
+        "video": "", 
+        "homework": "Neque mattis aliquet convallis lectus viverra ac nec facilisis phasellus - ultricies lacinia? Sed at faucibus lacinia euismod dolor vitae neque blandit non sit vivamus aliquet nibh -. Tellus felis integer - eros ac morbi lobortis a euismod scelerisque! Elementum fringilla ipsum lobortis nec lacinia rhoncus phasellus duis. Eu varius donec luctus facilisis? Nullam netus - senectus convallis vestibulum mi augue tempor nisi.\r\n", 
+        "tags": [
+            1, 
+            3
+        ]
+    }
+},
+{
+    "pk": "7fd1f6ff-d846-47ec-92c4-313b3e97337f", 
+    "model": "lessons.lesson", 
+    "fields": {
+        "course": "1268f09a-b057-4bb2-802e-b81c4d3ea4c5", 
+        "_order": 2, 
+        "video": "", 
+        "homework": "Metus risus tempor eleifend est rutrum luctus eros lectus! Lorem semper non eu hendrerit enim rutrum sapien congue arcu proin sed mauris phasellus -! Pellentesque sit mattis tellus condimentum neque! Fermentum viverra nullam erat purus dapibus aliquam libero? Dui ut nisi felis fames eget tristique malesuada rutrum blandit. Integer neque est lectus elementum.\r\n", 
+        "tags": [
+            1
+        ]
+    }
+},
+{
+    "pk": "9d0ad459-1f4b-4847-b9a7-c75c56ec0ccd", 
+    "model": "lessons.lesson", 
+    "fields": {
+        "course": "c90d1f99-9afa-4697-9518-94622229429d", 
+        "_order": 0, 
+        "video": "", 
+        "homework": "", 
+        "tags": [
+            1, 
+            3
+        ]
+    }
+},
+{
+    "pk": "e1f7418a-322e-4c2e-a1df-a1a4c35be999", 
+    "model": "lessons.lesson", 
+    "fields": {
+        "course": "c90d1f99-9afa-4697-9518-94622229429d", 
+        "_order": 2, 
+        "video": "", 
+        "homework": "", 
+        "tags": [
+            1, 
+            2
+        ]
+    }
+},
+{
+    "pk": "ecc007ac-5cc5-4ecc-9050-013947c3cfa3", 
+    "model": "lessons.lesson", 
+    "fields": {
+        "course": "c90d1f99-9afa-4697-9518-94622229429d", 
+        "_order": 1, 
+        "video": "", 
+        "homework": "", 
+        "tags": [
+            2
+        ]
+    }
+}
+]

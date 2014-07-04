@@ -1,0 +1,52 @@
+[
+{
+    "pk": "5b794eec-173d-48aa-b193-fe28ba868e6f", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "7fd1f6ff-d846-47ec-92c4-313b3e97337f", 
+        "_order": 0, 
+        "type": "homework", 
+        "file": ""
+    }
+},
+{
+    "pk": "7ef14c19-88dc-4cdd-87e1-27cd0eb4a8da", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "7fd1f6ff-d846-47ec-92c4-313b3e97337f", 
+        "_order": 1, 
+        "type": "homework", 
+        "file": ""
+    }
+},
+{
+    "pk": "acecf46d-0a1b-4a9a-b092-b265d30b2033", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "7fd1f6ff-d846-47ec-92c4-313b3e97337f", 
+        "_order": 2, 
+        "type": "resource", 
+        "file": ""
+    }
+},
+{
+    "pk": "b1e545f7-aca7-446d-84a5-12b371489a1f", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "7fd1f6ff-d846-47ec-92c4-313b3e97337f", 
+        "_order": 3, 
+        "type": "resource", 
+        "file": ""
+    }
+},
+{
+    "pk": "f05badc1-7fa1-4649-83fe-09238b282d27", 
+    "model": "resources.resource", 
+    "fields": {
+        "lesson": "7fd1f6ff-d846-47ec-92c4-313b3e97337f", 
+        "_order": 4, 
+        "type": "resource", 
+        "file": ""
+    }
+}
+]

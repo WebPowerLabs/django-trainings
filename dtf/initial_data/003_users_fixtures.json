@@ -1,0 +1,40 @@
+[
+{
+    "pk": 1, 
+    "model": "users.user", 
+    "fields": {
+        "username": "admin", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2014-07-04T09:52:26.838Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "infusionsoft_uid": 657, 
+        "password": "pbkdf2_sha256$12000$K4GMI5iy4m18$g9+/i57xBkW0e6A/xcF/BjLqY74kEoUgc/T++2LLHak=", 
+        "email": "will@django.nu", 
+        "date_joined": "2014-05-29T20:45:12.968Z"
+    }
+},
+{
+    "pk": 2, 
+    "model": "users.user", 
+    "fields": {
+        "username": "will", 
+        "first_name": "Will", 
+        "last_name": "Farley", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-06-09T00:28:40.908Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "infusionsoft_uid": 659, 
+        "password": "!6ai42wNUBBWs1ZoOwsfVaTdEQQLTWSskGCAJSpEY", 
+        "email": "webpowerlabs@gmail.com", 
+        "date_joined": "2014-05-29T23:09:52.256Z"
+    }
+}
+]
