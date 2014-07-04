@@ -148,7 +148,11 @@
     {% block content %}{% endblock content %}
 
     {% block footer %}
-      {% include "includes/footer-main.html" %}
+      {% if user.is_authenticated %}
+        {% include "includes/footer-app.html" %}
+      {% else %}
+        {% include "includes/footer-main.html" %}
+      {% endif %}
     {% endblock footer %}
 
     {% block modal %}{% endblock modal %}
