@@ -67,3 +67,7 @@
 .fav_button .state-2 {
   display: table-row;
 }
+
+body {
+  padding-top: 50px;
+}

@@ -54,7 +54,7 @@ from django.dispatch import receiver
 import djnfusion
 
 
-@receiver(post_save, sender=User)
-def djnfusion_sync_user(sender, **kwargs):
-    user = kwargs['instance']
-    djnfusion.sync_user(user)    
+#@receiver(post_save, sender=User)
+#def djnfusion_sync_user(sender, **kwargs):
+#    user = kwargs['instance']
+#    djnfusion.sync_user(user)    

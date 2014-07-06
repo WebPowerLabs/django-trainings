@@ -3,4 +3,4 @@ from django_comments.models import Comment
 
 
 class DTFComment(Comment):
-    hero_unit = ForeignKey('courses.Content')
+    hero_unit = ForeignKey('courses.Content', null=True, blank=True)

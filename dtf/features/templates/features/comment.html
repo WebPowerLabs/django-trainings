@@ -21,12 +21,7 @@
           {% include 'comments/comment_attached_content.html' with object=comment.hero_unit %}
       </div>
     {% endif %}
-    {% if comment.features %}
-    {% for feature in comment.features.active %}
 
-    {% include feature.get_template_url.name with content_object=feature.content_object %}
-    {% endfor %}
-    {% endif %}
   </div>
   <div class="panel-footer">
 
