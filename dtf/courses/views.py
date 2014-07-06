@@ -15,12 +15,6 @@ from django.views.generic.list import ListView
 from django.http.response import HttpResponseRedirect
 from utils.decorators import instructor_member_required, can_edit_content
 from facebook_groups.models import FacebookGroup
-from django.contrib.contenttypes.models import ContentType
-from django.conf import settings
-from ipware.ip import get_real_ip
-from django.contrib.sites.models import Site
-import django_comments
-Comment = django_comments.get_model()
 
 
 class CourseListView(PermissionMixin, CreateFormBaseView):
@@ -100,7 +94,7 @@ class CourseFavouriteListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.coursefavourite_set.active()
+        return CourseFavourite.objects.active(self.request.user)
 
 
 class CourseHistoryListView(PermissionMixin, ListView):
@@ -108,7 +102,7 @@ class CourseHistoryListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.coursehistory_set.active()
+        return CourseHistory.objects.active(self.request.user)
 
 
 class CourseHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
@@ -120,30 +114,3 @@ class CourseHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
         obj.is_active = False
         obj.save()
         return self.render_json_response({'success': True})
-
-
-class CourseShareView(AjaxResponsePermissionMixin, JSONResponseMixin, View):
-    decorators = {'POST': login_required}
-
-    def post_ajax(self, request, *args, **kwargs):
-        comment_text = 'Check out the [{0}]({1} "{2}...") course.'
-        ip = get_real_ip(self.request)
-        site = Site.objects.get(pk=settings.SITE_ID)
-        group = FacebookGroup.objects.get(pk=self.kwargs['group_pk'])
-        content_type = ContentType.objects.get_for_model(group)
-        course = Course.objects.get(slug=self.kwargs['slug'])
-
-        new_comment = Comment.objects.create(content_type=content_type,
-                                             object_pk=group.pk,
-                                             site=site)
-        new_comment.user = self.request.user
-        new_comment.user_name = self.request.user.username
-        new_comment.user_email = self.request.user.email
-        new_comment.ip_address = ip
-        new_comment.comment = comment_text.format(course.name,
-                                                  course.get_absolute_url(),
-                                                  course.description[:49])
-        new_comment.save()
-        return self.render_json_response({'success': True})
-
-

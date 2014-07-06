@@ -130,7 +130,7 @@ class LessonFavouriteListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.lessonfavourite_set.active()
+        return LessonFavourite.objects.active(self.request.user)
 
 
 class LessonHistoryListView(PermissionMixin, ListView):
@@ -138,7 +138,7 @@ class LessonHistoryListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.lessonhistory_set.active()
+        return LessonHistory.objects.active(self.request.user)
 
 
 class LessonHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,

@@ -18,9 +18,9 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{% url 'courses:favourite_action' object.course.pk %}" 
+                        <a href="{% url 'courses:favourite_action' object.course.pk %}"
                             class="ajax_action" 
-                            data-target="#course_favourite_{{ object.pk }}" 
+                            data-target="#course_favourite_{{ object.pk }}"
                             data-url="{% url 'courses:favourite_action' object.course.pk %}">
                                 <i class="fa fa-trash-o"></i>
                         </a>

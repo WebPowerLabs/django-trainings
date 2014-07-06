@@ -74,6 +74,7 @@ $(document).ready(function(){
                     $('.modal-share-form').html(data);
                 }
                 if (ct.indexOf('json') > -1) {
+                    $('.attached-content').remove();
                     $('.modal-share-form').html("Success.");
                     setTimeout(function(){
                         $('#myModal').modal('hide');

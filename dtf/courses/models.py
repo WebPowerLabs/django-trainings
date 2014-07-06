@@ -63,9 +63,6 @@ class History(models.Model):
     """
     For storing history.
     """
-
-    objects = CourseHistoryManager()
-
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
@@ -79,9 +76,6 @@ class Favourite(models.Model):
     """
     For storing favourites.
     """
-
-    objects = CourseFavouriteManager()
-
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
@@ -91,6 +85,8 @@ class Favourite(models.Model):
 
 
 class CourseHistory(History):
+    objects = CourseHistoryManager()
+
     course = models.ForeignKey('Course')
 
     class Meta:
@@ -98,6 +94,7 @@ class CourseHistory(History):
 
 
 class CourseFavourite(Favourite):
+    objects = CourseFavouriteManager()
     course = models.ForeignKey('Course')
 
     class Meta:

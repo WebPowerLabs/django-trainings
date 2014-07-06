@@ -28,31 +28,27 @@
         </div><!--/ .row-->
         <div class="row">
             <div class="content col-sm-7">
-                {% if object.video %}
-                    {% video_player object %}
-                    {% else %}
-                        {% thumbnail object.thumbnail '640x480' crop='center' as im %}
-                            <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
-                        {% endthumbnail %}
-                {% endif %}
-                    
-                    {% if user.is_authenticated %}
-                    <br />
-                        <button class="btn btn-danger ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.pk %}" >
-                            <span class='state-1'>
-                                <i class="fa fa-check"></i>
-                                Saved
-                            </span>
-                            <span class='state-2'>
-                                <i class="fa fa-heart"></i>
-                                Watch Later
-                            </span>
-                        </button>
-                      
-                      <a href="{% url 'features:add_comment' object_pk=object.pk class_name='lessons.models.Lesson' %}">Feature</a>
-                    {% endif %}
-
-
+            {% if object.video %}
+            {% video_player object %}
+            {% else %}
+                {% thumbnail object.thumbnail '640x480' crop='center' as im %}
+                <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
+                {% endthumbnail %}
+            {% endif %}
+            {% if user.is_authenticated %}
+                <br />
+                <button class="btn btn-danger ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.pk %}" >
+                    <span class='state-1'>
+                        <i class="fa fa-check"></i>
+                        Saved
+                    </span>
+                    <span class='state-2'>
+                        <i class="fa fa-heart"></i>
+                        Watch Later
+                    </span>
+                </button>
+                {% include 'includes/share_button.html' %}
+            {% endif %}
                 <div class="row">
                     {{ object.description }}
                 </div><!--/ .row-->

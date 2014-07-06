@@ -63,10 +63,10 @@ class LessonManager(PolymorphicManager):
 
 
 class LessonHistoryManager(models.Manager):
-    def active(self):
-        return self.filter(is_active=True)
+    def active(self, user):
+        return self.filter(is_active=True, user=user)
 
 
 class LessonFavouriteManager(models.Manager):
-    def active(self):
-        return self.filter(is_active=True)
+    def active(self, user):
+        return self.filter(is_active=True, user=user)

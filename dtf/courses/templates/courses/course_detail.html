@@ -15,36 +15,7 @@
     <div class="col-md-6 section bg-turquoise-color">
         <div class="course-info">
             {% if user.is_authenticated %}
-            <!-- Button trigger modal -->
-            <button class="btn btn-primary pull-right btn-share-form" data-toggle="modal" data-target="#myModal" data-url="{% url 'dtf_comments:share' object.pk %}">
-              Share
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Share course</h4>
-                  </div>
-                  <div class="modal-body">
-                       <!-- Nav tabs -->
-                       <ul class="nav nav-tabs" role="tablist">
-                           <li class="active"><a href="#tab-write-new" role="tab" data-toggle="tab">Write</a></li>
-                           <li><a href="#tab-preview-new" class="tab-preview" data-id='new' data-url="{% url 'dtf_comments:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
-                       </ul>
-                       <!-- Tab panes -->
-                       <div class="tab-content">
-                         <div class="tab-pane active modal-share-form" id="tab-write-new"></div>
-                         <div class="tab-pane" id="tab-preview-new"></div>
-                       </div>
-                      <div class="attached-content">
-                          {% include 'comments/comment_attached_content.html' %}
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% include 'includes/share_button.html' %}
             {% endif %}
             <h1>{{ object.name }}</h1>
             <hr>               

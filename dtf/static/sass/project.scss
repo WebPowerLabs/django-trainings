@@ -44,5 +44,18 @@
 .tab-pane {
   padding: 10px;
 }
-
-// !!! /Custom style  !!! 
+// !! Don't delete !!
+.fav_button.is_active .state-1{
+    display: table-row;
+}
+.fav_button.is_active .state-2{
+    display: none;
+}
+.fav_button .state-1{
+    display: none;
+}
+.fav_button .state-2{
+    display: table-row;
+}
+// !! /Don't delete !!
+// !!! /Custom style  !!!

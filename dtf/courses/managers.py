@@ -44,10 +44,10 @@ class CourseManager(PolymorphicManager):
 
 
 class CourseHistoryManager(models.Manager):
-    def active(self):
-        return self.filter(is_active=True)
+    def active(self, user):
+        return self.filter(is_active=True, user=user)
 
 
 class CourseFavouriteManager(models.Manager):
-    def active(self):
-        return self.filter(is_active=True)
+    def active(self, user):
+        return self.filter(is_active=True, user=user)

@@ -47,3 +47,23 @@
 .tab-pane {
   padding: 10px;
 }
+
+/* line 48, ../sass/project.scss */
+.fav_button.is_active .state-1 {
+  display: table-row;
+}
+
+/* line 51, ../sass/project.scss */
+.fav_button.is_active .state-2 {
+  display: none;
+}
+
+/* line 54, ../sass/project.scss */
+.fav_button .state-1 {
+  display: none;
+}
+
+/* line 57, ../sass/project.scss */
+.fav_button .state-2 {
+  display: table-row;
+}
