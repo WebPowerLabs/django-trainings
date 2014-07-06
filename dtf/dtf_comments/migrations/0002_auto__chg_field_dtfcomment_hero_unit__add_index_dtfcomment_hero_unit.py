@@ -8,18 +8,24 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'DTFComment'
-        db.create_table(u'dtf_comments_dtfcomment', (
-            (u'comment_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['django_comments.Comment'], unique=True, primary_key=True)),
-            ('hero_unit', self.gf('django.db.models.fields.CharField')(max_length=36, null=True, blank=True)),
-        ))
-        db.send_create_signal(u'dtf_comments', ['DTFComment'])
+
+        # Renaming column for 'DTFComment.hero_unit' to match new field type.
+        db.rename_column(u'dtf_comments_dtfcomment', 'hero_unit', 'hero_unit_id')
+        # Changing field 'DTFComment.hero_unit'
+        db.alter_column(u'dtf_comments_dtfcomment', 'hero_unit_id', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['courses.Content']))
+        # Adding index on 'DTFComment', fields ['hero_unit']
+        db.create_index(u'dtf_comments_dtfcomment', ['hero_unit_id'])
 
 
     def backwards(self, orm):
-        # Deleting model 'DTFComment'
-        db.delete_table(u'dtf_comments_dtfcomment')
+        # Removing index on 'DTFComment', fields ['hero_unit']
+        db.delete_index(u'dtf_comments_dtfcomment', ['hero_unit_id'])
 
+
+        # Renaming column for 'DTFComment.hero_unit' to match new field type.
+        db.rename_column(u'dtf_comments_dtfcomment', 'hero_unit_id', 'hero_unit')
+        # Changing field 'DTFComment.hero_unit'
+        db.alter_column(u'dtf_comments_dtfcomment', 'hero_unit', self.gf('django.db.models.fields.CharField')(max_length=36, null=True))
 
     models = {
         u'auth.group': {
@@ -42,6 +48,21 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'courses.content': {
+            'Meta': {'object_name': 'Content'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'id': ('django.db.models.fields.CharField', [], {'max_length': '36', 'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"}),
+            'polymorphic_ctype': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'polymorphic_courses.content_set'", 'null': 'True', 'to': u"orm['contenttypes.ContentType']"}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'slug': ('django_extensions.db.fields.AutoSlugField', [], {'allow_duplicates': 'False', 'max_length': '50', 'separator': "u'-'", 'blank': 'True', 'populate_from': "'name'", 'overwrite': 'False'}),
+            'thumbnail': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'thumbnail_height': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
+            'thumbnail_width': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
+            'updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
+        },
         u'django_comments.comment': {
             'Meta': {'ordering': "('submit_date',)", 'object_name': 'Comment', 'db_table': "'django_comments'"},
             'comment': ('django.db.models.fields.TextField', [], {'max_length': '3000'}),
@@ -61,7 +82,7 @@ class Migration(SchemaMigration):
         u'dtf_comments.dtfcomment': {
             'Meta': {'ordering': "('submit_date',)", 'object_name': 'DTFComment', '_ormbases': [u'django_comments.Comment']},
             u'comment_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['django_comments.Comment']", 'unique': 'True', 'primary_key': 'True'}),
-            'hero_unit': ('django.db.models.fields.CharField', [], {'max_length': '36', 'null': 'True', 'blank': 'True'})
+            'hero_unit': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['courses.Content']"})
         },
         u'sites.site': {
             'Meta': {'ordering': "(u'domain',)", 'object_name': 'Site', 'db_table': "u'django_site'"},

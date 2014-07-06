@@ -6,11 +6,10 @@ from django.db.models import permalink
 from django.conf import settings
 
 from jsonfield import JSONField
+from dtf_comments.models import DTFComment
 
 from .managers import FBGroupManager, FBPostManager
-import dtf_comments
 
-DTFComment = dtf_comments.get_model()
 
 
 class FacebookGroup(models.Model):

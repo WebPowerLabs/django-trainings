@@ -6,7 +6,8 @@ except ImportError:  # django < 1.4
 from dtf_comments import views
 
 urlpatterns = patterns('dtf_comments.views',
-#     url(r'^share/$', 'c_share', name='share'),
-
-    url('^share/$', views.DTFCommentShareView.as_view(), name='share'),
+    url('^share/(?P<content_pk>[-\w]+)$', views.DTFCommentShareView.as_view(),
+        name='share'),
+    url(r'^preview_comment/$', views.CommentPreviewView.as_view(),
+        name='preview_comment'),
 )

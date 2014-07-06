@@ -1,4 +1,2 @@
-<span>{{ form.comment.label }}</span>
-{{ from.comment.errors }}
-{{ form.comment }}
-
+{% load crispy_forms_tags %}
+{% crispy form %}

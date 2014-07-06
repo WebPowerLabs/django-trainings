@@ -1,6 +1,6 @@
+from django.db.models.fields.related import ForeignKey
 from django_comments.models import Comment
-from jsonfield import JSONField
 
 
 class DTFComment(Comment):
-    hero_unit = JSONField(null=True, blank=True)
+    hero_unit = ForeignKey('courses.Content')

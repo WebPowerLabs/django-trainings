@@ -13,5 +13,4 @@ urlpatterns = patterns('facebook_groups.views',
 	url(r"^(?P<fb_uid>\d+)/feed/$", "fb_group_feed", name="feed"),
 	url(r"^(?P<fb_uid>\d+)/sync/$", "sync_fb_data", name="sync"),
 	url(r"^(?P<fb_uid>\d+)/post/$", "fb_group_feed_post", name="feed_post"),
-    url(r'^preview_comment/$', 'preview_comment', name='preview_comment'),
 	)

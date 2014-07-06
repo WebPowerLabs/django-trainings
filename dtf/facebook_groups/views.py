@@ -9,7 +9,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 import django_comments
-from features.templatetags.markdown import markdown
+from dtf_comments.templatetags import markdown
+
 Comment = django_comments.get_model()
 
 from utils.comments import latest_comments
@@ -179,13 +180,3 @@ def fb_group_create(request):
     return render_to_response('facebook_groups/add.html',
         context,
         context_instance=RequestContext(request))
-
-
-@login_required
-def preview_comment(request):
-    if request.is_ajax():
-        data = request.POST.get('data', None)
-        html = '<p>Nothing to preview</p>'
-        if data:
-            html = markdown(data)
-        return HttpResponse(html)

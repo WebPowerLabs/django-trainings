@@ -45,32 +45,44 @@ $.ajaxSetup({
 });
 // end CSRF for AJAX request.
 $(document).ready(function(){
-    // $('select.share').change(function(){
-        // var url = $(this).find('option:selected').attr('data-url');
-        // $.ajax({
-            // url: url,
-            // type: 'POST',
-            // success: function (data) {
-                // console.log('ok');
-            // }
-        // }); 
-//         
-    // });
-    $('body').on('click', '.btn-share', function(event){
+    $('#myModal').on('hidden.bs.modal', function(event){
+        $('.modal-share-form').html('');
+    });
+    // AJAX request to DTFCommentShareView
+    $('body').on('click', '.btn-share-form', function(event){
         var url = $(this).attr('data-url');
         $.ajax({
             url: url,
             type: 'GET',
             success: function (data) {
-                console.log(data);
+                $('.modal-share-form').html(data);
             }
         });        
-
     });
-    
-    
-    
-    // AJAX request to preview_comment view
+    // AJAX submit to DTFCommentShareView
+    $('body').on('submit', '.share-form', function(event){
+        event.preventDefault();
+        var postData = $(this).serializeArray();
+        var url = $('.btn-share-form').attr('data-url');
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'POST',
+            success: function(data, status, xhr){
+                var ct = xhr.getResponseHeader("content-type") || "";
+                if (ct.indexOf('html') > -1) {
+                    $('.modal-share-form').html(data);
+                }
+                if (ct.indexOf('json') > -1) {
+                    $('.modal-share-form').html("Success.");
+                    setTimeout(function(){
+                        $('#myModal').modal('hide');
+                    }, 1000);
+                }
+            }
+        });
+    });
+    // AJAX request to CommentPreview
     $('body').on('click', 'a.tab-preview', function(event){
         var url = $(this).attr('data-url');
         var commentId = $(this).attr('data-id');

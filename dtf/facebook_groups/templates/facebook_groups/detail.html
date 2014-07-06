@@ -16,7 +16,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li class="active"><a href="#tab-write-new" role="tab" data-toggle="tab">Write</a></li>
-        <li><a href="#tab-preview-new" class="tab-preview" data-id='new' data-url="{% url 'facebook_groups:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
+        <li><a href="#tab-preview-new" class="tab-preview" data-id='new' data-url="{% url 'dtf_comments:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
@@ -65,7 +65,8 @@
             </a>
           </div>
         {% endif %}
-        {% include "features/comment.html" %}
+
+          {% include "features/comment.html" %}
       </div>
     {% endfor %}
   </div>

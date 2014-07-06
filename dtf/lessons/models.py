@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
 from django.db import models
 from lessons.managers import (LessonManager, LessonHistoryManager,
                               LessonFavouriteManager)
@@ -41,6 +44,11 @@ class Lesson(Content):
 
     def get_homework(self, user):
         return self.resource_set.get_list(user).filter(type='homework')
+    
+    def get_absolute_url(self):
+        site = Site.objects.get(pk=settings.SITE_ID)
+        return 'http://{0}{1}'.format(site.domain, reverse('lessons:detail',
+                                                kwargs={'slug': self.slug}))
 
 
 class LessonHistory(History):

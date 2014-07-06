@@ -16,6 +16,11 @@
   </h3>
   <div class="panel-body">
     <p>{{ comment.comment|markdown }}</p>
+    {% if comment.hero_unit %}
+      <div class="attached-content">
+          {% include 'comments/comment_attached_content.html' with object=comment.hero_unit %}
+      </div>
+    {% endif %}
     {% if comment.features %}
     {% for feature in comment.features.active %}
 
@@ -34,7 +39,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li class="active"><a href="#tab-write-{{ comment.pk }}" role="tab" data-toggle="tab">Write</a></li>
-        <li><a href="#tab-preview-{{ comment.pk }}" class="tab-preview" data-id='{{ comment.pk }}' data-url="{% url 'facebook_groups:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
+        <li><a href="#tab-preview-{{ comment.pk }}" class="tab-preview" data-id='{{ comment.pk }}' data-url="{% url 'dtf_comments:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
@@ -60,7 +65,7 @@
       </div>
       <div class="tab-pane" id="tab-preview-{{ comment.pk }}"></div>
       <div class="clearfix">
-          <button type="submit" id="id_submit" class="btn btn-primary"><i class="fa fa-send fa-fw"></i></button>
+          <button type="submit" id="id_submit" class="btn btn-primary pull-right"><i class="fa fa-send fa-fw"></i></button>
       </div>
           </form>
     </div>
