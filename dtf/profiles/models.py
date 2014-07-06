@@ -40,7 +40,9 @@ class InfusionsoftProfile(models.Model):
         """
         updates a profiles tags from the infusionsoft server
         """
+        # get infusionsofts tags from thier server and find the instances in our db
         tags = InfusionsoftTag.objects.by_user(self.user)
+        # get all active purchase for profile.user
         active_purchases = PackagePurchase.objects.filter(user__id=self.user_id,
             package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1) # 1 == Active
 
