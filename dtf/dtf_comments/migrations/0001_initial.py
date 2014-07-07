@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'DTFComment'
         db.create_table(u'dtf_comments_dtfcomment', (
             (u'comment_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['django_comments.Comment'], unique=True, primary_key=True)),
-            ('hero_unit', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['courses.Content'])),
+            ('hero_unit', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['courses.Content'], null=True, blank=True)),
         ))
         db.send_create_signal(u'dtf_comments', ['DTFComment'])
 
@@ -76,7 +76,7 @@ class Migration(SchemaMigration):
         u'dtf_comments.dtfcomment': {
             'Meta': {'ordering': "('submit_date',)", 'object_name': 'DTFComment', '_ormbases': [u'django_comments.Comment']},
             u'comment_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['django_comments.Comment']", 'unique': 'True', 'primary_key': 'True'}),
-            'hero_unit': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['courses.Content']"})
+            'hero_unit': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['courses.Content']", 'null': 'True', 'blank': 'True'})
         },
         u'sites.site': {
             'Meta': {'ordering': "(u'domain',)", 'object_name': 'Site', 'db_table': "u'django_site'"},

@@ -76,6 +76,7 @@ class Common(Configuration):
         'profiles',
         'dtf_comments',
         'packages',
+        'features',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -148,7 +149,7 @@ class Common(Configuration):
 
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf-1')
+    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf')
     ########## END DATABASE CONFIGURATION
 
     ########## CACHING
