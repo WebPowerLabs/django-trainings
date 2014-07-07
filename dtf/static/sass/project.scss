@@ -44,20 +44,42 @@
 .tab-pane {
   padding: 10px;
 }
-// !! Don't delete !!
-.fav_button.is_active .state-1{
-    display: table-row;
+
+.sortable_item .caption{
+  height: 200px;
+  overflow: hidden;
 }
-.fav_button.is_active .state-2{
+
+.no_transition{
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+
+.fav_button.is_active .state-1, .fav_button .state-2{
+    display: block;
+}
+
+.fav_button.is_active .state-2, .fav_button .state-1{
     display: none;
 }
-.fav_button .state-1{
-    display: none;
-}
-.fav_button .state-2{
+
+.history_item.is_active{
     display: table-row;
 }
-// !! /Don't delete !!
+
+.history_item{
+    display: none;
+}
+
+.favourite_item.is_active{
+    display: table-row;
+}
+
+.favourite_item{
+    display: none;
+}
 
 .notify-balloon {
   position: fixed;

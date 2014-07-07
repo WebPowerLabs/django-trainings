@@ -28,7 +28,7 @@
                             {% endthumbnail %}
                             <div class="caption text-center">
                                 <h3>{{ course.name }}</h3>
-                                <p>{{ course.description }}</p>
+                                <p>{{ course.description|truncatechars:276 }}</p>
                             </div><!--/ .caption-->
                         </div><!--/ .thumbnail-->
                     </a><!--/ .course-item-->

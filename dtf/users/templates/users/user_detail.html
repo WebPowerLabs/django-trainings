@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load avatar_tags %}
-{% load staticfiles i18n %}
+{% load staticfiles i18n avatar_tags %}
 
 {% block title %}{{ object.username }} | Decide to Fly{% endblock %}
 
@@ -13,7 +12,9 @@
         <div class="user-detail-box">
 
           {% avatar user %}
+          {% if object.fb_uid %}
           <img src="{{ object.get_fb_profile_img_url }}">
+          {% endif %}
           <h2>Hello, {{ object.username }}!</h2>
 
           {% if object == request.user %}
