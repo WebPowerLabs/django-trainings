@@ -113,5 +113,9 @@
             </div><!--/ .col-md-4-->
         </div><!--/ .row-->
     </div><!--/ .container-->
+
 </section><!--/ .lesson-detail-->
+    {% if user.is_authenticated %}
+    {% include 'includes/share_modal.html' %}
+    {% endif %}
 {% endblock content %}

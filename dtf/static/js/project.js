@@ -44,6 +44,15 @@ $.ajaxSetup({
     }
 });
 // end CSRF for AJAX request.
+
+function showNotification(html, time){
+    var notifyBalloon = '<div class="notify-balloon">' + html + '</div>';
+    $('body').append(notifyBalloon);
+    setTimeout(function(){
+        $('.notify-balloon').fadeOut();
+    }, time);
+}
+
 $(document).ready(function(){
     $('#myModal').on('hidden.bs.modal', function(event){
         $('.modal-share-form').html('');
@@ -63,22 +72,21 @@ $(document).ready(function(){
     $('body').on('submit', '.share-form', function(event){
         event.preventDefault();
         var postData = $(this).serializeArray();
+        var selectedGroup = $(this).find(':selected').text();
+        var notifyMessage = '<b>Post sent</b>.<br> This post has been shared \
+                             to the community <b>"' + selectedGroup + '"</b>.';
         var url = $('.btn-share-form').attr('data-url');
         $.ajax({
             url: url,
             data: postData,
             type: 'POST',
-            success: function(data, status, xhr){
-                var ct = xhr.getResponseHeader("content-type") || "";
-                if (ct.indexOf('html') > -1) {
+            statusCode: {
+                200: function(data){
                     $('.modal-share-form').html(data);
-                }
-                if (ct.indexOf('json') > -1) {
-                    $('.attached-content').remove();
-                    $('.modal-share-form').html("Success.");
-                    setTimeout(function(){
-                        $('#myModal').modal('hide');
-                    }, 1000);
+                },
+                201: function(){
+                    $('#myModal').modal('hide');
+                    showNotification(notifyMessage, 2000);
                 }
             }
         });

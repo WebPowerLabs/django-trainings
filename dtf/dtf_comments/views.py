@@ -11,7 +11,6 @@ from ipware.ip import get_real_ip, get_ip
 from courses.models import Content
 from dtf_comments.models import DTFComment
 from dtf_comments.templatetags.markdown import markdown
-from facebook_groups.models import FacebookGroup
 from utils.views import CreateFormBaseView, AjaxResponsePermissionMixin
 from dtf_comments.forms import DTFCommentShareForm
 
@@ -21,7 +20,7 @@ class CommentPreviewView(AjaxResponsePermissionMixin, View):
 
     def post_ajax(self, request, *args, **kwargs):
         data = request.POST.get('data', None)
-        html = '<p>Nothing to preview</p>'
+        html = '<p>Nothing to preview.</p>'
         if data:
             html = markdown(data)
         return HttpResponse(html)
@@ -35,14 +34,12 @@ class DTFCommentShareView(AjaxResponsePermissionMixin, JSONResponseMixin,
     template_name = 'includes/share_form.html'
 
     def form_valid(self, form):
-        content_type = ContentType.objects.get_for_model(FacebookGroup)
         content = get_object_or_404(Content, pk=self.kwargs['content_pk'])
         ip = get_real_ip(self.request)
         if not ip:
             ip = get_ip(self.request)
         self.object = form.save(commit=False)
-        self.object.content_type = content_type
-        self.object.object_pk = form.cleaned_data['object_pk'].pk
+        self.object.content_object = form.cleaned_data['object_pk']
         self.object.site = Site.objects.get(pk=settings.SITE_ID)
         self.object.hero_unit = content
         self.object.user = self.request.user
@@ -50,4 +47,6 @@ class DTFCommentShareView(AjaxResponsePermissionMixin, JSONResponseMixin,
         self.object.user_email = self.request.user.email
         self.object.ip_address = ip
         self.object.save()
-        return self.render_json_response({'success': True})
+        resp = self.render_json_response({'success': True})
+        resp.status_code = 201
+        return resp
