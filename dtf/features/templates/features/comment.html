@@ -55,7 +55,7 @@
               <div class="">
                   <div class="row">
                       <div class="col-xs-2 col-sm-1 fb-profile-comment-img">
-<!-- !! -->                          {% if user.fb_uid %}
+                          {% if user.fb_uid %}
                           <img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
                           {% else %}
                           {% avatar user %}
