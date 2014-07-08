@@ -29,6 +29,20 @@ class InfusionsoftPackageManager(models.Manager):
 
 class InfusionsoftTagManager(models.Manager):
 
+    def create(self, *args, **kwargs):
+        """
+        Creates a new tag using info from infusionsoft
+        prevents tags from being created that don't exist in infusionsoft
+        by overriding the objects create method
+        """
+        remote_id = kwargs.get("remote_id") if kwargs.get("remote_id") else None
+        if remote_id:
+            # remote id provided - connect to infusionsoft server
+            sync_data = self._get_sync_data(remote_id)
+        if sync_data:
+            return super(InfusionsoftTagManager, self).create(**sync_data)
+
+
     def create_sync(self, **kwargs):
         """
         Creates a new tag using info from infusionsoft
@@ -36,7 +50,7 @@ class InfusionsoftTagManager(models.Manager):
         remote_id = kwargs.get("remote_id") if kwargs.get("remote_id") else None
         if remote_id:
             # remote id provided - connect to infusionsoft server
-            sync_data = self._get_sync_data(remote_id)
+            sync_data = self._get_sync_data(remote_id) if self.remote_id else kwargs
         if sync_data:
 
             return self.create(**sync_data)

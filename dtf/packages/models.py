@@ -120,7 +120,7 @@ class InfusionsoftTag(models.Model):
     '''
     Infusionsoft Tag (ContactGroup)
     '''
-    remote_id = models.TextField(blank=True)
+    remote_id = models.TextField()
     group_category_id = models.TextField(blank=True)
     group_name = models.TextField(blank=True)
     group_description = models.TextField(blank=True)
@@ -128,16 +128,26 @@ class InfusionsoftTag(models.Model):
     objects = InfusionsoftTagManager()
 
     def __unicode__(self):
-        return self.group_name if self.group_name else self.pk
+        return self.group_name if self.group_name else u'InfusionsoftTag Object'
+
+    def save(self, *args, **kwargs):
+        remote_id = kwargs.get('remote_id') if kwargs.get('remote_id') else self.remote_id
+        sync_data = self._get_sync_data(remote_id=remote_id) if remote_id else None
+        if sync_data:
+            obj = InfusionsoftTag(**sync_data)
+            return super(InfusionsoftTag, obj).save(*args, **kwargs)
+        else:
+            return super(InfusionsoftTag, self).save(*args, **kwargs)
+
 
     def sync(self):
         sync_data = self._get_sync_data()
         if sync_data:
-            self = InfusionsoftPackage(**sync_data)
+            self = InfusionsoftTag(**sync_data)
             self.save()
 
-    def _get_sync_data(self):
-        provider_data = self._get_provider_data()
+    def _get_sync_data(self, remote_id=None):
+        provider_data = self._get_provider_data(remote_id)
         if provider_data:
             tag_data = dict({
                 "id": self.id,
@@ -149,9 +159,10 @@ class InfusionsoftTag(models.Model):
                 })
             return tag_data
 
-    def _get_provider_data(self):
-        if self.remote_id:
+    def _get_provider_data(self, remote_id=None):
+        remote_id = remote_id if remote_id else self.remote_id
+        if remote_id:
             results = server.DataService.findByField(key, "ContactGroup",
-                10, 0, "id", self.remote_id,
+                10, 0, "id", remote_id,
                 ["Id", "GroupCategoryId", "GroupName", "GroupDescription"]);
             return results[0]
