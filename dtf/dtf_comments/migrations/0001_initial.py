@@ -4,9 +4,14 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+import allauth.account.views.EmailVerificationSentView
+
+
 
 class Migration(SchemaMigration):
-
+    depends_on = (
+        ("courses", "0001_initial"),
+    )
     def forwards(self, orm):
         # Adding model 'DTFComment'
         db.create_table(u'dtf_comments_dtfcomment', (

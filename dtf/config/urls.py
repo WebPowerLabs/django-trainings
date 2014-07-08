@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from users.views import EmailVerificationSentView
 admin.autodiscover()
 import allauth.account.urls
 urlpatterns = patterns('',
@@ -15,6 +16,8 @@ urlpatterns = patterns('',
 
     # User management
     url(r'^users/', include("users.urls", namespace="users")),
+    url(r'^accounts/confirm-email/$', EmailVerificationSentView.as_view(),
+                                      name='account_email_verification_sent'),
     url(r'^accounts/', include('allauth.urls')),
 
     # Uncomment the next line to enable avatars
