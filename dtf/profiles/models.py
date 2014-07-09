@@ -53,7 +53,10 @@ class InfusionsoftProfile(models.Model):
                 # profile has tag that was removed on infusionsoft, remove tag
                 self.tags.remove(tag)
                 # set past_purchases of this tag to expired
-                active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id).set_status(2) # 2 == Expired
+                expired = active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id)
+                for purchase in expired:
+                    purchase.status = 2 # 2 == Expired
+                    purchase.save()
 
         for tag in tags:
             # loop through infusionsoft's tags

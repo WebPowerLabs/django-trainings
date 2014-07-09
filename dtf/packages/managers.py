@@ -7,9 +7,9 @@ from djnfusion import server, key
 class PackagePurchaseManager(models.Manager):
 
     def set_status(self, status=None):
-        status = status if status else 0
-        for purchase in self.all():
-            purchase.set_status(status)
+        if status:
+            for purchase in self.all():
+                purchase.status = status
 
 
 class InfusionsoftPackageManager(models.Manager):
@@ -54,6 +54,7 @@ class InfusionsoftTagManager(models.Manager):
         if sync_data:
 
             return self.create(**sync_data)
+
 
     def _get_sync_data(self, remote_id=None):
         """
