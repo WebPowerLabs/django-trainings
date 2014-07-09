@@ -17,6 +17,7 @@ from .forms import UserForm
 # Import the customized User model
 from .models import User
 from django.views.generic.base import TemplateView
+from allauth.account.views import ConfirmEmailView, LoginView, _ajax_response
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -58,6 +59,26 @@ class UserListView(LoginRequiredMixin, ListView):
     slug_url_kwarg = "pk"
 
 
+# Worst override I ever did before
+# Goal: add user_pk to session context in allauth.account.views.LoginView and
+# allauth.account.views.EmailVerificationSentView
+
+class LoginCustomView(LoginView):
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            user = User.objects.get(username=form.cleaned_data['login'])
+            self.request.session['account_user'] = user.pk
+        return LoginView.post(self, request, *args, **kwargs)
+
+
+# class ConfirmEmailCustomView(ConfirmEmailView):
+#     def login_on_confirm(self, confirmation):
+#         self.request.session['account_user'] = confirmation.email_address.user.pk
+#         return ConfirmEmailView.login_on_confirm(self, confirmation)
+
+
 class EmailVerificationSentView(TemplateView):
     template_name = 'account/verification_sent.html'
 
@@ -69,3 +90,4 @@ class EmailVerificationSentView(TemplateView):
             email = ''
         kwargs['email'] = email
         return TemplateView.get_context_data(self, **kwargs)
+# end Worst override I ever did before
