@@ -45,5 +45,5 @@ class User(AbstractUser):
             return fb_uid[0].uid
         else:
             return None
-     
+
 

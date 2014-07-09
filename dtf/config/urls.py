@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from users.views import EmailVerificationSentView, LoginCustomView
+admin.autodiscover()
 
 
 urlpatterns = patterns('',

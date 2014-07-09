@@ -59,10 +59,6 @@ class UserListView(LoginRequiredMixin, ListView):
     slug_url_kwarg = "pk"
 
 
-# Worst override I ever did before
-# Goal: add user_pk to session context in allauth.account.views.LoginView and
-# allauth.account.views.EmailVerificationSentView
-
 class LoginCustomView(LoginView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -71,12 +67,6 @@ class LoginCustomView(LoginView):
             user = User.objects.get(username=form.cleaned_data['login'])
             self.request.session['account_user'] = user.pk
         return LoginView.post(self, request, *args, **kwargs)
-
-
-# class ConfirmEmailCustomView(ConfirmEmailView):
-#     def login_on_confirm(self, confirmation):
-#         self.request.session['account_user'] = confirmation.email_address.user.pk
-#         return ConfirmEmailView.login_on_confirm(self, confirmation)
 
 
 class EmailVerificationSentView(TemplateView):
@@ -90,4 +80,3 @@ class EmailVerificationSentView(TemplateView):
             email = ''
         kwargs['email'] = email
         return TemplateView.get_context_data(self, **kwargs)
-# end Worst override I ever did before
