@@ -90,3 +90,18 @@ class InstructorProfile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+
+from allauth.account.signals import user_logged_in
+from django.dispatch import receiver
+
+@receiver(user_logged_in)
+def infusionsoft_sync_user(sender, **kwargs):
+    user = kwargs['user']
+    profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
+    profile.update_tags()
+    print profile.tags.all()
+
+    
+
+
