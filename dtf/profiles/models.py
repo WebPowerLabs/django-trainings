@@ -20,6 +20,7 @@ class FacebookProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
+
 class InfusionsoftProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     remote_id = models.TextField(blank=True)
@@ -52,7 +53,7 @@ class InfusionsoftProfile(models.Model):
                 # profile has tag that was removed on infusionsoft, remove tag
                 self.tags.remove(tag)
                 # set past_purchases of this tag to expired
-                active_purchases.filter(package__tag=tag).set_status(2) # 2 == Expired
+                active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id).set_status(2) # 2 == Expired
 
         for tag in tags:
             # loop through infusionsoft's tags
