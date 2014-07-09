@@ -10,56 +10,56 @@
 
 {% block content %}
 <section class="course-list">
-    <div class="container">
-        <div class="row">
-            <div class="section-header col-xs-12 text-center">
-                <h1 class="section-title">Coaching Courses</h1>
-                <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
-                <hr>
-            </div><!--/ .section-header-->
-        </div><!--/ .row-->
-        <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
-            {% for course in object_list %}
-                <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
-                    <a class="course-item" href="{% url 'courses:detail' course.slug %}">
-                        <div class="thumbnail">
-                            {% thumbnail course.thumbnail '284x180' crop='center' as im %}
-                                <img src="{{ im.url }}" class="img-rounded" alt="{{ course.name }}">
-                            {% endthumbnail %}
-                            <div class="caption text-center">
-                                <h3>{{ course.name }}</h3>
-                                <p>{{ course.description|truncatewords:30 }}</p>
-                            </div><!--/ .caption-->
-                        </div><!--/ .thumbnail-->
-                    </a><!--/ .course-item-->
-                </div><!--/ .col-md-4-->
-            {% endfor %}
-        </div><!--/ .row-->
-    </div><!--/ .container-->
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-xs-12 text-center">
+        <h1 class="section-title">Coaching Courses</h1>
+        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
+    <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
+      {% for course in object_list %}
+        <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
+          <a class="course-item" href="{% url 'courses:detail' course.slug %}">
+            <div class="thumbnail">
+              {% thumbnail course.thumbnail '284x180' crop='center' as im %}
+                <img src="{{ im.url }}" class="img-rounded" alt="{{ course.name }}">
+              {% endthumbnail %}
+              <div class="caption text-center">
+                <h3>{{ course.name }}</h3>
+                <p>{{ course.description|truncatewords:30 }}</p>
+              </div><!--/ .caption-->
+            </div><!--/ .thumbnail-->
+          </a><!--/ .course-item-->
+        </div><!--/ .col-md-4-->
+      {% endfor %}
+    </div><!--/ .row-->
+  </div><!--/ .container-->
 </section><!--/ .course-list-->
 {% endblock content %}
 
 {% block modal %}
-    {% if user.is_staff or user.instructorprofile %}
-        <!-- Add Course Modal -->
-        <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="addCourseLabel">Add a Course</h4>
-                    </div><!--/ .modal-header-->
-                    <div class="modal-body">
-                        <div class="col-md-12">
-                            {% crispy form %}
-                        </div><!--/ .col-md-12-->
-                    </div><!--/ .modal-body-->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save changes</button>
-                    </div><!--/ .modal-footer-->
-                </div><!--/ .modal-content-->
-            </div><!--/ .modal-dialog-->
-        </div><!--/ .modal-->
-    {% endif %}
+  {% if user.is_staff or user.instructorprofile %}
+    <!-- Add Course Modal -->
+    <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="addCourseLabel">Add a Course</h4>
+          </div><!--/ .modal-header-->
+          <div class="modal-body">
+            <div class="col-md-12">
+              {% crispy form %}
+            </div><!--/ .col-md-12-->
+          </div><!--/ .modal-body-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success">Save changes</button>
+          </div><!--/ .modal-footer-->
+        </div><!--/ .modal-content-->
+      </div><!--/ .modal-dialog-->
+    </div><!--/ .modal-->
+  {% endif %}
 {% endblock modal %}

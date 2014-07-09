@@ -1,0 +1,21 @@
+{% extends "packages/base.html" %}
+
+{% block title %}{{ package.name }}{% endblock title %}
+
+{% block content %}
+<section class="course-list">
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-xs-12 text-center">
+        <h1 class="section-title">{{ package.name }}</h1>
+        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
+  </div>
+
+  {% if class_name == 'InfusionsoftPackage' %}
+    {% include "packages/infusionsoft.html" %}
+  {% endif %}
+
+{% endblock content %}

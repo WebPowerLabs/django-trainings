@@ -7,8 +7,10 @@ from django.conf.urls.static import static
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+
+
 admin.autodiscover()
-import allauth.account.urls
+
 urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
@@ -34,6 +36,7 @@ urlpatterns = patterns('',
     url(r'^dtf_comments/', include('dtf_comments.urls',
                                    namespace="dtf_comments")),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^packages/', include('packages.urls')),
     url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

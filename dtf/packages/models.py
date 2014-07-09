@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.urlresolvers import reverse
 from djnfusion import server, key
 
 from django.conf import settings
@@ -28,11 +28,14 @@ class Package(models.Model):
     Base for package classes
     """
     name = models.CharField(max_length=255, blank=True)
-    courses = models.ManyToManyField("courses.Course")
-    lessons = models.ManyToManyField("lessons.Lesson")
+    courses = models.ManyToManyField("courses.Course", blank=True, null=True)
+    lessons = models.ManyToManyField("lessons.Lesson", blank=True, null=True)
 
     def __unicode__(self):
         return u'{}'.format(self.name if self.name else 'Package')
+
+    def get_absolute_url(self):
+        return reverse('packages:detail', kwargs={'pk': self.pk})
 
 
 class PackagePurchase(models.Model):
@@ -82,6 +85,7 @@ class InfusionsoftPackage(Package):
     status = models.TextField(blank=True, null=True)
     action_set_id = models.TextField(blank=True, null=True)
     tag = models.OneToOneField("InfusionsoftTag", blank=True, null=True)
+    purchase_url = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         sync_data = self._get_sync_data(product_id=self.product_id) if self.product_id else None
@@ -154,6 +158,10 @@ class InfusionsoftPackage(Package):
         results = server.ContactService.runActionSequence(key, contactId,
                                                           actionSetId)
         return results
+
+    @property
+    def price(self):
+        return self.plan_price if self.plan_price else self.product_price
     
 
 
