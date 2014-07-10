@@ -17,7 +17,7 @@ from .forms import UserForm
 # Import the customized User model
 from .models import User
 from django.views.generic.base import TemplateView
-from allauth.account.views import ConfirmEmailView, LoginView, _ajax_response
+from allauth.account.views import LoginView
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -64,8 +64,11 @@ class LoginCustomView(LoginView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         if form.is_valid():
-            user = User.objects.get(username=form.cleaned_data['login'])
-            self.request.session['account_user'] = user.pk
+            try:
+                user = User.objects.get(username=form.cleaned_data['login'])
+                self.request.session['account_user'] = user.pk
+            except User.DoesNotExist:
+                pass
         return LoginView.post(self, request, *args, **kwargs)
 
 

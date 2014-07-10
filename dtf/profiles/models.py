@@ -24,7 +24,7 @@ class FacebookProfile(models.Model):
 class InfusionsoftProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     remote_id = models.TextField(blank=True)
-    tags = models.ManyToManyField(InfusionsoftTag, 
+    tags = models.ManyToManyField(InfusionsoftTag,
         related_name="infusionsoft_profiles", blank=True, null=True)
 
     def __unicode__(self):
@@ -45,7 +45,7 @@ class InfusionsoftProfile(models.Model):
         tags = InfusionsoftTag.objects.by_user(self.user)
         # get all active purchase for profile.user
         active_purchases = PackagePurchase.objects.filter(user__id=self.user_id,
-            package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1) # 1 == Active
+            package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1)  # 1 == Active
 
         for tag in self.tags.all():
             # loop through profile's tags
@@ -53,7 +53,7 @@ class InfusionsoftProfile(models.Model):
                 # profile has tag that was removed on infusionsoft, remove tag
                 self.tags.remove(tag)
                 # set past_purchases of this tag to expired
-                active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id).set_status(2) # 2 == Expired
+                active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id).set_status(2)  # 2 == Expired
 
         for tag in tags:
             # loop through infusionsoft's tags
@@ -62,7 +62,7 @@ class InfusionsoftProfile(models.Model):
                 self.tags.add(tag)
                 # create a new package purchase for the tags infusionsoft package
                 PackagePurchase.objects.create(
-                    user=self.user, package=tag.infusionsoftpackage, status=1) # 1 == Active
+                    user=self.user, package=tag.infusionsoftpackage, status=1)  # 1 == Active
 
         return self.save()
 
@@ -82,7 +82,7 @@ class InfusionsoftProfile(models.Model):
         """
         results = server.DataService.findByField(key, "Contact",
             10, 0, "email", self.user.email,
-            ["Id",]);
+            ["Id", ]);
         return results[0] if len(results) else None
 
 
@@ -96,6 +96,7 @@ class InstructorProfile(models.Model):
 from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
 
+
 @receiver(user_logged_in)
 def infusionsoft_sync_user(sender, **kwargs):
     user = kwargs['user']
@@ -103,6 +104,6 @@ def infusionsoft_sync_user(sender, **kwargs):
     profile.update_tags()
     print profile.tags.all()
 
-    
+
 
 

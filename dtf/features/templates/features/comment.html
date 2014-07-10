@@ -15,7 +15,7 @@
       <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>
       {% else %}
         {% avatar comment.user %}
-        {{ comment.user.username }}
+        {{ comment.user.get_full_name }}
       {% endif %}
     <small class="date">{{ comment.submit_date|date }}</small>
   </h3>

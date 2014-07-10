@@ -74,7 +74,7 @@ $(document).ready(function(){
         var postData = $(this).serializeArray();
         var selectedGroup = $(this).find(':selected').text();
         var notifyMessage = '<b>Post sent</b>.<br> This post has been shared \
-                             to the community <b>"' + selectedGroup + '"</b>.';
+                             to the community <br /><b>"' + selectedGroup + '"</b>.';
         var url = $('.btn-share-form').attr('data-url');
         $.ajax({
             url: url,
