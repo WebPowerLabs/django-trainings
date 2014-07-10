@@ -1,4 +1,16 @@
 //----------------------------------------------//
+//-------------- NAVBARS ---------------//
+//----------------------------------------------//
+
+.navbar {
+	margin-bottom: 0;
+	.navbar-toggle {
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
+}
+
+//----------------------------------------------//
 //-------------- WEB APP NAVBARS ---------------//
 //----------------------------------------------//
 
@@ -35,12 +47,35 @@
 .secondary-nav {
 	background-color: @gray-lightest;
 	border-bottom: 1px solid @table-border-color;
-	.navbar-nav > li > a {
-		color: @gray;
+
+	// bootstrap removes this for mobile view
+	.navbar-nav {
+    // prevent from collapsing on mobile
+    float: left;
+    margin: 0;
+    &.navbar-right {
+    	float: right;
+    }
+
+    > li {
+      float: left;
+      > a {
+      	color: @gray;
+        padding-top:    @navbar-padding-vertical;
+        padding-bottom: @navbar-padding-vertical;
+        cursor: pointer;
 		&:hover {
 			background-color: @table-border-color;
 		}
-	}
+      }
+    }
+    &:first-child {
+      margin-left: -@navbar-padding-horizontal;
+    }
+    &.navbar-right:last-child {
+      margin-right: -@navbar-padding-horizontal;
+    }
+  }
 }
 
 //----------------------------------------------//
