@@ -44,7 +44,69 @@ $.ajaxSetup({
     }
 });
 // end CSRF for AJAX request.
+
+function showNotification(html, time){
+    var notifyBalloon = '<div class="notify-balloon">' + html + '</div>';
+    $('body').append(notifyBalloon);
+    setTimeout(function(){
+        $('.notify-balloon').fadeOut();
+    }, time);
+}
+
 $(document).ready(function(){
+    $('#shareModal').on('hidden.bs.modal', function(event){
+        $('.modal-share-form').html('');
+    });
+    // AJAX request to DTFCommentShareView
+    $('body').on('click', '.btn-share-form', function(event){
+        var url = $(this).attr('data-url');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data) {
+                $('.modal-share-form').html(data);
+            }
+        });        
+    });
+    // AJAX submit to DTFCommentShareView
+    $('body').on('submit', '.share-form', function(event){
+        event.preventDefault();
+        var postData = $(this).serializeArray();
+        var selectedGroup = $(this).find(':selected').text();
+        var notifyMessage = '<b>Post sent</b>.<br> This post has been shared \
+                             to the community <br /><b>"' + selectedGroup + '"</b>.';
+        var url = $('.btn-share-form').attr('data-url');
+        $.ajax({
+            url: url,
+            data: postData,
+            type: 'POST',
+            statusCode: {
+                200: function(data){
+                    $('.modal-share-form').html(data);
+                },
+                201: function(){
+                    $('#shareModal').modal('hide');
+                    showNotification(notifyMessage, 2000);
+                }
+            }
+        });
+    });
+    // AJAX request to CommentPreview
+    $('body').on('click', 'a.tab-preview', function(event){
+        var url = $(this).attr('data-url');
+        var commentId = $(this).attr('data-id');
+        var data = $('#tab-write-' + commentId + ' textarea').val(); 
+        var tabPreview = $('#tab-preview-' + commentId);
+        tabPreview.html('Loading preview...');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {data: data},
+            success: function (data) {
+                tabPreview.html(data);
+            }
+        });        
+    });
     // AJAX request to FavouriteAddView.
     $('body').on('click', '.ajax_action', function(event){
         event.preventDefault();
@@ -66,9 +128,6 @@ $(document).ready(function(){
             }
         });
     });
-
-    
-    
     // Renders element with class 'video-js' to HTML5 video player.
     $('.video-js').each(function(){
         videojs(this, {}, function(){

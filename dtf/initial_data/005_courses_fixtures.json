@@ -1,0 +1,237 @@
+[
+{
+    "pk": "1268f09a-b057-4bb2-802e-b81c4d3ea4c5", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:33:01.881Z", 
+        "description": "Augue porttitor eleifend lacinia habitant amet arcu. Curabitur orci mollis iaculis molestie venenatis? Pellentesque molestie felis quis, integer aliquam dapibus eros mauris neque tempor ultrices id massa. Risus porttitor ante netus volutpat aliquet molestie velit etiam. Orci sodales sit curabitur tempor lectus feugiat ut vivamus volutpat ipsum hendrerit at - quis. Lacus porta tincidunt quisque et senectus luctus molestie arcu rutrum sapien scelerisque congue tellus,.\r\n", 
+        "created": "2014-07-04T09:56:49.310Z", 
+        "thumbnail_width": "225", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_4_4.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "225", 
+        "polymorphic_ctype": 20, 
+        "slug": "test-course-1", 
+        "name": "Test Course 1"
+    }
+},
+{
+    "pk": "43957a8a-bd94-4fc1-aab3-947b2d4fd798", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:03:29.040Z", 
+        "description": "Facilisis rhoncus dolor habitant quisque senectus? Nunc condimentum bibendum sapien semper cursus. Felis tincidunt mi auctor duis nibh eros! A ultricies duis urna tristique eleifend. Morbi commodo ligula nibh blandit lobortis semper? Nisi velit pharetra magna proin venenatis tristique?\r\n", 
+        "created": "2014-07-04T09:57:56.253Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_3_2.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 26, 
+        "slug": "purus-sed-praesent", 
+        "name": "Purus sed praesent "
+    }
+},
+{
+    "pk": "5b794eec-173d-48aa-b193-fe28ba868e6f", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T09:59:32.833Z", 
+        "description": "Aliquet quam ullamcorper gravida molestie ultrices dapibus a tempus ac? Augue scelerisque nibh quisque phasellus pulvinar suspendisse cras malesuada gravida vivamus nisi sapien sagittis,! Urna magna, phasellus neque tristique gravida elementum et suscipit suspendisse. Netus fermentum adipiscing nunc, dui duis ultricies accumsan enim urna. Facilisis laoreet id velit rhoncus ut sed tortor! Mollis sed duis in nibh auctor massa vehicula ligula tempus elementum praesent condimentum ultricies?\r\n", 
+        "created": "2014-07-04T09:59:32.833Z", 
+        "thumbnail_width": "241", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_1.jpg", 
+        "published": false, 
+        "owner": 1, 
+        "thumbnail_height": "209", 
+        "polymorphic_ctype": 29, 
+        "slug": "sagittis-eleifend-viverra", 
+        "name": "Sagittis eleifend viverra "
+    }
+},
+{
+    "pk": "5baa4845-d64a-4007-8d28-2f5c68e205ad", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T09:57:39.838Z", 
+        "description": "Lacinia nec sagittis tempus elementum vehicula. Condimentum erat pulvinar luctus faucibus habitant accumsan sed euismod enim proin cursus rutrum nec! Eu dolor - tempor pellentesque lacinia ultricies varius integer vestibulum suspendisse? Vel a magna hendrerit congue lacinia tristique sapien porta, dapibus ultricies. Proin sapien et praesent tempus pharetra nulla. Id, sagittis vestibulum scelerisque porta varius urna gravida luctus purus tempus fames?\r\n", 
+        "created": "2014-07-04T09:57:39.838Z", 
+        "thumbnail_width": "290", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_7.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "174", 
+        "polymorphic_ctype": 26, 
+        "slug": "habitant-massa-felis", 
+        "name": "Habitant massa felis "
+    }
+},
+{
+    "pk": "7ef14c19-88dc-4cdd-87e1-27cd0eb4a8da", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:00:07.648Z", 
+        "description": "Varius curabitur sed lobortis a, integer bibendum convallis suscipit? Non leo tempus rutrum curabitur - felis convallis dolor arcu orci vehicula! Id praesent nam tellus proin massa dictum velit malesuada! Rhoncus molestie mollis fames gravida? Interdum suscipit morbi viverra augue eleifend! Sapien porta mattis orci dapibus eros nisi risus ultricies cras?\r\n", 
+        "created": "2014-07-04T09:59:33.191Z", 
+        "thumbnail_width": "241", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_1_1.jpg", 
+        "published": false, 
+        "owner": 1, 
+        "thumbnail_height": "209", 
+        "polymorphic_ctype": 29, 
+        "slug": "sagittis-eleifend-viverra-2", 
+        "name": "Nulla proin luctus "
+    }
+},
+{
+    "pk": "7fd1f6ff-d846-47ec-92c4-313b3e97337f", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:19:09.079Z", 
+        "description": "Purus eleifend lacinia volutpat quam dictum auctor? Faucibus mi vivamus consectetur dapibus lectus pharetra sodales ornare? Vehicula vestibulum purus libero non ultrices molestie ut. Convallis fusce ante tempor mollis aliquet ut? Etiam iaculis cras ipsum tortor ante. Aliquet commodo sagittis nibh nec justo consectetur accumsan curabitur lorem suscipit malesuada.\r\n", 
+        "created": "2014-07-04T09:57:17.142Z", 
+        "thumbnail_width": "258", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_5.jpg", 
+        "published": true, 
+        "owner": 2, 
+        "thumbnail_height": "195", 
+        "polymorphic_ctype": 26, 
+        "slug": "augue-magna-lorem", 
+        "name": "Augue magna lorem (has resources)"
+    }
+},
+{
+    "pk": "9d0ad459-1f4b-4847-b9a7-c75c56ec0ccd", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:32:47.647Z", 
+        "description": "Vitae auctor - lacinia sem morbi metus facilisis mi erat eu. Nec erat netus phasellus luctus vel fermentum suspendisse vivamus justo enim vehicula? Habitant lacus - ornare mattis consectetur ligula vestibulum egestas ullamcorper! Leo magna lectus cras vestibulum sagittis porttitor vel lacinia egestas senectus dapibus! Morbi quisque duis - vestibulum rutrum velit molestie malesuada in bibendum aliquet ornare scelerisque iaculis. Nisi amet leo lorem vehicula lobortis commodo orci id vestibulum faucibus eget,.\r\n", 
+        "created": "2014-07-04T10:32:47.647Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_3_5.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 26, 
+        "slug": "ac-venenatis-tortor", 
+        "name": "Ac venenatis tortor "
+    }
+},
+{
+    "pk": "acecf46d-0a1b-4a9a-b092-b265d30b2033", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T09:58:45.429Z", 
+        "description": "Gravida dolor nam venenatis urna suscipit. Facilisis ultrices id scelerisque vulputate lobortis rhoncus elit at integer tempus cursus,? Pulvinar lacus dictum lorem urna nunc condimentum purus senectus eu velit semper! Pulvinar tortor tincidunt cras non nam adipiscing praesent ante vitae - dignissim. Neque dignissim habitant laoreet etiam cursus fusce tristique non! Fames - condimentum facilisis proin porta aliquet sit molestie egestas vitae!\r\n", 
+        "created": "2014-07-04T09:58:45.429Z", 
+        "thumbnail_width": "550", 
+        "thumbnail": "courses/thumbs/2014/07/04/cpu.jpg", 
+        "published": false, 
+        "owner": 1, 
+        "thumbnail_height": "482", 
+        "polymorphic_ctype": 29, 
+        "slug": "vulputate-mi-a", 
+        "name": "Vulputate mi a "
+    }
+},
+{
+    "pk": "b1e545f7-aca7-446d-84a5-12b371489a1f", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T09:59:18.181Z", 
+        "description": "Felis elementum arcu interdum nisi varius, massa magna. Feugiat habitant lacus senectus placerat facilisis dignissim. Mattis enim pellentesque rhoncus lacinia at laoreet? Quisque eget enim ipsum volutpat commodo! Nisl placerat venenatis egestas porta ut velit tempor. Sem purus a elementum augue nisi elit lacinia cras blandit mauris, morbi amet?\r\n", 
+        "created": "2014-07-04T09:59:18.181Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_3_4.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 29, 
+        "slug": "scelerisque-elementum-pharetra", 
+        "name": "Scelerisque elementum pharetra "
+    }
+},
+{
+    "pk": "c90d1f99-9afa-4697-9518-94622229429d", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:33:01.901Z", 
+        "description": "Ut, ligula consectetur mollis eros felis orci euismod velit rhoncus semper etiam! Rhoncus bibendum erat ligula varius. Fusce nulla faucibus diam turpis rutrum velit ultricies dolor fermentum eros adipiscing. Pulvinar ante pharetra vestibulum nullam! Est metus venenatis tellus praesent condimentum pharetra malesuada enim! Quam curabitur condimentum, lorem fames metus sit iaculis rutrum aliquam.\r\n", 
+        "created": "2014-07-04T10:32:47.617Z", 
+        "thumbnail_width": "550", 
+        "thumbnail": "courses/thumbs/2014/07/04/cpu_1.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "482", 
+        "polymorphic_ctype": 20, 
+        "slug": "test-course-2", 
+        "name": "Test Course 2"
+    }
+},
+{
+    "pk": "e1f7418a-322e-4c2e-a1df-a1a4c35be999", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:32:47.744Z", 
+        "description": "Neque elementum euismod amet nisl nec? Lorem magna tincidunt ipsum ultricies suspendisse ornare eleifend metus, neque lacus pulvinar? Integer vitae interdum mollis proin iaculis adipiscing neque dolor! Euismod dictum erat eleifend tellus blandit nunc habitant lectus accumsan dui morbi! Dictum sagittis rhoncus gravida quis diam eleifend! Condimentum neque scelerisque consequat lorem - lobortis hendrerit adipiscing nullam non nulla aliquet mollis felis!\r\n", 
+        "created": "2014-07-04T10:32:47.744Z", 
+        "thumbnail_width": "225", 
+        "thumbnail": "courses/thumbs/2014/07/04/images_2.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "225", 
+        "polymorphic_ctype": 26, 
+        "slug": "eget-augue-phasellus", 
+        "name": "Eget augue phasellus "
+    }
+},
+{
+    "pk": "ecc007ac-5cc5-4ecc-9050-013947c3cfa3", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T10:32:47.692Z", 
+        "description": "Nunc in duis ullamcorper velit risus aliquam id, fames purus lacus ac? Curabitur vestibulum justo quisque ultricies sapien gravida varius? Faucibus massa dictum pharetra mi malesuada tempor egestas cras imperdiet praesent ornare elit? Nec quis placerat dignissim aliquet interdum! Lacinia lectus fusce consectetur sit dolor phasellus! Ac fermentum turpis adipiscing auctor eros fusce consequat aliquet!\r\n", 
+        "created": "2014-07-04T10:32:47.692Z", 
+        "thumbnail_width": "204", 
+        "thumbnail": "courses/thumbs/2014/07/04/images_1.jpg", 
+        "published": true, 
+        "owner": 1, 
+        "thumbnail_height": "204", 
+        "polymorphic_ctype": 26, 
+        "slug": "nibh-malesuada-nam", 
+        "name": "Nibh malesuada nam "
+    }
+},
+{
+    "pk": "f05badc1-7fa1-4649-83fe-09238b282d27", 
+    "model": "courses.content", 
+    "fields": {
+        "updated": "2014-07-04T09:59:06.790Z", 
+        "description": "Magna nisi rhoncus justo faucibus et lectus leo scelerisque! Id purus ornare urna orci! Integer phasellus malesuada volutpat dictum purus! Volutpat lacus vehicula suspendisse sodales. Nullam quam cras sapien leo dignissim feugiat morbi quisque habitant pharetra. Ultrices a pulvinar gravida suscipit!\r\n", 
+        "created": "2014-07-04T09:59:06.790Z", 
+        "thumbnail_width": "300", 
+        "thumbnail": "courses/thumbs/2014/07/04/download_3_3.jpg", 
+        "published": false, 
+        "owner": 1, 
+        "thumbnail_height": "168", 
+        "polymorphic_ctype": 29, 
+        "slug": "cras-faucibus-ligula", 
+        "name": "Cras faucibus ligula "
+    }
+},
+{
+    "pk": "1268f09a-b057-4bb2-802e-b81c4d3ea4c5", 
+    "model": "courses.course", 
+    "fields": {
+        "order": 0
+    }
+},
+{
+    "pk": "c90d1f99-9afa-4697-9518-94622229429d", 
+    "model": "courses.course", 
+    "fields": {
+        "order": 1
+    }
+}
+]

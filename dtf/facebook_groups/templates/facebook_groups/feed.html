@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 
 {% block feed %}
-<section class="facebook-feed">
+<section class="feed">
 <div class="container">
 	<div class="col-md-7 col-md-offset-2">
 	<p class="lead">{{ facebook_group.description }}</p>
@@ -70,7 +70,7 @@ $(document).ready(function() {
 					{% for comment in post.comments.data %}
 						<div id="comment-{{ comment.id }}" class="media fb-post">
 							<div data-fbuser="{{ comment.from.id }}" class="pull-left img-profile">
-								<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profil-img">
+								<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profile-img">
 							</div>
 							<div class="media-body">
 								<p>
@@ -135,7 +135,7 @@ $(document).ready(function() {
 					{% for comment in post.comments.data %}
 						<div id="comment-{{ comment.id }}" class="media fb-post">
 							<div data-fbuser="{{ comment.from.id }}" class="pull-left img-profile">
-								<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profil-img">
+								<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profile-img">
 							</div>
 							<div class="media-body">
 								<p>

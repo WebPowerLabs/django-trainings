@@ -6,7 +6,6 @@ from django.db import models
 from allauth.socialaccount.models import SocialApp
 from users.models import User
 
-
 class FBGroupManager(models.Manager):
 
 	def fb_create(self, **kwargs):
@@ -85,14 +84,14 @@ class FBPostManager(models.Manager):
 				# if request 200 create a new FB post object in database
 				fb_post_json = fb_post_request.json()
 				fb_post = self.create(
-					fb_uid = fb_post_json['id'], 
-					from_user = fb_post_json['from'],
-					to_user = fb_post_json['to'],
-					message = fb_post_json['message'],
-					privacy = fb_post_json['privacy'],
-					actions = fb_post_json['actions'],
-					created_time = fb_post_json['created_time'],
-					updated_time = fb_post_json['updated_time'],
+					fb_uid=fb_post_json['id'],
+					from_user=fb_post_json['from'],
+					to_user=fb_post_json['to'],
+					message=fb_post_json['message'],
+					privacy=fb_post_json['privacy'],
+					actions=fb_post_json['actions'],
+					created_time=fb_post_json['created_time'],
+					updated_time=fb_post_json['updated_time'],
 					)
 			else: fb_post = fb_post_request
 		return fb_post

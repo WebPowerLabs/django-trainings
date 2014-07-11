@@ -1,0 +1,14 @@
+{% load query_string thumbnail %}
+        <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}" class="list-group-item sortable_item pull-left" data-pk="{{ lesson.pk }}">
+            <div class="row">
+              <div class="col-md-3">
+                {% thumbnail lesson.thumbnail '122x117' crop='center' as im %}
+                  <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ lesson.name }}">
+                {% endthumbnail %}
+              </div><!--/ .col-md-3-->
+              <div class="col-md-9">
+                <h3 class="list-group-item-heading">{{ lesson.name }}</h3>
+                <p class="list-group-item-text">{{ lesson.description|truncatewords:25 }}</p>
+              </div><!--/ .col-md-9-->
+            </div><!--/ .row-->
+        </a><!--/ .list-group-item-->

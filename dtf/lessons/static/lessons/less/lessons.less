@@ -1,0 +1,83 @@
+//----------------------------------------------------//
+//--------------------- LESSONS APP ------------------//
+//----------------------------------------------------//
+
+//-------- Lesson List-Groups -------//
+.list-group.lessons {
+	.list-group-item {
+		padding: 20px;
+		.transition(background-color .25s ease);
+		border-radius: 0;
+		border-left: none;
+		border-right: none;
+		&:first-child {
+			border-top: none;
+		}
+		p, h1, h2, h3, h4, h5, h6 { color: @brand-gray; }
+		.list-group-item-heading { margin: 0 0 10px; }
+		.list-group-item-text { line-height: 1.5; }
+	}
+}
+
+//-------- Lesson Detail -------//
+.lesson-detail {
+	padding-top: 40px;
+	.course-label {
+		font-weight: 500;
+		i {
+			padding-right: 5px;
+		}
+	}
+	.content {
+		.fav_button {
+			text-transform: uppercase;
+			margin-bottom: 20px;
+			font-weight: 600;
+			color: @brand-danger;
+			background-color: transparent;
+			border: 2px solid @brand-danger;
+			i {
+				padding-right: 4px;
+				vertical-align: middle;
+				font-size: 18px;
+			}
+			&:hover {
+				background-color: hardlight(@brand-danger, #f5f5f5);
+			}
+		}
+	}
+	.panel {
+		box-shadow: 1px 1px 8px rgba(0,0,0,0.15);
+		.panel-heading {
+			span {
+				font-size: 22px;
+				text-transform: uppercase;
+				font-weight: 400;
+				line-height: 24px;
+			}
+			i {
+				color: #fff;
+				line-height: 24px;
+			}
+		}
+		.list-group-item-text {
+			color: @brand-gray;
+		}
+	}
+	.panel-primary {
+		.list-group-item {
+			border: 1px solid hardlight(@brand-primary, #ddd);
+			&:hover {
+				background-color: hardlight(@brand-primary, #f5f5f5);
+			}
+		}
+	}
+	.panel-success {
+		.list-group-item {
+			border: 1px solid hardlight(@brand-success, #ddd);
+			&:hover {
+				background-color: hardlight(@brand-success, #eee);
+			}			
+		}
+	}	
+}

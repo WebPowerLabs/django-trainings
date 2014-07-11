@@ -1,32 +1,28 @@
 {% extends "facebook_groups/base.html" %}
 {% load staticfiles i18n %}
 
-{% block title %}Groups{{ block.super }}{% endblock title %}
+{% block title %}Communities{{ block.super }}{% endblock title %}
 
-{% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static 'facebook_groups/css/feed.css' %}">
-{% endblock css %}
-
-{% block page_title %}Groups{% endblock page_title %}
+{% block page_title %}Communities{% endblock page_title %}
 
 {% block left_panel %}
 <ul class="nav nav-pills nav-stacked">
-	{% for fb_group in facebook_groups %}
-		<li><a href="{% url 'facebook_groups:detail' fb_group.fb_uid %}">{{ fb_group.name }}</a></li>
-	{% endfor %}
+  {% for fb_group in facebook_groups %}
+    <li><a href="{% url 'facebook_groups:detail' fb_group.fb_uid %}">{{ fb_group.name }}</a></li>
+  {% endfor %}
 </ul>
 {% endblock left_panel %}
 
 {% block feed %}
-<section class="facebook-feed">
-	{% with feed as comment_list %}
-	{% for comment in comment_list %}
-		<div id="post-{{ comment.id }}" class="fb-post panel panel-default">
-			{% include "comments/detail.html" with hide_comments=True %}
-		</div>
-	{% endfor %}
-	{% endwith %}
+<section class="feed">
+  {% with feed as comments %}
+    {% for comment in comments %}
+      <div id="post-{{ comment.id }}" class="fb-post panel panel-default">
+          {% include "features/comment.html" %}
+      </div>
+    {% endfor %}
+    {% include "comments/pager.html" with comment_list=comments %}
+  {% endwith %}
 </section>
 {% endblock feed %}
-{% block fb_form %}{% endblock fb_form %}
+

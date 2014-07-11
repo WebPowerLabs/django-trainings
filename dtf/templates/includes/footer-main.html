@@ -1,0 +1,62 @@
+<footer class="footer-main"><!-- - - - - - - - FOOTER MAIN BLOCK - - - - - - - -->
+  <section class="section footer-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 align-center">
+          <div class="widget widget_social">
+            <ul class="social-icons">
+              <li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
+              <li class="facebook"><a href="http://facebook.com/decidetofly"><i class="icon-facebook"></i>Facebook</a></li>
+              <li class="pinterest"><a href="http://www.pinterest.com/decidetofly"><i class="icon-pinterest-circled"></i>Pinterest</a></li>
+              <li class="rss"><a href="#"><i class="icon-rss"></i>Rss</a></li>
+              <li class="youtube"><a href="http://www.youtube.com/DecidetoFly"><i class="icon-youtube"></i>Youtube</a></li>
+              <li class="instagram"><a href="#"><i class="icon-instagramm"></i>Instagram</a></li>
+            </ul><!--/ .social-icons-->
+          </div><!--/ .widget-->
+        </div><!--/ .col-md-12-->
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </section><!--/ .section-->
+  <div class="footer-widgets">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h3 class="widget-title">Site Navigation</h3>
+          <ul>
+            {% include "menus/nav_marketing.html" %}
+          </ul>
+        </div><!--/ .col-md-4-->
+        <div class="contact-widget col-md-4">
+          <h3 class="widget-title">Contact Us</h3>
+            <p><strong>DECIDE TO FLY&trade;</strong></p>
+            <p>12400-3 Wake Union Church Rd.</br>
+               PMB #39</br>
+               Wake Forest, NC 27587</p>
+            <p><a href="tel:5203690500">(520) 369-0500</a></p>
+            <p><a href="mailto:info@decidetofly.com">info@decidetofly.com</a></p>
+        </div><!--/ .contact-widget-->
+        <div class="free-gift col-md-4">
+          <h3 class="widget-title">Mentorship Moments Opt-In</h3>
+          <p class="widget-subtitle">Lorem ipsum dolor amet, pellentesque ut lacus at velit consequat ut posuere neque in molestie gravida!</p>
+          {% include "includes/infusionsoft/optin_form.html" %}
+        </div><!--/ .free-gift-->
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </div><!--/ .footer-widgets-->
+  <div class="bottom-footer clearfix">
+    <div class="container">
+      <div class="row">  
+        <div class="col-sm-6">
+          <div class="copyright">
+            Copyright &copy; 2014 <a href="{% url 'home' %}">Decide to Fly&trade;</a>. All rights reserved
+          </div>
+        </div><!--/ .col-md-6-->
+        <div class="col-sm-3 col-sm-offset-3">
+          <div class="developed">
+            Designed by <a target="_blank" href="http://rabbitholestud.io/">Rabbit Hole Studio</a>
+          </div>
+        </div><!--/ .col-md-3-->
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </div><!--/ .bottom-footer-->
+</footer><!-- - - - - - - - /FOOTER MAIN BLOCK - - - - - - - -->

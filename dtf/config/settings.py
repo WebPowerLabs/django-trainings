@@ -59,6 +59,7 @@ class Common(Configuration):
         'djnfusion',
         'django_comments',
         'sorl.thumbnail',
+        'polymorphic',
     )
 
     # Apps specific for this project go here.
@@ -73,6 +74,9 @@ class Common(Configuration):
         'tags',
         'resources',
         'profiles',
+        'dtf_comments',
+        'packages',
+        'features',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -85,6 +89,10 @@ class Common(Configuration):
         'allauth.account',  # registration
         'allauth.socialaccount',  # registration
         'allauth.socialaccount.providers.facebook',
+    )
+    INSTALLED_APPS += (
+        'polymorphic',
+        'django.contrib.contenttypes',
     )
     ########## END APP CONFIGURATION
 
@@ -100,6 +108,8 @@ class Common(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
     ########## END MIDDLEWARE CONFIGURATION
+
+    COMMENTS_APP = 'dtf_comments'
 
     ########## DEBUG
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
@@ -293,7 +303,8 @@ class Common(Configuration):
 
 
     ########## Your common stuff: Below this line define 3rd party libary settings
-
+    INFUSIONSOFT_COMPANY = os.environ.get('INFUSIONSOFT_API_KEY', '')
+    INFUSIONSOFT_API_KEY = os.environ.get('INFUSIONSOFT_API_KEY', '')
     ########## Djnfusion CONFIG
 
     DJNFUSION_COMPANY = os.environ.get('INFUSIONSOFT_COMPANY_ID', '')
@@ -488,3 +499,7 @@ class Production(Common):
     DJNFUSION_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
     DJNFUSION_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_API_KEY")
     ########## END Djnfusion CONFIG
+
+
+    INFUSIONSOFT_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
+    INFUSIONSOFT_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")

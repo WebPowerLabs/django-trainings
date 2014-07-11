@@ -1,11 +1,16 @@
 from django.db import models
+from django.db.models import Q
 from django.db.models.aggregates import Max
 from profiles.models import InstructorProfile
+from polymorphic import PolymorphicManager
 
 
-class CourseManager(models.Manager):
+class CourseManager(PolymorphicManager):
     def published(self):
         return self.filter(published=True)
+
+    def purchased(self, user):
+        return self.filter(package__packagepurchase__user=user)
 
     def get_list(self, user=None):
         """
@@ -43,10 +48,10 @@ class CourseManager(models.Manager):
 
 
 class CourseHistoryManager(models.Manager):
-    def active(self):
-        return self.filter(is_active=True)
+    def active(self, user):
+        return self.filter(is_active=True, user=user)
 
 
 class CourseFavouriteManager(models.Manager):
-    def active(self):
-        return self.filter(is_active=True)
+    def active(self, user):
+        return self.filter(is_active=True, user=user)

@@ -13,7 +13,9 @@ from courses.signals import view_course_signal
 import json
 from django.views.generic.list import ListView
 from django.http.response import HttpResponseRedirect
-from utils.decorators import instructor_member_required, can_edit_content
+from utils.decorators import instructor_member_required, can_edit_content, \
+    purchase_or_instructor_member_required
+from facebook_groups.models import FacebookGroup
 
 
 class CourseListView(PermissionMixin, CreateFormBaseView):
@@ -36,7 +38,8 @@ class CourseDetailView(PermissionMixin, UpdateView):
     model = Course
     template_name = 'courses/course_detail.html'
     form_class = CourseCreateFrom
-    decorators = {'POST': can_edit_content(Course)}
+    decorators = {'POST': can_edit_content(Course),
+                  'GET': login_required}
 
     def get_queryset(self):
         return Course.objects.get_list(self.request.user)
@@ -48,6 +51,14 @@ class CourseDetailView(PermissionMixin, UpdateView):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         course = self.get_object()
         context['lesson_list'] = course.lesson_set.get_list(self.request.user)
+        context['fb_group_list'] = FacebookGroup.objects.all()
+        if self.request.user.is_authenticated():
+            try:
+                context['in_favourites'] = CourseFavourite.objects.get(
+                                                        course=self.object,
+                                                        user=self.request.user)
+            except CourseFavourite.DoesNotExist:
+                pass
         return context
 
     def get(self, request, *args, **kwargs):
@@ -59,7 +70,7 @@ class CourseDetailView(PermissionMixin, UpdateView):
 class CourseDeleteView(PermissionMixin, DeleteView):
     model = Course
     success_url = reverse_lazy('courses:list')
-    decorators = {'GET': can_edit_content(Course), 
+    decorators = {'GET': can_edit_content(Course),
                   'POST': can_edit_content(Course)}
 
 
@@ -84,7 +95,7 @@ class CourseFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
             obj.is_active = not obj.is_active
             obj.save()
         return self.render_json_response({'success': True,
-                                          'active': obj.is_active})
+                                          'is_active': obj.is_active})
 
 
 class CourseFavouriteListView(PermissionMixin, ListView):
@@ -92,7 +103,7 @@ class CourseFavouriteListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.coursefavourite_set.active()
+        return CourseFavourite.objects.active(self.request.user)
 
 
 class CourseHistoryListView(PermissionMixin, ListView):
@@ -100,7 +111,7 @@ class CourseHistoryListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.coursehistory_set.active()
+        return CourseHistory.objects.active(self.request.user)
 
 
 class CourseHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
@@ -112,5 +123,3 @@ class CourseHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
         obj.is_active = False
         obj.save()
         return self.render_json_response({'success': True})
-
-

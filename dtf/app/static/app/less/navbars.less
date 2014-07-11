@@ -1,0 +1,155 @@
+//----------------------------------------------//
+//-------------- NAVBARS ---------------//
+//----------------------------------------------//
+
+.navbar {
+	margin-bottom: 0;
+	.navbar-toggle {
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
+
+// Alerts //
+.alert {
+	border-radius: 0;
+	margin-bottom: 0;
+}
+}
+
+//----------------------------------------------//
+//-------------- WEB APP NAVBARS ---------------//
+//----------------------------------------------//
+
+.primary-nav,
+.secondary-nav {
+	border: none;
+	border-radius: 0;
+	.navbar-nav > li > a {
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+}
+// Primary App Navigation
+// ---------------------------------------
+.primary-nav {
+	background-color: @gray-dark;
+	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+	box-shadow: 0 0 10px fadeout(#000, 40%);
+	.nav-logo {
+		padding: 5px 10px 0;
+		max-height: 45px;
+	}
+	.navbar-nav > li > a {
+		color: @gray-lightest;
+		&:hover {
+			color: @gray-dark;
+			background-color: @gray-lightest;
+		}
+	}
+}
+// Staff Navigation
+// ---------------------------------------
+.secondary-nav {
+	background-color: @gray-lightest;
+	border-bottom: 1px solid @table-border-color;
+
+	// bootstrap removes this for mobile view
+	.navbar-nav {
+    // prevent from collapsing on mobile
+    float: left;
+    margin: 0;
+    &.navbar-right {
+    	float: right;
+    }
+
+    > li {
+      float: left;
+      > a {
+      	color: @gray;
+        padding-top:    @navbar-padding-vertical;
+        padding-bottom: @navbar-padding-vertical;
+        cursor: pointer;
+		&:hover {
+			background-color: @table-border-color;
+		}
+      }
+    }
+    &:first-child {
+      margin-left: -@navbar-padding-horizontal;
+    }
+    &.navbar-right:last-child {
+      margin-right: -@navbar-padding-horizontal;
+    }
+  }
+}
+
+//----------------------------------------------//
+//----------- MARKETING SITE NAVBARS -----------//
+//----------------------------------------------//
+
+.navbar-member,
+.navbar-marketing {
+	border: none;
+	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+	box-shadow: 0 0 10px fadeout(#000, 40%);
+	.navbar-right { padding-right: 20px; }
+	.navbar-nav > li > a {
+		text-transform: uppercase;
+	}
+}
+// Member Navigation
+// ---------------------------------------
+.navbar-member {
+	background-color: @gray-dark;
+	.navbar-nav > li > a {
+		color: @gray-lightest;
+		font-size: 14px;
+		font-weight: 600;
+		&:hover {
+			color: @gray-dark;
+			background-color: @gray-lightest;
+		}
+	}
+}
+// Marketing Navigation
+// ---------------------------------------
+.navbar-marketing {
+	background-color: @brand-dtf;
+	.nav-logo { padding: 10px 0 0 20px;}
+	.navbar-nav > li > a {
+		color: #fff;
+		line-height: 59px;
+		font-weight: 400;
+		.caret { color: #fff; }
+		&:hover,
+		&:focus {
+			color: @brand-dtf;
+			background-color: #fff;
+			.caret { color: @brand-dtf; }
+		}
+	}
+	.dropdown-menu {
+		background-color: fadeout(@gray-dark, 20%);
+		> li > a {
+			padding: 3px 30px;
+			color: #fff;
+			line-height: 30px;
+			text-transform: uppercase;
+			&:hover {
+				color: @gray-dark;
+				background-color: #fff;
+			}
+		}
+	}
+	.open {
+		> a, 
+		> a:hover, 
+		> a:focus {
+			color: @brand-dtf;
+			background-color: #fff;
+			border: none;
+			.caret { color: @brand-dtf; }
+		}
+	}
+}

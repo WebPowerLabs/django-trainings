@@ -5,6 +5,8 @@ from courses.models import Course, CourseHistory, CourseFavourite
 
 class LessonInline(admin.TabularInline):
     model = Lesson
+    fk_name = 'course'
+    template = 'admin/polymorphic_tabular.html'
 
 
 class CourseAdmin(admin.ModelAdmin):

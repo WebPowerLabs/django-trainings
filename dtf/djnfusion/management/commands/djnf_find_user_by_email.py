@@ -14,6 +14,7 @@ class Command(BaseCommand):
             raise CommandError("Pass email address as parameter.")
 
         results = server.DataService.findByField(key, "Contact", 10, 0, "email", email, ["Id", "Email"]);
+        #results = server.DataService.findByField(key, "SubscriptionPlan", 10, 0, "productid", 37, ["Id", "ProductId", "Cycle", "Frequency", "PreAuthorizeAmount", "Prorate", "Active", "PlanPrice"]);
         
         print "Found %d results." % len(results)
         for r in results:

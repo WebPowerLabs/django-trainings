@@ -1,0 +1,80 @@
+{% load staticfiles comments markdown avatar_tags %}
+<div id="c{{ comment.id }}" style="position:relative;bottom: 50px;"></div>
+<div class="comment-post">
+<div class="pull-right comment-actions">
+  <a href="{% url 'comments-delete' comment.id %}?next={{ request.path }}">
+    <i class="fa fa-times-circle-o"></i>
+  </a>
+  <a href="{% url 'comments-flag' comment.id %}?next={{ request.path }}">
+    <i class="fa fa-flag"></i>
+  </a>
+</div>
+  <h3 class="fb-post-heading">
+      {% if comment.user.fb_uid %}
+      <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+      <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>
+      {% else %}
+        {% avatar comment.user %}
+        {{ comment.user.get_full_name }}
+      {% endif %}
+    <small class="date">{{ comment.submit_date|date }}</small>
+  </h3>
+  <div class="panel-body">
+    <p>{{ comment.comment|markdown }}</p>
+    {% if comment.hero_unit %}
+      <div class="attached-content">
+          {% include 'comments/comment_attached_content.html' with object=comment.hero_unit %}
+      </div>
+    {% endif %}
+
+  </div>
+  <div class="panel-footer">
+
+  {% if not hide_comments %}
+      {% render_comment_list for comment %}
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  {% get_comment_form for comment as form %}
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#tab-write-{{ comment.pk }}" role="tab" data-toggle="tab">Write</a></li>
+        <li><a href="#tab-preview-{{ comment.pk }}" class="tab-preview" data-id='{{ comment.pk }}' data-url="{% url 'dtf_comments:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-write-{{ comment.pk }}">
+          <form class="form fb-comment-form" action="{% comment_form_target %}" method="POST" data-access-token="{{ request.user.get_fb_access_token }}">
+            {% csrf_token %}
+            <div class="hidden">{{ form.honeypot }}</div>
+            {{ form.content_type }}
+            {{ form.object_pk }}
+              {{ form.timestamp }}
+              {{ form.security_hash }}
+              <input type="hidden" name="next" value="{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}" />
+              <div class="">
+                  <div class="row">
+                      <div class="col-xs-2 col-sm-1 fb-profile-comment-img">
+                          {% if user.fb_uid %}
+                          <img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+                          {% else %}
+                          {% avatar user %}
+                          {% endif %}
+                      </div>
+                      <div class="col-xs-10 col-sm-11">
+                          <textarea class="form-control" placeholder="Write something..." name="comment" id="id_comment"></textarea>
+                      </div>
+                  </div>
+              </div>
+      </div>
+      <div class="tab-pane" id="tab-preview-{{ comment.pk }}"></div>
+      <div class="clearfix">
+          <button type="submit" id="id_submit" class="btn btn-primary pull-right"><i class="fa fa-send fa-fw"></i></button>
+      </div>
+          </form>
+    </div>
+  {% else %}
+      <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
+  {% endif %}
+  </div>
+</div>

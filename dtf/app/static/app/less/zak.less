@@ -4,90 +4,42 @@
 //--------------------------------- STYLES --------------------------------//
 //-------------------------------------------------------------------------//
 
-
-//--------------------------------------//
-//--------- Temporary Styles -----------//
-//--------------------------------------//
-
-// Coming Soon //
-section.block.coming-soon {
-	padding-top: 50px;
-	text-align: center;
-
-	h1 {
-		color: @brand-dtf;
-		font-weight: 300;
-		font-size: 36px;
-		text-transform: uppercase;
-	}
-}
-
-
 //--------------------------------------//
 //--------- Universal Styles -----------//
 //--------------------------------------//
 
-
-// ------ Import Marina Font ------ //
-@font-face {
-	font-family: Marina;
-	src: url(../../fonts/marina.ttf);
-}
-
 // ------ Background Colors ------ //
-.bg-transparent.section {
-	background-color: transparent;
-}
-
-// ------ General ------ //
-
-body.default #header {
-	border-bottom: none;
-}
-
- a {
- 	color: @brand-dtf;
- 	-webkit-transition: all .25s ease;
-	transition: all .25s ease;
-
-	&:hover {
-		text-decoration: none;
-	}
- }
-
-input, textarea, select, button {
-	-webkit-transition: all .25s ease;
-	transition: all .25s ease;
-}
-
-input {
-	padding: 3px 7px;
-}
-
-.thumbnail > img {
-	border: 5px solid @brand-gray-bg;
-	border-radius: 0;
-}
-
-// ------ Background Color Classes ------ //
+.bg-transparent.section { background-color: transparent; }
 .bg-white { background-color: #fff; }
+
+// Links
+// ---------------------------------------
+a:hover { text-decoration: none; }
+a,
+.btn {
+	-webkit-transition: color .25s ease, background-color .25s ease, border .25s ease;
+	-moz-transition: color .25s ease, background-color .25s ease, border .25s ease;
+	transition: color .25s ease, background-color .25s ease, border .25s ease;
+}
+
+// ------ Image Thumbnail ------ //
+.thumbnail > img { border-radius: 0; }
 
 // ------ Pager ------ //
 ul.pager {
-	.previous, .next {
+	.previous,
+	.next {
 		a {
 			font-weight: 400;
 			color: #fff;
 			background-color: @brand-dtf;
 			border-color: @brand-dtf;
 			i { color: #fff; }
-
 			&:hover {
 				background-color: darken(@brand-dtf, 8%);
 				border-color: darken(@brand-dtf, 8%);
 			}
 		}
-
 		&.disabled a, {
 			color: @gray-light;
 			background-color: @gray-lighter;
@@ -97,105 +49,14 @@ ul.pager {
 	}
 }
 
-// ------ Section Title ------ //
-.section-title {
-	position: relative;
-	margin-bottom: 70px;
-	padding-bottom: 15px;
-	text-align: center;
-
-	&:after {
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		margin-left: -7%;
-		width: 14%;
-		height: 2px;
-		background-color: #ececec;
-		content: "";
-	}
-
-	h1 {
-		margin-bottom: 20px;
-		color: @brand-dtf;
-		text-transform: uppercase;
-		font-weight: 100;
-		line-height: 1.1em;
-	}
-	h2 {
-		font-weight: 300;
-		text-transform: none;
-	}
-}
-
-.section-title-2 {
-	margin-bottom: 80px;
-	text-align: center;
-
-	h1 {
-		font-weight: 100;
-
-		span { 
-			color: @brand-dtf;
-			font-weight: 400;
-		}
-	}
-	h2 {
-		color: @section-title-gray;
-		font-weight: 300; 
-	}
-}
-
-.section-title, .section-title-2 {
-	h1 {
-		font-size: 42px;
-	}
-	h2 {
-		font-size: 20px;
-	}
-}
-
-@media (min-width: @screen-sm-min) {
-	.section-title, .section-title-2 {
-		h1 {
-			font-size: 60px;
-		}
-		h2 {
-			font-size: 24px;
-		}
-	}
-}
-
-// Fix for Parallax //
-.parallax .section-title {
-	&:after {
-		background-color: #cfcfcf;
-		background-color: rgba(207,207,207,.4);
-	}
-
-	h2 { color: #fff; }
-}
-
-
 // ------ Buttons ------ //
-
-.btn {
-	-webkit-transition: all .25s ease;
-	transition: all .25s ease;
-	font-weight: 300;
-}
-
-.btn-success:hover {
-	background-color: @brand-dtf-dark;
-}
-.btn-danger:hover {
-	background-color: @brand-danger-dark;
-}
+.btn { font-weight: 300;}
+.btn-success:hover { background-color: @brand-dtf-dark; }
+.btn-danger:hover { background-color: @brand-danger-dark; }
 .btn-default {
 	color:  @brand-dtf;
 	border: 2px solid  @brand-dtf;
 	background: transparent;
-	
 	&:hover {
 		color: @brand-gray;
 		border: 2px solid @brand-gray;
@@ -203,527 +64,122 @@ ul.pager {
 	}
 }
 
-
-// ------ Nav Menu ------ //
-
-.navigation ul ul {
-	background-color: @brand-gray;
-	background-color: rgba(91,94,96, .9);
-}
-
-header a:hover {
-	text-decoration: none;
-}
-
-#header {
-	#logo {
-		height: 30px;
-	}
-	&.header-shrink {
-		#logo {
-			height: 30px;
-		}
-
-		.header-member {
-			display: block;
-		}
-	}
-	&.transparent {
-		background-color: @brand-dtf;
-	}
-
-	.header-main {
-		background-color:  @brand-dtf;
-
-		#navigation {
-			background-color: @brand-dtf;
-		}
-
-		.navigation {
-			> ul > li {
-				&.downarrowclass {
-					> a:after {
-						color: @brand-dtf;
-					}
-					&:hover > a:after, &:focus > a:after, &:active > a:after {
-						color: #fff;
-					}
-				}
-
-				&:hover > a {
-					color: #fff;
-					background-color: @brand-dtf;
-				}
-			}
-
-			li.downarrowclass ul li:hover > a {
-				color: #fff;
-				background-color: transparent;
-			}
-
-			ul li {
-				float: none;
-				margin: 2px;
-
-				> a {
-					background-color: @brand-gray-bg;
-					border-radius: 3px;
-					color: @brand-dtf
-				}
-				&:hover > a {
-					color: #fff;
-					background-color: @brand-dtf;
-				}
-			}
-			ul ul {
-				background-color: @brand-dtf;
-			}
-		}
-	}
-
-	.header-member {
-		background-color: #777;
-
-		.header-in {
-			text-align: right;
-		}
-
-		.navigation {
-			> ul > li > a {
-				padding: 12px 20px 15px;
-				font-size: 12px;
-				font-weight: 600;
-			}
-			
-			ul li {
-				float: left;
-				margin: 0;
-
-				> a {
-					background-color: transparent;
-					border-radius: 0;
-				}
-			}
-		}
-
-		#nav-member {
-			display: inline-block;
-			vertical-align: middle;
-
-			> ul > li {
-				& > a {
-					color: @brand-gray-bg;
-				}
-				&:hover > a {
-					color: #777;
-					background-color: @brand-gray-bg;
-				}
-			}
-		}
-	}
-
-	&.header-shrink .header-member .navigation > ul > li > a {
-		padding-top: 12px !important;
-		padding-bottom: 15px !important;
-	}
-
-	&.transparent .header-member .navigation {
-		border-bottom: none;
-	}
-	
-
-}
-
-@media (min-width: @screen-md-min) {
-	#header {
-		#logo {
-			height: auto;
-		}
-		
-		&.header-shrink {
-			.header-member {
-				display: none;
-			}
-		}
-		&.transparent {
-			background-color: transparent;
-		}
-
-		.header-main {
-			#navigation {
-				background-color: transparent;
-			}
-
-			.navigation {
-				> ul > li {
-					&:hover > a {
-						color: @brand-dtf;
-						background-color: #fff;
-					}
-				}
-
-				ul li {
-					float: left;
-					margin: 0;
-
-					> a {
-						background-color: transparent;
-						border-radius: 0;
-						color: #fff;
-					}
-				}
-
-				ul ul {
-					background-color: @brand-gray;
-				}
-				
-				> ul > li.downarrowclass {
-					> a:after {
-						color: #fff;
-					}
-					&:hover > a:after, &:focus > a:after, &:active > a:after {
-						color: @brand-dtf;
-					}
-				}
-				
-				li.downarrowclass ul li:hover > a {
-					color: @brand-dtf;
-				}
-			}
-		}
-	}
-}
-
-.not-ie .header-member {
-	font: 0/0 a;
-}
-
-
-// ------ Footer Main ------ //
-
-footer.footer-main {
-	position: relative;
-	z-index: 1;
-	color: @brand-gray-light;
-
-	.section {
-		position: static;
-		padding: 75px 0;
-		background-color: @brand-gray;
-		background-color: rgba(0, 0, 0, 0.6);
-	}
-
-	.parallax-bg-4 .full-bg-image {
-		background-image: url(../../images/ventana-meeting.jpg);
-		//background-image: url(../../../images/ventana-meeting.jpg);
-	}
-
-	.widget {
-		margin-bottom: 0;
-	}
-
-	h2 {
-		margin-top: 40px;
-		color: @brand-gray-light;
-	}
-	h4 {
-		text-transform: uppercase;
-		font-weight: 300;
-		color: @brand-gray-light;
-	}
-	p, .widget_contacts p {
-		margin: 0;
-	}
-	.contact-form p {
-		margin: 0 0 1em;
-		line-height: 1em;
-	}
-	a {
-		color:  @brand-dtf;
-		text-transform: none;
-
-		&:hover {
-			color: #fff;
-			text-decoration: none;
-		}
-	}
-
-	ul {
-		list-style: none;
-	}
-		li ul {
-			padding-left: 25px;
-		}
-	ul.social-icons {
-		margin-top: 0;
-
-		li {
-			margin-right: 40px;
-
-			a {
-				width: 80px;
-				height: 80px;
-				border-radius: 80px;
-			}
-			i {
-				font-size: 40px;
-				line-height: 80px;
-			}
-		}
-	}
-
-	input {
-		border-color: @brand-gray-light;
-
-		&.btn {
-			margin-top: 20px;
-			border: none;
-		}
-	}
-
-	.logo-in-footer {
-		text-align: left;
-		padding: 60px 0;
-		background-color: @brand-gray;
-		background-color: rgba(0,0,0,.7);
-	}
-}
-
-.bottom-footer {
-	color: #888;
-}
-
-@media (min-width: @screen-md-min) {
-	footer.footer-main h2 {
-		margin-top: 0;
-	}
-}
-
-
 // ------ D2F Community CTA Block ------ //
-
 .community-cta {
 	text-align: center;
-	
-	&.bg-dark-color .full-bg-image {
-		opacity: 0.8;
-	}
-
+	&.bg-dark-color .full-bg-image { opacity: 0.8; }
 	&.parallax-clouds .full-bg-image {
 		background-image: url(../../images/clouds.jpg);
 		//background-image: url(../../../images/clouds.jpg);
 	}
-
-	h1 {
+	.title {
 		margin-bottom: 30px;
 		color: #fff;
 		font-size: 35px;
 		font-family: 'Julius Sans One', sans-serif;
 		text-transform: uppercase;
 	}
-	h3 {
+	.subtitle {
 		margin-bottom: 30px;
 		color: #fff;
-		font-size: 16px;
-		font-family: 'Roboto', sans-serif;
 		line-height: 1.5em;
 		font-weight: 300;
 	}
-	
 	.btn-lg {
 		width: 200px;
 		margin-top: 15px;
 	}
 }
-
 @media (min-width: @screen-sm-min) {
 	.community-cta {
-		h1 {
-			font-size: 60px;
-		}
-		h3 {
-			font-size: 20px;
-		}
-
+		.title { font-size: 60px; }
 		.btn-lg {
-			&.btn-success {
-				margin-left: 20px;
+			&.btn-success { margin-left: 20px; }
+		}
+	}
+}
+
+// ------ Free Product CTA Block ------ //
+.free-product-cta {
+	a {
+		color: @brand-dtf;
+		&:hover { color: @brand-gray; }
+	}
+	.main-entry {
+		padding-bottom: 0;
+		border-bottom: none;
+		.entry-image {
+			margin-bottom: 20px;
+			.title {
+				color: #fff;
+				font-size: 28px;
 			}
 		}
 	}
 }
-
-
-// ------ Free Product CTA Block ------ //
-
-.free-product-cta {
-	a {
-		color: @brand-dtf;
-
-		&:hover {
-			color: @brand-gray;
-		}
-	}
-
-	.main-entry {
-		padding-bottom: 0;
-		border-bottom: none;
-		
-		.entry-image {
-			margin-bottom: 20px;
-		}
-	}
-	.entry-image h3 {
-		color: #fff;
-		font-size: 28px;
-	}
-}
-
 @media (min-width: @screen-md-min) {
 	.free-product-cta {
-		.entry-image h3 {
-			font-size: 24px;
-		}
+		.entry-image .title { font-size: 24px; }
 	}
 }
-
 @media (min-width: @screen-lg-min) {
 	.free-product-cta {
-		.entry-image h3 {
-			font-size: 28px;
-		}
+		.entry-image .title { font-size: 28px; }
 	}
 }
-
 
 //--------------------------------------//
 //-------------- Homepage --------------//
 //--------------------------------------//
 
-
 // ------Welcome Block ------ //
-
 .welcome-home {
-	.section.parallax {
-		padding-top: 0;
+	.section {
+		padding-top: 40px;
 		padding-bottom: 0;
 	}
-
 	.full-bg-image {
 		background-image: url(../../images/decide-to-fly-home-banner.jpg);
 		//background-image: url(../../../images/decide-to-fly-home-banner.jpg);
 	}
-
-	.video-full-entry {
-		display: inline-block;
-
-		h1 {
-			margin-bottom: 0;
-			color: #5b5e60;
-			font-size: 29px;
-			font-weight: 600;
-			font-family: Garamond, sans-serif;
-			text-shadow: 2px 2px 3px fadeout(#000, 65%);
-			line-height: 1.1em;
-
-			span.red { color: #be2046; }
-			span.blue { color: #0a708f; }
-			span.green { color: #6d8021; }
-		}
-		h2 {
-			margin-bottom: 0;
-			font-family: Marina, sans-serif;
-		}
-
-		img.company-logo {
-			margin-bottom: 20px;
-			max-width: 200px;
+	.content { margin-bottom: 60px; }
+	.video-wrapper {
+		position: relative;
+		padding-bottom: 56.25%; /* 16:9 */
+		padding-top: 25px;
+		margin-bottom: 20px;
+		height: 0;
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
 		}
 	}
-
-	.btn {
-		margin-bottom: 25px
-	}
-
-	.parallax-overlay {
-		z-index: -1;
-		background-color: @brand-gray;
-		background-color: rgba(0, 0, 0, 0.3);
-		background-image: none;
-	}
-
-	img.swoosh {
-		margin-bottom: -7px;
-	}
+	img.swoosh { margin-bottom: -7px; }
 }
-
 @media (min-width: @screen-sm-min) {
 	.welcome-home {
-		.section.parallax {
-			padding-top: 100px;
-		}
-
-		.video-full-entry {
-			padding: 0 0 40px;
-
-			h1 {
-				font-size: 29px;
-			}
-			h2 {
-				font-size: 20px;
-			}
-		}
-	}
-}
-
-@media (min-width: @screen-md-min) {
-	.welcome-home {
-		.video-full-entry {
-			padding: 140px 0 60px;
-			
-			h1 {
-				font-size: 38px;
-			}
-			h2 {
-				font-size: 24px;
-			}
-		}
-
-		.welcome-title {
-			text-align: left;
-		}
-	}
-}
-
-@media (min-width: @screen-lg-min) {
-	.welcome-home {
-		.video-full-entry {
-			h1 {
-				font-size: 48px;
-			}
-		}
+		.section { padding-top: 100px; }
 	}
 }
 
 
 // ------ D2F Community Intro Block ------ //
-
-
 .community {
-	.community-items {
-		padding: 0 5%;
-	}
-
-	h2.entry-title {
+	padding-bottom: 40px;
+	.community-items { padding: 0 5%; }
+	.entry-title {
 		font-size: 19px;
 		font-weight: 400;
 	}
-	p {
+	.entry-body {
 		font-size: 14px;
 		line-height: 1.5em;
 		color: @gray;
 	}
-
 	.icon {
 		text-align: center;
 		margin: 19px auto 16px;
@@ -736,43 +192,33 @@ footer.footer-main {
 		border-radius: 100px;
 		padding: 20px 0;
 		position: relative;
-
 		i {
 			font-size: 30px;
 			color: @brand-gray;	
 		}
 	}
-
 	.entry {
-		padding: 0 10px;
+		padding: 10px 20px;
 		margin-bottom: 10px;
 		text-align: center;
 		height: auto;
 		min-height: 276px;
 		background: #fff;
+		border-radius: 10px;
 		float: left;
 		cursor: pointer;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
-
+		-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		&:hover {
 			background:  @brand-dtf;
 			color: #fff;
-
-			h2 {
-				color: #fff;
-			}
-			p {
-				color: #fff;
-			}
+			.entry-title,
+			.entry-body { color: #fff; }
 			.top {
 				border: 2px solid  @brand-dtf;
 				background: #fff;
-
-				i {
-					color: @brand-dtf;
-				}
+				i { color: @brand-dtf; }
 				&:after {
 					border: 2px solid white;
 					-webkit-transform: scale(1.2);
@@ -781,13 +227,11 @@ footer.footer-main {
 					transform: scale(1.2);
 				}
 			}
-
 			.bottom i {
 				border: 1px solid #fff;
 				color: #fff;
 			}
 		}
-
 		.top:after {
 			position: absolute;
 			background: transparent;
@@ -797,20 +241,15 @@ footer.footer-main {
 			width: 100%;
 			height: 100%;
 			border-radius: 500px;
-			-webkit-transition: all 0.4s;
-			-moz-transition: all 0.4s;
-			transition: all 0.4s;
+			-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		}
-
 		.icon {
 			text-align: center;
 			margin: 19px auto 16px;
-
-			&.top {
-				margin-top: 23px;
-			}
+			&.top { margin-top: 23px; }
 		}
-
 		.bottom i {
 			width: 31px;
 			height: 31px;
@@ -824,349 +263,139 @@ footer.footer-main {
 	}
 }
 
-
-// ------ Virtual Mentoring Block ------ //
-
-.vm-item-1, .vm-item-2 {
-	text-align: center;
-
-	h1 {
-		color:  @brand-dtf;
-		font-weight: 100;
-		font-size: 48px;
-		line-height: 1.1em;
-	}
-
-	.btn-lg {
-		width: 180px;
-	}
-}
-.vm-item-1 {
-	margin-bottom: 80px;
-}
-.vm-item-2 {
-	margin-bottom: 60px;
-}
-
-@media (min-width: @screen-md-min) {
-	.vm-item-1 {
-		text-align: right;
-	}
-	.vm-item-2 {
-		text-align: left;
-	}
-}
-
-
-// ------ Jami Amidon Intro Block ------ //
-.about-jami {
-	.list li {
-		margin-left: 30px;
-	}
-
-	.btn-lg {
-		margin-top: 24px;
-		height: 55px;
-		line-height: 1.74;
-	}
-}
-
-
-// ------ Contact Footer Block ------ //
-
-.contact-title {
-	&.section {
-		padding: 70px
-	}
-
-	.section-title {
-		margin-bottom: 0;
-		padding-bottom: 0;
-
-		&:after {
-			visibility: hidden;
-		}
-	}
-}
-
-footer.contact-footer {
-	position: relative;
-	z-index: 1;
-	color: @brand-gray-light; 
-
-	.section {
-		padding-bottom: 50px;
-		position: static;
-		background-color: @brand-gray;
-		background-color: rgba(0,0,0,.6);
-	}
-
-	h2 {
-		color: @brand-gray-light;
-		text-transform: uppercase;
-		font-weight: 300;
-	}
-	.widget_contacts p {
-		margin: 0;
-	}
-	a {
-		color: @brand-dtf;
-		
-		&:hover {
-			color: #fff;
-			text-decoration: none;
-		}
-	}
-
-	.parallax-bg-4 .full-bg-image {
-		background-image: url(../../images/ventana-meeting.jpg);
-		//background-image: url(../../../images/ventana-meeting.jpg);
-	}
-	
-	ul.social-icons {
-		padding-top: 30px;
-
-		li a {
-			border-radius: 25px;
-		}
-	}
-
-	.form-group input {
-		height: 50px;
-	}
-
-	textarea {
-		&.form-control {
-			padding: 10px;
-			font-size: 12px;
-			font-family: 'Roboto', sans-serif;
-			-webkit-border-radius: 6px;
-			border-radius: 6px;
-			background-color: transparent;
-
-			&:focus {
-				border-color: @brand-dtf;
-				-webkit-box-shadow: rgba(0, 194, 169, 0.701961) 0px 0px 10px 1px;
-				box-shadow: rgba(0, 194, 169, 0.701961) 0px 0px 10px 1px;
-			}
-		}
-	}
-}
-
-
 //--------------------------------------//
 //------------- About Page -------------//
 //--------------------------------------//
 
-
 // ------ About D2F Block ------ //
-
 .about-d2f {
-	.item-02 {
-		margin-top: 60px;
-	}
+	.item-02 { margin-top: 60px; }
 }
-
 
 // ------ Testimonials Block ------ //
-
 .testimonials {
-	li blockquote {
-		font-size: 18px;
-	}
+	li blockquote { font-size: 18px; }
 }
-
 @media (min-width: @screen-sm-min) {
 	.testimonials {
-		li blockquote {
-			font-size: 24px;
-		}
+		li blockquote { font-size: 24px; }
 	}
 }
 
 // ------ D2F Team Block ------ //
-
 .team {
-	.team-nav {
-		visibility: hidden;
-	}
-
-	.team-contents {
-		width: 100%;
-	}
-	.contents {
-		width: 100%;
-	}
-
+	.team-nav { visibility: hidden; }
+	.team-contents { width: 100%; }
+	.contents { width: 100%; }
 	.team-entry {
 		padding: 20px 20px;
 		width: 100%;
 	}
-
 	.team-plus-icon .curtain {
 		-webkit-transition: none;
+		-moz-transition: none;
 		transition: none;
 	}
-	.team-plus-icon:hover .curtain {
-		margin-left: -200px;
-	}
-	.single-image.team-img {
-		cursor: default;
-	}
-
+	.team-plus-icon:hover .curtain { margin-left: -200px; }
+	.single-image.team-img { cursor: default; }
 	.team-member article {
 		margin: 0 0 40px;
 		width: 100%;
-		
 		.team-group {
 			border: 1px solid #e0e0e0;
 			background-color: #fff;
 		}
-		
 		&:hover {
 			.team-group {
 				border: 1px solid #e0e0e0;
 				background-color: #fff;
 			}
-			.team-title {
-				color: @brand-gray;
-			}
-			.team-position {
-				color: #aeaeae;
-			}
+			.team-title { color: @brand-gray; }
+			.team-position { color: #aeaeae; }
 		}
 	}
-
-	.team-info {
-		width: 100%;
-	}
+	.team-info { width: 100%; }
 	.team-image {
 		width: 40%;
 		margin-right: 3%;
 	}
-	.team-group {
-		width: 57%;
-	}
-
+	.team-group { width: 57%; }
 	.team-content {
 		margin: 0;
 		display: table;
 		width: 100%;
 	}
-
-	.team-title {
-		font-size: 20px;
-	}
+	.team-title { font-size: 20px; }
 }
 
 @media (min-width: @screen-sm-min) {
 	.team {
-		.team-info {
-			width: 250px;
-		}
+		.team-info { width: 250px; }
 		.team-image {
 			width: 100%;
 			margin-right: 0;
 		}
-		.team-group {
-			width: 100%;
-		}
-
+		.team-group { width: 100%; }
 		.team-content {
 			margin-left: 260px;
 			display: block;
 			width: auto;
 		}
-
-		.team-member article {
-			margin: 0 20px 40px;
-		}
-
-		.team-title {
-			font-size: 24px;
-		}
+		.team-member article { margin: 0 20px 40px; }
+		.team-title { font-size: 24px; }
 	}
 }
 
 @media (min-width: @screen-md-min) {
 	.team {
-		.team-contents {
-			width: 50000px;
-		}
-		.contents {
-			width: 250px;
-		}
-
+		.team-contents { width: 50000px;}
+		.contents { width: 250px;}
 		.team-plus-icon .curtain {
-			-webkit-transition: all .3s ease-in;
-			transition: all .3s ease-in;
+			-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		}
-		.team-plus-icon:hover .curtain {
-			margin-left: 0;
-		}
-		.single-image.team-img {
-			cursor: pointer;
-		}
-		
+		.team-plus-icon:hover .curtain { margin-left: 0; }
+		.single-image.team-img { cursor: pointer; }
 		.team-member article {
 			margin: 0 20px;
 			width: auto;
-
 			&:hover {
 				.team-group {
 					border-color: transparent;
 					background-color:  @brand-dtf;
 				}
-				.team-title, .team-position {
-					color: #fff;
-				}
+				.team-title,
+				.team-position { color: #fff; }
 			}
 		}
 	}
 }
 
-
-// ------ FAQs Block ------ //
-
-.faqs {
-	.section-title h1 {
-		text-transform: none;
-	}
-}
-
-
 //------------------------------------------------------//
 //----------------- D2F Community Page -----------------//
 //------------------------------------------------------//
 
-
 // ------ About Community Block ------ //
-
 .about-community {
 	.btn-lg {
 		height: 60px;
 		margin-top: 80px;
 		line-height: 36px;
 	}
-
-	.about-left li, .about-right li  {
+	.about-left li,
+	.about-right li  {
 		line-height: 1.4em;
 		height: 64px;
 	}
-	.about-left {
-		text-align: right;
-	}
+	.about-left { text-align: right; }
 }
-
-.about-content {
-	background: none;
-}
-
-.about-left li, .about-right li {
+.about-content { background: none; }
+.about-left li,
+.about-right li {
 	text-align: center;
 	padding: 80px 0 100px;
 }
-
 .about-item-1 {
 	background: url(../../images/icons/comments.png) center top no-repeat;
 	//background: url(../../../images/icons/comments.png) center top no-repeat;
@@ -1193,27 +422,19 @@ footer.contact-footer {
 	background: url(../../images/icons/film.png) center top no-repeat;
 	//background: url(../../../images/icons/film.png) center top no-repeat;
 }
-
-@media (min-width: @screen-sm-min) {
-	.about-community {
-
-	}
-}
-
 @media (min-width: @screen-md-min) {
 	.about-community {
-		.about-left li, .about-right li {
+		.about-left li,
+		.about-right li {
 			text-align: center;
 			padding: 80px 0;
 		}
-
 		.about-content {
 			background: url(../../images/mandala.png) center top no-repeat;
 			//background: url(../../../images/mandala.png) center top no-repeat;
 			margin-bottom: 20px;
 			background-position-y: 20px;
 		}
-
 		.about-left li {
 			text-align: right;
 			padding: 0 80px 0 0;
@@ -1222,7 +443,6 @@ footer.contact-footer {
 			text-align: left;
 			padding: 0 0 0 80px;
 		}
-
 		.about-item-1 {
 			background: url(../../images/icons/comments.png) right top no-repeat;
 			//background: url(../../../images/icons/comments.png) right top no-repeat;
@@ -1251,7 +471,6 @@ footer.contact-footer {
 			background: url(../../images/icons/film.png) left top no-repeat;
 			//background: url(../../../images/icons/film.png) left top no-repeat;
 		}
-
 	}
 }
 
@@ -1264,69 +483,28 @@ footer.contact-footer {
 // ------ About VM Products Blocks ------ //
 
 .about-products {
-	text-align: center;
-	
 	.bg-dark-color .full-bg-image {
 		opacity: 0.8;
 	}
-
 	.parallax-courage .full-bg-image {
 		background-image: url(../../images/eagle.jpg);
 		//background-image: url(../../../images/eagle.jpg);
 	}
-	
 	.parallax-accelerate .full-bg-image {
 		background-image: url(../../images/businesswoman.jpg);
 		//background-image: url(../../../images/businesswoman.jpg);
 	}
-
-	.products-title {
-		h1 {
-			margin-bottom: 30px;
-			color: #fff;
-			font-size: 35px;
-			font-family: 'Julius Sans One', sans-serif;
-			font-weight: 600;
-			text-transform: none;
-		}
-		h3 {
-			margin-bottom: 30px;
-			color: #fff;
-			font-size: 16px;
-			font-family: 'Roboto', sans-serif;
-			line-height: 1.5em;
-			font-weight: 300;
-		}
-	}
-	
-	h1 {
-		margin: 10px 0 30px 0;
-		color: @brand-dtf;
-		text-transform: uppercase;
-		font-size: 48px;
-		font-weight: 100;
-		line-height: 1.1em;
-	}
-
 	.btn-lg {
 		width: 200px;
 		margin-top: 15px;
 	}
-
-	.products-items {
-		padding: 0 5%;
-	}
-
-	h2.entry-title {
+	.products-items { padding: 0 5%; }
+	.entry-title {
 		font-size: 19px;
 		font-weight: 400;
 		padding-top: 10px;
 	}
-	p {
-		font-size: 14px;
-		line-height: 1.5em;
-	}
-
+	.entry-body { line-height: 1.3em; }
 	.icon {
 		text-align: center;
 		margin: 19px auto 16px;
@@ -1339,16 +517,14 @@ footer.contact-footer {
 		border-radius: 100px;
 		padding: 39px 1px 0 0;
 		position: relative;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
-
+		-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+		transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		i {
 			font-size: 47px;
 			color: #fff;
 		}
 	}
-
 	.entry {
 		padding: 0 10px;
 		margin-bottom: 0;
@@ -1357,7 +533,6 @@ footer.contact-footer {
 		min-height: 276px;
 		background: #fff;
 		float: left;
-
 		&:hover {
 
 			.top {
@@ -1373,7 +548,6 @@ footer.contact-footer {
 				}
 			}
 		}
-
 		.top:after {
 			position: absolute;
 			background: transparent;
@@ -1383,16 +557,14 @@ footer.contact-footer {
 			width: 100%;
 			height: 100%;
 			border-radius: 500px;
-			-webkit-transition: all 0.4s;
-			-moz-transition: all 0.4s;
-			transition: all 0.4s;
+			-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+			transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		}
-
 		.icon {
 			text-align: center;
 			margin: 19px auto 16px;
 		}
-
 		.bottom i {
 			width: 31px;
 			height: 31px;
@@ -1406,60 +578,8 @@ footer.contact-footer {
 	}
 }
 
-@media (min-width: @screen-sm-min) {
-	.about-products {
-		.products-title {
-			h1 {
-				font-size: 56px;
-			}
-			h3 {
-				font-size: 20px;
-			}
-		}
-
-		.btn-lg {
-			&.btn-success {
-				margin-left: 20px;
-			}
-		}
-	}
-}
-
-@media (min-width: @screen-md-min) {
-	.about-products {
-	}
-}
-
-@media (min-width: @screen-lg-min) {
-	.about-products {
-		.products-title {
-			h1 {
-				font-size: 68px;
-			}
-		}
-	}
-}
-
-
-// ------ Purchase CTA Blocks ------ //
-
-.purchase-cta {
-	text-align: center;
-
-	h1 {
-		color: #fff;
-		font-weight: 400;
-		font-size: 34px;
-	}
-
-	h3 {
-		color: #fff;
-		font-size: 20px;
-		font-family: 'Roboto', sans-serif;
-		line-height: 1.5em;
-		font-weight: 300;
-	}
-
+// ------ Basic Call-to-Action ------ //
+.basic-cta {
 	.btn {
 		margin-top: 30px;
 		margin-bottom: 10px;
@@ -1467,38 +587,19 @@ footer.contact-footer {
 		line-height: 2;
 	}
 }
-
-@media (min-width: @screen-sm-min) {
-	.purchase-cta {
-		h1 {
-			font-size: 44px;
-		}
-	}
-}
-
 @media (min-width: @screen-md-min) {
-	.purchase-cta {
-		text-align: left;
-
-		.btn {
-			margin-top: 63px;
-		}
+	.basic-cta {
+		.btn { margin-top: 63px; }
 	}
 }
-
 
 //-----------------------------------------------//
 //-------------- Free Product Page --------------//
 //-----------------------------------------------//
 
-
 // ------ Speaker Info Block ------ //
-
 .about-speaker {
-	.list li {
-		margin-left: 30px;
-	}
-
+	.list li { margin-left: 30px; }
 	.btn-lg {
 		margin-top: 24px;
 		height: 55px;
@@ -1506,40 +607,28 @@ footer.contact-footer {
 	}
 }
 
-
 //---------------------------------------------//
 //----------------- Blog Page -----------------//
 //---------------------------------------------//
 
 .blog {
-	&.section {
-		padding: 80px 0 100px;
-	}
-
-	.tumblr-reader-body img {
-		width: 100%;
-	}
-
+	&.section { padding: 80px 0 100px; }
+	.tumblr-reader-body img { width: 100%;}
 	.tumblr-reader-title {
 		margin-bottom: 15px;
 		font-size: 32px;
 		color: @brand-gray;
 		line-height: 38px;
 	}
-
 	.tumblr-reader-post-regular {
 		border-bottom: 1px solid #ececec;
 		padding-bottom: 50px;
 		margin-bottom: 40px;
 	}
 }
-
 @media (min-width: @screen-md-min) {
 	.blog {
-		&.section {
-			padding: 100px 0;
-		}
-		
+		&.section { padding: 100px 0; }
 		.tumblr-reader-title {
 			font-size: 42px;
 			line-height: 44px;
@@ -1551,146 +640,58 @@ footer.contact-footer {
 //----------------- General Membership Elements -----------------//
 //---------------------------------------------------------------//
 
-
-//--------- Signin Form ---------//
-
+//--------- Member Form Pages ---------//
 .login-wrapper,
-.signup-wrapper {
+.signup-wrapper,
+.logout-wrapper,
+.verify-wrapper,
+.email-wrapper,
+.password-wrapper,
+.avatar-wrapper {
 	padding: 60px 0 65px;
-
-	h2 {
-		text-transform: uppercase;
-		font-size: 44px;
-		font-weight: 300;
-		color: @brand-dtf;
-	}
-
-	.btn-lg {
-		padding: 12px 80px;
-	}
-
-	label {
-		margin-bottom: 3px;
-	}
-	.button {
-		color: @brand-gray;
-	}
-}
-
-.signup-wrapper {
-	.btn-lg {
-		margin-top: 20px;
-	}
-}
-
-.logout-wrapper {
-	padding: 80px 0;
-}
-
-
-//--------- Verification Email Pages ---------//
-
-.verify-wrapper {
-	padding: 80px 0;
-
-	p {
-		margin-bottom: 0;
-	}
-}
-
-.email-wrapper {
-	padding: 80px 0;
-}
-
-//--------- Password Change Pages ---------//
-
-.password-wrapper {
-	padding: 80px 0;
 }
 
 //--------- AYD User Welcome Page ---------//
-
 .user-welcome-wrapper {
 	padding: 80px 0;
-
 	.user-detail-box {
 		background-color: @brand-gray-bg;
 		padding: 40px 30px 50px;
 		border-radius: 7px;
-
 		.img-thumbnail {
 			margin-right: 20px;
 			display: block;
 			float: left;
 		}
 	}
-
-	h1 {
-		text-transform: uppercase;
-		font-size: 32px;
-		font-weight: 300;
-		color: @brand-dtf;
-	}
 }
 
 //--------- User Profile Form ---------//
-
 .user-form-wrapper {
 	padding: 80px 0;
-
-	label {
-		margin-bottom: 3px;
-	}
 	.btn-lg {
 		margin-top: 20px;
 		padding: 12px 80px;
 	}
-
 	.form-horizontal .form-group {
 		margin-left: 0;
 		margin-right: 0;
 	}
 }
 
-//--------- Avatar Change ---------//
-
-.avatar-wrapper {
-	padding: 80px 0;
-}
-
 //--------- User Account Emails ---------//
-
 .acct-email-wrapper {
 	padding: 80px 0;
-
-	.buttonHolder {
-		padding: 5px 0 20px;
-	}
-
-	.verified {
-		color: @brand-dtf;
-	}
-	.unverified {
-		color: @brand-danger;
-	}
-
-	.separator {
-		padding: 0 5px;
-	}
+	.buttonHolder { padding: 5px 0 20px; }
+	.verified { color: @brand-dtf; }
+	.unverified { color: @brand-danger; }
+	.separator { padding: 0 5px; }
 }
 
 //--------- Users List ---------//
-
 .user-list-wrapper {
 	padding: 80px 0;
-
-	h2 {
-		font-size: 36px;
-	}
-
-	.img-thumbnail {
-		margin-right: 20px;
-	}
+	.img-thumbnail { margin-right: 20px; }
 }
 
 //------------------------------------------------//
@@ -1699,210 +700,19 @@ footer.contact-footer {
 
 .nufiles {
 	padding: 60px 0;
-
 	.section-title {
 		margin-bottom: 40px;
-
-		&:after {
-			display: none;
-		}
+		&:after { display: none; }
 	}
-
-	.media {
-		margin-top: 0;
-	}
-
+	.media { margin-top: 0; }
 	.nufiles-list {
 		background-color: @brand-gray-bg;
 		padding: 40px 3%;
 		border-radius: 7px;
 		margin-bottom: 40px;
-
-		&:last-child {
-			margin-bottom: 20px;
-		}
+		&:last-child { margin-bottom: 20px; }
 	}
-
-	.nufiles-heading {
-		font-size: 24px;
-	}
-
-	.nufiles-description {
-		font-size: 16px;
-	}
+	.nufiles-heading { font-size: 24px; }
+	.nufiles-description { font-size: 16px; }
 }
 
-//----------------------------------------------------//
-//----------------- LESSONS/COURSES APP --------------//
-//----------------------------------------------------//
-
-//-------- Course List -------//
-section.course-list {
-	&.section {
-		padding-top: 60px;
-	}
-	
-	.section-title {
-		margin-bottom: 40px;
-	}
-
-	.course-item {
-		.thumbnail {
-			display: block;
-			padding: 25px 10px 0;
-			border-radius: 0;
-
-			img {
-				max-width: 200px;
-				max-height: 160px;
-			}
-			.caption {
-				padding: 16px 9px 9px;
-			}
-		}
-
-		&:hover {
-			.thumbnail {
-				background-color: @brand-dtf;
-				border-color: @brand-dtf;
-
-				.caption {
-					h3, p {
-						color: white;
-					 	-webkit-transition: all .25s ease;
-						transition: all .25s ease;
-					}
-				}
-			}
-		}
-	}
-}
-
-//-------- Course Detail -------//
-section.course-detail {
-	background-color: @brand-dtf;
-
-	.section {
-		padding-top: 50px;
-	}
-
-	.course-info {
-		h1, p {
-			color: #fff;
-		}
-		h1 {
-			font-size: 44px;
-		}
-		p {
-			line-height: 20px;
-			font-weight: 400;
-		}
-
-		hr {
-			border-top: 1px solid #eee;
-			width: 60%;
-		}
-	}
-}
-
-//-------- Lesson List-Groups -------//
-.list-group.lessons {
-	a.list-group-item {
-		padding: 20px;
-	 	-webkit-transition: all .25s ease;
-		transition: all .25s ease;
-		border-radius: 0;
-		border-left: none;
-		border-right: none;
-
-		p, h1, h2, h3, h4, h5, h6 { color: @brand-gray; }
-		.list-group-item-heading { margin: 0 0 10px; }
-		.list-group-item-text { line-height: 1.5; }
-	}
-}
-
-//-------- Lesson Detail -------//
-section.lesson-detail {
-	&.section {
-		padding-top: 50px;
-	}
-
-	button.course-label {
-		font-weight: 500;
-		
-		i {
-			padding-right: 5px;
-		}
-	}
-
-	.content {
-		button.favourite_add {
-			text-transform: uppercase;
-			margin-bottom: 30px;
-			font-weight: 600;
-			color: @brand-danger;
-			background-color: transparent;
-			border: 2px solid @brand-danger;
-
-			i {
-				padding-right: 4px;
-				vertical-align: middle;
-				font-size: 18px;
-			}
-
-			&:hover {
-				background-color: hardlight(@brand-danger, #f5f5f5);
-			}
-		}
-	}
-
-	.panel {
-		box-shadow: 1px 1px 8px rgba(0,0,0,0.15);
-		
-		.panel-heading {
-			span {
-				font-size: 22px;
-				text-transform: uppercase;
-				font-weight: 400;
-				line-height: 24px;
-			}
-			i {
-				color: #fff;
-				line-height: 24px;
-			}
-		}
-		.list-group-item-text {
-			color: @brand-gray;
-		}
-	}
-
-	.panel-primary {
-		.list-group-item {
-			border: 1px solid hardlight(@brand-primary, #ddd);
-
-			&:hover {
-				background-color: hardlight(@brand-primary, #f5f5f5);
-			}
-		}
-	}
-	.panel-success {
-		.list-group-item {
-			border: 1px solid hardlight(@brand-success, #ddd);
-
-			&:hover {
-				background-color: hardlight(@brand-success, #eee);
-			}			
-		}
-	}	
-}
-
-//-------- Lesson List -------//
-section.lesson-list {
-	&.section {
-		padding-top: 60px;
-	}
-
-	.section-title {
-		margin-bottom: 40px;
-	}
-}

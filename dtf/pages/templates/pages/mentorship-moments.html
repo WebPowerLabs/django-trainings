@@ -1,0 +1,87 @@
+{% extends "pages/base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}Free Product | Decide to Fly{% endblock title %}
+
+{% block content %}
+<div id="wrapper">
+	
+	<!-- - - - - - - - VIDEO PLAYER BLOCK - - - - - - - -->
+	<section class="video-player section bg-gray-color">
+		<div class="container">
+			<div class="row">
+	            <div class="section-header-2 col-xs-12 text-center">
+	                <h1 class="section-title">Introducing <span>Jane Doe</span></h1>
+	                <h3 class="section-subtitle">Vivamus eget rhoncus purus. Proin non urna ligula. Nunc scelerisque, nunc eget placerat feugiat, arcu quam fringilla mauris, quis blandit diam neque posuere nulla.</h3>
+	                <hr>
+	            </div><!--/ .section-header-2-->
+			</div><!--/ .row-->
+			<div class="row">
+				<div class="col-xs-12">
+					<iframe width="1060" height="590" src="http://www.youtube.com/embed/qGsTlYLbwy4?wmode=transparent" frameborder="0" allowfullscreen></iframe>
+				</div><!--/ .col-xs-12-->
+			</div><!--/ .row-->
+		</div><!--/ .container-->
+	</section>
+	<!-- - - - - - - -/ VIDEO PLAYER BLOCK - - - - - - - -->
+
+	<!-- - - - - - - - ABOUT SPEAKER BLOCK - - - - - - - -->
+	<section class="about-speaker section">	
+		<div class="container">
+			<div class="row">
+	            <div class="section-header col-xs-12 text-center">
+	                <h1 class="section-title">Who is Jane Doe?</h1>
+	                <h3 class="section-subtitle">Some more information about this month's speaker.</h3>
+	                <hr>
+	            </div><!--/ .section-header-->
+			</div><!--/ .row-->
+			<div class="row">
+				<div class="col-md-6">
+					<p><img src="{% static 'images/happy-woman.jpg' %}" alt="Jami Amidon" /></p>
+				</div><!--/ .col-md-6-->
+				<div class="col-md-6">
+					<p>Lorem ipsum dolor amet, consectetur adipiscing elit. Pellentesque ut lacus at velit consequat sodales. Ut posuere neque in molestie gravida. Integer neque lementum posuere purus. Nam convallis ipsum. Maecenas a vulputate ipsum.</p>
+					<ul class="list">
+						<li class="type-5">Proin fringilla fermentum urna</li>
+						<li class="type-5">Sed consequat justo eleifend sit amet</li>
+						<li class="type-5">Phasellus eu pulvinar justo</li>
+						<li class="type-5">Vivamus a feugiat leo</li>
+						<li class="type-5">Phasellus pulvinar posuere lorem sit amet rhoncus</li>
+					</ul><!--/ .list-->
+					<div class="btn btn-lg btn-danger btn-block">Visit JaneDoe.com</div>
+				</div><!--/ .col-md-5-->
+			</div><!--/ .row-->
+		</div><!--/ .container-->
+	</section>
+	<!-- - - - - - - -/ ABOUT SPEAKER BLOCK - - - - - - - -->
+	
+	{% include "includes/community-cta.html" %}
+
+	<!-- - - - - - - - PREVIOUS SPEAKERS BLOCK - - - - - - - -->
+	<section class="past-speakers section">
+		<div class="container">
+			<div class="row">
+	            <div class="section-header col-xs-12 text-center">
+	                <h1 class="section-title">Hungry for More?</h1>
+	                <h3 class="section-subtitle">Then come take a look at some of our previous speakers!</h3>
+	                <hr>
+	            </div><!--/ .section-header-->
+			</div><!--/ .row-->
+			<div class="row">
+				<div class="col-xs-12">
+					<ul class="clients-items">
+						<li><a href="#"><img src="http://placehold.it/140x95" alt="" /></a></li>
+						<li><a href="#"><img src="http://placehold.it/140x95" alt="" /></a></li>
+						<li><a href="#"><img src="http://placehold.it/140x95" alt="" /></a></li>
+						<li><a href="#"><img src="http://placehold.it/140x95" alt="" /></a></li>
+						<li><a href="#"><img src="http://placehold.it/140x95" alt="" /></a></li>
+						<li><a href="#"><img src="http://placehold.it/140x95" alt="" /></a></li>
+					</ul><!--/ .clients-items-->
+				</div><!--/ .col-xs-12-->
+			</div><!--/ .row-->
+		</div><!--/ .container-->
+	</section>
+	<!-- - - - - - - -/ PREVIOUS SPEAKERS BLOCK - - - - - - - -->
+
+</div><!--/ #wrapper-->
+{% endblock content %}

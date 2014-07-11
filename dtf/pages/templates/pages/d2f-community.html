@@ -5,23 +5,18 @@
 {% block content %}
 <div id="wrapper">
 	
-
 	<!-- - - - - - - - ABOUT COMMUNITY BLOCK - - - - - - - -->
 	<section class="about-community section">
 			<div class="container">
-
 				<div class="row">
-					<div class="col-xs-12">
-						<div class="section-title-2">
-							<h1>The <span>Decide to Fly&trade;</span>Community</h1>
-							<h2>Vivamus eget rhoncus purus. Proin non urna ligula. Nunc scelerisque, nunc eget placerat feugiat, arcu quam fringilla mauris, quis blandit diam neque posuere nulla. Aliquam scelerisque diam ut fermentum bibendum. Ut sed ullamcorper nibh. Praesent sit amet molestie lectus, non faucibus tellus.</h2>	
-						</div>
-					</div><!--/ .col-xs-12-->
+		            <div class="section-header-2 col-xs-12 text-center">
+		                <h1 class="section-title">The <span>Decide to Fly&trade;</span>Community</h1>
+		                <h3 class="section-subtitle">Vivamus eget rhoncus purus. Proin non urna ligula. Nunc scelerisque, nunc eget placerat feugiat, arcu quam fringilla mauris, quis blandit diam neque posuere nulla. Aliquam scelerisque diam ut fermentum bibendum. Ut sed ullamcorper nibh. Praesent sit amet molestie lectus, non faucibus tellus.</h3>
+		                <hr>
+		            </div><!--/ .section-header-2-->
 				</div><!--/ .row-->
-
 				<div class="row">
 					<div class="col-md-12 about-content">
-
 						<div class="col-md-5 col-md-offset-0 col-sm-8 col-sm-offset-2 about-left">
 							<ul>
 								<li class="about-item-1">Lorem ipsum dolor sit amet, consecter adipiscing elit. Donec nec orci idenim lacinia auctor. Ut interdum urna ipsum.</li>
@@ -29,7 +24,6 @@
 								<li class="about-item-3">Lorem ipsum dolor sit amet, consecter adipiscing elit. Donec nec orci idenim lacinia auctor. Ut interdum urna ipsum.</li>
 							</ul>
 						</div>
-
 						<div class="col-md-5 col-md-offset-2 col-sm-8 col-sm-offset-2 about-right">
 							<ul>
 								<li class="about-item-4">Lorem ipsum dolor sit amet, consecter adipiscing elit. Donec nec orci idenim lacinia auctor. Ut interdum urna ipsum.</li>
@@ -37,41 +31,30 @@
 								<li class="about-item-6">Lorem ipsum dolor sit amet, consecter adipiscing elit. Donec nec orci idenim lacinia auctor. Ut interdum urna ipsum.</li>
 							</ul>
 						</div>
-
 						<div class="col-sm-4 col-sm-offset-4">
 							<a href="{% url 'buy-community' %}"><button class="btn btn-lg btn-block btn-info">Learn More</button></a>
 						</div>
-
 					</div><!--/ .col-md-12-->
 				</div><!--/ .row-->
-
 			</div><!--/ .container-->
 	</section>
 	<!-- - - - - - - - /ABOUT COMMUNITY BLOCK - - - - - - - -->
 
-
 	<!-- - - - - - - - PURCHASE CTA BLOCK - - - - - - - -->
-	<section class="purchase-cta section bg-turquoise-color">
+	<section class="basic-cta section bg-turquoise-color">
 		<div class="container">
 			<div class="row">
-
 				<div class="col-md-8">
-					<h1>Ready to begin your journey?</h1>
-					<h3>Nunc scelerisque, nunc eget placerat feugiat, arcu quam fringilla mauris, quis blandit diam neque posuere nulla. Aliquam scelerisque diam ut fermentum bibendum.</h3>
+					<h1 class="cta-title">Ready to begin your journey?</h1>
+					<h3 class="cta-subtitle">Nunc scelerisque, nunc eget placerat feugiat, arcu quam fringilla mauris, quis blandit diam neque posuere nulla. Aliquam scelerisque diam ut fermentum bibendum.</h3>
 				</div><!--/ .col-md-8-->
-
 				<div class="col-md-3 col-sm-8 col-xs-10 col-md-offset-1 col-sm-offset-2 col-xs-offset-1">
 					<a href="#"><button class="btn btn-lg btn-block btn-danger">Join the Community!</button></a>
 				</div><!--/ .col-md-3-->
-
 			</div><!--/ .row-->
 		</div><!--/ .container-->
 	</section><!--/ .section-->
 	<!-- - - - - - - - /PURCHASE CTA BLOCK - - - - - - - -->
-
-
-	{% include "includes/free-product-cta.html" with free_cta_title="Free Product CTA" free_cta_subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis consectetur mi vel luctus. Sed accumsan convallis nisi. Etiam mauris magna, mattis vel elementum sed, interdum sit amet nulla." %}
-
 
 </div><!--/ #wrapper-->
 {% endblock content %}

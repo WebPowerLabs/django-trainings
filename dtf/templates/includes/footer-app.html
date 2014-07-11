@@ -1,0 +1,46 @@
+<footer class="footer-main"><!-- - - - - - - - FOOTER APP - - - - - - - -->
+  <div class="footer-widgets">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h3 class="widget-title">App Navigation</h3>
+          <ul>
+            <li><a href="{% url 'users:detail' request.user.id %}">My Account</a></li>
+            {% include "menus/nav_app.html" %}
+            <li><a href="{% url 'account_logout' %}">Logout</a></li>
+          </ul>
+        </div><!--/ .col-md-4-->
+        <div class="contact-widget col-md-4">
+          <h3 class="widget-title">Contact Us</h3>
+            <p><strong>DECIDE TO FLY&trade;</strong></p>
+            <p>12400-3 Wake Union Church Rd.</br>
+               PMB #39</br>
+               Wake Forest, NC 27587</p>
+            <p><a href="tel:5203690500">(520) 369-0500</a></p>
+            <p><a href="mailto:info@decidetofly.com">info@decidetofly.com</a></p>
+        </div><!--/ .contact-widget-->
+        <div class="col-md-4">
+          <h3 class="widget-title">Need Help?</h3>
+          <p>If you're having trouble with the app, checkout our <a href="#"><strong>Support Page</strong></a>. We've answered some frequently asked questions that should help you out.</p>
+          <p>But if that doesn't help... just send an email to our support team at <a href="mailto:support@decidetofly.com">support@decidetofly.com</a>.</p>
+        </div><!--/ .col-md-4-->
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </div><!--/ .footer-widgets-->
+  <div class="bottom-footer clearfix">
+    <div class="container">
+      <div class="row">  
+        <div class="col-sm-6">
+          <div class="copyright">
+            Copyright &copy; 2014 <a href="{% url 'home' %}">Decide to Fly&trade;</a>. All rights reserved.
+          </div>
+        </div><!--/ .col-md-6-->
+        <div class="col-sm-3 col-sm-offset-3">
+          <div class="developed">
+            Designed by <a target="_blank" href="http://rabbitholestud.io/">Rabbit Hole Studio</a>
+          </div>
+        </div><!--/ .col-md-3-->
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </div><!--/ .bottom-footer-->
+</footer><!-- - - - - - - -/ FOOTER APP - - - - - - - -->

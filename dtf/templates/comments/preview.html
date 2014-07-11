@@ -5,6 +5,7 @@
 
 {% block content %}
   {% load comments %}
+  <div class="container">
   <form action="{% comment_form_target %}" method="post">{% csrf_token %}
     {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
     {% if form.errors %}
@@ -33,4 +34,5 @@
     <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
     </p>
   </form>
+</div>
 {% endblock %}

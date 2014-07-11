@@ -5,9 +5,13 @@ from django.db import models
 from django.db.models import permalink
 from django.conf import settings
 
+from allauth.socialaccount.models import SocialApp
+
 from jsonfield import JSONField
+from dtf_comments.models import DTFComment
 
 from .managers import FBGroupManager, FBPostManager
+
 
 
 class FacebookGroup(models.Model):
@@ -21,12 +25,21 @@ class FacebookGroup(models.Model):
     email = models.EmailField(max_length=255, blank=True)
     feed = models.TextField(blank=True)
     pinned_post = models.OneToOneField('FacebookPost', blank=True, null=True)
-    pinned_comment = models.OneToOneField('django_comments.Comment', blank=True, null=True)
+    pinned_comment = models.OneToOneField('dtf_comments.DTFComment',
+                                          blank=True, null=True)
 
     objects = FBGroupManager()
 
     def __unicode__(self):
         return self.name if self.name else self.fb_uid
+
+    @property
+    def social_app(self):
+        return SocialApp.objects.all()[0]
+    
+    @property
+    def client_id(self):
+        return self.social_app.client_id
 
     @permalink
     def get_absolute_url(self):
@@ -35,26 +48,21 @@ class FacebookGroup(models.Model):
     def get_fb_data_url(self, user):
         """ get data about this facebook group
         """
-
-        # get the fb token from requesting user
-        fb_token = user.get_fb_access_token()
         if self.fb_uid:
-            return "https://graph.facebook.com/v2.0/{}?access_token={}".format(self.fb_uid, fb_token.token)
+            return "https://graph.facebook.com/v2.0/{}?access_token={}|{}".format(
+                self.fb_uid, self.social_app.client_id, self.social_app.secret)
 
     def get_fb_feed_url(self, user):
         """ get feed for this facebook group
         """
-
-        # get the fb token from requesting user
-        fb_token = user.get_fb_access_token()
         if self.fb_uid:
-            return "https://graph.facebook.com/v2.0/{}/feed?limit=50&access_token={}".format(self.fb_uid, fb_token.token)
+            return "https://graph.facebook.com/v2.0/{}/feed?limit=50&access_token={}|{}".format(
+                self.fb_uid, self.social_app.client_id, self.social_app.secret)
 
     def save_fb_profile_data(self, user):
 
         # get data from facebook to save
         fb_data = requests.get(self.get_fb_data_url(user))
-        print fb_data
         if fb_data:
             fb_data_json = fb_data.json()
             self.name = fb_data_json["name"]
@@ -71,7 +79,6 @@ class FacebookGroup(models.Model):
         fb_feed = requests.get(self.get_fb_feed_url(user))
         if fb_feed:
             return fb_feed.json()
-
 
     def post_fb_feed(self, user, message):
         """
@@ -91,8 +98,7 @@ class FacebookGroup(models.Model):
         return pin
 
     def pin_comment(self, comment_id):
-        from django_comments.models import Comment
-        pin = get_object_or_404(Comment, id=comment_id)
+        pin = get_object_or_404(DTFComment, id=comment_id)
         self.pinned_comment = pin
         self.save()
         return pin
@@ -100,6 +106,7 @@ class FacebookGroup(models.Model):
     def unpin_comment(self):
         self.pinned_comment = None
         self.save()
+
 
 class FacebookPost(models.Model):
     fb_uid = models.CharField(max_length=255, unique=True)

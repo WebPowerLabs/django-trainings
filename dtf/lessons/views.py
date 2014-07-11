@@ -15,14 +15,15 @@ import json
 from lessons.signals import view_lesson_signal
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
-from utils.decorators import can_edit_content
+from utils.decorators import can_edit_content, \
+    purchase_or_instructor_member_required
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
     model = Lesson
     template_name = 'lessons/lesson_detail.html'
     form_class = LessonCreateFrom
-    decorators = {'GET': login_required,
+    decorators = {'GET': purchase_or_instructor_member_required(Lesson),
                   'POST': can_edit_content(Lesson)}
 
     def get_queryset(self):
@@ -130,7 +131,7 @@ class LessonFavouriteListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.lessonfavourite_set.active()
+        return LessonFavourite.objects.active(self.request.user)
 
 
 class LessonHistoryListView(PermissionMixin, ListView):
@@ -138,7 +139,7 @@ class LessonHistoryListView(PermissionMixin, ListView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
-        return self.request.user.lessonhistory_set.active()
+        return LessonHistory.objects.active(self.request.user)
 
 
 class LessonHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,

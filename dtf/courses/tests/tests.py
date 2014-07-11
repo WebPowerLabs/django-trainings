@@ -1,15 +1,18 @@
+from django.db.models import Q
 from django_nose.testcases import FastFixtureTestCase
 from courses.models import Course, CourseFavourite, CourseHistory
 from courses.tests.factories import (CourseFactory, UserFactory,
                                      CourseFavouriteFactory,
                                      CourseHistoryFactory,
-                                     InstructorProfileFactory)
+                                     InstructorProfileFactory, PackageFactory,
+                                     LessonFactory, PackagePurchaseFactory)
 from django.test.client import Client
 import json
 from django.core.urlresolvers import reverse
+from utils.tests import TestCaseBase
 
 
-class CourseManagerTest(FastFixtureTestCase):
+class CourseManagerTest(TestCaseBase):
     def setUp(self):
         self.password = 'password'
         self.instructor = UserFactory(username='instructor', is_staff=False)
@@ -21,11 +24,28 @@ class CourseManagerTest(FastFixtureTestCase):
         self.staff_user = UserFactory(username="staff", is_staff=True)
         self.staff_user.set_password(self.password)
         self.staff_user.save()
-
-        self.instructor_profile = InstructorProfileFactory(user=self.instructor)
+        self.instructor_profile = InstructorProfileFactory(
+                                                       user=self.instructor)
         self.course_pub = CourseFactory(published=True, owner=self.instructor)
         self.course_not_pub = CourseFactory(published=False,
                                             owner=self.instructor)
+        self.course_purchased = CourseFactory(published=True,
+                                              owner=self.instructor)
+        self.lesson = LessonFactory(course=self.course_purchased,
+                                    owner=self.instructor)
+        self.lesson_two = LessonFactory(course=self.course_pub,
+                                        owner=self.instructor)
+        self.package = PackageFactory()
+        self.package.lessons.add(self.lesson_two)
+
+        self.package.courses.add(self.course_purchased)
+        self.package_purchased = PackagePurchaseFactory(user=self.user,
+                                                        package=self.package)
+
+    def test_purchased(self):
+        purchased = [self.lesson_two.course, self.course_purchased]
+        res = Course.objects.purchased(self.user)
+        self.assertEqualQs(res, purchased)
 
     def test_get_list_user_had_insrtuctor_profile(self):
         total_count = Course.objects.all().count()
@@ -48,11 +68,10 @@ class CourseManagerTest(FastFixtureTestCase):
         self.assertEqual(total_count, current_count)
 
     def test_set_order(self):
-        new_order = [self.course_not_pub.pk, self.course_pub.pk]
+        new_order = [self.course_not_pub.pk, self.course_pub.pk,
+                     self.course_purchased.pk]
         Course.objects.set_order(new_order)
         self.assertEqual(Course.objects.get_order(), new_order)
-
-
 
 
 class CourseViewTest(FastFixtureTestCase):

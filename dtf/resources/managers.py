@@ -1,8 +1,8 @@
-from django.db import models
 from profiles.models import InstructorProfile
+from polymorphic.manager import PolymorphicManager
 
 
-class ResourceManager(models.Manager):
+class ResourceManager(PolymorphicManager):
     def published(self):
         return self.filter(published=True)
 

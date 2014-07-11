@@ -5,10 +5,13 @@ from resources.models import Resource
 
 class ResourceInLine(admin.TabularInline):
     model = Resource
+    fk_name = 'lesson'
+    template = 'admin/polymorphic_tabular.html'
 
 
 class LessonAdmin(admin.ModelAdmin):
     inlines = [ResourceInLine]
+
     list_filter = ['course']
     list_editable = ['published']
     list_display = ['name', 'published', '_order']
@@ -28,7 +31,3 @@ class LessonFavouriteAdmin(admin.ModelAdmin):
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(LessonHistory, LessonHistoryAdmin)
 admin.site.register(LessonFavourite, LessonFavouriteAdmin)
-
-
-
-

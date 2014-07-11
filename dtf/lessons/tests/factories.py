@@ -6,6 +6,7 @@ from courses.models import Course
 from profiles.models import InstructorProfile
 from tags.models import Tag
 from django.conf import settings
+from packages.models import Package, PackagePurchase
 
 
 def random_string(length=8):
@@ -22,6 +23,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 class InstructorProfileFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = InstructorProfile
+
 
 class CourseFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Course
@@ -57,3 +59,12 @@ class LessonFavouriteFactory(factory.django.DjangoModelFactory):
 
 class LessonHistoryFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = LessonHistory
+
+
+class PackageFactory(factory.django.DjangoModelFactory):
+    name = factory.LazyAttribute(lambda t: random_string())
+    FACTORY_FOR = Package
+
+
+class PackagePurchaseFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = PackagePurchase

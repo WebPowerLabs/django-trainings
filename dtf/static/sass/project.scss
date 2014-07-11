@@ -31,3 +31,70 @@
   background-color: #f2dede;
   border-color: #eed3d7;
 }
+
+// !!! Custom style !!!
+.media-body ul {
+  padding-left: 40px;
+}
+
+.panel-body ul {
+  padding-left: 40px;
+}
+
+.tab-pane {
+  padding: 10px;
+}
+
+.sortable_item .caption{
+  height: 200px;
+  overflow: hidden;
+}
+
+.no_transition{
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+
+.fav_button.is_active .state-1, .fav_button .state-2{
+    display: block;
+}
+
+.fav_button.is_active .state-2, .fav_button .state-1{
+    display: none;
+}
+
+.history_item.is_active{
+    display: table-row;
+}
+
+.history_item{
+    display: none;
+}
+
+.favourite_item.is_active{
+    display: table-row;
+}
+
+.favourite_item{
+    display: none;
+}
+
+.notify-balloon {
+  position: fixed;
+  z-index: 100500;
+  top: 30%;
+  left: 50%;
+  padding: 15px;
+  margin-left: -190px;
+  width: 380px;
+
+  color: #FFF;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  box-shadow: 0 2px 15px #888;
+  text-shadow: 0px 1px 0px #262626;
+  line-height: 160%;
+}
+// !!! /Custom style  !!!

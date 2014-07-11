@@ -1,0 +1,94 @@
+//-------------------------------------------//
+//--------------- TYPOGRAPHY ----------------//
+//-------------------------------------------//
+
+
+// Import Marina Font
+// ---------------------------------------
+@font-face {
+	font-family: Marina;
+	src: url(../../fonts/marina.ttf);
+}
+
+// Section Headers
+// ---------------------------------------
+.section-header,
+.section-header-2 {
+	.section-title { font-weight: 300; }
+	hr {
+		margin: 20px auto 40px;
+		width: 150px;
+		border-top: 2px solid @gray-lighter;
+	}
+	.section-subtitle {
+		margin-top: 15px;
+		font-weight: 300;
+	}
+}
+.section-header {
+	.section-title {
+		text-transform: uppercase;
+		color: @brand-dtf;
+	}
+}
+.section-header-2 {
+	.section-title span { 
+		color: @brand-dtf;
+		font-weight: 400;
+	}
+	.section-subtitle { color: @gray-light; }
+}
+
+// ------Product Header
+// ---------------------------------------
+.product-header {
+	.section-title,
+	.section-subtitle {
+		margin-bottom: 30px;
+		color: #fff;
+	}
+	.section-title {
+		font-size: 56px;
+		font-family: 'Julius Sans One', sans-serif;
+		font-weight: 600;
+	}
+	.section-subtitle {
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 1.5em;
+	}
+}
+
+// ------Basic Call-to-Action
+// ---------------------------------------
+.basic-cta {
+	text-align: center;
+	.cta-title {
+		color: #fff;
+		font-weight: 400;
+	}
+	.cta-subtitle {
+		color: #fff;
+		line-height: 1.3em;
+		font-weight: 300;
+	}
+}
+@media (min-width: @screen-md-min) {
+	.basic-cta { text-align: left; }
+}
+
+// ------Member Login/Logout Forms
+// ---------------------------------------
+.login-wrapper,
+.signup-wrapper {
+	.title {
+		text-transform: uppercase;
+		color: @brand-dtf;
+	}
+}
+.logout-wrapper {
+	.title {
+		text-transform: uppercase;
+		color: @brand-danger;
+	}
+}

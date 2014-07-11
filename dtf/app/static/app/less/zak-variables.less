@@ -7,18 +7,19 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
-@gray-darker:            lighten(#000, 13.5%); // #222
-@gray-dark:              lighten(#000, 20%);   // #333
-@gray:                   lighten(#000, 33.5%); // #555
-@gray-light:             lighten(#000, 60%);   // #999
-@gray-lighter:           lighten(#000, 85%); // #eee
+@gray-darker:            lighten(#000, 13.5%); 	// #222
+@gray-dark:              lighten(#000, 20%);   	// #333
+@gray:                   lighten(#000, 33.5%); 	// #555
+@gray-light:             lighten(#000, 60%);   	// #999
+@gray-lighter:           lighten(#000, 85%);	// #d9d9d9
+@gray-lightest:          #f8f8f8;
 
 @brand-primary:         #428bca;
 @brand-success:         #00c2a9;
 @brand-info:            #4982e3;
 @brand-warning:         #f0ad4e;
-
 @brand-danger:          #cc0a66;
+
 @brand-danger-dark:     darken(@brand-danger, 7%);
 
 @brand-dtf:				#00c2a9;
@@ -30,6 +31,8 @@
 @brand-gray-bg:			#f8f8f8;
 @section-title-gray:	#aeaeae;
 
+@contact-footer-bg: 	@gray-dark;
+
 //== Scaffolding
 //
 // ## Settings for some of the most global styles.
@@ -40,7 +43,7 @@
 @text-color:            @gray-dark;
 
 //** Global textual link color.
-@link-color:            @brand-primary;
+@link-color:            @brand-dtf;
 //** Link hover color set via `darken()` function.
 @link-hover-color:      darken(@link-color, 15%);
 

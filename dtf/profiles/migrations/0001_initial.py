@@ -6,26 +6,11 @@ from django.db import models
 
 
 class Migration(SchemaMigration):
+    depends_on = (
+        ("packages", "0001_initial"),
+    )
 
     def forwards(self, orm):
-        # Adding model 'CourseProfile'
-        db.create_table(u'profiles_courseprofile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['users.User'], unique=True)),
-            ('history', self.gf('jsonfield.fields.JSONField')(default='{}')),
-            ('favorites', self.gf('jsonfield.fields.JSONField')(default='{}')),
-        ))
-        db.send_create_signal(u'profiles', ['CourseProfile'])
-
-        # Adding model 'LessonProfile'
-        db.create_table(u'profiles_lessonprofile', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['users.User'], unique=True)),
-            ('history', self.gf('jsonfield.fields.JSONField')(default='{}')),
-            ('favorites', self.gf('jsonfield.fields.JSONField')(default='{}')),
-        ))
-        db.send_create_signal(u'profiles', ['LessonProfile'])
-
         # Adding model 'FacebookProfile'
         db.create_table(u'profiles_facebookprofile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -38,23 +23,39 @@ class Migration(SchemaMigration):
         db.create_table(u'profiles_infusionsoftprofile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['users.User'], unique=True)),
-            ('infusionsoft_uid', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('remote_id', self.gf('django.db.models.fields.TextField')(blank=True)),
         ))
         db.send_create_signal(u'profiles', ['InfusionsoftProfile'])
 
+        # Adding M2M table for field tags on 'InfusionsoftProfile'
+        m2m_table_name = db.shorten_name(u'profiles_infusionsoftprofile_tags')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('infusionsoftprofile', models.ForeignKey(orm[u'profiles.infusionsoftprofile'], null=False)),
+            ('infusionsofttag', models.ForeignKey(orm[u'packages.infusionsofttag'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['infusionsoftprofile_id', 'infusionsofttag_id'])
+
+        # Adding model 'InstructorProfile'
+        db.create_table(u'profiles_instructorprofile', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['users.User'], unique=True)),
+        ))
+        db.send_create_signal(u'profiles', ['InstructorProfile'])
+
 
     def backwards(self, orm):
-        # Deleting model 'CourseProfile'
-        db.delete_table(u'profiles_courseprofile')
-
-        # Deleting model 'LessonProfile'
-        db.delete_table(u'profiles_lessonprofile')
-
         # Deleting model 'FacebookProfile'
         db.delete_table(u'profiles_facebookprofile')
 
         # Deleting model 'InfusionsoftProfile'
         db.delete_table(u'profiles_infusionsoftprofile')
+
+        # Removing M2M table for field tags on 'InfusionsoftProfile'
+        db.delete_table(db.shorten_name(u'profiles_infusionsoftprofile_tags'))
+
+        # Deleting model 'InstructorProfile'
+        db.delete_table(u'profiles_instructorprofile')
 
 
     models = {
@@ -78,12 +79,13 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'profiles.courseprofile': {
-            'Meta': {'object_name': 'CourseProfile'},
-            'favorites': ('jsonfield.fields.JSONField', [], {'default': "'{}'"}),
-            'history': ('jsonfield.fields.JSONField', [], {'default': "'{}'"}),
+        u'packages.infusionsofttag': {
+            'Meta': {'object_name': 'InfusionsoftTag'},
+            'group_category_id': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'group_description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'group_name': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['users.User']", 'unique': 'True'})
+            'remote_id': ('django.db.models.fields.TextField', [], {'blank': 'True'})
         },
         u'profiles.facebookprofile': {
             'Meta': {'object_name': 'FacebookProfile'},
@@ -94,13 +96,12 @@ class Migration(SchemaMigration):
         u'profiles.infusionsoftprofile': {
             'Meta': {'object_name': 'InfusionsoftProfile'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'infusionsoft_uid': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'remote_id': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'infusionsoft_profiles'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['packages.InfusionsoftTag']"}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['users.User']", 'unique': 'True'})
         },
-        u'profiles.lessonprofile': {
-            'Meta': {'object_name': 'LessonProfile'},
-            'favorites': ('jsonfield.fields.JSONField', [], {'default': "'{}'"}),
-            'history': ('jsonfield.fields.JSONField', [], {'default': "'{}'"}),
+        u'profiles.instructorprofile': {
+            'Meta': {'object_name': 'InstructorProfile'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['users.User']", 'unique': 'True'})
         },
