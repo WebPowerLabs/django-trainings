@@ -115,4 +115,8 @@ class InfusionsoftTagManager(models.Manager):
                 results = server.DataService.findByField(key, "Contact",
                     10, 0, _key, _value,
                     ["Groups", ]);
-            return results[0]["Groups"] if len(results) else None
+            try:
+                return_results = results[0]["Groups"] if len(results) else None
+            except KeyError:
+                return_results = None
+            return  return_results
