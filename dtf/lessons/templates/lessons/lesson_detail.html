@@ -4,118 +4,125 @@
 {% block nav_actions %}
 {{ block.super }}
 {% if user.is_staff or user == object.owner %}
-<li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit lesson</a></li>
-<li><a href="{% url 'resources:add' object.slug %}" class="">Add Resource or Homework</a></li>
-<li><a class="" href='{% url "lessons:delete" object.slug %}'>Delete</a></li>
+<li class="dropdown">
+  <a data-toggle="dropdown">
+    <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
+  </a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit lesson</a></li>
+    <li><a href="{% url 'resources:add' object.slug %}" class="">Add Resource or Homework</a></li>
+    <li><a class="" href='{% url "lessons:delete" object.slug %}'>Delete</a></li>
+  </ul>
+</li>
+{% endif %}
+{% if user.is_authenticated %}
+<li>
+  <a class="ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.pk %}" >
+    <span class='state-1'>
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class='state-2'>
+      <i class="fa fa-heart-o"></i>
+    </span>
+  </a>
+</li>
+<li><a class="btn-share-form" data-toggle="modal" data-target="#shareModal" data-url="{% url 'dtf_comments:share' object.pk %}"><i class="fa fa-share"></i></a></li>
 {% endif %}
 {% endblock nav_actions %}
 
+{% block nav_secondary %}
+<li>
+  <a href="{% url 'courses:detail' object.course.slug %}">
+    <i class="fa fa-arrow-left"></i> &nbsp; {{ object.course }}
+  </a>
+</li>
+{% endblock nav_secondary %}
+
 {% block content %}
 <section class="lesson-detail">
-    <div class="container">
-        <div id="collapseOne" class="panel-collapse collapse">
-            {% if user.is_staff or user == object.owner %}{% crispy form %}{% endif %}
-        </div><!--/ .panel-collapse-->
-        <div class="row">
-            <div class="col-xs-12">
-                <h4>
-                    <a href="{% url 'courses:detail' object.course.slug %}">
-                        <button class="btn btn-sm btn-success course-label"><i class="fa fa-arrow-left"></i> {{ object.course }}</button>
-                    </a>
-                </h4>
-                <h3>{{ object.name }}</h3>
-            </div><!--/ .col-xs-12-->
-        </div><!--/ .row-->
-        <div class="row">
-            <div class="content col-sm-7">
-            {% if object.video %}
-            {% video_player object %}
-            {% else %}
-                {% thumbnail object.thumbnail '640x480' crop='center' as im %}
-                <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
-                {% endthumbnail %}
+  <div class="container">
+    <div id="collapseOne" class="panel-collapse collapse">
+      {% if user.is_staff or user == object.owner %}{% crispy form %}{% endif %}
+    </div><!--/ .panel-collapse-->
+
+    <h2>{{ object.name }}</h2>
+
+    <div class="row">
+      <div class="content col-sm-7">
+      {% if object.video %}
+      {% video_player object %}
+      {% else %}
+        {% thumbnail object.thumbnail '640x480' crop='center' as im %}
+        <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
+        {% endthumbnail %}
+      {% endif %}
+      <p>
+        {{ object.description }}
+      </p>
+      </div><!--/ .content-->
+      <div class="col-sm-5">
+        <div class="panel panel-primary panel-resource">
+          <div class="panel-heading">
+            <span>Resources</span>
+            {% if user.is_staff or user == object.owner %}
+              <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
             {% endif %}
-            {% if user.is_authenticated %}
-                <br />
-                <button class="btn btn-danger ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.pk %}" >
-                    <span class='state-1'>
-                        <i class="fa fa-check"></i>
-                        Saved
-                    </span>
-                    <span class='state-2'>
-                        <i class="fa fa-heart"></i>
-                        Watch Later
-                    </span>
-                </button>
-                {% include 'includes/share_button.html' %}
+          </div><!--/ .panel-heading-->
+          <div class="list-group {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
+            {% for res in resource_list %}
+              {% include 'resources/partials/detail.html' with object=res %}
+            {% empty %}
+            <a class="list-group-item">
+              <p class="list-group-item-text">There are no items yet ;)</p>
+            </a><!--/ .list-group-item-->
+            {% endfor %}
+          </div>
+        </div>
+        <div class="panel panel-success panel-resource">
+          <div class="panel-heading">
+            <span>Homework</span>
+            {% if user.is_staff or user == object.owner %}
+            <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
             {% endif %}
-                <div class="row">
-                    {{ object.description }}
-                </div><!--/ .row-->
-            </div><!--/ .content-->
-            <div class="col-sm-5">
-                <div class="panel panel-primary panel-resource">
-                    <div class="panel-heading">
-                        <span>Resources</span>
-                        {% if user.is_staff or user == object.owner %}
-                            <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
-                        {% endif %}
-                    </div><!--/ .panel-heading-->
-                    <div class="list-group {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
-                        {% for res in resource_list %}
-                            {% include 'resources/partials/detail.html' with object=res %}
-                        {% empty %}
-                        <a class="list-group-item">
-                            <p class="list-group-item-text">There are no items yet ;)</p>
-                        </a><!--/ .list-group-item-->
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="panel panel-success panel-resource">
-                    <div class="panel-heading">
-                        <span>Homework</span>
-                        {% if user.is_staff or user == object.owner %}
-                        <a href="{% url 'resources:add' object.slug %}" class="pull-right"><i class="fa fa-plus"></i></a>
-                        {% endif %}
-                    </div>
-                    <div class="list-group  {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
-                        {% for res in homework_list %}
-                            {% include 'resources/partials/detail.html' with object=res %} 
-                        {% empty %}
-                        <a class="list-group-item">
-                            <p class="list-group-item-text">There are no items yet ;)</p>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% if object.tags.all %}
-                        <h3>Lesson categories</h3>
-                        {% for tag in object.tags.all %}
-                        <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
-                        {% include 'tags/partials/detail.html' with object=tag %}
-                        </a>
-                        {% endfor %}
-                {% endif %}
-            </div><!--/ .col-sm-5-->
-        </div><!--/ .row-->
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <ul class="pager">
-                    
-                    <li class="previous {% if not prev_url %}disabled{% endif %}">
-                        <a {% if prev_url %}href="{{ prev_url }}{% query_string request.GET %}"{% endif %}><i class="fa fa-arrow-left"></i> Previous</a>
-                    </li>
-                    
-                    <li class="next {% if not next_url %}disabled{% endif %}">
-                        <a {% if next_url %}href="{{ next_url }}{% query_string request.GET %}"{% endif %}>Next <i class="fa fa-arrow-right"></i></a>
-                    </li>
-                </ul>
-            </div><!--/ .col-md-4-->
-        </div><!--/ .row-->
-    </div><!--/ .container-->
+          </div>
+          <div class="list-group  {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
+            {% for res in homework_list %}
+              {% include 'resources/partials/detail.html' with object=res %} 
+            {% empty %}
+            <a class="list-group-item">
+              <p class="list-group-item-text">There are no items yet ;)</p>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        {% if object.tags.all %}
+            <h3>Lesson categories</h3>
+            {% for tag in object.tags.all %}
+            <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
+            {% include 'tags/partials/detail.html' with object=tag %}
+            </a>
+            {% endfor %}
+        {% endif %}
+      </div><!--/ .col-sm-5-->
+    </div><!--/ .row-->
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <ul class="pager">
+          
+          <li class="previous {% if not prev_url %}disabled{% endif %}">
+            <a {% if prev_url %}href="{{ prev_url }}{% query_string request.GET %}"{% endif %}><i class="fa fa-arrow-left"></i> Previous</a>
+          </li>
+          
+          <li class="next {% if not next_url %}disabled{% endif %}">
+            <a {% if next_url %}href="{{ next_url }}{% query_string request.GET %}"{% endif %}>Next <i class="fa fa-arrow-right"></i></a>
+          </li>
+        </ul>
+      </div><!--/ .col-md-4-->
+    </div><!--/ .row-->
+  </div><!--/ .container-->
 
 </section><!--/ .lesson-detail-->
-    {% if user.is_authenticated %}
-    {% include 'includes/share_modal.html' %}
-    {% endif %}
+  {% if user.is_authenticated %}
+  {% include 'includes/share_modal.html' %}
+  {% endif %}
 {% endblock content %}

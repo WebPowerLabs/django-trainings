@@ -10,9 +10,20 @@ class LessonManager(PolymorphicManager):
         return self.filter(published=True)
 
     def purchased(self, user):
+        if user and user.is_authenticated():
+            try:
+                instructor = user.instructorprofile
+            except InstructorProfile.DoesNotExist:
+                instructor = False
+            if user.is_staff or instructor:
+                return self.filter(Q(published=True) | Q(owner=user))
+        
         return self.filter(Q(package__packagepurchase__user=user) |
                            Q(course__package__packagepurchase__user=user)
                            ).distinct()
+
+    def owned(self, user):
+        return self.filter(owner=user)
 
     def get_list(self, user=None):
         """
@@ -25,8 +36,8 @@ class LessonManager(PolymorphicManager):
             except InstructorProfile.DoesNotExist:
                 instructor = False
             if user.is_staff or instructor:
-                return self.all()
-        return self.published().filter(course__published=True)
+                return self.filter(Q(published=True) | Q(owner=user))
+        return self.published().filter(course__published=True) # course is published too
 
     def get_next_url(self, obj, tag_id=None, course_id=None, user=None):
         """

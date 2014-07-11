@@ -10,32 +10,32 @@
 
 {% block content %}
 <section class="course-list">
-    <div class="container">
-        <div class="row">
-            <div class="section-header col-xs-12 text-center">
-                <h1 class="section-title">Coaching Courses</h1>
-                <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
-                <hr>
-            </div><!--/ .section-header-->
-        </div><!--/ .row-->
-        <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
-            {% for course in object_list %}
-                <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
-                    <a class="course-item" href="{% url 'courses:detail' course.slug %}">
-                        <div class="thumbnail">
-                            {% thumbnail course.thumbnail '284x180' crop='center' as im %}
-                                <img src="{{ im.url }}" class="img-rounded" alt="{{ course.name }}">
-                            {% endthumbnail %}
-                            <div class="caption text-center">
-                                <h3>{{ course.name }}</h3>
-                                <p>{{ course.description|truncatewords:30 }}</p>
-                            </div><!--/ .caption-->
-                        </div><!--/ .thumbnail-->
-                    </a><!--/ .course-item-->
-                </div><!--/ .col-md-4-->
-            {% endfor %}
-        </div><!--/ .row-->
-    </div><!--/ .container-->
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-xs-12 text-center">
+        <h1 class="section-title">Coaching Courses</h1>
+        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
+    <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
+      {% for course in object_list %}
+        <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
+          <a class="course-item" href="{% url 'courses:detail' course.slug %}">
+            <div class="thumbnail">
+              {% thumbnail course.thumbnail '284x180' crop='center' as im %}
+                <img src="{{ im.url }}" class="img-rounded" alt="{{ course.name }}">
+              {% endthumbnail %}
+              <div class="caption text-center">
+                <h3>{{ course.name }}</h3>
+                <p>{{ course.description|truncatewords:20 }}</p>
+              </div><!--/ .caption-->
+            </div><!--/ .thumbnail-->
+          </a><!--/ .course-item-->
+        </div><!--/ .col-md-4-->
+      {% endfor %}
+    </div><!--/ .row-->
+  </div><!--/ .container-->
 </section><!--/ .course-list-->
 {% endblock content %}
 

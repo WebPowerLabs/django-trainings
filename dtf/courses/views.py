@@ -50,6 +50,13 @@ class CourseDetailView(PermissionMixin, UpdateView):
         course = self.get_object()
         context['lesson_list'] = course.lesson_set.get_list(self.request.user)
         context['fb_group_list'] = FacebookGroup.objects.all()
+        if self.request.user.is_authenticated():
+            try:
+                context['in_favourites'] = CourseFavourite.objects.get(
+                                                        course=self.object,
+                                                        user=self.request.user)
+            except CourseFavourite.DoesNotExist:
+                pass
         return context
 
     def get(self, request, *args, **kwargs):
@@ -86,7 +93,7 @@ class CourseFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
             obj.is_active = not obj.is_active
             obj.save()
         return self.render_json_response({'success': True,
-                                          'active': obj.is_active})
+                                          'is_active': obj.is_active})
 
 
 class CourseFavouriteListView(PermissionMixin, ListView):
