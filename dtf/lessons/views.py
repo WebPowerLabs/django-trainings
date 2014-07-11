@@ -15,14 +15,15 @@ import json
 from lessons.signals import view_lesson_signal
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
-from utils.decorators import can_edit_content
+from utils.decorators import can_edit_content, \
+    purchase_or_instructor_member_required
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
     model = Lesson
     template_name = 'lessons/lesson_detail.html'
     form_class = LessonCreateFrom
-    decorators = {'GET': login_required,
+    decorators = {'GET': purchase_or_instructor_member_required(Lesson),
                   'POST': can_edit_content(Lesson)}
 
     def get_queryset(self):

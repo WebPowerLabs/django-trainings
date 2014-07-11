@@ -102,7 +102,7 @@ from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
 
 
-# @receiver(user_logged_in)
+@receiver(user_logged_in)
 def infusionsoft_sync_user(sender, **kwargs):
     user = kwargs['user']
     profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
