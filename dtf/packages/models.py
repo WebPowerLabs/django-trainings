@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.urlresolvers import reverse
 from djnfusion import server, key
 
 from django.conf import settings
@@ -10,12 +10,14 @@ from jsonfield import JSONField
 # from packages.providers.infusionsoft import server, key
 from .managers import InfusionsoftTagManager, PackagePurchaseManager
 
+
 def remove_unused(_dict):
     return_dict = {}
     for _key, _value in _dict.iteritems():
         if _value:
             return_dict[_key] = _value
     return return_dict
+
 
 def setdictattrs(obj, _dict):
     _dict = remove_unused(_dict)
@@ -28,11 +30,14 @@ class Package(models.Model):
     Base for package classes
     """
     name = models.CharField(max_length=255, blank=True)
-    courses = models.ManyToManyField("courses.Course")
-    lessons = models.ManyToManyField("lessons.Lesson")
+    courses = models.ManyToManyField("courses.Course", blank=True, null=True)
+    lessons = models.ManyToManyField("lessons.Lesson", blank=True, null=True)
 
     def __unicode__(self):
         return u'{}'.format(self.name if self.name else 'Package')
+
+    def get_absolute_url(self):
+        return reverse('packages:detail', kwargs={'pk': self.pk})
 
 
 class PackagePurchase(models.Model):
@@ -82,6 +87,7 @@ class InfusionsoftPackage(Package):
     status = models.TextField(blank=True, null=True)
     action_set_id = models.TextField(blank=True, null=True)
     tag = models.OneToOneField("InfusionsoftTag", blank=True, null=True)
+    purchase_url = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         sync_data = self._get_sync_data(product_id=self.product_id) if self.product_id else None
@@ -93,7 +99,7 @@ class InfusionsoftPackage(Package):
         sync_data = self._get_sync_data()
         if sync_data:
             setdictattrs(self, sync_data)
-            
+
         self.save()
 
     def _get_sync_data(self, product_id=None):
@@ -128,8 +134,6 @@ class InfusionsoftPackage(Package):
                 "description": product_data.get("Description"),
                 "status": product_data.get("Status"),
                 })
-
-
         return package_data if package_data else None
 
     def _get_subscription_data(self, product_id=None):
@@ -146,7 +150,7 @@ class InfusionsoftPackage(Package):
         if product_id:
             results = server.DataService.findByField(key, "Product",
                 10, 0, "id", product_id,
-                ["Id", "ProductName", "ProductPrice", "Description", 
+                ["Id", "ProductName", "ProductPrice", "Description",
                 "Status", "IsPackage"]);
             return results[0] if len(results) else None
 
@@ -154,7 +158,10 @@ class InfusionsoftPackage(Package):
         results = server.ContactService.runActionSequence(key, contactId,
                                                           actionSetId)
         return results
-    
+
+    @property
+    def price(self):
+        return self.plan_price if self.plan_price else self.product_price
 
 
 class InfusionsoftTag(models.Model):
@@ -179,7 +186,6 @@ class InfusionsoftTag(models.Model):
             return super(InfusionsoftTag, obj).save(*args, **kwargs)
         else:
             return super(InfusionsoftTag, self).save(*args, **kwargs)
-
 
     def sync(self):
         sync_data = self._get_sync_data()

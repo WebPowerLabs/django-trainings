@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-import hashlib
 # Import the AbstractUser model
 from django.contrib.auth.models import AbstractUser
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
 from allauth.socialaccount.models import SocialAccount
 
 
 # Subclass AbstractUser
 class User(AbstractUser):
-
-    infusionsoft_uid = models.IntegerField(null=True, blank=True, unique=True)
 
     def __unicode__(self):
         return self.username
@@ -45,5 +40,5 @@ class User(AbstractUser):
             return fb_uid[0].uid
         else:
             return None
-     
+
 

@@ -1,0 +1,14 @@
+{% load query_string thumbnail %}
+<a class="list-group-item" href="{% url 'courses:detail' course.slug %}{% query_string request.GET %}">
+    <div class="row">
+        <div class="col-md-3">
+            {% thumbnail course.thumbnail '170x150' crop='center' as im %}
+            <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ course.name }}">
+            {% endthumbnail %}
+        </div>
+        <div class="col-md-9">
+            <h2 class="list-group-item-heading">{{ course.name }}</h2>
+            <p class="list-group-item-text">{{ course.description|truncatewords:25 }}</p>
+        </div>
+    </div>
+</a>

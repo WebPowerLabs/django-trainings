@@ -14,8 +14,8 @@
       <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
       <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>
       {% else %}
-        {% avatar user %}
-        {{ user.username }}
+        {% avatar comment.user %}
+        {{ comment.user.get_full_name }}
       {% endif %}
     <small class="date">{{ comment.submit_date|date }}</small>
   </h3>
@@ -55,7 +55,7 @@
               <div class="">
                   <div class="row">
                       <div class="col-xs-2 col-sm-1 fb-profile-comment-img">
-                          {% if comment.user.fb_uid %}
+                          {% if user.fb_uid %}
                           <img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
                           {% else %}
                           {% avatar user %}

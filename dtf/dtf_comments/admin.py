@@ -4,7 +4,7 @@ from dtf_comments.models import DTFComment
 
 class DTFCommentAdmin(admin.ModelAdmin):
     list_filter = ['submit_date']
-    list_display = ['user_name', 'site', 'ip_address', 'submit_date',
-                    'is_public', 'is_removed']
+    list_display = ['user_name', 'content_type', 'site', 'ip_address',
+                    'submit_date', 'is_public', 'is_removed']
 
 admin.site.register(DTFComment, DTFCommentAdmin)

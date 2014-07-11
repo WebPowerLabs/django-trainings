@@ -1,0 +1,17 @@
+{% extends "packages/base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="list-group">
+    {% for obj in object_list %}
+    <a class="list-group-item" href="{{ obj.get_absolute_url }}">
+      <h3 class="list-group-item-heading">
+        {{ obj.name }}
+      </h3>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,5 +1,5 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags query_string thumbnail %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <section class="lesson-list">
@@ -15,19 +15,7 @@
             <div class="col-md-9">
                 <div class="list-group lessons">
                     {% for lesson in object_list %}
-                        <a class="list-group-item" href="{% url 'lessons:detail' lesson.slug %}{% query_string request.GET %}">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    {% thumbnail lesson.thumbnail '170x150' crop='center' as im %}
-                                    <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ lesson.name }}">
-                                    {% endthumbnail %}
-                                </div>
-                                <div class="col-md-9">
-                                    <h2 class="list-group-item-heading">{{ lesson.name }}</h2>
-                                    <p class="list-group-item-text">{{ lesson.description|truncatewords:25 }}</p>
-                                </div>
-                            </div>
-                        </a>
+                        {% include "lessons/lesson_list_item.html" %}
                     {% endfor %}
                 </div>
             </div>

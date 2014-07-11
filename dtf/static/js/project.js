@@ -54,7 +54,7 @@ function showNotification(html, time){
 }
 
 $(document).ready(function(){
-    $('#myModal').on('hidden.bs.modal', function(event){
+    $('#shareModal').on('hidden.bs.modal', function(event){
         $('.modal-share-form').html('');
     });
     // AJAX request to DTFCommentShareView
@@ -74,7 +74,7 @@ $(document).ready(function(){
         var postData = $(this).serializeArray();
         var selectedGroup = $(this).find(':selected').text();
         var notifyMessage = '<b>Post sent</b>.<br> This post has been shared \
-                             to the community <b>"' + selectedGroup + '"</b>.';
+                             to the community <br /><b>"' + selectedGroup + '"</b>.';
         var url = $('.btn-share-form').attr('data-url');
         $.ajax({
             url: url,
@@ -85,7 +85,7 @@ $(document).ready(function(){
                     $('.modal-share-form').html(data);
                 },
                 201: function(){
-                    $('#myModal').modal('hide');
+                    $('#shareModal').modal('hide');
                     showNotification(notifyMessage, 2000);
                 }
             }
