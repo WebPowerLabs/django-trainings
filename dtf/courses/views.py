@@ -39,7 +39,7 @@ class CourseDetailView(PermissionMixin, UpdateView):
     template_name = 'courses/course_detail.html'
     form_class = CourseCreateFrom
     decorators = {'POST': can_edit_content(Course),
-                  'GET': purchase_or_instructor_member_required(Course)}
+                  'GET': login_required}
 
     def get_queryset(self):
         return Course.objects.get_list(self.request.user)

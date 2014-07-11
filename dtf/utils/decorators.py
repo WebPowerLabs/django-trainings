@@ -23,19 +23,27 @@ def  purchase_or_instructor_member_required(model):
         def check(request, *args, **kwargs):
             user = request.user
             slug = kwargs.get('slug', None)
+            content = model.objects.get(slug=slug)
+            packages = Package.objects.filter(Q(courses=content) |
+                                              Q(lessons=content) |
+                                              Q(courses=content.course))
+            for p in packages:
+                print p.id, p.name
             if user.is_authenticated() and user.is_active:
-                content = model.objects.get(slug=slug)
-                packages = Package.objects.filter(Q(courses=content) |
-                                                  Q(lessons=content) |
-                                                  Q(courses=content.course))
                 try:
                     instructor = user.instructorprofile
                 except InstructorProfile.DoesNotExist:
                     instructor = False
                 if not packages or content in model.objects.purchased(user) or user.is_staff or instructor:
                     return view_func(request, *args, **kwargs)
-            return HttpResponseRedirect(reverse('packages:list_to_content',
-                                            kwargs={'content_pk': content.pk}))
+            # if multiple packages exist return a list of purchase options
+            if len(packages) > 1:
+                return HttpResponseRedirect(reverse('packages:list_to_content',
+                                                kwargs={'content_pk': content.pk}))
+            # if only one exists return the package
+            else:
+                return HttpResponseRedirect(reverse('packages:detail',
+                                                kwargs={'pk': packages[0].pk}))
         return check
     return wrapper
 
