@@ -38,7 +38,7 @@ urlpatterns = patterns('',
     url(r'^dtf_comments/', include('dtf_comments.urls',
                                    namespace="dtf_comments")),
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^packages/', include('packages.urls')),
+    url(r'^packages/', include('packages.urls', namespace="packages")),
     url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

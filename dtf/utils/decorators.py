@@ -1,9 +1,35 @@
 from functools import wraps
 from profiles.models import InstructorProfile
 from django.http.response import Http404
-from courses.models import Course
+from courses.models import Course, Content
 from lessons.models import Lesson
 from resources.models import Resource
+
+
+def  purchase_or_instructor_member_required(model):
+    if model not in [Course, Lesson, Resource]:
+        raise ValueError('{} should be one of the next models [Course, Lesson, Resource]'.format(model))
+
+    def wrapper(view_func):
+        @wraps(view_func)
+        def check(request, *args, **kwargs):
+            if request.user.is_authenticated() and request.user.is_active:
+                user = request.user
+                slug = kwargs.get('slug', None)
+                content = model.objects.get(slug=slug)
+                purchased_list = model.objects.purchased(user)
+                try:
+                    instructor = request.user.instructorprofile
+                except InstructorProfile.DoesNotExist:
+                    instructor = False
+                if request.user.is_staff or instructor:
+                    return view_func(request, *args, **kwargs)
+                pass
+
+
+        return check
+    return wrapper
+
 
 
 def instructor_member_required(view_func):

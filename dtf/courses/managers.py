@@ -10,9 +10,14 @@ class CourseManager(PolymorphicManager):
         return self.filter(published=True)
 
     def purchased(self, user):
-        return self.filter(Q(package__packagepurchase__user=user) |
-                           Q(lesson__package__packagepurchase__user=user)
-                           ).distinct()
+        if user and user.is_authenticated():
+            try:
+                instructor = user.instructorprofile
+            except InstructorProfile.DoesNotExist:
+                instructor = False
+            if user.is_staff or instructor:
+                return self.filter(Q(published=True) | Q(owner=user))
+        return self.filter(package__packagepurchase__user=user)
 
     def get_list(self, user=None):
         """
