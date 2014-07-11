@@ -36,7 +36,7 @@ class Course(Content):
 
     objects = CourseManager()
 
-    order = models.IntegerField(editable=False, default=0)
+    order = models.IntegerField(editable=False)
 
     def save(self, *args, **kwargs):
         if self.order is None:

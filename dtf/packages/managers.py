@@ -18,11 +18,10 @@ class InfusionsoftPackageManager(models.Manager):
         """ 
         Syncs with infusionsoft api
         arguments:
-        
         """
         product = kwargs.get("product")
-        results = server.DataService.findByField(key, "SubscriptionPlan", 
-            10, 0, "productid", product, ["Id", "ProductId", "Cycle", 
+        results = server.DataService.findByField(key, "SubscriptionPlan",
+            10, 0, "productid", product, ["Id", "ProductId", "Cycle",
             "Frequency", "PreAuthorizeAmount", "Prorate", "Active", "PlanPrice"]);
         return results
 
@@ -42,7 +41,6 @@ class InfusionsoftTagManager(models.Manager):
         if sync_data:
             return super(InfusionsoftTagManager, self).create(**sync_data)
 
-
     def create_sync(self, **kwargs):
         """
         Creates a new tag using info from infusionsoft
@@ -54,7 +52,6 @@ class InfusionsoftTagManager(models.Manager):
         if sync_data:
 
             return self.create(**sync_data)
-
 
     def _get_sync_data(self, remote_id=None):
         """
@@ -99,7 +96,7 @@ class InfusionsoftTagManager(models.Manager):
         if remote_id:
             results = server.DataService.findByField(key, "ContactGroupAssign",
                 10, 0, "GroupId", remote_id,
-                ["ContactId",]);
+                ["ContactId", ]);
             # sync data is None if an empty array
             return [user['ContactId'] for user in results]
 
@@ -117,5 +114,5 @@ class InfusionsoftTagManager(models.Manager):
                 # if they have an infusionsoft profile this should work
                 results = server.DataService.findByField(key, "Contact",
                     10, 0, _key, _value,
-                    ["Groups",]);
+                    ["Groups", ]);
             return results[0]["Groups"] if len(results) else None

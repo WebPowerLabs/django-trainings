@@ -1,6 +1,5 @@
 from django.contrib import admin
 from resources.models import Resource
-from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
 
 
 class ResourceAdmin(admin.ModelAdmin):

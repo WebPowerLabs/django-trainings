@@ -17,7 +17,6 @@ class LessonManager(PolymorphicManager):
                 instructor = False
             if user.is_staff or instructor:
                 return self.filter(Q(published=True) | Q(owner=user))
-        
         return self.filter(Q(package__packagepurchase__user=user) |
                            Q(course__package__packagepurchase__user=user)
                            ).distinct()
@@ -37,7 +36,7 @@ class LessonManager(PolymorphicManager):
                 instructor = False
             if user.is_staff or instructor:
                 return self.filter(Q(published=True) | Q(owner=user))
-        return self.published().filter(course__published=True) # course is published too
+        return self.published().filter(course__published=True)  # course is published too
 
     def get_next_url(self, obj, tag_id=None, course_id=None, user=None):
         """

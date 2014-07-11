@@ -16,6 +16,8 @@ from .forms import UserForm
 
 # Import the customized User model
 from .models import User
+from django.views.generic.base import TemplateView
+from allauth.account.views import LoginView
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -55,3 +57,29 @@ class UserListView(LoginRequiredMixin, ListView):
     # These next two lines tell the view to index lookups by pk
     slug_field = "pk"
     slug_url_kwarg = "pk"
+
+
+class LoginCustomView(LoginView):
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            try:
+                user = User.objects.get(username=form.cleaned_data['login'])
+                self.request.session['account_user'] = user.pk
+            except User.DoesNotExist:
+                pass
+        return LoginView.post(self, request, *args, **kwargs)
+
+
+class EmailVerificationSentView(TemplateView):
+    template_name = 'account/verification_sent.html'
+
+    def get_context_data(self, **kwargs):
+        try:
+            email = User.objects.get(pk=self.request.session['account_user']
+                                     ).email
+        except User.DoesNotExist:
+            email = ''
+        kwargs['email'] = email
+        return TemplateView.get_context_data(self, **kwargs)

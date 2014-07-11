@@ -13,7 +13,8 @@ from courses.signals import view_course_signal
 import json
 from django.views.generic.list import ListView
 from django.http.response import HttpResponseRedirect
-from utils.decorators import instructor_member_required, can_edit_content
+from utils.decorators import instructor_member_required, can_edit_content, \
+    purchase_or_instructor_member_required
 from facebook_groups.models import FacebookGroup
 
 
@@ -37,7 +38,8 @@ class CourseDetailView(PermissionMixin, UpdateView):
     model = Course
     template_name = 'courses/course_detail.html'
     form_class = CourseCreateFrom
-    decorators = {'POST': can_edit_content(Course)}
+    decorators = {'POST': can_edit_content(Course),
+                  'GET': purchase_or_instructor_member_required(Course)}
 
     def get_queryset(self):
         return Course.objects.get_list(self.request.user)

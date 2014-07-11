@@ -40,26 +40,26 @@
 {% endblock content %}
 
 {% block modal %}
-  {% if user.is_staff or user.instructorprofile %}
-    <!-- Add Course Modal -->
-    <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="addCourseLabel">Add a Course</h4>
-          </div><!--/ .modal-header-->
-          <div class="modal-body">
-            <div class="col-md-12">
-              {% crispy form %}
-            </div><!--/ .col-md-12-->
-          </div><!--/ .modal-body-->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success">Save changes</button>
-          </div><!--/ .modal-footer-->
-        </div><!--/ .modal-content-->
-      </div><!--/ .modal-dialog-->
-    </div><!--/ .modal-->
-  {% endif %}
+    {% if user.is_staff or user.instructorprofile %}
+        <!-- Add Course Modal -->
+        <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="addCourseLabel">Add a Course</h4>
+                    </div><!--/ .modal-header-->
+                    <div class="modal-body clearfix">
+                        <div class="col-md-12">
+                            {% crispy form %}
+                        </div><!--/ .col-md-12-->
+                    </div><!--/ .modal-body-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success">Save changes</button>
+                    </div><!--/ .modal-footer-->
+                </div><!--/ .modal-content-->
+            </div><!--/ .modal-dialog-->
+        </div><!--/ .modal-->
+    {% endif %}
 {% endblock modal %}

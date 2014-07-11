@@ -1,10 +1,14 @@
-{% load comments markdown %}
+{% load comments markdown avatar_tags %}
 
 <div class="fb-comments">
 {% for comment in comment_list %}
     <div id="comment-{{ comment.id }}" class="media fb-post">
         <div data-fbuser="{{ comment.user.id }}" class="pull-left img-profile">
+        {% if comment.user.fb_uid %}
             <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-responsive fb-profile-img">
+        {% else %}
+            {% avatar comment.user %}
+        {% endif %}
         </div>
         <div class="media-body">
             <p>
