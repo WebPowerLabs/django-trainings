@@ -88,7 +88,13 @@ class InfusionsoftProfile(models.Model):
         results = server.DataService.findByField(key, "Contact",
             10, 0, "email", self.user.email,
             ["Id", ]);
-        return results[0] if len(results) else None
+        if not len(results):
+            server.ContactService.add(key, [
+            {"Email": self.user.email}, 
+            {"FirstName": self.user.first_name}, 
+            {"LastName": self.user.last_name}])
+            self._get_provider_data()
+        return results[0]
 
 
 class InstructorProfile(models.Model):
@@ -104,10 +110,11 @@ from django.dispatch import receiver
 
 @receiver(user_logged_in)
 def infusionsoft_sync_user(sender, **kwargs):
-    user = kwargs['user']
-    profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
-    profile.update_tags()
-    print profile.tags.all()
+    if settings.DJNFUSION_COMPANY:
+        user = kwargs['user']
+        profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
+        profile.update_tags()
+
 
 
 
