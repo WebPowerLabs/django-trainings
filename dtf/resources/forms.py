@@ -8,7 +8,8 @@ from resources.models import Resource
 class ResourceCreateFrom(forms.ModelForm):
     class Meta:
         model = Resource
-        fields = ['name', 'description', 'published', 'thumbnail', 'type', 'lesson', 'file']
+        fields = ['name', 'description', 'published', 'thumbnail', 'type',
+                  'file']
 
     helper = FormHelper()
     helper.add_input(Submit('save_changes', 'Save changes',

@@ -183,19 +183,17 @@
 			/*	Contact Form										*/
 			/* ---------------------------------------------------- */
 
+			if ($('form.contact-form').length) {
 
-
-
-			if ($('.contact-form').length) {
-
-				var $form = $('.contact-form'),
+				var $form = $('form.contact-form'),
 					$loader = '<span>Loader...</span>';
 					$form.append('<div class="contact-form-response" />');
 					
 				$form.each(function () {
 
 					var $this = $(this), 
-						$response = $('.contact-form-response', $this).append('<div class="alert"></div>');
+						$response = $('.contact-form-response', $this)
+						              .append('<div class="alert"></div>');
 
 					$this.submit(function () {
 

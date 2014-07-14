@@ -11,6 +11,16 @@
         {% endif %}
         </div>
         <div class="media-body">
+            {% if user.is_staff %}
+            <div class="pull-right comment-actions">
+              <a href="{% url 'comments-delete' comment.id %}?next={{ request.path }}">
+                <i class="fa fa-times-circle-o"></i>
+              </a>
+              <a href="{% url 'comments-flag' comment.id %}?next={{ request.path }}">
+                <i class="fa fa-flag"></i>
+              </a>
+            </div>
+            {% endif %}
             <p>
             <strong class="fb-from-user">{{ comment.user.get_full_name }}</strong> 
             <span class="fb-message">{{ comment.comment|markdown }}</span>
