@@ -40,10 +40,11 @@ class CourseManagerTest(TestCaseBase):
 
         self.package.courses.add(self.course_purchased)
         self.package_purchased = PackagePurchaseFactory(user=self.user,
-                                                        package=self.package)
+                                                        package=self.package,
+                                                        status=1)
 
     def test_purchased(self):
-        purchased = [self.lesson_two.course, self.course_purchased]
+        purchased = [self.course_purchased]
         res = Course.objects.purchased(self.user)
         self.assertEqualQs(res, purchased)
 
