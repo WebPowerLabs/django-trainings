@@ -11,7 +11,7 @@ class CourseManager(PolymorphicManager):
 
     def purchased(self, user):
         return self.filter(package__packagepurchase__user=user,
-            package__packagepurchase__status=1).distinct()
+                           package__packagepurchase__status=1)
 
     def get_list(self, user=None):
         """

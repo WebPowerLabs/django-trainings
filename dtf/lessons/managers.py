@@ -30,7 +30,7 @@ class LessonManager(PolymorphicManager):
             except InstructorProfile.DoesNotExist:
                 instructor = False
             if user.is_staff or instructor:
-                return self.filter(Q(published=True) | Q(owner=user))
+                return self.all()
         return self.published().filter(course__published=True)  # course is published too
 
     def get_next_url(self, obj, tag_id=None, course_id=None, user=None):
