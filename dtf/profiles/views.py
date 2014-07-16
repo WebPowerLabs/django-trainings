@@ -10,14 +10,13 @@ from .models import InfusionsoftProfile
 
 
 @login_required
-def update_infusionsoft_tags(request, pk=None):
+def update_infusionsoft_tags(request):
     '''
     '''
     redirect = request.GET.get('next') if request.GET.get('next') else reverse_lazy("users:redirect")
-    if pk:
-    	profile = get_object_or_404(InfusionsoftProfile, pk=pk)
-    	if profile.user == request.user:
-    		profile.update_tags()
-    		print profile.tags.all()
-    	
+
+    profile = InfusionsoftProfile.objects.get_or_create(user=request.user)[0]
+    profile.update_tags()
+    print profile.tags.all()
+        
     return HttpResponseRedirect(redirect)

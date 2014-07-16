@@ -5,5 +5,5 @@ except ImportError:  # django < 1.4
 
 
 urlpatterns = patterns('profiles.views',
-	url(r"^infusionsoft/(?P<pk>\d+)/update_tags/$", "update_infusionsoft_tags", name="infusionsoft_update_tags"),
+	url(r"^infusionsoft/update_tags/$", "update_infusionsoft_tags", name="infusionsoft_update_tags"),
 	)
