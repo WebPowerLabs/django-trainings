@@ -6,6 +6,7 @@ from lessons.models import Lesson
 from resources.models import Resource
 from django.core.urlresolvers import reverse
 from packages.models import Package
+from profiles.models import InfusionsoftProfile
 from django.db.models import Q
 
 
@@ -22,6 +23,8 @@ def  purchase_or_instructor_member_required(model):
         @wraps(view_func)
         def check(request, *args, **kwargs):
             user = request.user
+            profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
+            profile.update_tags()
             slug = kwargs.get('slug', None)
             content = model.objects.get(slug=slug)
             packages = Package.objects.filter(Q(courses=content) |
