@@ -3,10 +3,18 @@ import requests
 
 from django.db import models
 
+from django.db.models import Q
 from allauth.socialaccount.models import SocialApp
 from users.models import User
 
 class FBGroupManager(models.Manager):
+
+	def purchased(self, user):
+		if user and user.is_staff:
+			return self.all()
+		return self.filter(Q(package__packagepurchase__user=user,
+						   package__packagepurchase__status=1) |
+						   Q(package=None))
 
 	def fb_create(self, **kwargs):
 		""" Creates a facebook group for the Facebook App

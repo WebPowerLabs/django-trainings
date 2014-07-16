@@ -5,6 +5,9 @@
 <div class="container">
   <div class="list-group lessons">
     {% for obj in object_list %}
+      {% for facebook_group in obj.package.groups.all %}
+        {% include "facebook_groups/facebook_group_list_item.html" %}
+      {% endfor %}
       {% for course in obj.package.courses.all %}
         {% include "courses/course_list_item.html" %}
       {% endfor %}

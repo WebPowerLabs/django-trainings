@@ -5,15 +5,16 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, HTML, Div
 
 html_close_button = """
-                    <a class="btn btn-danger" data-dismiss="modal"
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
                     data-toggle="collapse" data-parent="#accordion"
-                    href="#collapseOne">Close</a>
+                    href="#collapseOne">Close</button>
                     """
 
 
 class CourseCreateFrom(forms.ModelForm):
     class Meta:
         model = Course
+        fields = ['name', 'description', 'published', 'thumbnail']
 
     helper = FormHelper()
     helper.layout = Layout('name', 'description', 'published', 'thumbnail',

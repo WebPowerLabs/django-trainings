@@ -18,9 +18,7 @@ class DTFCommentForm(CommentForm):
 
 
 class DTFCommentShareForm(forms.ModelForm):
-    object_pk = ModelChoiceField(queryset=FacebookGroup.objects.all(),
-                                 label="Select facebook group:",
-                                 to_field_name='pk')
+    object_pk = ModelChoiceField(queryset='', label="Select facebook group:")
 
     class Meta:
         model = DTFComment
@@ -28,6 +26,11 @@ class DTFCommentShareForm(forms.ModelForm):
         widgets = {
           'comment': forms.Textarea(attrs={'rows': 3}),
         }
+
+    def __init__(self, user, *args, **kwargs):
+        super(DTFCommentShareForm, self).__init__(*args, **kwargs)
+        qs = FacebookGroup.objects.purchased(user)
+        self.fields['object_pk'].queryset = qs
 
     helper = FormHelper()
     helper.form_class = 'share-form'
