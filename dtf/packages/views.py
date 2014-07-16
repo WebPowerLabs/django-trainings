@@ -21,12 +21,19 @@ class PackageDetailView(DetailView):
 	template_name = "packages/detail.html"
 
 	def get_context_data(self, **kwargs):
+		context = super(PackageDetailView, self).get_context_data(**kwargs)
+
 		package = self.get_object()
+		purchased = PackagePurchase.objects.purchased(self.request.user).filter(
+			package=package)
+		
 		try:
+			# if infusionsoft package, use that instead of package_package
 			package = package.infusionsoftpackage
 		except  InfusionsoftPackage.DoesNotExist:
 			pass
-		context = super(PackageDetailView, self).get_context_data(**kwargs)
+
+		context['purchased'] = purchased[0] if purchased else False
 		context['class_name'] = package.__class__.__name__
 		context['package'] = package
 		return context

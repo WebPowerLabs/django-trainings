@@ -1,11 +1,5 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="well">
-      <h1><i class="fa fa-usd"></i> &nbsp; {{ package.price }}</h1>
-      <hr>
-      <a class="btn btn-xl btn-primary" href="{{ package.purchase_url }}?emailAddress={{ request.user.email }}&firstName={{ request.user.first_name }}&lastName={{ request.user.last_name }}">
-        Buy Now
-      </a>
-    </div>
-  </div>
-</div>
+  <h1><span>Total: </span> &nbsp; <i class="fa fa-usd"></i> {{ package.price }}</h1>
+  <hr>
+  <a class="btn btn-xl btn-primary" href="{{ package.purchase_url }}?emailAddress={{ request.user.email }}&firstName={{ request.user.first_name }}&lastName={{ request.user.last_name }}">
+    Proceed to checkout &nbsp; <i class="fa fa-arrow-right"></i>
+  </a>

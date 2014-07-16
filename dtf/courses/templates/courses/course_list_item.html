@@ -2,7 +2,7 @@
 <a class="list-group-item" href="{% url 'courses:detail' course.slug %}{% query_string request.GET %}">
     <div class="row">
         <div class="col-md-3">
-            {% thumbnail course.thumbnail '170x150' crop='center' as im %}
+            {% thumbnail course.thumbnail '250x250' crop='center' as im %}
             <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ course.name }}">
             {% endthumbnail %}
         </div>

@@ -5,17 +5,40 @@
 {% block content %}
 <section class="course-list">
   <div class="container">
-    <div class="row">
-      <div class="section-header col-xs-12 text-center">
+      <div class="section-header text-center">
         <h1 class="section-title">{{ package.name }}</h1>
         <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
         <hr>
       </div><!--/ .section-header-->
+    <div class="row">
+      <div class="col-md-6">
+        <h4>You are purchasing the following items:</h4>
+        <div class="list-group lessons">
+          {% for facebook_group in package.groups.all %}
+            {% include "facebook_groups/facebook_group_list_item.html" %}
+          {% endfor %}
+          {% for course in package.courses.all %}
+            {% include "courses/course_list_item.html" %}
+          {% endfor %}
+          {% for lesson in package.lessons.all %}
+            {% include "lessons/lesson_list_item.html" %}
+          {% endfor %}
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-md-6">
+        {% if not purchased %} {# display purchase link #}
+          {% if class_name == 'InfusionsoftPackage' %}
+            {% include "packages/infusionsoft.html" %}
+          {% endif %}
+          {% else %} {# display date purchased #}
+            <p>*You purchased this package on {{ purchased.created_at | date:"M d, Y" }}</p>
+            <a class="btn btn-primary" href="{% url 'packages:purchases' %}">View my purchases &nbsp; <i class="fa fa-arrow-right"></i></a>
+          {% endif %}
+      </div>
     </div><!--/ .row-->
   </div>
 
-  {% if class_name == 'InfusionsoftPackage' %}
-    {% include "packages/infusionsoft.html" %}
-  {% endif %}
+
 
 {% endblock content %}

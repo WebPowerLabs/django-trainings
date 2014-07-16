@@ -6,10 +6,8 @@ from djnfusion import server, key
 
 class PackagePurchaseManager(models.Manager):
 
-    def set_status(self, status=None):
-        if status:
-            for purchase in self.all():
-                purchase.status = status
+    def purchased(self, user=None):
+        return self.filter(user=user, status=1)
 
 
 class InfusionsoftPackageManager(models.Manager):
