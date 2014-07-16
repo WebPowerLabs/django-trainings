@@ -12,7 +12,10 @@ def query_string(source=None, **kwargs):
     if source:
         q.update(source)
     for k, v in kwargs.items():
-        q.update({k: v})
+        if v not in ['']:
+            q.update({k: v})
     if q:
         return "{}".format('?' + q.urlencode())
     return q.urlencode()
+
+

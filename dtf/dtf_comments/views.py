@@ -1,5 +1,4 @@
 from braces.views._ajax import JSONResponseMixin
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.views.generic.base import View
 from django.contrib.auth.decorators import login_required

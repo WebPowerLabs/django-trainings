@@ -1,5 +1,5 @@
 {% load query_string thumbnail %}
-        <a href="{% url 'lessons:detail' lesson.slug %}?course={{ lesson.course_id }}" class="list-group-item sortable_item pull-left" data-pk="{{ lesson.pk }}">
+        <a href="{% url 'lessons:detail' lesson.slug %}{% query_string request.GET course=course_pk %}" class="list-group-item sortable_item pull-left" data-pk="{{ lesson.pk }}">
             <div class="row">
               <div class="col-md-3">
                 {% thumbnail lesson.thumbnail '122x117' crop='center' as im %}
