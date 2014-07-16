@@ -29,9 +29,11 @@ class Package(models.Model):
     """
     Base for package classes
     """
-    name = models.CharField(max_length=255, blank=True)
-    courses = models.ManyToManyField("courses.Course", blank=True, null=True)
-    lessons = models.ManyToManyField("lessons.Lesson", blank=True, null=True)
+    name = models.CharField(max_length=255)
+    courses = models.ManyToManyField("courses.Course", null=True, blank=True)
+    lessons = models.ManyToManyField("lessons.Lesson", null=True, blank=True)
+    groups = models.ManyToManyField("facebook_groups.FacebookGroup", null=True,
+                                    blank=True)
 
     def __unicode__(self):
         return u'{}'.format(self.name if self.name else 'Package')

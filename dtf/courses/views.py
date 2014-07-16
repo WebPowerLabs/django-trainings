@@ -50,7 +50,8 @@ class CourseDetailView(PermissionMixin, UpdateView):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         course = self.get_object()
         context['lesson_list'] = course.lesson_set.get_list(self.request.user)
-        context['fb_group_list'] = FacebookGroup.objects.all()
+        context['fb_group_list'] = FacebookGroup.objects.purchased(
+                                                           self.request.user)
         if self.request.user.is_authenticated():
             try:
                 context['in_favourites'] = CourseFavourite.objects.get(

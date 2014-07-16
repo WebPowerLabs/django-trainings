@@ -1,15 +1,14 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Field, Submit, Button, Fieldset, HTML
-from crispy_forms.bootstrap import InlineField, StrictButton
+from crispy_forms.layout import Layout, Div, Submit, HTML
+
 
 class ContactForm(forms.Form):
 	email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'input-lg', 'placeholder': 'Email'}))
 	subject = forms.CharField(max_length=128, widget=forms.TextInput(attrs={'class': 'input-lg', 'placeholder': 'Subject'}))
-	feedback = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Your Message...'}))
+	feedback = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Your Message...'}), required=False)
 	next = forms.HiddenInput()
 
 	def __init__(self, *args, **kwargs):

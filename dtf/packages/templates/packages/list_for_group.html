@@ -1,0 +1,25 @@
+{% extends "packages/base.html" %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<section class="course-list">
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-xs-12 text-center">
+        <h1 class="section-title">Ways to buy '{{ content }}'</h1>
+        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+        <hr>
+      </div><!--/ .section-header-->
+        <div class="">
+        {% for package in object_list %}
+        <a href="{{ package.get_absolute_url }}" class="">
+            <p class="">{{ package.name }}</p>
+        </a>
+        {% empty %}
+            <p class="text-center">No packages for this content yet.</p>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
