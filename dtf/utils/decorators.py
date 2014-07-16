@@ -7,7 +7,6 @@ from resources.models import Resource
 from django.core.urlresolvers import reverse
 from packages.models import Package
 from django.db.models import Q
-from facebook_groups.models import FacebookGroup
 
 
 def  purchase_or_instructor_member_required(model):
@@ -16,7 +15,7 @@ def  purchase_or_instructor_member_required(model):
     package associated with the content or user is a staff or instructor member
     or user has PackagePurchase. Redirects to content purchase page if not.
     """
-    if model not in [Course, Lesson, Resource, FacebookGroup]:
+    if model not in [Course, Lesson, Resource]:
         raise ValueError('{} should be one of the next models [Course, Lesson, Resource]'.format(model))
 
     def wrapper(view_func):
