@@ -11,7 +11,7 @@ def update_infusionsoft_tags(request):
     '''
     updates users tags with infusionsofts
     '''
-    redirect = request.GET.get('next') if request.GET.get('next') else reverse_lazy("packages:purchases")
+    redirect = request.GET.get('next') if request.GET.get('next') else reverse_lazy("users:redirect")
 
     profile = InfusionsoftProfile.objects.get_or_create(user=request.user)[0]
     profile.update_tags()

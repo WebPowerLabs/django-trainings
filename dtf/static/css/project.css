@@ -110,3 +110,15 @@
   text-shadow: 0px 1px 0px #262626;
   line-height: 160%;
 }
+
+.package-table {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.package-table .package-items {
+  min-height: 100px;
+}
+.package-table .package-total {
+  min-height: 50px;
+}
