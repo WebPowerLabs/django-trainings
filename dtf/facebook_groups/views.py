@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 # from django.core.mail import mail_admins
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 # from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 import django_comments
 from dtf_comments.templatetags import markdown
+from packages.models import Package
 
 Comment = django_comments.get_model()
 
@@ -85,9 +86,18 @@ def fb_group_detail(request, fb_uid):
         "facebook_group": fb_group,
         "comments": comments
     }
+    packages = Package.objects.filter(groups=fb_group)
+    purchased_groups = FacebookGroup.objects.purchased(request.user)
+    if fb_group not in purchased_groups and not request.user.is_staff:
+        if len(packages) > 1:
+                return HttpResponseRedirect(reverse('packages:list_for_group',
+                                                kwargs={'group_pk': fb_group.pk}))
+        return HttpResponseRedirect(reverse('packages:detail',
+                                            kwargs={'pk': packages[0].pk}))
+
     return render_to_response('facebook_groups/detail.html',
-        context,
-        context_instance=RequestContext(request))
+                                context,
+                                context_instance=RequestContext(request))
 
 
 @login_required

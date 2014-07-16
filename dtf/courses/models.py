@@ -40,7 +40,10 @@ class Course(Content):
 
     def save(self, *args, **kwargs):
         if self.order is None:
-            self.order = Course.objects.get_max_order() + 1
+            try:
+                self.order = Course.objects.get_max_order() + 1
+            except TypeError:
+                self.order = 0
         super(Course, self).save(*args, **kwargs)
 
     class Meta:

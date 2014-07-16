@@ -17,6 +17,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from utils.decorators import can_edit_content, \
     purchase_or_instructor_member_required
+from facebook_groups.models import FacebookGroup
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
@@ -41,6 +42,8 @@ class LessonDetailView(PermissionMixin, UpdateView):
                                                 course_id, self.request.user)
         context['prev_url'] = Lesson.objects.get_prev_url(self.object, tag_id,
                                                 course_id, self.request.user)
+        context['fb_group_list'] = FacebookGroup.objects.purchased(
+                                                           self.request.user)
         if self.request.user.is_authenticated():
             try:
                 context['in_favourites'] = LessonFavourite.objects.get(
@@ -91,6 +94,7 @@ class LessonAddView(PermissionMixin, CreateFormBaseView):
         self.object.course = Course.objects.get(slug=self.kwargs['slug'])
         self.object.owner = self.request.user
         self.object.save()
+        form.save_m2m()
         return HttpResponseRedirect(self.get_success_url())
 
 

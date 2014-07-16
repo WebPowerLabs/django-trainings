@@ -26,7 +26,9 @@
     </span>
   </a>
 </li>
+{% if fb_group_list %}  
 <li><a class="btn-share-form" data-toggle="modal" data-target="#shareModal" data-url="{% url 'dtf_comments:share' object.pk %}"><i class="fa fa-share"></i></a></li>
+{% endif %}
 {% endif %}
 {% endblock nav_actions %}
 
@@ -122,7 +124,7 @@
   </div><!--/ .container-->
 
 </section><!--/ .lesson-detail-->
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and fb_group_list %}
   {% include 'includes/share_modal.html' %}
   {% endif %}
 {% endblock content %}

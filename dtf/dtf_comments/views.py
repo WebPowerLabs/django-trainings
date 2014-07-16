@@ -32,6 +32,11 @@ class DTFCommentShareView(AjaxResponsePermissionMixin, JSONResponseMixin,
     form_class = DTFCommentShareForm
     template_name = 'includes/share_form.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(DTFCommentShareView, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
     def form_valid(self, form):
         content = get_object_or_404(Content, pk=self.kwargs['content_pk'])
         ip = get_real_ip(self.request)

@@ -16,51 +16,24 @@ class PageView(TemplateView):
         return context
 
 
-# def contact(request):
-#     form = ContactForm()
-#     if request.POST:
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             subject = form.cleaned_data['subject']
-#             email = form.cleaned_data['email']
-#             message = '{} from {}'.format(form.cleaned_data['feedback'], email)
-#             subject = unicode('Feedback: {}').format(subject)
-#             mail_admins(subject, message)
-#             _next = request.POST.get('next')
-#             messages.success(request, 'Thanks for the feedback!')
-#             if _next:
-#                 return HttpResponseRedirect(_next)
-#
-#     _next = ""
-#     if request.GET.get('next'):
-#         _next = request.GET.get('next')
-#
-#     context = {'form': form, 'next': _next}
-#     return render_to_response('pages/contact.html',
-#         context,
-#         context_instance=RequestContext(request))
-
-
 @csrf_exempt
 @json_view
 def contact(request):
-    context = {}
-    if request.POST:
-        if request.POST.get('email'):
+    form = ContactForm(request.POST or None)
+    context = {'success': False,
+               'message': 'Please input subject and valid email address!'}
+    if request.POST and form.is_valid():
+        email = form.cleaned_data['email']
+        subject = form.cleaned_data['subject']
+        feedback = form.cleaned_data['feedback']
+        message = '{0} from {1}'.format(feedback, email)
 
-            subject = request.POST.get('subject')
-            email = request.POST.get('email')
-            message = '{} from {}'.format(request.POST.get('feedback'), email)
-
-            if request.POST.get('feedback'):
-                subject = unicode('Feedback: {}').format(subject)
-                context['message'] = 'Thanks for the feedback!'
-            else:
-                subject = unicode('Subscriber: {}').format(subject)
-                context['message'] = 'Thanks for subscribing!'
-            mail_admins(subject, message)
-            context['success'] = True
+        if feedback:
+            subject = unicode('Feedback: {}').format(subject)
+            context['message'] = 'Thanks for the feedback!'
         else:
-            context['success'] = False
-            context['message'] = 'Please input your email'
+            subject = unicode('Subscriber: {}').format(subject)
+            context['message'] = 'Thanks for subscribing!'
+        mail_admins(subject, message)
+        context['success'] = True
     return context

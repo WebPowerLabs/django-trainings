@@ -230,7 +230,7 @@
 								} 
 								else {
 									$response.find('div').removeClass().addClass('alert alert-danger');
-									$response.find('div').text(response.message);
+									$response.find('div').html(response.message);
 									$response.show(300);
 								
 							}

@@ -13,7 +13,6 @@ from dtf_comments.models import DTFComment
 from .managers import FBGroupManager, FBPostManager
 
 
-
 class FacebookGroup(models.Model):
     fb_uid = models.CharField(max_length=255, unique=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -36,7 +35,7 @@ class FacebookGroup(models.Model):
     @property
     def social_app(self):
         return SocialApp.objects.all()[0]
-    
+
     @property
     def client_id(self):
         return self.social_app.client_id
