@@ -1,6 +1,7 @@
 {% load staticfiles comments markdown avatar_tags %}
 <div id="c{{ comment.id }}" style="position:relative;bottom: 50px;"></div>
 <div class="comment-post">
+{% if user.is_staff %}
 <div class="pull-right comment-actions">
   <a href="{% url 'comments-delete' comment.id %}?next={{ request.path }}">
     <i class="fa fa-times-circle-o"></i>
@@ -9,6 +10,7 @@
     <i class="fa fa-flag"></i>
   </a>
 </div>
+{% endif %}
   <h3 class="fb-post-heading">
       {% if comment.user.fb_uid %}
       <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">

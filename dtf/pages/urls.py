@@ -42,5 +42,8 @@ urlpatterns = patterns('pages.views',
     url(r'^coming-soon/$',
         PageView.as_view(template_name='pages/coming-soon.html'),
         name="coming-soon"),
+    url(r'^hmh_promo/$',
+        PageView.as_view(template_name='pages/hmh_sell_page.html'),
+        name="hmh-sell-1"),
     url(r'^contact/$', 'contact', name='contact'),
     )

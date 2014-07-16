@@ -67,7 +67,7 @@ def fb_group_detail(request, fb_uid):
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
     content_type_id = ContentType.objects.get_for_model(FacebookGroup)
     comments = Comment.objects.filter(content_type=content_type_id,
-        object_pk=fb_group.pk).order_by('-submit_date')
+        object_pk=fb_group.pk, is_removed=False).order_by('-submit_date')
     if fb_group.pinned_comment:
         comments = comments.exclude(pk=fb_group.pinned_comment.pk)
     paginator = Paginator(comments, 5)

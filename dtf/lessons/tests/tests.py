@@ -35,7 +35,8 @@ class LessonViewTest(TestCaseBase):
         self.package.lessons.add(self.lesson_two)
         self.package.courses.add(self.course_purchased)
         self.package_purchased = PackagePurchaseFactory(user=self.user,
-                                                        package=self.package)
+                                                        package=self.package,
+                                                        status=1)
 
     def test_purchased(self):
         purchased = [self.lesson_one, self.lesson_two]

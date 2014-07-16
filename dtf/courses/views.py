@@ -13,8 +13,7 @@ from courses.signals import view_course_signal
 import json
 from django.views.generic.list import ListView
 from django.http.response import HttpResponseRedirect
-from utils.decorators import instructor_member_required, can_edit_content, \
-    purchase_or_instructor_member_required
+from utils.decorators import instructor_member_required, can_edit_content
 from facebook_groups.models import FacebookGroup
 
 

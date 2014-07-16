@@ -20,17 +20,17 @@ class ResourceListView(PermissionMixin, CreateFormBaseView):
     model = Resource
     queryset = Resource.objects.all()
     success_url = reverse_lazy('resources:list')
-    form_class = ResourceCreateFrom
+#     form_class = ResourceCreateFrom
     decorators = {'POST': staff_member_required, 'GET': login_required}
 
     def get_queryset(self):
         return Resource.objects.get_list(self.request.user)
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.owner = self.request.user
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+#     def form_valid(self, form):
+#         self.object = form.save(commit=False)
+#         self.object.owner = self.request.user
+#         self.object.save()
+#         return HttpResponseRedirect(self.get_success_url())
 
 
 class ResourceDeleteView(PermissionMixin, DeleteView):
@@ -63,6 +63,12 @@ class ResourceAddView(PermissionMixin, CreateFormBaseView):
 
     def get_success_url(self):
         return reverse('lessons:detail', kwargs={'slug': self.kwargs['slug']})
+
+    def get_initial(self):
+        initial = super(ResourceAddView, self).get_initial()
+        initial = initial.copy()
+        initial['type'] = self.request.GET.get('type', None)
+        return initial
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

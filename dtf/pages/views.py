@@ -1,15 +1,7 @@
-from django.shortcuts import render, render_to_response
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import mail_admins
-from django.contrib import messages
-from django.template import RequestContext
-from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.views.generic.base import TemplateView
-
-from crispy_forms.utils import render_crispy_form
 from jsonview.decorators import json_view
-
-
 from .forms import ContactForm, EmailForm
 
 
@@ -24,35 +16,34 @@ class PageView(TemplateView):
         return context
 
 
-def contact(request):
-    form = ContactForm()
-    if request.POST:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            email = form.cleaned_data['email']
-            message = '{} from {}'.format(form.cleaned_data['feedback'], email)
-            subject = unicode('Feedback: {}').format(subject)
-            mail_admins(subject, message)
-            _next = request.POST.get('next')
-            messages.success(request, 'Thanks for the feedback!')
-            if _next:
-                return HttpResponseRedirect(_next)
-
-    _next = ""
-    if request.GET.get('next'):
-        _next = request.GET.get('next')
-
-    context = {'form': form, 'next': _next}
-    return render_to_response('pages/contact.html',
-        context,
-        context_instance=RequestContext(request))
+# def contact(request):
+#     form = ContactForm()
+#     if request.POST:
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             subject = form.cleaned_data['subject']
+#             email = form.cleaned_data['email']
+#             message = '{} from {}'.format(form.cleaned_data['feedback'], email)
+#             subject = unicode('Feedback: {}').format(subject)
+#             mail_admins(subject, message)
+#             _next = request.POST.get('next')
+#             messages.success(request, 'Thanks for the feedback!')
+#             if _next:
+#                 return HttpResponseRedirect(_next)
+#
+#     _next = ""
+#     if request.GET.get('next'):
+#         _next = request.GET.get('next')
+#
+#     context = {'form': form, 'next': _next}
+#     return render_to_response('pages/contact.html',
+#         context,
+#         context_instance=RequestContext(request))
 
 
 @csrf_exempt
 @json_view
 def contact(request):
-    form = ContactForm()
     context = {}
     if request.POST:
         if request.POST.get('email'):
@@ -72,6 +63,4 @@ def contact(request):
         else:
             context['success'] = False
             context['message'] = 'Please input your email'
-
-
     return context

@@ -53,7 +53,7 @@
     </div><!--/ .panel-collapse-->
     <div class="list-group lessons {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'lessons:order' object.slug %}">
       {% for lesson in lesson_list %}
-        {% include "lessons/lesson_list_item.html" %}
+        {% include "lessons/lesson_list_item.html" with course_pk=lesson.course.pk %}
       {% endfor %}
     </div><!--/ .list-group-->
   </div><!--/ .col-md-6-->
