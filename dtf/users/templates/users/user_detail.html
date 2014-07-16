@@ -8,30 +8,38 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-md-5">
-        <div class="user-detail-box">
-
-          {% avatar user %}
+      <div class="col-md-4">
+        <div class="">
+          <h2>
           {% if object.fb_uid %}
-          <img src="{{ object.get_fb_profile_img_url }}">
+            <img src="{{ object.get_fb_profile_img_url }}">
+          {% else %}
+            <a class="" href="{% url 'avatar_change' %}">
+              {% avatar user %}
+            </a>
           {% endif %}
-          <h2>Hello, {{ object.username }}!</h2>
+            {% if object.get_full_name %}{{ object.get_full_name }}{% else %}{{ object.username }}{% endif %}
+          </h2>
 
           {% if object == request.user %}
-            <div class="">
+            <ul class="nav nav-stacked nav-pills">
               <!-- Action buttons -->
-                <a class="btn btn-info" href="{% url 'users:update' %}">My Info</a>
-                <a class="btn btn-success" href="{% url 'account_email' %}">Email</a>
-                <a class="btn btn-success" href="{% url 'avatar_change' %}">Profile Picture</a>
-              <!-- Your Stuff: Custom user template urls -->
+                <li><a class="" href="{% url 'users:update' %}">My Info</a></li>
+                <li><a class="" href="{% url 'account_email' %}">Email</a></li>
+                <li><a href="{% url 'courses:history' %}">Course History</a></li>
+                <li><a href="{% url 'lessons:history' %}">Lesson History</a></li>
+                <li><a href="{% url 'courses:favourites' %}">Course Favourites</a></li>
+                <li><a href="{% url 'lessons:favourites' %}">Lesson Favourites</a></li>
+                <li><a href="{% url 'packages:purchases' %}">Purchases</a></li>
+              
               <!-- End Action buttons -->
-            </div>
+            </ul>
           {% endif %}
 
         </div>
       </div>
 
-      <div class="col-md-7">
+      <div class="col-md-8">
         <h1>Welcome to Accelerate Your Destiny!</h1>
         <p>Donec semper id sapien ac feugiat. Proin turpis eros, pharetra lacinia accumsan sed, imperdiet in nisl. Sed aliquam sem mauris, ac elementum velit pretium vitae. Aenean ac odio eu odio lacinia accumsan.</p>
         <a class="btn btn-success btn-lg" href="{% url 'nufiles:list' %}">View All Sessions</a>
