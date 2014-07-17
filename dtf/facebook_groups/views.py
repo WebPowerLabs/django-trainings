@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 import django_comments
 from dtf_comments.templatetags import markdown
 from packages.models import Package
+from profiles.models import InfusionsoftProfile
 
 Comment = django_comments.get_model()
 
@@ -87,6 +88,8 @@ def fb_group_detail(request, fb_uid):
         "comments": comments
     }
     packages = Package.objects.filter(groups=fb_group)
+    profile = InfusionsoftProfile.objects.get_or_create(user=request.user)[0]
+    profile.update_tags()
     purchased_groups = FacebookGroup.objects.purchased(request.user)
     if fb_group not in purchased_groups and not request.user.is_staff:
         if len(packages) > 1:
