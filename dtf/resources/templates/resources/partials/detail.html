@@ -1,4 +1,8 @@
+{% if object.file %}
+<a href="{{ object.file.url }}" class="list-group-item sortable_item no_transition" data-pk="{{ object.pk }}" download>
+{% else %}
 <a href="{% url 'resources:detail' object.slug %}" class="list-group-item sortable_item no_transition" data-pk="{{ object.pk }}">
+{% endif %}
     <h4 class="list-group-item-heading">{{ object.name }}</h4>
     <p class="list-group-item-text">
         {{ object.description }}

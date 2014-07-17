@@ -9,6 +9,7 @@ from jsonfield import JSONField
 # the server not in __init__
 # from packages.providers.infusionsoft import server, key
 from .managers import InfusionsoftTagManager, PackagePurchaseManager
+from packages.managers import PackageManager
 
 
 def remove_unused(_dict):
@@ -34,6 +35,8 @@ class Package(models.Model):
     lessons = models.ManyToManyField("lessons.Lesson", null=True, blank=True)
     groups = models.ManyToManyField("facebook_groups.FacebookGroup", null=True,
                                     blank=True)
+
+    objects = PackageManager()
 
     def __unicode__(self):
         return u'{}'.format(self.name if self.name else 'Package')

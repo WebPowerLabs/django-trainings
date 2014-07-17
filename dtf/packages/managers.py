@@ -2,6 +2,16 @@
 from django.db import models
 
 from djnfusion import server, key
+from django.db.models import Q
+
+
+class PackageManager(models.Manager):
+    def get_for_content(self, content):
+        """
+        Receive content object and returns all available packages for it.
+        """
+        return self.filter(Q(lessons=content.lesson) |
+                           Q(courses=content.lesson.course)).distinct()
 
 
 class PackagePurchaseManager(models.Manager):

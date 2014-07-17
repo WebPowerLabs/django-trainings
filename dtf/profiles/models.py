@@ -90,8 +90,8 @@ class InfusionsoftProfile(models.Model):
             ["Id", ]);
         if not len(results):
             server.ContactService.add(key, [
-            {"Email": self.user.email}, 
-            {"FirstName": self.user.first_name}, 
+            {"Email": self.user.email},
+            {"FirstName": self.user.first_name},
             {"LastName": self.user.last_name}])
             self._get_provider_data()
         return results[0]
