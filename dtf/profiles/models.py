@@ -41,35 +41,36 @@ class InfusionsoftProfile(models.Model):
         """
         updates a profiles tags from the infusionsoft server
         """
-        # get infusionsofts tags from thier server and find the instances in our db
-        tags = InfusionsoftTag.objects.by_user(self.user)
-        # get all active purchase for profile.user
-        active_purchases = PackagePurchase.objects.filter(user__id=self.user_id,
-            package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1)  # 1 == Active
+        if settings.DJNFUSION_COMPANY and settings.DJNFUSION_API_KEY:
+            # get infusionsofts tags from thier server and find the instances in our db
+            tags = InfusionsoftTag.objects.by_user(self.user)
+            # get all active purchase for profile.user
+            active_purchases = PackagePurchase.objects.filter(user__id=self.user_id,
+                package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1)  # 1 == Active
 
-        for tag in self.tags.all():
-            # loop through profile's tags
-            if tag not in tags:
-                # profile has tag that was removed on infusionsoft, remove tag
-                self.tags.remove(tag)
-                # set past_purchases of this tag to expired
+            for tag in self.tags.all():
+                # loop through profile's tags
+                if tag not in tags:
+                    # profile has tag that was removed on infusionsoft, remove tag
+                    self.tags.remove(tag)
+                    # set past_purchases of this tag to expired
 
-                expired = active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id)
-                for purchase in expired:
-                    purchase.status = 2  # 2 == Expired
-                    purchase.save()
+                    expired = active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id)
+                    for purchase in expired:
+                        purchase.status = 2  # 2 == Expired
+                        purchase.save()
 
 
-        for tag in tags:
-            # loop through infusionsoft's tags
-            if tag not in self.tags.all():
-                # profile does not have tag on infusionsoft, add tag
-                self.tags.add(tag)
-                # create a new package purchase for the tags infusionsoft package
-                PackagePurchase.objects.create(
-                    user=self.user, package=tag.infusionsoftpackage, status=1)  # 1 == Active
+            for tag in tags:
+                # loop through infusionsoft's tags
+                if tag not in self.tags.all():
+                    # profile does not have tag on infusionsoft, add tag
+                    self.tags.add(tag)
+                    # create a new package purchase for the tags infusionsoft package
+                    PackagePurchase.objects.create(
+                        user=self.user, package=tag.infusionsoftpackage, status=1)  # 1 == Active
 
-        return self.save()
+            return self.save()
 
     def update_profile(self):
         """
@@ -90,8 +91,8 @@ class InfusionsoftProfile(models.Model):
             ["Id", ]);
         if not len(results):
             server.ContactService.add(key, [
-            {"Email": self.user.email}, 
-            {"FirstName": self.user.first_name}, 
+            {"Email": self.user.email},
+            {"FirstName": self.user.first_name},
             {"LastName": self.user.last_name}])
             self._get_provider_data()
         return results[0]

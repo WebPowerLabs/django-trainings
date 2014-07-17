@@ -11,7 +11,7 @@ import json
 from utils.tests import TestCaseBase
 
 
-class LessonViewTest(TestCaseBase):
+class LessonViewTest(FastFixtureTestCase):
     def setUp(self):
         self.username = 'testuser'
         self.password = 'password'
@@ -20,8 +20,7 @@ class LessonViewTest(TestCaseBase):
         self.user.set_password(self.password)
         self.user.save()
         self.course = CourseFactory(owner=self.user)
-        self.course_purchased = CourseFactory(owner=self.user)
-        self.lesson_one = LessonFactory(course=self.course_purchased,
+        self.lesson_one = LessonFactory(course=self.course,
                                         owner=self.user)
         self.lesson_two = LessonFactory(course=self.course, owner=self.user)
         self.lesson_three = LessonFactory(course=self.course, owner=self.user)
@@ -31,21 +30,11 @@ class LessonViewTest(TestCaseBase):
         self.lesson_fav_item = LessonFavouriteFactory(user=self.user,
                                                       lesson=self.lesson_one,
                                                       is_active=True)
-        self.package = PackageFactory()
-        self.package.lessons.add(self.lesson_two)
-        self.package.courses.add(self.course_purchased)
-        self.package_purchased = PackagePurchaseFactory(user=self.user,
-                                                        package=self.package,
-                                                        status=1)
-
-    def test_purchased(self):
-        purchased = [self.lesson_one, self.lesson_two]
-        res = Lesson.objects.purchased(self.user)
-        self.assertEqualQs(res, purchased)
 
     def test_order_view(self):
         self.client.login(username=self.username, password=self.password)
         new_order = [self.lesson_three.pk,
+                     self.lesson_one.pk,
                      self.lesson_two.pk]
 
         req_data = json.dumps({'new_order': new_order})
@@ -104,7 +93,7 @@ class LessonViewTest(TestCaseBase):
         self.assertTrue(resp_data['success'])
 
 
-class LessonManagerTest(FastFixtureTestCase):
+class LessonManagerTest(TestCaseBase):
     def setUp(self):
         self.password = 'password'
         self.instructor = UserFactory(username='instructor', is_staff=False)
@@ -138,6 +127,22 @@ class LessonManagerTest(FastFixtureTestCase):
                                              course=self.course_pub,
                                              published=True,
                                              owner=self.instructor)
+        self.package = PackageFactory()
+        self.package.lessons.add(self.lesson_curr_not_pub)
+
+        self.package_user = PackageFactory()
+        self.package_user.lessons.add(self.lesson_first_pub)
+        self.package_user.courses.add(self.course_not_pub)
+        self.package_purchased = PackagePurchaseFactory(user=self.user,
+                                                    package=self.package_user,
+                                                    status=1)
+
+    def test_purchased(self):
+        purchased = [self.lesson_of_not_pub_course,
+                     self.lesson_first_pub,
+                     self.lesson_last_pub]
+        res = Lesson.objects.purchased(self.user)
+        self.assertEqualQs(res, purchased)
 
     def test_get_list_user_had_insrtuctor_profile(self):
         total_count = Lesson.objects.all().count()

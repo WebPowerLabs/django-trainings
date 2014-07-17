@@ -3,7 +3,7 @@ import requests
 
 from django.db import models
 
-from django.db.models import Q
+from django.db.models import Q, Count
 from allauth.socialaccount.models import SocialApp
 from users.models import User
 
@@ -13,9 +13,10 @@ class FBGroupManager(models.Manager):
         if user.is_authenticated():
             if user.is_staff:
                 return self.all()
-        return self.filter(Q(package__packagepurchase__user=user,
-                           package__packagepurchase__status=1) |
-                           Q(package=None))
+        return self.annotate(Count('package')
+                             ).filter(Q(package__packagepurchase__user=user,
+                                        package__packagepurchase__status=1) |
+                                      Q(package__count=0)).distinct()
 
     def fb_create(self, **kwargs):
         """ Creates a facebook group for the Facebook App

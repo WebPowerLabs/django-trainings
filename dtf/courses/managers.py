@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.db.models.aggregates import Max
 from profiles.models import InstructorProfile
 from polymorphic import PolymorphicManager
@@ -10,8 +10,10 @@ class CourseManager(PolymorphicManager):
         return self.filter(published=True)
 
     def purchased(self, user):
-        return self.filter(package__packagepurchase__user=user,
-                           package__packagepurchase__status=1)
+        return self.annotate(Count('package')
+                             ).filter(Q(package__packagepurchase__user=user,
+                                        package__packagepurchase__status=1) |
+                                      Q(package__count=0))
 
     def get_list(self, user=None):
         """

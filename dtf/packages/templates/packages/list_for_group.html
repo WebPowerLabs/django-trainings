@@ -5,21 +5,40 @@
 {% block content %}
 <section class="course-list">
   <div class="container">
-    <div class="row">
-      <div class="section-header col-xs-12 text-center">
-        <h1 class="section-title">Ways to buy '{{ content }}'</h1>
-        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
-        <hr>
-      </div><!--/ .section-header-->
-        <div class="">
-        {% for package in object_list %}
-        <a href="{{ package.get_absolute_url }}" class="">
-            <p class="">{{ package.name }}</p>
-        </a>
-        {% empty %}
-            <p class="text-center">No packages for this content yet.</p>
+    <div class="section-header col-xs-12 text-center">
+    <h1 class="section-title">Ways to buy {{ content }}</h1>
+    <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+    <hr>
+    </div><!--/ .section-header-->
+  <div class="row">
+    {% for package in object_list %}
+    <div class="col-md-4">
+      <a href="{{ package.get_absolute_url }}" class="package-table text-center">
+      <h3 class="">{{ package.name }}</h3>
+      <hr>
+      <ul class="list-group package-items">
+        {% for facebook_group in package.groups.all %}
+          <li class="list-group-item">{{ facebook_group.name }}</li>
         {% endfor %}
-        </div>
+        {% for course in package.courses.all %}
+          <li class="list-group-item">{{ course.name }}</li>
+        {% endfor %}
+        {% for lesson in package.lessons.all %}
+          <li class="list-group-item">{{ lesson.name }}</li>
+        {% endfor %}
+      </ul>
+      <h4 class="package-total">
+      {% if package.infusionsoftpackage %}
+      <span>Total: </span> &nbsp; <i class="fa fa-usd"></i> {{ package.infusionsoftpackage.price }}
+      {% endif %}
+      </h4>
+      <button type="button" class="btn btn-block btn-primary">View Package &nbsp; <i class="fa fa-arrow-right"></i></button>
+      </a>
     </div>
+    {% empty %}
+      <p class="text-center">No packages for this content yet.</p>
+    {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock content %}

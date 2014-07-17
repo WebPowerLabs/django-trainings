@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.core.urlresolvers import reverse
 from profiles.models import InstructorProfile
 from polymorphic.manager import PolymorphicManager
@@ -10,11 +10,14 @@ class LessonManager(PolymorphicManager):
         return self.filter(published=True)
 
     def purchased(self, user):
-        return self.filter(Q(package__packagepurchase__user=user,
-                             package__packagepurchase__status=1) |
-                           Q(course__package__packagepurchase__user=user,
-                             course__package__packagepurchase__status=1)
-                           ).distinct()
+        return self.annotate(Count('package'), Count('course__package')
+                             ).filter(
+                              Q(package__packagepurchase__user=user,
+                                package__packagepurchase__status=1) |
+                              Q(course__package__packagepurchase__user=user,
+                                course__package__packagepurchase__status=1) |
+                              Q(package__count=0, course__package__count=0)
+                              ).distinct()
 
     def owned(self, user):
         return self.filter(owner=user)

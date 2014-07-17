@@ -1,13 +1,16 @@
 from django_nose.testcases import FastFixtureTestCase
 from resources.models import Resource
 from resources.tests.factories import (ResourceFactory, LessonFactory,
-                                       UserFactory, InstructorProfileFactory)
+                                       UserFactory, InstructorProfileFactory,
+                                       PackageFactory, CourseFactory,
+                                       PackagePurchaseFactory)
 from django.test.client import Client
 import json
 from django.core.urlresolvers import reverse
+from utils.tests import TestCaseBase
 
 
-class ResourceManagerTest(FastFixtureTestCase):
+class ResourceManagerTest(TestCaseBase):
     def setUp(self):
         self.password = 'password'
         self.instructor = UserFactory(username='instructor', is_staff=False)
@@ -20,13 +23,36 @@ class ResourceManagerTest(FastFixtureTestCase):
         self.staff_user.set_password(self.password)
         self.staff_user.save()
 
-        self.instructor_profile = InstructorProfileFactory(user=self.instructor)
+        self.instructor_profile = InstructorProfileFactory(
+                                                       user=self.instructor)
 
-        self.lesson = LessonFactory(owner=self.user)
-        self.res_pub = ResourceFactory(lesson=self.lesson, published=True,
+        self.course = CourseFactory()
+        self.lesson = LessonFactory(owner=self.user, course=self.course)
+        self.lesson_purchased = LessonFactory(owner=self.user,
+                                              course=self.course)
+        self.lesson_not_purchased = LessonFactory(owner=self.user,
+                                              course=self.course)
+
+        self.res_pub = ResourceFactory(lesson=self.lesson_purchased,
+                                       published=True,
                                        owner=self.user)
-        self.res_not_pub = ResourceFactory(lesson=self.lesson, published=True,
+        self.res_not_pub = ResourceFactory(lesson=self.lesson, published=False,
                                            owner=self.user)
+        self.res_not_purch = ResourceFactory(lesson=self.lesson_not_purchased,
+                                             published=False,
+                                             owner=self.user)
+        self.package_one = PackageFactory()
+        self.package_one.lessons.add(self.lesson_purchased)
+        self.package_two = PackageFactory()
+        self.package_two.lessons.add(self.lesson_not_purchased)
+        self.package_purchased = PackagePurchaseFactory(user=self.user,
+                                                    package=self.package_one,
+                                                    status=1)
+
+    def test_purchased(self):
+        purchased = [self.res_pub, self.res_not_pub]
+        res = Resource.objects.purchased(self.user)
+        self.assertEqualQs(res, purchased)
 
     def test_get_list_user_had_insrtuctor_profile(self):
         total_count = Resource.objects.all().count()

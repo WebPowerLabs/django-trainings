@@ -10,9 +10,8 @@ def latest_comments(request):
     '''
     returns latest public comments from all models for the active site id
     '''
-    purchased_list = []
-    for group in FacebookGroup.objects.purchased(request.user):
-        purchased_list.append(group.pk)
+    purchased_list = list(FacebookGroup.objects.purchased(request.user
+                                             ).values_list('id', flat=True))
     site = get_current_site(request)
     content_type_id = ContentType.objects.get_for_model(DTFComment)
     qs = DTFComment.objects.filter(
@@ -20,5 +19,6 @@ def latest_comments(request):
         is_public=True,
         is_removed=False,
         object_pk__in=purchased_list,
+        content_type=ContentType.objects.get_for_model(FacebookGroup)
     ).exclude(content_type=content_type_id)  # exclude comment's comments
     return qs.order_by('-submit_date')[:40]
