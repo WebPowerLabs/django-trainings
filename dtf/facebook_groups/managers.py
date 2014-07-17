@@ -6,17 +6,12 @@ from django.db import models
 from django.db.models import Q
 from allauth.socialaccount.models import SocialApp
 from users.models import User
-from profiles.models import InstructorProfile
 
 
 class FBGroupManager(models.Manager):
     def purchased(self, user):
         if user.is_authenticated():
-            try:
-                instructor = user.instructorprofile
-            except InstructorProfile.DoesNotExist:
-                instructor = False
-            if user.is_staff or instructor:
+            if user.is_staff:
                 return self.all()
         return self.filter(Q(package__packagepurchase__user=user,
                            package__packagepurchase__status=1) |
