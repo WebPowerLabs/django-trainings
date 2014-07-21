@@ -11,7 +11,7 @@
         <div class="row">
             <table class="table table-striped">
                 {% for object in object_list %}
-                    <tr id='lesson_favourite_{{ object.pk }}' class='favourite_item is_active'>
+                    <tr id='lesson_favourite_{{ object.slug }}' class='favourite_item is_active'>
                         <td>{{ object.created }}</td>
                         <td>
                             <a href="{% url 'lessons:detail' object.lesson.slug %}">
@@ -19,10 +19,10 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{% url 'lessons:favourite_action' object.lesson.pk %}"
+                            <a href="{% url 'lessons:favourite_action' object.lesson.slug %}"
                                 class="ajax_action"
-                                data-target="#lesson_favourite_{{ object.pk }}"
-                                data-url="{% url 'lessons:favourite_action' object.lesson.pk %}">
+                                data-target="#lesson_favourite_{{ object.slug }}"
+                                data-url="{% url 'lessons:favourite_action' object.lesson.slug %}">
                                     <i class="fa fa-trash-o"></i>
                             </a>
                         </td>

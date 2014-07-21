@@ -7,7 +7,7 @@ from polymorphic.manager import PolymorphicManager
 
 class LessonManager(PolymorphicManager):
     def published(self):
-        return self.filter(published=True)
+        return self.filter(published=True, course__published=True)
 
     def purchased(self, user):
         return self.annotate(Count('package'), Count('course__package')
@@ -34,7 +34,7 @@ class LessonManager(PolymorphicManager):
                 instructor = False
             if user.is_staff or instructor:
                 return self.all()
-        return self.published().filter(course__published=True)  # course is published too
+        return self.published()
 
     def get_next_url(self, obj, tag_id=None, course_id=None, user=None):
         """

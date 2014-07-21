@@ -1,9 +1,9 @@
 {% extends 'courses/base.html' %}
-{% load crispy_forms_tags thumbnail static %}
+{% load crispy_forms_tags thumbnail static user_permission_tags %}
 
 {% block nav_actions %}
 {{ block.super }}
-{% if user.is_staff or user == object.owner %}
+{% if user|can_manage_content:object %}
 <li class="dropdown">
   <a data-toggle="dropdown">
     <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
@@ -16,8 +16,13 @@
 </li>
 {% endif %}
 {% if user.is_authenticated %}
+  {% if user|is_member %}
+  <li>
+    <a><span>Complete: {{ course_completion }}%</span></a> 
+  </li>
+  {% endif %}
 <li>
-  <a class="ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'courses:favourite_action' object.pk %}" data-target=".fav_button">
+  <a class="ajax_action fav_button{% if is_favourite %} is_active{% endif %}" data-url="{% url 'courses:favourite_action' object.slug %}" data-target=".fav_button">
   <span class='state-1'>
     <i class="fa fa-heart"></i>
   </span>
@@ -53,7 +58,7 @@
     <div id="collapseOne" class="panel-collapse collapse">
       {% crispy form %}
     </div><!--/ .panel-collapse-->
-    <div class="list-group lessons {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'lessons:order' object.slug %}">
+    <div class="list-group lessons {% if user|can_manage_content:object %}sortable{% endif %}" data-url="{% url 'lessons:order' object.slug %}">
       {% for lesson in lesson_list %}
         {% include "lessons/lesson_list_item.html" with course_pk=lesson.course.pk %}
       {% endfor %}

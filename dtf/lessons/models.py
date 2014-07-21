@@ -44,7 +44,7 @@ class Lesson(Content):
 
     def get_homework(self, user):
         return self.resource_set.get_list(user).filter(type='homework')
-    
+
     def get_absolute_url(self):
         site = Site.objects.get(pk=settings.SITE_ID)
         return 'http://{0}{1}'.format(site.domain, reverse('lessons:detail',
@@ -73,3 +73,18 @@ class LessonFavourite(Favourite):
 
     class Meta:
         verbose_name_plural = 'Lesson Favourites'
+
+
+class LessonComplete(models.Model):
+    """
+    Through model between user and lesson that allows users to check lesson
+    as completed.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    lesson = models.ForeignKey('Lesson')
+    is_complete = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Lesson complete item'
+        verbose_name_plural = 'Lesson complete items'

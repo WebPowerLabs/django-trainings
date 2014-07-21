@@ -3,8 +3,10 @@ from lessons.tests.factories import (TagFactory, LessonFactory, CourseFactory,
                                      UserFactory, LessonHistoryFactory,
                                      LessonFavouriteFactory,
                                      InstructorProfileFactory, PackageFactory,
-                                     PackagePurchaseFactory)
-from lessons.models import Lesson, LessonFavourite, LessonHistory
+                                     PackagePurchaseFactory,
+                                     LessonCompleteFactory)
+from lessons.models import (Lesson, LessonFavourite, LessonHistory,
+                            LessonComplete)
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 import json
@@ -30,6 +32,9 @@ class LessonViewTest(FastFixtureTestCase):
         self.lesson_fav_item = LessonFavouriteFactory(user=self.user,
                                                       lesson=self.lesson_one,
                                                       is_active=True)
+        self.lesson_complete_item = LessonCompleteFactory(user=self.user,
+                                                      lesson=self.lesson_one,
+                                                      is_complete=True)
 
     def test_order_view(self):
         self.client.login(username=self.username, password=self.password)
@@ -50,7 +55,7 @@ class LessonViewTest(FastFixtureTestCase):
     def test_lesson_action_favourite_view_add_item(self):
         self.client.login(username=self.username, password=self.password)
         resp = self.client.post(reverse('lessons:favourite_action', kwargs={
-                                                    'pk': self.lesson_one.pk}),
+                                                'slug': self.lesson_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)
@@ -64,7 +69,7 @@ class LessonViewTest(FastFixtureTestCase):
         self.client.login(username=self.username, password=self.password)
 
         resp = self.client.post(reverse('lessons:favourite_action', kwargs={
-                                                    'pk': self.lesson_one.pk}),
+                                                'slug': self.lesson_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)
@@ -89,6 +94,33 @@ class LessonViewTest(FastFixtureTestCase):
         resp_data = json.loads(resp.content)
         deleted_item = LessonHistory.objects.get(pk=self.lesson_his_item.pk)
         self.assertFalse(deleted_item.is_active)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
+
+    def test_lesson_complete_action_view_add_item(self):
+        self.client.login(username=self.username, password=self.password)
+        resp = self.client.post(reverse('lessons:complete_action', kwargs={
+                                                'slug': self.lesson_one.slug}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        self.assertTrue(LessonComplete.objects.get(
+                                    lesson=self.lesson_one,
+                                    user=self.client.session['_auth_user_id']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
+
+    def test_lesson_complete_action_view_delete_item(self):
+        self.client.login(username=self.username, password=self.password)
+
+        resp = self.client.post(reverse('lessons:complete_action', kwargs={
+                                                'slug': self.lesson_one.slug}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        deleted_item = LessonComplete.objects.get(
+                                            pk=self.lesson_complete_item.pk)
+        self.assertFalse(deleted_item.is_complete)
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp_data['success'])
 

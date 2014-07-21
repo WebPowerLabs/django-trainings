@@ -111,7 +111,7 @@ class CourseViewTest(FastFixtureTestCase):
     def test_course_favourite_action_view_add_item(self):
         self.client.login(username=self.username, password=self.password)
         resp = self.client.post(reverse('courses:favourite_action', kwargs={
-                                                    'pk': self.course_one.pk}),
+                                                'slug': self.course_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)
@@ -125,7 +125,7 @@ class CourseViewTest(FastFixtureTestCase):
         self.client.login(username=self.username, password=self.password)
 
         resp = self.client.post(reverse('courses:favourite_action', kwargs={
-                                                    'pk': self.course_one.pk}),
+                                                'slug': self.course_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)

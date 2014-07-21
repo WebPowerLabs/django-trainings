@@ -3,6 +3,7 @@
 from django.contrib.auth.models import AbstractUser
 
 from allauth.socialaccount.models import SocialAccount
+from profiles.models import InstructorProfile
 
 
 # Subclass AbstractUser
@@ -41,4 +42,10 @@ class User(AbstractUser):
         else:
             return None
 
-
+    @property
+    def is_instructor(self):
+        try:
+            self.instructorprofile
+            return True
+        except InstructorProfile.DoesNotExist:
+            return False

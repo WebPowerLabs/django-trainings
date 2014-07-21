@@ -1,9 +1,9 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags query_string video_player thumbnail comments %}
+{% load crispy_forms_tags query_string video_player thumbnail comments user_permission_tags %}
 
 {% block nav_actions %}
 {{ block.super }}
-{% if user.is_staff or user == object.owner %}
+{% if user|can_manage_content:object %}
 <li class="dropdown">
   <a data-toggle="dropdown">
     <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
@@ -16,8 +16,20 @@
 </li>
 {% endif %}
 {% if user.is_authenticated %}
+  {% if user|is_member %}
+  <li>
+    <a class="ajax_action complete_button{% if is_complete %} is_active {% endif %}" data-url="{% url 'lessons:complete_action' object.slug %}" data-target=".complete_button">
+      <span class='state-1'>
+        <i class="fa fa-check-square-o"></i>
+      </span>
+      <span class='state-2'>
+        <i class="fa fa-square-o"></i>
+      </span>
+    </a>
+  </li>
+  {% endif %}
 <li>
-  <a class="ajax_action fav_button{% if in_favourites.is_active %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.pk %}" >
+  <a class="ajax_action fav_button{% if is_favourite %} is_active {% endif %}" data-url="{% url 'lessons:favourite_action' object.slug %}" data-target=".fav_button">
     <span class='state-1'>
       <i class="fa fa-heart"></i>
     </span>
@@ -26,9 +38,9 @@
     </span>
   </a>
 </li>
-{% if fb_group_list %}  
-<li><a class="btn-share-form" data-toggle="modal" data-target="#shareModal" data-url="{% url 'dtf_comments:share' object.pk %}"><i class="fa fa-share"></i></a></li>
-{% endif %}
+  {% if fb_group_list %}  
+  <li><a class="btn-share-form" data-toggle="modal" data-target="#shareModal" data-url="{% url 'dtf_comments:share' object.pk %}"><i class="fa fa-share"></i></a></li>
+  {% endif %}
 {% endif %}
 {% endblock nav_actions %}
 
@@ -44,7 +56,7 @@
 <section class="lesson-detail">
   <div class="container">
     <div id="collapseOne" class="panel-collapse collapse">
-      {% if user.is_staff or user == object.owner %}{% crispy form %}{% endif %}
+      {% if user|can_manage_content:object %}{% crispy form %}{% endif %}
     </div><!--/ .panel-collapse-->
 
     <h2>{{ object.name }}</h2>
@@ -66,11 +78,11 @@
         <div class="panel panel-primary panel-resource">
           <div class="panel-heading">
             <span>Resources</span>
-            {% if user.is_staff or user == object.owner %}
+            {% if user|can_manage_content:object %}
               <a href="{% url 'resources:add' object.slug %}?type=resource" class="pull-right"><i class="fa fa-plus"></i></a>
             {% endif %}
           </div><!--/ .panel-heading-->
-          <div class="list-group {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
+          <div class="list-group {% if user|can_manage_content:object %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
             {% for res in resource_list %}
               {% include 'resources/partials/detail.html' with object=res %}
             {% empty %}
@@ -83,11 +95,11 @@
         <div class="panel panel-success panel-resource">
           <div class="panel-heading">
             <span>Homework</span>
-            {% if user.is_staff or user == object.owner %}
+            {% if user|can_manage_content:object %}
             <a href="{% url 'resources:add' object.slug %}?type=homework" class="pull-right"><i class="fa fa-plus"></i></a>
             {% endif %}
           </div>
-          <div class="list-group  {% if user.is_staff or user == object.owner %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
+          <div class="list-group  {% if user|can_manage_content:object %}sortable{% endif %}" data-url="{% url 'resources:order' object.slug %}">
             {% for res in homework_list %}
               {% include 'resources/partials/detail.html' with object=res %} 
             {% empty %}
