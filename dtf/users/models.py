@@ -3,7 +3,6 @@
 from django.contrib.auth.models import AbstractUser
 
 from allauth.socialaccount.models import SocialAccount
-from profiles.models import InstructorProfile
 
 
 # Subclass AbstractUser
@@ -44,6 +43,7 @@ class User(AbstractUser):
 
     @property
     def is_instructor(self):
+        from profiles.models import InstructorProfile
         try:
             self.instructorprofile
             return True
