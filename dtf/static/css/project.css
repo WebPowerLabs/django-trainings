@@ -108,3 +108,19 @@
   text-shadow: 0px 1px 0px #262626;
   line-height: 160%;
 }
+
+/* line 102, ../sass/project.scss */
+.audiojs {
+  margin: 10px auto;
+  width: 435px;
+}
+
+/* line 106, ../sass/project.scss */
+.audiojs .play-pause {
+  padding: 4px 0;
+}
+
+/* line 110, ../sass/project.scss */
+li.dropdown a {
+  cursor: pointer;
+}

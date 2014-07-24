@@ -1,6 +1,6 @@
 {% extends 'courses/base.html' %}
 
-{% load crispy_forms_tags thumbnail %}
+{% load crispy_forms_tags thumbnail query_string %}
 {% block nav_actions %}
 {{ block.super }}
 {% if user.is_staff or user.is_instructor %}
@@ -13,7 +13,7 @@
   <div class="container">
     <div class="row">
       <div class="section-header col-xs-12 text-center">
-        <h1 class="section-title">Coaching Courses</h1>
+        <h1 class="section-title">{% if request.GET.purchased %}My {% endif %}Coaching Courses</h1>
         <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
         <hr>
       </div><!--/ .section-header-->
@@ -21,7 +21,7 @@
     <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
       {% for course in object_list %}
         <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
-          <a class="course-item" href="{% url 'courses:detail' course.slug %}">
+          <a class="course-item" href="{% url 'courses:detail' course.slug %}{% query_string request.GET %}">
             <div class="thumbnail">
               {% thumbnail course.thumbnail '284x180' crop='center' as im %}
                 <img src="{{ im.url }}" class="img-rounded" alt="{{ course.name }}">

@@ -7,7 +7,7 @@ from crispy_forms.layout import Submit
 class LessonCreateFrom(forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ['name', 'description', 'published', 'thumbnail', 'video',
+        fields = ['name', 'description', 'published', 'thumbnail', 'audio',
                   'homework', 'tags']
 
     helper = FormHelper()

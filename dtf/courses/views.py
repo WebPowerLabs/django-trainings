@@ -25,6 +25,8 @@ class CourseListView(PermissionMixin, CreateFormBaseView):
     decorators = {'POST': instructor_member_required}
 
     def get_queryset(self):
+        if self.request.GET.get('purchased', None):
+            return Course.objects.purchased(self.request.user)
         return Course.objects.get_list(self.request.user)
 
     def form_valid(self, form):

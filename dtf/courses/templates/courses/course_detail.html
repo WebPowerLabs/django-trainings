@@ -1,5 +1,5 @@
 {% extends 'courses/base.html' %}
-{% load crispy_forms_tags thumbnail static user_permission_tags %}
+{% load crispy_forms_tags thumbnail static user_permission_tags query_string %}
 
 {% block nav_actions %}
 {{ block.super }}
@@ -39,7 +39,7 @@
 
 {% block nav_secondary %}
 <li>
-  <a href="{% url 'courses:list' %}">
+  <a href="{% url 'courses:list' %}{% query_string request.GET %}">
   <i class="fa fa-arrow-left"></i> &nbsp; Courses
   </a>
 </li>

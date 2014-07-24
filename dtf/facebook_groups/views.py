@@ -5,11 +5,10 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 import django_comments
-from dtf_comments.templatetags import markdown
 from packages.models import Package
 from profiles.models import InfusionsoftProfile
 
@@ -28,6 +27,8 @@ def fb_group_list(request):
     content types
     '''
     fb_groups = FacebookGroup.objects.all()
+    if request.GET.get('purchased', None):
+        fb_groups = FacebookGroup.objects.purchased(request.user)
     feed = latest_comments(request)  # get latest comments
     paginator = Paginator(feed, 10)  # TODO: add settings var: paginate_by
     try:
@@ -66,6 +67,8 @@ def fb_group_detail(request, fb_uid):
     are used in the template
     '''
     fb_groups = FacebookGroup.objects.all()
+    if request.GET.get('purchased', None):
+        fb_groups = FacebookGroup.objects.purchased(request.user)
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
     content_type_id = ContentType.objects.get_for_model(FacebookGroup)
     comments = Comment.objects.filter(content_type=content_type_id,

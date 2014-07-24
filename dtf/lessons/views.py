@@ -34,13 +34,15 @@ class LessonDetailView(PermissionMixin, UpdateView):
     def get_context_data(self, **kwargs):
         tag_id = self.request.GET.get('tags', None)
         course_id = self.request.GET.get('course', None)
+        purchased = self.request.GET.get('purchased', None)
         context = super(LessonDetailView, self).get_context_data(**kwargs)
         context['resource_list'] = Lesson.get_resource(self.object,
                                                        self.request.user)
         context['homework_list'] = Lesson.get_homework(self.object,
                                                        self.request.user)
         context['next_url'] = Lesson.objects.get_next_url(self.object, tag_id,
-                                                course_id, self.request.user)
+                                                          course_id, purchased,
+                                                          self.request.user)
         context['prev_url'] = Lesson.objects.get_prev_url(self.object, tag_id,
                                                 course_id, self.request.user)
         context['fb_group_list'] = FacebookGroup.objects.purchased(
@@ -81,12 +83,18 @@ class LessonListView(PermissionMixin, FilterView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
+        if self.request.GET.get('purchased', None):
+            return Lesson.objects.purchased(self.request.user
+                                            ).order_by('-created')
         return Lesson.objects.get_list(self.request.user).order_by('-created')
 
     def get_context_data(self, **kwargs):
         context = super(LessonListView, self).get_context_data(**kwargs)
         context['tag_list'] = Tag.objects.all()
         context['course_list'] = Course.objects.get_list(self.request.user)
+        if self.request.GET.get('purchased', None):
+            context['course_list'] = Course.objects.purchased(
+                                                          self.request.user)
         return context
 
 
