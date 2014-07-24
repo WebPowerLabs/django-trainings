@@ -1,5 +1,5 @@
 {% extends "facebook_groups/base.html" %}
-{% load staticfiles i18n %}
+{% load staticfiles i18n query_string %}
 
 {% block title %}Communities{{ block.super }}{% endblock title %}
 
@@ -8,7 +8,7 @@
 {% block left_panel %}
 <ul class="nav nav-pills nav-stacked">
   {% for fb_group in facebook_groups %}
-    <li><a href="{% url 'facebook_groups:detail' fb_group.fb_uid %}">{{ fb_group.name }}</a></li>
+    <li><a href="{% url 'facebook_groups:detail' fb_group.fb_uid %}{% query_string request.GET %}">{{ fb_group.name }}</a></li>
   {% endfor %}
 </ul>
 {% endblock left_panel %}
