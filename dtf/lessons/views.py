@@ -1,5 +1,6 @@
 from django.views.generic.edit import DeleteView, UpdateView
-from lessons.models import Lesson, LessonFavourite, LessonHistory
+from lessons.models import (Lesson, LessonFavourite, LessonHistory,
+                            LessonComplete)
 from django.core.urlresolvers import reverse_lazy, reverse
 from lessons.forms import LessonCreateFrom
 from lessons.filters import LessonFilter
@@ -15,8 +16,8 @@ import json
 from lessons.signals import view_lesson_signal
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
-from utils.decorators import can_edit_content, \
-    purchase_or_instructor_member_required
+from utils.decorators import (can_edit_content,
+                              purchase_or_instructor_member_required)
 from facebook_groups.models import FacebookGroup
 
 
@@ -46,10 +47,20 @@ class LessonDetailView(PermissionMixin, UpdateView):
                                                            self.request.user)
         if self.request.user.is_authenticated():
             try:
-                context['in_favourites'] = LessonFavourite.objects.get(
+                context['is_favourite'] = LessonFavourite.objects.get(
                                                         lesson=self.object,
-                                                        user=self.request.user)
+                                                        user=self.request.user
+                                                        ).is_active
             except LessonFavourite.DoesNotExist:
+                pass
+
+        if self.request.user.is_authenticated():
+            try:
+                context['is_complete'] = LessonComplete.objects.get(
+                                                        lesson=self.object,
+                                                        user=self.request.user
+                                                        ).is_complete
+            except LessonComplete.DoesNotExist:
                 pass
         return context
 
@@ -120,7 +131,7 @@ class LessonFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
-        lesson = Lesson.objects.get(pk=self.kwargs['pk'])
+        lesson = Lesson.objects.get(slug=self.kwargs['slug'])
         obj, created = LessonFavourite.objects.get_or_create(lesson=lesson,
                                                     user=self.request.user)
         if not created:
@@ -155,3 +166,19 @@ class LessonHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
         obj.is_active = False
         obj.save()
         return self.render_json_response({'success': True})
+
+
+class LessonCompleteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                           View):
+    decorators = {'POST': purchase_or_instructor_member_required(Lesson)}
+
+    def post_ajax(self, request, *args, **kwargs):
+        user = self.request.user
+        lesson = Lesson.objects.get(slug=self.kwargs['slug'])
+        obj, created = LessonComplete.objects.get_or_create(lesson=lesson,
+                                                            user=user)
+        if not created:
+            obj.is_complete = not obj.is_complete
+            obj.save()
+        return self.render_json_response({'success': True,
+                                          'is_active': obj.is_complete})

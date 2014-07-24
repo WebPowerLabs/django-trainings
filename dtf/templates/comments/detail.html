@@ -2,16 +2,18 @@
 
 <div id="c{{ comment.id }}" style="position:relative;bottom: 50px;"></div>
 <div class="comment-post">
-{% if user.is_staff %}
 <div class="pull-right comment-actions">
+{% if user.is_staff or comment.user == user %}
   <a href="{% url 'comments-delete' comment.id %}?next={{ request.path }}">
     <i class="fa fa-times-circle-o"></i>
   </a>
+{% endif %}
+{% if comment.user != user %}
   <a href="{% url 'comments-flag' comment.id %}?next={{ request.path }}">
     <i class="fa fa-flag"></i>
   </a>
-</div>
 {% endif %}
+</div>
   <h3 class="fb-post-heading">
     <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
     <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>

@@ -114,6 +114,7 @@ $(document).ready(function(){
         var target = $this.attr('data-target');
         target = target != undefined ? $(target) : $this;
         var url = $this.attr('data-url');
+        console.log(target);
         $.ajax({
             url: url,
             type: 'POST',

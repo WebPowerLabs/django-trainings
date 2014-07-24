@@ -41,4 +41,11 @@ class User(AbstractUser):
         else:
             return None
 
-
+    @property
+    def is_instructor(self):
+        from profiles.models import InstructorProfile
+        try:
+            self.instructorprofile
+            return True
+        except InstructorProfile.DoesNotExist:
+            return False

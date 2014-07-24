@@ -6,7 +6,7 @@ from courses.models import Course, CourseFavourite, CourseHistory
 from django.views.generic import DeleteView
 from courses.forms import CourseCreateFrom
 from utils.views import (CreateFormBaseView, PermissionMixin,
-                            AjaxResponsePermissionMixin)
+                         AjaxResponsePermissionMixin)
 from braces.views._ajax import JSONResponseMixin
 from django.views.generic.base import View
 from courses.signals import view_course_signal
@@ -15,6 +15,7 @@ from django.views.generic.list import ListView
 from django.http.response import HttpResponseRedirect
 from utils.decorators import instructor_member_required, can_edit_content
 from facebook_groups.models import FacebookGroup
+from lessons.models import LessonComplete
 
 
 class CourseListView(PermissionMixin, CreateFormBaseView):
@@ -52,11 +53,25 @@ class CourseDetailView(PermissionMixin, UpdateView):
         context['lesson_list'] = course.lesson_set.get_list(self.request.user)
         context['fb_group_list'] = FacebookGroup.objects.purchased(
                                                            self.request.user)
+        lesson_total = self.get_object().lesson_set.published().count()
+        lesson_completed = LessonComplete.objects.filter(
+                                               lesson__published=True,
+                                               user=self.request.user,
+                                               is_complete=True,
+                                               lesson__course=self.get_object()
+                                               ).count()
+        try:
+            context['course_completion'] = round(
+                             float(lesson_completed) / lesson_total * 100, 2)
+        except ZeroDivisionError:
+            context['course_completion'] = 0
+
         if self.request.user.is_authenticated():
             try:
-                context['in_favourites'] = CourseFavourite.objects.get(
+                context['is_favourite'] = CourseFavourite.objects.get(
                                                         course=self.object,
-                                                        user=self.request.user)
+                                                        user=self.request.user
+                                                        ).is_active
             except CourseFavourite.DoesNotExist:
                 pass
         return context
@@ -88,7 +103,7 @@ class CourseFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
-        course = Course.objects.get(pk=self.kwargs['pk'])
+        course = Course.objects.get(slug=self.kwargs['slug'])
         obj, created = CourseFavourite.objects.get_or_create(course=course,
                                                      user=self.request.user)
         if not created:

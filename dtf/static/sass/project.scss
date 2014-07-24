@@ -57,11 +57,11 @@
   transition-duration: 0s;
 }
 
-.fav_button.is_active .state-1, .fav_button .state-2{
+.ajax_action.is_active .state-1, .ajax_action .state-2{
     display: block;
 }
 
-.fav_button.is_active .state-2, .fav_button .state-1{
+.ajax_action.is_active .state-2, .ajax_action .state-1{
     display: none;
 }
 
