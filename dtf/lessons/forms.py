@@ -8,7 +8,7 @@ class LessonCreateFrom(forms.ModelForm):
     class Meta:
         model = Lesson
         fields = ['name', 'description', 'published', 'thumbnail', 'audio',
-                  'homework', 'tags']
+                  'video', 'homework', 'tags']
 
     helper = FormHelper()
     helper.add_input(Submit('save_changes', 'Save changes',
