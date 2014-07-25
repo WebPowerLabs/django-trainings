@@ -1,6 +1,18 @@
+{% load user_thumbnail %}
 {% if request.user.is_authenticated %}
-  <li><a href="{% url 'users:detail' request.user.id %}">My Account</a></li>
-  <li><a href="{% url 'account_logout' %}">Logout</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" class="profile">
+      {% user_thumbnail request.user %}
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><a href="{% url 'users:detail' request.user.id %}">My Account</a></li>
+      <li><a href="{% url 'account_logout' %}">Logout</a></li>
+      <li><a class="" href="{% url 'users:update' %}">My Info</a></li>
+      <li><a class="" href="{% url 'account_email' %}">Email</a></li>
+      <li><a href="{% url 'packages:purchases' %}">Purchases</a></li>   
+    </ul>
+  </li>
+
 {% else %}
   <li><a href="{% url 'account_signup' %}">Signup</a></li>
   <li><a href="{% url 'account_login' %}">Login</a></li>
