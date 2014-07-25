@@ -6,6 +6,7 @@
       <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><a href="{% url 'facebook_groups:list' %}">All Communities</a></li>
       <li><a href="{% url 'facebook_groups:list' %}{% query_string purchased=1 %}">My Communities</a></li>
     </ul>
   </li>
@@ -15,6 +16,7 @@
       <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><a href="{% url 'courses:list' %}">All Courses</a></li>
       <li><a href="{% url 'courses:list' %}{% query_string purchased=1 %}">My Courses</a></li>
       <li><a href="{% url 'courses:favourites' %}" class="">Favourites</a></li>
       <li><a href="{% url 'courses:history' %}">History</a></li>
@@ -26,6 +28,7 @@
       <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><a href="{% url 'lessons:list' %}">All Lessons</a></li>
       <li><a href="{% url 'lessons:list' %}{% query_string purchased=1 %}">My Lessons</a></li>
       <li><a href="{% url 'lessons:favourites' %}" class="">Favourites</a></li>
       <li><a href="{% url 'lessons:history' %}">History</a></li>

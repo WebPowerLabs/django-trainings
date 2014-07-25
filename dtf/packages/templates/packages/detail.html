@@ -7,7 +7,9 @@
   <div class="container">
       <div class="section-header text-center">
         <h1 class="section-title">{{ package.name }}</h1>
-        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+        {% if class_name == 'InfusionsoftPackage' %}
+        <h3 class="section-subtitle">{{ package.description }}</h3>
+        {% endif %}
         <hr>
       </div><!--/ .section-header-->
     <div class="row">
