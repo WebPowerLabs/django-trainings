@@ -1,6 +1,6 @@
 from functools import wraps
 from profiles.models import InstructorProfile
-from django.http.response import Http404, HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect, HttpResponse
 from courses.models import Course, Content
 from lessons.models import Lesson
 from resources.models import Resource
@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from packages.models import Package
 from profiles.models import InfusionsoftProfile
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.views import redirect_to_login
 
 
 def  purchase_or_instructor_member_required(model):
@@ -24,27 +25,29 @@ def  purchase_or_instructor_member_required(model):
         @wraps(view_func)
         def check(request, *args, **kwargs):
             user = request.user
-            profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
-            profile.update_tags()
             slug = kwargs.get('slug', None)
             content = get_object_or_404(Content, slug=slug)
-            purchased_list = model.objects.purchased(user)
-            packages = Package.objects.get_for_content(content)
             if user.is_authenticated() and user.is_active:
+                packages = Package.objects.get_for_content(content)
+                profile = InfusionsoftProfile.objects.get_or_create(
+                                                                user=user)[0]
+                profile.update_tags()
+                purchased_list = model.objects.purchased(user)
                 try:
                     instructor = user.instructorprofile
                 except InstructorProfile.DoesNotExist:
                     instructor = False
                 if content in purchased_list or user.is_staff or instructor:
                     return view_func(request, *args, **kwargs)
-            # if multiple packages exist return a list of purchase options
-            if len(packages) > 1:
-                return HttpResponseRedirect(
+                # if multiple packages exist return a list of purchase options
+                if len(packages) > 1:
+                    return HttpResponseRedirect(
                                         reverse('packages:list_for_content',
                                     kwargs={'content_pk': content.lesson.pk}))
-            # if only one exists return the package
-            return HttpResponseRedirect(reverse('packages:detail',
+                # if only one exists return the package
+                return HttpResponseRedirect(reverse('packages:detail',
                                                 kwargs={'pk': packages[0].pk}))
+            return redirect_to_login(request.path)
         return check
     return wrapper
 

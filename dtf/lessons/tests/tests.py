@@ -170,13 +170,36 @@ class LessonManagerTest(TestCaseBase):
                                                     status=1)
 
     def test_purchased(self):
-        purchased = [self.lesson_of_not_pub_course,
-                     self.lesson_first_pub,
+        purchased = [self.lesson_first_pub,
                      self.lesson_last_pub]
         res = Lesson.objects.purchased(self.user)
         self.assertEqualQs(res, purchased)
 
-    def test_get_list_user_had_insrtuctor_profile(self):
+    def test_get_next_url_purchased(self):
+        actual_url = reverse('lessons:detail', kwargs={
+                                        'slug': self.lesson_first_pub.slug})
+        url = Lesson.objects.get_next_url(obj=self.lesson_last_pub,
+                                          purchased=1, user=self.user)
+        self.assertEqual(actual_url, url)
+
+    def test_get_prev_url_purchased(self):
+        actual_url = reverse('lessons:detail', kwargs={
+                                        'slug': self.lesson_last_pub.slug})
+        url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub,
+                                          purchased=1, user=self.user)
+        self.assertEqual(actual_url, url)
+
+    def test_get_next_url_for_last_object_purchased(self):
+        url = Lesson.objects.get_next_url(obj=self.lesson_first_pub,
+                                          purchased=1, user=self.user)
+        self.assertFalse(url)
+
+    def test_get_prev_url_for_last_first_purchased(self):
+        url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
+                                          purchased=1, user=self.user)
+        self.assertFalse(url)
+
+    def test_get_list_user_has_insrtuctor_profile(self):
         total_count = Lesson.objects.all().count()
         current_count = Lesson.objects.get_list(self.instructor).count()
         self.assertEqual(total_count, current_count)
@@ -233,12 +256,12 @@ class LessonManagerTest(TestCaseBase):
                                           user=self.staff_user)
         self.assertEqual(actual_url, url)
 
-    def test_get_next_url_None_user_is_staff(self):
+    def test_get_next_url_for_last_object_user_is_staff(self):
         url = Lesson.objects.get_next_url(obj=self.lesson_of_not_pub_course,
                                           user=self.staff_user)
         self.assertFalse(url)
 
-    def test_get_prev_url_None_user_is_staff(self):
+    def test_get_prev_url_for_first_object_user_is_staff(self):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           user=self.staff_user)
         self.assertFalse(url)
@@ -296,12 +319,12 @@ class LessonManagerTest(TestCaseBase):
                                           user=self.user)
         self.assertEqual(actual_url, url)
 
-    def test_get_next_url_None_user_is_not_staff(self):
+    def test_get_next_url_for_last_object_user_is_not_staff(self):
         url = Lesson.objects.get_next_url(obj=self.lesson_first_pub,
                                           user=self.user)
         self.assertFalse(url)
 
-    def test_get_prev_url_None_user_is_not_staff(self):
+    def test_get_prev_url_for_first_object_user_is_not_staff(self):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           user=self.user)
         self.assertFalse(url)
@@ -353,10 +376,10 @@ class LessonManagerTest(TestCaseBase):
         url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub)
         self.assertEqual(actual_url, url)
 
-    def test_get_next_url_None_no_user(self):
+    def test_get_next_url_for_last_object_no_user(self):
         url = Lesson.objects.get_next_url(obj=self.lesson_first_pub)
         self.assertFalse(url)
 
-    def test_get_prev_url_None_no_user(self):
+    def test_get_prev_url_for_first_object_no_user(self):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub)
         self.assertFalse(url)

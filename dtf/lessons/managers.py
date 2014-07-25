@@ -16,7 +16,8 @@ class LessonManager(PolymorphicManager):
                                 package__packagepurchase__status=1) |
                               Q(course__package__packagepurchase__user=user,
                                 course__package__packagepurchase__status=1) |
-                              Q(package__count=0, course__package__count=0)
+                              Q(package__count=0, course__package__count=0),
+                              published=True, course__published=True
                               ).distinct()
 
     def owned(self, user):

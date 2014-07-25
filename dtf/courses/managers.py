@@ -13,7 +13,7 @@ class CourseManager(PolymorphicManager):
         return self.annotate(Count('package')
                              ).filter(Q(package__packagepurchase__user=user,
                                         package__packagepurchase__status=1) |
-                                      Q(package__count=0))
+                                      Q(package__count=0), published=True)
 
     def get_list(self, user=None):
         """

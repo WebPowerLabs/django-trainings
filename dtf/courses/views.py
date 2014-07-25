@@ -25,7 +25,8 @@ class CourseListView(PermissionMixin, CreateFormBaseView):
     decorators = {'POST': instructor_member_required}
 
     def get_queryset(self):
-        if self.request.GET.get('purchased', None):
+        if self.request.user.is_authenticated(
+                              ) and self.request.GET.get('purchased', None):
             return Course.objects.purchased(self.request.user)
         return Course.objects.get_list(self.request.user)
 
@@ -43,39 +44,34 @@ class CourseDetailView(PermissionMixin, UpdateView):
     decorators = {'POST': can_edit_content(Course),
                   'GET': login_required}
 
-    def get_queryset(self):
-        return Course.objects.get_list(self.request.user)
-
     def get_success_url(self):
         return reverse('courses:detail', kwargs={'slug': self.kwargs['slug']})
 
     def get_context_data(self, **kwargs):
+        course = self.object
+        user = self.request.user
         context = super(CourseDetailView, self).get_context_data(**kwargs)
-        course = self.get_object()
-        context['lesson_list'] = course.lesson_set.get_list(self.request.user)
-        context['fb_group_list'] = FacebookGroup.objects.purchased(
-                                                           self.request.user)
-        lesson_total = self.get_object().lesson_set.published().count()
+        context['lesson_list'] = course.lesson_set.get_list(user)
+        context['fb_group_list'] = FacebookGroup.objects.purchased(user)
+        lesson_total = course.lesson_set.published().count()
         lesson_completed = LessonComplete.objects.filter(
-                                               lesson__published=True,
-                                               user=self.request.user,
-                                               is_complete=True,
-                                               lesson__course=self.get_object()
-                                               ).count()
+                                                     lesson__published=True,
+                                                     user=user,
+                                                     is_complete=True,
+                                                     lesson__course=course
+                                                     ).count()
         try:
             context['course_completion'] = round(
                              float(lesson_completed) / lesson_total * 100, 2)
         except ZeroDivisionError:
             context['course_completion'] = 0
-
-        if self.request.user.is_authenticated():
-            try:
-                context['is_favourite'] = CourseFavourite.objects.get(
-                                                        course=self.object,
-                                                        user=self.request.user
-                                                        ).is_active
-            except CourseFavourite.DoesNotExist:
-                pass
+        try:
+            context['is_favourite'] = CourseFavourite.objects.get(
+                                                            course=course,
+                                                            user=user
+                                                            ).is_active
+        except CourseFavourite.DoesNotExist:
+            pass
         return context
 
     def get(self, request, *args, **kwargs):
