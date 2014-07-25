@@ -14,8 +14,10 @@ class Lesson(Content):
     """
     objects = LessonManager()
 
+    video = models.FileField(upload_to='lessons/videos/%Y/%m/%d', blank=True,
+                            null=True)
     audio = models.FileField(upload_to='lessons/audio/%Y/%m/%d', blank=True,
-                             null=True)
+                            null=True)
     homework = models.TextField(blank=True)
     course = models.ForeignKey('courses.Course')
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
