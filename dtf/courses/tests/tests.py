@@ -45,7 +45,7 @@ class CourseManagerTest(TestCaseBase):
                                                     status=1)
 
     def test_purchased(self):
-        purchased = [self.course_purchased, self.course_not_pub]
+        purchased = [self.course_purchased]
         res = Course.objects.purchased(self.user)
         self.assertEqualQs(res, purchased)
 

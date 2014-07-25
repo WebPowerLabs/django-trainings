@@ -8,7 +8,7 @@ from django_filters.views import FilterView
 from tags.models import Tag
 from courses.models import Course
 from utils.views import (CreateFormBaseView, PermissionMixin,
-                            AjaxResponsePermissionMixin)
+                         AjaxResponsePermissionMixin)
 from django.http.response import HttpResponseRedirect
 from braces.views._ajax import JSONResponseMixin
 from django.views.generic.base import View
@@ -28,42 +28,34 @@ class LessonDetailView(PermissionMixin, UpdateView):
     decorators = {'GET': purchase_or_instructor_member_required(Lesson),
                   'POST': can_edit_content(Lesson)}
 
-    def get_queryset(self):
-        return Lesson.objects.get_list(self.request.user)
-
     def get_context_data(self, **kwargs):
+        lesson = self.object
+        user = self.request.user
         tag_id = self.request.GET.get('tags', None)
         course_id = self.request.GET.get('course', None)
         purchased = self.request.GET.get('purchased', None)
         context = super(LessonDetailView, self).get_context_data(**kwargs)
-        context['resource_list'] = Lesson.get_resource(self.object,
-                                                       self.request.user)
-        context['homework_list'] = Lesson.get_homework(self.object,
-                                                       self.request.user)
-        context['next_url'] = Lesson.objects.get_next_url(self.object, tag_id,
+        context['resource_list'] = Lesson.get_resource(lesson, user)
+        context['homework_list'] = Lesson.get_homework(lesson, user)
+        context['next_url'] = Lesson.objects.get_next_url(lesson, tag_id,
                                                           course_id, purchased,
-                                                          self.request.user)
-        context['prev_url'] = Lesson.objects.get_prev_url(self.object, tag_id,
-                                                course_id, self.request.user)
-        context['fb_group_list'] = FacebookGroup.objects.purchased(
-                                                           self.request.user)
-        if self.request.user.is_authenticated():
-            try:
-                context['is_favourite'] = LessonFavourite.objects.get(
-                                                        lesson=self.object,
-                                                        user=self.request.user
-                                                        ).is_active
-            except LessonFavourite.DoesNotExist:
-                pass
-
-        if self.request.user.is_authenticated():
-            try:
-                context['is_complete'] = LessonComplete.objects.get(
-                                                        lesson=self.object,
-                                                        user=self.request.user
-                                                        ).is_complete
-            except LessonComplete.DoesNotExist:
-                pass
+                                                          user)
+        context['prev_url'] = Lesson.objects.get_prev_url(lesson, tag_id,
+                                                          course_id, purchased,
+                                                          user)
+        context['fb_group_list'] = FacebookGroup.objects.purchased(user)
+        try:
+            context['is_favourite'] = LessonFavourite.objects.get(user=user,
+                                                                  lesson=lesson
+                                                                  ).is_active
+        except LessonFavourite.DoesNotExist:
+            pass
+        try:
+            context['is_complete'] = LessonComplete.objects.get(user=user,
+                                                                lesson=lesson
+                                                                ).is_complete
+        except LessonComplete.DoesNotExist:
+            pass
         return context
 
     def get_success_url(self):
