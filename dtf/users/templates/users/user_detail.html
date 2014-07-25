@@ -22,14 +22,7 @@
           </h2>
 
           {% if object == request.user %}
-            <ul class="nav nav-stacked nav-pills">
-              <!-- Action buttons -->
-                <li><a class="" href="{% url 'users:update' %}">My Info</a></li>
-                <li><a class="" href="{% url 'account_email' %}">Email</a></li>
-                <li><a href="{% url 'packages:purchases' %}">Purchases</a></li>
-              
-              <!-- End Action buttons -->
-            </ul>
+
           {% endif %}
 
         </div>
