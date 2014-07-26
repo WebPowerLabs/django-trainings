@@ -2,3 +2,59 @@
 //--------------------- PACKAGES ------------------//
 //-------------------------------------------------//
 
+//----------- "Ways to buy..." Page -----------//
+.package-options {
+	.package-wrapper { margin-bottom: 50px; }
+	.package-table {
+		margin-bottom: 30px;
+		border-radius: 6px;
+		box-shadow: 1px 1px 10px -2px fadeout(#000, 85%);
+	}
+	.package-title {
+		margin-bottom: 0;
+		padding: 18px 20px;
+		color: #fff;
+		background-color: @gray-dark;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+	}
+	.included {
+		margin-bottom: 0;
+		padding: 2px 0;
+		background-color: @gray-lightest;
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
+		border-left: 1px solid @table-border-color;
+		border-right: 1px solid @table-border-color;
+	}
+	.list-group { margin-bottom: 0; }
+	.package-items .list-group-item {
+		border-radius: 0;
+		&:last-child { border-bottom: none; }
+	}
+	.package-total {
+		margin-top: 0;
+		margin-bottom: 25px;
+		padding: 10px 0;
+		background-color: @brand-dtf;
+		color: #fff;
+		font-size: 42px;
+		font-weight: 600;
+		text-shadow: 1px 1px 1px fadeout(#000, 60%);
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
+		i {
+			font-size: 24px;
+			vertical-align: top;
+		}
+	}
+	.buy-button {
+		padding: 12px 18%;
+		text-transform: uppercase;
+		font-size: 26px;
+		font-weight: 300;
+		box-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+		&:hover { box-shadow: 2px 2px 14px rgba(0,0,0,0.8); }
+	}
+}
