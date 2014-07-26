@@ -1,5 +1,6 @@
-  <h1><span>Total: </span> &nbsp; <i class="fa fa-usd"></i> {{ package.price }}</h1>
-  <hr>
-  <a class="btn btn-xl btn-primary" href="{{ package.purchase_url }}?emailAddress={{ request.user.email }}&firstName={{ request.user.first_name }}&lastName={{ request.user.last_name }}">
-    Proceed to checkout &nbsp; <i class="fa fa-arrow-right"></i>
-  </a>
+  <div class="package-price">
+	  <h1 class="total">Total</h1>
+	  <h1 class="price"><i class="fa fa-usd"></i> {{ package.price }}</h1>
+	  <div class="clearfix"></div>
+	</div>
+  <a href="{{ package.purchase_url }}?emailAddress={{ request.user.email }}&firstName={{ request.user.first_name }}&lastName={{ request.user.last_name }}"><button class="btn btn-lg btn-danger">Proceed to Checkout</button></a>
