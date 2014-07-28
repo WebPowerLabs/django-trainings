@@ -22,18 +22,7 @@
           </h2>
 
           {% if object == request.user %}
-            <ul class="nav nav-stacked nav-pills">
-              <!-- Action buttons -->
-                <li><a class="" href="{% url 'users:update' %}">My Info</a></li>
-                <li><a class="" href="{% url 'account_email' %}">Email</a></li>
-                <li><a href="{% url 'courses:history' %}">Course History</a></li>
-                <li><a href="{% url 'lessons:history' %}">Lesson History</a></li>
-                <li><a href="{% url 'courses:favourites' %}">Course Favourites</a></li>
-                <li><a href="{% url 'lessons:favourites' %}">Lesson Favourites</a></li>
-                <li><a href="{% url 'packages:purchases' %}">Purchases</a></li>
-              
-              <!-- End Action buttons -->
-            </ul>
+
           {% endif %}
 
         </div>
