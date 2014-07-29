@@ -6,36 +6,27 @@
 {% block content %}
 <section class="user-welcome-wrapper">
   <div class="container">
-
     <div class="row">
-      <div class="col-md-4">
-        <div class="">
-          <h2>
-          {% if object.fb_uid %}
-            <img src="{{ object.get_fb_profile_img_url }}">
-          {% else %}
-            <a class="" href="{% url 'avatar_change' %}">
-              {% avatar user %}
-            </a>
-          {% endif %}
-            {% if object.get_full_name %}{{ object.get_full_name }}{% else %}{{ object.username }}{% endif %}
-          </h2>
-
-          {% if object == request.user %}
-
-          {% endif %}
-
+      <div class="col-md-7">
+        <div class="feed">
+          {% for comment in comments %}
+          <div class="fb-post">
+            {% include "features/comment.html" with hide_comments=True %}
+          </div>
+          {% endfor %}
         </div>
       </div>
-
-      <div class="col-md-8">
-        <h1>Welcome to Accelerate Your Destiny!</h1>
-        <p>Donec semper id sapien ac feugiat. Proin turpis eros, pharetra lacinia accumsan sed, imperdiet in nisl. Sed aliquam sem mauris, ac elementum velit pretium vitae. Aenean ac odio eu odio lacinia accumsan.</p>
-        <a class="btn btn-success btn-lg" href="{% url 'nufiles:list' %}">View All Sessions</a>
-        <a class="btn btn-danger btn-lg" href="{% url 'account_logout' %}">Logout</a>
+      <div class="col-md-5">
+        <div class="list-group lessons">
+          {% for course in courses %}
+          {% include "courses/course_list_item.html" %}
+          {% endfor %}
+        </div>
+        {% for group in groups %}
+        <p>{{ group.name }}</p>
+        {% endfor %}
       </div>
     </div>
-
   </div>
 </section>
 {% endblock content %}

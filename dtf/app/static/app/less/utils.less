@@ -18,3 +18,43 @@
 	margin-right: auto;
 	display: table;
 }
+.img-thumbnail {
+	padding: 0;
+	background-color: inherit;
+	border-radius: @border-radius-small;
+	border-width: 0;
+}
+.comment-form-control {
+	.comment-img {
+		width: 12%;
+		padding-right: 15px;
+		height: 34px;
+		float: left;
+		.img-thumbnail {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			margin-right: auto;
+			display: table;
+		}
+	}
+	.comment-field {
+		float: left;
+		max-width: 76%;
+	}
+	.comment-submit {
+		width: 12%;
+		float: left;
+
+		.btn {
+			margin-left: auto;
+			text-align: center;
+			display: table;	
+		}
+	}
+	@media (max-width: @screen-phone) {
+		.comment-img {width: 16%;}
+		.comment-field {max-width: 68%;}
+		.comment-submit {width: 16%;}
+	}
+}
