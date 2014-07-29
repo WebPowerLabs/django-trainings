@@ -270,8 +270,9 @@ class Common(Configuration):
     ########## END SLUGLIFIER
 
     ########## ELASTICSEARCH SETTINGS
-    ELASTICSEARCH_SETTINGS = [{'host': 'localhost'}]
-    ELASTICSEARCH_INDEX = 'dtf'
+    BONSAI_URL = os.environ.get('BONSAI_URL', 'localhost')
+    ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
+    ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
 
 
     ########## LOGGING CONFIGURATION
@@ -382,7 +383,6 @@ class Local(Common):
     ########## end django-debug-toolbar
 
     ########## Your local stuff: Below this line define 3rd party libary settings
-
 
 class LocalAndrew(Local):
     # Andrews Local settings
