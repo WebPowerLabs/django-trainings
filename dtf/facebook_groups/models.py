@@ -11,6 +11,9 @@ from jsonfield import JSONField
 from dtf_comments.models import DTFComment
 
 from .managers import FBGroupManager, FBPostManager
+from django.db.models.signals import post_save, post_delete
+from django.dispatch.dispatcher import receiver
+from utils.search import EsClient
 
 
 class FacebookGroup(models.Model):
@@ -121,3 +124,14 @@ class FacebookPost(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.fb_uid
+
+
+@receiver(post_save, sender=FacebookGroup)
+def index_es_doc(instance, **kwarg):
+    EsClient(instance).index()
+
+
+@receiver(post_delete, sender=FacebookGroup)
+def delete_es_doc(instance, **kwarg):
+    EsClient(instance).delete()
+

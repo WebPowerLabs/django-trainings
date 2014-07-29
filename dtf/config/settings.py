@@ -269,6 +269,11 @@ class Common(Configuration):
     AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
     ########## END SLUGLIFIER
 
+    ########## ELASTICSEARCH SETTINGS
+    ELASTICSEARCH_SETTINGS = [{'host': 'localhost'}]
+    ELASTICSEARCH_INDEX = 'dtf'
+
+
     ########## LOGGING CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
     # A sample logging configuration. The only tangible logging

@@ -1,10 +1,12 @@
 from django.conf import settings
-from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
 from django.db import models
 from lessons.managers import (LessonManager, LessonHistoryManager,
                               LessonFavouriteManager)
 from courses.models import Content, History, Favourite
+from django.db.models import permalink
+from django.db.models.signals import post_save, post_delete
+from django.dispatch.dispatcher import receiver
+from utils.search import EsClient
 
 
 class Lesson(Content):
@@ -48,10 +50,9 @@ class Lesson(Content):
     def get_homework(self, user):
         return self.resource_set.get_list(user).filter(type='homework')
 
+    @permalink
     def get_absolute_url(self):
-        site = Site.objects.get(pk=settings.SITE_ID)
-        return 'http://{0}{1}'.format(site.domain, reverse('lessons:detail',
-                                                kwargs={'slug': self.slug}))
+        return 'lessons:detail', (), {'slug': self.slug}
 
 
 class LessonHistory(History):
@@ -91,3 +92,13 @@ class LessonComplete(models.Model):
     class Meta:
         verbose_name = 'Lesson complete item'
         verbose_name_plural = 'Lesson complete items'
+
+
+@receiver(post_save, sender=Lesson)
+def index_es_doc(instance, **kwarg):
+    EsClient(instance).index()
+
+
+@receiver(post_delete, sender=Lesson)
+def delete_es_doc(instance, **kwarg):
+    EsClient(instance).delete()

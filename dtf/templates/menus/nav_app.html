@@ -38,3 +38,9 @@
 {% if user.is_staff %}
 	<li><a href="{% url 'admin:index' %}">Admin</a></li>
 {% endif %}
+  <li>
+    <form method="get" action="{% url 'search' %}">
+      <input type="text" name="query" class="form-control search-bar">
+      <button class="btn btn-default">Search!</button>
+    </form>  
+  </li>

@@ -3,9 +3,11 @@ from django_extensions.db.fields import AutoSlugField, UUIDField
 from django.conf import settings
 from courses.managers import (CourseManager, CourseHistoryManager,
                               CourseFavouriteManager)
-from django.core.urlresolvers import reverse
-from django.contrib.sites.models import Site
 from polymorphic import PolymorphicModel
+from django.db.models import permalink
+from django.db.models.signals import post_save, post_delete
+from django.dispatch.dispatcher import receiver
+from utils.search import EsClient
 
 
 class Content(PolymorphicModel):
@@ -56,10 +58,9 @@ class Course(Content):
     def __unicode__(self):
         return self.name
 
+    @permalink
     def get_absolute_url(self):
-        site = Site.objects.get(pk=settings.SITE_ID)
-        return 'http://{0}{1}'.format(site.domain, reverse('courses:detail',
-                                                kwargs={'slug': self.slug}))
+        return 'courses:detail', (), {'slug': self.slug}
 
 
 class History(models.Model):
@@ -102,3 +103,13 @@ class CourseFavourite(Favourite):
 
     class Meta:
         verbose_name_plural = 'Course Favourites'
+
+
+@receiver(post_save, sender=Course)
+def index_es_doc(instance, **kwarg):
+    EsClient(instance).index()
+
+
+@receiver(post_delete, sender=Course)
+def delete_es_doc(instance, **kwarg):
+    EsClient(instance).delete()

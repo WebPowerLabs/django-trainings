@@ -3,10 +3,11 @@ from django.core.mail import mail_admins
 from django.views.generic.base import TemplateView
 from jsonview.decorators import json_view
 from .forms import ContactForm, EmailForm
+from django.shortcuts import render
+from utils.search import EsClient
 
 
 class PageView(TemplateView):
-
     template_name = "404.html"
 
     def get_context_data(self, **kwargs):
@@ -37,3 +38,12 @@ def contact(request):
         mail_admins(subject, message)
         context['success'] = True
     return context
+
+
+def search(request):
+    res_list = []
+    query = request.GET.get('query', None)
+    if query:
+        res_list = EsClient().search(query)
+    return render(request, 'pages/search_results.html',
+                  {'result_list': res_list})
