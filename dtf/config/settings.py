@@ -269,13 +269,15 @@ class Common(Configuration):
     AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
     ########## END SLUGLIFIER
 
-    ########## ELASTICSEARCH SETTINGS
+    ########## ELASTICSEARCH CONFIGURATION
     ELASTICSEARCH_SETTINGS = [{'host': 'privet-1821403.us-east-1.bonsai.io',
                                'port': 443,
                                'use_ssl': True,
                                'username': 'ae3c3lfd',
                                'password': '61zwio5idcs8zyzi'
                                }]
+    # Don't forget to create index in cluster.
+    # Run: curl -XPUT 'url_to_elastic_search_cluster/index_name'
     ELASTICSEARCH_INDEX = 'dtf'
 
 
