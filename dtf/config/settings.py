@@ -270,9 +270,18 @@ class Common(Configuration):
     ########## END SLUGLIFIER
 
     ########## ELASTICSEARCH SETTINGS
-    BONSAI_URL = os.environ.get('BONSAI_URL', 'localhost')
-    ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
-    ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
+
+    #BONSAI_URL = os.environ.get('BONSAI_URL', 'localhost')
+    #ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
+    #ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
+
+    ELASTICSEARCH_SETTINGS = [{'host': 'privet-1821403.us-east-1.bonsai.io',
+                               'port': 443,
+                               'use_ssl': True,
+                               'username': 'ae3c3lfd',
+                               'password': '61zwio5idcs8zyzi'
+                               }]
+    ELASTICSEARCH_INDEX = 'dtf'
 
 
     ########## LOGGING CONFIGURATION
