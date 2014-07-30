@@ -281,6 +281,8 @@ class Common(Configuration):
                                'username': 'ae3c3lfd',
                                'password': '61zwio5idcs8zyzi'
                                }]
+    # Don't forget to create index in cluster.
+    # Run: curl -XPUT 'url_to_elastic_search_cluster/index_name'
     ELASTICSEARCH_INDEX = 'dtf'
 
 
