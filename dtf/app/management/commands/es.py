@@ -31,7 +31,7 @@ class Command(BaseCommand):
         Displays the doduments info of the index.
         """
         for k, v in EsClient().index_info()['docs'].items():
-            self.stdout.write('{}: {}'.format(k.replace('_', ' '), v))
+                self.stdout.write('{}: {}'.format(k.replace('_', ' '), v))
 
     def sync(self):
         """

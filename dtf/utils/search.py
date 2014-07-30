@@ -32,7 +32,7 @@ class EsClient(object):
         Delete a document from an index.
         """
         return self.client.delete(index=self.search_index, doc_type=self.type,
-                           id=self.obj.pk)
+                                  id=self.obj.pk)
 
     def search(self, query):
         """
