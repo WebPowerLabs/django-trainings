@@ -48,9 +48,9 @@ class EsClient(object):
             res_list.append(item)
         return res_list
 
-    def health(self):
+    def index_info(self):
         """
-        Returns a very simple status on the health of the cluster.
+        Returns the info of the index.
         """
-        return self.client.cluster.health()
+        return self.client.indices.status()['indices'][self.search_index]
 

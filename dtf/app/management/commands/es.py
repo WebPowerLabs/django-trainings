@@ -8,48 +8,56 @@ from utils.search import EsClient
 class Command(BaseCommand):
     help = 'Commands for the Elasticsearch client.'
     option_list = BaseCommand.option_list + (
-                make_option('--sync',
+                make_option('--sync', '-s',
                             action='store_true',
                             dest='sync',
                             default=False,
                             help='Sync db data with cluster.'),
-                make_option('--health',
+                make_option('--info', '-i',
                              action='store_true',
-                             dest='health',
+                             dest='info',
                              default=False,
-                             help='Cluster health info.'))
+                             help='Index info.'))
 
     def handle(self, *args, **options):
         if options.get('sync', None):
             self.sync()
 
-        if options.get('health', None):
-            self.health()
+        if options.get('info', None):
+            self.info()
 
-    def health(self):
+    def info(self):
         """
-        Displays a very simple status on the health of the cluster.
+        Displays the doduments info of the index.
         """
-        max_len = 80
-        for k, v in EsClient().health().items():
-            self.stdout.write('{}:{}'.format(k, str(v).rjust(max_len - len(k),
-                                                             "_")))
+        for k, v in EsClient().index_info()['docs'].items():
+            self.stdout.write('{}: {}'.format(k.replace('_', ' '), v))
 
     def sync(self):
         """
         Adds or updates a documents in an index with the db data.
         """
+        content_list = Content.objects.all()
+        group_list = FacebookGroup.objects.all()
+        total_cnt = content_list.count() + group_list.count()
+        current_obj_index = 1
         created_cnt = 0
-        total_cnt = 0
-        for content in Content.objects.all():
+        progress_message = 'Syncing {} of {} item(s)'
+
+        for content in content_list:
             if not content.polymorphic_ctype.name == 'resource':
+                self.stdout.write(progress_message.format(current_obj_index,
+                                                          total_cnt))
                 res = EsClient(content).index()
                 created_cnt += 1 if res['created'] else 0
-                total_cnt += 1
-        for group in FacebookGroup.objects.all():
+                current_obj_index += 1
+
+        for group in group_list:
+            self.stdout.write(progress_message.format(current_obj_index,
+                                                      total_cnt))
             res = EsClient(group).index()
             created_cnt += 1 if res['created'] else 0
-            total_cnt += 1
+            current_obj_index += 1
         self.stdout.write('Created: {0}. Updated: {2}. Total: {1}'.format(
                                                       created_cnt, total_cnt,
                                                       total_cnt - created_cnt))
