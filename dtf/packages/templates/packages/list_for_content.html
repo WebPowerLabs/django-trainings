@@ -3,18 +3,20 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-<section class="course-list">
+<section class="package-options">
   <div class="container">
-    <div class="section-header-2 col-xs-12 text-center">
-      <h1 class="section-title">Ways to buy <span>{{ content }}</span></h1>
-      <hr>
-    </div><!--/ .section-header-->
+    <div class="row">
+      <div class="section-header-2 col-xs-12 text-center">
+        <h1 class="section-title">Ways to buy <span>{{ content }}</span></h1>
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
     <div class="row">
       {% for package in object_list %}
-      <div class="col-md-4">
-        <a href="{{ package.get_absolute_url }}" class="package-table text-center">
-          <h3 class="">{{ package.name }}</h3>
-          <hr><!--separator-->
+      <div class="package-wrapper col-md-6 text-center">
+        <div class="package-table">
+          <h3 class="package-title">{{ package.name }}</h3>
+          <p class="included">Here's what's included:</p>
           <ul class="package-items list-group">
             {% for facebook_group in package.groups.all %}
               <li class="list-group-item">{{ facebook_group.name }}</li>
@@ -28,12 +30,12 @@
           </ul><!--/ .package-items-->
           <h4 class="package-total">
             {% if package.infusionsoftpackage %}
-              <span>Total: </span> &nbsp; <i class="fa fa-usd"></i> {{ package.infusionsoftpackage.price }}
+              <i class="fa fa-usd"></i> {{ package.infusionsoftpackage.price }}
             {% endif %}
           </h4><!--/ .package-total-->
-          <button type="button" class="btn btn-block btn-primary">View Package &nbsp; <i class="fa fa-arrow-right"></i></button>
-        </a><!--/ .package-table-->
-      </div><!--/ .col-md-4-->
+        </div><!--/ .package-table-->
+        <a href="{{ package.get_absolute_url }}"><button type="button" class="buy-button btn btn-lg btn-danger">Buy Now</button></a>
+      </div><!--/ .package-wrapper-->
       {% empty %}
       <p class="text-center">No packages for this content yet.</p>
       {% endfor %}

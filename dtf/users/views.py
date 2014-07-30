@@ -11,6 +11,9 @@ from django.views.generic import ListView
 # Only authenticated users can access views using this.
 from braces.views import LoginRequiredMixin
 
+from utils.comments import latest_comments
+from courses.models import Course
+from facebook_groups.models import FacebookGroup
 # Import the form from users/forms.py
 from .forms import UserForm
 
@@ -25,6 +28,14 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     # These next two lines tell the view to index lookups by pk
     slug_field = "pk"
     slug_url_kwarg = "pk"
+
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        user = self.get_object()
+        context['courses'] = Course.objects.purchased(user)
+        context['comments'] = latest_comments(self.request)  # get latest comments
+        context['groups'] = FacebookGroup.objects.purchased(user)
+        return context
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):
