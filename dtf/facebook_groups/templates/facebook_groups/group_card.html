@@ -1,4 +1,4 @@
-{% load query_string thumbnail static %}
+{% load query_string thumbnail staticfiles %}
 <a class="group-item" href="{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% query_string request.GET %}">
 	<div class="row">
   <div class="col-md-6">
