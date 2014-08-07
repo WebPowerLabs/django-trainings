@@ -1,3 +1,4 @@
+{% if comment_list.paginator.num_pages > 1 %}
 <ul class="pager">
   {% if comment_list.has_previous %}
     <li class="previous">
@@ -19,3 +20,4 @@
     </li>
   {% endif %}
 </ul>
+{% endif %}

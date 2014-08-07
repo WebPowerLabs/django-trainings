@@ -8,23 +8,79 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <div class="feed">
-          {% for comment in comments %}
-          <div class="fb-post">
-            {% include "features/comment.html" with hide_comments=True %}
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Communities Feed
           </div>
-          {% endfor %}
+          <div class="feed">
+            {% for comment in comments %}
+            <div class="fb-post">
+              {% include "features/comment.html" with hide_comments=True %}
+            </div>
+            {% empty %}
+            <div class="panel-body">
+              <p>Your community feed will appear here when you <a href="{% url 'facebook_groups:list' %}">join a community</a>.</p>
+            </div>
+            {% endfor %}
+          </div>
+          {% if comments.paginator.num_pages > 1 %}
+          <div class="panel-footer">
+            {% include "comments/pager.html" with comment_list=comments %}
+          </div>
+          {% endif %}
         </div>
       </div>
       <div class="col-md-5">
-        <div class="list-group lessons">
-          {% for course in courses %}
-          {% include "courses/course_list_item.html" %}
-          {% endfor %}
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            My Communities
+          </div>
+          <div class="">
+            {% for facebook_group in groups %}
+              {% include "facebook_groups/facebook_group_list_item.html" %}
+            {% empty %}
+            <div class="panel-body">
+              <p>Your communities will appear here when you <a href="{% url 'facebook_groups:list' %}">join a community</a>.</p>
+            </div>
+            {% endfor %}
+          </div>
         </div>
-        {% for group in groups %}
-        <p>{{ group.name }}</p>
-        {% endfor %}
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Favorite Courses
+          </div>
+          <div class="">
+            <div class="list-group lessons">
+              {% for course_favourite in courses %}
+                {% with course_favourite.course as course %}
+                  {% include "courses/course_list_item.html" %}
+                {% endwith %}
+                {% empty %}
+                <div class="panel-body">
+                  <p>Your favorite courses will appear here when you <a href="{% url 'courses:list' %}">favorite a course</a>.</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Favorite Lessons
+          </div>
+          <div class="">
+            <div class="list-group lessons">
+              {% for lesson_favourite in lessons %}
+                {% with lesson_favourite.lesson as lesson %}
+                  {% include "lessons/lesson_list_item.html" %}
+                {% endwith %}
+                {% empty %}
+                <div class="panel-body">
+                  <p>Your favorite lessons will appear here when you <a href="{% url 'lessons:list' %}">favorite a lesson</a>.</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

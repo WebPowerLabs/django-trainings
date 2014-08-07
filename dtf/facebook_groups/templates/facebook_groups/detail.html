@@ -1,16 +1,37 @@
-{% extends "facebook_groups/list.html" %}
-{% load staticfiles comments i18n %}
+{% extends "facebook_groups/base.html" %}
+{% load staticfiles comments i18n thumbnail query_string %}
 {% block title %}{{ facebook_group.name }}{{ block.super }}{% endblock title %}
 
+{% block cover %}
+{% if facebook_group.cover %}
+  {% thumbnail facebook_group.cover '750x320' crop='center' as im %} {# 2.35:1 #}
+    <img src="{{ im.url }}" class="cover-img img-responsive" alt="{{ facebook_group.name }}">
+  {% endthumbnail %}
+{% else %}
+  <img src="{% static 'images/decide-to-fly-home-banner.jpg' %}" class="cover-img img-responsive" alt="{{ facebook_group.name }}">
+{% endif %}
+{% endblock cover %}
+
 {% block page_title %}{{ facebook_group.name }}{% endblock page_title %}
+{% block page_description %}{{ facebook_group.description }}{% endblock page_description %}
+
+{% block nav_actions %}
+{% if user.is_staff %}
+  <li><a href="{% url 'facebook_groups:edit' fb_uid=facebook_group.fb_uid %}"><i class="fa fa-edit"></i> Edit Community</a></li>
+{% endif %}
+{% endblock nav_actions %}
+
+{% block nav_secondary %}
+<li>
+  <a href="{% url 'facebook_groups:list' %}{% query_string request.GET %}">
+  <i class="fa fa-arrow-left"></i> &nbsp; Communities
+  </a>
+</li>
+{% endblock nav_secondary %}
 
 {% block feed %}
 <section class="feed">
-  <div class="">
-    <p class="lead">{{ facebook_group.description }}</p>
-  </div>
-  <div class="clearfix"></div>
-  <div class="panel">
+  <div class="panel panel-default panel-comment-create">
     {% if user.is_authenticated %}
     {% get_comment_form for facebook_group as form %}
     <!-- Nav tabs -->
@@ -18,11 +39,14 @@
         <li class="active"><a href="#tab-write-new" role="tab" data-toggle="tab">Write</a></li>
         <li><a href="#tab-preview-new" class="tab-preview" data-id='new' data-url="{% url 'dtf_comments:preview_comment' %}" role="tab" data-toggle="tab">Preview</a></li>
     </ul>
+<form action="{% comment_form_target %}" method="POST">
+            {% csrf_token %}
+    <div class="panel-body">
     <!-- Tab panes -->
+
     <div class="tab-content">
       <div class="tab-pane active" id="tab-write-new">
-          <form action="{% comment_form_target %}" method="POST">
-            {% csrf_token %}
+
               <textarea class="form-control" placeholder="Write something..." name="{{ form.comment.html_name }}" id="id_comment"></textarea>
             <div class="hidden">{{ form.honeypot }}</div>
             {{ form.content_type }}
@@ -31,12 +55,16 @@
             {{ form.security_hash }}
             <input type="hidden" name="next" value="{% url 'facebook_groups:detail' facebook_group.fb_uid %}" />
       </div>
+
       <div class="tab-pane" id="tab-preview-new"></div>
-      <div class="clearfix">
-        <button type="submit" id="id_submit" class="btn btn-primary pull-right"><i class="fa fa-send fa-fw"></i></button>
-      </div>
-          </form>
     </div>
+</div>
+        <div class="panel-footer">
+        <button type="submit" id="id_submit" class="btn btn-primary pull-right"><i class="fa fa-send fa-fw"></i></button>
+        <div class="clearfix"></div>
+      </div>
+    </form>
+
     {% else %}
       <p>Please <a href="{% url 'account_login' %}">log in</a> to leave a comment.</p>
     {% endif %}

@@ -24,6 +24,9 @@
     <li><a class="" href='{% url "lessons:delete" object.slug %}'>Delete</a></li>
   </ul>
 </li>
+{% if fb_group_list %}  
+  <li><a class="btn-share-form" data-toggle="modal" data-target="#shareModal" data-url="{% url 'dtf_comments:share' object.pk %}"><i class="fa fa-share"></i></a></li>
+{% endif %}
 {% endif %}
 {% if user.is_authenticated %}
   {% if user|is_member %}
@@ -48,9 +51,7 @@
     </span>
   </a>
 </li>
-  {% if fb_group_list %}  
-  <li><a class="btn-share-form" data-toggle="modal" data-target="#shareModal" data-url="{% url 'dtf_comments:share' object.pk %}"><i class="fa fa-share"></i></a></li>
-  {% endif %}
+
 {% endif %}
 {% endblock nav_actions %}
 
@@ -106,6 +107,7 @@
             </a><!--/ .list-group-item-->
             {% endfor %}
           </div>
+          <div class="clearfix"></div>
         </div>
         <div class="panel panel-success panel-resource">
           <div class="panel-heading">
@@ -123,6 +125,7 @@
             </a>
             {% endfor %}
           </div>
+          <div class="clearfix"></div>
         </div>
         {% if object.tags.all %}
             <h3>Lesson categories</h3>

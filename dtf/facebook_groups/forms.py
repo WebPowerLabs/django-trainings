@@ -4,6 +4,8 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Field, Submit, Button, Fieldset, HTML
 
+from .models import FacebookGroup
+
 class FBGroupFeedForm(forms.Form):
 	message = forms.CharField()
 
@@ -20,22 +22,31 @@ class FBGroupFeedForm(forms.Form):
 				)
 			)
 
-class FBGroupCreateForm(forms.Form):
-	name = forms.CharField()
-	description = forms.CharField()
-	privacy = forms.ChoiceField(choices=(('open', 'Open'), ('closed', 'Closed')))
-	#admin = forms.CharField()
+class FBGroupCreateForm(forms.ModelForm):
+
+	class Meta:
+		model = FacebookGroup
+		fields = ["name", "description", "privacy", "cover", "thumbnail"]
+
+
 
 	def __init__(self, *args, **kwargs):
 		super(FBGroupCreateForm, self).__init__(*args, **kwargs)
+		self.fields["privacy"].choices = (('open', 'Open'), ('closed', 'Closed'))
+
 		self.helper = FormHelper()
 		self.helper.form_tag = True
-		self.helper.form_class = 'form'
+		self.helper.form_class = 'form form-horizontal'
+		self.helper.attrs = {"enctype": "multipart/form-data"}
+		self.helper.label_class = "col-md-2"
+		self.helper.field_class = "col-md-10"
 		self.helper.form_action = '.'
 		self.helper.layout = Layout(
 			'name',
 			'description',
 			'privacy',
+			'cover',
+			'thumbnail',
 			FormActions(
 				Submit('submit', 'Submit')
 				)

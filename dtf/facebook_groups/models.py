@@ -29,6 +29,16 @@ class FacebookGroup(models.Model):
     pinned_post = models.OneToOneField('FacebookPost', blank=True, null=True)
     pinned_comment = models.OneToOneField('dtf_comments.DTFComment',
                                           blank=True, null=True)
+    thumbnail = models.ImageField(upload_to='fb_groups/thumbs/%Y/%m/%d',
+                height_field='thumbnail_height', width_field='thumbnail_width',
+                blank=True, null=True)
+    thumbnail_height = models.CharField(max_length=255, blank=True)
+    thumbnail_width = models.CharField(max_length=255, blank=True)
+    cover = models.ImageField(upload_to='fb_groups/covers/%Y/%m/%d',
+                height_field='cover_height', width_field='cover_width',
+                blank=True, null=True)
+    cover_height = models.CharField(max_length=255, blank=True)
+    cover_width = models.CharField(max_length=255, blank=True)
 
     objects = FBGroupManager()
 
