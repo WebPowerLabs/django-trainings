@@ -9,15 +9,17 @@
 		overflow: hidden;
 		max-width: 100%;
 	}
-	.header {
-		position: absolute;
-		top: 0;
-		width: 100%;
-		color: #fff;
-		padding: 10px 15px;
-		#gradient > .vertical-three-colors(transparent; #000; 1%; transparent);
-		.page-title {
-			margin: 0;
+	@media (min-width: @screen-sm) {
+		.header {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			color: #fff;
+			padding: 10px 15px;
+			#gradient > .vertical-three-colors(transparent; #000; 1%; transparent);
+			.page-title {
+				margin: 0;
+			}
 		}
 	}
 }
@@ -41,7 +43,14 @@
 		}
 	}
 	.fb-post {
-		border-top: 1px solid @gray-lighter;
+		.comment-post {
+			border-top: 1px solid @gray-lighter;
+		}
+		&.panel {
+			.comment-post {
+				border-top: none;
+			}
+		}
 
 		p {
 			margin-bottom: 5px;

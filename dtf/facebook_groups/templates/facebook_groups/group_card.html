@@ -1,8 +1,8 @@
 {% load query_string thumbnail staticfiles %}
 <a class="group-item" href="{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% query_string request.GET %}">
-	<div class="row">
+  <div class="row">
   <div class="col-md-6">
-  	{% if facebook_group.thumbnail %}
+    {% if facebook_group.thumbnail %}
     {% thumbnail facebook_group.thumbnail '360x240' crop='center' as im %}
       <img src="{{ im.url }}" class="group-img img-responsive" alt="{{ facebook_group.name }}">
     {% endthumbnail %}
