@@ -124,3 +124,12 @@
 li.dropdown a {
   cursor: pointer;
 }
+
+/* line 115, ../sass/project.scss */
+input.search-bar {
+  background: white;
+  margin-top: 10px;
+  margin-left: 15px;
+  height: 30px;
+  width: 300px;
+}

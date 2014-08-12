@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Import the reverse lookup function
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 # view imports
 from django.views.generic import DetailView
@@ -10,6 +11,7 @@ from django.views.generic import ListView
 
 # Only authenticated users can access views using this.
 from braces.views import LoginRequiredMixin
+
 
 # Import the form from users/forms.py
 from .forms import UserForm
@@ -25,6 +27,30 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     # These next two lines tell the view to index lookups by pk
     slug_field = "pk"
     slug_url_kwarg = "pk"
+
+    def get_context_data(self, **kwargs):
+        from utils.comments import latest_comments
+        from courses.models import CourseFavourite
+        from lessons.models import LessonFavourite
+        from facebook_groups.models import FacebookGroup
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        user = self.get_object()
+        feed = latest_comments(self.request)  # get latest comments
+        paginator = Paginator(feed, 5)
+        try:
+            page = int(self.request.GET.get('page', '1'))
+        except ValueError:
+            page = 1
+        try:
+            feed = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            feed = paginator.page(paginator.num_pages)
+
+        context['courses'] = CourseFavourite.objects.active(user)
+        context['lessons'] = LessonFavourite.objects.active(user)
+        context['groups'] = FacebookGroup.objects.purchased(user)
+        context['comments'] = feed
+        return context
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):

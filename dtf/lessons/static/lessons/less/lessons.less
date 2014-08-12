@@ -4,6 +4,7 @@
 
 //-------- Lesson List-Groups -------//
 .list-group.lessons {
+	margin-bottom: 0;
 	.list-group-item {
 		padding: 20px;
 		.transition(background-color .25s ease);
@@ -76,5 +77,24 @@
 				background-color: hardlight(@brand-success, #eee);
 			}			
 		}
-	}	
+	}
+	.panel-resource {
+		.list-group {
+			width: 100%;
+			float: left;
+			.list-group-item {
+				float: left;
+				width: 100%;
+				.list-group-item-primary {
+					width: 90%;
+					float: left;
+					min-height: 60px;
+				}
+				.list-group-item-secondary {
+					width: 10%;
+					float: left;
+				}
+			}
+		}
+	}
 }

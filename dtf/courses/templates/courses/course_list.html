@@ -18,7 +18,7 @@
         <hr>
       </div><!--/ .section-header-->
     </div><!--/ .row-->
-    <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
+    <div class="row {% if user.is_staff and not request.GET.purchased %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
       {% for course in object_list %}
         <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
           {% include "courses/course_card.html" %}

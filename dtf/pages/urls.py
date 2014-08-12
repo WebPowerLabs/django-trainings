@@ -49,4 +49,5 @@ urlpatterns = patterns('pages.views',
         PageView.as_view(template_name='pages/hmh_video.html'),
         name="hmh-video"),
     url(r'^contact/$', 'contact', name='contact'),
+    url(r'^search/$', 'search', name="search"),
     )

@@ -1,6 +1,6 @@
 from functools import wraps
 from profiles.models import InstructorProfile
-from django.http.response import Http404, HttpResponseRedirect, HttpResponse
+from django.http.response import Http404, HttpResponseRedirect
 from courses.models import Course, Content
 from lessons.models import Lesson
 from resources.models import Resource
