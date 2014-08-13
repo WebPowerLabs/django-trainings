@@ -5,11 +5,12 @@
       {% user_thumbnail request.user %}
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      <li><a href="{% url 'users:detail' request.user.id %}">My Account</a></li>
+      <li><a href="{% url 'users:detail' request.user.id %}">Dashboard</a></li>
+      <li><a href="{% url 'packages:purchases' %}">Purchases</a></li> 
       <li><a href="{% url 'account_logout' %}">Logout</a></li>
-      <li><a class="" href="{% url 'users:update' %}">My Info</a></li>
-      <li><a class="" href="{% url 'account_email' %}">Email</a></li>
-      <li><a href="{% url 'packages:purchases' %}">Purchases</a></li>   
+      <li class="divider"></li>
+      <li><a class="" href="{% url 'users:update' %}">Edit Info</a></li>
+      <li><a class="" href="{% url 'account_email' %}">Edit Email</a></li>  
     </ul>
   </li>
 

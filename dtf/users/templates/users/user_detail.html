@@ -4,8 +4,51 @@
 {% block title %}{{ object.username }} | Decide to Fly{% endblock %}
 
 {% block content %}
-<section class="user-welcome-wrapper">
+
+<div class="container">
+    <h1 class="page-header">
+      {{ object.get_full_name }}
+    </h1>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Profile
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          {% if request.user == object %}
+            <a class="" href="{% url 'avatar_add' %}">
+          {% else %}
+            <a>
+          {% endif %}
+          {% if object.fb_uid and not object|has_avatar %}
+            <img src="{{ object.get_fb_profile_img_url }}" class="thumbnail img-thumbnail">
+          {% else %}
+          <img src="{% avatar_url object 160 %}" class="thumbnail img-thumbnail">
+          {% endif %}
+            </a>
+        </div>
+        <div class="col-md-9">
+          <p><strong>My Archetype: </strong>{{ profile.archetype }}</p>
+          <p><strong>My Anthem: </strong>{{ profile.anthem }}</p>
+          <p><strong>I am ... </strong>{{ profile.about }} </p>
+        </div>
+      </div>
+    </div>
+    {% if request.user == object %}
+    <div class="panel-footer">
+      <a class="btn btn-link" href="{% url 'profiles:update_user_profile' %}">Update Profile</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if request.user == object or request.user.is_staff %}
+<section class="">
   <div class="container">
+    <h2 class="page-header">
+      My Dashboard
+    </h2>
     <div class="row">
       <div class="col-md-7">
         <div class="panel panel-primary">
@@ -85,4 +128,5 @@
     </div>
   </div>
 </section>
+{% endif %}
 {% endblock content %}

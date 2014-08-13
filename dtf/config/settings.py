@@ -359,7 +359,7 @@ class Common(Configuration):
     AVATAR_HASH_USERDIRNAMES = True
     AVATAR_CLEANUP_DELETED = True
     AVATAR_HASH_FILENAMES = True
-    AVATAR_MAX_SIZE = 1048576
+    AVATAR_MAX_SIZE = 1048576*2
     ########## END AVATAR CONFIG
 
 class Local(Common):

@@ -39,6 +39,7 @@ class FacebookGroup(models.Model):
                 blank=True, null=True)
     cover_height = models.CharField(max_length=255, blank=True)
     cover_width = models.CharField(max_length=255, blank=True)
+    active = models.BooleanField(default=True)
 
     objects = FBGroupManager()
 

@@ -1,10 +1,15 @@
-{% load query_string thumbnail %}
+{% load query_string thumbnail staticfiles %}
 <a class="list-group-item fb-group" href="{% url 'facebook_groups:detail' facebook_group.fb_uid %}">
   <div class="row">
     <div class="col-xs-3">
+    {% if facebook_group.thumbnail %}
     {% thumbnail facebook_group.thumbnail '250x250' crop='center' as im %}
       <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ facebook_group.name }}">
     {% endthumbnail %}
+    {% else %}
+    <img class="img-rounded img-responsive" src="{% static 'images/decide-to-fly-home-banner.jpg' %}">
+    {% endif %}
+
     </div><!--/ .col-xs-3-->
     <div class="col-xs-9">
       <h3 class="list-group-item-heading">{{ facebook_group.name }}</h3>

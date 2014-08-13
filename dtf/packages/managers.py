@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from httplib import CannotSendRequest
+
 from django.db import models
 from django.conf import settings
 

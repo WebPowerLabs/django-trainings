@@ -1,3 +1,10 @@
 from django import forms
 
-# place form definition here
+from .models import UserProfile
+
+
+class UserProfileForm(forms.ModelForm):
+
+	class Meta:
+		model = UserProfile
+		fields = ["archetype", "anthem", "about"]

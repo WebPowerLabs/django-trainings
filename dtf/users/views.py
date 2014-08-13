@@ -33,6 +33,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         from courses.models import CourseFavourite
         from lessons.models import LessonFavourite
         from facebook_groups.models import FacebookGroup
+        from profiles.models import UserProfile
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = self.get_object()
         feed = latest_comments(self.request)  # get latest comments
@@ -50,6 +51,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         context['lessons'] = LessonFavourite.objects.active(user)
         context['groups'] = FacebookGroup.objects.purchased(user)
         context['comments'] = feed
+        context['profile'] = UserProfile.objects.get_or_create(user=user)[0]
         return context
 
 

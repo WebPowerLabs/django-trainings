@@ -2,7 +2,7 @@
 {% if user|can_manage_content:object.lesson %}
 <div class="list-group-item sortable_item no_transition">
   {% if object.file %}
-    <a href="{{ object.file.url }}" class="list-group-item-primary" data-pk="{{ object.pk }}" download>
+    <a href="{{ object.file.url }}" class="list-group-item-primary" data-pk="{{ object.pk }}" target="_blank">
   {% else %}
     <a href="{% url 'resources:detail' object.slug %}" class="list-group-item-primary" data-pk="{{ object.pk }}">
   {% endif %}
@@ -22,7 +22,7 @@
 </div>
 {% else %}
 {% if object.file %}
-<a href="{{ object.file.url }}" class="list-group-item sortable_item no_transition" data-pk="{{ object.pk }}" download>
+<a href="{{ object.file.url }}" class="list-group-item sortable_item no_transition" data-pk="{{ object.pk }}" target="_blank">
 {% else %}
 <a href="{% url 'resources:detail' object.slug %}" class="list-group-item sortable_item no_transition" data-pk="{{ object.pk }}">
 {% endif %}
