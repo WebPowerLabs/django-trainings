@@ -26,13 +26,14 @@ class FBGroupCreateForm(forms.ModelForm):
 
 	class Meta:
 		model = FacebookGroup
-		fields = ["name", "description", "privacy", "cover", "thumbnail"]
+		fields = ["name", "description", "privacy", "cover", "thumbnail", "active"]
 
 
 
 	def __init__(self, *args, **kwargs):
 		super(FBGroupCreateForm, self).__init__(*args, **kwargs)
 		self.fields["privacy"].choices = (('open', 'Open'), ('closed', 'Closed'))
+		self.fields["active"].help_text = u'Uncheck to hide group from public'
 
 		self.helper = FormHelper()
 		self.helper.form_tag = True
@@ -47,6 +48,7 @@ class FBGroupCreateForm(forms.ModelForm):
 			'privacy',
 			'cover',
 			'thumbnail',
+			'active',
 			FormActions(
 				Submit('submit', 'Submit')
 				)

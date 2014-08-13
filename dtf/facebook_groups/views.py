@@ -26,7 +26,7 @@ def fb_group_list(request):
     lists all facebook groups. also includes the latest comments from all 
     content types
     '''
-    fb_groups = FacebookGroup.objects.all()
+    fb_groups = FacebookGroup.objects.active(user=request.user)
     if request.GET.get('purchased', None):
         fb_groups = FacebookGroup.objects.purchased(request.user)
     feed = latest_comments(request)  # get latest comments

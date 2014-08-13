@@ -9,11 +9,17 @@ from users.models import User
 
 
 class FBGroupManager(models.Manager):
+
+    def active(self, user=None):
+        if user and user.is_staff:
+            return self.all()
+        return self.filter(active=True)
+
     def purchased(self, user):
         if user.is_authenticated():
             if user.is_staff:
                 return self.all()
-        return self.annotate(Count('package')
+        return self.active().annotate(Count('package')
                              ).filter(Q(package__packagepurchase__user=user,
                                         package__packagepurchase__status=1) |
                                       Q(package__count=0)).distinct()
