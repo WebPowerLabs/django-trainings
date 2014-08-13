@@ -158,7 +158,6 @@ ul.pager {
 			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
 		}
 	}
-	img.swoosh { margin-bottom: -7px; }
 }
 @media (min-width: @screen-sm-min) {
 	.welcome-home {
@@ -206,7 +205,7 @@ ul.pager {
 		background: #fff;
 		border-radius: 10px;
 		float: left;
-		cursor: pointer;
+		cursor: default;
 		-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
@@ -260,6 +259,52 @@ ul.pager {
 			border: 1px solid @brand-gray;
 			border-radius: 100px;
 		}
+	}
+}
+
+// ------Meet the Founder ------ //
+.meet-founder {
+	.section {
+		padding-top: 40px;
+		padding-bottom: 0;
+	}
+	.full-bg-image {
+		background-image: url(../../images/meet-jami-amidon.jpg);
+		//background-image: url(../../../images/meet-jami-amidon.jpg);
+	}
+	.video-full-entry { padding: 110px 0; }
+	.content { margin-bottom: 60px; }
+	.video-wrapper {
+		position: relative;
+		padding-bottom: 56.25%; /* 16:9 */
+		padding-top: 25px;
+		margin-bottom: 20px;
+		height: 0;
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
+		}
+	}
+	.quote {
+		font-style: italic;
+		font-weight: 600;
+		color: #fff;
+		text-shadow: 1px 1px 7px fadeout(#000, 30%);
+	}
+	.source {
+		padding-left: 40%;
+		text-transform: uppercase;
+		font-weight: 600;
+		letter-spacing: 2px;
+	}
+}
+@media (min-width: @screen-sm-min) {
+	.meet-founder {
+		.section { padding-top: 100px; }
 	}
 }
 
