@@ -26,7 +26,7 @@ def fb_group_list(request):
     lists all facebook groups. also includes the latest comments from all 
     content types
     '''
-    fb_groups = FacebookGroup.objects.all()
+    fb_groups = FacebookGroup.objects.active(user=request.user)
     if request.GET.get('purchased', None):
         fb_groups = FacebookGroup.objects.purchased(request.user)
     feed = latest_comments(request)  # get latest comments
@@ -75,7 +75,7 @@ def fb_group_detail(request, fb_uid):
         object_pk=fb_group.pk, is_removed=False).order_by('-submit_date')
     if fb_group.pinned_comment:
         comments = comments.exclude(pk=fb_group.pinned_comment.pk)
-    paginator = Paginator(comments, 5)
+    paginator = Paginator(comments, 20)
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -180,17 +180,40 @@ def fb_group_create(request):
     '''
     form = FBGroupCreateForm()
     if request.method == 'POST':
+        form = form(request)
         name = request.POST.get('name')
         description = request.POST.get('description')
         privacy = request.POST.get('privacy')
         fb_group = FacebookGroup.objects.fb_create(user=request.user.id,
             name=name, description=description, privacy=privacy)
-        return HttpResponseRedirect(reverse_lazy("facebook_groups:sync",
+        # sync with fb data
+        fb_group.save_fb_profile_data(request.user)
+        return HttpResponseRedirect(reverse_lazy("facebook_groups:detail",
             kwargs={"fb_uid" : fb_group.fb_uid}))
-
-    fb_groups = FacebookGroup.objects.all()
     context = {
-        'facebook_groups': fb_groups,
+        'form': form
+    }
+    return render_to_response('facebook_groups/add.html',
+        context,
+        context_instance=RequestContext(request))
+
+
+@login_required
+def fb_group_edit(request, fb_uid):
+    '''
+    edits facebook_group on the local database as well as on facebook
+    redirects to sync view instead of syncing here
+    '''
+    fb_group = FacebookGroup.objects.get(fb_uid=fb_uid)
+    
+    if request.method == 'POST':
+        form = FBGroupCreateForm(request.POST, request.FILES, instance=fb_group)
+        if form.is_valid:
+            form.save()
+            return HttpResponseRedirect(reverse_lazy("facebook_groups:detail",
+                kwargs={"fb_uid" : fb_group.fb_uid}))
+    form = FBGroupCreateForm(instance=fb_group)
+    context = {
         'form': form
     }
     return render_to_response('facebook_groups/add.html',

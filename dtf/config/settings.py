@@ -269,7 +269,12 @@ class Common(Configuration):
     AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
     ########## END SLUGLIFIER
 
-    ########## ELASTICSEARCH CONFIGURATION
+    ########## ELASTICSEARCH SETTINGS
+
+    #BONSAI_URL = os.environ.get('BONSAI_URL', 'localhost')
+    #ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
+    #ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
+
     ELASTICSEARCH_SETTINGS = [{'host': 'privet-1821403.us-east-1.bonsai.io',
                                'port': 443,
                                'use_ssl': True,
@@ -354,7 +359,7 @@ class Common(Configuration):
     AVATAR_HASH_USERDIRNAMES = True
     AVATAR_CLEANUP_DELETED = True
     AVATAR_HASH_FILENAMES = True
-    AVATAR_MAX_SIZE = 1048576
+    AVATAR_MAX_SIZE = 1048576*2
     ########## END AVATAR CONFIG
 
 class Local(Common):
@@ -389,7 +394,6 @@ class Local(Common):
     ########## end django-debug-toolbar
 
     ########## Your local stuff: Below this line define 3rd party libary settings
-
 
 class LocalAndrew(Local):
     # Andrews Local settings

@@ -2,11 +2,60 @@
 //--------------------- COMMUNITY FEED ------------------//
 //-------------------------------------------------------//
 
+.section-groups {
+	.header-container {
+		position: relative;
+		display: block;
+		overflow: hidden;
+		max-width: 100%;
+	}
+	@media (min-width: @screen-sm) {
+		.header {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			color: #fff;
+			padding: 10px 15px;
+			#gradient > .vertical-three-colors(transparent; #000; 1%; transparent);
+			.page-title {
+				margin: 0;
+			}
+		}
+	}
+}
+
+.group-item {
+	// fb group as a list item
+	display: block;
+	.material-lift();
+	margin: 10px 0;
+	.group-title, .group-text {
+		padding: 10px 0;
+	}
+}
+
 .feed {
+	.panel-comment-create {
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+		.nav-tabs {
+			padding: 15px 10px 0;
+		}
+	}
 	.fb-post {
+		.comment-post {
+			border-top: 1px solid @gray-lighter;
+		}
+		&.panel {
+			.comment-post {
+				border-top: none;
+			}
+		}
+
 		p {
 			margin-bottom: 5px;
 			line-height: 24px;
+			color: @gray;
 		}
 		.fb-post-heading {
 			clear: both;
@@ -20,9 +69,10 @@
 				float: left;
 			}
 			.fb-from-user {
-				line-height: 40px;
+				line-height: 30px;
 				padding-left: 15px;
 				float: left;
+				color: @brand-success;
 			}
 			.date {
 				line-height: 34px;
@@ -47,6 +97,9 @@
 				font-weight: 600;
 				font-size: 12px;
 				color: @brand-gray;
+			}
+			.fb-from-user {
+				color: @brand-success;
 			}
 		}
 		.fb-comment-form {
@@ -95,15 +148,16 @@
 		.tab-pane {
 			padding: 0;
 		}
+		.panel-body {
+			padding: 0 15px 15px;
+		}
 	}
 	// bootstrap panel overrides
 	.panel-pinned {
 		border-color: @brand-danger;
 		box-shadow: 0 0 3px @brand-danger;
 	}
-	.panel-body {
-		padding: 0 15px 15px;
-	}
+
 	.panel-footer {
 		background-color: @brand-gray-bg;
 	}

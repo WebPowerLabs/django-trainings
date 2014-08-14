@@ -5,12 +5,12 @@ from djnfusion import server, key
 
 from packages.models import InfusionsoftTag, PackagePurchase
 
-# class PackageProfile(models.Model):
-#    '''
-#    for storing information about Packages
-#    '''
-#    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-#    packages = models.ManyToManyField("packages.Package")
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    archetype = models.CharField(max_length=255, blank=True, verbose_name=u'My Archetype')
+    anthem = models.TextField(blank=True, verbose_name=u'My Anthem')
+    about = models.TextField(blank=True, verbose_name=u'I am...')
 
 
 class FacebookProfile(models.Model):
@@ -115,7 +115,6 @@ def infusionsoft_sync_user(sender, **kwargs):
         user = kwargs['user']
         profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
         profile.update_tags()
-
 
 
 

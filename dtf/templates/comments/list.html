@@ -5,7 +5,7 @@
     <div id="comment-{{ comment.id }}" class="media fb-post">
         <div data-fbuser="{{ comment.user.id }}" class="pull-left img-profile">
         {% if comment.user.fb_uid %}
-            <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-responsive fb-profile-img">
+            <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-thumbnail">
         {% else %}
             {% avatar comment.user %}
         {% endif %}

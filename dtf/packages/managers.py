@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from httplib import CannotSendRequest
+
 from django.db import models
 from django.conf import settings
 
@@ -120,10 +122,13 @@ class InfusionsoftTagManager(models.Manager):
             _key = "Id" if user.infusionsoftprofile else "email"
             _value = user.infusionsoftprofile.get_remote_id if user.infusionsoftprofile else user.email
             if _key and _value:
-                # if they have an infusionsoft profile this should work
-                results = server.DataService.findByField(key, "Contact",
-                    10, 0, _key, _value,
-                    ["Groups", ]);
+                try:
+                    # if they have an infusionsoft profile this should work
+                    results = server.DataService.findByField(key, "Contact",
+                        10, 0, _key, _value,
+                        ["Groups", ]);
+                except CannotSendRequest:
+                    results = (None,)
             try:
                 return_results = results[0]["Groups"] if len(results) else None
             except KeyError:
