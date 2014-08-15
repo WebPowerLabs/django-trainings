@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'marinaregular';
+    src: url('marina-webfont.eot');
+    src: url('marina-webfont.eot?#iefix') format('embedded-opentype'),
+         url('marina-webfont.woff') format('woff'),
+         url('marina-webfont.ttf') format('truetype'),
+         url('marina-webfont.svg#marinaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

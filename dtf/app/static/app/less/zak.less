@@ -17,9 +17,9 @@
 a:hover { text-decoration: none; }
 a,
 .btn {
-	-webkit-transition: color .25s ease, background-color .25s ease, border .25s ease, box-shadow .25s ease;
-	-moz-transition: color .25s ease, background-color .25s ease, border .25s ease, box-shadow .25s ease;
-	transition: color .25s ease, background-color .25s ease, border .25s ease, box-shadow .25s ease;
+	-webkit-transition: color .25s , background-color .25s , border .25s , box-shadow .25s ;
+	-moz-transition: color .25s , background-color .25s , border .25s , box-shadow .25s ;
+	transition: color .25s , background-color .25s , border .25s , box-shadow .25s ;
 }
 
 // ------ Image Thumbnail ------ //
@@ -158,6 +158,10 @@ ul.pager {
 			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
 		}
 	}
+	.nurture-button {
+		font-size: 24px;
+		padding: 15px 60px;
+	}
 }
 @media (min-width: @screen-sm-min) {
 	.welcome-home {
@@ -175,9 +179,12 @@ ul.pager {
 		font-weight: 400;
 	}
 	.entry-body {
-		font-size: 14px;
 		line-height: 1.5em;
 		color: @gray;
+	}
+	.icon-heart {
+		max-height: 100px;
+		margin-left: -15px;
 	}
 	.icon {
 		text-align: center;
@@ -264,47 +271,31 @@ ul.pager {
 
 // ------Meet the Founder ------ //
 .meet-founder {
-	.section {
-		padding-top: 40px;
-		padding-bottom: 0;
-	}
+	.section { padding: 50px 0; }
 	.full-bg-image {
 		background-image: url(../../images/meet-jami-amidon.jpg);
 		//background-image: url(../../../images/meet-jami-amidon.jpg);
 	}
-	.video-full-entry { padding: 110px 0; }
 	.content { margin-bottom: 60px; }
-	.video-wrapper {
-		position: relative;
-		padding-bottom: 56.25%; /* 16:9 */
-		padding-top: 25px;
-		margin-bottom: 20px;
-		height: 0;
-		iframe {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
-		}
-	}
 	.quote {
-		font-style: italic;
-		font-weight: 600;
-		color: #fff;
-		text-shadow: 1px 1px 7px fadeout(#000, 30%);
+		font-family: marinaregular, Helvetica, Arial, sans-serif;
+		font-size: 46px;
+		font-weight: 500;
+		color: #669933;
+		text-shadow: 0 0 10px #fff;
 	}
 	.source {
+		font-family: scriptinaregular, Garamond, Arial, sans-serif;
 		padding-left: 40%;
-		text-transform: uppercase;
+		font-size: 42px;
 		font-weight: 600;
-		letter-spacing: 2px;
+		color: #fff;
+		text-shadow: 0 0 10px rgba(0,0,0,0.8);
 	}
 }
 @media (min-width: @screen-sm-min) {
 	.meet-founder {
-		.section { padding-top: 100px; }
+		.section { padding: 120px 0; }
 	}
 }
 
