@@ -114,7 +114,7 @@
             </div><!--/ .col-md-6-->
           </div><!--/ .row-->
         </div><!--/ .video-full-entry-->
-        <a href="#" class="btn btn-danger">Meet the Founder</button></a>
+        <a href="{% url 'meet-the-founder' %}" class="btn btn-danger">Meet the Founder</button></a>
       </div><!--/ .container-->
     </section><!--/ .section-->
   </section>
@@ -143,16 +143,25 @@
       </div>
       <div class="modal-body">
         <p>We are so close to launch. You are going to be the first to see all of the changes we have made to the Decide To Fly &trade; Community. We'll stay in touch.</p>
-        <form id="connected-form-infusionsoft">
+
           <!--TODO: infusionsoft form here -->
+<form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/e74a54ec36026bde848d6930d06fb1b6" class="infusion-form form" method="POST" id="connect-form">
+    <input name="inf_form_xid" type="hidden" value="e74a54ec36026bde848d6930d06fb1b6" />
+    <input name="inf_form_name" type="hidden" value="Opt-in to&#a;&quot;Stay Connected&quot;" />
+    <input name="infusionsoft_version" type="hidden" value="1.32.0.68" />
+
           <div class="form-group">
-            <label class="group-label" label-for="connect-email">Name</label>
-            <input class="form-control" type="text" placeholder="Your Name" id="connect-name" name="connect-name">
+            <label class="group-label" for="inf_field_FirstName">First Name</label>
+            <input class="form-control" type="text" placeholder="Your First Name" id="inf_field_FirstName" name="inf_field_FirstName">
           </div>
           <div class="form-group">
-            <label class="group-label" label-for="connect-email">Email</label>
-            <input class="form-control" type="text" placeholder="Your Email" id="connect-email" name="connect-email">
+            <label class="group-label" for="inf_field_Email">Email</label>
+            <input class="form-control" type="text" placeholder="Your Email" id="inf_field_Email" name="inf_field_Email">
             <p class="help-block">Please give us your best email so we can stay connected!</p>
+          </div>
+          <div class="form-group">
+            <label for="inf_field_Phone1">Cell Phone *</label>
+            <input class="form-control" id="inf_field_Phone1" name="inf_field_Phone1" type="text" />
           </div>
         </form>
       </div>
@@ -169,9 +178,19 @@
 {{ block.super }}
 {% include "includes/js_marketing.html" %}
 <script type="text/javascript">
+$('#connect-form').on('submit', function(e) {
+  e.preventDefault();
+
+});
+
 $('#contact-form #submit').click(function(e) {
   e.preventDefault();
   $('#contact-form').submit();
+});
+
+$('#connect-submit').click(function(e) {
+  e.preventDefault();
+  $('#connect-form').submit();
 });
 </script>
 {% endblock javascript %}
