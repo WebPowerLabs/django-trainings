@@ -72,7 +72,7 @@ class InfusionsoftTagManager(models.Manager):
         """
         tag_str = self._get_provider_tags_data_for_user(user)
         tag_ids = [int(tag_id) for tag_id in tag_str.split(",")] if tag_str else []
-        tags = self.filter(remote_id__in=tag_ids) if len(tag_ids) else None
+        tags = self.filter(remote_id__in=tag_ids) if len(tag_ids) else self.none()
         return tags
 
     def _get_sync_data(self, remote_id=None):
