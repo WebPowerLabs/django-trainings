@@ -8,24 +8,20 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Lesson.video'
-        db.delete_column(u'lessons_lesson', 'video')
 
-        # Adding field 'Lesson.audio'
-        db.add_column(u'lessons_lesson', 'audio',
-                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
-                      keep_default=False)
+        # Changing field 'Lesson.video'
+        db.alter_column(u'lessons_lesson', 'video_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['lessons.Video'], unique=True, null=True))
+        # Adding unique constraint on 'Lesson', fields ['video']
+        db.create_unique(u'lessons_lesson', ['video_id'])
 
 
     def backwards(self, orm):
-        # Adding field 'Lesson.video'
-        db.add_column(u'lessons_lesson', 'video',
-                      self.gf('django.db.models.fields.files.FileField')(default=None, max_length=100, blank=True),
-                      keep_default=False)
+        # Removing unique constraint on 'Lesson', fields ['video']
+        db.delete_unique(u'lessons_lesson', ['video_id'])
 
-        # Deleting field 'Lesson.audio'
-        db.delete_column(u'lessons_lesson', 'audio')
 
+        # Changing field 'Lesson.video'
+        db.alter_column(u'lessons_lesson', 'video_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['lessons.Video'], null=True))
 
     models = {
         u'auth.group': {
@@ -89,7 +85,8 @@ class Migration(SchemaMigration):
             u'content_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['courses.Content']", 'unique': 'True', 'primary_key': 'True'}),
             'course': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['courses.Course']"}),
             'homework': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['tags.Tag']", 'null': 'True', 'blank': 'True'})
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['tags.Tag']", 'null': 'True', 'blank': 'True'}),
+            'video': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['lessons.Video']", 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         u'lessons.lessoncomplete': {
             'Meta': {'object_name': 'LessonComplete'},
@@ -108,6 +105,12 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "['-created']", 'object_name': 'LessonHistory', '_ormbases': [u'courses.History']},
             u'history_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['courses.History']", 'unique': 'True', 'primary_key': 'True'}),
             'lesson': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Lesson']"})
+        },
+        u'lessons.video': {
+            'Meta': {'object_name': 'Video'},
+            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         u'tags.tag': {
             'Meta': {'object_name': 'Tag'},

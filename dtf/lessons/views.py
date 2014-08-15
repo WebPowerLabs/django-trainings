@@ -1,6 +1,6 @@
 from django.views.generic.edit import DeleteView, UpdateView
 from lessons.models import (Lesson, LessonFavourite, LessonHistory,
-                            LessonComplete)
+                            LessonComplete, Video)
 from django.core.urlresolvers import reverse_lazy, reverse
 from lessons.forms import LessonCreateFrom
 from lessons.filters import LessonFilter
@@ -19,6 +19,12 @@ from django.contrib.auth.decorators import login_required
 from utils.decorators import (can_edit_content,
                               purchase_or_instructor_member_required)
 from facebook_groups.models import FacebookGroup
+from django.core.files.storage import FileSystemStorage, default_storage
+import os
+from django.core.files.base import ContentFile
+from django.conf import settings
+from datetime import datetime
+from django.core.files import File
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
@@ -100,8 +106,22 @@ class LessonAddView(PermissionMixin, CreateFormBaseView):
     def get_success_url(self):
         return reverse('courses:detail', kwargs={'slug': self.kwargs['slug']})
 
+    def form_invalid(self, form):
+        print form.errors
+        return CreateFormBaseView.form_invalid(self, form)
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
+        video_path = form.cleaned_data.get('video_path')
+        if video_path:
+            video = Video()
+            base_name = os.path.basename(video_path)
+            file_obj = default_storage.open(video_path)
+            djangofile = File(file_obj)
+            video.orig.save(base_name, djangofile)
+            file_obj.close()
+            video.save()
+            self.object.video = video
         self.object.course = Course.objects.get(slug=self.kwargs['slug'])
         self.object.owner = self.request.user
         self.object.save()
@@ -169,7 +189,7 @@ class LessonHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
 
 
 class LessonCompleteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
-                           View):
+                               View):
     decorators = {'POST': purchase_or_instructor_member_required(Lesson)}
 
     def post_ajax(self, request, *args, **kwargs):
@@ -182,3 +202,25 @@ class LessonCompleteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
             obj.save()
         return self.render_json_response({'success': True,
                                           'is_active': obj.is_complete})
+        
+        
+class UploadVideoView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                      View):
+     
+    def post_ajax(self, request, *args, **kwargs):
+#         import pdb;pdb.set_trace()
+        file_obj = request.FILES.get('video')
+        name = file_obj.name
+        video_name = name.rsplit('.', 1)[0]
+        fileStorage = default_storage
+        folder_path = 'tmp/{}'.format(datetime.now().strftime('%Y/%m/%d'))
+        video = fileStorage.save(os.path.join(folder_path, name.replace(' ', '_')), ContentFile(file_obj.read()))
+#         FileSystemStorage
+        res = {
+                'name': video_name,
+                'size': file_obj.size,
+                'path': video,
+                'base_name': name,
+                'madia_path': u'{}{}'.format(settings.MEDIA_URL, video)
+               }
+        return self.render_json_response(res)

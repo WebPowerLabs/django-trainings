@@ -1,6 +1,6 @@
 from django.contrib import admin
 from lessons.models import (Lesson, LessonHistory, LessonFavourite,
-                            LessonComplete)
+                            LessonComplete, Video)
 from resources.models import Resource
 
 
@@ -34,7 +34,11 @@ class LessonCompleteAdmin(admin.ModelAdmin):
     list_display = ['lesson', 'user', 'created', 'is_complete']
     list_filter = ['created', 'user']
 
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__', 'status', 'orig', 'mp4', 'ogg']
+
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(LessonHistory, LessonHistoryAdmin)
 admin.site.register(LessonFavourite, LessonFavouriteAdmin)
 admin.site.register(LessonComplete, LessonCompleteAdmin)
+admin.site.register(Video, VideoAdmin)

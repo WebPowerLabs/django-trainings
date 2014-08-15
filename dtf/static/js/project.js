@@ -158,6 +158,72 @@ $(document).ready(function(){
         });
         $this.disableSelection();
     });
+    
+    
+    
+    
+    var uploader = $('.fileuploader');
+    var acceptFileTypes = /(mp4|avi|mov|mpeg)$/i;
+    var in_progress = 0;
+    uploader.each(function(){
+        var upl = $(this);
+        upl.fileupload({
+            url: upl.attr('data-url'),
+            allowedTypes: 'avi,mp4,mov,mkv',
+            dataType : 'json',
+                add : function(e, data) {
+                    var file = data.files[0];
+                    var uploadErrors = [];
+                    if (file['name'].length && !acceptFileTypes.test(file['name'])) {
+                        uploadErrors.push('Accepts only avi, mp4, mov, mkv files.');
+                    }
+                    if (uploadErrors.length > 0) {
+                        alert(uploadErrors.join("\n"));
+                    } else {
+                        in_progress += 1;
+                        data.submit();
+                        $('#submit-id-save_changes').attr('disabled', 'disabled');
+                    }
+                },
+                done : function(e, data) {
+                    // upl.attr('title','ololo');
+                    $("#id_video_path").val(data.result.path);
+                    $('#submit-id-save_changes').removeAttr('disabled');
+                },
+                progress: function(e, data){
+                    var file = data.files[0];
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    var progressBar = $('.progress');
+                    if(progress == 100){
+                        progressBar.removeClass('active');
+                        in_progress = in_progress - 1;
+                        setTimeout(function(){
+                            progressBar.addClass('hidden');
+                        }, 1000);
+                        if (in_progress == 0){
+                        }
+                    }else{
+                        progressBar.removeClass('hidden');
+                    }
+                    progressBar.find('.progress-bar').css('width', progress + '%');
+                }
+        });
+    });
+    
+    
+    
+    
+    
+    
 });
+
+
+
+
+
+
+
+
+
 
 

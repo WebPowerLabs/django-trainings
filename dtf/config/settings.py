@@ -29,7 +29,6 @@ PROJECT_NAME = os.environ.get('PROJECT_NAME', 'dtf')
 
 
 class Common(Configuration):
-
     ########## APP CONFIGURATION
     DJANGO_APPS = (
         # Default Django apps:

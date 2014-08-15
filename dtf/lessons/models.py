@@ -7,6 +7,32 @@ from django.db.models import permalink
 from django.db.models.signals import post_save, post_delete
 from django.dispatch.dispatcher import receiver
 from utils.search import EsClient
+import ntpath
+
+
+class Video(models.Model):
+    SCHEDULED = 0
+    CONVERTED = 1
+    CONVERTING = 2
+    ERROR = 3
+
+    STATUS_CHOICES = [
+              [CONVERTING, 'Converting'],
+              [ERROR, 'Error'],
+              [SCHEDULED, 'Scheduled'],
+              [CONVERTED, 'Converted']
+              ]
+    
+    status = models.IntegerField(choices=STATUS_CHOICES, default=SCHEDULED)
+    orig = models.FileField(upload_to='lessons/videos/orig/%Y/%m/%d', null=True,
+                            blank=True)
+    mp4 = models.FileField(upload_to='lessons/videos/mp4/%Y/%m/%d', null=True,
+                           blank=True)
+    ogg = models.FileField(upload_to='lessons/videos/ogg/%Y/%m/%d', null=True,
+                           blank=True)
+    
+    def __unicode__(self):
+        return u'{}'.format(ntpath.basename(self.orig.file.name))
 
 
 class Lesson(Content):
@@ -16,8 +42,7 @@ class Lesson(Content):
     """
     objects = LessonManager()
 
-    video = models.FileField(upload_to='lessons/videos/%Y/%m/%d', blank=True,
-                            null=True)
+    video = models.OneToOneField('Video', blank=True, null=True)
     audio = models.FileField(upload_to='lessons/audio/%Y/%m/%d', blank=True,
                             null=True)
     homework = models.TextField(blank=True)
