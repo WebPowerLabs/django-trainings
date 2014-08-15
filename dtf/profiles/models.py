@@ -90,11 +90,15 @@ class InfusionsoftProfile(models.Model):
             10, 0, "email", self.user.email,
             ["Id", ]);
         if not len(results):
-            server.ContactService.add(key, [
-            {"Email": self.user.email},
-            {"FirstName": self.user.first_name},
-            {"LastName": self.user.last_name}])
-            self._get_provider_data()
+            #TODO:FIX THIS java.lang.String ERROR
+#            remote_id = server.ContactService.add(key, [
+#                {"djUserID": unicode(self.user.id)},
+#                {"Email": self.user.email},
+#                {"FirstName": self.user.first_name},
+#                {"LastName": self.user.last_name}])
+
+#            return {"Id": remote_id}
+            return []
         return results[0]
 
 

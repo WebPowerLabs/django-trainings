@@ -121,6 +121,8 @@ class InfusionsoftTagManager(models.Manager):
             # try getting users infusionsoft id, use email as backup
             _key = "Id" if user.infusionsoftprofile else "email"
             _value = user.infusionsoftprofile.get_remote_id if user.infusionsoftprofile else user.email
+            results = self.none()
+            return_results = self.none()
             if _key and _value:
                 try:
                     # if they have an infusionsoft profile this should work
@@ -128,9 +130,11 @@ class InfusionsoftTagManager(models.Manager):
                         10, 0, _key, _value,
                         ["Groups", ]);
                 except CannotSendRequest:
-                    results = (None,)
-            try:
-                return_results = results[0]["Groups"] if len(results) else None
-            except KeyError:
-                return_results = None
-            return  return_results
+                    results = (self.none(),)
+            if results:
+
+                try:
+                    return_results = results[0]["Groups"] if len(results) else self.none()
+                except KeyError:
+                    pass
+            return return_results
