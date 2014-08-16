@@ -16,7 +16,7 @@ class LessonCreateFrom(forms.ModelForm):
                 'thumbnail',
                 HTML("""<div id="div_id_video" class="form-group">
                           <label for="id_video">Video</label><br />
-                          <span class="btn btn-success fileinput-button
+                          <span class="btn btn-primary fileinput-button
                           {% if object.video %} hidden{% endif %}">
                             <i class="fa fa-plus"></i>&nbsp;
                             <span class="fileinput-title">
