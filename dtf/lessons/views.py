@@ -208,14 +208,14 @@ class UploadVideoView(AjaxResponsePermissionMixin, JSONResponseMixin,
                       View):
      
     def post_ajax(self, request, *args, **kwargs):
-#         import pdb;pdb.set_trace()
         file_obj = request.FILES.get('video')
         name = file_obj.name
         video_name = name.rsplit('.', 1)[0]
         fileStorage = default_storage
         folder_path = 'tmp/{}'.format(datetime.now().strftime('%Y/%m/%d'))
-        video = fileStorage.save(os.path.join(folder_path, name.replace(' ', '_')), ContentFile(file_obj.read()))
-#         FileSystemStorage
+        video = fileStorage.save(os.path.join(folder_path,
+                                              name.replace(' ', '_')
+                                                ), ContentFile(file_obj.read()))
         res = {
                 'name': video_name,
                 'size': file_obj.size,

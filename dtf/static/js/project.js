@@ -161,7 +161,6 @@ $(document).ready(function(){
     
     
     
-    
     var uploader = $('.fileuploader');
     var acceptFileTypes = /(mp4|avi|mov|mpeg)$/i;
     var in_progress = 0;
@@ -169,7 +168,6 @@ $(document).ready(function(){
         var upl = $(this);
         upl.fileupload({
             url: upl.attr('data-url'),
-            allowedTypes: 'avi,mp4,mov,mkv',
             dataType : 'json',
                 add : function(e, data) {
                     var file = data.files[0];
@@ -182,6 +180,8 @@ $(document).ready(function(){
                     } else {
                         in_progress += 1;
                         data.submit();
+                        $('.fileinput-button').attr('disabled', 'disabled');
+                        $('.fileinput-title').text('Loading...');
                         $('#submit-id-save_changes').attr('disabled', 'disabled');
                     }
                 },
