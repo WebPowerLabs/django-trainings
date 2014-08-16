@@ -1,8 +1,16 @@
 {% extends 'lessons/base.html' %}
 {% load static crispy_forms_tags query_string video_player thumbnail comments user_permission_tags %}
 
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'js/uploader/css/jquery.fileupload.css' %}">
+<link rel="stylesheet" href="{% static 'js/uploader/css/jquery.fileupload-ui.css' %}">
+{% endblock css %}
 {% block javascript %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'js/uploader/js/jquery.fileupload.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/uploader/js/jquery.iframe-transport.js' %}"></script>
 <script src="{% static 'js/audiojs/audio.min.js' %}"></script>
 <script>
   audiojs.events.ready(function() {

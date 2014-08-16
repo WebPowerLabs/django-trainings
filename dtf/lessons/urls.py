@@ -7,8 +7,8 @@ except ImportError:  # django < 1.4
 from lessons import views
 
 urlpatterns = patterns('',
-    url('^upload_video/$', views.UploadVideoView.as_view(),
-                                                        name='upload_video'),                       
+    url('^upload_video_file/$', views.UploadVideoFileView.as_view(),
+                                                    name='upload_video_file'),
     url('^delete_history/(?P<pk>[-\w]+)/$',
                                     views.LessonHistoryDeleteView.as_view(),
                                                         name='delete_history'),

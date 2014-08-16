@@ -17,14 +17,17 @@ from lessons.signals import view_lesson_signal
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from utils.decorators import (can_edit_content,
-                              purchase_or_instructor_member_required)
+                              purchase_or_instructor_member_required,
+    instructor_member_required)
 from facebook_groups.models import FacebookGroup
-from django.core.files.storage import FileSystemStorage, default_storage
+from django.core.files.storage import default_storage
 import os
 from django.core.files.base import ContentFile
 from django.conf import settings
 from datetime import datetime
 from django.core.files import File
+
+fileStorage = default_storage
 
 
 class LessonDetailView(PermissionMixin, UpdateView):
@@ -71,6 +74,28 @@ class LessonDetailView(PermissionMixin, UpdateView):
         view_lesson_signal.send(sender=self.get_object(),
                                 user=self.request.user)
         return UpdateView.get(self, request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        video_instance = self.get_object().video
+        video_path = form.cleaned_data.get('video_path')
+        video_pk = form.cleaned_data.get('video_pk')
+        self.object = form.save(commit=False)
+        self.object.video = video_instance
+        if video_instance and not video_pk:
+            self.object.video = None
+            video_instance.delete()
+        if video_path:
+            video = Video()
+            base_name = os.path.basename(video_path)
+            file_obj = default_storage.open(video_path)
+            djangofile = File(file_obj)
+            video.orig.save(base_name, djangofile)
+            file_obj.close()
+            video.save()
+            self.object.video = video
+        self.object.save()
+        form.save_m2m()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class LessonListView(PermissionMixin, FilterView):
@@ -106,13 +131,9 @@ class LessonAddView(PermissionMixin, CreateFormBaseView):
     def get_success_url(self):
         return reverse('courses:detail', kwargs={'slug': self.kwargs['slug']})
 
-    def form_invalid(self, form):
-        print form.errors
-        return CreateFormBaseView.form_invalid(self, form)
-
     def form_valid(self, form):
-        self.object = form.save(commit=False)
         video_path = form.cleaned_data.get('video_path')
+        self.object = form.save(commit=False)
         if video_path:
             video = Video()
             base_name = os.path.basename(video_path)
@@ -204,23 +225,23 @@ class LessonCompleteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
                                           'is_active': obj.is_complete})
         
         
-class UploadVideoView(AjaxResponsePermissionMixin, JSONResponseMixin,
-                      View):
-     
+class UploadVideoFileView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                          View):
+    decorators = {'POST': instructor_member_required}
+    
     def post_ajax(self, request, *args, **kwargs):
         file_obj = request.FILES.get('video')
         name = file_obj.name
         video_name = name.rsplit('.', 1)[0]
-        fileStorage = default_storage
         folder_path = 'tmp/{}'.format(datetime.now().strftime('%Y/%m/%d'))
         video = fileStorage.save(os.path.join(folder_path,
                                               name.replace(' ', '_')
                                                 ), ContentFile(file_obj.read()))
         res = {
-                'name': video_name,
-                'size': file_obj.size,
-                'path': video,
-                'base_name': name,
-                'madia_path': u'{}{}'.format(settings.MEDIA_URL, video)
+               'name': video_name,
+               'size': file_obj.size,
+               'path': video,
+               'base_name': name,
+               'madia_path': u'{}{}'.format(settings.MEDIA_URL, video)
                }
         return self.render_json_response(res)

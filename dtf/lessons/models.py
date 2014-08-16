@@ -32,8 +32,11 @@ class Video(models.Model):
                            blank=True)
     
     def __unicode__(self):
-        return u'{}'.format(ntpath.basename(self.orig.file.name))
-
+        return self.filename
+    
+    @property
+    def filename(self):
+        return ntpath.basename(self.orig.file.name)
 
 class Lesson(Content):
     """ Lesson

@@ -159,62 +159,70 @@ $(document).ready(function(){
         $this.disableSelection();
     });
     
-    
-    
+    // AJAX file uploader
     var uploader = $('.fileuploader');
     var acceptFileTypes = /(mp4|avi|mov|mpeg)$/i;
     var in_progress = 0;
+    
+    // Remove uploaded file
+    $('body').on('click', '.fileinput-button-remove', function(event){
+        event.preventDefault();
+        $("#id_video_pk").val('');
+        $("#id_video_path").val('');
+        $(this).addClass('hidden');
+        $('.fileinput-button').removeClass('hidden');
+    });
+    
+    // Upload file
     uploader.each(function(){
         var upl = $(this);
+        var addBtn = $('.fileinput-button');
+        var removeBtn = $('.fileinput-button-remove');
+        var submitBtn = $('#submit-id-save_changes');
         upl.fileupload({
             url: upl.attr('data-url'),
             dataType : 'json',
-                add : function(e, data) {
-                    var file = data.files[0];
-                    var uploadErrors = [];
-                    if (file['name'].length && !acceptFileTypes.test(file['name'])) {
-                        uploadErrors.push('Accepts only avi, mp4, mov, mkv files.');
-                    }
-                    if (uploadErrors.length > 0) {
-                        alert(uploadErrors.join("\n"));
-                    } else {
-                        in_progress += 1;
-                        data.submit();
-                        $('.fileinput-button').attr('disabled', 'disabled');
-                        $('.fileinput-title').text('Loading...');
-                        $('#submit-id-save_changes').attr('disabled', 'disabled');
-                    }
-                },
-                done : function(e, data) {
-                    // upl.attr('title','ololo');
-                    $("#id_video_path").val(data.result.path);
-                    $('#submit-id-save_changes').removeAttr('disabled');
-                },
-                progress: function(e, data){
-                    var file = data.files[0];
-                    var progress = parseInt(data.loaded / data.total * 100, 10);
-                    var progressBar = $('.progress');
-                    if(progress == 100){
-                        progressBar.removeClass('active');
-                        in_progress = in_progress - 1;
-                        setTimeout(function(){
-                            progressBar.addClass('hidden');
-                        }, 1000);
-                        if (in_progress == 0){
-                        }
-                    }else{
-                        progressBar.removeClass('hidden');
-                    }
-                    progressBar.find('.progress-bar').css('width', progress + '%');
+            add : function(e, data) {
+                var file = data.files[0];
+                var uploadErrors = [];
+                if (file['name'].length && !acceptFileTypes.test(file['name'])) {
+                    uploadErrors.push('Accepts only avi, mp4, mov, mkv files.');
                 }
+                if (uploadErrors.length > 0) {
+                    alert(uploadErrors.join("\n"));
+                } else {
+                    in_progress += 1;
+                    data.submit();
+                    addBtn.attr('disabled', 'disabled');
+                    submitBtn.attr('disabled', 'disabled');
+                }
+            },
+            done : function(e, data) {
+                $("#id_video_path").val(data.result.path);
+                submitBtn.removeAttr('disabled');
+                addBtn.addClass('hidden').removeAttr('disabled');
+                removeBtn.removeClass('hidden');
+                removeBtn.find('.fileinput-title').text("Remove " + "'" + data.result.base_name + "'");
+            },
+            progress: function(e, data){
+                var file = data.files[0];
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                var progressBar = $('.progress');
+                if(progress == 100){
+                    progressBar.removeClass('active');
+                    in_progress = in_progress - 1;
+                    setTimeout(function(){
+                        progressBar.addClass('hidden');
+                    }, 1000);
+                    if (in_progress == 0){
+                    }
+                }else{
+                    progressBar.removeClass('hidden');
+                }
+                progressBar.find('.progress-bar').css('width', progress + '%');
+            }
         });
     });
-    
-    
-    
-    
-    
-    
 });
 
 
