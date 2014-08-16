@@ -234,9 +234,9 @@ class UploadVideoFileView(AjaxResponsePermissionMixin, JSONResponseMixin,
         name = file_obj.name
         video_name = name.rsplit('.', 1)[0]
         folder_path = 'tmp/{}'.format(datetime.now().strftime('%Y/%m/%d'))
-        video = fileStorage.save(os.path.join(folder_path,
-                                              name.replace(' ', '_')
-                                                ), ContentFile(file_obj.read()))
+        video = fileStorage.save(os.path.join(
+                                  folder_path, name.replace(' ', '_')
+                                            ), ContentFile(file_obj.read()))
         res = {
                'name': video_name,
                'size': file_obj.size,
