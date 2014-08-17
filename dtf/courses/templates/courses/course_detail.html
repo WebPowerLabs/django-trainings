@@ -55,9 +55,12 @@
     </div><!--/ .course-info-->
   </div><!--/ .col-md-6-->
   <div class="col-md-6 bg-white">
+    {% if user|can_manage_content:object %}
     <div id="collapseOne" class="panel-collapse collapse">
       {% crispy form %}
+        <div class="clearfix"></div>
     </div><!--/ .panel-collapse-->
+    {% endif %}
     <div class="list-group lessons {% if user|can_manage_content:object %}sortable{% endif %}" data-url="{% url 'lessons:order' object.slug %}">
       {% for lesson in lesson_list %}
         {% include "lessons/lesson_list_item.html" with course_pk=lesson.course.pk %}

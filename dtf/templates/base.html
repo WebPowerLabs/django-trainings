@@ -29,6 +29,11 @@
     ================================================== -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+      <link rel="apple-touch-icon" sizes="76x76" href="{% static 'icon/touch-icon-76x76.png' %}">
+      <link rel="apple-touch-icon" sizes="120x120" href="{% static 'icon/touch-icon-120x120.png' %}">
+      <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icon/touch-icon-144x144.png' %}">
+      <link rel="apple-touch-icon" sizes="152x152" href="{% static 'icon/touch-icon.png-152x152' %}">
+      
     {% block css %}
     {% comment %}
     {% if debug %}
@@ -89,7 +94,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <i class="fa fa-bars"></i>
               </button>
-              <a href="#"><img class="nav-logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
+              <a href="{% url 'home' %}"><img class="nav-logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="nav-main">
