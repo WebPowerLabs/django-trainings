@@ -161,7 +161,7 @@ $(document).ready(function(){
     
     // AJAX file uploader
     var uploader = $('.fileuploader');
-    var acceptFileTypes = /(mp4|avi|mov|flv)$/i;
+    var acceptFileTypes = /(mp4|m4v|mov|f4v|flv|webm|wmv|avi|mpg)$/i;
     var in_progress = 0;
     
     // Remove uploaded file
