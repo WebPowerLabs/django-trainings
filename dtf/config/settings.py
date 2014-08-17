@@ -59,6 +59,7 @@ class Common(Configuration):
         'django_comments',
         'sorl.thumbnail',
         'polymorphic',
+        'djcelery',
     )
 
     # Apps specific for this project go here.
@@ -269,7 +270,6 @@ class Common(Configuration):
     ########## END SLUGLIFIER
 
     ########## ELASTICSEARCH SETTINGS
-
     #BONSAI_URL = os.environ.get('BONSAI_URL', 'localhost')
     #ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
     #ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
@@ -283,7 +283,11 @@ class Common(Configuration):
     # Don't forget to create index in cluster.
     # Run: curl -XPUT 'url_to_elastic_search_cluster/index_name'
     ELASTICSEARCH_INDEX = 'dtf'
-
+    
+    ########## CELERY SETTINGS
+    BROKER_URL = 'redis://localhost'
+    CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+    ########## END CELERY SETTINGS
 
     ########## LOGGING CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging

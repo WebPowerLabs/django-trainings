@@ -83,8 +83,20 @@
     <div class="row">
       <div class="content col-sm-7">
         {% if object.video %}
-          {% video_player object %}
+          {% if object.video.status == object.video.CONVERTED %}
+            {% video_player object %}
           {% else %}
+            <div class="jumbotron">
+              <p class="text-center">
+                {% if object.video.status == object.video.ERROR %}
+                  Error uploading video file.
+                {% else %}
+                  This video is being processed.
+                {% endif %}
+              </p>  
+            </div>
+          {% endif %}
+        {% else %}
           {% thumbnail object.thumbnail '640x480' crop='center' as im %}
           <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
           {% endthumbnail %}

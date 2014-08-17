@@ -8,6 +8,24 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Deleting field 'Video.file'
+        db.delete_column(u'lessons_video', 'file')
+
+        # Adding field 'Video.orig'
+        db.add_column(u'lessons_video', 'orig',
+                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'Video.mp4'
+        db.add_column(u'lessons_video', 'mp4',
+                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'Video.webm'
+        db.add_column(u'lessons_video', 'webm',
+                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
+                      keep_default=False)
+
 
         # Changing field 'Lesson.video'
         db.alter_column(u'lessons_lesson', 'video_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['lessons.Video'], unique=True, null=True))
@@ -18,6 +36,20 @@ class Migration(SchemaMigration):
     def backwards(self, orm):
         # Removing unique constraint on 'Lesson', fields ['video']
         db.delete_unique(u'lessons_lesson', ['video_id'])
+
+        # Adding field 'Video.file'
+        db.add_column(u'lessons_video', 'file',
+                      self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True),
+                      keep_default=False)
+
+        # Deleting field 'Video.orig'
+        db.delete_column(u'lessons_video', 'orig')
+
+        # Deleting field 'Video.mp4'
+        db.delete_column(u'lessons_video', 'mp4')
+
+        # Deleting field 'Video.webm'
+        db.delete_column(u'lessons_video', 'webm')
 
 
         # Changing field 'Lesson.video'
@@ -108,9 +140,11 @@ class Migration(SchemaMigration):
         },
         u'lessons.video': {
             'Meta': {'object_name': 'Video'},
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'mp4': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'orig': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'webm': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'})
         },
         u'tags.tag': {
             'Meta': {'object_name': 'Tag'},

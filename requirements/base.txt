@@ -52,3 +52,6 @@ misaka==1.0.2
 django-polymorphic==0.5.5
 django-ipware==0.0.8
 elasticsearch==1.1.1
+redis==2.10.3
+celery==3.1.13
+django-celery==3.1.10

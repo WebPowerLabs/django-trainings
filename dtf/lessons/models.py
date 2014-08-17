@@ -8,6 +8,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch.dispatcher import receiver
 from utils.search import EsClient
 import ntpath
+from lessons.tasks import process_video
 
 
 class Video(models.Model):
@@ -24,12 +25,12 @@ class Video(models.Model):
               ]
     
     status = models.IntegerField(choices=STATUS_CHOICES, default=SCHEDULED)
-    orig = models.FileField(upload_to='lessons/videos/orig/%Y/%m/%d', null=True,
-                            blank=True)
-    mp4 = models.FileField(upload_to='lessons/videos/mp4/%Y/%m/%d', null=True,
-                           blank=True)
-    ogg = models.FileField(upload_to='lessons/videos/ogg/%Y/%m/%d', null=True,
-                           blank=True)
+    orig = models.FileField(upload_to='lessons/videos/orig/%Y/%m/%d',
+                            null=True, blank=True)
+    mp4 = models.FileField(upload_to='lessons/videos/mp4/%Y/%m/%d',
+                           null=True, blank=True)
+    webm = models.FileField(upload_to='lessons/videos/webm/%Y/%m/%d',
+                            null=True, blank=True)
     
     def __unicode__(self):
         return self.filename
@@ -130,3 +131,8 @@ def index_es_doc(instance, **kwarg):
 @receiver(post_delete, sender=Lesson)
 def delete_es_doc(instance, **kwarg):
     EsClient(instance).delete()
+
+@receiver(post_save, sender=Video)
+def convert_video(instance, created, **kwarg):
+    if created:
+        process_video.delay(instance)
