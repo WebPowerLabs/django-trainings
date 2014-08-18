@@ -45,8 +45,13 @@ def  purchase_or_instructor_member_required(model):
                                         reverse('packages:list_for_content',
                                     kwargs={'content_pk': content.lesson.pk}))
                 # if only one exists return the package
-                return HttpResponseRedirect(reverse('packages:detail',
-                                                kwargs={'pk': packages[0].pk}))
+                if len(packages) == 1:
+                    return HttpResponseRedirect(reverse('packages:detail',
+                                                    kwargs={'pk': packages[0].pk}))
+                else:
+                    return HttpResponseRedirect(
+                                        reverse('packages:list_for_content',
+                                    kwargs={'content_pk': content.lesson.pk}))
             return redirect_to_login(request.path)
         return check
     return wrapper

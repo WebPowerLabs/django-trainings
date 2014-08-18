@@ -192,16 +192,14 @@ def fb_group_create(request):
                 name=name, description=description, privacy=privacy)
                 # sync with fb data
                 fb_group.save_fb_profile_data(request.user)
+                form = FBGroupCreateForm(request.POST, request.FILES, instance=fb_group)
+                form.save()
             
-            fb_group.owner = request.user
-            fb_uid = fb_group.fb_uid
-            if not fb_uid:
+            if not fb_group.fb_uid:
                 # no fb_uid was given becuase user reqeusting to create was not logged in.
                 fb_group.fb_uid = FacebookGroup.objects.all().order_by('-id')[0].id+1
-                print fb_group.fb_uid
-
-            fb_group.save()
-
+                fb_group.owner = request.user
+                fb_group.save()
 
             return HttpResponseRedirect(reverse_lazy("facebook_groups:detail",
                 kwargs={"fb_uid" : fb_group.fb_uid}))
