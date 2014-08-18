@@ -180,16 +180,31 @@ def fb_group_create(request):
     '''
     form = FBGroupCreateForm()
     if request.method == 'POST':
-        form = form(request)
+        form = FBGroupCreateForm(request.POST, request.FILES)
         name = request.POST.get('name')
         description = request.POST.get('description')
         privacy = request.POST.get('privacy')
-        fb_group = FacebookGroup.objects.fb_create(user=request.user.id,
-            name=name, description=description, privacy=privacy)
-        # sync with fb data
-        fb_group.save_fb_profile_data(request.user)
-        return HttpResponseRedirect(reverse_lazy("facebook_groups:detail",
-            kwargs={"fb_uid" : fb_group.fb_uid}))
+        if form.is_valid():
+            fb_group = form.save(commit=False)
+
+            if request.user.fb_uid:
+                fb_group = FacebookGroup.objects.fb_create(user=request.user.id,
+                name=name, description=description, privacy=privacy)
+                # sync with fb data
+                fb_group.save_fb_profile_data(request.user)
+            
+            fb_group.owner = request.user
+            fb_uid = fb_group.fb_uid
+            if not fb_uid:
+                # no fb_uid was given becuase user reqeusting to create was not logged in.
+                fb_group.fb_uid = FacebookGroup.objects.all().order_by('-id')[0].id+1
+                print fb_group.fb_uid
+
+            fb_group.save()
+
+
+            return HttpResponseRedirect(reverse_lazy("facebook_groups:detail",
+                kwargs={"fb_uid" : fb_group.fb_uid}))
     context = {
         'form': form
     }
