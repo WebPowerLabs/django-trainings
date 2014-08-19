@@ -174,9 +174,9 @@ class InfusionsoftTag(models.Model):
     Infusionsoft Tag (ContactGroup)
     '''
     remote_id = models.TextField()
-    group_category_id = models.TextField(blank=True)
-    group_name = models.TextField(blank=True)
-    group_description = models.TextField(blank=True)
+    group_category_id = models.TextField(blank=True, null=True)
+    group_name = models.TextField(blank=True, null=True)
+    group_description = models.TextField(blank=True, null=True)
 
     objects = InfusionsoftTagManager()
 
