@@ -16,7 +16,7 @@
 		<h2 class="title">{% trans "Sign Up" %}</h2>
 		<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">log in</a>.{% endblocktrans %}</p>
 
-	{% if request.GET.inf_field_Email %}<!-- If there was a product referral email -->
+
 
 		<form class="form signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
 			{% csrf_token %}
@@ -53,7 +53,6 @@
 	{% else %} <!-- If there was a product referral -->
 		<p>We apologize but we are currently only allowing a select group of users to sign up at the moment. We will be open to the public soon though so come back!</p>
 
-	{% endif %}
       </div>
     </div>
   </div>
