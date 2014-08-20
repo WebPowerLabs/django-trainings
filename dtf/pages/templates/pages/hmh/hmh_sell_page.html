@@ -30,24 +30,51 @@
         margin-top: -30px;
         text-shadow: 2px 2px 2px #BE2135;
         font-weight: 400;
+        padding: 10px 10%;
+        font-size: 1.5em;
     }
   .pricing-2 .package {
     background-color: #139e97;
     color: #fff;
+    padding: 0;
+    margin-top: -43px;
   }
   .pricing-2 .package small {
     color: #fff;
   }
   .pricing-2 .price-table {
     color: #000;
-    background-color: #fff;
+    background-color: rgba(240, 219, 64, 0.5);
   }
   .pricing-2 .price-table .sale {
     color: #000;
   }
+  .pricing-2 .price-wrapper {
+    padding-bottom: 50px;
+    font-size: 1.1em;
+  }
+  .pricing-2 .price-wrapper small {
+    font-size: 0.8em;
+  }
+
   .pricing-2 .text-danger {
     color: red;
   }
+  .highlight-box p, .highlight-box li {
+    font-size: 1.15em;
+  }
+.pricing-2 ul.features li {
+padding: 10px;
+}
+.pricing-2 .price {
+margin: 10px 0;
+}
+.pricing-2 .price-table {
+padding: 30px 15px 5px;
+}
+.pricing-2 .price-table {
+margin-top: 40px;
+}
     </style>
   </head>
   <body>
@@ -107,7 +134,7 @@
         </div><!--/ .col-md-6-->
         <div class="about col-md-6 col-md-pull-6">
           <h2 style="color: #560e2c;">Grief is a powerful emotion...</h2>
-          <p>...and we are taught to react to the emotional feeling in our hearts by using our minds. Society unknowingly offers us false information as we look to deal with these feelings. Unfortunately the response our friends and family offer us do nothing to help us with the hurt that remains present in our hearts.</p>
+          <p>...and we are taught to react to the emotional feeling in our hearts by using our minds. Unfortunately, our friends and family don’t know how to help us. The support they offer does little to help us deal with the pain that lingers in our hearts.</p>
         </div><!--/ .about-->
       </div><!--/ .container-->
       <div class="testimonials block bg-soft">
@@ -158,7 +185,7 @@
               <li style="font-size: 18px; font-weight: 300; padding: 4px 0;"><i class="fa-li fa fa-check" style="color: #a81d59; padding: 4px 0;"></i>Invited to a safe space to work through your process.</li>
             </ul>
             <div style="display:block;width:100%;text-align:center;">
-              <button href="#pricing-2" class="btn btn-lg btn-danger" style="margin-top: 20px;">Join Us Now</button>
+              <a href="#pricing-2" class="btn btn-lg btn-danger" style="margin-top: 20px;">Join Us Now</a>
             </div>
           </div><!--/ .col-sm-6-->
         </div><!--/ .row-->
@@ -179,7 +206,7 @@
             <h4 style="line-height: 24px; font-weight: 300;">When we experience loss, the feelings from other accrued losses over a lifetime can be magnified. In seven weeks the Heal My Heart&trade; Workshop is designed to answer the question we have been subconsciously and consciously asking since childhood, “How do I deal with this pain?”</h4>
           </div><!--/ .col-lg-10-->
           <div class="col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 text-center">
-            <h3 class="section-subtitle" style="color: #560e2c;">Let’s begin the H.E.A.L.I.N.G.</h3>
+            <h1 class="section-subtitle" style="color: #560e2c;">Let’s Begin The H.E.A.L.I.N.G.</h1>
           </div><!--/ .col-lg-6-->
         </div><!--/ .row-->
         <div class="row">
@@ -191,7 +218,7 @@
               <p>In this session, we will:</p>
               <ul class="">
                 <li>Help you to see what is sitting in the foundation of your own life.</li>
-                <li>Look at our experiences with the past Meaninful Emotional experiences.</li>
+                <li>Look at our experiences with the past Meaningful Emotional experiences.</li>
                 <li>Learn how we become so vulnerable to this pain.</li>
               </ul>
             </div><!--/ .highlight-box-->
@@ -324,16 +351,16 @@
     <section class="pricing-2 block" id="pricing-2">
       <div class="container">
         <div class="row text-center">
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="price-wrapper">
-              <div class="price-table" style="padding-bottom: 10px;">
+              <div class="price-table" style="padding-bottom: 35px;">
                 <div class="package col-md-8 col-md-offset-2">
                   <h4 class="title" style="letter-spacing: 2px;"><small>Seven Week Web Class</small><br>Single Pay Option</h4>
                 </div><!--/ .package-->
-                <img class="sale" src="{% static 'images/hmh/sale-strikethrough.png' %}">
+                <h3 class="sale">$797</h3>
                 <h1 class="price">
                   <span class="currency text-danger">$</span>
-                  <span class="amount text-danger" style="font-size:45px;">497</span>
+                  <span class="amount text-danger" style="font-size:35px;">497</span>
                   <span class="decimal"></span>
                 </h1><!--/ .price-->
                 <p class="text-danger">(Special MPLO Price avail for next 5 days)</p>
@@ -347,25 +374,26 @@
                 <h4 class="text-danger">BONUS!</h4>
               <ul class="list-unstyled features">
                 <li class="odd text-danger">Live Q&A calls with 24/7 access to recordings</li>
-                <li class="even" style="padding-bottom: 40px;">
-                  <span class="text-danger">FREE Ticket to Heal My Heart&trade; 3 day event</span>
+                <li class="even">
+                  <span class="text-danger">FREE Ticket to Heal My Heart&trade; 3 Day Event</span>
                   <br><small>*event ticket does not include, travel, transportation, accommodations or food served at the event.</small></li>
               </ul><!--/ .features-->
+              <script src="http://countdownmonkey.com/counter/843/1696s.js"></script>
             </div>
             </div><!--/ .price-wrapper-->
-            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger btn-lg">Enroll Now</a>
-          </div><!--/ .col-sm-6-->
-          <div class="col-sm-6">
+            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger">Enroll Now</a>
+          </div><!--/ .col-md-6-->
+          <div class="col-md-6">
             <div class="price-wrapper">
               <div class="price-table">
                 <div class="package col-md-8 col-md-offset-2">
                   <h4 class="title" style="letter-spacing: 2px;"><small>Seven Week Web Class</small><br>2 Pay Option</h4>
                 </div><!--/ .package-->
-                <img class="sale" src="{% static 'images/hmh/sale-strikethrough.png' %}">
+                <h3 class="sale">$797</h3>
                 <h1 class="price text-danger">
                   Pay
                   <span class="currency">$</span>
-                  <span class="amount" style="font-size:45px;">267</span>
+                  <span class="amount" style="font-size:35px;">267</span>
                   <span class="decimal"></span>
                   Today
                   <br>
@@ -382,12 +410,13 @@
                   <h4 class="text-danger">BONUS!</h4>
                 <ul class="list-unstyled features text-danger">
                   <li class="odd">Live Q&A calls with 24/7 access to recordings</li>
-                  <li class="even" style="padding-bottom: 40px;">FREE Ticket to Heal My Heart&trade; 3 day event</li>
+                  <li class="even">FREE Ticket to Heal My Heart&trade; 3 Day Event<br><small style="color:#000;">*event ticket does not include, travel, transportation, accommodations or food served at the event.</small></li>
                 </ul><!--/ .features-->
+                <script src="http://countdownmonkey.com/counter/843/1697s.js"></script>
               </div>
             </div><!--/ .price-wrapper-->
-            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger btn-lg">Enroll Now</a>
-          </div><!--/ .col-sm-6-->
+            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger">Enroll Now</a>
+          </div><!--/ .col-md-6-->
         </div><!--/ .row-->
       </div><!--/ .container-->
     </section>
