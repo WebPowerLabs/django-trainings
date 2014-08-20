@@ -7,20 +7,53 @@
 {% block title %}{% trans "Sign Up | Decide to Fly" %}{% endblock title %}
 
 {% block content %}
+
+
 <div class="signup-wrapper">
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<h2 class="title">{% trans "Sign Up" %}</h2>
-		<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-		<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+		<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">log in</a>.{% endblocktrans %}</p>
+
+	{% if request.GET.inf_field_Email %}<!-- If there was a product referral email -->
+
+		<form class="form signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
 			{% csrf_token %}
-			{{ form|crispy }}
+	{% include "bootstrap3/errors.html" %}
+		<div class="form-group">
+			{{ form.username.label }}
+			<input type="text" name="{{ form.username.name }}" id="id_{{ form.username.name }}" class="form-control">
+			{{ form.username.errors }}
+		</div>
+		<div class="form-group">
+			{{ form.email.label }}
+			<input type="text" name="{{ form.email.name }}" id="id_{{ form.email.name }}" class="form-control" value="{{ request.GET.inf_field_Email }}" {% if request.GET.inf_field_Email %}disabled{% endif %}>
+			<span class="help-text{% if not request.GET.inf_field_Email %} hidden{% endif %}">*You will be able to change your email address after signing up.</span>
+			{{ form.email.errors }}
+		</div>
+		<div class="form-group">
+			{{ form.password1.label }}
+			<input type="password" name="{{ form.password1.name }}" id="id_{{ form.password1.name }}" class="form-control">
+			{{ form.password1.errors }}
+		</div>
+		<div class="form-group">
+			{{ form.password2.label }}
+			<input type="password" name="{{ form.password2.name }}" id="id_{{ form.password2.name }}" class="form-control">
+			{{ form.password2.errors }}
+		</div>
+
+			{{ form.confirmation_key }}
+
 			{% if redirect_field_value %}
 				<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
 			{% endif %}
 			<button class="btn btn-success btn-lg" type="submit">{% trans "Sign Up" %} &raquo;</button>
 		</form>
+	{% else %} <!-- If there was a product referral -->
+		<p>We apologize but we are currently only allowing a select group of users to sign up at the moment. We will be open to the public soon though so come back!</p>
+
+	{% endif %}
       </div>
     </div>
   </div>
