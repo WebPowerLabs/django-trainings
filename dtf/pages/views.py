@@ -17,6 +17,23 @@ class PageView(TemplateView):
         return context
 
 
+class HMHPageView(PageView):
+    template_name = "pages/hmh/hmh_video.html"
+
+    def get_template_names(self):
+        '''
+        Looks for a custom_template value and prepends it to template_names 
+        if it exists otherwise 'nupages/page_detail.html' is used
+        '''
+        template_names = super(HMHPageView, self).get_template_names()
+        code = self.request.GET.get('access_code', None)
+        if code:
+            video_id = str(code)[-1:]
+            video_template_name = "pages/hmh/hmh_video_{}.html".format(video_id)
+            template_names.insert(0, video_template_name)
+        return template_names
+
+
 @csrf_exempt
 @json_view
 def contact(request):

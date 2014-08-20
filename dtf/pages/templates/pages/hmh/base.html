@@ -48,20 +48,20 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active text-center">
-                <a class="video-nav-item" href="#">
+              <li class="text-center{% block nav_video_1 %}{% endblock nav_video_1 %}">
+                <a class="video-nav-item" href="{% block link_video_1 %}{% url 'hmh-video' %}?access_code=aly8b34yafn1{% endblock link_video_1 %}">
                   <h4 class="item-title">Video 1</h4>
                   <p class="description">Position Yourself for Sales Success Doing What You Love</p>
                 </a>
               </li>
-              <li class="text-center">
-                <a class="video-nav-item" href="#">
+              <li class="text-center{% block nav_video_2 %}{% endblock nav_video_2 %}">
+                <a class="video-nav-item" href="{% block link_video_2 %}{% url 'hmh-video' %}?access_code=aly8b34yafn2{% endblock link_video_2 %}">
                   <h4 class="item-title">Video 2</h4>
                   <p class="description">Teleseminar & Webinar Closing Techniques</p>
                 </a>
               </li>
-              <li class="text-center">
-                <a class="video-nav-item" href="#">
+              <li class="text-center{% block nav_video_3 %}{% endblock nav_video_3 %}">
+                <a class="video-nav-item" href="{% block link_video_3 %}{% url 'hmh-video' %}?access_code=aly8b34yafn3{% endblock link_video_3 %}">
                   <h4 class="item-title">Webinar</h4>
                   <p class="description">Finally Get Your Work Online</p>
                 </a>
@@ -79,14 +79,20 @@
         <div class="container">
           <div class="row">
             <div class="section-header col-xs-12 text-center">
-                <h1 class="section-title">Lorem Ipsum Dolor Consectetur Adipiscing</h1>
+                <h1 class="section-title">{% block title %}Heal My Heart&trade;{% endblock title %}</h1>
                 <hr>
             </div><!--/ .section-header-->
           </div><!--/ .row-->
           <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
               <div class="video-wrapper">
-                <iframe width="100%" height="590" src="http://www.youtube.com/embed/qGsTlYLbwy4?wmode=transparent" frameborder="0" allowfullscreen></iframe>
+                {% block video %}
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://0740d05792ded6c37235-5d746ac01735382e98afd614a81d1e3b.ssl.cf1.rackcdn.com/getQueryString.js"></script>
+<iframe id="youtube_qGsTlYLbwy4" width="560" height="315" src="//www.youtube.com/embed/qGsTlYLbwy4?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+<script class="PlusThisVidTrack100" type="text/javascript">  email=""; cid=""; if(getQueryVariable("Email") != "not found"){email=getQueryVariable("Email");} if(getQueryVariable("Contact0Email") != "not found"){email=getQueryVariable("Contact0Email");} if(getQueryVariable("inf_field_Email") != "not found"){email=getQueryVariable("inf_field_Email");} if(getQueryVariable("Id") != "not found"){cid=getQueryVariable("Id");} if(getQueryVariable("contactId") != "not found"){cid=getQueryVariable("contactId");}  if(email != ""){ if(cid!=""){   furl_qGsTlYLbwy4 = "https://my.plusthis.com/p/08ffd651af4653e341425daf9f12978fdb8e9131"; var tr0_qGsTlYLbwy4="f"; }} var playTracker;var YT_ready=(function(){var b=[],a=false;return function(d,e){if(d===true){a=true;for(var c=0;c<b.length;c++){b.shift()()}}else{if(typeof d=="function"){if(a){d()}else{b[e?"unshift":"push"](d)}}}}})();function onYouTubePlayerAPIReady(){YT_ready(true)}(function(){var a=document.createElement("script");a.src="https://www.youtube.com/player_api";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();var player;YT_ready(function(){var a="youtube_qGsTlYLbwy4";if(a){player=new YT.Player(a,{events:{onStateChange:stopCycle}})}});function stopCycle(a){if(a.data==1){playTracker=window.setInterval(isRun,900)}else{window.clearInterval(playTracker)}}function isRun(){videoProgress(player.getCurrentTime())}; function videoProgress(t){ if(t > 59){ if(t < 61){ if(tr0_qGsTlYLbwy4 == "f"){ jQuery.ajax({ url: furl_qGsTlYLbwy4, type: "POST", data: {"Id" : cid, "Email" : email, "i" : "0"}, dataType: "jsonp"}); tr0_qGsTlYLbwy4="t";}}} }</script>
+
+              {% endblock video %}
               </div>
             </div><!--/ .col-xs-12-->
           </div><!--/ .row-->
@@ -99,19 +105,9 @@
     ================================================== -->
       <section class="get-ready-list block bg-soft">
         <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <h1>To get ready for Jami’s upcoming Heal My Heart&trade; Webinar:</h1>
-              <ul class="fa-ul">
-                <li><i class="fa-li fa fa-check"></i>Download your Big Why document and post an answer to the question, “What do you want your life to look and feel like?” I am excited to read what plans we will create together!</li>
-                <li><i class="fa-li fa fa-check"></i>Mark your calendar for Jami’s upcoming Heal My Heart Webinar:</li>
-                <blockquote>You were called for more.<br>
-                  You are not alone on this healing journey.<br>
-                  Find the peace and joy that is missing.</blockquote>
-                <li><i class="fa-li fa fa-check"></i>Watch the video above and if you have already done that, click below to register for the upcoming webinar.</li>
-              </ul>
-              <a href="#"><button class="webinar-reg btn btn-lg btn-danger">Webinar Registration</button></a>
-            </div><!--/ .col-sm-6-->
+          {% block about %}
+
+            {% endblock about %}
           </div><!--/ .row-->
         </div><!--/ .container-->
       </section>
@@ -188,11 +184,8 @@
         <div class="container">
           <div class="row">
             <div class="copyright col-sm-6">
-              <p>2014 &copy; <a href="#">Decide to Fly&trade;</a>. All rights reserved.</p>
+              <p>2014 &copy; <a href="#">Decide to Fly&trade;</a>. All rights reserved. See our <a href="{% url 'terms-of-service' %}">Terms of Service</a></p>
             </div><!--/ .copyright-->
-            <div class="developer col-sm-6">
-              <p>Developed by <a href="http://rabbitholestud.io">Rabbit Hole Studio</a>.</p>
-            </div><!--/ .developer-->
           </div><!--/ .row-->
         </div><!--/ .container-->
       </section>

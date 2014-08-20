@@ -20,17 +20,37 @@
     <link rel="stylesheet" href="{% static 'pages/hmh-sell.min.css' %}">
     <style>
     .pricing-2 .buy-button {
-        background: -webkit-linear-gradient(#ad2538, #691621); /* For Safari 5.1 to 6.0 */
-        background: -o-linear-gradient(#ad2538, #691621); /* For Opera 11.1 to 12.0 */
-        background: -moz-linear-gradient(#ad2538, #691621); /* For Firefox 3.6 to 15 */
-        background: linear-gradient(#ad2538, #691621); /* Standard syntax */
-        color: #E9E69B;
+        background: -webkit-linear-gradient(red, #BE2135); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(red, #BE2135); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(red, #BE2135); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(red, #BE2135); /* Standard syntax */
+        color: rgb(246, 227, 81);
         margin-top: -30px;
-        text-shadow: 2px 2px 2px #691621;
+        text-shadow: 2px 2px 2px #BE2135;
+        font-weight: 400;
     }
+  .pricing-2 .package {
+    background-color: #139e97;
+    color: #fff;
+  }
+  .pricing-2 .package small {
+    color: #fff;
+  }
+  .pricing-2 .price-table {
+    color: #000;
+    background-color: #fff;
+  }
+  .pricing-2 .price-table .sale {
+    color: #000;
+  }
+  .pricing-2 .text-danger {
+    color: red;
+  }
     </style>
   </head>
   <body>
+
+{% block content %}
 
   <!-- LOGO HEADER
   ================================================== -->
@@ -304,17 +324,17 @@
         <div class="row text-center">
           <div class="col-sm-6">
             <div class="price-wrapper">
-              <div class="price-table" style="background-color: #a81d59; padding-bottom: 49px;">
-                <div class="package col-md-8 col-md-offset-2 bg-primary">
+              <div class="price-table" style="padding-bottom: 10px;">
+                <div class="package col-md-8 col-md-offset-2">
                   <h4 class="title" style="letter-spacing: 2px;"><small>Seven Week Web Class</small><br>Single Pay Option</h4>
                 </div><!--/ .package-->
-                <h3 class="sale">$797</h3>
+                <img class="sale" src="{% static 'images/hmh/sale-strikethrough.png' %}">
                 <h1 class="price">
-                  <span class="currency">$</span>
-                  <span class="amount" style="font-size:45px;">497</span>
+                  <span class="currency text-danger">$</span>
+                  <span class="amount text-danger" style="font-size:45px;">497</span>
                   <span class="decimal"></span>
                 </h1><!--/ .price-->
-                <p>(Special MPLO Price avail for next 5 days)</p>
+                <p class="text-danger">(Special MPLO Price avail for next 5 days)</p>
               </div><!--/ .price-table-->
               <div class="features">
                 <h4>Start today!</h4>
@@ -322,23 +342,25 @@
                 <li class="odd">Course is available 24/7 online</li>
                 <li class="even">24/7 access to the online community support</li>
                 </ul><!--/ .features-->
-                <h4>BONUS!</h4>
+                <h4 class="text-danger">BONUS!</h4>
               <ul class="list-unstyled features">
-                <li class="odd">Live Q&A calls with 24/7 access to recordings</li>
-                <li class="even" style="padding-bottom: 40px;">FREE Ticket to Heal My Heart&trade; 3 day event</li>
+                <li class="odd text-danger">Live Q&A calls with 24/7 access to recordings</li>
+                <li class="even" style="padding-bottom: 40px;">
+                  <span class="text-danger">FREE Ticket to Heal My Heart&trade; 3 day event</span>
+                  <br><small>*event ticket does not include, travel, transportation, accommodations or food served at the event.</small></li>
               </ul><!--/ .features-->
             </div>
             </div><!--/ .price-wrapper-->
-            <a href="#"><button class="buy-button btn btn-danger btn-lg">Enroll Now</button></a>
+            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger btn-lg">Enroll Now</a>
           </div><!--/ .col-sm-6-->
           <div class="col-sm-6">
             <div class="price-wrapper">
-              <div class="price-table" style="background-color: #a81d59;">
-                <div class="package col-md-8 col-md-offset-2 bg-accent">
+              <div class="price-table">
+                <div class="package col-md-8 col-md-offset-2">
                   <h4 class="title" style="letter-spacing: 2px;"><small>Seven Week Web Class</small><br>2 Pay Option</h4>
                 </div><!--/ .package-->
-                <h3 class="sale">$797</h3>
-                <h1 class="price">
+                <img class="sale" src="{% static 'images/hmh/sale-strikethrough.png' %}">
+                <h1 class="price text-danger">
                   Pay
                   <span class="currency">$</span>
                   <span class="amount" style="font-size:45px;">267</span>
@@ -346,8 +368,8 @@
                   Today
                   <br>
                 </h1><!--/ .price-->
-                <p><small>*remaining $267 will be automatically charged in 21 days</small></p>
-                <p>(Special MPLO 2 Pay Option avail for next 72 hrs)</p>
+                <p class="text-danger"><small>*remaining $267 will be automatically charged in 21 days</small></p>
+                <p class="text-danger">(Special MPLO 2 Pay Option avail for next 72 hrs)</p>
               </div><!--/ .price-table-->
               <div class="features">
                 <h4>Start today!</h4>
@@ -355,14 +377,14 @@
                   <li class="odd">Course is available 24/7 online</li>
                   <li class="even">24/7 access to the online community support</li>
                   </ul><!--/ .features-->
-                  <h4>BONUS!</h4>
-                <ul class="list-unstyled features">
+                  <h4 class="text-danger">BONUS!</h4>
+                <ul class="list-unstyled features text-danger">
                   <li class="odd">Live Q&A calls with 24/7 access to recordings</li>
                   <li class="even" style="padding-bottom: 40px;">FREE Ticket to Heal My Heart&trade; 3 day event</li>
                 </ul><!--/ .features-->
               </div>
             </div><!--/ .price-wrapper-->
-            <a href="#"><button class="buy-button btn btn-danger btn-lg">Enroll Now</button></a>
+            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger btn-lg">Enroll Now</a>
           </div><!--/ .col-sm-6-->
         </div><!--/ .row-->
       </div><!--/ .container-->
@@ -427,6 +449,8 @@
     </section>
   <!-- END COPYRIGHT FOOTER SECTION
   ================================================== -->
+
+{% endblock content %}
 
   <!-- Latest JQuery -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

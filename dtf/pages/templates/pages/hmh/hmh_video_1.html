@@ -1,0 +1,41 @@
+{% extends "pages/hmh/base.html" %}
+{% load staticfiles %}
+
+{% block nav_video_1 %} active{% endblock nav_video_1 %}
+{% block nav_video_2 %}{% endblock nav_video_2 %}
+{% block nav_video_3 %}{% endblock nav_video_3 %}
+
+
+{% block link_video_2 %}{% endblock link_video_2 %}
+{% block link_video_3 %}{% endblock link_video_3 %}
+
+{% block title %}Video 1{% endblock title %}
+
+{% block video %}
+      
+<iframe id="youtube_qGsTlYLbwy4" width="560" height="315" src="//www.youtube.com/embed/qGsTlYLbwy4?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+
+{% endblock video %}
+
+{% block about %}
+<form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/9fdb9d77ed482f693a79455013345cc9" class="infusion-form" method="POST">
+    <input name="inf_form_xid" type="hidden" value="9fdb9d77ed482f693a79455013345cc9" />
+    <input name="inf_form_name" type="hidden" value="Video Series&#a;Opt-in Form" />
+    <input name="infusionsoft_version" type="hidden" value="1.32.0.69" />
+    <div class="infusion-field form-group">
+        <label class="control-label" for="inf_field_FirstName">First Name *</label>
+        <input class="form-control infusion-field-input-container" id="inf_field_FirstName" name="inf_field_FirstName" type="text" />
+    </div>
+    <div class="infusion-field form-group">
+        <label class="control-label" for="inf_field_Email">Email *</label>
+        <input class="form-control infusion-field-input-container" id="inf_field_Email" name="inf_field_Email" type="text" />
+    </div>
+    <div class="infusion-field form-group">
+        <label class="control-label" for="inf_field_Phone1">Cell Phone *</label>
+        <input class="form-control infusion-field-input-container" id="inf_field_Phone1" name="inf_field_Phone1" type="text" />
+    </div>
+    <div class="infusion-submit">
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </div>
+</form>
+{% endblock about %}
