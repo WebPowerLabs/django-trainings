@@ -28,7 +28,9 @@
 		</div>
 		<div class="form-group">
 			{{ form.email.label }}
-			<input type="text" name="{{ form.email.name }}" id="id_{{ form.email.name }}" class="form-control" value="{{ request.GET.inf_field_Email }}" {% if request.GET.inf_field_Email %}disabled{% endif %}>
+			<input type="text" name="{{ form.email.name }}" id="id_{{ form.email.name }}" class="form-control{% if request.GET.inf_field_Email %} hidden{% endif %}" value="{{ request.GET.inf_field_Email }}">
+			
+			<p class="form-control{% if not request.GET.inf_field_Email %} hidden{% endif %}" disabled>{{ request.GET.inf_field_Email }}</p>
 			<span class="help-text{% if not request.GET.inf_field_Email %} hidden{% endif %}">*You will be able to change your email address after signing up.</span>
 			{{ form.email.errors }}
 		</div>
@@ -50,9 +52,11 @@
 			{% endif %}
 			<button class="btn btn-success btn-lg" type="submit">{% trans "Sign Up" %} &raquo;</button>
 		</form>
+		{% comment %}
 	{% else %} <!-- If there was a product referral -->
 		<p>We apologize but we are currently only allowing a select group of users to sign up at the moment. We will be open to the public soon though so come back!</p>
-
+	{% endif %}
+	{% endcomment %}
       </div>
     </div>
   </div>
