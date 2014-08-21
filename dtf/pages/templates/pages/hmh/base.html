@@ -21,6 +21,20 @@
      <!-- Infusionsoft Analytics Tracking Code
     ================================================== -->
     <script type="text/javascript" src="https://kb140.infusionsoft.com/app/webTracking/getTrackingCode?trackingId=1f490cf4ac33c0c9f67aab5ed87bef61"></script>
+    <style>
+    .header .jumbotron {
+      background-color: red;
+      color: #fff;
+
+    }
+    .header .jumbotron p {
+      font-weight: 400;
+      font-size: 2em;
+    }
+    .navbar.video-nav .navbar-header {
+      padding: 0;
+  }
+    </style>
   </head>
   <body>
     <div id="fb-root"></div>
@@ -53,19 +67,19 @@
               <li class="text-center{% block nav_video_1 %}{% endblock nav_video_1 %}">
                 <a class="video-nav-item" href="{% block link_video_1 %}{% url 'hmh-video' %}?access_code=aly8b34yafn1{% endblock link_video_1 %}">
                   <h4 class="item-title">Video 1</h4>
-                  <p class="description">Position Yourself for Sales Success Doing What You Love</p>
+                  <p class="description">You Are Not Alone</p>
                 </a>
               </li>
               <li class="text-center{% block nav_video_2 %}{% endblock nav_video_2 %}">
                 <a class="video-nav-item" href="{% block link_video_2 %}{% url 'hmh-video' %}?access_code=aly8b34yafn2{% endblock link_video_2 %}">
                   <h4 class="item-title">Video 2</h4>
-                  <p class="description">Teleseminar & Webinar Closing Techniques</p>
+                  <p class="description">Find the Peace and Joy</p>
                 </a>
               </li>
               <li class="text-center{% block nav_video_3 %}{% endblock nav_video_3 %}">
                 <a class="video-nav-item" href="{% block link_video_3 %}{% url 'hmh-video' %}?access_code=aly8b34yafn3{% endblock link_video_3 %}">
                   <h4 class="item-title">Webinar</h4>
-                  <p class="description">Finally Get Your Work Online</p>
+                  <p class="description">Let The Journey Begin</p>
                 </a>
               </li>
             </ul>
@@ -75,16 +89,19 @@
     <!-- END HMH VIDEO NAVBAR
     ================================================== -->
 
+<section class="header text-center">
+  <div class="jumbotron">
+    <div class="container">
+      <p class="title">{% block title %}Heal My Heart&trade;{% endblock title %}</p>
+      <p class="lead">{% block lead %}{% endblock lead %}</p>
+    </div>
+  </div>
+</div>
+</section>
     <!-- VIDEO SECTION
     ================================================== -->
       <section class="video-player block">
         <div class="container">
-          <div class="row">
-            <div class="section-header col-xs-12 text-center">
-                <h1 class="section-title">{% block title %}Heal My Heart&trade;{% endblock title %}</h1>
-                <hr>
-            </div><!--/ .section-header-->
-          </div><!--/ .row-->
           <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
               <div class="video-wrapper">
@@ -102,6 +119,7 @@
       </section>
     <!-- END VIDEO SECTION
     ================================================== -->
+
 
     <!-- ABOUT ICON LIST SECTION
     ================================================== -->
@@ -122,7 +140,7 @@
         <div class="container">
           <div class="row">
             <div class="section-header col-xs-12 text-center">
-                <h1 class="section-title">Leave a Comment Below!</h1>
+                <h1 class="section-title">Tell me about how you feel since your loss?</h1>
                 <hr>
             </div><!--/ .section-header-->
           </div><!--/ .row-->
