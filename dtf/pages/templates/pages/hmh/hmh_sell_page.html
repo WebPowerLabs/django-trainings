@@ -351,12 +351,13 @@ margin-top: 40px;
     <section class="pricing-2 block" id="pricing-2">
       <div class="container">
         <div class="row text-center">
-          <div class="col-md-6">
+          <div class="col-md-6{% if request.GET.expired %} col-md-offset-3{% endif %}">
             <div class="price-wrapper">
               <div class="price-table" style="padding-bottom: 35px;">
                 <div class="package col-md-8 col-md-offset-2">
                   <h4 class="title" style="letter-spacing: 2px;"><small>Seven Week Web Class</small><br>Single Pay Option</h4>
                 </div><!--/ .package-->
+                {% if request.GET.expired != '2' %}
                 <h3 class="sale">$797</h3>
                 <h1 class="price">
                   <span class="currency text-danger">$</span>
@@ -365,6 +366,17 @@ margin-top: 40px;
                 </h1><!--/ .price-->
                 <p class="text-danger">(Special MPLO Price avail for next 5 days)</p>
               </div><!--/ .price-table-->
+              {% else %}
+                <h3 class="sale"></h3>
+                <h1 class="price">
+                  <span class="currency text-danger">$</span>
+                  <span class="amount text-danger" style="font-size:35px;">797</span>
+                  <span class="decimal"></span>
+                </h1><!--/ .price-->
+              </div><!--/ .price-table-->              
+              {% endif %}
+
+
               <div class="features">
                 <h4>Start today!</h4>
               <ul class="list-unstyled features">
@@ -378,11 +390,15 @@ margin-top: 40px;
                   <span class="text-danger">FREE Ticket to Heal My Heart&trade; 3 Day Event</span>
                   <br><small>*event ticket does not include, travel, transportation, accommodations or food served at the event.</small></li>
               </ul><!--/ .features-->
+              {% if request.GET.expired != '2' %}
               <script src="https://countdownmonkey.com/counter/843/1696s.js"></script>
+              {% endif %}
+
             </div>
             </div><!--/ .price-wrapper-->
-            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger">Enroll Now</a>
+            <a href="{% if request.GET.expired == '2' %}https://kb140.infusionsoft.com/app/orderForms/384216ba-12fa-466f-ba63-252071d246d3{% else %}https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9{% endif %}" class="buy-button btn btn-danger">Enroll Now</a>
           </div><!--/ .col-md-6-->
+          {% if not request.GET.expired %}
           <div class="col-md-6">
             <div class="price-wrapper">
               <div class="price-table">
@@ -415,8 +431,9 @@ margin-top: 40px;
                 <script src="https://countdownmonkey.com/counter/843/1697s.js"></script>
               </div>
             </div><!--/ .price-wrapper-->
-            <a href="https://kb140.infusionsoft.com/app/orderForms/681607e5-3782-47a5-9f61-cd656b3b62e9" class="buy-button btn btn-danger">Enroll Now</a>
+            <a href="https://kb140.infusionsoft.com/app/orderForms/b76ba636-ae94-43a3-9462-f4693f6eeb22" class="buy-button btn btn-danger">Enroll Now</a>
           </div><!--/ .col-md-6-->
+          {% endif %}
         </div><!--/ .row-->
       </div><!--/ .container-->
     </section>

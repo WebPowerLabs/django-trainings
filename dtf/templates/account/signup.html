@@ -21,18 +21,67 @@
     <form class="form signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
   {% include "bootstrap3/errors.html" %}
+
+    <div class="form-group">
+      {{ form.first_name.label }}
+      <input type="text" name="{{ form.first_name.name }}" id="id_{{ form.first_name.name }}" class="form-control" value="{% if form.first_name.value %}{{ form.first_name.value }}{% else %}{{ request.GET.inf_field_FirstName }}{% endif %}">
+      {{ form.first_name.errors }}
+    </div>
+    <div class="form-group">
+      {{ form.last_name.label }}
+      <input type="text" name="{{ form.last_name.name }}" id="id_{{ form.last_name.name }}" class="form-control" value="{% if form.last_name.value %}{{ form.last_name.value }}{% else %}{{ request.GET.inf_field_LastName }}{% endif %}">
+      {{ form.last_name.errors }}
+    </div>
     <div class="form-group">
       {{ form.username.label }}
-      <input type="text" name="{{ form.username.name }}" id="id_{{ form.username.name }}" class="form-control">
+      <input type="text" name="{{ form.username.name }}" id="id_{{ form.username.name }}" class="form-control" value="{% if form.username.value %}{{ form.username.value }}{% endif %}">
       {{ form.username.errors }}
     </div>
     <div class="form-group">
       {{ form.email.label }}
-      <input type="text" name="{{ form.email.name }}" id="id_{{ form.email.name }}" class="form-control{% if request.GET.inf_field_Email %} hidden{% endif %}" value="{{ request.GET.inf_field_Email }}">
+      <input type="text" name="{{ form.email.name }}" id="id_{{ form.email.name }}" class="form-control{% if request.GET.inf_field_Email %} hidden{% endif %}" value="{% if form.email.value %}{{ form.email.value }}{% else %}{{ request.GET.inf_field_Email }}{% endif %}">
       <p class="form-control{% if not request.GET.inf_field_Email %} hidden{% endif %}" disabled>{{ request.GET.inf_field_Email }}</p>
       <span class="help-text{% if not request.GET.inf_field_Email %} hidden{% endif %}">*You will be able to change your email address after signing up.</span>
       {{ form.email.errors }}
     </div>
+    <div class="form-group">
+      {{ form.phone.label }}
+      <input type="text" name="{{ form.phone.name }}" id="id_{{ form.phone.name }}" class="form-control" value="{% if form.phone.value %}{{ form.phone.value }}{% else %}{{ request.GET.inf_field_PhoneNumber }}{% endif %}">
+      {{ form.phone.errors }}
+    </div>
+    <div class="form-group">
+      {{ form.street1.label }}
+      <input type="text" name="{{ form.street1.name }}" id="id_{{ form.street1.name }}" class="form-control" value="{% if form.street1.value %}{{ form.street1.value }}{% else %}{{ request.GET.inf_field_StreetAddress1 }}{% endif %}">
+      {{ form.street1.errors }}
+    </div>
+    <div class="form-group">
+      {{ form.street2.label }}
+      <input type="text" name="{{ form.street2.name }}" id="id_{{ form.street2.name }}" class="form-control" value="{% if form.street2.value %}{{ form.street2.value }}{% else %}{{ request.GET.inf_field_StreetAddress2 }}{% endif %}">
+      {{ form.street2.errors }}
+    </div>
+    <div class="form-group">
+      {{ form.city.label }}
+      <input type="text" name="{{ form.city.name }}" id="id_{{ form.city.name }}" class="form-control" value="{% if form.city.value %}{{ form.city.value }}{% else %}{{ request.GET.inf_field_City }}{% endif %}">
+      {{ form.city.errors }}
+    </div>
+
+    <div class="form-group">
+      {{ form.state.label }}
+      <input type="text" name="{{ form.state.name }}" id="id_{{ form.state.name }}" class="form-control" value="{% if form.state.value %}{{ form.state.value }}{% else %}{{ request.GET.inf_field_State }}{% endif %}">
+      {{ form.state.errors }}
+    </div>
+    <div class="form-group">
+      {{ form.postal_code.label }}
+      <input type="text" name="{{ form.postal_code.name }}" id="id_{{ form.postal_code.name }}" class="form-control" value="{% if form.postal_code.value %}{{ form.postal_code.value }}{% else %}{{ request.GET.inf_field_PostalCode }}{% endif %}">
+      {{ form.postal_code.errors }}
+    </div>
+    <div class="form-group">
+      {{ form.country.label }}
+      <input type="text" name="{{ form.country.name }}" id="id_{{ form.country.name }}" class="form-control" value="{% if form.country.value %}{{ form.country.value }}{% else %}{{ request.GET.inf_field_Country }}{% endif %}">
+      {{ form.country.errors }}
+    </div>
+
+
     <div class="form-group">
       {{ form.password1.label }}
       <input type="password" name="{{ form.password1.name }}" id="id_{{ form.password1.name }}" class="form-control">

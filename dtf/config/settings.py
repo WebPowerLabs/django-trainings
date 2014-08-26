@@ -60,6 +60,8 @@ class Common(Configuration):
         'django_comments',
         'sorl.thumbnail',
         'polymorphic',
+        'djcelery',
+        'localflavor',
     )
 
     # Apps specific for this project go here.
@@ -257,6 +259,7 @@ class Common(Configuration):
     ACCOUNT_AUTHENTICATION_METHOD = "username"
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+    ACCOUNT_FORMS = {'signup': 'users.forms.UserSignupForm'}
     ########## END AUTHENTICATION CONFIGURATION
 
     ########## Custom user app defaults
