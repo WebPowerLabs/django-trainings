@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles thumbnail %}
 <!DOCTYPE html>
 <html lang="en" ng-app>
   <head>
@@ -71,6 +71,24 @@ padding: 30px 15px 5px;
 margin-top: 40px;
 }
 
+.panel.panel-green {
+border: solid 4px #139e97;
+background-color: #fff;
+margin-bottom: 20px;
+padding: 20px 15px;
+box-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+
+}
+.section-transition {
+  margin-top: -100px;
+}
+.section-transition-fix {
+  width: 100%;
+  height: 100px;
+}
+.section-bonus {
+  background-color: #F1F4D9;
+}
 
 /* font-sizes */
 .highlight-box p, .highlight-box li {
@@ -86,13 +104,41 @@ margin-top: 40px;
 .pricing-2 .buy-button, .buy-button {
   font-size: 1.5em;
 }
+.pricing-2 .price small {
+  color: red;
+  font-size: 0.5em;
+}
 .section-wont p, .section-wont li {
   font-size: 1.15em;
+}
+.panel-green {
+  font-size: 1.1em;
+}
+.panel-green strong {
+  font-size: 1.15em;
+}
+.section-wont li>strong {
+  font-size: 1.15em;
+}
+.section-bonus {
+  font-size: 1.1em;
+  line-height: 2;
+
+}
+.section-questions {
+  font-size: 1.1em;
+}
+.section-questions .question {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.section-questions .response {
+  font-size: 1.1em;
 }
 /*Colors*/
 
 .text-brown {color:#560E2C;}
-
+.text-red {color:red;}
 </style>
   </head>
   <body>
@@ -354,8 +400,12 @@ margin-top: 40px;
           </div><!--/ .col-md-10-->
           <div class="col-md-4">
             <div class="highlight-box testimonial">
-              <p>"My focus is much better!”</p>
-              <h4 style="margin-left: 10%; margin-bottom: 0;">-Jenifer</h4>
+              <p>"I didn't know how I was going to move forward after the loss of my dog. My focus is much better after this web class.”</p>
+              <h4 style="margin-left: 10%; margin-bottom: 10px;">-Jenifer</h4>
+                {% thumbnail 'https://djangonu-d2f.s3.amazonaws.com/images/hmh/girl_dog.jpg' 'x200' crop='10%' as im %}
+                <img class="img-responsive thumbnail" style="max-height: 200px;" src="{{ im.url }}">
+                {% endthumbnail %}
+              
             </div><!--/ .highlight-box-->
           </div><!--/ .col-md-4-->
         </div>
@@ -365,16 +415,22 @@ margin-top: 40px;
   ================================================== -->
 
 <section class="section-wont">
+
   <div class="container">
-    <h2 class="page-header">Let me also share a few things you WON’T get with my Heal My Heart &trade;</h2>
+    <h2 class="page-header text-brown">Let me also share a few things you WON’T get with my Heal My Heart &trade; Workshop</h2>
     <!--photo of Jami confused-->
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
         <ul class="">
-          <li>No endless weeks of therapy that keep you stuck in your emotions and dependent on another person for your results</li>
-          <li>No massive confusing breakdown methods that leave you feeling inadequate to understand and grasp the process of transformation</li>
-          <li>No woo-woo intangible processes that appeal to your belief system and make you wonder if they really worked</li>
+          <li><strong>No endless weeks of therapy</strong> that keep you stuck in your emotions and dependent on another person for your results</li>
+          <li><strong>No massive confusing breakdown methods</strong> that leave you feeling inadequate to understand and grasp the process of transformation</li>
+          <li><strong>No intangible woo-woo processes</strong> that appeal to your belief system and make you wonder if they really worked</li>
         </ul>
+      </div>
+      <div class="col-md-4">
+        <img class="img-responsive" src="{% static 'images/hmh/Jami_05_Print.jpg' %}">
+      </div>
+      <div class="col-md-12">
         <h3 class="text-brown">So now you may be wondering, &quot;Jami, how EXACTLY are you going to teach me to...&quot;</h3>
         <ul class="">
           <li>Create a self awareness that transforms my life</li>
@@ -384,50 +440,135 @@ margin-top: 40px;
           <li>Keep me in the state of joy and happiness</li>
           <li>...all in 7 weeks so I can go out and enjoy the kind of life I want to have</li>
         </ul>
-        <p class="">Valid question!</p>
-        <h3 class="">Here's my answer...</h3>
+        <h1 class="">Valid question!</h1>
+        <h3 class="text-brown">Here's my answer...</h3>
         <p class="">I've designed this training to go much deeper than one of those "in-a-box" info products that gets you all excited and then leaves you alone to struggle your way through finding the time and the focus to get going. Sorry, I care too much to do that to you.</p>
         <p class="">I'm going to hold your hand all the way through this one. It's not okay with me for you to do anything but have the peace, joy, freedom and fun that you have been longing for.</p>
-        <h3 class="">Here's are the SPECIFICS of how we're going to do this:</h3>
+        <h3 class="text-brown">Here's are the SPECIFICS of how we're going to do this:</h3>
         <p class="">You'll be sent an invitation to join our exclusive online community. Here's where we'll post all trainings, recordings of the calls, additional video training, worksheets, and more. (Plus you'll also be able to connect with other participants.) I've created an entire Virtual Community around this life-changing information so you get the most out of it.</p>
         <p class="">The only catch? You really need to do the work.</p>
-        <a class="btn buy-button">Get Started Now</a>
+        <a href="#pricing-2" class="btn buy-button">Get Started Now</a>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix section-transition-fix"></div>
+</section>
 
-        <h3 class="">2 GREAT Bonuses!:</h3>
+<section class="section-bonus">
+  <div class="container">
+    <h2 class="page-header text-red">2 GREAT Bonuses!</h2>
+    <!--photo of Jami confused-->
+    <div class="row">
+      <div class="col-md-12">
 
-        <p class="">That’s not all. Our promise to My Pet Lives On is to immediately give you elite status so we added:</p>
+        <h4 class="" style="padding-bottom: 20px;">That’s not all. Our promise to My Pet Lives On is to immediately give you elite status so we added:</h4>
+
 
         <!--(surround by border)include photo of telephone-->
-        <div class="panel panel-default">
+        <div class="panel panel-green">
           <div class="panel-body">
-            <p class="">2 live Q & A calls a month</p>
-            <p class="">Have all of your questions answered as you travel the journey of hope and healing. You can submit your questions early to be sure you get the attention you need.</p>
+            <div class="row">
+              <div class="col-md-8">
+                <p class=""><strong>2 Live Q & A Calls a Month</strong></p>
+                <p class="">Have all of your questions answered as you travel the journey of hope and healing. You can submit your questions early to be sure you get the attention you need.</p>
+              </div>
+              <div class="col-md-4">
+                {% thumbnail 'https://djangonu-d2f.s3.amazonaws.com/images/hmh/girl_phone.jpg' '400x300' crop='10%' as im %}
+                <img class="img-responsive pull-right" src="{{ im.url }}">
+                {% endthumbnail %}
+              </div>
+            </div>
           </div>
         </div>
         <!--(surround by border) include photo of past event-->
-        <div class="panel panel-default">
+        <div class="panel panel-green">
           <div class="panel-body">
-            <p class="">And my REALLY Big Bonus is a FREE ticket to my Heal My Heart &trade; Day Live Event ($497 value)</p>
+            <div class="row">
+              <div class="col-md-8">
+                <p class="">And my REALLY Big Bonus is a FREE ticket to my <strong>Heal My Heart&trade; 3 Day Live Event ($497 value)</strong></p>
+              </div>
+              <div class="col-md-4">
+                {% thumbnail 'https://djangonu-d2f.s3.amazonaws.com/images/hmh/girl_phone.jpg' '400x300' crop='10%' as im %}
+                <img class="img-responsive pull-right" src="{{ im.url }}">
+                {% endthumbnail %}              </div>
+            </div>      
           </div>
         </div>
         <p class="">I’m super excited about bringing this work to you live because I know that when we come together with common experiences, a desire to give and share, and learn and grow, PLUS learn how to implement the new tools we learn on the spot, the personal transformation possible is extraordinary. I have seen it with my own eyes over and over again! The bonus seats are limited and offered on a first come first served basis, so you will want to be the first to reserve a spot. You will be the first to know when we open up access to register.</p>
 
-        <p class="">Here is what Lisa said:</p>
+        <p class="lead">Here is what Lisa said:</p>
 
         <blockquote>
         <p class="">“This work is transformational. When I finally got it, I could see how my stories have been affecting every area and every relationship in my life. I now use this work every day in everything I do. I had no idea that my past painful experiences were affecting me this way. Thank you so much for teaching me this, Jami. It’s life changing.”</p>
         </blockquote>
-
-        <!--(Surround the rest of this information with a border) -->
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <!--(add a satisfaction guarantee seal here to the right just below this sentence)-->
-            <p class="">You are also protected by my “I’m learning and loving this course”.</p>
-            <p class="">We're confident that you will be thrilled with my Heal My Heart &trade; Virtual Workshop. We also know that if you follow the steps and do the work, you will have a life-transforming experience.</p>
-            <p class="">Just to back that up, we'll give you 30 days from the date of your purchase to live with the work and REALLY decide if it's for you... in your heart. If you decide it's not for you... just let us know and get a full refund of your course tuition. No reason needed.</p>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix section-transition-fix"></div>
+</section>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <!--(Surround the rest of this information with a border) -->
+      <div class="panel panel-green section-transition">
+        <div class="panel-body">
+          <!--(add a satisfaction guarantee seal here to the right just below this sentence)-->
+          <div class="row">
+            <div class="col-sm-8 col-md-9">
+              <h4 class="">You are also protected by my “I’m learning and loving this course” guarantee.</h4>
+              <p class="">We're confident that you will be thrilled with my Heal My Heart &trade; Virtual Workshop. We also know that if you follow the steps and do the work, you will have a life-transforming experience.</p>
+              <p class="">Just to back that up, we'll give you 30 days from the date of your purchase to live with the work and REALLY decide if it's for you... in your heart. If you decide it's not for you... just let us know and get a full refund of your course tuition. No reason needed.</p>
+            </div>
+            <div class="col-sm-4 col-md-3">
+              <img class="img-responsive" src="{% static 'images/hmh/satisfaction.jpg' %}">
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="section-questions">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="">PS. I know that taking the first step is the hardest. We have to ask ourselves if we are really willing to let go of the pain that is keeping us stuck. What I need to tell you is you are NOT going to have to let go of your happy memories. You can let go of the painful memories and grow further than you ever thought possible and remember, you are not alone on this journey.</p>
 
+        <h3>Are you ready to reserve your spot but still have a few questions?</h3>
+
+        <p class="question">When does this start and how much time do I need to spend on this work?</p>
+
+        <p class="response">You can get started right now and self pace through the workshop. You have access to it for a whole year and has been designed to be accessible to you 24/7. The workshop listening time is anywhere from 1 to 1 1⁄2 hr long. The “ownwork” takes roughly 30-45 min a week to complete.</p>
+
+        <p class="question">Do I have to be a techie to do this?</p>
+
+        <p class="response">Not at all. You do have to be able to click your mouse, know how to watch a video and print or view a pdf file by simply clicking and printing. We have a frequently asked questions page on the site if you get stuck.</p>
+
+        <p class="question">Is this therapy?</p>
+
+        <p class="response">No. We are not therapists. This program uses self healing processes. If you are under the care of a therapist or other doctor for mental issues, or taking medications for mental health issues or depression, we suggest you consult with your caregiver before taking this course. </p>
+
+        <p class="question">Is this work only if someone or my pet has died?</p>
+
+        <p class="response">No, remember GREIF is described as Getting Really Intense Emotional Feelings we don’t know how to deal with from negative Meaningful Emotional events that happen in your lifetime. This pain is stored in our minds and hearts. It can come from divorce, moving, change in relationships, losing a job...there are so many losses that people suffer. When you process through this pain, a whole world of possibility, joy, peace, and freedom is open to you.</p>
+
+        <div class="row">
+          <div class="col-sm-8">
+
+        <blockquote>
+          <p>Jami is a world-renowned leading authority and an expert in supporting people through the grieving process.  Jami is passionate and effective in helping people to see what is really at the core of their pain and suffering.  Her course, Heal my Heart&trade; has proven to successfully guide people through each step of their grieving process, leading them from their darkest of times, back into the light.  Jami and her team have assembled proven methods and personalized this grief support workshop to help people around the world when addressing their pain and stimulating healing.  This program is good for the participant and it is great for planet since it brings the support and the tools needed to guide people one step at a time with care and with love.  Jami graciously makes herself and her team available to her clients and they help their clients to grow and to be more confident in their journey as they make progress. I personally recommend this course to my clients who are suffering through the loss of a pet and need understanding and care through their healing and recovery time.  If you have lost a pet and coping with the grieving process, discover the way to navigate and participate in your healing by joining Jami in this course to heal your heart. </p>
+        </blockquote>
+            <p class="author">
+            Lee Richter, CEO <br>
+            <a href="http://MyPetLivesOn.com" target="_blank">MyPetLivesOn.com</a> <br>
+            Holistic Veterinary Care <br>
+            Montclair Veterinary Hospital <br>
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <img class="img-responsive" src="{% static 'images/hmh/lee_richter.jpg' %}">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -446,16 +587,16 @@ margin-top: 40px;
                   <h4 class="title" style="letter-spacing: 2px;"><small>Seven Week Web Class</small><br>3 Pay Option</h4>
                 </div><!--/ .package-->
                 <h3 class="sale">$797</h3>
-                <h1 class="price text-danger">
-                  Pay just
+                <h1 class="price text-danger" style="padding-left: 40px;">
+                  <small>Pay just</small>
                   <span class="currency">$</span>
                   <span class="amount" style="font-size:35px;">177</span>
                   <span class="decimal"></span>
-                  to start today!
+                  <small>to get started!</small>
                   <br>
                 </h1><!--/ .price-->
                 <p class="text-danger"><small>*Remaining 2 payments of $177 will be automatically charged every 21 days.</small></p>
-                <p class="text-danger">(Special MPLO 2 Pay Option avail for next 72 hrs)</p>
+                <p class="text-danger">(Special MPLO 3 Pay Option avail for next 72 hrs)</p>
               </div><!--/ .price-table-->
               <div class="features">
                 <h4>Start today!</h4>
