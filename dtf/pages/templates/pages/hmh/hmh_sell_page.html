@@ -621,7 +621,42 @@ box-shadow: 1px 1px 8px rgba(0,0,0,0.5);
             <a href="https://kb140.infusionsoft.com/app/orderForms/b76ba636-ae94-43a3-9462-f4693f6eeb22" class="buy-button btn btn-danger">Enroll Now</a>
           </div><!--/ .col-md-6-->
           {% endif %} <!--/ 3 pay -->
-          <div class="col-md-6{% if request.GET.expired %} col-md-offset-3{% endif %}">
+          {% if request.GET.expired == '2' %}
+
+          <div class="col-md-6">
+            <div class="price-wrapper">
+              <div class="price-table">
+                <div class="package col-md-8 col-md-offset-2">
+                  <h4 class="title" style="letter-spacing: 2px;"><small>Seven Week Web Class</small><br>3 Pay Option</h4>
+                </div><!--/ .package-->
+                <h3 class="sale"></h3>
+                <h1 class="price text-danger" style="padding-left: 40px;">
+                  <small>Pay just</small>
+                  <span class="currency">$</span>
+                  <span class="amount" style="font-size:35px;">293</span>
+                  <span class="decimal"></span>
+                  <small>to get started!</small>
+                  <br>
+                </h1><!--/ .price-->
+                <p class="text-danger"><small>*Remaining 2 payments of $293 will be automatically charged every 21 days.</small></p>
+              </div><!--/ .price-table-->
+              <div class="features">
+                <h4>Start today!</h4>
+                <ul class="list-unstyled features">
+                  <li class="odd">Course is available 24/7 online</li>
+                  <li class="even">24/7 access to the online community support</li>
+                  </ul><!--/ .features-->
+                  <h4 class="text-danger">BONUS!</h4>
+                <ul class="list-unstyled features text-danger">
+                  <li class="odd">Live Q&A calls with 24/7 access to recordings</li>
+                  <li class="even">FREE Ticket to Heal My Heart&trade; 3 Day Event<br><small style="color:#000;">*event ticket does not include, travel, transportation, accommodations or food served at the event.</small></li>
+                </ul><!--/ .features-->
+              </div>
+            </div><!--/ .price-wrapper-->
+            <a href="https://kb140.infusionsoft.com/app/orderForms/cd9004ea-9e95-4e2b-81fe-f4097e825ab6" class="buy-button btn btn-danger">Enroll Now</a>
+          </div><!--/ .col-md-6-->
+          {% endif %}
+          <div class="col-md-6{% if request.GET.expired == '1' %} col-md-offset-3{% endif %}">
             <div class="price-wrapper">
               <div class="price-table" style="padding-bottom: 35px;">
                 <div class="package col-md-8 col-md-offset-2">
