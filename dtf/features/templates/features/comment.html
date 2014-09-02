@@ -14,7 +14,13 @@
  {% endif %}
 </div>
   <h3 class="fb-post-heading">
-      {% user_thumbnail comment.user %}
+    <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
+      {% if comment.user.fb_uid %}
+      <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+      {% else %}
+        {% avatar comment.user %}
+      {% endif %}
+    </a>
       <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.first_name }}</a>
     <small class="date">{{ comment.submit_date|date }}</small>
   </h3>
@@ -46,7 +52,13 @@
         <input type="hidden" name="next" value="{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}" />
         <div class="comment-form-control">
           <div class="comment-img">
-            {% user_thumbnail user %}
+            <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
+              {% if comment.user.fb_uid %}
+              <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+              {% else %}
+                {% avatar comment.user %}
+              {% endif %}
+            </a>
           </div>
           <input type="text" class="form-control comment-field" placeholder="Write something..." name="comment" id="id_comment">
           <div class="comment-submit">

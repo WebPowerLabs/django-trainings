@@ -4,11 +4,14 @@
 {% for comment in comment_list %}
     <div id="comment-{{ comment.id }}" class="media fb-post">
         <div data-fbuser="{{ comment.user.id }}" class="pull-left img-profile">
-        {% if comment.user.fb_uid %}
-            <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-thumbnail">
-        {% else %}
-            {% avatar comment.user %}
-        {% endif %}
+            <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
+              {% if comment.user.fb_uid %}
+              <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+              {% else %}
+                {% avatar comment.user %}
+              {% endif %}
+            </a>
+
         </div>
         <div class="media-body">
             <div class="pull-right comment-actions">

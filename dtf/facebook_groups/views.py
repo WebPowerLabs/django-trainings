@@ -195,9 +195,12 @@ def fb_group_create(request):
                 form = FBGroupCreateForm(request.POST, request.FILES, instance=fb_group)
                 form.save()
             
-            if not fb_group.fb_uid:
+            else:
                 # no fb_uid was given becuase user reqeusting to create was not logged in.
-                fb_group.fb_uid = FacebookGroup.objects.all().order_by('-id')[0].id+1
+                fb_uid = 1
+                if FacebookGroup.objects.count():
+                    fb_uid = FacebookGroup.objects.all().order_by('-id')[0].id+1
+                fb_group.fb_uid = fb_uid
                 fb_group.owner = request.user
                 fb_group.save()
 

@@ -14,13 +14,15 @@
  {% endif %}
 </div>
   <h3 class="fb-post-heading">
+
+    <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
       {% if comment.user.fb_uid %}
       <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
-      <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>
       {% else %}
         {% avatar comment.user %}
-        {{ comment.user.get_full_name }}
       {% endif %}
+    </a>
+      <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.get_full_name }}</a>
     <small class="date">{{ comment.submit_date|date }}</small>
   </h3>
   <div class="panel-body">
