@@ -1,112 +1,133 @@
 {% extends "pages/base.html" %}
 {% load staticfiles i18n crispy_forms_tags %}
 
+{% block title %}Decide to Fly&trade;{% endblock title %}
+
+{% block scriptina %}
+<!----Scriptina Webfont---->
+<link rel="stylesheet" href="{% static 'fonts/scriptina-webfont.css' %}" type="text/css" charset="utf-8" />
+{% endblock scriptina %}
+
+{% block marina %}
+<!----Marina Webfont---->
+<link rel="stylesheet" href="{% static 'fonts/marina-webfont.css' %}" type="text/css" charset="utf-8" />
+{% endblock marina %}
+
 {% block footer %}
 {% endblock footer %}
 
 {% block content %}
 <div id="wrapper">
 
-	<!-- - - - - - - - WELCOME HOME BLOCK - - - - - - - -->
-	<section class="welcome-home">
-		<section class="section parallax">
-			<div class="full-bg-image"></div>
-			<div class="col-sm-5 col-sm-offset-1">
-				<div class="content text-center">
-					<div class="video-wrapper">
-						<iframe width="100%" height="auto" src="http://www.youtube.com/embed/qGsTlYLbwy4?wmode=transparent" frameborder="0" allowfullscreen></iframe>
-					</div><!--/ .video-wrapper-->
-					<a href="#"><button class="btn btn-success btn-lg">Get Your Free Gift</button></a>
-				</div><!--/ .content-->
-			</div><!--/ .col-sm-5-->
-			<img class="swoosh" src="{% static 'images/swoosh.png' %}" />
-		</section><!--/ .section-->
-	</section>
-	<!-- - - - - - - -/ WELCOME HOME BLOCK - - - - - - - -->
+  <!-- - - - - - - - WELCOME HOME BLOCK - - - - - - - -->
+  <section class="welcome-home">
+    <section class="section parallax">
+      <div class="full-bg-image"></div>
+      <div class="col-sm-5 col-sm-offset-1">
+        <div class="content text-center">
+          <div class="video-wrapper">
 
-	<!-- - - - - - - - D2F COMMUNITY INTRO BLOCK - - - - - - - -->
-	<section class="community section">
-		<div class="container">
-	        <div class="row">
-	            <div class="section-header col-xs-12 text-center">
-	            	<h3 class="section-subtitle">The community to:</h3>
-	                <h1 class="section-title">Connect, Collaborate & Create</h1>
-	                <h3 class="section-subtitle">the life you REALLY want to live!</h3>
-	                <hr>
-	            </div><!--/ .section-header-->
-	        </div><!--/ .row-->
-		</div><!--/ .container-->
-		<div class="row community-items">
-				<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-					<a href="{% url 'd2f-community' %}">
-						<div class="entry">
-							<div class="icon top">
-								<i class="fa fa-desktop"></i>
-							</div><!--/ .icon-->
-							<h2 class="entry-title">Online Mentoring</h2>
-							<div class="entry-body">
-								<p>Curabitur consequat iaculis neque a faucibus. Sed in rhoncus tellus. Mauris tortor nibh, convallis quis sagittis ut, ornare eget metus. Phasellus vel varius ante.</p>
-							</div><!--/ .entry-body-->
-							<div class="icon bottom">
-								<i class="fa fa-plus"></i>
-							</div><!--/ .icon-->
-						</div><!--/ .entry-->
-					</a>
-				</div><!--/ .col-md-4-->
-				<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-					<a href="{% url 'd2f-community' %}">
-						<div class="entry">
-							<div class="icon top">
-								<i class="fa fa-comments"></i>
-							</div><!--/ .icon-->
-							<h2 class="entry-title">Live Discussion Boards</h2>
-							<div class="entry-body">
-								<p>Curabitur consequat iaculis neque a faucibus. Sed in rhoncus tellus. Mauris tortor nibh, convallis quis sagittis ut, ornare eget metus. Phasellus vel varius ante.</p>
-							</div><!--/ .entry-body-->
-							<div class="icon bottom">
-								<i class="fa fa-plus"></i>
-							</div><!--/ .icon-->
-						</div><!--/ .entry-->
-					</a>			
-				</div><!--/ .col-md-4-->
-				<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-					<a href="{% url 'd2f-community' %}">
-						<div class="entry">
-							<div class="icon top">
-								<i class="fa fa-users"></i>
-							</div><!--/ .icon-->
-							<h2 class="entry-title">Connect With Peers</h2>
-							<div class="entry-body">
-								<p>Curabitur consequat iaculis neque a faucibus. Sed in rhoncus tellus. Mauris tortor nibh, convallis quis sagittis ut, ornare eget metus. Phasellus vel varius ante.</p>
-							</div><!--/ .entry-body-->
-							<div class="icon bottom">
-								<i class="fa fa-plus"></i>
-							</div><!--/ .icon-->
-						</div><!--/ .entry-->
-					</a>
-				</div><!--/ .col-md-4-->
-			</div><!--/ .row-->
-	</section>
-	<!-- - - - - - - -/ D2F COMMUNITY INTRO BLOCK - - - - - - - -->
+<video class="img-responsive" id="video_player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="640" height="480">
+    <source src="https://s3.amazonaws.com/djangonu-d2f/videos/d2fhome.mp4" type='video/mp4' />
+    <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+</video>
+          </div><!--/ .video-wrapper-->
+          <button class="nurture-button btn btn-danger btn-lg" data-toggle="modal" data-target="#connectedModal">Stay Connected</button>
+        </div><!--/ .content-->
+      </div><!--/ .col-sm-5-->
+      <img class="swoosh" src="{% static 'images/swoosh.png' %}" />
+    </section><!--/ .section-->
+  </section>
+  <!-- - - - - - - -/ WELCOME HOME BLOCK - - - - - - - -->
 
-	<!-- - - - - - - - CTS INTRO BLOCK - - - - - - - -->
-	<section class="welcome-home">
-		<section class="section parallax padding-off">
-			<div class="full-bg-image"></div>
-			<div class="container">	
-				<div class="video-full-entry">
-					<div class="row">
-						<div class="col-sm-6">
-						</div><!--/ .col-md-6-->
-					</div><!--/ .row-->
-				</div><!--/ .video-full-entry-->
-			</div><!--/ .container-->
-			<img class="swoosh" src="{% static 'images/swoosh.png' %}" />
-		</section><!--/ .section-->
-	</section>
-	<!-- - - - - - - -/ CTS INTRO BLOCK - - - - - - - -->
-	
-	{% include "includes/footer-contact.html" %}
+  <!-- - - - - - - - D2F COMMUNITY INTRO BLOCK - - - - - - - -->
+  <section class="community section">
+    <div class="container">
+          <div class="row">
+              <div class="section-header col-xs-12 text-center">
+                <h3 class="section-subtitle">The community to:</h3>
+                  <h1 class="section-title">Connect, Collaborate & Create</h1>
+                  <h3 class="section-subtitle">the life you REALLY want to live!</h3>
+                  <hr>
+              </div><!--/ .section-header-->
+          </div><!--/ .row-->
+    </div><!--/ .container-->
+    <div class="row community-items">
+        <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+          <!--<a href="{% url 'd2f-community' %}">-->
+            <div class="entry">
+              <img class="icon-heart" src="http://i1219.photobucket.com/albums/dd439/zlorenz48/heal-my-heart-logo_zpsd10ba518.png">
+              <h2 class="entry-title">Connect</h2>
+              <div class="entry-body">
+                <p>&bull; Be encouraged 24/7 online<br>
+                  &bull; Be equipped with resources you need<br>
+                  &bull; Be empowered with beneficial relationships.</p>
+              </div><!--/ .entry-body-->
+              <div class="icon bottom">
+                <i class="fa fa-plus"></i>
+              </div><!--/ .icon-->
+            </div><!--/ .entry-->
+          <!--</a>-->
+        </div><!--/ .col-md-4-->
+        <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+          <!--<a href="{% url 'd2f-community' %}">-->
+            <div class="entry">
+              <img class="icon-heart" src="http://i1219.photobucket.com/albums/dd439/zlorenz48/heal-my-heart-logo_zpsd10ba518.png">
+              <h2 class="entry-title">Collaborate</h2>
+              <div class="entry-body">
+                <p>&bull; Learn from the wisdom & knowledge of others<br>
+                  &bull; Share your own experiences to help others<br>
+                  &bull; Work together to build your dreams and acheive your goals</p>
+              </div><!--/ .entry-body-->
+              <div class="icon bottom">
+                <i class="fa fa-plus"></i>
+              </div><!--/ .icon-->
+            </div><!--/ .entry-->
+          <!--</a>-->     
+        </div><!--/ .col-md-4-->
+        <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+          <!--<a href="{% url 'd2f-community' %}">-->
+            <div class="entry">
+              <img class="icon-heart" src="http://i1219.photobucket.com/albums/dd439/zlorenz48/heal-my-heart-logo_zpsd10ba518.png">
+              <h2 class="entry-title">Create</h2>
+              <div class="entry-body">
+                <p>&bull; Expand your vision of what is possible for you<br>
+                &bull; Take your highest thoughts and make them a reality<br>
+                &bull; Live and love the life you were created for</p>
+              </div><!--/ .entry-body-->
+              <div class="icon bottom">
+                <i class="fa fa-plus"></i>
+              </div><!--/ .icon-->
+            </div><!--/ .entry-->
+          <!--</a>-->
+        </div><!--/ .col-md-4-->
+      </div><!--/ .row-->
+  </section>
+  <!-- - - - - - - -/ D2F COMMUNITY INTRO BLOCK - - - - - - - -->
+
+  <!-- - - - - - - - MEET THE FOUNDER BLOCK - - - - - - - -->
+  <section class="meet-founder">
+    <section class="section parallax padding-off">
+      <div class="full-bg-image"></div>
+      <div class="container"> 
+        <div class="video-full-entry">
+          <div class="row">
+            <div class="col-sm-7">
+              <h1 class="quote" style="color:#336633;">"I believe in you.<br> If I can do it, then you can too!"</h1>
+              <h1 class="source">Jami Amidon</h1>
+            </div><!--/ .col-md-6-->
+          </div><!--/ .row-->
+        </div><!--/ .video-full-entry-->
+        <a href="{% url 'meet-the-founder' %}" class="btn btn-danger">Meet the Founder</button></a>
+      </div><!--/ .container-->
+    </section><!--/ .section-->
+  </section>
+  <!-- - - - - - - -/ MEET THE FOUNDER BLOCK - - - - - - - -->
+  
+  {% include "includes/footer-contact.html" %}
 
 </div><!--/ #wrapper-->
 <!-- - - - - - - - - - - - - end Wrapper - - - - - - - - - - - - - - - -->
@@ -116,13 +137,58 @@
 <div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
 {% endblock loader %}
 
+{% block modal %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="connectedModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="connectedModalLabel">Thank You!</h4>
+      </div>
+      <div class="modal-body">
+        <p>We are so close to launch. You are going to be the first to see all of the changes we have made to the Decide To Fly &trade; Community. We'll stay in touch.</p>
+
+          <!--TODO: infusionsoft form here -->
+<form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/e74a54ec36026bde848d6930d06fb1b6" class="infusion-form form" id="connect-form" method="POST">
+    <input name="inf_form_xid" type="hidden" value="e74a54ec36026bde848d6930d06fb1b6" />
+    <input name="inf_form_name" type="hidden" value="Opt-in to&#a;&quot;Stay Connected&quot;" />
+    <input name="infusionsoft_version" type="hidden" value="1.32.0.68" />
+
+   <div class="infusion-field form-group">
+        <label class="control-label" for="inf_field_FirstName">First Name</label>
+        <input class="infusion-field-input-container form-control" id="inf_field_FirstName" name="inf_field_FirstName" type="text" />
+    </div>
+    <div class="infusion-field form-group">
+        <label class="control-label" for="inf_field_Email">Email</label>
+        <input class="infusion-field-input-container form-control" id="inf_field_Email" name="inf_field_Email" type="text" />
+    </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--TODO: submit to infusionsoft -->
+        <button type="button" class="btn btn-success" id="connect-submit">Connect &nbsp; <i class="fa fa-check"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock modal %}
+
 {% block javascript %}
 {{ block.super }}
 {% include "includes/js_marketing.html" %}
 <script type="text/javascript">
+
 $('#contact-form #submit').click(function(e) {
-	e.preventDefault();
-	$('#contact-form').submit();
+  e.preventDefault();
+  $('#contact-form').submit();
+});
+
+$('#connect-submit').click(function(e) {
+  e.preventDefault();
+  $('#connect-form').submit();
 });
 </script>
 {% endblock javascript %}

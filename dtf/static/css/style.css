@@ -100,7 +100,6 @@ nav ol {
     list-style-image: none;
 }
 
-ul { list-style: none outside;    }
 ol { list-style-position: inside; }
 
 a {

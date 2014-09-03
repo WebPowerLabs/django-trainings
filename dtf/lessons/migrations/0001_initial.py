@@ -6,21 +6,15 @@ from django.db import models
 
 
 class Migration(SchemaMigration):
+    depends_on = (
+        ("tags", "0001_initial"),
+    )
 
     def forwards(self, orm):
-        # Adding model 'Video'
-        db.create_table(u'lessons_video', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True)),
-            ('status', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal(u'lessons', ['Video'])
-
         # Adding model 'Lesson'
         db.create_table(u'lessons_lesson', (
             (u'content_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['courses.Content'], unique=True, primary_key=True)),
-            ('video', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['lessons.Video'], null=True, blank=True)),
-            ('audio', self.gf('django.db.models.fields.files.FileField')(max_length=100, null=True, blank=True)),
+            ('video', self.gf('django.db.models.fields.files.FileField')(max_length=100, blank=True)),
             ('homework', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('course', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['courses.Course'])),
             ('_order', self.gf('django.db.models.fields.IntegerField')(default=0)),
@@ -50,21 +44,8 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'lessons', ['LessonFavourite'])
 
-        # Adding model 'LessonComplete'
-        db.create_table(u'lessons_lessoncomplete', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'])),
-            ('lesson', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['lessons.Lesson'])),
-            ('is_complete', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal(u'lessons', ['LessonComplete'])
-
 
     def backwards(self, orm):
-        # Deleting model 'Video'
-        db.delete_table(u'lessons_video')
-
         # Deleting model 'Lesson'
         db.delete_table(u'lessons_lesson')
 
@@ -76,9 +57,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'LessonFavourite'
         db.delete_table(u'lessons_lessonfavourite')
-
-        # Deleting model 'LessonComplete'
-        db.delete_table(u'lessons_lessoncomplete')
 
 
     models = {
@@ -120,7 +98,7 @@ class Migration(SchemaMigration):
         u'courses.course': {
             'Meta': {'ordering': "['order']", 'object_name': 'Course', '_ormbases': [u'courses.Content']},
             u'content_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['courses.Content']", 'unique': 'True', 'primary_key': 'True'}),
-            'order': ('django.db.models.fields.IntegerField', [], {})
+            'order': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         u'courses.favourite': {
             'Meta': {'ordering': "['-created']", 'object_name': 'Favourite'},
@@ -139,20 +117,11 @@ class Migration(SchemaMigration):
         u'lessons.lesson': {
             'Meta': {'ordering': "(u'_order',)", 'object_name': 'Lesson', '_ormbases': [u'courses.Content']},
             '_order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'audio': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'content_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['courses.Content']", 'unique': 'True', 'primary_key': 'True'}),
             'course': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['courses.Course']"}),
             'homework': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['tags.Tag']", 'null': 'True', 'blank': 'True'}),
-            'video': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Video']", 'null': 'True', 'blank': 'True'})
-        },
-        u'lessons.lessoncomplete': {
-            'Meta': {'object_name': 'LessonComplete'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_complete': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'lesson': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Lesson']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['users.User']"})
+            'video': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'blank': 'True'})
         },
         u'lessons.lessonfavourite': {
             'Meta': {'ordering': "['-created']", 'object_name': 'LessonFavourite', '_ormbases': [u'courses.Favourite']},
@@ -163,12 +132,6 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "['-created']", 'object_name': 'LessonHistory', '_ormbases': [u'courses.History']},
             u'history_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['courses.History']", 'unique': 'True', 'primary_key': 'True'}),
             'lesson': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['lessons.Lesson']"})
-        },
-        u'lessons.video': {
-            'Meta': {'object_name': 'Video'},
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'status': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         u'tags.tag': {
             'Meta': {'object_name': 'Tag'},
@@ -183,6 +146,7 @@ class Migration(SchemaMigration):
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'infusionsoft_uid': ('django.db.models.fields.IntegerField', [], {'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),

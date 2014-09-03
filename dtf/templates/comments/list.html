@@ -24,7 +24,7 @@
             {% endif %}
             </div>
             <p>
-            <strong class="fb-from-user">{{ comment.user.get_full_name }}</strong> 
+            <strong class="fb-from-user">{{ comment.user.first_name }}</strong> 
             <span class="fb-message">{{ comment.comment|markdown }}</span>
             </p>
             <p class="fb-actions">

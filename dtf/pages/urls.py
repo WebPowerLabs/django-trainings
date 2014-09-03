@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from .views import PageView
+from .views import PageView, HMHPageView
 
 
 urlpatterns = patterns('pages.views',
@@ -43,11 +43,17 @@ urlpatterns = patterns('pages.views',
         PageView.as_view(template_name='pages/coming-soon.html'),
         name="coming-soon"),
     url(r'^hmh_promo/$',
-        PageView.as_view(template_name='pages/hmh_sell_page.html'),
+        PageView.as_view(template_name='pages/hmh/hmh_sell_page.html'),
         name="hmh-sell-1"),
     url(r'^hmh_video/$',
-        PageView.as_view(template_name='pages/hmh_video.html'),
+        HMHPageView.as_view(),
         name="hmh-video"),
+    url(r'^terms-of-service/$',
+        PageView.as_view(template_name='pages/terms-of-service.html'),
+        name="terms-of-service"),
+    url(r'^meet-the-founder/$',
+        PageView.as_view(template_name='pages/meet_the_founder.html'),
+        name="meet-the-founder"),
     url(r'^contact/$', 'contact', name='contact'),
     url(r'^search/$', 'search', name="search"),
     )

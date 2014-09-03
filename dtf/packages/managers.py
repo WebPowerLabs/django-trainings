@@ -72,7 +72,7 @@ class InfusionsoftTagManager(models.Manager):
         """
         tag_str = self._get_provider_tags_data_for_user(user)
         tag_ids = [int(tag_id) for tag_id in tag_str.split(",")] if tag_str else []
-        tags = self.filter(remote_id__in=tag_ids) if len(tag_ids) else None
+        tags = self.filter(remote_id__in=tag_ids) if len(tag_ids) else self.none()
         return tags
 
     def _get_sync_data(self, remote_id=None):
@@ -121,6 +121,8 @@ class InfusionsoftTagManager(models.Manager):
             # try getting users infusionsoft id, use email as backup
             _key = "Id" if user.infusionsoftprofile else "email"
             _value = user.infusionsoftprofile.get_remote_id if user.infusionsoftprofile else user.email
+            results = self.none()
+            return_results = self.none()
             if _key and _value:
                 try:
                     # if they have an infusionsoft profile this should work
@@ -128,9 +130,11 @@ class InfusionsoftTagManager(models.Manager):
                         10, 0, _key, _value,
                         ["Groups", ]);
                 except CannotSendRequest:
-                    results = (None,)
-            try:
-                return_results = results[0]["Groups"] if len(results) else None
-            except KeyError:
-                return_results = None
-            return  return_results
+                    results = (self.none(),)
+            if results:
+
+                try:
+                    return_results = results[0]["Groups"] if len(results) else self.none()
+                except KeyError:
+                    pass
+            return return_results

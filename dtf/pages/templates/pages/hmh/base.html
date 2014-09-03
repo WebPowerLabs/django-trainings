@@ -1,0 +1,220 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>Heal My Heart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- Font Awesome Icons
+    ================================================== -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Theme Stylesheets
+    ================================================== -->
+
+    <link rel="stylesheet" href="{% static 'pages/hmh-sell.min.css' %}">
+     <!-- Infusionsoft Analytics Tracking Code
+    ================================================== -->
+    <script type="text/javascript" src="https://kb140.infusionsoft.com/app/webTracking/getTrackingCode?trackingId=1f490cf4ac33c0c9f67aab5ed87bef61"></script>
+    <style>
+    .header .jumbotron {
+      background-color: red;
+      color: #fff;
+
+    }
+    .header .jumbotron p {
+      font-weight: 400;
+      font-size: 2em;
+    }
+    .navbar.video-nav .navbar-header {
+      padding: 0;
+  }
+    </style>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1411556859108186&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- LOGO HMH VIDEO NAVBAR
+    ================================================== -->
+      <nav class="video-nav navbar navbar-default navbar-static-top bg-soft" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+              <img class="logo" src="http://i1219.photobucket.com/albums/dd439/zlorenz48/heal-my-heart-broken-logo_zpsaa29aefb.png">
+              <h1 class="title">Heal My Heart</h1>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="text-center{% block nav_video_1 %}{% endblock nav_video_1 %}">
+                <a class="video-nav-item" href="{% block link_video_1 %}{% url 'hmh-video' %}?access_code=aly8b34yafn1{% endblock link_video_1 %}">
+                  <h4 class="item-title">Video 1</h4>
+                  <p class="description">You Are Not Alone</p>
+                </a>
+              </li>
+              <li class="text-center{% block nav_video_2 %}{% endblock nav_video_2 %}">
+                <a class="video-nav-item" href="{% block link_video_2 %}{% url 'hmh-video' %}?access_code=aly8b34yafn2{% endblock link_video_2 %}">
+                  <h4 class="item-title">Video 2</h4>
+                  <p class="description">Find the Peace and Joy</p>
+                </a>
+              </li>
+              <li class="text-center{% block nav_video_3 %}{% endblock nav_video_3 %}">
+                <a class="video-nav-item" href="{% block link_video_3 %}{% url 'hmh-video' %}?access_code=aly8b34yafn3{% endblock link_video_3 %}">
+                  <h4 class="item-title">Webinar</h4>
+                  <p class="description">Let The Journey Begin</p>
+                </a>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    <!-- END HMH VIDEO NAVBAR
+    ================================================== -->
+
+<section class="header text-center">
+  <div class="jumbotron">
+    <div class="container">
+      <p class="title">{% block title %}Heal My Heart&trade;{% endblock title %}</p>
+      <p class="lead">{% block lead %}{% endblock lead %}</p>
+    </div>
+  </div>
+</div>
+</section>
+    <!-- VIDEO SECTION
+    ================================================== -->
+      <section class="video-player block">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="video-wrapper">
+                {% block video %}
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://0740d05792ded6c37235-5d746ac01735382e98afd614a81d1e3b.ssl.cf1.rackcdn.com/getQueryString.js"></script>
+<iframe id="youtube_qGsTlYLbwy4" width="560" height="315" src="//www.youtube.com/embed/qGsTlYLbwy4?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+<script class="PlusThisVidTrack100" type="text/javascript">  email=""; cid=""; if(getQueryVariable("Email") != "not found"){email=getQueryVariable("Email");} if(getQueryVariable("Contact0Email") != "not found"){email=getQueryVariable("Contact0Email");} if(getQueryVariable("inf_field_Email") != "not found"){email=getQueryVariable("inf_field_Email");} if(getQueryVariable("Id") != "not found"){cid=getQueryVariable("Id");} if(getQueryVariable("contactId") != "not found"){cid=getQueryVariable("contactId");}  if(email != ""){ if(cid!=""){   furl_qGsTlYLbwy4 = "https://my.plusthis.com/p/08ffd651af4653e341425daf9f12978fdb8e9131"; var tr0_qGsTlYLbwy4="f"; }} var playTracker;var YT_ready=(function(){var b=[],a=false;return function(d,e){if(d===true){a=true;for(var c=0;c<b.length;c++){b.shift()()}}else{if(typeof d=="function"){if(a){d()}else{b[e?"unshift":"push"](d)}}}}})();function onYouTubePlayerAPIReady(){YT_ready(true)}(function(){var a=document.createElement("script");a.src="https://www.youtube.com/player_api";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();var player;YT_ready(function(){var a="youtube_qGsTlYLbwy4";if(a){player=new YT.Player(a,{events:{onStateChange:stopCycle}})}});function stopCycle(a){if(a.data==1){playTracker=window.setInterval(isRun,900)}else{window.clearInterval(playTracker)}}function isRun(){videoProgress(player.getCurrentTime())}; function videoProgress(t){ if(t > 59){ if(t < 61){ if(tr0_qGsTlYLbwy4 == "f"){ jQuery.ajax({ url: furl_qGsTlYLbwy4, type: "POST", data: {"Id" : cid, "Email" : email, "i" : "0"}, dataType: "jsonp"}); tr0_qGsTlYLbwy4="t";}}} }</script>
+
+              {% endblock video %}
+              </div>
+            </div><!--/ .col-xs-12-->
+          </div><!--/ .row-->
+        </div><!--/ .container-->
+      </section>
+    <!-- END VIDEO SECTION
+    ================================================== -->
+
+
+    <!-- ABOUT ICON LIST SECTION
+    ================================================== -->
+      <section class="get-ready-list block bg-soft">
+        <div class="container">
+          {% block about %}
+
+            {% endblock about %}
+          </div><!--/ .row-->
+        </div><!--/ .container-->
+      </section>
+    <!-- END ABOUT ICON LIST SECTION
+    ================================================== -->
+
+    <!-- BOXED HIGHLIGHTS SECTION
+    ================================================== -->
+      <section class="social-comments block">
+        <div class="container">
+          <div class="row">
+            <div class="section-header col-xs-12 text-center">
+                <h1 class="section-title">Tell me about how you feel since your loss?</h1>
+                <hr>
+            </div><!--/ .section-header-->
+          </div><!--/ .row-->
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="fb-comments" data-href="http://decidetofly.com" data-width="100%" data-numposts="10" data-colorscheme="light"></div>
+            </div>
+          </div><!--/ .row-->
+        </div><!--/ .container-->
+      </section>
+    <!-- END BOXED HIGHLIGHTS SECTION
+    ================================================== -->
+
+    <!-- CONTACT SECTION
+    ================================================== -->
+      <section class="contact block bg-primary text-white">
+        <div class="container text-center">
+          <div class="row">
+            <div class="section-header col-xs-12">
+              <h1 class="section-title">Contact Us</h1>
+              <hr><!--/ .separator-->
+            </div><!--/ .section-header-->
+          </div><!--/ .row-->
+          <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+              <a class="phone" href="tel:5203690500"><i class="fa fa-mobile"></i>(520) 369-0500</a>
+            </div><!--/ .col-md-4-->
+            <div class="col-md-4">
+              <a class="email" href="mailto:info@decidetofly.com"><i class="fa fa-envelope-o"></i>info@decidetofly.com</a>
+            </div><!--/ .col-md-4-->
+          </div><!--/ .row-->
+          <div class="contact-form">
+            <form role="form">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control input-lg" id="InputName1" placeholder="Name">
+                </div><!--/ .form-group-->
+                <div class="form-group">
+                  <input type="email" class="form-control input-lg" id="InputEmail1" placeholder="Email">
+                </div><!--/ .form-group-->
+                <div class="form-group">
+                  <input type="tel" class="form-control input-lg" id="InputPhone1" placeholder="Phone">
+                </div><!--/ .form-group-->
+              </div><!--/ .col-md-6-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" placeholder="Send a message..."></textarea>
+                </div><!--/ .form-group-->
+                <button type="submit" class="btn btn-default btn-lg btn-block">Submit</button>
+              </div><!--/ .col-md-6-->
+            </form>
+          </div><!--/ .contact-form-->
+        </div><!--/ .container-->
+      </section>
+    <!-- END CONTACT SECTION
+    ================================================== -->
+
+    <!-- COPYRIGHT FOOTER SECTION
+    ================================================== -->
+      <section class="copyright-footer bg-primary-dark text-white">
+        <div class="container">
+          <div class="row">
+            <div class="copyright col-sm-6">
+              <p>2014 &copy; <a href="#">Decide to Fly&trade;</a>. All rights reserved. See our <a href="{% url 'terms-of-service' %}">Terms of Service</a></p>
+            </div><!--/ .copyright-->
+          </div><!--/ .row-->
+        </div><!--/ .container-->
+      </section>
+    <!-- END COPYRIGHT FOOTER SECTION
+    ================================================== -->
+
+    <!-- Latest JQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
