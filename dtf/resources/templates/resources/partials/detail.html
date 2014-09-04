@@ -1,4 +1,4 @@
-{% load user_permission_tags %}
+{% load user_permission_tags markdown %}
 {% if user|can_manage_content:object.lesson %}
 <div class="list-group-item sortable_item no_transition">
   {% if object.file %}
@@ -8,7 +8,7 @@
   {% endif %}
     <h4 class="list-group-item-heading">{{ object.name }}</h4>
     <p class="list-group-item-text">
-        {{ object.description }}
+        {{ object.description|markdown }}
     </p>
   </a>
   <div class="list-group-item-secondary btn-group-vertical">
@@ -28,7 +28,7 @@
 {% endif %}
     <h4 class="list-group-item-heading">{{ object.name }}</h4>
     <p class="list-group-item-text">
-        {{ object.description }}
+        {{ object.description|markdown }}
     </p>
 </a>
 {% endif %}
