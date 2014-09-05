@@ -35,6 +35,7 @@ class Package(models.Model):
     lessons = models.ManyToManyField("lessons.Lesson", null=True, blank=True)
     groups = models.ManyToManyField("facebook_groups.FacebookGroup", null=True,
                                     blank=True)
+    #journals = models.ManyToManyField("journals.JournalQuestionSet")
 
     objects = PackageManager()
 

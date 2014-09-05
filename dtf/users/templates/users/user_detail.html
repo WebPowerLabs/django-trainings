@@ -76,6 +76,24 @@
       <div class="col-md-5">
         <div class="panel panel-primary">
           <div class="panel-heading">
+            My Journal
+          </div>
+          <div class="">
+            <form class="form panel-body" action="{% url 'journals:entries' %}" method="POST">
+              {% csrf_token %}
+            {% for question in journal_questions %}
+              {% include "journals/journal_question.html" %}
+            {% empty %}
+
+              <p>Your journal questions will appear here.</p>
+            {% endfor %}
+            <input class="btn btn-primary" type="submit" value="Submit">
+            </form>
+
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
             My Communities
           </div>
           <div class="">

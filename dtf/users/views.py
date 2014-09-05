@@ -29,29 +29,43 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     slug_url_kwarg = "pk"
 
     def get_context_data(self, **kwargs):
-        from utils.comments import latest_comments
-        from courses.models import CourseFavourite
-        from lessons.models import LessonFavourite
-        from facebook_groups.models import FacebookGroup
+ 
         from profiles.models import UserProfile
+
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = self.get_object()
-        feed = latest_comments(self.request)  # get latest comments
-        paginator = Paginator(feed, 5)
-        try:
-            page = int(self.request.GET.get('page', '1'))
-        except ValueError:
-            page = 1
-        try:
-            feed = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            feed = paginator.page(paginator.num_pages)
-
-        context['courses'] = CourseFavourite.objects.active(user)
-        context['lessons'] = LessonFavourite.objects.active(user)
-        context['groups'] = FacebookGroup.objects.purchased(user)
-        context['comments'] = feed
         context['profile'] = UserProfile.objects.get_or_create(user=user)[0]
+
+        if user == self.request.user:        
+            from utils.comments import latest_comments
+            from courses.models import CourseFavourite
+            from lessons.models import LessonFavourite
+            from facebook_groups.models import FacebookGroup
+            from journals.models import Journal, JournalQuestion
+
+            # comment feed
+            feed = latest_comments(self.request)  # get latest comments
+            paginator = Paginator(feed, 5)
+            try:
+                page = int(self.request.GET.get('page', '1'))
+            except ValueError:
+                page = 1
+            try:
+                feed = paginator.page(page)
+            except (EmptyPage, InvalidPage):
+                feed = paginator.page(paginator.num_pages)
+
+            # journals
+            journal_questions = JournalQuestion.objects.all()
+            journal = Journal.objects.get(author=user)
+
+            context['courses'] = CourseFavourite.objects.active(user)
+            context['lessons'] = LessonFavourite.objects.active(user)
+            context['groups'] = FacebookGroup.objects.purchased(user)
+            context['comments'] = feed
+            context['journal'] = journal
+            context['journal_questions'] = journal_questions
+        
         return context
 
 

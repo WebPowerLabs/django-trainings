@@ -62,6 +62,7 @@ class Common(Configuration):
         'polymorphic',
         'djcelery',
         'localflavor',
+        'django_hstore',
     )
 
     # Apps specific for this project go here.
@@ -79,6 +80,7 @@ class Common(Configuration):
         'dtf_comments',
         'packages',
         'features',
+        'journals',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -151,7 +153,7 @@ class Common(Configuration):
 
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf')
+    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf-1')
     ########## END DATABASE CONFIGURATION
 
     ########## CACHING
@@ -363,6 +365,8 @@ class Common(Configuration):
     AVATAR_HASH_FILENAMES = True
     AVATAR_MAX_SIZE = 1048576*2
     ########## END AVATAR CONFIG
+
+    SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
 class Local(Common):
 
