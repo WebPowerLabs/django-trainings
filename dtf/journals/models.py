@@ -51,7 +51,7 @@ class JournalQuestion(models.Model):
     FIELD_TYPES = (
                    ('char', 'Single-line Text'),
                    ('text', 'Multi-line Text'),)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
     type = models.CharField(choices=FIELD_TYPES, default='char', max_length=4)
     active = models.BooleanField(default=True)
 
