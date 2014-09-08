@@ -52,11 +52,11 @@
         <input type="hidden" name="next" value="{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}" />
         <div class="comment-form-control">
           <div class="comment-img">
-            <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
-              {% if comment.user.fb_uid %}
-              <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+            <a href="{% url 'users:detail' request.user.pk %}" title="View {{ request.user.first_name }}'s Profile">
+              {% if request.user.fb_uid %}
+              <img src="{{ request.user.get_fb_profile_img_url }}" class="fb-profile-img">
               {% else %}
-                {% avatar comment.user %}
+                {% avatar request.user %}
               {% endif %}
             </a>
           </div>
