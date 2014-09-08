@@ -258,10 +258,11 @@ class Common(Configuration):
     )
 
     # Some really nice defaults
-    ACCOUNT_AUTHENTICATION_METHOD = "username"
+    ACCOUNT_AUTHENTICATION_METHOD = "email"
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-    ACCOUNT_FORMS = {'signup': 'users.forms.UserSignupForm'}
+    ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.UserSignupForm'
+    SOCIALACCOUNT_AUTO_SIGNUP = False
     ########## END AUTHENTICATION CONFIGURATION
 
     ########## Custom user app defaults
