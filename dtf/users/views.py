@@ -41,7 +41,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             from courses.models import CourseFavourite
             from lessons.models import LessonFavourite
             from facebook_groups.models import FacebookGroup
-            from journals.models import Journal, JournalQuestion
+            from journals.models import Journal, JournalQuestion, JournalEntry
 
             # comment feed
             feed = latest_comments(self.request)  # get latest comments
@@ -55,16 +55,20 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             except (EmptyPage, InvalidPage):
                 feed = paginator.page(paginator.num_pages)
 
-            # journals
-            journal_questions = JournalQuestion.objects.all()
-            journal = Journal.objects.get(author=user)
+            journal = Journal.objects.get_or_create(author=user)[0]
+            try:
+                entry = JournalEntry.objects.filter(journal=journal,
+                                                    active=True).latest()
+            except JournalEntry.DoesNotExist:
+                entry = None
 
             context['courses'] = CourseFavourite.objects.active(user)
             context['lessons'] = LessonFavourite.objects.active(user)
             context['groups'] = FacebookGroup.objects.purchased(user)
             context['comments'] = feed
             context['journal'] = journal
-            context['journal_questions'] = journal_questions
+            context['questions'] = JournalQuestion.objects.purchased(user)
+            context['entry'] = entry
         
         return context
 

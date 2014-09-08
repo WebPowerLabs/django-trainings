@@ -1,7 +1,10 @@
+import datetime
+
 from django.db import models
 from django_hstore import hstore
 from django.conf import settings
 
+from .managers import JournalQuestionManager
 
 
 class JournalEntry(models.Model):
@@ -13,13 +16,32 @@ class JournalEntry(models.Model):
 
     class Meta:
         ordering = ('-created',)
-        get_latest_by = ('-created',)
+        get_latest_by = 'created'
 
     def __unicode__(self):
         return u'{} {}'.format(self.journal.author.username, self.created)
 
+
 class Journal(models.Model):
     author = models.OneToOneField(settings.AUTH_USER_MODEL)
+
+    @property
+    def can_submit(self):
+        '''
+        returns true if an author can submit a journal entry now
+        '''
+        can_sumbit = True if not self._user_submitted_entry_today() else False
+        return can_sumbit
+
+    def _user_submitted_entry_today(self):
+        '''
+        Returns true if a journal entry was submitted today
+        '''
+        yesterday = datetime.datetime.now() - datetime.timedelta(1)
+        entry_today = JournalEntry.objects.filter(journal=self, active=True, 
+                                            created__gte=yesterday).exists()
+        return entry_today
+
 
     def __unicode__(self):
         return u"{}".format(self.author.first_name)
@@ -32,6 +54,9 @@ class JournalQuestion(models.Model):
     name = models.CharField(max_length=20)
     type = models.CharField(choices=FIELD_TYPES, default='char', max_length=4)
     active = models.BooleanField(default=True)
+
+
+    objects = JournalQuestionManager()
 
     @property
     def template_name(self):

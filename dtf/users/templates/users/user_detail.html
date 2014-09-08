@@ -76,20 +76,27 @@
       <div class="col-md-5">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            My Journal
+            <a href="{% url 'journals:entries' %}" title="View My Journal" style="color:#fff;">My Journal</a>
           </div>
-          <div class="">
-            <form class="form panel-body" action="{% url 'journals:entries' %}" method="POST">
+          <div class="panel-body">
+            {% if journal.can_submit %}
+            <form class="form" action="{% url 'journals:entries' %}" method="POST">
               {% csrf_token %}
-            {% for question in journal_questions %}
+            {% for question in questions %}
               {% include "journals/journal_question.html" %}
+              {% if forloop.last %}
+              <input class="btn btn-primary" type="submit" value="Submit">
+              {% endif %}
             {% empty %}
-
               <p>Your journal questions will appear here.</p>
             {% endfor %}
-            <input class="btn btn-primary" type="submit" value="Submit">
+            
             </form>
-
+            {% else %}
+            {% for question, response in entry.data.iteritems %}
+              <p><strong>{{ question }}:</strong> {{ response }}</p>
+            {% endfor %}
+            {% endif %}
           </div>
         </div>
         <div class="panel panel-primary">
