@@ -3,14 +3,15 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
-from .models import Journal, JournalEntry, JournalQuestion
+from .models import Journal, JournalEntry
 
-
+@login_required
 def journal_entries_list(request):
     user = request.user
-    journal = Journal.objects.get(author=user)
-    entries = JournalEntry.objects.filter(journal=journal)
+    journal = Journal.objects.get_or_create(author=user)[0]
+    entries = JournalEntry.objects.filter(journal=journal.id)
 
     paginator = Paginator(entries, 10)
     try:

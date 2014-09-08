@@ -4,6 +4,8 @@ from django.db import models
 from django_hstore import hstore
 from django.conf import settings
 
+from positions import PositionField
+
 from .managers import JournalQuestionManager
 
 
@@ -54,7 +56,7 @@ class JournalQuestion(models.Model):
     name = models.CharField(max_length=255)
     type = models.CharField(choices=FIELD_TYPES, default='char', max_length=4)
     active = models.BooleanField(default=True)
-
+    position = PositionField()
 
     objects = JournalQuestionManager()
 
