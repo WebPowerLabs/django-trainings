@@ -6,6 +6,7 @@ from profiles.models import InstructorProfile
 from resources.models import Resource
 from lessons.models import Lesson
 from courses.models import Course
+from packages.models import Package, PackagePurchase
 
 
 def random_string(length=8):
@@ -18,7 +19,8 @@ class UserFactory(factory.django.DjangoModelFactory):
     last_name = factory.Sequence(lambda n: "Last%s" % n)
     email = factory.Sequence(lambda n: "email%s@example.com" % n)
     is_staff = True
-    
+
+
 class InstructorProfileFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = InstructorProfile
 
@@ -43,3 +45,12 @@ class ResourceFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Resource
     # fields
     name = factory.LazyAttribute(lambda t: random_string())
+
+
+class PackageFactory(factory.django.DjangoModelFactory):
+    name = factory.LazyAttribute(lambda t: random_string())
+    FACTORY_FOR = Package
+
+
+class PackagePurchaseFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = PackagePurchase

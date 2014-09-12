@@ -3,15 +3,17 @@ from lessons.tests.factories import (TagFactory, LessonFactory, CourseFactory,
                                      UserFactory, LessonHistoryFactory,
                                      LessonFavouriteFactory,
                                      InstructorProfileFactory, PackageFactory,
-                                     PackagePurchaseFactory)
-from lessons.models import Lesson, LessonFavourite, LessonHistory
+                                     PackagePurchaseFactory,
+                                     LessonCompleteFactory)
+from lessons.models import (Lesson, LessonFavourite, LessonHistory,
+                            LessonComplete)
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 import json
 from utils.tests import TestCaseBase
 
 
-class LessonViewTest(TestCaseBase):
+class LessonViewTest(FastFixtureTestCase):
     def setUp(self):
         self.username = 'testuser'
         self.password = 'password'
@@ -20,8 +22,7 @@ class LessonViewTest(TestCaseBase):
         self.user.set_password(self.password)
         self.user.save()
         self.course = CourseFactory(owner=self.user)
-        self.course_purchased = CourseFactory(owner=self.user)
-        self.lesson_one = LessonFactory(course=self.course_purchased,
+        self.lesson_one = LessonFactory(course=self.course,
                                         owner=self.user)
         self.lesson_two = LessonFactory(course=self.course, owner=self.user)
         self.lesson_three = LessonFactory(course=self.course, owner=self.user)
@@ -31,21 +32,14 @@ class LessonViewTest(TestCaseBase):
         self.lesson_fav_item = LessonFavouriteFactory(user=self.user,
                                                       lesson=self.lesson_one,
                                                       is_active=True)
-        self.package = PackageFactory()
-        self.package.lessons.add(self.lesson_two)
-        self.package.courses.add(self.course_purchased)
-        self.package_purchased = PackagePurchaseFactory(user=self.user,
-                                                        package=self.package,
-                                                        status=1)
-
-    def test_purchased(self):
-        purchased = [self.lesson_one, self.lesson_two]
-        res = Lesson.objects.purchased(self.user)
-        self.assertEqualQs(res, purchased)
+        self.lesson_complete_item = LessonCompleteFactory(user=self.user,
+                                                      lesson=self.lesson_one,
+                                                      is_complete=True)
 
     def test_order_view(self):
         self.client.login(username=self.username, password=self.password)
         new_order = [self.lesson_three.pk,
+                     self.lesson_one.pk,
                      self.lesson_two.pk]
 
         req_data = json.dumps({'new_order': new_order})
@@ -61,7 +55,7 @@ class LessonViewTest(TestCaseBase):
     def test_lesson_action_favourite_view_add_item(self):
         self.client.login(username=self.username, password=self.password)
         resp = self.client.post(reverse('lessons:favourite_action', kwargs={
-                                                    'pk': self.lesson_one.pk}),
+                                                'slug': self.lesson_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)
@@ -75,7 +69,7 @@ class LessonViewTest(TestCaseBase):
         self.client.login(username=self.username, password=self.password)
 
         resp = self.client.post(reverse('lessons:favourite_action', kwargs={
-                                                    'pk': self.lesson_one.pk}),
+                                                'slug': self.lesson_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)
@@ -103,8 +97,35 @@ class LessonViewTest(TestCaseBase):
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(resp_data['success'])
 
+    def test_lesson_complete_action_view_add_item(self):
+        self.client.login(username=self.username, password=self.password)
+        resp = self.client.post(reverse('lessons:complete_action', kwargs={
+                                                'slug': self.lesson_one.slug}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        self.assertTrue(LessonComplete.objects.get(
+                                    lesson=self.lesson_one,
+                                    user=self.client.session['_auth_user_id']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
 
-class LessonManagerTest(FastFixtureTestCase):
+    def test_lesson_complete_action_view_delete_item(self):
+        self.client.login(username=self.username, password=self.password)
+
+        resp = self.client.post(reverse('lessons:complete_action', kwargs={
+                                                'slug': self.lesson_one.slug}),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+                                        content_type='application/json')
+        resp_data = json.loads(resp.content)
+        deleted_item = LessonComplete.objects.get(
+                                            pk=self.lesson_complete_item.pk)
+        self.assertFalse(deleted_item.is_complete)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp_data['success'])
+
+
+class LessonManagerTest(TestCaseBase):
     def setUp(self):
         self.password = 'password'
         self.instructor = UserFactory(username='instructor', is_staff=False)
@@ -138,8 +159,47 @@ class LessonManagerTest(FastFixtureTestCase):
                                              course=self.course_pub,
                                              published=True,
                                              owner=self.instructor)
+        self.package = PackageFactory()
+        self.package.lessons.add(self.lesson_curr_not_pub)
 
-    def test_get_list_user_had_insrtuctor_profile(self):
+        self.package_user = PackageFactory()
+        self.package_user.lessons.add(self.lesson_first_pub)
+        self.package_user.courses.add(self.course_not_pub)
+        self.package_purchased = PackagePurchaseFactory(user=self.user,
+                                                    package=self.package_user,
+                                                    status=1)
+
+    def test_purchased(self):
+        purchased = [self.lesson_first_pub,
+                     self.lesson_last_pub]
+        res = Lesson.objects.purchased(self.user)
+        self.assertEqualQs(res, purchased)
+
+    def test_get_next_url_purchased(self):
+        actual_url = reverse('lessons:detail', kwargs={
+                                        'slug': self.lesson_first_pub.slug})
+        url = Lesson.objects.get_next_url(obj=self.lesson_last_pub,
+                                          purchased=1, user=self.user)
+        self.assertEqual(actual_url, url)
+
+    def test_get_prev_url_purchased(self):
+        actual_url = reverse('lessons:detail', kwargs={
+                                        'slug': self.lesson_last_pub.slug})
+        url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub,
+                                          purchased=1, user=self.user)
+        self.assertEqual(actual_url, url)
+
+    def test_get_next_url_for_last_object_purchased(self):
+        url = Lesson.objects.get_next_url(obj=self.lesson_first_pub,
+                                          purchased=1, user=self.user)
+        self.assertFalse(url)
+
+    def test_get_prev_url_for_last_first_purchased(self):
+        url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
+                                          purchased=1, user=self.user)
+        self.assertFalse(url)
+
+    def test_get_list_user_has_insrtuctor_profile(self):
         total_count = Lesson.objects.all().count()
         current_count = Lesson.objects.get_list(self.instructor).count()
         self.assertEqual(total_count, current_count)
@@ -196,12 +256,12 @@ class LessonManagerTest(FastFixtureTestCase):
                                           user=self.staff_user)
         self.assertEqual(actual_url, url)
 
-    def test_get_next_url_None_user_is_staff(self):
+    def test_get_next_url_for_last_object_user_is_staff(self):
         url = Lesson.objects.get_next_url(obj=self.lesson_of_not_pub_course,
                                           user=self.staff_user)
         self.assertFalse(url)
 
-    def test_get_prev_url_None_user_is_staff(self):
+    def test_get_prev_url_for_first_object_user_is_staff(self):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           user=self.staff_user)
         self.assertFalse(url)
@@ -259,12 +319,12 @@ class LessonManagerTest(FastFixtureTestCase):
                                           user=self.user)
         self.assertEqual(actual_url, url)
 
-    def test_get_next_url_None_user_is_not_staff(self):
+    def test_get_next_url_for_last_object_user_is_not_staff(self):
         url = Lesson.objects.get_next_url(obj=self.lesson_first_pub,
                                           user=self.user)
         self.assertFalse(url)
 
-    def test_get_prev_url_None_user_is_not_staff(self):
+    def test_get_prev_url_for_first_object_user_is_not_staff(self):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub,
                                           user=self.user)
         self.assertFalse(url)
@@ -316,10 +376,10 @@ class LessonManagerTest(FastFixtureTestCase):
         url = Lesson.objects.get_prev_url(obj=self.lesson_first_pub)
         self.assertEqual(actual_url, url)
 
-    def test_get_next_url_None_no_user(self):
+    def test_get_next_url_for_last_object_no_user(self):
         url = Lesson.objects.get_next_url(obj=self.lesson_first_pub)
         self.assertFalse(url)
 
-    def test_get_prev_url_None_no_user(self):
+    def test_get_prev_url_for_first_object_no_user(self):
         url = Lesson.objects.get_prev_url(obj=self.lesson_last_pub)
         self.assertFalse(url)

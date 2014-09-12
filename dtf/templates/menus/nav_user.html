@@ -1,7 +1,23 @@
+{% load user_thumbnail query_string %}
 {% if request.user.is_authenticated %}
-  <li><a href="{% url 'users:detail' request.user.id %}">My Account</a></li>
-  <li><a href="{% url 'account_logout' %}">Logout</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" class="profile">
+      {% user_thumbnail request.user %}
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li><a href="{% url 'users:detail' request.user.id %}">Dashboard</a></li>
+      <li><a href="{% url 'packages:purchases' %}">Purchases</a></li> 
+      <li><a href="{% url 'account_logout' %}">Logout</a></li>
+      <li class="divider"></li>
+      <li><a class="" href="{% url 'users:update' %}">Edit Info</a></li>
+      <li><a class="" href="{% url 'account_email' %}">Edit Email</a></li>  
+    </ul>
+  </li>
+
 {% else %}
-  <li><a href="{% url 'account_signup' %}">Signup</a></li>
+
+  {% if request.GET.inf_field_Email %}<!-- If there was a product referral email -->
+  <li><a href="{% url 'account_signup' %}{% query_string request.GET %}">Signup</a></li>
+  {% endif %}
   <li><a href="{% url 'account_login' %}">Login</a></li>
 {% endif %}

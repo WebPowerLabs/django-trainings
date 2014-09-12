@@ -63,12 +63,12 @@
 }
 
 /* line 60, ../sass/project.scss */
-.fav_button.is_active .state-1, .fav_button .state-2 {
+.ajax_action.is_active .state-1, .ajax_action .state-2 {
   display: block;
 }
 
 /* line 64, ../sass/project.scss */
-.fav_button.is_active .state-2, .fav_button .state-1 {
+.ajax_action.is_active .state-2, .ajax_action .state-1 {
   display: none;
 }
 
@@ -87,14 +87,12 @@
   display: table-row;
 }
 
-
 /* line 80, ../sass/project.scss */
 .favourite_item {
   display: none;
 }
 
 /* line 84, ../sass/project.scss */
-
 .notify-balloon {
   position: fixed;
   z-index: 100500;
@@ -111,14 +109,27 @@
   line-height: 160%;
 }
 
-.package-table {
-  margin-bottom: 20px;
-  display: block;
+/* line 102, ../sass/project.scss */
+.audiojs {
+  margin: 10px auto;
+  width: 435px;
 }
 
-.package-table .package-items {
-  min-height: 100px;
+/* line 106, ../sass/project.scss */
+.audiojs .play-pause {
+  padding: 4px 0;
 }
-.package-table .package-total {
-  min-height: 50px;
+
+/* line 110, ../sass/project.scss */
+li.dropdown a {
+  cursor: pointer;
+}
+
+/* line 115, ../sass/project.scss */
+input.search-bar {
+  background: white;
+  margin-top: 10px;
+  margin-left: 15px;
+  height: 30px;
+  width: 300px;
 }

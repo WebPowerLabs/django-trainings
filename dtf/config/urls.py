@@ -8,12 +8,12 @@ from django.conf.urls.static import static
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from users.views import EmailVerificationSentView, LoginCustomView
+from dtf_comments.views import CommentDeleteView
 admin.autodiscover()
 
 urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-
     # User management
     url(r'^users/', include("users.urls", namespace="users")),
     url(r"^accounts/login/$", LoginCustomView.as_view(), name="account_login"),
@@ -37,8 +37,11 @@ urlpatterns = patterns('',
     url(r'^features/', include('features.urls', namespace="features")),
     url(r'^dtf_comments/', include('dtf_comments.urls',
                                    namespace="dtf_comments")),
+    url(r'^comments/delete/(?P<comment_id>\d+)/$', CommentDeleteView.as_view(),
+                                                    name='comments-delete'),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^packages/', include('packages.urls', namespace="packages")),
+    url(r'^journals/', include('journals.urls', namespace="journals")),
     url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

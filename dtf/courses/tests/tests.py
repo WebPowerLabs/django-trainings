@@ -1,11 +1,10 @@
-from django.db.models import Q
 from django_nose.testcases import FastFixtureTestCase
 from courses.models import Course, CourseFavourite, CourseHistory
 from courses.tests.factories import (CourseFactory, UserFactory,
                                      CourseFavouriteFactory,
-                                     CourseHistoryFactory,
+                                     CourseHistoryFactory, LessonFactory,
                                      InstructorProfileFactory, PackageFactory,
-                                     LessonFactory, PackagePurchaseFactory)
+                                     PackagePurchaseFactory)
 from django.test.client import Client
 import json
 from django.core.urlresolvers import reverse
@@ -36,12 +35,14 @@ class CourseManagerTest(TestCaseBase):
         self.lesson_two = LessonFactory(course=self.course_pub,
                                         owner=self.instructor)
         self.package = PackageFactory()
-        self.package.lessons.add(self.lesson_two)
+        self.package.courses.add(self.course_pub)
 
-        self.package.courses.add(self.course_purchased)
+        self.package_user = PackageFactory()
+        self.package_user.lessons.add(self.lesson_two)
+        self.package_user.courses.add(self.course_purchased)
         self.package_purchased = PackagePurchaseFactory(user=self.user,
-                                                        package=self.package,
-                                                        status=1)
+                                                    package=self.package_user,
+                                                    status=1)
 
     def test_purchased(self):
         purchased = [self.course_purchased]
@@ -110,7 +111,7 @@ class CourseViewTest(FastFixtureTestCase):
     def test_course_favourite_action_view_add_item(self):
         self.client.login(username=self.username, password=self.password)
         resp = self.client.post(reverse('courses:favourite_action', kwargs={
-                                                    'pk': self.course_one.pk}),
+                                                'slug': self.course_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)
@@ -124,7 +125,7 @@ class CourseViewTest(FastFixtureTestCase):
         self.client.login(username=self.username, password=self.password)
 
         resp = self.client.post(reverse('courses:favourite_action', kwargs={
-                                                    'pk': self.course_one.pk}),
+                                                'slug': self.course_one.slug}),
                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest',
                                         content_type='application/json')
         resp_data = json.loads(resp.content)

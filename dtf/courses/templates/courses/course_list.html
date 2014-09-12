@@ -1,9 +1,9 @@
 {% extends 'courses/base.html' %}
 
-{% load crispy_forms_tags thumbnail %}
+{% load crispy_forms_tags %}
 {% block nav_actions %}
 {{ block.super }}
-{% if user.is_staff or user.instructorprofile %}
+{% if user.is_staff or user.is_instructor %}
 <li><a class="" href="#" data-toggle="modal" data-target="#addCourse">Add a Course</a></li>
 {% endif %}
 {% endblock nav_actions %}
@@ -13,25 +13,15 @@
   <div class="container">
     <div class="row">
       <div class="section-header col-xs-12 text-center">
-        <h1 class="section-title">Coaching Courses</h1>
-        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+        <h1 class="section-title">{% if request.GET.purchased %}My {% endif %}Coaching Courses</h1>
+        <!--h3 class="section-subtitle"></h3-->
         <hr>
       </div><!--/ .section-header-->
     </div><!--/ .row-->
-    <div class="row {% if user.is_staff %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
+    <div class="row {% if user.is_staff and not request.GET.purchased %}sortable{% endif %}" data-url="{% url 'courses:order' %}">
       {% for course in object_list %}
         <div class="col-md-4 sortable_item" data-pk='{{ course.pk }}'>
-          <a class="course-item" href="{% url 'courses:detail' course.slug %}">
-            <div class="thumbnail">
-              {% thumbnail course.thumbnail '284x180' crop='center' as im %}
-                <img src="{{ im.url }}" class="img-rounded" alt="{{ course.name }}">
-              {% endthumbnail %}
-              <div class="caption text-center">
-                <h3>{{ course.name }}</h3>
-                <p>{{ course.description|truncatewords:20 }}</p>
-              </div><!--/ .caption-->
-            </div><!--/ .thumbnail-->
-          </a><!--/ .course-item-->
+          {% include "courses/course_card.html" %}
         </div><!--/ .col-md-4-->
       {% endfor %}
     </div><!--/ .row-->
@@ -40,7 +30,7 @@
 {% endblock content %}
 
 {% block modal %}
-    {% if user.is_staff or user.instructorprofile %}
+    {% if user.is_staff or user.is_instructor %}
         <!-- Add Course Modal -->
         <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">

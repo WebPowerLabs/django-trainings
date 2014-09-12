@@ -1,5 +1,6 @@
 from django.views.generic.edit import DeleteView, UpdateView
-from lessons.models import Lesson, LessonFavourite, LessonHistory
+from lessons.models import (Lesson, LessonFavourite, LessonHistory,
+                            LessonComplete)
 from django.core.urlresolvers import reverse_lazy, reverse
 from lessons.forms import LessonCreateFrom
 from lessons.filters import LessonFilter
@@ -7,7 +8,7 @@ from django_filters.views import FilterView
 from tags.models import Tag
 from courses.models import Course
 from utils.views import (CreateFormBaseView, PermissionMixin,
-                            AjaxResponsePermissionMixin)
+                         AjaxResponsePermissionMixin)
 from django.http.response import HttpResponseRedirect
 from braces.views._ajax import JSONResponseMixin
 from django.views.generic.base import View
@@ -15,8 +16,8 @@ import json
 from lessons.signals import view_lesson_signal
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
-from utils.decorators import can_edit_content, \
-    purchase_or_instructor_member_required
+from utils.decorators import (can_edit_content,
+                              purchase_or_instructor_member_required)
 from facebook_groups.models import FacebookGroup
 
 
@@ -27,30 +28,34 @@ class LessonDetailView(PermissionMixin, UpdateView):
     decorators = {'GET': purchase_or_instructor_member_required(Lesson),
                   'POST': can_edit_content(Lesson)}
 
-    def get_queryset(self):
-        return Lesson.objects.get_list(self.request.user)
-
     def get_context_data(self, **kwargs):
+        lesson = self.object
+        user = self.request.user
         tag_id = self.request.GET.get('tags', None)
         course_id = self.request.GET.get('course', None)
+        purchased = self.request.GET.get('purchased', None)
         context = super(LessonDetailView, self).get_context_data(**kwargs)
-        context['resource_list'] = Lesson.get_resource(self.object,
-                                                       self.request.user)
-        context['homework_list'] = Lesson.get_homework(self.object,
-                                                       self.request.user)
-        context['next_url'] = Lesson.objects.get_next_url(self.object, tag_id,
-                                                course_id, self.request.user)
-        context['prev_url'] = Lesson.objects.get_prev_url(self.object, tag_id,
-                                                course_id, self.request.user)
-        context['fb_group_list'] = FacebookGroup.objects.purchased(
-                                                           self.request.user)
-        if self.request.user.is_authenticated():
-            try:
-                context['in_favourites'] = LessonFavourite.objects.get(
-                                                        lesson=self.object,
-                                                        user=self.request.user)
-            except LessonFavourite.DoesNotExist:
-                pass
+        context['resource_list'] = Lesson.get_resource(lesson, user)
+        context['homework_list'] = Lesson.get_homework(lesson, user)
+        context['next_url'] = Lesson.objects.get_next_url(lesson, tag_id,
+                                                          course_id, purchased,
+                                                          user)
+        context['prev_url'] = Lesson.objects.get_prev_url(lesson, tag_id,
+                                                          course_id, purchased,
+                                                          user)
+        context['fb_group_list'] = FacebookGroup.objects.purchased(user)
+        try:
+            context['is_favourite'] = LessonFavourite.objects.get(user=user,
+                                                                  lesson=lesson
+                                                                  ).is_active
+        except LessonFavourite.DoesNotExist:
+            pass
+        try:
+            context['is_complete'] = LessonComplete.objects.get(user=user,
+                                                                lesson=lesson
+                                                                ).is_complete
+        except LessonComplete.DoesNotExist:
+            pass
         return context
 
     def get_success_url(self):
@@ -70,12 +75,18 @@ class LessonListView(PermissionMixin, FilterView):
     decorators = {'GET': login_required}
 
     def get_queryset(self):
+        if self.request.GET.get('purchased', None):
+            return Lesson.objects.purchased(self.request.user
+                                            ).order_by('-created')
         return Lesson.objects.get_list(self.request.user).order_by('-created')
 
     def get_context_data(self, **kwargs):
         context = super(LessonListView, self).get_context_data(**kwargs)
         context['tag_list'] = Tag.objects.all()
         context['course_list'] = Course.objects.get_list(self.request.user)
+        if self.request.GET.get('purchased', None):
+            context['course_list'] = Course.objects.purchased(
+                                                          self.request.user)
         return context
 
 
@@ -120,7 +131,7 @@ class LessonFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
-        lesson = Lesson.objects.get(pk=self.kwargs['pk'])
+        lesson = Lesson.objects.get(slug=self.kwargs['slug'])
         obj, created = LessonFavourite.objects.get_or_create(lesson=lesson,
                                                     user=self.request.user)
         if not created:
@@ -155,3 +166,19 @@ class LessonHistoryDeleteView(AjaxResponsePermissionMixin, JSONResponseMixin,
         obj.is_active = False
         obj.save()
         return self.render_json_response({'success': True})
+
+
+class LessonCompleteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
+                           View):
+    decorators = {'POST': purchase_or_instructor_member_required(Lesson)}
+
+    def post_ajax(self, request, *args, **kwargs):
+        user = self.request.user
+        lesson = Lesson.objects.get(slug=self.kwargs['slug'])
+        obj, created = LessonComplete.objects.get_or_create(lesson=lesson,
+                                                            user=user)
+        if not created:
+            obj.is_complete = not obj.is_complete
+            obj.save()
+        return self.render_json_response({'success': True,
+                                          'is_active': obj.is_complete})

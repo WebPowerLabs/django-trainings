@@ -1,0 +1,6 @@
+{% load avatar_tags %}
+{% if user.fb_uid %}
+<img src="{{ user.get_fb_profile_img_url }}" class="img-thumbnail">
+{% else %}
+{% avatar user 40 %}
+{% endif %}

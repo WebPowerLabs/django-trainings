@@ -4,25 +4,30 @@
 {% for comment in comment_list %}
     <div id="comment-{{ comment.id }}" class="media fb-post">
         <div data-fbuser="{{ comment.user.id }}" class="pull-left img-profile">
-        {% if comment.user.fb_uid %}
-            <img src="{{ comment.user.get_fb_profile_img_url }}" class="img-responsive fb-profile-img">
-        {% else %}
-            {% avatar comment.user %}
-        {% endif %}
+            <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
+              {% if comment.user.fb_uid %}
+              <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+              {% else %}
+                {% avatar comment.user %}
+              {% endif %}
+            </a>
+
         </div>
         <div class="media-body">
-            {% if user.is_staff %}
             <div class="pull-right comment-actions">
+            {% if user.is_staff or comment.user == user %}
               <a href="{% url 'comments-delete' comment.id %}?next={{ request.path }}">
                 <i class="fa fa-times-circle-o"></i>
               </a>
+            {% endif %}
+            {% if comment.user != user %}
               <a href="{% url 'comments-flag' comment.id %}?next={{ request.path }}">
                 <i class="fa fa-flag"></i>
               </a>
-            </div>
             {% endif %}
+            </div>
             <p>
-            <strong class="fb-from-user">{{ comment.user.get_full_name }}</strong> 
+            <strong class="fb-from-user">{{ comment.user.first_name }}</strong> 
             <span class="fb-message">{{ comment.comment|markdown }}</span>
             </p>
             <p class="fb-actions">

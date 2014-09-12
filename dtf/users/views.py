@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Import the reverse lookup function
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 # view imports
 from django.views.generic import DetailView
@@ -10,6 +11,7 @@ from django.views.generic import ListView
 
 # Only authenticated users can access views using this.
 from braces.views import LoginRequiredMixin
+
 
 # Import the form from users/forms.py
 from .forms import UserForm
@@ -25,6 +27,50 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     # These next two lines tell the view to index lookups by pk
     slug_field = "pk"
     slug_url_kwarg = "pk"
+
+    def get_context_data(self, **kwargs):
+ 
+        from profiles.models import UserProfile
+
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        user = self.get_object()
+        context['profile'] = UserProfile.objects.get_or_create(user=user)[0]
+
+        if user == self.request.user:        
+            from utils.comments import latest_comments
+            from courses.models import CourseFavourite
+            from lessons.models import LessonFavourite
+            from facebook_groups.models import FacebookGroup
+            from journals.models import Journal, JournalQuestion, JournalEntry
+
+            # comment feed
+            feed = latest_comments(self.request)  # get latest comments
+            paginator = Paginator(feed, 5)
+            try:
+                page = int(self.request.GET.get('page', '1'))
+            except ValueError:
+                page = 1
+            try:
+                feed = paginator.page(page)
+            except (EmptyPage, InvalidPage):
+                feed = paginator.page(paginator.num_pages)
+
+            journal = Journal.objects.get_or_create(author=user)[0]
+            try:
+                entry = JournalEntry.objects.filter(journal=journal,
+                                                    active=True).latest()
+            except JournalEntry.DoesNotExist:
+                entry = None
+
+            context['courses'] = CourseFavourite.objects.active(user)
+            context['lessons'] = LessonFavourite.objects.active(user)
+            context['groups'] = FacebookGroup.objects.purchased(user)
+            context['comments'] = feed
+            context['journal'] = journal
+            context['questions'] = JournalQuestion.objects.purchased(user)
+            context['entry'] = entry
+        
+        return context
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):

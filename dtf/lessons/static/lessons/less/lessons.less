@@ -1,18 +1,16 @@
-//----------------------------------------------------//
-//--------------------- LESSONS APP ------------------//
-//----------------------------------------------------//
+//------------------------------------------------//
+//--------------------- LESSONS ------------------//
+//------------------------------------------------//
 
 //-------- Lesson List-Groups -------//
 .list-group.lessons {
+	margin-bottom: 0;
 	.list-group-item {
 		padding: 20px;
 		.transition(background-color .25s ease);
 		border-radius: 0;
 		border-left: none;
 		border-right: none;
-		&:first-child {
-			border-top: none;
-		}
 		p, h1, h2, h3, h4, h5, h6 { color: @brand-gray; }
 		.list-group-item-heading { margin: 0 0 10px; }
 		.list-group-item-text { line-height: 1.5; }
@@ -79,5 +77,24 @@
 				background-color: hardlight(@brand-success, #eee);
 			}			
 		}
-	}	
+	}
+	.panel-resource {
+		.list-group {
+			width: 100%;
+			float: left;
+			.list-group-item {
+				float: left;
+				width: 100%;
+				.list-group-item-primary {
+					width: 90%;
+					float: left;
+					min-height: 60px;
+				}
+				.list-group-item-secondary {
+					width: 10%;
+					float: left;
+				}
+			}
+		}
+	}
 }

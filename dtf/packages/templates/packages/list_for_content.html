@@ -3,42 +3,43 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-<section class="course-list">
+<section class="package-options">
   <div class="container">
-    <div class="section-header col-xs-12 text-center">
-    <h1 class="section-title">Ways to buy {{ content }}</h1>
-    <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
-    <hr>
-    </div><!--/ .section-header-->
-  <div class="row">
-    {% for package in object_list %}
-    <div class="col-md-4">
-      <a href="{{ package.get_absolute_url }}" class="package-table text-center">
-      <h3 class="">{{ package.name }}</h3>
-      <hr>
-      <ul class="list-group package-items">
-        {% for facebook_group in package.groups.all %}
-          <li class="list-group-item">{{ facebook_group.name }}</li>
-        {% endfor %}
-        {% for course in package.courses.all %}
-          <li class="list-group-item">{{ course.name }}</li>
-        {% endfor %}
-        {% for lesson in package.lessons.all %}
-          <li class="list-group-item">{{ lesson.name }}</li>
-        {% endfor %}
-      </ul>
-      <h4 class="package-total">
-      {% if package.infusionsoftpackage %}
-      <span>Total: </span> &nbsp; <i class="fa fa-usd"></i> {{ package.infusionsoftpackage.price }}
-      {% endif %}
-      </h4>
-      <button type="button" class="btn btn-block btn-primary">View Package &nbsp; <i class="fa fa-arrow-right"></i></button>
-      </a>
-    </div>
-    {% empty %}
+    <div class="row">
+      <div class="section-header-2 col-xs-12 text-center">
+        <h1 class="section-title">Ways to buy <span>{{ content }}</span></h1>
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
+    <div class="row">
+      {% for package in object_list %}
+      <div class="package-wrapper col-md-6 text-center">
+        <div class="package-table">
+          <h3 class="package-title">{{ package.name }}</h3>
+          <p class="included">Here's what's included:</p>
+          <ul class="package-items list-group">
+            {% for facebook_group in package.groups.all %}
+              <li class="list-group-item">{{ facebook_group.name }}</li>
+            {% endfor %}
+            {% for course in package.courses.all %}
+              <li class="list-group-item">{{ course.name }}</li>
+            {% endfor %}
+            {% for lesson in package.lessons.all %}
+              <li class="list-group-item">{{ lesson.name }}</li>
+            {% endfor %}
+          </ul><!--/ .package-items-->
+          <h4 class="package-total">
+            {% if package.infusionsoftpackage %}
+              <i class="fa fa-usd"></i> {{ package.infusionsoftpackage.price }}
+            {% endif %}
+          </h4><!--/ .package-total-->
+        </div><!--/ .package-table-->
+        <a href="{{ package.get_absolute_url }}"><button type="button" class="buy-button btn btn-lg btn-danger">Buy Now</button></a>
+      </div><!--/ .package-wrapper-->
+      {% empty %}
       <p class="text-center">No packages for this content yet.</p>
-    {% endfor %}
-    </div>
-  </div>
-</div>
+      {% endfor %}
+    </div><!--/ .row-->
+  </div><!--/ .container-->
+</section>
 {% endblock content %}

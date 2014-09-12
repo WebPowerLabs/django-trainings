@@ -17,9 +17,9 @@
 a:hover { text-decoration: none; }
 a,
 .btn {
-	-webkit-transition: color .25s ease, background-color .25s ease, border .25s ease;
-	-moz-transition: color .25s ease, background-color .25s ease, border .25s ease;
-	transition: color .25s ease, background-color .25s ease, border .25s ease;
+	-webkit-transition: color .25s , background-color .25s , border .25s , box-shadow .25s ;
+	-moz-transition: color .25s , background-color .25s , border .25s , box-shadow .25s ;
+	transition: color .25s , background-color .25s , border .25s , box-shadow .25s ;
 }
 
 // ------ Image Thumbnail ------ //
@@ -158,7 +158,10 @@ ul.pager {
 			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
 		}
 	}
-	img.swoosh { margin-bottom: -7px; }
+	.nurture-button {
+		font-size: 24px;
+		padding: 15px 60px;
+	}
 }
 @media (min-width: @screen-sm-min) {
 	.welcome-home {
@@ -176,9 +179,12 @@ ul.pager {
 		font-weight: 400;
 	}
 	.entry-body {
-		font-size: 14px;
 		line-height: 1.5em;
 		color: @gray;
+	}
+	.icon-heart {
+		max-height: 100px;
+		margin-left: -15px;
 	}
 	.icon {
 		text-align: center;
@@ -206,7 +212,7 @@ ul.pager {
 		background: #fff;
 		border-radius: 10px;
 		float: left;
-		cursor: pointer;
+		cursor: default;
 		-webkit-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
@@ -260,6 +266,36 @@ ul.pager {
 			border: 1px solid @brand-gray;
 			border-radius: 100px;
 		}
+	}
+}
+
+// ------Meet the Founder ------ //
+.meet-founder {
+	.section { padding: 50px 0; }
+	.full-bg-image {
+		background-image: url(../../images/meet-jami-amidon.jpg);
+		//background-image: url(../../../images/meet-jami-amidon.jpg);
+	}
+	.content { margin-bottom: 60px; }
+	.quote {
+		font-family: marinaregular, Helvetica, Arial, sans-serif;
+		font-size: 46px;
+		font-weight: 500;
+		color: #669933;
+		text-shadow: 0 0 10px #fff;
+	}
+	.source {
+		font-family: scriptinaregular, Garamond, Arial, sans-serif;
+		padding-left: 40%;
+		font-size: 42px;
+		font-weight: 600;
+		color: #fff;
+		text-shadow: 0 0 10px rgba(0,0,0,0.8);
+	}
+}
+@media (min-width: @screen-sm-min) {
+	.meet-founder {
+		.section { padding: 120px 0; }
 	}
 }
 
@@ -697,7 +733,6 @@ ul.pager {
 //------------------------------------------------//
 //----------------- Nufiles Page -----------------//
 //------------------------------------------------//
-
 .nufiles {
 	padding: 60px 0;
 	.section-title {
@@ -716,3 +751,12 @@ ul.pager {
 	.nufiles-description { font-size: 16px; }
 }
 
+//---------------------------------------------//
+//----------- Terms of Service Page -----------//
+//---------------------------------------------//
+.terms-of-service {
+	&.section { padding: 60px 0; }
+	h4 { margin-top: 25px; }
+	p { margin: 0 0 1em; }
+	ul, ol { padding-left: 40px; }
+}

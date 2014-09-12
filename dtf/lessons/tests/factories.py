@@ -1,7 +1,8 @@
 import factory
 import random
 import string
-from lessons.models import Lesson, LessonFavourite, LessonHistory
+from lessons.models import (Lesson, LessonFavourite, LessonHistory,
+                            LessonComplete)
 from courses.models import Course
 from profiles.models import InstructorProfile
 from tags.models import Tag
@@ -59,6 +60,10 @@ class LessonFavouriteFactory(factory.django.DjangoModelFactory):
 
 class LessonHistoryFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = LessonHistory
+
+
+class LessonCompleteFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = LessonComplete
 
 
 class PackageFactory(factory.django.DjangoModelFactory):

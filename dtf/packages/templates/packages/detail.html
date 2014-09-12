@@ -3,16 +3,18 @@
 {% block title %}{{ package.name }}{% endblock title %}
 
 {% block content %}
-<section class="course-list">
+<section class="package-detail">
   <div class="container">
       <div class="section-header text-center">
         <h1 class="section-title">{{ package.name }}</h1>
-        <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
+        {% if class_name == 'InfusionsoftPackage' %}
+        <h3 class="section-subtitle">{{ package.description }}</h3>
+        {% endif %}
         <hr>
       </div><!--/ .section-header-->
     <div class="row">
-      <div class="col-md-6">
-        <h4>You are purchasing the following items:</h4>
+      <div class="col-md-7">
+        <h4 >You're about to purchase the following items:</h4>
         <div class="list-group lessons">
           {% for facebook_group in package.groups.all %}
             {% include "facebook_groups/facebook_group_list_item.html" %}
@@ -26,7 +28,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         {% if not purchased %} {# display purchase link #}
           {% if class_name == 'InfusionsoftPackage' %}
             {% include "packages/infusionsoft.html" %}

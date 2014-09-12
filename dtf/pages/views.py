@@ -3,10 +3,11 @@ from django.core.mail import mail_admins
 from django.views.generic.base import TemplateView
 from jsonview.decorators import json_view
 from .forms import ContactForm, EmailForm
+from django.shortcuts import render
+from utils.search import EsClient
 
 
 class PageView(TemplateView):
-
     template_name = "404.html"
 
     def get_context_data(self, **kwargs):
@@ -14,6 +15,23 @@ class PageView(TemplateView):
         context['email_form'] = EmailForm()
         context['contact_form'] = ContactForm()
         return context
+
+
+class HMHPageView(PageView):
+    template_name = "pages/hmh/hmh_video.html"
+
+    def get_template_names(self):
+        '''
+        Looks for a custom_template value and prepends it to template_names 
+        if it exists otherwise 'nupages/page_detail.html' is used
+        '''
+        template_names = super(HMHPageView, self).get_template_names()
+        code = self.request.GET.get('access_code', None)
+        if code:
+            video_id = str(code)[-1:]
+            video_template_name = "pages/hmh/hmh_video_{}.html".format(video_id)
+            template_names.insert(0, video_template_name)
+        return template_names
 
 
 @csrf_exempt
@@ -37,3 +55,12 @@ def contact(request):
         mail_admins(subject, message)
         context['success'] = True
     return context
+
+
+def search(request):
+    res_list = []
+    query = request.GET.get('query', None)
+    if query:
+        res_list = EsClient().search(query)
+    return render(request, 'pages/search_results.html',
+                  {'result_list': res_list})

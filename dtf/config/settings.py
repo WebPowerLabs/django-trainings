@@ -60,6 +60,9 @@ class Common(Configuration):
         'django_comments',
         'sorl.thumbnail',
         'polymorphic',
+        'djcelery',
+        'localflavor',
+        'django_hstore',
     )
 
     # Apps specific for this project go here.
@@ -77,6 +80,7 @@ class Common(Configuration):
         'dtf_comments',
         'packages',
         'features',
+        'journals',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -149,7 +153,7 @@ class Common(Configuration):
 
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf')
+    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf-1')
     ########## END DATABASE CONFIGURATION
 
     ########## CACHING
@@ -257,6 +261,7 @@ class Common(Configuration):
     ACCOUNT_AUTHENTICATION_METHOD = "username"
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+    ACCOUNT_FORMS = {'signup': 'users.forms.UserSignupForm'}
     ########## END AUTHENTICATION CONFIGURATION
 
     ########## Custom user app defaults
@@ -268,6 +273,23 @@ class Common(Configuration):
     ########## SLUGLIFIER
     AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
     ########## END SLUGLIFIER
+
+    ########## ELASTICSEARCH SETTINGS
+
+    #BONSAI_URL = os.environ.get('BONSAI_URL', 'localhost')
+    #ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
+    #ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
+
+    ELASTICSEARCH_SETTINGS = [{'host': 'privet-1821403.us-east-1.bonsai.io',
+                               'port': 443,
+                               'use_ssl': True,
+                               'username': 'ae3c3lfd',
+                               'password': '61zwio5idcs8zyzi'
+                               }]
+    # Don't forget to create index in cluster.
+    # Run: curl -XPUT 'url_to_elastic_search_cluster/index_name'
+    ELASTICSEARCH_INDEX = 'dtf'
+
 
     ########## LOGGING CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -322,8 +344,7 @@ class Common(Configuration):
     ########## SOCIAL CONFIG
     SOCIALACCOUNT_PROVIDERS = \
         { 'facebook':
-              { 'SCOPE': ['email', 'publish_stream', 'read_stream', 'user_groups',
-                          'user_photos', 'user_hometown', 'user_location', 'photo_upload', 'status_update'],
+              { 'SCOPE': ['email', 'public_profile', 'user_friends'],
                 'AUTH_PARAMS': { 'auth_type': 'reauthenticate' },
                 'METHOD': 'js_sdk',
                 'VERIFIED_EMAIL': True
@@ -342,8 +363,10 @@ class Common(Configuration):
     AVATAR_HASH_USERDIRNAMES = True
     AVATAR_CLEANUP_DELETED = True
     AVATAR_HASH_FILENAMES = True
-    AVATAR_MAX_SIZE = 1048576
+    AVATAR_MAX_SIZE = 1048576*2
     ########## END AVATAR CONFIG
+
+    SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
 class Local(Common):
 
@@ -378,7 +401,6 @@ class Local(Common):
 
     ########## Your local stuff: Below this line define 3rd party libary settings
 
-
 class LocalAndrew(Local):
     # Andrews Local settings
     # $ export DJANGO_CONFIGURATION="LocalAndrew"
@@ -399,14 +421,18 @@ class Production(Common):
     INSTALLED_APPS += ("djangosecure",)
 
     # set this to 60 seconds and then to 518400 when you can prove it works
+    MIDDLEWARE_CLASSES = Common.MIDDLEWARE_CLASSES + ('djangosecure.middleware.SecurityMiddleware',)
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_HSTS_SECONDS = 60
     SECURE_HSTS_INCLUDE_SUBDOMAINS = values.BooleanValue(True)
     SECURE_FRAME_DENY = values.BooleanValue(True)
     SECURE_CONTENT_TYPE_NOSNIFF = values.BooleanValue(True)
     SECURE_BROWSER_XSS_FILTER = values.BooleanValue(True)
-    SESSION_COOKIE_SECURE = values.BooleanValue(False)
+    SESSION_COOKIE_SECURE = values.BooleanValue(True)
     SESSION_COOKIE_HTTPONLY = values.BooleanValue(True)
     SECURE_SSL_REDIRECT = values.BooleanValue(True)
+    CSRF_COOKIE_SECURE = values.BooleanValue(True)
+
     ########## end django-secure
 
     ########## SITE CONFIGURATION

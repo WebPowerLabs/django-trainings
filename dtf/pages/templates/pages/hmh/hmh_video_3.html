@@ -1,0 +1,17 @@
+{% extends "pages/hmh/base.html" %}
+{% load staticfiles %}
+
+{% block nav_video_1 %}{% endblock nav_video_1 %}
+{% block nav_video_2 %}{% endblock nav_video_2 %}
+{% block nav_video_3 %} active{% endblock nav_video_3 %}
+
+
+{% block title %}Let The Journey Begin{% endblock title %}
+
+{% block video %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://0740d05792ded6c37235-5d746ac01735382e98afd614a81d1e3b.ssl.cf1.rackcdn.com/getQueryString.js"></script>
+<iframe id="youtube_jiyIcz7wUH0" width="560" height="315" src="//www.youtube.com/embed/jiyIcz7wUH0?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+<script class="PlusThisVidTrack100" type="text/javascript">  email=""; cid=""; if(getQueryVariable("Email") != "not found"){email=getQueryVariable("Email");} if(getQueryVariable("Contact0Email") != "not found"){email=getQueryVariable("Contact0Email");} if(getQueryVariable("inf_field_Email") != "not found"){email=getQueryVariable("inf_field_Email");} if(getQueryVariable("Id") != "not found"){cid=getQueryVariable("Id");} if(getQueryVariable("contactId") != "not found"){cid=getQueryVariable("contactId");}  if(email != ""){ if(cid!=""){   furl_jiyIcz7wUH0 = "https://my.plusthis.com/p/39f603fb985b8a66945c02fba765b4a8a06401f5"; var tr0_jiyIcz7wUH0="f"; }} var playTracker;var YT_ready=(function(){var b=[],a=false;return function(d,e){if(d===true){a=true;for(var c=0;c<b.length;c++){b.shift()()}}else{if(typeof d=="function"){if(a){d()}else{b[e?"unshift":"push"](d)}}}}})();function onYouTubePlayerAPIReady(){YT_ready(true)}(function(){var a=document.createElement("script");a.src="https://www.youtube.com/player_api";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();var player;YT_ready(function(){var a="youtube_jiyIcz7wUH0";if(a){player=new YT.Player(a,{events:{onStateChange:stopCycle}})}});function stopCycle(a){if(a.data==1){playTracker=window.setInterval(isRun,900)}else{window.clearInterval(playTracker)}}function isRun(){videoProgress(player.getCurrentTime())}; function videoProgress(t){ if(t > 44){ if(t < 46){ if(tr0_jiyIcz7wUH0 == "f"){ jQuery.ajax({ url: furl_jiyIcz7wUH0, type: "POST", data: {"Id" : cid, "Email" : email, "i" : "0"}, dataType: "jsonp"}); tr0_jiyIcz7wUH0="t";}}} }</script>
+{% endblock video %}
+

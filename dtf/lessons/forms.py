@@ -7,8 +7,8 @@ from crispy_forms.layout import Submit
 class LessonCreateFrom(forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ['name', 'description', 'published', 'thumbnail', 'video',
-                  'homework', 'tags']
+        fields = ['name', 'description', 'published', 'thumbnail', 'audio',
+                  'video', 'tags']
 
     helper = FormHelper()
     helper.add_input(Submit('save_changes', 'Save changes',

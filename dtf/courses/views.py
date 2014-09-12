@@ -6,7 +6,7 @@ from courses.models import Course, CourseFavourite, CourseHistory
 from django.views.generic import DeleteView
 from courses.forms import CourseCreateFrom
 from utils.views import (CreateFormBaseView, PermissionMixin,
-                            AjaxResponsePermissionMixin)
+                         AjaxResponsePermissionMixin)
 from braces.views._ajax import JSONResponseMixin
 from django.views.generic.base import View
 from courses.signals import view_course_signal
@@ -15,6 +15,7 @@ from django.views.generic.list import ListView
 from django.http.response import HttpResponseRedirect
 from utils.decorators import instructor_member_required, can_edit_content
 from facebook_groups.models import FacebookGroup
+from lessons.models import LessonComplete
 
 
 class CourseListView(PermissionMixin, CreateFormBaseView):
@@ -24,6 +25,9 @@ class CourseListView(PermissionMixin, CreateFormBaseView):
     decorators = {'POST': instructor_member_required}
 
     def get_queryset(self):
+        if self.request.user.is_authenticated(
+                              ) and self.request.GET.get('purchased', None):
+            return Course.objects.purchased(self.request.user)
         return Course.objects.get_list(self.request.user)
 
     def form_valid(self, form):
@@ -40,25 +44,34 @@ class CourseDetailView(PermissionMixin, UpdateView):
     decorators = {'POST': can_edit_content(Course),
                   'GET': login_required}
 
-    def get_queryset(self):
-        return Course.objects.get_list(self.request.user)
-
     def get_success_url(self):
         return reverse('courses:detail', kwargs={'slug': self.kwargs['slug']})
 
     def get_context_data(self, **kwargs):
+        course = self.object
+        user = self.request.user
         context = super(CourseDetailView, self).get_context_data(**kwargs)
-        course = self.get_object()
-        context['lesson_list'] = course.lesson_set.get_list(self.request.user)
-        context['fb_group_list'] = FacebookGroup.objects.purchased(
-                                                           self.request.user)
-        if self.request.user.is_authenticated():
-            try:
-                context['in_favourites'] = CourseFavourite.objects.get(
-                                                        course=self.object,
-                                                        user=self.request.user)
-            except CourseFavourite.DoesNotExist:
-                pass
+        context['lesson_list'] = course.lesson_set.get_list(user)
+        context['fb_group_list'] = FacebookGroup.objects.purchased(user)
+        lesson_total = course.lesson_set.published().count()
+        lesson_completed = LessonComplete.objects.filter(
+                                                     lesson__published=True,
+                                                     user=user,
+                                                     is_complete=True,
+                                                     lesson__course=course
+                                                     ).count()
+        try:
+            context['course_completion'] = round(
+                             float(lesson_completed) / lesson_total * 100, 2)
+        except ZeroDivisionError:
+            context['course_completion'] = 0
+        try:
+            context['is_favourite'] = CourseFavourite.objects.get(
+                                                            course=course,
+                                                            user=user
+                                                            ).is_active
+        except CourseFavourite.DoesNotExist:
+            pass
         return context
 
     def get(self, request, *args, **kwargs):
@@ -88,7 +101,7 @@ class CourseFavouriteActionView(AjaxResponsePermissionMixin, JSONResponseMixin,
     decorators = {'POST': login_required}
 
     def post_ajax(self, request, *args, **kwargs):
-        course = Course.objects.get(pk=self.kwargs['pk'])
+        course = Course.objects.get(slug=self.kwargs['slug'])
         obj, created = CourseFavourite.objects.get_or_create(course=course,
                                                      user=self.request.user)
         if not created:

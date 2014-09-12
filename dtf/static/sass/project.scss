@@ -57,11 +57,11 @@
   transition-duration: 0s;
 }
 
-.fav_button.is_active .state-1, .fav_button .state-2{
+.ajax_action.is_active .state-1, .ajax_action .state-2{
     display: block;
 }
 
-.fav_button.is_active .state-2, .fav_button .state-1{
+.ajax_action.is_active .state-2, .ajax_action .state-1{
     display: none;
 }
 
@@ -97,4 +97,27 @@
   text-shadow: 0px 1px 0px #262626;
   line-height: 160%;
 }
+//audio js
+
+.audiojs {
+  margin: 10px auto;
+  width: 435px;
+}
+.audiojs .play-pause {
+  padding: 4px 0;
+}
+
+li.dropdown a {
+  cursor: pointer;
+}
+// search-bar
+
+input.search-bar {
+  background: white;
+  margin-top: 10px;
+  margin-left: 15px;
+  height: 30px;
+  width: 300px; 
+}
+
 // !!! /Custom style  !!!

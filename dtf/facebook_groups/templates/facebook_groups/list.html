@@ -1,28 +1,26 @@
 {% extends "facebook_groups/base.html" %}
-{% load staticfiles i18n %}
+{% load staticfiles i18n query_string %}
 
 {% block title %}Communities{{ block.super }}{% endblock title %}
 
 {% block page_title %}Communities{% endblock page_title %}
 
+{% block nav_secondary %}
+<li>
+  <a href="{% url 'facebook_groups:list' %}{% query_string request.GET %}">Communities
+  </a>
+</li>
+{% endblock nav_secondary %}
+
 {% block left_panel %}
-<ul class="nav nav-pills nav-stacked">
-  {% for fb_group in facebook_groups %}
-    <li><a href="{% url 'facebook_groups:detail' fb_group.fb_uid %}">{{ fb_group.name }}</a></li>
-  {% endfor %}
-</ul>
+
 {% endblock left_panel %}
 
 {% block feed %}
-<section class="feed">
-  {% with feed as comments %}
-    {% for comment in comments %}
-      <div id="post-{{ comment.id }}" class="fb-post panel panel-default">
-          {% include "features/comment.html" %}
-      </div>
-    {% endfor %}
-    {% include "comments/pager.html" with comment_list=comments %}
-  {% endwith %}
-</section>
+<ul class="list-group">
+  {% for facebook_group in facebook_groups %}
+    {% include "facebook_groups/group_card.html" %}
+  {% endfor %}
+</ul>
 {% endblock feed %}
 

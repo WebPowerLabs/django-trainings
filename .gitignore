@@ -37,6 +37,9 @@ media/
 # Bower
 bower_components/
 
+# Secrets
+.secrets/
+
 # Andrew
 test_db
 local_settings.py

@@ -1,7 +1,20 @@
 # -*- coding: utf-8 -*-
+from httplib import CannotSendRequest
+
 from django.db import models
+from django.conf import settings
 
 from djnfusion import server, key
+from django.db.models import Q
+
+
+class PackageManager(models.Manager):
+    def get_for_content(self, content):
+        """
+        Receive content object and returns all available packages for it.
+        """
+        return self.filter(Q(lessons=content.lesson) |
+                           Q(courses=content.lesson.course)).distinct()
 
 
 class PackagePurchaseManager(models.Manager):
@@ -51,6 +64,17 @@ class InfusionsoftTagManager(models.Manager):
 
             return self.create(**sync_data)
 
+    def by_user(self, user=None):
+        """
+        Returns tags a user has from the infusionsoft server
+        **kwargs
+        user: user instance or email
+        """
+        tag_str = self._get_provider_tags_data_for_user(user)
+        tag_ids = [int(tag_id) for tag_id in tag_str.split(",")] if tag_str else []
+        tags = self.filter(remote_id__in=tag_ids) if len(tag_ids) else self.none()
+        return tags
+
     def _get_sync_data(self, remote_id=None):
         """
         Converts remote data keys into model keys
@@ -76,17 +100,6 @@ class InfusionsoftTagManager(models.Manager):
             # sync data is None if an empty array
             return results[0] if len(results) else None
 
-    def by_user(self, user=None):
-        """
-        Returns tags a user has from the infusionsoft server
-        **kwargs
-        user: user instance or email
-        """
-        tag_str = self._get_provider_tags_data_for_user(user)
-        tag_ids = [int(tag_id) for tag_id in tag_str.split(",")]
-        tags = self.filter(remote_id__in=tag_ids) if len(tag_ids) else None
-        return tags
-
     def _get_provider_users_data(self, remote_id=None):
         """
         Returns array of user infusionsoftprofile remote_ids associated with a tag
@@ -104,17 +117,24 @@ class InfusionsoftTagManager(models.Manager):
         **kwargs
         user: user instance
         """
-        if user:
+        if user and settings.DJNFUSION_COMPANY and settings.DJNFUSION_API_KEY:
             # try getting users infusionsoft id, use email as backup
             _key = "Id" if user.infusionsoftprofile else "email"
             _value = user.infusionsoftprofile.get_remote_id if user.infusionsoftprofile else user.email
+            results = self.none()
+            return_results = self.none()
             if _key and _value:
-                # if they have an infusionsoft profile this should work
-                results = server.DataService.findByField(key, "Contact",
-                    10, 0, _key, _value,
-                    ["Groups", ]);
-            try:
-                return_results = results[0]["Groups"] if len(results) else None
-            except KeyError:
-                return_results = None
-            return  return_results
+                try:
+                    # if they have an infusionsoft profile this should work
+                    results = server.DataService.findByField(key, "Contact",
+                        10, 0, _key, _value,
+                        ["Groups", ]);
+                except CannotSendRequest:
+                    results = (self.none(),)
+            if results:
+
+                try:
+                    return_results = results[0]["Groups"] if len(results) else self.none()
+                except KeyError:
+                    pass
+            return return_results

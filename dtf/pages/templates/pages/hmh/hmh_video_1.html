@@ -1,0 +1,49 @@
+{% extends "pages/hmh/base.html" %}
+{% load staticfiles %}
+
+{% block nav_video_1 %} active{% endblock nav_video_1 %}
+{% block nav_video_2 %}{% endblock nav_video_2 %}
+{% block nav_video_3 %}{% endblock nav_video_3 %}
+
+
+{% block link_video_2 %}{% endblock link_video_2 %}
+{% block link_video_3 %}{% endblock link_video_3 %}
+
+{% block title %}Are you Experiencing The Loss of Your Pet?{% endblock title %}
+{% block lead %}Get The Support You Need Now{% endblock lead %}
+
+{% block video %}
+      
+<iframe id="youtube_qGsTlYLbwy4" width="560" height="315" src="//www.youtube.com/embed/qGsTlYLbwy4?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+
+{% endblock video %}
+
+{% block about %}
+<div class="text-center" style="padding: 20px 15px;">
+<p class="lead">We all need someone to walk beside us and help us not let the lows get too low.</p>
+<p class="lead">But most people don’t understand the feelings of loss you are having and do not know how to help you heal that pain in your heart.</p>
+<p class="lead">Take a few minutes for yourself right now and join me in this powerful session to explain how you can feel released from the pain you are feeling. The video is FREE and can help you begin the healing journey so you feel peace, joy and freedom again.</p>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+<form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/9fdb9d77ed482f693a79455013345cc9" class="infusion-form" method="POST">
+    <input name="inf_form_xid" type="hidden" value="9fdb9d77ed482f693a79455013345cc9" />
+    <input name="inf_form_name" type="hidden" value="Video Series&#a;Opt-in Form" />
+    <input name="infusionsoft_version" type="hidden" value="1.32.0.69" />
+    <div class="infusion-field form-group">
+        <label for="inf_field_FirstName">First Name *</label>
+        <input class="form-control infusion-field-input-container" id="inf_field_FirstName" name="inf_field_FirstName" type="text" />
+    </div>
+    <div class="infusion-field form-group">
+        <label for="inf_field_Email">Email *</label>
+        <input class="form-control infusion-field-input-container" id="inf_field_Email" name="inf_field_Email" type="text" />
+    </div>
+    <div class="infusion-submit">
+        <input type="submit" value="Submit" class="btn btn-danger"/>
+    </div>
+</form>
+
+</div>
+</div>
+{% endblock about %}

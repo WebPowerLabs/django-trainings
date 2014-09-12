@@ -1,64 +1,58 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags query_string %}
 
 {% block content %}
 <section class="lesson-list">
-    <div class="container">
-        <div class="row">
-            <div class="section-header col-xs-12 text-center">
-                <h1 class="section-title">All Lessons</h1>
-                <h3 class="section-subtitle">Justo enim velit luctus consectetur vitae nisi scelerisque a cras sapien urna? Enim amet - congue praesent rutrum venenatis ipsum varius?</h3>
-                <hr>
-            </div><!--/ .section-header-->
-        </div><!--/ .row-->
-        <div class="row">
-            <div class="col-md-9">
-                <div class="list-group lessons">
-                    {% for lesson in object_list %}
-                        {% include "lessons/lesson_list_item.html" %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="row">
-                    <h3>Lesson Categories</h3>
-                    <hr />
-                </div>
-                <div class="row">
-                    <a href="{% url 'lessons:list' %}">
-                        <span class="label label-{% if not request.GET.tags %}success{% else %}primary{% endif %}">
-                            All
-                        </span>&nbsp;
-                    </a>
-                    {% for tag in tag_list %}
-                        <a href="{% url 'lessons:list' %}?tags={{ tag.id }}">
-                        {% include 'tags/partials/detail.html' with object=tag %}
-                        </a>
-                    {% endfor %}
-                </div><!--/ .row-->
-                <br />
-                <div class="row">
-                    <h3>Browse Courses</h3>
-                    <div class="list-group">
-                        {% for course in course_list %}
-                        <a href="{% url 'courses:detail' course.slug %}" class="list-group-item">
-                            <h4 class="list-group-item-heading">{{ course.name }}</h4>
-                            <p class="list-group-item-text">
-                                {{ course.description|truncatewords:15 }}
-                            </p>
-                        </a>
-                        {% empty %}
-                        <a href="#" class="list-group-item">
-                            <p class="list-group-item-text">
-                                There are no items yet ;)
-                            </p>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div><!--/ .row-->
-    </div><!--/ .container-->
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-xs-12 text-center">
+        <h1 class="section-title">{% if request.GET.purchased %}My{% else %}All{% endif %} Lessons</h1>
+        <!--h3 class="section-subtitle"></h3-->
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
+    <div class="row">
+      <div class="col-md-9">
+        <div class="list-group lessons">
+          {% for lesson in object_list %}
+            {% include "lessons/lesson_list_item.html" %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h3>Lesson Categories</h3>
+        <hr />
+        <a href="{% url 'lessons:list' %}{% query_string purchased=request.GET.purchased %}">
+          <span class="label label-{% if not request.GET.tags %}success{% else %}primary{% endif %}">
+            All
+          </span>&nbsp;
+        </a>
+        {% for tag in tag_list %}
+          <a href="{% url 'lessons:list' %}{% query_string purchased=request.GET.purchased tags=tag.id %}">
+          {% include 'tags/partials/detail.html' with object=tag %}
+          </a>
+        {% endfor %}
+      <br />
+        <h3>Browse Courses</h3>
+        <div class="list-group">
+          {% for course in course_list %}
+          <a href="{% url 'courses:detail' course.slug %}" class="list-group-item">
+            <h4 class="list-group-item-heading">{{ course.name }}</h4>
+            <p class="list-group-item-text">
+              {{ course.description|truncatewords:15 }}
+            </p>
+          </a>
+          {% empty %}
+          <a href="#" class="list-group-item">
+            <p class="list-group-item-text">
+              There are no items yet ;)
+            </p>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div><!--/ .row-->
+  </div><!--/ .container-->
 </section><!--/ .lesson-list-->
 {% endblock content %}
-        
+    

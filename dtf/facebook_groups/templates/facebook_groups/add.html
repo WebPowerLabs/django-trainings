@@ -1,10 +1,14 @@
-{% extends "facebook_groups/list.html" %}
+{% extends "facebook_groups/base.html" %}
 {% load staticfiles i18n crispy_forms_tags %}
 
 {% block title %}Create a Community{{ block.super }}{% endblock title %}
 
 {% block page_title %}Create a Community{% endblock page_title %}
 
-{% block fb_form %}
-{% crispy form %}
-{% endblock fb_form %}
+{% block content %}
+<div class="container">
+  <div class="">
+    {% crispy form %}
+  </div>
+</div>
+{% endblock content %}

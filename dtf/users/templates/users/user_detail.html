@@ -4,49 +4,154 @@
 {% block title %}{{ object.username }} | Decide to Fly{% endblock %}
 
 {% block content %}
-<section class="user-welcome-wrapper">
-  <div class="container">
 
-    <div class="row">
-      <div class="col-md-4">
-        <div class="">
-          <h2>
-          {% if object.fb_uid %}
-            <img src="{{ object.get_fb_profile_img_url }}">
+<div class="container">
+    <h1 class="page-header">
+      {{ object.first_name }}
+    </h1>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Profile
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          {% if request.user == object %}
+            <a class="" href="{% url 'avatar_add' %}">
           {% else %}
-            <a class="" href="{% url 'avatar_change' %}">
-              {% avatar user %}
+            <a>
+          {% endif %}
+          {% if object.fb_uid and not object|has_avatar %}
+            <img src="{{ object.get_fb_profile_img_url }}" class="thumbnail img-thumbnail">
+          {% else %}
+          <img src="{% avatar_url object 160 %}" class="thumbnail img-thumbnail">
+          {% endif %}
             </a>
-          {% endif %}
-            {% if object.get_full_name %}{{ object.get_full_name }}{% else %}{{ object.username }}{% endif %}
-          </h2>
-
-          {% if object == request.user %}
-            <ul class="nav nav-stacked nav-pills">
-              <!-- Action buttons -->
-                <li><a class="" href="{% url 'users:update' %}">My Info</a></li>
-                <li><a class="" href="{% url 'account_email' %}">Email</a></li>
-                <li><a href="{% url 'courses:history' %}">Course History</a></li>
-                <li><a href="{% url 'lessons:history' %}">Lesson History</a></li>
-                <li><a href="{% url 'courses:favourites' %}">Course Favourites</a></li>
-                <li><a href="{% url 'lessons:favourites' %}">Lesson Favourites</a></li>
-                <li><a href="{% url 'packages:purchases' %}">Purchases</a></li>
-              
-              <!-- End Action buttons -->
-            </ul>
-          {% endif %}
-
+        </div>
+        <div class="col-md-9">
+          <p><strong>My Archetype: </strong>{{ profile.archetype }}</p>
+          <p><strong>My Anthem: </strong>{{ profile.anthem }}</p>
+          <p><strong>I am ... </strong>{{ profile.about }} </p>
         </div>
       </div>
+    </div>
+    {% if request.user == object %}
+    <div class="panel-footer">
+      <a class="btn btn-link" href="{% url 'profiles:update_user_profile' %}">Update Profile</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
 
-      <div class="col-md-8">
-        <h1>Welcome to Accelerate Your Destiny!</h1>
-        <p>Donec semper id sapien ac feugiat. Proin turpis eros, pharetra lacinia accumsan sed, imperdiet in nisl. Sed aliquam sem mauris, ac elementum velit pretium vitae. Aenean ac odio eu odio lacinia accumsan.</p>
-        <a class="btn btn-success btn-lg" href="{% url 'nufiles:list' %}">View All Sessions</a>
-        <a class="btn btn-danger btn-lg" href="{% url 'account_logout' %}">Logout</a>
+{% if request.user == object or request.user.is_staff %}
+<section class="">
+  <div class="container">
+    <h2 class="page-header">
+      My Dashboard
+    </h2>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Communities Feed
+          </div>
+          <div class="feed">
+            {% for comment in comments %}
+            <div class="fb-post">
+              {% include "features/comment.html" with hide_comments=True %}
+            </div>
+            {% empty %}
+            <div class="panel-body">
+              <p>Your community feed will appear here when you <a href="{% url 'facebook_groups:list' %}">join a community</a>.</p>
+            </div>
+            {% endfor %}
+          </div>
+          {% if comments.paginator.num_pages > 1 %}
+          <div class="panel-footer">
+            {% include "comments/pager.html" with comment_list=comments %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <a href="{% url 'journals:entries' %}" title="View My Journal" style="color:#fff;">My Journal</a>
+          </div>
+          <div class="panel-body">
+            {% if journal.can_submit %}
+            <form class="form" action="{% url 'journals:entries' %}" method="POST">
+              {% csrf_token %}
+            {% for question in questions %}
+              {% include "journals/journal_question.html" %}
+              {% if forloop.last %}
+              <input class="btn btn-primary" type="submit" value="Submit">
+              {% endif %}
+            {% empty %}
+              <p>Your journal questions will appear here.</p>
+            {% endfor %}
+            
+            </form>
+            {% else %}
+            {% for question, response in entry.data.iteritems %}
+              <p><strong>{{ question }}:</strong> {{ response }}</p>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            My Communities
+          </div>
+          <div class="">
+            {% for facebook_group in groups %}
+              {% include "facebook_groups/facebook_group_list_item.html" %}
+            {% empty %}
+            <div class="panel-body">
+              <p>Your communities will appear here when you <a href="{% url 'facebook_groups:list' %}">join a community</a>.</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Favorite Courses
+          </div>
+          <div class="">
+            <div class="list-group lessons">
+              {% for course_favourite in courses %}
+                {% with course_favourite.course as course %}
+                  {% include "courses/course_list_item.html" %}
+                {% endwith %}
+                {% empty %}
+                <div class="panel-body">
+                  <p>Your favorite courses will appear here when you <a href="{% url 'courses:list' %}">favorite a course</a>.</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Favorite Lessons
+          </div>
+          <div class="">
+            <div class="list-group lessons">
+              {% for lesson_favourite in lessons %}
+                {% with lesson_favourite.lesson as lesson %}
+                  {% include "lessons/lesson_list_item.html" %}
+                {% endwith %}
+                {% empty %}
+                <div class="panel-body">
+                  <p>Your favorite lessons will appear here when you <a href="{% url 'lessons:list' %}">favorite a lesson</a>.</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
 </section>
+{% endif %}
 {% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'journals/base.html' %}
+
+{% block content %}
+<div class="container">
+
+{% for entry in entries %}
+
+{{ entry.created }}
+
+{% for question, response in entry.data.iteritems %}
+  <p><strong>{{ question }}:</strong> {{ response }}</p>
+{% endfor %}
+
+{% endfor %}
+</div>
+{% include "comments/pager.html" with comment_list=entries %}
+{% endblock content %}

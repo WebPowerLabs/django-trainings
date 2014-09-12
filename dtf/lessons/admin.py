@@ -1,5 +1,6 @@
 from django.contrib import admin
-from lessons.models import Lesson, LessonHistory, LessonFavourite
+from lessons.models import (Lesson, LessonHistory, LessonFavourite,
+                            LessonComplete)
 from resources.models import Resource
 
 
@@ -19,15 +20,21 @@ class LessonAdmin(admin.ModelAdmin):
 
 class LessonHistoryAdmin(admin.ModelAdmin):
     list_display = ['lesson', 'user', 'created', 'is_active']
-    list_filter = ['created']
+    list_filter = ['created', 'user', 'lesson']
     list_editable = ['is_active']
 
 
 class LessonFavouriteAdmin(admin.ModelAdmin):
     list_display = ['lesson', 'user', 'created', 'is_active']
-    list_filter = ['user']
+    list_filter = ['created', 'user', 'lesson']
     list_editable = ['is_active']
+
+
+class LessonCompleteAdmin(admin.ModelAdmin):
+    list_display = ['lesson', 'user', 'created', 'is_complete']
+    list_filter = ['created', 'user']
 
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(LessonHistory, LessonHistoryAdmin)
 admin.site.register(LessonFavourite, LessonFavouriteAdmin)
+admin.site.register(LessonComplete, LessonCompleteAdmin)

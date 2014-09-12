@@ -14,6 +14,8 @@
       {% for lesson in obj.package.lessons.all %}
         {% include "lessons/lesson_list_item.html" %}
       {% endfor %}
+    {% empty %}
+      <h3 class="text-center">No items.</h3>
     {% endfor %}
   </div>
 </div>

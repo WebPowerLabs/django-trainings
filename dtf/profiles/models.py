@@ -5,12 +5,12 @@ from djnfusion import server, key
 
 from packages.models import InfusionsoftTag, PackagePurchase
 
-# class PackageProfile(models.Model):
-#    '''
-#    for storing information about Packages
-#    '''
-#    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-#    packages = models.ManyToManyField("packages.Package")
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    archetype = models.CharField(max_length=255, blank=True, verbose_name=u'My Archetype')
+    anthem = models.TextField(blank=True, verbose_name=u'My Anthem')
+    about = models.TextField(blank=True, verbose_name=u'I am...')
 
 
 class FacebookProfile(models.Model):
@@ -41,35 +41,36 @@ class InfusionsoftProfile(models.Model):
         """
         updates a profiles tags from the infusionsoft server
         """
-        # get infusionsofts tags from thier server and find the instances in our db
-        tags = InfusionsoftTag.objects.by_user(self.user)
-        # get all active purchase for profile.user
-        active_purchases = PackagePurchase.objects.filter(user__id=self.user_id,
-            package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1)  # 1 == Active
+        if settings.DJNFUSION_COMPANY and settings.DJNFUSION_API_KEY:
+            # get infusionsofts tags from thier server and find the instances in our db
+            tags = InfusionsoftTag.objects.by_user(self.user)
+            # get all active purchase for profile.user
+            active_purchases = PackagePurchase.objects.filter(user__id=self.user_id,
+                package__infusionsoftpackage__tag_id__in=[tag.id for tag in self.tags.all()], status=1)  # 1 == Active
 
-        for tag in self.tags.all():
-            # loop through profile's tags
-            if tag not in tags:
-                # profile has tag that was removed on infusionsoft, remove tag
-                self.tags.remove(tag)
-                # set past_purchases of this tag to expired
+            for tag in self.tags.all():
+                # loop through profile's tags
+                if tag not in tags:
+                    # profile has tag that was removed on infusionsoft, remove tag
+                    self.tags.remove(tag)
+                    # set past_purchases of this tag to expired
 
-                expired = active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id)
-                for purchase in expired:
-                    purchase.status = 2  # 2 == Expired
-                    purchase.save()
+                    expired = active_purchases.filter(package__infusionsoftpackage__tag_id=tag.id)
+                    for purchase in expired:
+                        purchase.status = 2  # 2 == Expired
+                        purchase.save()
 
 
-        for tag in tags:
-            # loop through infusionsoft's tags
-            if tag not in self.tags.all():
-                # profile does not have tag on infusionsoft, add tag
-                self.tags.add(tag)
-                # create a new package purchase for the tags infusionsoft package
-                PackagePurchase.objects.create(
-                    user=self.user, package=tag.infusionsoftpackage, status=1)  # 1 == Active
+            for tag in tags:
+                # loop through infusionsoft's tags
+                if tag not in self.tags.all():
+                    # profile does not have tag on infusionsoft, add tag
+                    self.tags.add(tag)
+                    # create a new package purchase for the tags infusionsoft package
+                    PackagePurchase.objects.create(
+                        user=self.user, package=tag.infusionsoftpackage, status=1)  # 1 == Active
 
-        return self.save()
+            return self.save()
 
     def update_profile(self):
         """
@@ -89,11 +90,15 @@ class InfusionsoftProfile(models.Model):
             10, 0, "email", self.user.email,
             ["Id", ]);
         if not len(results):
-            server.ContactService.add(key, [
-            {"Email": self.user.email}, 
-            {"FirstName": self.user.first_name}, 
-            {"LastName": self.user.last_name}])
-            self._get_provider_data()
+            #TODO:FIX THIS java.lang.String ERROR
+#            remote_id = server.ContactService.add(key, [
+#                {"djUserID": unicode(self.user.id)},
+#                {"Email": self.user.email},
+#                {"FirstName": self.user.first_name},
+#                {"LastName": self.user.last_name}])
+
+#            return {"Id": remote_id}
+            return []
         return results[0]
 
 
@@ -114,7 +119,6 @@ def infusionsoft_sync_user(sender, **kwargs):
         user = kwargs['user']
         profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
         profile.update_tags()
-
 
 
 
