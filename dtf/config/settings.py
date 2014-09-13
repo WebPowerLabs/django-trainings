@@ -154,7 +154,7 @@ class Common(Configuration):
 
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf-1')
+    DATABASES = values.DatabaseURLValue('postgres://localhost/trainings')
     ########## END DATABASE CONFIGURATION
 
     ########## CACHING
