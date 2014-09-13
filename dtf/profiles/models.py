@@ -8,9 +8,35 @@ from packages.models import InfusionsoftTag, PackagePurchase
 
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    archetype = models.CharField(max_length=255, blank=True, verbose_name=u'My Archetype')
+    archetype = models.CharField(max_length=255, blank=True, 
+                                 verbose_name=u'My Archetype')
     anthem = models.TextField(blank=True, verbose_name=u'My Anthem')
     about = models.TextField(blank=True, verbose_name=u'I am...')
+    support = models.TextField(blank=True, 
+                               verbose_name=u'I need support in achieving:')
+
+    def __unicode__(self):
+        return self.user.username
+
+
+class UserPrivateProfile(models.Model):
+    '''
+    Private profile for users. Other users are not able to view this unless
+    they are staff
+    '''
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, 
+                                related_name='private_profile')
+    dream = models.TextField(blank=True,
+                             verbose_name=u'My BIG dream is:')
+
+    def __unicode__(self):
+        return self.user.username
+
+    def can_view(self, user):
+        '''
+        Other users are not able to view this unless they are staff
+        '''
+        return user == self.user or user.is_staff
 
 
 class FacebookProfile(models.Model):

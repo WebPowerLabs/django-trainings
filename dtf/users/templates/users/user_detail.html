@@ -76,7 +76,19 @@
       <div class="col-md-5">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <a href="{% url 'journals:entries' %}" title="View My Journal" style="color:#fff;">My Journal</a>
+            My Private Profile
+          </div>
+          <div class="panel-body">
+              <form class="form form-horizontal" action="{% url 'profiles:update_user_private_profile' %}" method="POST">
+                {% csrf_token %}
+              {{ private_profile }}
+              <input type="submit" class="btn btn-primary" value="Save">
+              </form>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <a href="{% url 'journals:entries' %}" title="View My Journal" style="color:#fff;text-decoration:underline;">My Journal</a>
           </div>
           <div class="panel-body">
             {% if journal.can_submit %}

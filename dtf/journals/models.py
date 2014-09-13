@@ -60,6 +60,10 @@ class JournalQuestion(models.Model):
 
     objects = JournalQuestionManager()
 
+    class Meta:
+        ordering = ('position',)
+        get_latest_by = 'position'
+
     @property
     def template_name(self):
         return self._get_template_name()
