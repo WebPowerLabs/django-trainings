@@ -4,8 +4,8 @@
 
 {% block cover %}
 {% if facebook_group.cover %}
-  {% thumbnail facebook_group.cover '750x320' crop='center' as im %} {# 2.35:1 #}
-    <img src="{{ im.url }}" class="cover-img img-responsive" alt="{{ facebook_group.name }}">
+  {% thumbnail facebook_group.cover '750x260' crop='center' as im %} {# 2.35:1 #}
+    <img src="{{ im.url }}" class="img-responsive" alt="{{ facebook_group.name }}">
   {% endthumbnail %}
 {% else %}
   <img src="{% static 'images/decide-to-fly-home-banner.jpg' %}" class="cover-img img-responsive" alt="{{ facebook_group.name }}">
