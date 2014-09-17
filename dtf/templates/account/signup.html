@@ -93,6 +93,7 @@
       {{ form.password2.errors }}
     </div>    
       {{ form.confirmation_key }}
+      <input type="hidden" name="{{ form.referral_code.name }}" id="id_{{ form.referral_code.name }}" value="{% if form.referral_code.value %}{{ form.referral_code.value }}{% else %}{{ request.GET.referral_code }}{% endif %}">
       {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}

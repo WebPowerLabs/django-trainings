@@ -42,6 +42,7 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django_comments.urls')),
     url(r'^packages/', include('packages.urls', namespace="packages")),
     url(r'^journals/', include('journals.urls', namespace="journals")),
+    url(r'^affiliates/', include('affiliates.urls', namespace="affiliates")),
     url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

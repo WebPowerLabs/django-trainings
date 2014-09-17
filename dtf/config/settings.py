@@ -81,6 +81,7 @@ class Common(Configuration):
         'packages',
         'features',
         'journals',
+        'affiliates',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

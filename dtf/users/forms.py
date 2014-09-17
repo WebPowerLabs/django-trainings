@@ -2,6 +2,8 @@
 from django import forms
 from localflavor.us.forms import USStateField, USZipCodeField, USPhoneNumberField
 
+from affiliates.models import Affiliate
+
 from .models import User
 
 
@@ -25,6 +27,7 @@ class UserSignupForm(forms.Form):
     state = USStateField()
     postal_code = USZipCodeField()
     country = forms.CharField()
+    referral_code = forms.CharField(required=False, widget=forms.HiddenInput)
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
@@ -37,4 +40,11 @@ class UserSignupForm(forms.Form):
         user.postal_code = self.cleaned_data['postal_code']
         user.country = self.cleaned_data['country']
         user.save()
+        referral_code = self.cleaned_data['referral_code']
+        if referral_code:
+            Affiliate.objects.sign_up_affiliate_user_with_code(user, 
+                                                               referral_code)
+        else:
+            Affiliate.objects.sign_up_affiliate_user_with_zip(user, 
+                                                              user.postal_code)
 
