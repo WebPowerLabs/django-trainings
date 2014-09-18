@@ -27,7 +27,7 @@ class UserPrivateProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, 
                                 related_name='private_profile')
     dream = models.TextField(blank=True,
-                             verbose_name=u'My BIG dream is:')
+                             verbose_name=u'My BIG WHY is:')
 
     def __unicode__(self):
         return self.user.username

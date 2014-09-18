@@ -1,5 +1,5 @@
 {% extends 'lessons/base.html' %}
-{% load static crispy_forms_tags query_string video_player thumbnail comments user_permission_tags markdown %}
+{% load staticfiles crispy_forms_tags query_string video_player thumbnail comments user_permission_tags markdown %}
 
 {% block javascript %}
 {{ block.super }}
@@ -8,7 +8,16 @@
   audiojs.events.ready(function() {
     var as = audiojs.createAll();
   });
-</script>
+
+{% if not can_start %}
+$(document).ready(function(){
+  $('#incompleteModal').modal({
+  keyboard: false,
+  backdrop: 'static',
+  });
+});
+{% endif %}
+  </script>
 {% endblock javascript %}
 
 {% block nav_actions %}
@@ -154,7 +163,28 @@
   </div><!--/ .container-->
 
 </section><!--/ .lesson-detail-->
+
+{% endblock content %}
+
+{% block modal %}
   {% if user.is_authenticated and fb_group_list %}
   {% include 'includes/share_modal.html' %}
   {% endif %}
-{% endblock content %}
+
+<!-- Modal -->
+<div class="modal fade" id="incompleteModal" tabindex="-1" role="dialog" aria-labelledby="incompleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title" id="incompleteModalLabel">Complete previous lessons to start this lesson.</h4>
+      </div>
+      <div class="modal-body">
+<a href="{% url 'lessons:detail' current_lesson.slug %}{% query_string request.GET course=course_pk %}" class="">{{ current_lesson.name }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock modal %}

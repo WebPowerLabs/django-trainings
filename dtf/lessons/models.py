@@ -54,6 +54,19 @@ class Lesson(Content):
     def get_absolute_url(self):
         return 'lessons:detail', (), {'slug': self.slug}
 
+    def can_start(self, user):
+        '''
+        A user will need to mark previous lessons as completed in order to
+        begin new lessons
+        '''
+        current_lesson_order = Lesson.objects.completed(
+                                     user, course=self.course
+                                     ).aggregate(models.Max('_order')
+                                     )['_order__max']
+        if not current_lesson_order and current_lesson_order != 0:
+            current_lesson_order = -1
+        return self._order <= (current_lesson_order+1)
+
 
 class LessonHistory(History):
     """
