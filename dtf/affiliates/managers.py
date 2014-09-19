@@ -13,11 +13,10 @@ class AffiliateManager(models.Manager):
 
 
     def sign_up_affiliate_user_with_zip(self, user):
-        try:
-            affiliate = self.get(zip__postal_code=user.postal_code)
-            self.sign_up_affiliate_user_with_code(user, affiliate.code)
-        except self.DoesNotExist:
-            pass
+        affiliate = self.filter(zip__postal_code=user.postal_code)
+        if len(affiliate):
+            self.sign_up_affiliate_user_with_code(user, affiliate[0].code)
+
 
 
 

@@ -125,7 +125,10 @@ class LoginCustomView(LoginView):
         if form.is_valid():
             try:
                 user = User.objects.get(username=form.cleaned_data['login'])
-                self.request.session['account_user'] = user.pk
+                try:
+                    self.request.session['account_user'] = user.pk
+                except KeyError:
+                    pass
             except User.DoesNotExist:
                 pass
         return LoginView.post(self, request, *args, **kwargs)

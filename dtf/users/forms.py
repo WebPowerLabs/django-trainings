@@ -45,6 +45,5 @@ class UserSignupForm(forms.Form):
             Affiliate.objects.sign_up_affiliate_user_with_code(user, 
                                                                referral_code)
         else:
-            Affiliate.objects.sign_up_affiliate_user_with_zip(user, 
-                                                              user.postal_code)
+            Affiliate.objects.sign_up_affiliate_user_with_zip(user)
 
