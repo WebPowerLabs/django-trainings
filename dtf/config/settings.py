@@ -202,6 +202,7 @@ class Common(Configuration):
         'django.contrib.messages.context_processors.messages',
         'django.core.context_processors.request',
         # Your stuff: custom template context processers go here
+        'courses.context_processors.trainings_names',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
@@ -369,6 +370,13 @@ class Common(Configuration):
     ########## END AVATAR CONFIG
 
     SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
+
+    ########## START TRAININGS CONFIG
+    COURSE_NAME = "Program"
+    LESSON_NAME = "Session"
+    RESOURCE_NAME = "Resource"
+    HOMEWORK_NAME = "Ownwork"
+    ########## END TRAININGS CONFIG
 
 class Local(Common):
 

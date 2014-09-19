@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="section-header col-xs-12 text-center">
-        <h1 class="section-title">{% if request.GET.purchased %}My{% else %}All{% endif %} Lessons</h1>
+        <h1 class="section-title">{% if request.GET.purchased %}My{% else %}All{% endif %} {{ trainings.lesson_name }}s</h1>
         <!--h3 class="section-subtitle"></h3-->
         <hr>
       </div><!--/ .section-header-->
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="col-md-3">
-        <h3>Lesson Categories</h3>
+        <h3>{{ trainings.lesson_name }} Categories</h3>
         <hr />
         <a href="{% url 'lessons:list' %}{% query_string purchased=request.GET.purchased %}">
           <span class="label label-{% if not request.GET.tags %}success{% else %}primary{% endif %}">
@@ -33,7 +33,7 @@
           </a>
         {% endfor %}
       <br />
-        <h3>Browse Courses</h3>
+        <h3>Browse {{ trainings.course_name }}s</h3>
         <div class="list-group">
           {% for course in course_list %}
           <a href="{% url 'courses:detail' course.slug %}" class="list-group-item">
