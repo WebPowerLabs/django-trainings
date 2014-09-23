@@ -29,11 +29,30 @@
     ================================================== -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-      <link rel="apple-touch-icon" sizes="76x76" href="{% static 'icon/touch-icon-76x76.png' %}">
-      <link rel="apple-touch-icon" sizes="120x120" href="{% static 'icon/touch-icon-120x120.png' %}">
-      <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icon/touch-icon-144x144.png' %}">
-      <link rel="apple-touch-icon" sizes="152x152" href="{% static 'icon/touch-icon-152x152.png' %}">
-      
+    <!-- Apple Mobile optimizations -->
+
+    <!-- Home screen icons -->
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'icon/touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'icon/touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icon/touch-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'icon/touch-icon-152x152.png' %}">
+    
+    <!-- loading screen image 640px x 1136px -->
+    <link rel="apple-touch-startup-image" href="{% static 'icon/touch-icon-152x152.png' %}">
+    
+    <!-- launcher title -->
+    <meta name="apple-mobile-web-app-title" content="Decide To Fly &trade;">
+
+    <!-- window size -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    
+  {% comment %}
+  ONLY WORKS ON SPAS
+
+    <!-- Hide browser url bar -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  {% endcomment %}
+
     {% block css %}
     {% comment %}
     {% if debug %}

@@ -29,10 +29,17 @@ def journal_entries_list(request):
     }
     if request.method == 'POST':
         new_entry_data = request.POST.copy()
+        next = new_entry_data.get('next', None)
+        if next:
+            del new_entry_data['next']
+        else:
+            next = reverse_lazy("journals:entries")
+        
         del new_entry_data[u'csrfmiddlewaretoken']
         JournalEntry.objects.create(journal=journal, 
                                     data=new_entry_data.dict())
-        return HttpResponseRedirect(reverse_lazy("journals:entries"))
+
+        return HttpResponseRedirect(next)
 
     return render_to_response("journals/entries.html", context, 
                               context_instance=RequestContext(request))

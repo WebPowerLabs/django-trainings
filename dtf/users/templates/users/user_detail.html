@@ -58,7 +58,7 @@
           <div class="feed">
             {% for comment in comments %}
             <div class="fb-post">
-              {% include "features/comment.html" with hide_comments=True %}
+              {% include "features/comment.html" with hide_comments=False show_from=True %}
             </div>
             {% empty %}
             <div class="panel-body">
@@ -97,6 +97,7 @@
             {% for question in questions %}
               {% include "journals/journal_question.html" %}
               {% if forloop.last %}
+              <input type="hidden" name="next" id="id_next" value="{% url 'users:detail' request.user.id %}">
               <input class="btn btn-primary" type="submit" value="Submit">
               {% endif %}
             {% empty %}
@@ -167,3 +168,35 @@
 </section>
 {% endif %}
 {% endblock content %}
+
+{% block modal %}
+<div class="bottom-menu visible-sm visible-xs">
+  <div class="bottom-menu-trigger text-center">
+    <a href="#" class="" id="bottom-menu-trigger">Download the free Decide To Fly &trade; mobile app</a>
+  </div>
+  <div class="bottom-menu-content" id="bottom-menu-content">
+    <p class="text-center">Simply tap the <i class=""></i> button below, and choose<br>
+      "Add to Home Screen"<br>
+      The mobile app will appear installed as an icon on your homescreen.<br>
+      <i class="fa fa-arrow-down"></i>
+    </p>
+  </div>
+</div>
+
+{% endblock modal %}
+
+{% block javascript %}
+{{ block.super }}
+<script>
+$(document).ready(function(){
+  $('#bottom-menu-trigger').on('click', function(e) {
+    e.preventDefault();
+    $('#bottom-menu-content').toggleClass('active');
+  });
+if (window.navigator.standalone) {
+    // The app is running in standalone mode.
+    $('#bottom-menu-trigger').addClass('hidden');
+}
+});
+</script>
+{% endblock javascript %}

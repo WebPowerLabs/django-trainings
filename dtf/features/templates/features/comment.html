@@ -1,4 +1,10 @@
 {% load staticfiles comments markdown avatar_tags user_thumbnail %}
+{% comment %}
+arguments when including this template:
+comment
+hide_comments=False
+show_from=False
+{% endcomment %}
 <div id="c{{ comment.id }}"></div>
 <div class="comment-post">
 <div class="pull-right comment-actions">
@@ -22,7 +28,10 @@
       {% endif %}
     </a>
       <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.first_name }}</a>
-    <small class="date">{{ comment.submit_date|date }}</small>
+      {% if show_from %}
+      <small class="via">via <a href="{{ comment.get_content_object_url }}">{{ comment.content_object_name }}</a></small>
+      {% endif %}
+      <small class="date">{{ comment.submit_date|date }}</small>
   </h3>
   <div class="panel-body">
     <p>{{ comment.comment|markdown }}</p>
