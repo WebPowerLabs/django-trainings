@@ -191,6 +191,8 @@
           videojs.options.flash.swf = "{% static 'js/video-js/video-js.swf' %}"
       </script>
       <!-- place project specific Javascript in this file -->
+      <script src="{% static 'js/jquery.qs.js' %}"></script>
+      <script src="{% static 'js/jquery.goTo.js' %}"></script>
       <script src="{% static 'js/project.js' %}"></script>
 
     {% endblock javascript %}

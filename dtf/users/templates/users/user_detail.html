@@ -58,7 +58,9 @@
           <div class="feed">
             {% for comment in comments %}
             <div class="fb-post">
-              {% include "features/comment.html" with hide_comments=False show_from=True %}
+              {% with comment.content_object as facebook_group %}
+              {% include "features/comment.html" with hide_comments=False show_from=True next=request.user.get_absolute_url %}
+              {% endwith %}
             </div>
             {% empty %}
             <div class="panel-body">
@@ -199,4 +201,5 @@ if (window.navigator.standalone) {
 }
 });
 </script>
+<script src="{% static 'comments/dtfComments.js' %}"></script>
 {% endblock javascript %}

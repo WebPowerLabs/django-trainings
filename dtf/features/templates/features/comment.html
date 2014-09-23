@@ -4,6 +4,7 @@ arguments when including this template:
 comment
 hide_comments=False
 show_from=False
+next=None
 {% endcomment %}
 <div id="c{{ comment.id }}"></div>
 <div class="comment-post">
@@ -58,7 +59,7 @@ show_from=False
       {{ form.object_pk }}
         {{ form.timestamp }}
         {{ form.security_hash }}
-        <input type="hidden" name="next" value="{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}" />
+        <input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}{% endif %}" />
         <div class="comment-form-control">
           <div class="comment-img">
             <a href="{% url 'users:detail' request.user.pk %}" title="View {{ request.user.first_name }}'s Profile">
