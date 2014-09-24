@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
@@ -44,3 +44,25 @@ def journal_entries_list(request):
     return render_to_response("journals/entries.html", context, 
                               context_instance=RequestContext(request))
 
+
+@login_required
+def journal_entries_edit(request, pk):
+    user = request.user
+    entry = get_object_or_404(JournalEntry, pk=pk)
+    if entry.journal.author == user:
+        pass
+    else:
+        return HttpResponseRedirect(reverse_lazy("journals:entries"))
+    if request.method == 'POST':
+        new_entry_data = request.POST.copy()
+        next = new_entry_data.get('next', None)
+        if next:
+            del new_entry_data['next']
+        else:
+            next = reverse_lazy("journals:entries")
+        del new_entry_data[u'csrfmiddlewaretoken']
+        entry.data = new_entry_data.dict()
+        print entry
+        entry.save()
+        return HttpResponseRedirect(next)
+    return HttpResponseRedirect(reverse_lazy("journals:entries"))

@@ -44,7 +44,7 @@
 </div>
 
 {% if request.user == object or request.user.is_staff %}
-<section class="">
+<section class="dashboard">
   <div class="container">
     <h2 class="page-header">
       My Dashboard
@@ -108,9 +108,21 @@
             
             </form>
             {% else %}
+            <form class="form" action="{% url 'journals:entries_edit' entry.pk %}" method="POST">
+              {% csrf_token %}
             {% for question, response in entry.data.iteritems %}
-              <p><strong>{{ question }}:</strong> {{ response }}</p>
+            <div id="div_id_{{ question }}" class="form-group">
+              <label for="id_{{ question }}" class="control-label">{{ question }}</label>
+              <div class="controls">
+                <input class="textinput form-control" id="id_{{ question }}" maxlength="255" name="{{ question }}" type="text" value="{{ response }}"> 
+              </div>
+            </div>
+              {% if forloop.last %}
+              <input type="hidden" name="next" id="id_next" value="{% url 'users:detail' request.user.id %}">
+              <input class="btn btn-primary" type="submit" value="Save Changes">
+              {% endif %}
             {% endfor %}
+            </form>
             {% endif %}
           </div>
         </div>

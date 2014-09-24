@@ -9,7 +9,7 @@
     var as = audiojs.createAll();
   });
 
-{% if not can_start %}
+{% if not can_start and not user.is_staff %}
 $(document).ready(function(){
   $('#incompleteModal').modal({
   keyboard: false,

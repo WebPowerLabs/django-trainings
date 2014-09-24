@@ -1,5 +1,5 @@
 {% extends "facebook_groups/base.html" %}
-{% load staticfiles comments i18n thumbnail query_string %}
+{% load staticfiles comments i18n thumbnail query_string avatar_tags %}
 {% block title %}{{ facebook_group.name }}{{ block.super }}{% endblock title %}
 
 {% block cover %}
@@ -101,6 +101,34 @@
   {% include "comments/pager.html" with comment_list=comments %}
 </section>
 {% endblock %}
+
+{% block left_panel %}
+<div class="panel panel-primary" style="margin-top:20px;">
+  <div class="panel-heading">
+    My Communities
+  </div>
+  <div class="">
+    <ul class="list-group" style="margin-bottom:0;">
+      {% for facebook_group in facebook_groups %}
+        {% include "facebook_groups/facebook_group_list_item.html" %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    Community Memebers
+  </div>
+  <div class="panel-body">
+    {% for member in members %}
+    <a href="{% url 'users:detail' member.pk %}">
+      <img src="{% avatar_url member 40 %}" class="thumbnail img-thumbnail pull-left">
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
 {% block javascript %}
 {{ block.super }}
 <script src="{% static 'bootstrap/js/tab.js' %}"></script>
