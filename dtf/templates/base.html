@@ -54,9 +54,9 @@
   {% endcomment %}
 
     {% block css %}
-    {% comment %}
+
     {% if debug %}
-    <link rel="stylesheet/less" href="{% static 'bootstrap/less/zak-bootstrap.less' %}">
+    <link rel="stylesheet/less" href="{% static 'app/less/bootstrap-router.less' %}">
     <script type="text/javascript">
       less = {
         env: "development", // or "production"
@@ -75,15 +75,14 @@
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
     {% else %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
     {% endif %}
-    {% endcomment %}
-        
+
         <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
 
         <!-- Video-js style -->
         <link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+
         <!-- This file store project specific CSS -->
         <link href="{% static 'css/project.css' %}" rel="stylesheet">
     {% endblock %}
