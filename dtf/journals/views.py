@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Journal, JournalEntry
 
+
 @login_required
 def journal_entries_list(request):
     user = request.user

@@ -144,7 +144,7 @@ class NotificationProfile(models.Model):
     new_community_post = models.BooleanField(default=True)
     new_lesson = models.BooleanField(default=True)
     new_course = models.BooleanField(default=True)
-    news = models.BooleanField(defualt=True)
+    news = models.BooleanField(default=True)
 
 
 from allauth.account.signals import user_logged_in

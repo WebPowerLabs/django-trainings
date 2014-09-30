@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% crispy form %}
+
+{% endblock content %}
+
+{% block css %}
+{{ block.super }}
+<style>
+.etfar-form .help-block {display: none;}
+</style>
+{% endblock css %}

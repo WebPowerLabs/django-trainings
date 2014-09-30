@@ -82,6 +82,7 @@ class Common(Configuration):
         'features',
         'journals',
         'affiliates',
+        'etfars',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
