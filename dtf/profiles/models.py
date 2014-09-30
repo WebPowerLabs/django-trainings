@@ -139,6 +139,14 @@ class InstructorProfile(models.Model):
         return self.user.username
 
 
+class NotificationProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    new_community_post = models.BooleanField(default=True)
+    new_lesson = models.BooleanField(default=True)
+    new_course = models.BooleanField(default=True)
+    news = models.BooleanField(defualt=True)
+
+
 from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
 
