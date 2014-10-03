@@ -133,3 +133,8 @@ input.search-bar {
   height: 30px;
   width: 300px;
 }
+
+/* line 123, ../sass/project.scss */
+.progress {
+  margin-top: 20px;
+}

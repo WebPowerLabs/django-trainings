@@ -1,5 +1,17 @@
 {% extends 'lessons/base.html' %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags static %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'js/uploader/css/jquery.fileupload.css' %}">
+<link rel="stylesheet" href="{% static 'js/uploader/css/jquery.fileupload-ui.css' %}">
+{% endblock css %}
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/uploader/js/jquery.iframe-transport.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/uploader/js/jquery.fileupload.js' %}"></script>
+{% endblock javascript %}
+
 
 {% block content %}
 <div class="container">
@@ -8,4 +20,5 @@
     </div>
 </div>
 {% endblock content %}
+
         

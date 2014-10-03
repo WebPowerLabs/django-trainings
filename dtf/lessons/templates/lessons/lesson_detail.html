@@ -1,10 +1,21 @@
 {% extends 'lessons/base.html' %}
 {% load staticfiles crispy_forms_tags query_string video_player thumbnail comments user_permission_tags markdown %}
 
+
+{% block css %}
+{{ block.super }}
+<link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'js/uploader/css/jquery.fileupload.css' %}">
+<link rel="stylesheet" href="{% static 'js/uploader/css/jquery.fileupload-ui.css' %}">
+{% endblock css %}
 {% block javascript %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'js/uploader/js/jquery.fileupload.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/uploader/js/jquery.iframe-transport.js' %}"></script>
 <script src="{% static 'js/audiojs/audio.min.js' %}"></script>
+<script src="{% static 'js/video-js/video.js' %}"></script>
 <script>
+  videojs.options.flash.swf = "{% static 'js/video-js/video-js.swf' %}"
   audiojs.events.ready(function() {
     var as = audiojs.createAll();
   });
@@ -84,8 +95,20 @@ $(document).ready(function(){
     <div class="row">
       <div class="content col-sm-7">
         {% if object.video %}
-          {% video_player object %}
+          {% if object.video.status == object.video.CONVERTED %}
+            {% video_player object %}
           {% else %}
+            <div class="jumbotron">
+              <p class="text-center">
+                {% if object.video.status == object.video.ERROR %}
+                  Error uploading video file.
+                {% else %}
+                  This video is being processed.
+                {% endif %}
+              </p>  
+            </div>
+          {% endif %}
+        {% else %}
           {% thumbnail object.thumbnail '640x480' crop='center' as im %}
           <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
           {% endthumbnail %}

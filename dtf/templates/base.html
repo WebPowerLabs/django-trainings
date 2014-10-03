@@ -80,10 +80,9 @@
     {% endcomment %}
         
         <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
-
-        <!-- Video-js style -->
-        <link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+
+
         <!-- This file store project specific CSS -->
         <link href="{% static 'css/project.css' %}" rel="stylesheet">
     {% endblock %}
@@ -186,10 +185,6 @@
 
       <!-- Your stuff: Third-party javascript libraries go here -->
       <script src="{% static 'js/jquery-ui-1.10.4.min.js' %}"></script>
-      <script src="{% static 'js/video-js/video.js' %}"></script>
-      <script>
-          videojs.options.flash.swf = "{% static 'js/video-js/video-js.swf' %}"
-      </script>
       <!-- place project specific Javascript in this file -->
       <script src="{% static 'js/jquery.qs.js' %}"></script>
       <script src="{% static 'js/jquery.goTo.js' %}"></script>

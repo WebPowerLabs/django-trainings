@@ -1,5 +1,6 @@
 from elasticsearch import Elasticsearch
 from django.conf import settings
+from elasticsearch.exceptions import NotFoundError
 
 
 class EsClient(object):
@@ -31,8 +32,11 @@ class EsClient(object):
         """
         Delete a document from an index.
         """
-        return self.client.delete(index=self.search_index, doc_type=self.type,
-                                  id=self.obj.pk)
+        try:
+            return self.client.delete(index=self.search_index, id=self.obj.pk,
+                                      doc_type=self.type)
+        except NotFoundError:
+            pass
 
     def search(self, query):
         """
