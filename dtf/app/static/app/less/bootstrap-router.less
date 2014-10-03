@@ -1,5 +1,5 @@
 // Core variables and mixins
-@import "zak-variables.less";
+@import "variables.less";
 
 
 //
@@ -8,9 +8,11 @@
 // Modified bootstrap.less for selective imports
 //
 //
+// bootstrap is in /dtf/bower_components/bootstrap
+// @bootstrap-path:          "../../../../../bower_components/bootstrap/less/";
 
-@bootstrap-path:          "../../../../../bower_components/bootstrap/less/";
-
+// bootstrap is in /dtf/dtf/app/static/bower_components/bower_components/bootstrap
+@bootstrap-path:          "../../bower_components/bower_components/bootstrap/less/";
 
 @import "@{bootstrap-path}mixins.less";
 
@@ -69,7 +71,8 @@
 @import "type.less";
 
 // App router
-@import "apps.less";
+//@import "apps.less"; // for compiling
+@import "apps-dev.less";
 
 // Styles from Web Theme
 @import "project.less";

@@ -7,7 +7,37 @@ from django.db.models import permalink
 from django.db.models.signals import post_save, post_delete
 from django.dispatch.dispatcher import receiver
 from utils.search import EsClient
+import ntpath
+from lessons.tasks import process_video
 
+
+class Video(models.Model):
+    SCHEDULED = 0
+    CONVERTED = 1
+    CONVERTING = 2
+    ERROR = 3
+
+    STATUS_CHOICES = [
+              [CONVERTING, 'Converting'],
+              [ERROR, 'Error'],
+              [SCHEDULED, 'Scheduled'],
+              [CONVERTED, 'Converted']
+              ]
+    
+    status = models.IntegerField(choices=STATUS_CHOICES, default=SCHEDULED)
+    orig = models.FileField(upload_to='lessons/videos/orig/%Y/%m/%d',
+                            null=True, blank=True)
+    mp4 = models.FileField(upload_to='lessons/videos/mp4/%Y/%m/%d',
+                           null=True, blank=True)
+    webm = models.FileField(upload_to='lessons/videos/webm/%Y/%m/%d',
+                            null=True, blank=True)
+    
+    def __unicode__(self):
+        return self.filename
+    
+    @property
+    def filename(self):
+        return ntpath.basename(self.orig.file.name)
 
 class Lesson(Content):
     """ Lesson
@@ -16,8 +46,7 @@ class Lesson(Content):
     """
     objects = LessonManager()
 
-    video = models.FileField(upload_to='lessons/videos/%Y/%m/%d', blank=True,
-                            null=True)
+    video = models.OneToOneField('Video', blank=True, null=True)
     audio = models.FileField(upload_to='lessons/audio/%Y/%m/%d', blank=True,
                             null=True)
     homework = models.TextField(blank=True)
@@ -53,6 +82,19 @@ class Lesson(Content):
     @permalink
     def get_absolute_url(self):
         return 'lessons:detail', (), {'slug': self.slug}
+
+    def can_start(self, user):
+        '''
+        A user will need to mark previous lessons as completed in order to
+        begin new lessons
+        '''
+        current_lesson_order = Lesson.objects.completed(
+                                     user, course=self.course
+                                     ).aggregate(models.Max('_order')
+                                     )['_order__max']
+        if not current_lesson_order and current_lesson_order != 0:
+            current_lesson_order = -1
+        return self._order <= (current_lesson_order+1)
 
 
 class LessonHistory(History):
@@ -102,3 +144,8 @@ def index_es_doc(instance, **kwarg):
 @receiver(post_delete, sender=Lesson)
 def delete_es_doc(instance, **kwarg):
     EsClient(instance).delete()
+
+@receiver(post_save, sender=Video)
+def convert_video(instance, created, **kwarg):
+    if created:
+        process_video.delay(instance)

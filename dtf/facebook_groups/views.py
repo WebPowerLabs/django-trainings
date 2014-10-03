@@ -16,6 +16,7 @@ Comment = django_comments.get_model()
 
 from utils.comments import latest_comments
 
+
 from .models import FacebookGroup
 from .forms import FBGroupFeedForm, FBGroupCreateForm
 
@@ -66,10 +67,9 @@ def fb_group_detail(request, fb_uid):
     view of facebook group without the facebook feed. instead django_comments 
     are used in the template
     '''
-    fb_groups = FacebookGroup.objects.all()
-    if request.GET.get('purchased', None):
-        fb_groups = FacebookGroup.objects.purchased(request.user)
+    fb_groups = FacebookGroup.objects.purchased(request.user)
     fb_group = get_object_or_404(FacebookGroup, fb_uid=fb_uid)
+    members = fb_group.get_members()
     content_type_id = ContentType.objects.get_for_model(FacebookGroup)
     comments = Comment.objects.filter(content_type=content_type_id,
         object_pk=fb_group.pk, is_removed=False).order_by('-submit_date')
@@ -88,7 +88,8 @@ def fb_group_detail(request, fb_uid):
     context = {
         "facebook_groups": fb_groups,
         "facebook_group": fb_group,
-        "comments": comments
+        "comments": comments,
+        "members": members,
     }
     packages = Package.objects.filter(groups=fb_group)
     profile = InfusionsoftProfile.objects.get_or_create(user=request.user)[0]

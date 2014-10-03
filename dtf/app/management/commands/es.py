@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
     def info(self):
         """
-        Displays the doduments info of the index.
+        Displays the documents info of the index.
         """
         for k, v in EsClient().index_info()['docs'].items():
                 self.stdout.write('{}: {}'.format(k.replace('_', ' '), v))

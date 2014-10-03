@@ -1,11 +1,38 @@
 from django.db import models
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Max
 from django.core.urlresolvers import reverse
 from profiles.models import InstructorProfile
 from polymorphic.manager import PolymorphicManager
 
 
 class LessonManager(PolymorphicManager):
+
+    def completed(self, user, course=None):
+
+        lessons = self.purchased(user).filter(lessoncomplete__user=user, 
+                                              lessoncomplete__is_complete=True)
+        if course:
+            return lessons.filter(course=course)
+        return lessons
+
+    def get_current(self, user, course):
+        completed_order = self.completed(user, course=course
+                                         ).aggregate(
+                                         Max('_order'))['_order__max']
+        if not completed_order and completed_order != 0:
+            completed_order = -1
+        # list of lessons for course that have not been completed
+        not_completed = self.published().filter(
+                                 _order__gt=completed_order,
+                                 course=course,
+                                 )
+        # if there are uncompleted lessons
+        if len(not_completed):
+            return not_completed[0] # return the next lesson
+        # if there are no uncomplete lessons, the course is complete
+        else:
+            return self.published(user, course=course).order_by('-_order')[0]
+
     def published(self):
         return self.filter(published=True, course__published=True)
 

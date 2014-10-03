@@ -13,7 +13,10 @@ from dtf_comments.models import DTFComment
 from .managers import FBGroupManager, FBPostManager
 from django.db.models.signals import post_save, post_delete
 from django.dispatch.dispatcher import receiver
+from django.db.models import Q
 from utils.search import EsClient
+from django.contrib.auth import get_user_model
+
 
 
 class FacebookGroup(models.Model):
@@ -119,6 +122,15 @@ class FacebookGroup(models.Model):
     def unpin_comment(self):
         self.pinned_comment = None
         self.save()
+
+    def get_members(self):
+        User = get_user_model()
+        if self.package_set.count():
+            return User.objects.filter(is_active=True
+                     ).filter(Q(packagepurchase__package__groups=self,
+                                packagepurchase__status=1)).distinct()
+        else:
+            return User.objects.filter(is_active=True)
 
 
 class FacebookPost(models.Model):

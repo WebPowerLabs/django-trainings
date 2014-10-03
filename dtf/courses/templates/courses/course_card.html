@@ -1,7 +1,7 @@
 {% load query_string thumbnail %}
 <a class="course-item" href="{% url 'courses:detail' course.slug %}{% query_string request.GET %}">
   <div class="thumbnail">
-    {% thumbnail course.thumbnail '400x267' crop='center' as im %}
+    {% thumbnail course.thumbnail '720x480' crop='center' as im %}
       <img src="{{ im.url }}" class="course-img" alt="{{ course.name }}">
     {% endthumbnail %}
     <div class="caption text-center">

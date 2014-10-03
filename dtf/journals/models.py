@@ -4,6 +4,8 @@ from django.db import models
 from django_hstore import hstore
 from django.conf import settings
 
+from positions import PositionField
+
 from .managers import JournalQuestionManager
 
 
@@ -51,12 +53,16 @@ class JournalQuestion(models.Model):
     FIELD_TYPES = (
                    ('char', 'Single-line Text'),
                    ('text', 'Multi-line Text'),)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=255)
     type = models.CharField(choices=FIELD_TYPES, default='char', max_length=4)
     active = models.BooleanField(default=True)
-
+    position = PositionField()
 
     objects = JournalQuestionManager()
+
+    class Meta:
+        ordering = ('position',)
+        get_latest_by = 'position'
 
     @property
     def template_name(self):

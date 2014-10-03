@@ -1,0 +1,12 @@
+{% load query_string thumbnail %}
+<a class="course-item" href="{% url 'affiliates:partner_detail' partner.slug %}{% query_string request.GET %}">
+  <div class="thumbnail">
+    {% thumbnail partner.thumbnail '400x267' crop='center' as im %}
+      <img src="{{ im.url }}" class="course-img" alt="{{ partner.name }}">
+    {% endthumbnail %}
+    <div class="caption text-center">
+      <h3 class="caption-title">{{ partner.name }}</h3>
+      <p class="caption-text">{{ partner.description|truncatewords:20 }}</p>
+    </div><!--/ .caption-->
+  </div><!--/ .thumbnail-->
+</a><!--/ .course-item-->

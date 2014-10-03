@@ -1,4 +1,11 @@
 {% load staticfiles comments markdown avatar_tags user_thumbnail %}
+{% comment %}
+arguments when including this template:
+comment
+hide_comments=False
+show_from=False
+next=None
+{% endcomment %}
 <div id="c{{ comment.id }}"></div>
 <div class="comment-post">
 <div class="pull-right comment-actions">
@@ -22,7 +29,10 @@
       {% endif %}
     </a>
       <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.first_name }}</a>
-    <small class="date">{{ comment.submit_date|date }}</small>
+      {% if show_from %}
+      <small class="via">via <a href="{{ comment.get_content_object_url }}">{{ comment.content_object_name }}</a></small>
+      {% endif %}
+      <small class="date">{{ comment.submit_date|date }}</small>
   </h3>
   <div class="panel-body">
     <p>{{ comment.comment|markdown }}</p>
@@ -49,14 +59,14 @@
       {{ form.object_pk }}
         {{ form.timestamp }}
         {{ form.security_hash }}
-        <input type="hidden" name="next" value="{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}" />
+        <input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% if facebook_group %}{% url 'facebook_groups:detail' facebook_group.fb_uid %}{% else %}{% url 'facebook_groups:list' %}{% endif %}{% endif %}" />
         <div class="comment-form-control">
           <div class="comment-img">
-            <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
-              {% if comment.user.fb_uid %}
-              <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+            <a href="{% url 'users:detail' request.user.pk %}" title="View {{ request.user.first_name }}'s Profile">
+              {% if request.user.fb_uid %}
+              <img src="{{ request.user.get_fb_profile_img_url }}" class="fb-profile-img">
               {% else %}
-                {% avatar comment.user %}
+                {% avatar request.user %}
               {% endif %}
             </a>
           </div>

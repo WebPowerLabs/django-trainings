@@ -44,7 +44,7 @@
 </div>
 
 {% if request.user == object or request.user.is_staff %}
-<section class="">
+<section class="dashboard">
   <div class="container">
     <h2 class="page-header">
       My Dashboard
@@ -58,7 +58,9 @@
           <div class="feed">
             {% for comment in comments %}
             <div class="fb-post">
-              {% include "features/comment.html" with hide_comments=True %}
+              {% with comment.content_object as facebook_group %}
+              {% include "features/comment.html" with hide_comments=False show_from=True next=request.user.get_absolute_url %}
+              {% endwith %}
             </div>
             {% empty %}
             <div class="panel-body">
@@ -76,7 +78,19 @@
       <div class="col-md-5">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <a href="{% url 'journals:entries' %}" title="View My Journal" style="color:#fff;">My Journal</a>
+            My Private Profile
+          </div>
+          <div class="panel-body">
+              <form class="form form-horizontal" action="{% url 'profiles:update_user_private_profile' %}" method="POST">
+                {% csrf_token %}
+              {{ private_profile }}
+              <input type="submit" class="btn btn-primary" value="Save">
+              </form>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <a href="{% url 'journals:entries' %}" title="View My Journal" style="color:#fff;text-decoration:underline;">My Journal</a>
           </div>
           <div class="panel-body">
             {% if journal.can_submit %}
@@ -85,6 +99,7 @@
             {% for question in questions %}
               {% include "journals/journal_question.html" %}
               {% if forloop.last %}
+              <input type="hidden" name="next" id="id_next" value="{% url 'users:detail' request.user.id %}">
               <input class="btn btn-primary" type="submit" value="Submit">
               {% endif %}
             {% empty %}
@@ -93,9 +108,21 @@
             
             </form>
             {% else %}
+            <form class="form" action="{% url 'journals:entries_edit' entry.pk %}" method="POST">
+              {% csrf_token %}
             {% for question, response in entry.data.iteritems %}
-              <p><strong>{{ question }}:</strong> {{ response }}</p>
+            <div id="div_id_{{ question }}" class="form-group">
+              <label for="id_{{ question }}" class="control-label">{{ question }}</label>
+              <div class="controls">
+                <input class="textinput form-control" id="id_{{ question }}" maxlength="255" name="{{ question }}" type="text" value="{{ response }}"> 
+              </div>
+            </div>
+              {% if forloop.last %}
+              <input type="hidden" name="next" id="id_next" value="{% url 'users:detail' request.user.id %}">
+              <input class="btn btn-primary" type="submit" value="Save Changes">
+              {% endif %}
             {% endfor %}
+            </form>
             {% endif %}
           </div>
         </div>
@@ -115,7 +142,7 @@
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Favorite Courses
+            Favorite {{ trainings.course_name }}s
           </div>
           <div class="">
             <div class="list-group lessons">
@@ -133,7 +160,7 @@
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Favorite Lessons
+            Favorite {{ trainings.lesson_name }}s
           </div>
           <div class="">
             <div class="list-group lessons">
@@ -155,3 +182,36 @@
 </section>
 {% endif %}
 {% endblock content %}
+
+{% block modal %}
+<div class="bottom-menu visible-sm visible-xs">
+  <div class="bottom-menu-trigger text-center">
+    <a href="#" class="" id="bottom-menu-trigger">Download the free Decide To Fly &trade; mobile app</a>
+  </div>
+  <div class="bottom-menu-content" id="bottom-menu-content">
+    <p class="text-center">Simply tap the <i class=""></i> button below, and choose<br>
+      "Add to Home Screen"<br>
+      The mobile app will appear installed as an icon on your homescreen.<br>
+      <i class="fa fa-arrow-down"></i>
+    </p>
+  </div>
+</div>
+
+{% endblock modal %}
+
+{% block javascript %}
+{{ block.super }}
+<script>
+$(document).ready(function(){
+  $('#bottom-menu-trigger').on('click', function(e) {
+    e.preventDefault();
+    $('#bottom-menu-content').toggleClass('active');
+  });
+if (window.navigator.standalone) {
+    // The app is running in standalone mode.
+    $('#bottom-menu-trigger').addClass('hidden');
+}
+});
+</script>
+<script src="{% static 'comments/dtfComments.js' %}"></script>
+{% endblock javascript %}

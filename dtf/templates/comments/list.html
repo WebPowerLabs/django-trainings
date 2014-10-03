@@ -2,6 +2,7 @@
 
 <div class="fb-comments">
 {% for comment in comment_list %}
+<div id="c{{ comment.id }}" style="position:relative; bottom: 50px; visibility:hidden;"></div>
     <div id="comment-{{ comment.id }}" class="media fb-post">
         <div data-fbuser="{{ comment.user.id }}" class="pull-left img-profile">
             <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">

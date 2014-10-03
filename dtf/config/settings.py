@@ -29,7 +29,6 @@ PROJECT_NAME = os.environ.get('PROJECT_NAME', 'dtf')
 
 
 class Common(Configuration):
-
     ########## APP CONFIGURATION
     DJANGO_APPS = (
         # Default Django apps:
@@ -81,6 +80,8 @@ class Common(Configuration):
         'packages',
         'features',
         'journals',
+        'affiliates',
+        'etfars',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -201,6 +202,7 @@ class Common(Configuration):
         'django.contrib.messages.context_processors.messages',
         'django.core.context_processors.request',
         # Your stuff: custom template context processers go here
+        'courses.context_processors.trainings_names',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
@@ -258,10 +260,11 @@ class Common(Configuration):
     )
 
     # Some really nice defaults
-    ACCOUNT_AUTHENTICATION_METHOD = "username"
+    ACCOUNT_AUTHENTICATION_METHOD = "email"
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-    ACCOUNT_FORMS = {'signup': 'users.forms.UserSignupForm'}
+    ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.UserSignupForm'
+    SOCIALACCOUNT_AUTO_SIGNUP = False
     ########## END AUTHENTICATION CONFIGURATION
 
     ########## Custom user app defaults
@@ -275,7 +278,6 @@ class Common(Configuration):
     ########## END SLUGLIFIER
 
     ########## ELASTICSEARCH SETTINGS
-
     #BONSAI_URL = os.environ.get('BONSAI_URL', 'localhost')
     #ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
     #ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
@@ -289,7 +291,11 @@ class Common(Configuration):
     # Don't forget to create index in cluster.
     # Run: curl -XPUT 'url_to_elastic_search_cluster/index_name'
     ELASTICSEARCH_INDEX = 'dtf'
-
+    
+    ########## CELERY SETTINGS
+    BROKER_URL = 'redis://localhost'
+    CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+    ########## END CELERY SETTINGS
 
     ########## LOGGING CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -367,6 +373,13 @@ class Common(Configuration):
     ########## END AVATAR CONFIG
 
     SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
+
+    ########## START TRAININGS CONFIG
+    COURSE_NAME = "Program"
+    LESSON_NAME = "Session"
+    RESOURCE_NAME = "Resource"
+    HOMEWORK_NAME = "Ownwork"
+    ########## END TRAININGS CONFIG
 
 class Local(Common):
 

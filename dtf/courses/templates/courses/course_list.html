@@ -4,7 +4,7 @@
 {% block nav_actions %}
 {{ block.super }}
 {% if user.is_staff or user.is_instructor %}
-<li><a class="" href="#" data-toggle="modal" data-target="#addCourse">Add a Course</a></li>
+<li><a class="" href="#" data-toggle="modal" data-target="#addCourse">Add a {{ trainings.course_name }}</a></li>
 {% endif %}
 {% endblock nav_actions %}
 
@@ -13,7 +13,7 @@
   <div class="container">
     <div class="row">
       <div class="section-header col-xs-12 text-center">
-        <h1 class="section-title">{% if request.GET.purchased %}My {% endif %}Coaching Courses</h1>
+        <h1 class="section-title">{% if request.GET.purchased %}My {% endif %}{{ trainings.course_name }}s</h1>
         <!--h3 class="section-subtitle"></h3-->
         <hr>
       </div><!--/ .section-header-->
@@ -37,7 +37,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="addCourseLabel">Add a Course</h4>
+                        <h4 class="modal-title" id="addCourseLabel">Add a {{ trainings.course_name }}</h4>
                     </div><!--/ .modal-header-->
                     <div class="modal-body clearfix">
                         <div class="col-md-12">

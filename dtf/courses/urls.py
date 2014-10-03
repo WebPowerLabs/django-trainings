@@ -5,6 +5,7 @@ except ImportError:  # django < 1.4
 
 from courses import views
 
+
 urlpatterns = patterns('',
     url('^delete_history/(?P<pk>[-\w]+)/$',
                                     views.CourseHistoryDeleteView.as_view(),
