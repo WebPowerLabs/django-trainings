@@ -8,8 +8,7 @@ from .models import Etfar
 from .forms import EtfarForm
 
 
-@login_required
-def etfar_tool(request):
+def etfar_tool_form_prep():
     form = EtfarForm()
     # remove submit button
     form.helper.layout.pop(5)
@@ -21,11 +20,17 @@ def etfar_tool(request):
                                                form_clone.helper.form_class)
     form_clone.helper.form_id = "etfar_tool_clone"
     # remove the event field for new clones
-    etfars = Etfar.objects.filter(owner=request.user, active=True)
     del form_clone.fields["event"]
+    return form, form_clone
+
+
+@login_required
+def etfar_tool(request):
+    form, form_clone = etfar_tool_form_prep()
+    etfars = Etfar.objects.filter(owner=request.user, active=True)
     context = {
-        'form': form,
-        'form_clone': form_clone,
+        'etfar_form': form,
+        'etfar_form_clone': form_clone,
         'etfars': etfars,
     }
     if request.method == 'POST':

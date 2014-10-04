@@ -49,6 +49,16 @@
     <h2 class="page-header">
       My Dashboard
     </h2>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Navigation Tool
+      </div>
+      <div class="panel-body">
+        {% include 'etfars/tool_isolate.html' %}
+      </div>
+    </div>
+
+
     <div class="row">
       <div class="col-md-7">
         <div class="panel panel-primary">
@@ -214,4 +224,13 @@ if (window.navigator.standalone) {
 });
 </script>
 <script src="{% static 'comments/dtfComments.js' %}"></script>
+<script src="{% static 'etfars/etfarTool.js' %}"></script>
 {% endblock javascript %}
+
+{% block css %}
+{{ block.super }}
+<style>
+.etfar-form .help-block {display: none;}
+</style>
+{% endblock css %}
+

@@ -12,7 +12,6 @@ from django.views.generic import ListView
 # Only authenticated users can access views using this.
 from braces.views import LoginRequiredMixin
 
-
 # Import the form from users/forms.py
 from .forms import UserForm
 
@@ -20,6 +19,7 @@ from .forms import UserForm
 from .models import User
 from django.views.generic.base import TemplateView
 from allauth.account.views import LoginView
+
 
 
 def paginate_request(request, feed, user):
@@ -58,6 +58,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             from facebook_groups.models import FacebookGroup
             from journals.models import Journal, JournalQuestion, JournalEntry
             from profiles.forms import UserPrivateProfileForm
+            from etfars.views import etfar_tool_form_prep
 
             # comment feed
             all_comments = latest_comments(self.request)  # get latest comments
@@ -73,6 +74,9 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             # place private profile into form
             private_form = UserPrivateProfileForm(instance=private_profile)
 
+            # get the etfar forms
+            etfar_form, etfar_form_clone = etfar_tool_form_prep()
+
             # pass to context
             context['courses'] = CourseFavourite.objects.active(user)
             context['lessons'] = LessonFavourite.objects.active(user)
@@ -82,6 +86,8 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             context['private_profile'] = private_form   
             context['questions'] = JournalQuestion.objects.purchased(user)
             context['entry'] = entry
+            context['etfar_form'] = etfar_form
+            context['etfar_form_clone'] = etfar_form_clone
         
         return context
 
