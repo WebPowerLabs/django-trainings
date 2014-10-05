@@ -1,54 +1,82 @@
 {% extends "pages/base.html" %}
 {% load staticfiles i18n crispy_forms_tags %}
 
-{% block title %}Decide to Fly&trade;{% endblock title %}
-
-{% block scriptina %}
-<!----Scriptina Webfont---->
-<link rel="stylesheet" href="{% static 'fonts/scriptina-webfont.css' %}" type="text/css" charset="utf-8" />
-{% endblock scriptina %}
-
-{% block marina %}
-<!----Marina Webfont---->
-<link rel="stylesheet" href="{% static 'fonts/marina-webfont.css' %}" type="text/css" charset="utf-8" />
-{% endblock marina %}
+{% block title %}Flute Lessons{% endblock title %}
 
 {% block footer %}
 {% endblock footer %}
 
+{% block header %}
+<!-- ----------- NAV MENUS ----------- -->
+  <header>
+    <nav class="navbar nav-member navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-bars"></i>
+          </button><!--/ .navbar-toggle-->
+        </div><!--/ .navbar-header-->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+              {% block nav_user %}
+                {% include "menus/nav_user.html" %}
+              {% endblock nav_user %}
+          </ul><!--/ .nav-->
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav><!--/ .navbar-->
+    <nav class="navbar nav-marketing home navbar-static-top" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle hidden" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-bars"></i>
+          </button><!--/ .navbar-toggle-->
+          <a href="{% url 'home' %}"><img class="nav-logo" src="{% static 'images/logo-placeholder.png' %}"></a>
+        </div><!--/ .navbar-header-->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+          <ul class="nav navbar-nav navbar-right">
+              {% block nav %}
+                {% include "menus/nav_marketing.html" %}
+              {% endblock nav %}
+          </ul><!--/ .nav-->
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav><!--/ .navbar-->
+  </header>
+<!-- -----------/ NAV MENUS ----------- -->
+{% endblock header %}
+
 {% block content %}
-<div id="wrapper">
-
-  <!-- - - - - - - - WELCOME HOME BLOCK - - - - - - - -->
-  <section class="welcome-home">
-    <section class="section parallax">
+  <!-- ----------- WELCOME BLOCK ----------- -->
+  <section class="welcome">
+    <section class="parallax">
       <div class="full-bg-image"></div>
-      <div class="col-sm-5 col-sm-offset-1">
-        <div class="content text-center">
-          <div class="video-wrapper">
-
-
-<iframe src="//fast.wistia.net/embed/iframe/mqf3iy8pjj" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
-          </div><!--/ .video-wrapper-->
-          <button class="nurture-button btn btn-danger btn-lg" data-toggle="modal" data-target="#connectedModal">Stay Connected</button>
-        </div><!--/ .content-->
-      </div><!--/ .col-sm-5-->
-      <img class="swoosh" src="{% static 'images/swoosh.png' %}" />
+      <div class="container">
+      <div class="col-xs-12 text-center">
+        <h1 class="title">Flute Lessons App</h1>
+      </div><!--/ .col-md-8-->
+      </div>
     </section><!--/ .section-->
   </section>
-  <!-- - - - - - - -/ WELCOME HOME BLOCK - - - - - - - -->
+  <!-- -----------/ WELCOME BLOCK ----------- -->
 
-  <!-- - - - - - - - D2F COMMUNITY INTRO BLOCK - - - - - - - -->
+  <!-- ----------- BLOCK ----------- -->
   <section class="community section">
     <div class="container">
-          <div class="row">
-              <div class="section-header col-xs-12 text-center">
-                <h3 class="section-subtitle">The community to:</h3>
-                  <h1 class="section-title">Connect, Collaborate & Create</h1>
-                  <h3 class="section-subtitle">the life you REALLY want to live!</h3>
-                  <hr>
-              </div><!--/ .section-header-->
-          </div><!--/ .row-->
+      <div class="row">
+          <div class="section-header col-xs-12 text-center">
+            <h3 class="section-subtitle">The community to:</h3>
+              <h1 class="section-title">Connect, Collaborate & Create</h1>
+              <h3 class="section-subtitle">the life you REALLY want to live!</h3>
+              <hr>
+          </div><!--/ .section-header-->
+      </div><!--/ .row-->
     </div><!--/ .container-->
     <div class="row community-items">
         <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
@@ -101,93 +129,28 @@
         </div><!--/ .col-md-4-->
       </div><!--/ .row-->
   </section>
-  <!-- - - - - - - -/ D2F COMMUNITY INTRO BLOCK - - - - - - - -->
-
-  <!-- - - - - - - - MEET THE FOUNDER BLOCK - - - - - - - -->
-  <section class="meet-founder">
-    <section class="section parallax padding-off">
-      <div class="full-bg-image"></div>
-      <div class="container"> 
-        <div class="video-full-entry">
-          <div class="row">
-            <div class="col-sm-7">
-              <h1 class="quote" style="color:#336633;">"I believe in you.<br> If I can do it, then you can too!"</h1>
-              <h1 class="source">Jami Amidon</h1>
-            </div><!--/ .col-md-6-->
-          </div><!--/ .row-->
-        </div><!--/ .video-full-entry-->
-        <a href="{% url 'meet-the-founder' %}" class="btn btn-danger">Meet the Founder</button></a>
-      </div><!--/ .container-->
-    </section><!--/ .section-->
-  </section>
-  <!-- - - - - - - -/ MEET THE FOUNDER BLOCK - - - - - - - -->
+  <!-- -----------/ BLOCK ----------- -->
   
   {% include "includes/footer-contact.html" %}
 
-</div><!--/ #wrapper-->
-<!-- - - - - - - - - - - - - end Wrapper - - - - - - - - - - - - - - - -->
 {% endblock content %}
 
-{% block loader %}
-<div class="loader"></div><!-- - - - - - - - - Loader - - - - - - - - - -->
-{% endblock loader %}
-
-{% block modal %}
-
-
-<!-- Modal -->
-<div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="connectedModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="connectedModalLabel">Thank You!</h4>
-      </div>
-      <div class="modal-body">
-        <p>We are so close to launch. You are going to be the first to see all of the changes we have made to the Decide To Fly &trade; Community. We'll stay in touch.</p>
-
-          <!--TODO: infusionsoft form here -->
-<form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/e74a54ec36026bde848d6930d06fb1b6" class="infusion-form form" id="connect-form" method="POST">
-    <input name="inf_form_xid" type="hidden" value="e74a54ec36026bde848d6930d06fb1b6" />
-    <input name="inf_form_name" type="hidden" value="Opt-in to&#a;&quot;Stay Connected&quot;" />
-    <input name="infusionsoft_version" type="hidden" value="1.32.0.68" />
-
-   <div class="infusion-field form-group">
-        <label class="control-label" for="inf_field_FirstName">First Name</label>
-        <input class="infusion-field-input-container form-control" id="inf_field_FirstName" name="inf_field_FirstName" type="text" />
-    </div>
-    <div class="infusion-field form-group">
-        <label class="control-label" for="inf_field_Email">Email</label>
-        <input class="infusion-field-input-container form-control" id="inf_field_Email" name="inf_field_Email" type="text" />
-    </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <!--TODO: submit to infusionsoft -->
-        <button type="button" class="btn btn-success" id="connect-submit">Connect &nbsp; <i class="fa fa-check"></i></button>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock modal %}
-
 {% block javascript %}
-{{ block.super }}
-{% include "includes/js_marketing.html" %}
-<script type="text/javascript">
-
-$('#contact-form #submit').click(function(e) {
-  e.preventDefault();
-  $('#contact-form').submit();
-});
-
-$('#connect-submit').click(function(e) {
-  e.preventDefault();
-  $('#connect-form').submit();
-});
-</script>
+  {{ block.super }}
+  {% include "includes/js_marketing.html" %}
+  <script type="text/javascript">
+    $('#contact-form #submit').click(function(e) {
+      e.preventDefault();
+      $('#contact-form').submit();
+    });
+    $('#connect-submit').click(function(e) {
+      e.preventDefault();
+      $('#connect-form').submit();
+    });
+  </script>
 {% endblock javascript %}
+
 {% block css %}
-{{ block.super }}
-{% include "includes/css_marketing.html" %}
+  {{ block.super }}
+  {% include "includes/css_marketing.html" %}
 {% endblock css %}

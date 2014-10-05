@@ -12,14 +12,10 @@
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    {% block scriptina %}
-    {% endblock scriptina %}
-    {% block marina %}
-    {% endblock marina %}
-
     <!-- Web Fonts
     ================================================== -->
-    <link href='//fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,700|Julius+Sans+One|Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700,600,800' rel='stylesheet' type='text/css'>
 
     <!-- Font Awesome Icons
     ================================================== -->
@@ -98,11 +94,9 @@
   </head>
 
   <body class="{% block bodyclass %}app{% endblock bodyclass %} {% block page-class %}home{% endblock page-class %} animated" data-spy="scroll" data-target="#navigation">
-    {% block loader %}
-    {% endblock loader %}
     {% block header %}
       <header id="app-header">
-        <nav class="navbar navbar-default navbar-fixed-top primary-nav" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top nav-user" role="navigation">
           {% block messages %}
             {% include "includes/messages.html" %}
           {% endblock messages %}
@@ -113,7 +107,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <i class="fa fa-bars"></i>
               </button>
-              <a href="{% url 'home' %}"><img class="nav-logo" src="{% static 'images/decide-to-fly-logo.png' %}"></a>
+              <a href="{% url 'home' %}"><img class="nav-logo" src="{% static 'images/logo-placeholder-dark.png' %}"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="nav-main">
@@ -140,10 +134,8 @@
     {% endblock header %}
 
     {% block sub_header %}
-      <nav class="navbar navbar-default secondary-nav" role="navigation">
+      <nav class="navbar navbar-default nav-secondary" role="navigation">
           <div class="container-fluid">
-
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="" id="nav-secondary">
               <ul class="nav navbar-nav">
@@ -151,7 +143,6 @@
                   {% include "menus/nav_secondary.html" %}
                 {% endblock nav_secondary %}
               </ul>
-
               <ul class="nav navbar-nav navbar-right">
                 {% block nav_actions %}
                   {% include "menus/nav_actions.html" %}
@@ -162,7 +153,8 @@
         </nav>
     {% endblock sub_header %}
 
-    {% block content %}{% endblock content %}
+    {% block content %}
+    {% endblock content %}
 
     {% block footer %}
       {% if user.is_authenticated %}
@@ -172,7 +164,8 @@
       {% endif %}
     {% endblock footer %}
 
-    {% block modal %}{% endblock modal %}
+    {% block modal %}
+    {% endblock modal %}
 
     <!-- Le javascript
     ================================================== -->

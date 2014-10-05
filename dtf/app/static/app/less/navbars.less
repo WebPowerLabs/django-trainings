@@ -1,16 +1,20 @@
-//----------------------------------------------//
-//-------------- NAVBARS ---------------//
-//----------------------------------------------//
+//------------------------------------------//
+//---------------- NAV MENUS ---------------//
+//------------------------------------------//
 
+// Universal Nav Menu Styles
+// ---------------------------------------
 .navbar {
 	margin-bottom: 0;
+	a {
+		font-family: "Montserrat", Helvetica, sans-serif;
+		letter-spacing: 1px;
+	}
 	.navbar-toggle {
 		padding-top: 3px;
 		padding-bottom: 3px;
 	}
-	.profile {
-		padding: 5px 15px;
-	}
+	.profile { padding: 5px 15px; }
 	.img-thumbnail {
 		max-height: 40px;
 		max-width: 40px;
@@ -18,8 +22,7 @@
 		border-radius: 20px;
 		padding: 0;
 	}
-
-	// Alerts //
+	// Alerts
 	.alert {
 		border-radius: 0;
 		margin-bottom: 0;
@@ -29,13 +32,12 @@
 		margin-bottom: 7px;
 	}
 }
+.navbar-nav > li > .dropdown-menu { border: none; }
 
-//----------------------------------------------//
-//-------------- WEB APP NAVBARS ---------------//
-//----------------------------------------------//
-
-.primary-nav,
-.secondary-nav {
+// App Nav Menus
+// ---------------------------------------
+.nav-user,
+.nav-secondary {
 	border: none;
 	border-radius: 0;
 	.navbar-nav > li > a {
@@ -44,39 +46,53 @@
 		text-transform: uppercase;
 	}
 }
-// Primary App Navigation
-// ---------------------------------------
-.primary-nav {
-	background-color: @gray-dark;
-	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+//----- User Navigation
+.nav-user {
+	background-color: @gray-lighter;
+	// Box Shadow
 	box-shadow: 0 0 10px fadeout(#000, 40%);
+	-moz-box-shadow: 0 0 10px fadeout(#000, 40%);
+	-o-box-shadow: 0 0 10px fadeout(#000, 40%);
+	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
 	.nav-logo {
-		padding: 5px 10px 0;
-		max-height: 45px;
+		padding: 9px 20px 0;
+		max-height: 40px;
 	}
 	.navbar-nav > li > a {
-		color: @gray-lightest;
+		color: @gray-dark;
+		font-size: 14px;
+		font-weight: 600;
 		&:hover {
-			color: @gray-dark;
-			background-color: @gray-lightest;
+			background-color: transparent;
+			color: @brand-primary;
+		}
+	}
+	.navbar-form {
+		&.navbar-right:last-child { margin-right: -10px; }
+		.form-control {
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+			-webkit-box-shadow: none;
+			margin-right: -4px;
+		}
+		.btn-default {
+			border: 1px solid #fff;
+			border-radius: 0;
+			&:hover { background-color: #fff; }
 		}
 	}
 }
-// Staff Navigation
-// ---------------------------------------
-.secondary-nav {
-	background-color: @gray-lightest;
+//----- Staff Navigation
+.nav-secondary {
+	background-color: @gray-lighter;
 	border-bottom: 1px solid @table-border-color;
-
 	// bootstrap removes this for mobile view
 	.navbar-nav {
     // prevent from collapsing on mobile
     float: left;
     margin: 0;
-    &.navbar-right {
-    	float: right;
-    }
-
+    &.navbar-right { float: right; }
     > li {
       float: left;
       > a {
@@ -84,86 +100,90 @@
         padding-top:    @navbar-padding-vertical;
         padding-bottom: @navbar-padding-vertical;
         cursor: pointer;
-		&:hover {
-			background-color: @table-border-color;
-		}
+				&:hover { background-color: @table-border-color;}
       }
     }
-    &:first-child {
-      margin-left: -@navbar-padding-horizontal;
-    }
-    &.navbar-right:last-child {
-      margin-right: -@navbar-padding-horizontal;
-    }
+    &:first-child { margin-left: -@navbar-padding-horizontal; }
+    &.navbar-right:last-child { margin-right: -@navbar-padding-horizontal; }
   }
 }
 
-//----------------------------------------------//
-//----------- MARKETING SITE NAVBARS -----------//
-//----------------------------------------------//
-
-.navbar-member,
-.navbar-marketing {
-	border: none;
-	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
-	box-shadow: 0 0 10px fadeout(#000, 40%);
-	.navbar-right { padding-right: 20px; }
-	.navbar-nav > li > a {
-		text-transform: uppercase;
-	}
-}
-// Member Navigation
+// Marketing Site Nav Menus
 // ---------------------------------------
-.navbar-member {
-	background-color: @gray-dark;
+.nav-member,
+.nav-marketing {
+	border: none;
+	// Box Shadow
+	box-shadow: 0 0 10px fadeout(#000, 40%);
+	-moz-box-shadow: 0 0 10px fadeout(#000, 40%);
+	-o-box-shadow: 0 0 10px fadeout(#000, 40%);
+	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+	.navbar-right { padding-right: 20px; }
+	.navbar-nav a { text-transform: uppercase; }
+}
+//----- Member Navigation
+.nav-member {
+	background-color: @gray-lighter;
 	.navbar-nav > li > a {
-		color: @gray-lightest;
+		color: @gray-dark;
 		font-size: 14px;
 		font-weight: 600;
 		&:hover {
-			color: @gray-dark;
-			background-color: @gray-lightest;
+			background-color: transparent;
+			color: @brand-primary;
 		}
 	}
 }
-// Marketing Navigation
-// ---------------------------------------
-.navbar-marketing {
-	background-color: @brand-dtf;
-	.nav-logo { padding: 10px 0 0 20px;}
+//----- Marketing Navigation
+.nav-marketing {
+	background-color: @gray-dark;
+	.nav-logo { 
+		max-height: 56px;
+		padding: 24px 0 0 20px;
+	}
 	.navbar-nav > li > a {
-		color: #fff;
-		line-height: 59px;
+		color: @gray-light2;
 		font-weight: 400;
-		.caret { color: #fff; }
+		line-height: 50px;
+		.caret { color: @gray-light2; }
 		&:hover,
 		&:focus {
-			color: @brand-dtf;
-			background-color: #fff;
-			.caret { color: @brand-dtf; }
+			color: #fff;
+			background-color: transparent;
+			.caret { color: #fff; }
 		}
 	}
 	.dropdown-menu {
-		background-color: fadeout(@gray-dark, 20%);
+		background-color: @gray-dark;
 		> li > a {
 			padding: 3px 30px;
-			color: #fff;
+			color: @gray-light2;
 			line-height: 30px;
 			text-transform: uppercase;
 			&:hover {
-				color: @gray-dark;
-				background-color: #fff;
+				color: #fff;
+				background-color: transparent;
 			}
 		}
 	}
+	.nav .open {
+		> a,
+		> a:hover,
+		> a:focus { background-color: transparent; }
+	}
 	.open {
-		> a, 
-		> a:hover, 
-		> a:focus {
-			color: @brand-dtf;
-			background-color: #fff;
-			border: none;
-			.caret { color: @brand-dtf; }
+		> li > a, 
+		> li > a:hover, 
+		> li > a:focus {
+			color: #fff;
+			background-color: transparent;
+			.caret { color: @brand-primary; }
 		}
+	}
+	// Homepage Marketing Nav
+	&.home {
+		background-color: fadeout(@gray-darker, 30%);
+		margin-bottom: -80px;
+		.dropdown-menu { background-color: fadeout(@gray-darker, 30%); }
 	}
 }

@@ -32,12 +32,12 @@ ul.pager {
 		a {
 			font-weight: 400;
 			color: #fff;
-			background-color: @brand-dtf;
-			border-color: @brand-dtf;
+			background-color: @brand-primary;
+			border-color: @brand-primary;
 			i { color: #fff; }
 			&:hover {
-				background-color: darken(@brand-dtf, 8%);
-				border-color: darken(@brand-dtf, 8%);
+				background-color: darken(@brand-primary, 8%);
+				border-color: darken(@brand-primary, 8%);
 			}
 		}
 		&.disabled a, {
@@ -46,21 +46,6 @@ ul.pager {
 			border-color: @gray-lighter;
 			i { color: @gray-light; }
 		}
-	}
-}
-
-// ------ Buttons ------ //
-.btn { font-weight: 300;}
-.btn-success:hover { background-color: @brand-dtf-dark; }
-.btn-danger:hover { background-color: @brand-danger-dark; }
-.btn-default {
-	color:  @brand-dtf;
-	border: 2px solid  @brand-dtf;
-	background: transparent;
-	&:hover {
-		color: @brand-gray;
-		border: 2px solid @brand-gray;
-		background: transparent;
 	}
 }
 
@@ -102,8 +87,8 @@ ul.pager {
 // ------ Free Product CTA Block ------ //
 .free-product-cta {
 	a {
-		color: @brand-dtf;
-		&:hover { color: @brand-gray; }
+		color: @brand-primary;
+		&:hover { color: @gray; }
 	}
 	.main-entry {
 		padding-bottom: 0;
@@ -132,44 +117,6 @@ ul.pager {
 //-------------- Homepage --------------//
 //--------------------------------------//
 
-// ------Welcome Block ------ //
-.welcome-home {
-	.section {
-		padding-top: 40px;
-		padding-bottom: 0;
-	}
-	.full-bg-image {
-		background-image: url(../../images/decide-to-fly-home-banner.jpg);
-		//background-image: url(../../../images/decide-to-fly-home-banner.jpg);
-	}
-	.content { margin-bottom: 60px; }
-	.video-wrapper {
-		position: relative;
-		padding-bottom: 56.25%; /* 16:9 */
-		padding-top: 25px;
-		margin-bottom: 20px;
-		height: 0;
-		iframe {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
-		}
-	}
-	.nurture-button {
-		font-size: 24px;
-		padding: 15px 60px;
-	}
-}
-@media (min-width: @screen-sm-min) {
-	.welcome-home {
-		.section { padding-top: 100px; }
-	}
-}
-
-
 // ------ D2F Community Intro Block ------ //
 .community {
 	padding-bottom: 40px;
@@ -194,13 +141,13 @@ ul.pager {
 		width: 70px;
 		height: 70px;
 		background: transparent;
-		border: 2px solid @brand-gray;
+		border: 2px solid @gray;
 		border-radius: 100px;
 		padding: 20px 0;
 		position: relative;
 		i {
 			font-size: 30px;
-			color: @brand-gray;	
+			color: @gray;	
 		}
 	}
 	.entry {
@@ -217,14 +164,14 @@ ul.pager {
 		-moz-transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		transition: color 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 		&:hover {
-			background:  @brand-dtf;
+			background:  @brand-primary;
 			color: #fff;
 			.entry-title,
 			.entry-body { color: #fff; }
 			.top {
-				border: 2px solid  @brand-dtf;
+				border: 2px solid  @brand-primary;
 				background: #fff;
-				i { color: @brand-dtf; }
+				i { color: @brand-primary; }
 				&:after {
 					border: 2px solid white;
 					-webkit-transform: scale(1.2);
@@ -261,9 +208,9 @@ ul.pager {
 			height: 31px;
 			padding-top: 6px;
 			font-size: 20px;
-			color: @brand-gray;
+			color: @gray;
 			background: transparent;
-			border: 1px solid @brand-gray;
+			border: 1px solid @gray;
 			border-radius: 100px;
 		}
 	}
@@ -346,7 +293,7 @@ ul.pager {
 				border: 1px solid #e0e0e0;
 				background-color: #fff;
 			}
-			.team-title { color: @brand-gray; }
+			.team-title { color: @gray; }
 			.team-position { color: #aeaeae; }
 		}
 	}
@@ -399,7 +346,7 @@ ul.pager {
 			&:hover {
 				.team-group {
 					border-color: transparent;
-					background-color:  @brand-dtf;
+					background-color:  @brand-primary;
 				}
 				.team-title,
 				.team-position { color: #fff; }
@@ -419,6 +366,7 @@ ul.pager {
 		margin-top: 80px;
 		line-height: 36px;
 	}
+	li { list-style: none; }
 	.about-left li,
 	.about-right li  {
 		line-height: 1.4em;
@@ -572,8 +520,8 @@ ul.pager {
 		&:hover {
 
 			.top {
-				border: 2px solid  @brand-dtf;
-				background: @brand-dtf;
+				border: 2px solid  @brand-primary;
+				background: @brand-primary;
 
 				&:after {
 					border: 2px solid white;
@@ -606,9 +554,9 @@ ul.pager {
 			height: 31px;
 			padding-top: 6px;
 			font-size: 20px;
-			color: @brand-gray;
+			color: @gray;
 			background: transparent;
-			border: 1px solid @brand-gray;
+			border: 1px solid @gray;
 			border-radius: 100px;
 		}
 	}
@@ -653,7 +601,7 @@ ul.pager {
 	.tumblr-reader-title {
 		margin-bottom: 15px;
 		font-size: 32px;
-		color: @brand-gray;
+		color: @gray;
 		line-height: 38px;
 	}
 	.tumblr-reader-post-regular {
@@ -691,7 +639,7 @@ ul.pager {
 .user-welcome-wrapper {
 	padding: 80px 0;
 	.user-detail-box {
-		background-color: @brand-gray-bg;
+		background-color: @gray-lighter;
 		padding: 40px 30px 50px;
 		border-radius: 7px;
 		.img-thumbnail {
@@ -719,7 +667,7 @@ ul.pager {
 .acct-email-wrapper {
 	padding: 80px 0;
 	.buttonHolder { padding: 5px 0 20px; }
-	.verified { color: @brand-dtf; }
+	.verified { color: @brand-primary; }
 	.unverified { color: @brand-danger; }
 	.separator { padding: 0 5px; }
 }
@@ -741,7 +689,7 @@ ul.pager {
 	}
 	.media { margin-top: 0; }
 	.nufiles-list {
-		background-color: @brand-gray-bg;
+		background-color: @gray-lighter;
 		padding: 40px 3%;
 		border-radius: 7px;
 		margin-bottom: 40px;

@@ -1,56 +1,34 @@
 {% load staticfiles i18n crispy_forms_tags %}
 
-	<!-- - - - - - - - CONTACT FOOTER TITLE BLOCK - - - - - - - -->
-	<section class="contact-title section">
+<!-- ----------- CONTACT FOOTER ----------- -->
+<footer class="contact-footer">
+	<img class="img-responsive" src="{% static 'images/flute-footer.png' %}"/>
+	<section class="contact-form section">
 		<div class="container">
-	        <div class="row">
-	            <div class="section-header col-xs-12 text-center">
-	                <h1 class="section-title">Contact Us</h1>
-	                <h3 class="section-subtitle">We look forward to hearing from you!</h3>
-	            </div><!--/ .section-header-->
-	        </div><!--/ .row-->
+			<div class="row">
+				<div class="col-md-6 ">
+					{% crispy contact_form %}
+				</div><!--/ .col-md-6-->
+				<div class="contact-widget col-md-6">
+					<h2 class="company-title">Flute Lessons</h2>
+          <p>1234 E. Awesome St.<br>
+            Super City, AZ 85719</p>
+          <p><br><a href="#">(555) 555-5555</a></p>
+          <p><a href="#">info@awesome.com</a></p>
+				</div><!--/ .contact-widget-->
+			</div><!--/ .row-->
 		</div><!--/ .container-->
-	</section>
-	<!-- - - - - - - -/ CONTACT FOOTER TITLE BLOCK - - - - - - - -->
-
-	<!-- - - - - - - - CONTACT FOOTER BLOCK - - - - - - - -->
-	<footer class="contact-footer">
-		<section class="contact-form section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 ">
-						{% crispy contact_form %}
-					</div><!--/ .col-md-6-->
-					<div class="contact-widget col-md-6">
-						<img class="footer-logo" src="{% static 'images/decide-to-fly-logo2.png' %}"/>
-			            <p>12400-3 Wake Union Church Rd.</br>
-			               PMB #39</br>
-			               Wake Forest, NC 27587</p>
-			            <p><a href="tel:5203690500">(520) 369-0500</a></p>
-			            <p><a href="mailto:info@decidetofly.com">info@decidetofly.com</a></p>
-						<!--<div class="widget widget_social">
-							<ul class="social-icons">
-								<li class="twitter"><a href="https://twitter.com/DecideToFly"><i class="icon-twitter"></i>Twitter</a></li>
-								<li class="facebook"><a href="http://facebook.com/decidetofly"><i class="icon-facebook"></i>Facebook</a></li>
-								<li class="pinterest"><a href="http://www.pinterest.com/decidetofly"><i class="icon-pinterest-circled"></i>Pinterest</a></li>
-								<li class="rss"><a href="#"><i class="icon-rss"></i>Rss</a></li>
-								<li class="youtube"><a href="http://www.youtube.com/DecidetoFly"><i class="icon-youtube"></i>Youtube</a></li>
-								<li class="instagram"><a href="#"><i class="icon-instagramm"></i>Instagram</a></li>
-							</ul><!--/ .social-icons
-						</div><!--/ .widget_social-->
-					</div><!--/ .contact-widget-->
-				</div><!--/ .row-->
-			</div><!--/ .container-->
-		</section><!--/ .contact-form-->
-	    <div class="bottom-footer clearfix">
-	      <div class="container">
-	        <div class="row">
-	          <div class="col-xs-12 text-center">
-	            <div class="copyright">
-	            	Copyright &copy; 2014 <a href="{% url 'home' %}">Decide to Fly&trade;</a>. All rights reserved. See our <a href="{% url 'terms-of-service' %}">Terms of Service</a>.
-	            </div><!--/ .copyright-->
-	          </div><!--/ .col-xs-12-->
-	        </div><!--/ .row-->
-	      </div><!--/ .container-->
-	    </div><!--/ .bottom-footer-->
-	</footer><!-- - - - - - - -/ CONTACT FOOTER BLOCK - - - - - - - -->
+	</section><!--/ .contact-form-->
+    <div class="bottom-footer clearfix">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <div class="copyright">
+            	Copyright &copy; 2014 <a href="{% url 'home' %}">Flute Lessons</a>. All rights reserved.
+            </div><!--/ .copyright-->
+          </div><!--/ .col-xs-12-->
+        </div><!--/ .row-->
+      </div><!--/ .container-->
+    </div><!--/ .bottom-footer-->
+</footer>
+<!-- -----------/ CONTACT FOOTER ----------- -->
