@@ -1,0 +1,68 @@
+//----------------------------------//
+//--------- CUSTOM THEME -----------//
+//----------------------------------//
+
+body { padding-top: @navbar-height; }
+
+/*	Typography
+/* ----------------------------------- */
+.text-white { color: #fff; }
+.company-title { margin-top: 0; }
+// Text Selection
+::selection {
+	background-color: @brand-primary;
+	color: #fff;
+	text-shadow: none;
+}
+::-moz-selection {
+	background-color: @brand-primary;
+	color: #fff;
+	text-shadow: none;
+}
+
+/*	Media
+/* ----------------------------------- */
+// Responsive Video
+.video-wrapper {
+	height: 0;
+	margin-bottom: 20px;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	position: relative;
+	iframe {
+		box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+}
+
+//-------------------------------------//
+//--------- HOMEPAGE BLOCKS -----------//
+//-------------------------------------//
+
+/*	Welcome
+/* ----------------------------------- */	
+.welcome {
+	padding: 160px 0 100px;
+	.text-white();
+	.full-bg-image { background-image: url(../../images/parallax/flute-rose.jpg); }
+	.title {
+		font-size: 28px;
+		font-weight: 600;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+	}
+}
+@media (min-width: @screen-sm-min) {
+	.welcome {
+		.title { font-size: 56px; }
+	}
+}
+@media (min-width: @screen-md-min) {
+	.welcome {
+		.title { font-size: 72px; }
+	}
+}

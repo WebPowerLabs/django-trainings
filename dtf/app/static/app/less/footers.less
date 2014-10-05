@@ -16,18 +16,26 @@ footer {
 			border-color: @gray-light;
 			background-color: transparent;
 			&:focus {
-				border-color: @brand-dtf;
-				-webkit-box-shadow: fadeout(@brand-dtf, 70%) 0px 0px 7px 1px;
-				box-shadow: fadeout(@brand-dtf, 70%) 0px 0px 7px 1px;
+				border-color: @brand-primary;
+				// Box Shadow
+				box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
+				-moz-box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
+				-o-box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
+				-webkit-box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
 			}
 		}
-		.bottom-footer { color: @gray-light; }
+	}
+	.bottom-footer {
+		background-color: @gray-darker;
+		color: @gray-light;
+		padding: 35px 0;
+		.copyright { font-size: 12px; }
 	}
 }
 
 // ------ Primary Footer
 // ---------------------------------------
-footer.footer-main {
+.footer-main {
 	background-color: @gray-dark;
 	.section {
 		padding: 75px 0;
@@ -37,23 +45,6 @@ footer.footer-main {
 	.widget-title {
 		color: @gray-lighter;
 		text-transform: uppercase;
-	}
-	ul { list-style: none; }
-	li ul { padding-left: 25px; }
-	ul.social-icons {
-		margin-top: 0;
-		li {
-			margin-right: 40px;
-			a {
-				width: 80px;
-				height: 80px;
-				border-radius: 80px;
-			}
-			i {
-				font-size: 40px;
-				line-height: 80px;
-			}
-		}
 	}
 	.footer-widgets {
 		text-align: left;
@@ -68,41 +59,16 @@ footer.footer-main {
 
 // ------ Contact Footer
 // ---------------------------------------
-.contact-title {
-	&.section { padding: 70px }
-	.section-title {
-		margin-bottom: 0;
-		padding-bottom: 0;
-		&:after { visibility: hidden; }
-	}
-}
-
-footer.contact-footer {
+.contact-footer {
+	background-color: #fff;
 	.section {
 		padding-bottom: 0;
 		&.contact-form {
 			background-color: @gray-dark;
-			-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
-			box-shadow: 0 0 10px fadeout(#000, 40%);
-		}
-	}
-	img.footer-logo {
-		margin-bottom: 10px;
-		max-height: 100px;
-	}
-	ul.social-icons {
-		padding-top: 30px;
-		li a {
-			border-radius: 25px;
-			color: @gray-lighter;
-			border: 1px solid @gray-lighter;
-			&:hover { border-color: transparent; }
 		}
 	}
 	textarea { border-radius: 6px; }
-	.bottom-footer { background-color: darken(@gray-dark, 5%); }
 }
-
 
 .bottom-menu {
 	position: fixed;
