@@ -11,7 +11,10 @@ function singleScreen() {
 }
 function cloneForm() {
   // clone from the hidden form clone
-  $('#etfar_tool_clone').clone().appendTo($("#right-editor")).removeClass('hidden').attr('id', 'etfar_tool');
+  $('#etfar_tool_clone').clone().appendTo($("#right-editor")).attr('id', 'etfar_tool').removeClass('hidden');
+  $('#right-editor #etfar_tool').fadeOut(0, function() {
+    $(this).delay(500).fadeIn();
+  });
   // populate hidden event input with event title value
   $('#right-editor #id_event').val($('#event-title').text());
 }
@@ -22,7 +25,11 @@ function saveEvent(eventInput) {
   $('#event-title').removeClass('hidden').text(eventInput.val());
 }
 function moveRightFormToLeft() {
-  $("#left-editor #etfar_tool").replaceWith($("#right-editor #etfar_tool"));
+  $("#right-editor #etfar_tool").fadeOut(500, function() {
+    $("#left-editor #etfar_tool").replaceWith($("#right-editor #etfar_tool"));
+    $("#left-editor #etfar_tool").fadeIn(500);
+    singleScreen();
+  });
 }
 function moveLeftFormToRight() {
   $("#right-editor #etfar_tool").replaceWith($("#left-editor #etfar_tool"));
@@ -34,9 +41,14 @@ function toggleObj(obj, toggle) {
   if(toggle) {
     if(toggle=='show'){
       obj.removeClass('hidden');
+      obj.fadeOut(0, function() {
+        obj.fadeIn(500);
+      });
     }
     if(toggle=='hide'){
-      obj.addClass('hidden');
+      obj.fadeOut(500, function() {
+        //obj.addClass('hidden');
+      });
     }
   } else {
     obj.toggleClass('hidden');
@@ -46,8 +58,11 @@ function toggleObj(obj, toggle) {
 function progressCheckNo() {
   // user selects no in progress box
   // this starts a new "tfar"
-  toggleObj($('#progress-check'), 'hide');
-  toggleObj($('#replace-old-tfar'), 'show');
+  $('#progress-check').fadeOut(500, function() {
+    $('#replace-old-tfar').fadeOut(0, function() {
+      $(this).removeClass('hidden').fadeIn(500);
+    });
+  });
   splitScreen();
   cloneForm();
 }
@@ -59,8 +74,8 @@ function progressCheckYes() {
 }
 function startNewTfar() {
   var $eventInput = $("#left-editor #etfar_tool #id_event");
-    $('#start-new-tfar').addClass('hidden');
-    $('#replace-old-tfar').removeClass('hidden');
+    $('#start-new-tfar').fadeOut(0);
+    $('#replace-old-tfar').removeClass('hidden').fadeIn(0);
     saveEvent($eventInput);
     splitScreen();
     cloneForm();
@@ -72,10 +87,15 @@ $(document).ready(function(){
   });
   $('#replace-old-tfar').on('click', function(e) {
     moveRightFormToLeft();
-    singleScreen();
-    $('#replace-old-tfar').addClass('hidden');
-    // start progress check
-    toggleObj($('#progress-check'), 'show');
+
+    $('#replace-old-tfar').fadeOut(500, function() {
+       // start progress check
+      $('#progress-check').fadeOut(0, function() {
+        $(this).removeClass('hidden');
+        $(this).fadeIn(500);
+      });
+    });
+
   });
   $('#progress-yes').on('click', function(e) {
     e.preventDefault();
