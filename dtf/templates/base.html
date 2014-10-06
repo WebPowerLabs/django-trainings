@@ -6,88 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
     <!-- Web Fonts
     ================================================== -->
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700,600,800' rel='stylesheet' type='text/css'>
-
     <!-- Font Awesome Icons
     ================================================== -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
     <!-- Basic Page Needs
     ================================================== -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <!-- Apple Mobile optimizations -->
-
     <!-- Home screen icons -->
     <link rel="apple-touch-icon" sizes="76x76" href="{% static 'icon/touch-icon-76x76.png' %}">
     <link rel="apple-touch-icon" sizes="120x120" href="{% static 'icon/touch-icon-120x120.png' %}">
     <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icon/touch-icon-144x144.png' %}">
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'icon/touch-icon-152x152.png' %}">
-    
     <!-- loading screen image 640px x 1136px -->
     <link rel="apple-touch-startup-image" href="{% static 'icon/touch-icon-152x152.png' %}">
-    
     <!-- launcher title -->
     <meta name="apple-mobile-web-app-title" content="Decide To Fly &trade;">
-
     <!-- window size -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    
+
   {% comment %}
   ONLY WORKS ON SPAS
-
     <!-- Hide browser url bar -->
     <meta name="apple-mobile-web-app-capable" content="yes">
   {% endcomment %}
 
-    {% block css %}
-
+  {% block css %}
     {% if debug %}
-    <link rel="stylesheet/less" href="{% static 'app/less/bootstrap-router.less' %}">
-    <script type="text/javascript">
-      less = {
-        env: "development", // or "production"
-        async: false,       // load imports async
-        fileAsync: false,   // load imports async when in a page under
-        // a file protocol
-        poll: 1000,         // when in watch mode, time in ms between polls
-        functions: {},      // user functions, keyed by name
-        dumpLineNumbers: "comments", // or "mediaquery" or "all"
-        relativeUrls: false,// whether to adjust url's to be relative
-        // if false, url's are already relative to the
-        // entry less file
-        rootpath: ""// a path to add on to the start of every url
-        //resource
-      };
-    </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
+      <link rel="stylesheet/less" href="{% static 'app/less/bootstrap-router.less' %}">
+      <script type="text/javascript">
+        less = {
+          env: "development", // or "production"
+          async: false,       // load imports async
+          fileAsync: false,   // load imports async when in a page under
+          // a file protocol
+          poll: 1000,         // when in watch mode, time in ms between polls
+          functions: {},      // user functions, keyed by name
+          dumpLineNumbers: "comments", // or "mediaquery" or "all"
+          relativeUrls: false,// whether to adjust url's to be relative
+          // if false, url's are already relative to the
+          // entry less file
+          rootpath: ""// a path to add on to the start of every url
+          //resource
+        };
+      </script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
     {% else %}
-    <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
+      <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}">
     {% endif %}
-
-        <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
-
-        <!-- Video-js style -->
-        <link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
-
-
-        <!-- This file store project specific CSS -->
-        <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    {% endblock %}
+      <link href="{% static 'css/fontello.css' %}" rel="stylesheet">
+      <!-- Video-js style -->
+      <link href="{% static 'js/video-js/video-js.css' %}" rel="stylesheet">
+      <!-- This file store project specific CSS -->
+      <link href="{% static 'css/project.css' %}" rel="stylesheet">
+  {% endblock css %}
 
     <!-- Infusionsoft Analytics Tracking Code
     ================================================== -->
     <script type="text/javascript" src="https://kb140.infusionsoft.com/app/webTracking/getTrackingCode?trackingId=1f490cf4ac33c0c9f67aab5ed87bef61"></script>
-
     <!-- HTML5 Shiv
     ================================================== -->
     <script src="{% static 'js/jquery.modernizr.js' %}"></script>
