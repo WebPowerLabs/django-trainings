@@ -21,9 +21,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-              {% block nav_user %}
-                {% include "menus/nav_user.html" %}
-              {% endblock nav_user %}
+            {% block nav_user %}
+              {% include "menus/nav_user.html" %}
+            {% endblock nav_user %}
           </ul><!--/ .nav-->
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -41,9 +41,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav navbar-right">
-              {% block nav %}
-                {% include "menus/nav_marketing.html" %}
-              {% endblock nav %}
+            {% block nav %}
+              {% include "menus/nav_marketing.html" %}
+            {% endblock nav %}
           </ul><!--/ .nav-->
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -66,70 +66,40 @@
   </section>
   <!-- -----------/ WELCOME BLOCK ----------- -->
 
-  <!-- ----------- BLOCK ----------- -->
-  <section class="community section">
+  <!-- ----------- ICON SECTIONS BLOCK ----------- -->
+  <section class="icon-sections block">
     <div class="container">
       <div class="row">
-          <div class="section-header col-xs-12 text-center">
-            <h3 class="section-subtitle">The community to:</h3>
-              <h1 class="section-title">Connect, Collaborate & Create</h1>
-              <h3 class="section-subtitle">the life you REALLY want to live!</h3>
-              <hr>
-          </div><!--/ .section-header-->
+        <div class="section-header col-xs-12 text-center">
+          <h1 class="section-title">Our Services</h1>
+          <hr><!--/ .separator-->
+        </div><!--/ .section-header-->
+      </div><!--/ .row-->
+
+      <div class="row">
+        <div class="content-box col-md-4 text-center">
+          <a href="#"><i class="icon fa fa-gears"></i></a>
+          <h4 class="title">Web Design</h4>
+          <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique tellus ut lectus suscipit, nec elementum dolor placerat. Proin ut metus vitae purus condimentum dictum a in justo. Nullam luctus cursus fermentum.</p>
+          <a href="#"><h5 class="more-info">Read More &nbsp;<i class="fa fa-arrow-right"></i></h5></a>
+        </div><!--/ .content-box-->
+        <div class="content-box col-md-4 text-center">
+          <a href="#"><i class="icon fa fa-group"></i></a>
+          <h4 class="title">Bootstrap Framework</h4>
+          <p class="description">Maecenas molestie, libero non ornare aliquam, felis augue volutpat quam, eget ultrices eros metus eu neque. Donec accumsan ultricies nisl. Maecenas ut pellentesque ipsum. Mauris est mi, vestibulum non tristique sit amet.</p>
+          <a href="#"><h5 class="more-info">Read More &nbsp;<i class="fa fa-arrow-right"></i></h5></a>
+        </div><!--/ .content-box-->
+        <div class="content-box col-md-4 text-center">
+          <a href="#"><i class="icon fa fa-flag"></i></a>
+          <h4 class="title">Django Development</h4>
+          <p class="description">Suspendisse libero nulla, elementum in sollicitudin id, rutrum eget sapien. Nullam ut posuere diam. Nulla id erat id dolor feugiat facilisis non vel urna. Duis consectetur fermentum libero ut gravida.</p>
+          <a href="#"><h5 class="more-info">Read More &nbsp;<i class="fa fa-arrow-right"></i></h5></a>
+        </div><!--/ .content-box-->
+
       </div><!--/ .row-->
     </div><!--/ .container-->
-    <div class="row community-items">
-        <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-          <!--<a href="{% url 'd2f-community' %}">-->
-            <div class="entry">
-              <img class="icon-heart" src="{% static 'images/d2f-nowings.png' %}">
-              <h2 class="entry-title">Connect</h2>
-              <div class="entry-body">
-                <p>&bull; Be encouraged 24/7 online<br>
-                  &bull; Be equipped with resources you need<br>
-                  &bull; Be empowered with beneficial relationships.</p>
-              </div><!--/ .entry-body-->
-              <div class="icon bottom">
-                <i class="fa fa-plus"></i>
-              </div><!--/ .icon-->
-            </div><!--/ .entry-->
-          <!--</a>-->
-        </div><!--/ .col-md-4-->
-        <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-          <!--<a href="{% url 'd2f-community' %}">-->
-            <div class="entry">
-              <img class="icon-heart" src="{% static 'images/d2f-nowings.png' %}">
-              <h2 class="entry-title">Collaborate</h2>
-              <div class="entry-body">
-                <p>&bull; Learn from the wisdom & knowledge of others<br>
-                  &bull; Share your own experiences to help others<br>
-                  &bull; Work together to build your dreams and acheive your goals</p>
-              </div><!--/ .entry-body-->
-              <div class="icon bottom">
-                <i class="fa fa-plus"></i>
-              </div><!--/ .icon-->
-            </div><!--/ .entry-->
-          <!--</a>-->     
-        </div><!--/ .col-md-4-->
-        <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-          <!--<a href="{% url 'd2f-community' %}">-->
-            <div class="entry">
-              <img class="icon-heart" src="{% static 'images/d2f-nowings.png' %}">
-              <h2 class="entry-title">Create</h2>
-              <div class="entry-body">
-                <p>&bull; Expand your vision of what is possible for you<br>
-                &bull; Take your highest thoughts and make them a reality<br>
-                &bull; Live and love the life you were created for</p>
-              </div><!--/ .entry-body-->
-              <div class="icon bottom">
-                <i class="fa fa-plus"></i>
-              </div><!--/ .icon-->
-            </div><!--/ .entry-->
-          <!--</a>-->
-        </div><!--/ .col-md-4-->
-      </div><!--/ .row-->
   </section>
-  <!-- -----------/ BLOCK ----------- -->
+  <!-- -----------/ ICON SECTIONS BLOCK ----------- -->
   
   {% include "includes/footer-contact.html" %}
 
