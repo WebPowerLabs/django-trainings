@@ -550,3 +550,4 @@ class Production(Common):
 
     INFUSIONSOFT_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
     INFUSIONSOFT_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
+    BROKER_URL = 'redis://redistogo:ae0406a227274aa7681acdf0fec01783@hoki.redistogo.com:11015/'
