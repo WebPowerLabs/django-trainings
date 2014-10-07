@@ -2,66 +2,76 @@
 //---------------- NAV MENUS ---------------//
 //------------------------------------------//
 
-// Universal Nav Menu Styles
+// Universal Styles
 // ---------------------------------------
 .navbar {
+	border: none;
+	border-radius: 0;
 	margin-bottom: 0;
 	a {
 		font-family: "Montserrat", Helvetica, sans-serif;
+		font-size: 12px;
+		font-weight: 600;
 		letter-spacing: 1px;
+		text-transform: uppercase;
+		// Caret Transitions
+		.caret {
+			transition: color .25s;
+			-moz-transition: color .25s;
+			-o-transition: color .25s;
+			-webkit-transition: color .25s;
+		}
 	}
-	.navbar-toggle {
-		padding-top: 3px;
-		padding-bottom: 3px;
+	.dropdown-menu a {
+		font-size: 12px;
+		font-weight: 600;
+		padding: 5px 20px;
 	}
+	.container-fluid { padding: 0 35px;}
 	.profile { padding: 5px 15px; }
 	.img-thumbnail {
-		max-height: 40px;
-		max-width: 40px;
-		border-width: 0;
-		border-radius: 20px;
+		border-radius: 50%;
+		border: 3px solid transparent;
 		padding: 0;
+		// Transitions
+		transition: border-color .25s;
+		-moz-transition: border-color .25s;
+		-o-transition: border-color .25s;
+		-webkit-transition: border-color .25s;
+		&:hover {
+			border-color: @brand-primary;
+		}
 	}
 	// Alerts
 	.alert {
 		border-radius: 0;
 		margin-bottom: 0;
 	}
-	.navbar-form {
-		margin-top: 7px;
-		margin-bottom: 7px;
-	}
 }
 .navbar-nav > li > .dropdown-menu { border: none; }
 
-// App Nav Menus
-// ---------------------------------------
+// Box Shadows
 .nav-user,
+.nav-member,
+.nav-marketing,
 .nav-secondary {
-	border: none;
-	border-radius: 0;
-	.navbar-nav > li > a {
-		font-size: 12px;
-		font-weight: 600;
-		text-transform: uppercase;
-	}
-}
-//----- User Navigation
-.nav-user {
-	background-color: @gray-lighter;
-	// Box Shadow
 	box-shadow: 0 0 10px fadeout(#000, 40%);
 	-moz-box-shadow: 0 0 10px fadeout(#000, 40%);
 	-o-box-shadow: 0 0 10px fadeout(#000, 40%);
 	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+}
+
+// User & Member Navigation
+// ---------------------------------------
+.nav-user,
+.nav-member {
+	background-color: @gray-lighter;
 	.nav-logo {
-		padding: 9px 20px 0;
+		padding: 9px 20px 0 0;
 		max-height: 40px;
 	}
 	.navbar-nav > li > a {
 		color: @gray-dark;
-		font-size: 14px;
-		font-weight: 600;
 		&:hover {
 			background-color: transparent;
 			color: @brand-primary;
@@ -82,69 +92,31 @@
 			&:hover { background-color: #fff; }
 		}
 	}
-}
-//----- Staff Navigation
-.nav-secondary {
-	background-color: @gray-lighter;
-	border-bottom: 1px solid @table-border-color;
-	// bootstrap removes this for mobile view
-	.navbar-nav {
-    // prevent from collapsing on mobile
-    float: left;
-    margin: 0;
-    &.navbar-right { float: right; }
-    > li {
-      float: left;
-      > a {
-      	color: @gray;
-        padding-top:    @navbar-padding-vertical;
-        padding-bottom: @navbar-padding-vertical;
-        cursor: pointer;
-				&:hover { background-color: @table-border-color;}
-      }
-    }
-    &:first-child { margin-left: -@navbar-padding-horizontal; }
-    &.navbar-right:last-child { margin-right: -@navbar-padding-horizontal; }
-  }
-}
-
-// Marketing Site Nav Menus
-// ---------------------------------------
-.nav-member,
-.nav-marketing {
-	border: none;
-	// Box Shadow
-	box-shadow: 0 0 10px fadeout(#000, 40%);
-	-moz-box-shadow: 0 0 10px fadeout(#000, 40%);
-	-o-box-shadow: 0 0 10px fadeout(#000, 40%);
-	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
-	.navbar-right { padding-right: 20px; }
-	.navbar-nav a { text-transform: uppercase; }
-}
-//----- Member Navigation
-.nav-member {
-	background-color: @gray-lighter;
-	.navbar-nav > li > a {
+	.dropdown-menu > li > a {
 		color: @gray-dark;
-		font-size: 14px;
-		font-weight: 600;
 		&:hover {
+			color: @brand-primary;
+			background-color: transparent;
+		}
+	}
+	.nav .open {
+		> a,
+		> a:hover,
+		> a:focus {
 			background-color: transparent;
 			color: @brand-primary;
+			.caret { color: @brand-primary; }
 		}
 	}
 }
-//----- Marketing Navigation
+
+// Secondary & Marketing Navigation
+// ---------------------------------------
+.nav-secondary,
 .nav-marketing {
 	background-color: @gray-dark;
-	.nav-logo { 
-		max-height: 56px;
-		padding: 24px 0 0 20px;
-	}
 	.navbar-nav > li > a {
 		color: @gray-light2;
-		font-weight: 400;
-		line-height: 50px;
 		.caret { color: @gray-light2; }
 		&:hover,
 		&:focus {
@@ -156,10 +128,7 @@
 	.dropdown-menu {
 		background-color: @gray-dark;
 		> li > a {
-			padding: 3px 30px;
 			color: @gray-light2;
-			line-height: 30px;
-			text-transform: uppercase;
 			&:hover {
 				color: #fff;
 				background-color: transparent;
@@ -167,19 +136,52 @@
 		}
 	}
 	.nav .open {
-		> a,
-		> a:hover,
-		> a:focus { background-color: transparent; }
-	}
-	.open {
-		> li > a, 
-		> li > a:hover, 
-		> li > a:focus {
+		> a, 
+		> a:hover, 
+		> a:focus {
 			color: #fff;
 			background-color: transparent;
-			.caret { color: @brand-primary; }
+			.caret { color: #fff; }
 		}
 	}
+}
+
+// Secondary Navigation
+// ---------------------------------------
+.nav-secondary {
+	margin-bottom: 40px;
+	// bootstrap removes this for mobile view
+	.navbar-nav {
+    // prevent from collapsing on mobile
+    float: left;
+    margin: 0;
+    &.navbar-right { float: right; }
+    > li {
+      float: left;
+      > a {
+      	color: @gray-light2;
+      	cursor: pointer;
+        padding-top:    @navbar-padding-vertical;
+        padding-bottom: @navbar-padding-vertical;
+				&:hover {
+					background-color: transparent;
+					color: #fff;
+				}
+      }
+    }
+    &:first-child { margin-left: -@navbar-padding-horizontal; }
+    &.navbar-right:last-child { margin-right: -@navbar-padding-horizontal; }
+  }
+}
+
+// Marketing Navigation
+// ---------------------------------------
+.nav-marketing {
+	.nav-logo { 
+		max-height: 56px;
+		padding-top: 24px;
+	}
+	.navbar-nav > li > a { line-height: 50px; }
 	// Homepage Marketing Nav
 	&.home {
 		background-color: fadeout(@gray-darker, 30%);

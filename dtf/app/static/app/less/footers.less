@@ -1,73 +1,50 @@
-//-------------------------------------------//
-//-------------- WEB APP FOOTER -------------//
-//-------------------------------------------//
+//-------------------------------------//
+//-------------- FOOTERS --------------//
+//-------------------------------------//
 
-//--------------------------------------------//
-//---------- MARKETING SITE FOOTERS ----------//
-//--------------------------------------------//
-
+/* ------ Universal Styles
+/* --------------------------------------- */
 footer {
-	&.footer-main,
-	&.contact-footer {
-		color: @gray-lighter;
-		a:hover { color: #fff; }
-		.contact-widget p { margin: 0; }
-		input, textarea {
-			border-color: @gray-light;
-			background-color: transparent;
-			&:focus {
-				border-color: @brand-primary;
-				// Box Shadow
-				box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
-				-moz-box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
-				-o-box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
-				-webkit-box-shadow: fadeout(@brand-primary, 70%) 0px 0px 7px 1px;
-			}
-		}
-	}
-	.bottom-footer {
-		background-color: @gray-darker;
-		color: @gray-light;
-		padding: 35px 0;
-		.copyright { font-size: 12px; }
-	}
+	background-color:@gray-darker;
+	color: @gray-light2;
+	a:hover { color: #fff; }
+	.widget-title { margin-bottom: 20px; }
+	.contact-widget p { margin: 0; }
+}
+.bottom-footer {
+	background-color: transparent;
+	color: @gray-light;
+	padding: 35px 0;
+	font-size: 12px;
 }
 
-// ------ Primary Footer
+// ------ Main Footer & App Footer
 // ---------------------------------------
-.footer-main {
-	background-color: @gray-dark;
-	.section {
-		padding: 75px 0;
-		background-color: transparent;
+.footer-main,
+.footer-app { margin-top: 60px; }
+.footer-content {
+	background-color:@gray-dark;
+	padding: 50px 0 70px;
+	text-align: left;
+	// Box Shadow
+	box-shadow: 0 0 10px fadeout(#000, 40%);
+	-mox-box-shadow: 0 0 10px fadeout(#000, 40%);
+	-o-box-shadow: 0 0 10px fadeout(#000, 40%);
+	-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
+	ul {
+		list-style: none;
+		padding-left: 0;
 	}
-	.widget { margin-bottom: 0; }
-	.widget-title {
-		color: @gray-lighter;
-		text-transform: uppercase;
-	}
-	.footer-widgets {
-		text-align: left;
-		padding: 60px 0;
-		background-color: fadeout(#000, 70%);
-		-webkit-box-shadow: 0 0 10px fadeout(#000, 40%);
-		box-shadow: 0 0 10px fadeout(#000, 40%);
-		.widget-subtitle { margin-bottom: 15px; }
-	}
-	.bottom-footer { background-color: fadeout(#000, 50%); }
 }
 
-// ------ Contact Footer
+// ------ Contact Footer (Homepage)
 // ---------------------------------------
 .contact-footer {
-	background-color: #fff;
-	.section {
-		padding-bottom: 0;
-		&.contact-form {
-			background-color: @gray-dark;
-		}
+	.flute-divider { background-color: #fff; }
+	.contact-section {
+		padding: 60px 0 30px;
+		background-color: @gray-dark;
 	}
-	textarea { border-radius: 6px; }
 }
 
 .bottom-menu {

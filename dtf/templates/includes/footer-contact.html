@@ -2,11 +2,11 @@
 
 <!-- ----------- CONTACT FOOTER ----------- -->
 <footer class="contact-footer">
-	<img class="img-responsive" src="{% static 'images/flute-footer.png' %}"/>
-	<section class="contact-form section">
+	<img class="img-responsive flute-divider" src="{% static 'images/flute-footer.png' %}"/>
+	<div class="contact-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 ">
+				<div class="col-md-6">
 					{% crispy contact_form %}
 				</div><!--/ .col-md-6-->
 				<div class="contact-widget col-md-6">
@@ -18,17 +18,11 @@
 				</div><!--/ .contact-widget-->
 			</div><!--/ .row-->
 		</div><!--/ .container-->
-	</section><!--/ .contact-form-->
+	</div><!--/ .contact-section-->
     <div class="bottom-footer clearfix">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 text-center">
-            <div class="copyright">
-            	Copyright &copy; 2014 <a href="{% url 'home' %}">Flute Lessons</a>. All rights reserved.
-            </div><!--/ .copyright-->
-          </div><!--/ .col-xs-12-->
-        </div><!--/ .row-->
-      </div><!--/ .container-->
+      <div class="col-xs-12 text-center">
+        Copyright &copy; 2014 <a href="{% url 'home' %}">Flute Lessons</a>. All rights reserved.
+      </div><!--/ .col-xs-12-->
     </div><!--/ .bottom-footer-->
 </footer>
 <!-- -----------/ CONTACT FOOTER ----------- -->

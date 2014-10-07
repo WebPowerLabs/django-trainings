@@ -4,8 +4,9 @@
 
 body { padding-top: @navbar-height; }
 
-/*	Typography
+/* Typography
 /* ----------------------------------- */
+p { font-weight: 300; }
 .text-white { color: #fff; }
 .company-title { margin-top: 0; }
 // Text Selection
@@ -19,15 +20,36 @@ body { padding-top: @navbar-height; }
 	color: #fff;
 	text-shadow: none;
 }
-// Link Transition
+// Links
 a {
+	// Transitions
 	transition: color .25s;
 	-moz-transition: color .25s;
 	-o-transition: color .25s;
 	-webkit-transition: color .25s;
+	&:hover { text-decoration: none; }
 }
 
-/*	Media
+/* Buttons
+/* ----------------------------------- */
+// Button Transitions
+.btn {
+	transition: color .25s, background-color .25s, border-color .25s;
+	-moz-transition: color .25s, background-color .25s, border-color .25s;
+	-o-transition: color .25s, background-color .25s, border-color .25s;
+	-webkit-transition: color .25s, background-color .25s, border-color .25s;
+}
+
+/* Forms
+/* ----------------------------------- */
+.input-sm,
+.input-lg,
+.form-control {
+	border-radius: 0;
+}
+.form-control { border: none; }
+
+/* Media
 /* ----------------------------------- */
 // Responsive Video
 .video-wrapper {
@@ -46,7 +68,7 @@ a {
 	}
 }
 
-/*	Section
+/* Blocks
 /* ----------------------------------- */
 .section {
 	position: relative;
@@ -67,8 +89,33 @@ a {
 	.block { padding: 90px; }
 }
 
+/*	Pager
+/* ----------------------------------- */
+ul.pager {
+	.previous,
+	.next {
+		a {
+			font-weight: 400;
+			color: #fff;
+			background-color: @brand-primary;
+			border-color: @brand-primary;
+			i { color: #fff; }
+			&:hover {
+				background-color: darken(@brand-primary, 8%);
+				border-color: darken(@brand-primary, 8%);
+			}
+		}
+		&.disabled a, {
+			color: @gray-light;
+			background-color: @gray-lighter;
+			border-color: @gray-lighter;
+			i { color: @gray-light; }
+		}
+	}
+}
+
 /* Parallax
-/* -------------------------------------------------- */
+/* ----------------------------------- */
 .parallax { 
 	z-index: 0;
 	background-color: transparent;
@@ -169,14 +216,20 @@ a {
 /*	Welcome
 /* ----------------------------------- */	
 .welcome {
-	padding: 160px 0 100px;
+	padding: 200px 0 140px;
 	.text-white();
 	.full-bg-image { background-image: url(../../images/parallax/flute-rose.jpg); }
 	.title {
 		font-size: 28px;
 		font-weight: 600;
 		letter-spacing: 2px;
+		margin-bottom: 25px;
 		text-transform: uppercase;
+	}
+	.subtitle {
+		font-size: 16px;
+		font-weight: 400;
+		letter-spacing: 2px;
 	}
 }
 @media (min-width: @screen-sm-min) {
@@ -205,15 +258,29 @@ a {
 			border-radius: 50%;
 			box-shadow: 1px 1px 8px rgba(0,0,0,0.4);
 			// Transition
-			transition: box-shadow 0.25s ease;
-			-moz-transition: box-shadow 0.25s ease;
-			-o-transition: box-shadow 0.25s ease;
-			-webkit-transition: box-shadow 0.25s ease;
+			transition: box-shadow 0.25s;
+			-moz-transition: box-shadow 0.25s;
+			-o-transition: box-shadow 0.25s;
+			-webkit-transition: box-shadow 0.25s;
 			&:hover { box-shadow: 1px 1px 12px rgba(0,0,0,0.7); }
 		}
 		.more-info {
 			text-transform: uppercase;
 			margin-top: 15px;
 		}
+	}
+}
+
+/* Features Showcase
+/* ----------------------------------- */
+.features-showcase {
+	.feature {
+		.column { margin-bottom: 25px; }
+		i {
+			color: @brand-primary;
+			font-size: 60px;
+		}
+		h3 { margin-top: 0; }
+		hr { border-color: @gray-light2; }
 	}
 }
