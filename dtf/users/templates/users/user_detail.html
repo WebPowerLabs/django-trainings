@@ -227,14 +227,8 @@ if (window.navigator.standalone) {
 </script>
 <script src="{% static 'comments/dtfComments.js' %}"></script>
 {% if etfar_form %}
-<script src="{% static 'etfars/etfarTool.js' %}"></script>
+<script src="{% static 'etfars/js/etfarTool.js' %}"></script>
 {% endif %}
 {% endblock javascript %}
 
-{% block css %}
-{{ block.super }}
-<style>
-.etfar-form .help-block {display: none;}
-</style>
-{% endblock css %}
 

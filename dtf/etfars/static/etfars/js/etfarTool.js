@@ -2,12 +2,12 @@
 function splitScreen() {
   // show right editor, make left editor half width
   $("#right-editor").addClass('col-md-6').removeClass('hidden');
-  $("#left-editor").addClass('col-md-6');
+  $("#left-editor").addClass('col-md-6 inactive');
 }
 function singleScreen() {
   // hide right editor, make left editor full width
   $("#right-editor").removeClass('col-md-6').addClass('hidden');
-  $("#left-editor").removeClass('col-md-6');
+  $("#left-editor").removeClass('col-md-6 inactive');
 }
 function cloneForm() {
   // clone from the hidden form clone
@@ -19,11 +19,18 @@ function cloneForm() {
   $('#right-editor #id_event').val($('#event-title').text());
 }
 function saveEvent(eventInput) {
-  // hide event field and move to clone.
-  eventInput.parents('.form-group').addClass('hidden').appendTo($("#etfar_tool_clone"));
   // move event input to page title
   $('#event-title').removeClass('hidden').text(eventInput.val());
+  // hide event field and move to clone.
+  eventInput.parents('.form-group').addClass('hidden').appendTo($("#etfar_tool_clone"));
 }
+function saveTfar(baseForm, newForm) {
+  newForm.find('#hint_id_thought').text("Old Thought: " + baseForm.find('#id_thought').val());
+  newForm.find('#hint_id_feeling').text("Old Feeling: " + baseForm.find('#id_feeling').val());
+  newForm.find('#hint_id_action').text("Old Action: " + baseForm.find('#id_action').val());
+  newForm.find('#hint_id_result').text("Old Result: " + baseForm.find('#id_result').val());
+}
+
 function moveRightFormToLeft() {
   $("#right-editor #etfar_tool").fadeOut(500, function() {
     $("#left-editor #etfar_tool").replaceWith($("#right-editor #etfar_tool"));
@@ -65,6 +72,7 @@ function progressCheckNo() {
   });
   splitScreen();
   cloneForm();
+  saveTfar($("#left-editor #etfar_tool"), $("#right-editor #etfar_tool"));
 }
 function progressCheckYes() {
   // user selects yes in progress box
@@ -79,6 +87,7 @@ function startNewTfar() {
     saveEvent($eventInput);
     splitScreen();
     cloneForm();
+    saveTfar($("#left-editor #etfar_tool"), $("#right-editor #etfar_tool"));
 }
 $(document).ready(function(){
   $('#start-new-tfar').on('click', function(e) {

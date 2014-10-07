@@ -12,9 +12,28 @@
   }
 
   .etfar-form {
-
   }
   .progress-check {
     .transition(.5s);
+  }
+  .left-editor, .right-editor {
+    .help-block {
+      display: none;
+    }
+  }
+  .left-editor .new {
+    display: none;
+  }
+}
+@media (max-width: @screen-sm-max) {
+  .etfar-tool {
+    .right-editor .help-block {
+      display: block;
+    }
+    .left-editor {
+      &.inactive {
+        display: none;
+      }
+    }
   }
 }

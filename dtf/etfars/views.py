@@ -21,6 +21,12 @@ def etfar_tool_form_prep():
     form_clone.helper.form_id = "etfar_tool_clone"
     # remove the event field for new clones
     del form_clone.fields["event"]
+    new_prefix = "<span class='new'>New </span>"
+    for fieldname in form_clone.fields:
+        form_clone.fields[fieldname].label = "{}{}".format(new_prefix,
+                                                            form_clone.fields[
+                                                             fieldname].label)
+
     return form, form_clone
 
 
