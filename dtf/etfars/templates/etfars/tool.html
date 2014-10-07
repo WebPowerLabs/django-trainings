@@ -39,13 +39,8 @@
 
 {% endblock content %}
 
-{% block css %}
-{{ block.super }}
-<style>
-.etfar-form .help-block {display: none;}
-</style>
-{% endblock css %}
+
 {% block javascript %}
 {{ block.super }}
-<script src="{% static 'etfars/etfarTool.js' %}"></script>
+<script src="{% static 'etfars/js/etfarTool.js' %}"></script>
 {% endblock javascript %}
