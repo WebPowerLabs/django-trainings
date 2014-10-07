@@ -35,7 +35,7 @@ class ContactForm(forms.Form):
             'feedback',
             'honeypot',
             HTML('<input type="hidden" name="next" value="{{ request.path }}">'),
-            HTML('<div class="btn btn-lg btn-block btn-success submit" type="submit" id="submit"><i class="icon-paper-plane-2"></i></div>')
+            HTML('<div class="btn btn-lg btn-block btn-primary submit" type="submit" id="submit"><i class="icon-paper-plane-2"></i></div>')
         )
 
 
@@ -62,6 +62,6 @@ class EmailForm(forms.Form):
             'honeypot',
             HTML('<input type="hidden" name="next" value="{{ request.path }}">'),
              Div(
-                Submit('submit', 'Submit!', css_class='btn-lg btn-block btn-success')
+                Submit('submit', 'Submit!', css_class='btn-lg btn-block btn-primary')
             )
         )

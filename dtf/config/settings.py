@@ -375,10 +375,10 @@ class Common(Configuration):
     SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
     ########## START TRAININGS CONFIG
-    COURSE_NAME = "Program"
-    LESSON_NAME = "Session"
+    COURSE_NAME = "Course"
+    LESSON_NAME = "Lesson"
     RESOURCE_NAME = "Resource"
-    HOMEWORK_NAME = "Ownwork"
+    HOMEWORK_NAME = "Homework"
     ########## END TRAININGS CONFIG
 
 class Local(Common):

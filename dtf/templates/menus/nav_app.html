@@ -2,23 +2,12 @@
 {% if user.is_authenticated %}
   <li class="dropdown">
     <a data-toggle="dropdown">
-      Communities
-      <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
-    </a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      <li><a href="{% url 'facebook_groups:list' %}">All Communities</a></li>
-      <li><a href="{% url 'facebook_groups:list' %}{% query_string purchased=1 %}">My Communities</a></li>
-    </ul>
-  </li>
-  <li class="dropdown">
-    <a data-toggle="dropdown">
       {{ trainings.course_name }}s
       <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
       <li><a href="{% url 'courses:list' %}">All {{ trainings.course_name }}s</a></li>
-      <li><a href="{% url 'courses:list' %}{% query_string purchased=1 %}">My {{ trainings.course_name }}s</a></li>
-      <li><a href="{% url 'courses:favourites' %}" class="">Favourites</a></li>
+      <li><a href="{% url 'courses:favourites' %}" class="">Favorites</a></li>
       <li><a href="{% url 'courses:history' %}">History</a></li>
     </ul>
   </li>
@@ -29,11 +18,11 @@
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
       <li><a href="{% url 'lessons:list' %}">All {{ trainings.lesson_name }}s</a></li>
-      <li><a href="{% url 'lessons:list' %}{% query_string purchased=1 %}">My {{ trainings.lesson_name }}s</a></li>
-      <li><a href="{% url 'lessons:favourites' %}" class="">Favourites</a></li>
+      <li><a href="{% url 'lessons:favourites' %}" class="">Favorites</a></li>
       <li><a href="{% url 'lessons:history' %}">History</a></li>
     </ul>
   </li>
+  <li><a href="{% url 'facebook_groups:list' %}">Discussions</a></li>
 {% endif %}
 {% if user.is_staff %}
 	<li><a href="{% url 'admin:index' %}">Admin</a></li>

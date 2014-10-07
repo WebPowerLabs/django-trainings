@@ -6,14 +6,23 @@
 .list-group.lessons {
 	margin-bottom: 0;
 	.list-group-item {
-		padding: 20px;
-		.transition(background-color .25s ease);
-		border-radius: 0;
 		border-left: none;
+		border-radius: 0;
 		border-right: none;
-		p, h1, h2, h3, h4, h5, h6 { color: @gray-lighter; }
+		padding: 25px 15px 25px;
+		.transition(background-color .25s ease);
+		.img-responsive { padding: 0; }
 		.list-group-item-heading { margin: 0 0 10px; }
-		.list-group-item-text { line-height: 1.5; }
+		.list-group-item-text { line-height: 21px; }
+	}
+}
+@media (min-width: @screen-sm-min) {
+	.list-group.lessons {
+		.list-group-item {
+			padding: 25px 45px 25px 40px;
+			.img-responsive { padding: 5px; }
+			.list-group-item-heading { margin: 10px 0; }
+		}
 	}
 }
 
