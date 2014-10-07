@@ -36,6 +36,7 @@ class LessonCompleteAdmin(admin.ModelAdmin):
 
 class VideoAdmin(admin.ModelAdmin):
     list_display = ['filename', 'status', 'orig', 'mp4', 'webm']
+    readonly_fields = ['mp4', 'webm']
 
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(LessonHistory, LessonHistoryAdmin)
