@@ -3,7 +3,7 @@
 <a class="media" href="{{ content_object.get_absolute_url }}" title="Go to {{ content_object.name }}">
   <div class="pull-left">
     {% thumbnail content_object.thumbnail '120x100' crop='center' as im %}
-    <img src="{{ im.url }}" class="img-rounded media-object" alt="{{ content_object.name }}">
+    <img src="{{ im.url }}" class="img-circle media-object" alt="{{ content_object.name }}">
     {% endthumbnail %}
   </div>
   <div class="media-body">

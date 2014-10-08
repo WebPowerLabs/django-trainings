@@ -32,13 +32,18 @@ a {
 
 /* Buttons
 /* ----------------------------------- */
-// Button Transitions
 .btn {
+	border: none;
+	// Transitions
 	transition: color .25s, background-color .25s, border-color .25s;
 	-moz-transition: color .25s, background-color .25s, border-color .25s;
 	-o-transition: color .25s, background-color .25s, border-color .25s;
 	-webkit-transition: color .25s, background-color .25s, border-color .25s;
 }
+.btn,
+.btn-lg,
+.btn-sm,
+.btn-xs { border-radius: 0; }
 
 /* Forms
 /* ----------------------------------- */
@@ -258,10 +263,10 @@ ul.pager {
 			border-radius: 50%;
 			box-shadow: 1px 1px 8px rgba(0,0,0,0.4);
 			// Transition
-			transition: box-shadow 0.25s;
-			-moz-transition: box-shadow 0.25s;
-			-o-transition: box-shadow 0.25s;
-			-webkit-transition: box-shadow 0.25s;
+			transition: box-shadow 0.25s ease-in-out;
+			-moz-transition: box-shadow 0.25s ease-in-out;
+			-o-transition: box-shadow 0.25s ease-in-out;
+			-webkit-transition: box-shadow 0.25s ease-in-out;
 			&:hover { box-shadow: 1px 1px 12px rgba(0,0,0,0.7); }
 		}
 		.more-info {

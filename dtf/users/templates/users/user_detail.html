@@ -22,9 +22,9 @@
             <a>
           {% endif %}
           {% if object.fb_uid and not object|has_avatar %}
-            <img src="{{ object.get_fb_profile_img_url }}" class="thumbnail img-thumbnail">
+            <img src="{{ object.get_fb_profile_img_url }}" class="img-circle img-responsive">
           {% else %}
-          <img src="{% avatar_url object 160 %}" class="thumbnail img-thumbnail">
+          <img src="{% avatar_url object 160 %}" class="img-circle img-responsive">
           {% endif %}
             </a>
         </div>

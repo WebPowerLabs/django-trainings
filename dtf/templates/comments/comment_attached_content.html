@@ -2,9 +2,9 @@
 
 <a href="{{ object.get_absolute_url }}" class="">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             {% thumbnail object.thumbnail '122x117' crop='center' as im %}
-                <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
+                <img src="{{ im.url }}" class="img-responsive" alt="{{ object.name }}">
             {% endthumbnail %}
         </div><!--/ .col-md-3-->
         <div class="col-md-9">

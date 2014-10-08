@@ -6,227 +6,212 @@
 {% block page_title %}{{ facebook_group.name }}{% endblock page_title %}
 
 {% block group_actions %}
-{{ block.super }}
-<li><a href="{% url 'facebook_groups:feed_post' facebook_group.fb_uid %}"><i class="fa fa-plus"></i> Post</a></li>
+	{{ block.super }}
+	<li><a href="{% url 'facebook_groups:feed_post' facebook_group.fb_uid %}"><i class="fa fa-plus"></i> Post</a></li>
 {% endblock group_actions %}
 
 {% block css %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static 'facebook_groups/css/feed.css' %}">
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'facebook_groups/css/feed.css' %}">
 {% endblock css %}
 
 {% block javascript %}
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="{% static 'facebook_groups/js/jquery.getNext.js' %}"></script>
-<script type="text/javascript">
-function formatDate(d) {
-    var minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
-	    hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
-	    ampm = d.getHours() >= 12 ? 'pm' : 'am',
-	    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-	    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-	return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
-};
-$(document).ready(function() {
-	$(".facebook-feed .date").each(function() {
-		var date = new Date($(this).data("date"));
-		$(this).text(formatDate(date));
-	});
-});
-</script>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="{% static 'facebook_groups/js/jquery.getNext.js' %}"></script>
+	<script type="text/javascript">
+		function formatDate(d) {
+		    var minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+			    hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+			    ampm = d.getHours() >= 12 ? 'pm' : 'am',
+			    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+			    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+			return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+		};
+		$(document).ready(function() {
+			$(".facebook-feed .date").each(function() {
+				var date = new Date($(this).data("date"));
+				$(this).text(formatDate(date));
+			});
+		});
+	</script>
 {% endblock javascript %}
 
-
 {% block feed %}
-<section class="feed">
-<div class="container">
-	<div class="col-md-7 col-md-offset-2">
-	<p class="lead">{{ facebook_group.description }}</p>
-	<div class="clearfix"></div>
-	<div id="facebook-feed-list">
+	<section class="feed">
+		<div class="container">
+			<div class="col-md-7 col-md-offset-2">
+				<p class="lead">{{ facebook_group.description }}</p>
+				<div class="clearfix"></div>
+				<div id="facebook-feed-list">
+				{% if facebook_group.pinned_post %}
+				{% with facebook_group.pinned_post as post %}
+					<div id="post-{{ post.id }}" class="fb-post panel panel-primary panel-pinned">
+						<h3 class="fb-post-heading">
+							<img src="https://graph.facebook.com/{{ post.from_user.id }}/picture?width=40&height=40" class="fb-profile-img">
+							<span class="fb-from-user">{{ post.from_user.name }}</span><br>
+							<small class="date" data-date="{{ post.created_time }}"></small>
+						</h3>
+						<div class="panel-body">
+							{% if post.picture and post.link %}
+								<a href="{{ post.link }}" target="_blank" class="pull-left">
+									<img src="{{ post.picture }}" class="img-responsive fb-picture">
+								</a>
+							{% elif post.picture %}
+								<img src="{{ post.picture }}" class="img-responsive pull-left">
+							{% endif %}
+							<p>{{ post.message }}</p>
+							<p class="fb-actions"><small>{{ post.likes|length }} Likes | {{ post.comments|length }} Comments</small></p>
+						</div>
+						<div class="panel-footer">
+							<div class="fb-comments">
+							{% if post.comments.data %}
+								{% for comment in post.comments.data %}
+									<div id="comment-{{ comment.id }}" class="media fb-post">
+										<div data-fbuser="{{ comment.from.id }}" class="pull-left img-profile">
+											<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profile-img">
+										</div>
+										<div class="media-body">
+											<h6 class="fb-from-user">{{ comment.from.name }}</h6>
+											<span class="fb-message">{{ comment.message }}</span>
+											{% if comment.picture and comment.link %}
+												<a href="{{ comment.link }}" target="_blank" class="pull-left">
+													<img src="{{ comment.picture }}" class="img-responsive fb-picture">
+												</a>
+											{% elif comment.picture %}
+												<img src="{{ comment.picture }}" class="img-responsive pull-left fb-picture">
+											{% endif %}
+											<p class="fb-actions"><small>{{ comment.like_count }} Likes</small> | <small class="date" data-date="{{ post.created_time }}"></small></p>
+										</div>
+									</div>
+								{% endfor %}
+							{% endif %}
+							</div>
+							<form class="form fb-comment-form" data-access-token="{{ request.user.get_fb_access_token }}">
+								<div class="">
+									<div class="row">
+										<div class="col-xs-2 col-sm-1 fb-profile-comment-img">
+											<img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+										</div>
+										<div class="col-xs-10 col-sm-11">
+											<input type="text" name="message" class="form-control" placeholder="Write a comment...">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				{% endwith %}
+				{% endif %}
 
-	{% if facebook_group.pinned_post %}
-	{% with facebook_group.pinned_post as post %}
-		<div id="post-{{ post.id }}" class="fb-post panel panel-primary panel-pinned">
+				<div class="fb-divider"></div>
+
+				{% for post in feed.data %}
+					<div id="post-{{ post.id }}" class="fb-post panel panel-default">
+						<h3 class="fb-post-heading">
+							<img src="https://graph.facebook.com/{{ post.from.id }}/picture?width=40&height=40" class="fb-profile-img">
+							<span class="fb-from-user">{{ post.from.name }}</span><br>
+							<small class="date" data-date="{{ post.created_time }}"></small>
+						</h3>
+						<div class="panel-body">
+							{% if post.picture and post.link %}
+								<a href="{{ post.link }}" target="_blank" class="pull-left">
+									<img src="{{ post.picture }}" class="img-responsive fb-picture">
+								</a>
+							{% elif post.picture %}
+								<img src="{{ post.picture }}" class="img-responsive pull-left">
+							{% endif %}
+							<p>{{ post.message }}</p>
+							<p class="fb-actions"><small>{{ post.likes|length }} Likes | {{ post.comments|length }} Comments</small></p>
+						</div>
+						<div class="panel-footer">
+							<div class="fb-comments">
+							{% if post.comments.data %}
+								{% for comment in post.comments.data %}
+									<div id="comment-{{ comment.id }}" class="media fb-post">
+										<div data-fbuser="{{ comment.from.id }}" class="pull-left img-profile">
+											<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profile-img">
+										</div>
+										<div class="media-body">
+											<h6 class="fb-from-user">{{ comment.from.name }}</h6>
+											<span class="fb-message">{{ comment.message }}</span>
+											{% if comment.picture and comment.link %}
+												<a href="{{ comment.link }}" target="_blank" class="pull-left">
+													<img src="{{ comment.picture }}" class="img-responsive fb-picture">
+												</a>
+											{% elif comment.picture %}
+												<img src="{{ comment.picture }}" class="img-responsive pull-left fb-picture">
+											{% endif %}
+											<p class="fb-actions"><small>{{ comment.like_count }} Likes</small> | <small class="date" data-date="{{ post.created_time }}"></small></p>
+										</div>
+									</div>
+								{% endfor %}
+							{% endif %}
+							</div>
+							<form class="form fb-comment-form" data-access-token="{{ request.user.get_fb_access_token }}">
+								<div class="">
+									<div class="row">
+										<div class="col-xs-2 col-sm-1 fb-profile-comment-img">
+											<img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+										</div>
+										<div class="col-xs-10 col-sm-11">
+											<input type="text" name="message" class="form-control" placeholder="Write a comment...">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				{% endfor %}
+				</div>
+				<div class="text-center clearfix">
+					<a id="get-next" class="btn btn-primary text-center" data-next="{{ feed.paging.next }}" href="#">Load More</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- templates for jquery async load -->
+	<section id="templates" class="hidden">
+		<div id="post-template" class="panel panel-default fb-post">
 			<h3 class="fb-post-heading">
-				<img src="https://graph.facebook.com/{{ post.from_user.id }}/picture?width=40&height=40" class="fb-profile-img">
-				<span class="fb-from-user">{{ post.from_user.name }}</span>
-				<small class="date" data-date="{{ post.created_time }}"></small>
+				<img src="" class="fb-profile-img">
+				<span class="fb-from-user"></span><br>
+				<small class="date"></small>
 			</h3>
 			<div class="panel-body">
-				{% if post.picture and post.link %}
-					<a href="{{ post.link }}" target="_blank" class="pull-left">
-						<img src="{{ post.picture }}" class="img-responsive fb-picture">
-					</a>
-				{% elif post.picture %}
-					<img src="{{ post.picture }}" class="img-responsive pull-left">
-				{% endif %}
-				<p>{{ post.message }}</p>
-				<p class="fb-actions"><small>{{ post.likes|length }} Likes | {{ post.comments|length }} Comments</small></p>
+				<a class="fb-link" href="#">
+					<img src="" class="img-responsive pull-left fb-picture">
+				</a>
+				<span class="fb-message"></span>
 			</div>
 			<div class="panel-footer">
-				<div class="fb-comments">
-				{% if post.comments.data %}
-					{% for comment in post.comments.data %}
-						<div id="comment-{{ comment.id }}" class="media fb-post">
-							<div data-fbuser="{{ comment.from.id }}" class="pull-left img-profile">
-								<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profile-img">
-							</div>
-							<div class="media-body">
-								<p>
-								<strong class="fb-from-user">{{ comment.from.name }}</strong> 
-								<span class="fb-message">{{ comment.message }}</span>
-									{% if comment.picture and comment.link %}
-										<a href="{{ comment.link }}" target="_blank" class="pull-left">
-											<img src="{{ comment.picture }}" class="img-responsive fb-picture">
-										</a>
-									{% elif comment.picture %}
-										<img src="{{ comment.picture }}" class="img-responsive pull-left fb-picture">
-									{% endif %}
-								
-								<p class="fb-actions">
-									<small>{{ comment.like_count }} Likes</small> | <small class="date" data-date="{{ post.created_time }}"></small>
-								</p>
-							</div>
-						</div>
-					{% endfor %}
-				{% endif %}
-				</div>
+				<div class="fb-comments"></div>
 				<form class="form fb-comment-form" data-access-token="{{ request.user.get_fb_access_token }}">
 					<div class="">
 						<div class="row">
-							<div class="col-xs-2 col-sm-1 fb-profile-comment-img">
-								<img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
-							</div>
-							<div class="col-xs-10 col-sm-11">
-								<input type="text" name="message" class="form-control" placeholder="Write a comment...">
-							</div>
+						<div class="col-xs-2 col-sm-1 fb-profile-comment-img">
+							<img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
+						</div>
+						<div class="col-xs-10 col-sm-11">
+							<input type="text" name="message" class="form-control" placeholder="Write a comment...">
+						</div>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-	{% endwith %}
-	{% endif %}
-
-	<div class="fb-divider"></div>
-
-	{% for post in feed.data %}
-		<div id="post-{{ post.id }}" class="fb-post panel panel-default">
-			<h3 class="fb-post-heading">
-				<img src="https://graph.facebook.com/{{ post.from.id }}/picture?width=40&height=40" class="fb-profile-img">
-				<span class="fb-from-user">{{ post.from.name }}</span>
-				<small class="date" data-date="{{ post.created_time }}"></small>
-			</h3>
-			<div class="panel-body">
-				{% if post.picture and post.link %}
-					<a href="{{ post.link }}" target="_blank" class="pull-left">
-						<img src="{{ post.picture }}" class="img-responsive fb-picture">
-					</a>
-				{% elif post.picture %}
-					<img src="{{ post.picture }}" class="img-responsive pull-left">
-				{% endif %}
-				<p>{{ post.message }}</p>
-				<p class="fb-actions"><small>{{ post.likes|length }} Likes | {{ post.comments|length }} Comments</small></p>
+		<div id="comment-template" class="media fb-post">
+			<div class="pull-left img-profile">
+				<img src="" class="img-responsive fb-profile-img">
 			</div>
-			<div class="panel-footer">
-				<div class="fb-comments">
-				{% if post.comments.data %}
-					{% for comment in post.comments.data %}
-						<div id="comment-{{ comment.id }}" class="media fb-post">
-							<div data-fbuser="{{ comment.from.id }}" class="pull-left img-profile">
-								<img src="https://graph.facebook.com/{{ comment.from.id }}/picture?width=40&height=40" class="img-responsive fb-profile-img">
-							</div>
-							<div class="media-body">
-								<p>
-								<strong class="fb-from-user">{{ comment.from.name }}</strong> 
-								<span class="fb-message">{{ comment.message }}</span>
-									{% if comment.picture and comment.link %}
-										<a href="{{ comment.link }}" target="_blank" class="pull-left">
-											<img src="{{ comment.picture }}" class="img-responsive fb-picture">
-										</a>
-									{% elif comment.picture %}
-										<img src="{{ comment.picture }}" class="img-responsive pull-left fb-picture">
-									{% endif %}
-								
-								<p class="fb-actions">
-									<small>{{ comment.like_count }} Likes</small> | <small class="date" data-date="{{ post.created_time }}"></small>
-								</p>
-							</div>
-						</div>
-					{% endfor %}
-				{% endif %}
-				</div>
-				<form class="form fb-comment-form" data-access-token="{{ request.user.get_fb_access_token }}">
-					<div class="">
-						<div class="row">
-							<div class="col-xs-2 col-sm-1 fb-profile-comment-img">
-								<img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
-							</div>
-							<div class="col-xs-10 col-sm-11">
-								<input type="text" name="message" class="form-control" placeholder="Write a comment...">
-							</div>
-						</div>
-					</div>
-				</form>
+			<div class="media-body">
+				<h6 class="fb-from-user"></h6>
+				<span class="fb-message"></span>
+				<a class="fb-link" href="#">
+					<img src="" class="img-responsive pull-left fb-picture">
+				</a>
 			</div>
 		</div>
-	{% endfor %}
-	</div>
-	<div class="text-center clearfix">
-		<a id="get-next" class="btn btn-primary text-center" data-next="{{ feed.paging.next }}" href="#">Load More</a>
-	</div>
-	</div>
-</div>
-</section>
-
-
-
-<!-- templates for jquery async load -->
-<section id="templates" class="hidden">
-<div id="post-template" class="panel panel-default fb-post">
-	<h3 class="fb-post-heading">
-		<img src="" class="fb-profile-img">
-		<span class="fb-from-user"></span>
-		<small class="date"></small>
-	</h3>
-	<div class="panel-body">
-		<a class="fb-link" href="#">
-			<img src="" class="img-responsive pull-left fb-picture">
-		</a>
-		<p class="fb-message"></p>
-	</div>
-	<div class="panel-footer">
-		<div class="fb-comments"></div>
-		<form class="form fb-comment-form" data-access-token="{{ request.user.get_fb_access_token }}">
-			<div class="">
-				<div class="row">
-				<div class="col-xs-2 col-sm-1 fb-profile-comment-img">
-					<img src="{{ request.user.get_fb_profile_img_url }}" class="img-responsive">
-				</div>
-				<div class="col-xs-10 col-sm-11">
-					<input type="text" name="message" class="form-control" placeholder="Write a comment...">
-				</div>
-				</div>
-			</div>
-		</form>
-	</div>
-</div>
-<div id="comment-template" class="media fb-post">
-	<div class="pull-left img-profile">
-		<img src="" class="img-responsive fb-profile-img">
-	</div>
-	<div class="media-body">
-		<p>
-		<strong class="fb-from-user"></strong> 
-		<span class="fb-message"></span>
-		</p>
-		<a class="fb-link" href="#">
-			<img src="" class="img-responsive pull-left fb-picture">
-		</a>
-	</div>
-</div>
-</section>
-
+	</section>
 {% endblock feed %}
 

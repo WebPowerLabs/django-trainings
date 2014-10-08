@@ -10,6 +10,7 @@
 		max-width: 100%;
 		.img-responsive { width: 100%; }
 	}
+	.discussion-title { margin-top: 0; }
 	@media (min-width: @screen-sm) {
 		.header {
 			position: absolute;
@@ -26,145 +27,175 @@
 }
 
 .group-item {
-	// fb group as a list item
+	background-color: #fff;
 	display: block;
+	margin-bottom: 20px;
 	.material-lift();
-	margin: 10px 0;
-	.group-title, .group-text {
-		padding: 10px 0;
+	.group-img { width: 100%; }
+	.group-info { padding: 20px 25px; }
+	.group-title,
+	.group-text {
+		color: @gray-dark;
+		margin: 0;
+	}
+	.group-title { margin-bottom: 15px; }
+	@media (min-width: @screen-md-min) {
+		.group-info { padding: 25px 25px 25px 5px; }
 	}
 }
 
-.feed {
-	.panel-comment-create {
-		border-top-right-radius: 0;
-		border-top-left-radius: 0;
-		.nav-tabs {
-			padding: 15px 10px 0;
-		}
-	}
-	.fb-post {
-		.comment-post {
-			border-top: 1px solid @gray-lighter;
-		}
-		&.panel {
-			.comment-post {
-				border-top: none;
-			}
-		}
+/* Create Comment Form
+/* --------------------------------------- */
+.panel-comment-create {
+	border-radius: 0;
+	.nav-tabs { padding: 15px 10px 0; }
+	.comment-create-form { border: 1px solid @input-border; }
+}
 
+/* Group Feed
+/* --------------------------------------- */
+.feed {
+	.fb-post {
+		border-radius: 0;
+		border: none;
+		&.panel { .box-shadow-1(); }
+		.comment-post { border-top: 1px solid @gray-lighter; }
+		&.panel .comment-post { border-top: none; }
 		p {
-			margin-bottom: 5px;
-			line-height: 24px;
-			color: @gray;
+			line-height: 20px;
+			color: @gray-dark;
+			font-weight: 400;
 		}
 		.fb-post-heading {
 			clear: both;
 			display: inline-block;
-			margin-bottom: 0;
-			margin-top: 0;
-			padding: 10px 15px;
-			.img-thumbnail {
-				max-width: 40px;
+			margin: 0;
+			padding: 10px 15px 0;
+			.img-circle {
+				max-width: 50px;
 				display: inline-block;
 				float: left;
 			}
 			.fb-from-user {
-				line-height: 40px;
+				color: @brand-primary;
+				display: inline-block;
+				font-size: 18px;
+				margin: 5px 0 0;
 				padding-left: 15px;
-				float: left;
-				color: @brand-success;
 			}
 			.date, .via {
-				// lines up with fb-from-user
-				line-height: 32px;
-				float: left;
-				padding: 8px 0px 0 10px;
-				font-size: .6em;
+				color: @gray-light;
+				font-size: 11px;
+				font-weight: 600;
+				margin-bottom: 0;
+				padding-left: 15px;
 			}
 		}
-
-		// comments
+		// Attached Content
+		.attached-content {
+			border-top: 1px solid @gray-lighter;
+			margin-top: 20px;
+			padding-top: 15px;
+			.list-group-item-heading { color: @gray-dark; }
+		}
+		// Group Comments
 		.fb-comments {
 			width: 100%;
 			clear: both;
-			.media {
-				margin-top: 5px;
-			}
-			.img-thumbnail {
-				max-width: 40px;
-			}
-			p {
-				line-height: 22px;
+			.media { margin: 0 0 10px; }
+			.img-circle { max-width: 40px; }
+			.fb-message p {
+				font-size: 12px;
+				line-height: 16px;
 			}
 			.fb-actions {
-				font-weight: 600;
+				color: @gray;
 				font-size: 12px;
-				color: @gray-lighter;
+				font-weight: 600;
 			}
 			.fb-from-user {
-				color: @brand-success;
+				color: @brand-primary;
+				float: left;
+				margin: 3px 10px 0 0;
+			}
+			.date {
+				color: @gray-light;
+				font-size: 11px;
+				font-weight: 600;
+				margin-bottom: 0;
 			}
 		}
-		.fb-comment-form {
-			padding: 10px 0;
-			input {
-				background-color: #fff;
-			}
-		}
-
-		.fb-picture {
-			// image posted in an inline comment
-			padding-right: 20px;
-		}
-		// Pinned posts
+		.fb-comment-form input { background-color: #fff; }
+		// Image posted in an inline comment
+		.fb-picture { padding-right: 20px; }
+		// Pinned post
 		.pin-post {
 			visibility: hidden;
 			padding: 5px 15px 5px 0;
 			&
-			a:hover > * {
-				color: @brand-danger;
-			}
+			a:hover > * { color: @brand-danger; }
 		}
 		&:hover {
-			.pin-post {
-				visibility: visible;
-			}
+			.pin-post { visibility: visible; }
 		}
 	}
-	// CONTRIB-COMMENTS
+	// Contrib Comments
 	.comment-post {
 		.comment-actions {
 			padding: 5px 10px 5px 0;
 			visibility: hidden;
 		}
-		.comment-actions a {
-			padding-left: 5px;
-		}
-		.comment-actions a:hover > * {
-			color: @brand-danger;
-		}	
+		.comment-actions a { padding-left: 5px; }
+		.comment-actions a:hover > * { color: @brand-danger; }
 		&:hover {
-			.comment-actions {
-				visibility: visible;
-			}
+			.comment-actions { visibility: visible; }
 		}
-		.tab-pane {
-			padding: 0;
-		}
-		.panel-body {
-			padding: 0 15px 15px;
-		}
+		.tab-pane { padding: 0; }
+		.panel-body { padding: 0 15px 15px; }
 	}
 	// bootstrap panel overrides
 	.panel-pinned {
 		border-color: @brand-danger;
 		box-shadow: 0 0 3px @brand-danger;
 	}
-
 	.panel-footer {
-		background-color: @gray-lighter;
+		border-radius: 0;
+		background-color: lighten(@gray-lighter, 3%);
 	}
-} // END FEED
+}
+
+.comment-form-control {
+	.comment-img {
+		padding-right: 15px;
+		height: 34px;
+		float: left;
+		.img-circle {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			margin-right: auto;
+			display: table;
+		}
+	}
+	.comment-field {
+		float: left;
+		max-width: 80%;
+		box-shadow: none;
+	}
+	.comment-submit {
+		float: left;
+		height: 34px;
+		.btn {
+			margin-left: auto;
+			text-align: center;
+			display: table;	
+		}
+	}
+	@media (max-width: @screen-phone) {
+		.comment-img {width: 16%;}
+		.comment-field {max-width: 68%;}
+		.comment-submit {width: 16%;}
+	}
+}
 	
 
