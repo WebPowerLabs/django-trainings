@@ -5,7 +5,7 @@
 <a class="media" href="{% url 'lessons:detail' lesson.slug %}" title="Go to {{ lesson.name }}">
   <div class="pull-left">
     {% thumbnail lesson.thumbnail '120x100' crop='center' as im %}
-    <img src="{{ im.url }}" class="img-rounded media-object" alt="{{ lesson.name }}">
+    <img src="{{ im.url }}" class="img-circle media-object" alt="{{ lesson.name }}">
     {% endthumbnail %}
   </div>
   <div class="media-body">

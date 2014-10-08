@@ -1,26 +1,31 @@
 {% extends "facebook_groups/base.html" %}
 {% load staticfiles i18n query_string %}
 
-{% block title %}Communities{{ block.super }}{% endblock title %}
-
-{% block page_title %}Communities{% endblock page_title %}
+{% block title %}Discussions{% endblock title %}
 
 {% block nav_secondary %}
-<li>
-  <a href="{% url 'facebook_groups:list' %}{% query_string request.GET %}">Communities
-  </a>
-</li>
 {% endblock nav_secondary %}
 
-{% block left_panel %}
-
-{% endblock left_panel %}
-
-{% block feed %}
-<ul class="list-group">
-  {% for facebook_group in facebook_groups %}
-    {% include "facebook_groups/group_card.html" %}
-  {% endfor %}
-</ul>
-{% endblock feed %}
-
+{% block content %}
+<section class="section-groups">
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-xs-12 text-center">
+        <h1 class="section-title">{% block page_title %}Discussions{% endblock page_title %}</h1>
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        {% block feed %}
+          <ul class="list-group">
+            {% for facebook_group in facebook_groups %}
+              {% include "facebook_groups/group_card.html" %}
+            {% endfor %}
+          </ul><!--/ .list-group-->
+        {% endblock feed %}
+      </div><!--/ .col-md-8-->
+    </div><!--/ .row-->
+  </div><!--/ .container-->
+</section>
+{% endblock content %}

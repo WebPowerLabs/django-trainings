@@ -6,10 +6,17 @@
 .course-list {
 	.course-item {
 		.thumbnail {
+			background-color: #fff;
 			border: none;
 			border-radius: 0;
 			display: block;
 			padding: 0 0 0;
+			.material-lift();
+			// Box Shadow
+			/*box-shadow: 1px 1px 8px fadeout(#000, 70%);
+			-moz-box-shadow: 1px 1px 8px fadeout(#000, 70%);
+			-o-box-shadow: 1px 1px 8px fadeout(#000, 70%);
+			-webkit-box-shadow: 1px 1px 8px fadeout(#000, 70%);*/
 			h3 { margin-top: 5px; }
 			img {
 				max-width: 100%;
@@ -17,31 +24,11 @@
 			}
 			.caption {
 				padding: 16px 19px 9px;
-				border-bottom: 1px solid @gray-lighter;
-				border-left: 1px solid @gray-lighter;
-				border-right: 1px solid @gray-lighter;
 				// Transitions
 				transition: border-color .25s;
 				-moz-transition: border-color .25s;
 				-o-transition: border-color .25s;
 				-webkit-transition: border-color .25s;
-			}
-		}
-		&:hover {
-			.thumbnail {
-				background-color: @brand-primary;
-				border-color: @brand-primary;
-				.caption {
-					border-color: @brand-primary;
-					h3, p {
-						color: white;
-						// Transitions
-						transition: color .25s;
-						-moz-transition: color .25s;
-						-o-transition: color .25s;
-						-webkit-transition: color .25s;
-					}
-				}
 			}
 		}
 	}
@@ -68,8 +55,6 @@
 }
 @media (min-width: @screen-sm-min) {
 	.course-detail {
-		.course-info {
-			padding: 50px;
-		}
+		.course-info { padding: 50px; }
 	}
 }

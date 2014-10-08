@@ -20,7 +20,7 @@ next=None
   </a>
  {% endif %}
 </div>
-  <h3 class="fb-post-heading">
+  <div class="fb-post-heading">
     <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
       {% if comment.user.fb_uid %}
       <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
@@ -28,12 +28,12 @@ next=None
         {% avatar comment.user %}
       {% endif %}
     </a>
-      <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.first_name }}</a>
+      <h3 class="fb-from-user"><a href="{% get_comment_permalink comment %}">{{ comment.user.first_name }} {{ comment.user.last_name }}</a></h3>
       {% if show_from %}
       <small class="via">via <a href="{{ comment.get_content_object_url }}">{{ comment.content_object_name }}</a></small>
       {% endif %}
-      <small class="date">{{ comment.submit_date|date }}</small>
-  </h3>
+      <br><small class="date">{{ comment.submit_date|date }}</small>
+  </div>
   <div class="panel-body">
     <p>{{ comment.comment|markdown }}</p>
     {% if comment.hero_unit %}
@@ -71,9 +71,7 @@ next=None
             </a>
           </div>
           <input type="text" class="form-control comment-field" placeholder="Write something..." name="comment" id="id_comment">
-          <div class="comment-submit">
-          <button type="submit" id="id_submit" class="btn btn-primary"><i class="fa fa-send fa-fw"></i></button>
-          </div>
+          <button type="submit" id="id_submit" class="btn btn-primary comment-submit"><i class="fa fa-send fa-fw"></i></button>
         </div>
 
       <div class="clearfix"></div>
