@@ -7,7 +7,7 @@ def convert_video(in_file, vformat):
     Receives video file object and format in which it should be converted.
     Returns converted video file object.
     """
-    if format not in ['webm', 'mp4']:
+    if vformat not in ['webm', 'mp4']:
         raise ValueError('Argument "format" value must be "webm" or "mp4".')
     
     f_out = tempfile.NamedTemporaryFile(suffix=".{}".format(vformat))
