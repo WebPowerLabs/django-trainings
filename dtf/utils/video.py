@@ -1,6 +1,7 @@
 import tempfile
 import subprocess
-
+from django.core.files.base import File
+from StringIO import StringIO
 
 def convert_video(in_file, vformat):
     """
@@ -22,6 +23,7 @@ def convert_video(in_file, vformat):
     command = {'mp4': mp4_cmd, 'webm': webm_cmd}
     
     in_file.seek(0)
-    subprocess.call(command[vformat], stdin=in_file, shell=True)
-     
+    proc = subprocess.Popen(command[vformat], stdin=subprocess.PIPE,
+                            shell=True)
+    proc.communicate(bytes(in_file.read()))
     return f_out
