@@ -413,6 +413,11 @@ class Local(Common):
     ########## end django-debug-toolbar
 
     ########## Your local stuff: Below this line define 3rd party libary settings
+    STATICFILES_DIRS = (
+        join(BASE_DIR, 'static'),
+        join(BASE_DIR, '..', 'bower_components'),
+    )
+
 
 class LocalAndrew(Local):
     # Andrews Local settings
