@@ -1,5 +1,5 @@
 {% extends 'lessons/base.html' %}
-{% load staticfiles crispy_forms_tags query_string video_player thumbnail comments user_permission_tags %}
+{% load staticfiles crispy_forms_tags query_string video_player thumbnail comments user_permission_tags markdown %}
 
 
 {% block css %}
@@ -19,7 +19,16 @@
   audiojs.events.ready(function() {
     var as = audiojs.createAll();
   });
-</script>
+
+{% if not can_start and not user.is_staff %}
+$(document).ready(function(){
+  $('#incompleteModal').modal({
+  keyboard: false,
+  backdrop: 'static',
+  });
+});
+{% endif %}
+  </script>
 {% endblock javascript %}
 
 {% block nav_actions %}
@@ -30,8 +39,8 @@
     <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
   </a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit lesson</a></li>
-    <li><a href="{% url 'resources:add' object.slug %}" class="">Add Resource or Homework</a></li>
+    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit {{ trainings.lesson_name }}</a></li>
+    <li><a href="{% url 'resources:add' object.slug %}" class="">Add {{ trainings.resource_name }} or {{ trainings.homework_name }}</a></li>
     <li><a class="" href='{% url "lessons:delete" object.slug %}'>Delete</a></li>
   </ul>
 </li>
@@ -110,13 +119,13 @@
           {% endif %}
         {% endif %}
       <p>
-        {{ object.description }}
+        {{ object.description|markdown }}
       </p>
       </div><!--/ .content-->
       <div class="col-sm-5">
         <div class="panel panel-primary panel-resource">
           <div class="panel-heading">
-            <span>Resources</span>
+            <span>{{ trainings.resource_name }}s</span>
             {% if user|can_manage_content:object %}
               <a href="{% url 'resources:add' object.slug %}?type=resource" class="pull-right"><i class="fa fa-plus"></i></a>
             {% endif %}
@@ -134,7 +143,7 @@
         </div>
         <div class="panel panel-success panel-resource">
           <div class="panel-heading">
-            <span>Homework</span>
+            <span>{{ trainings.homework_name }}</span>
             {% if user|can_manage_content:object %}
             <a href="{% url 'resources:add' object.slug %}?type=homework" class="pull-right"><i class="fa fa-plus"></i></a>
             {% endif %}
@@ -151,7 +160,7 @@
           <div class="clearfix"></div>
         </div>
         {% if object.tags.all %}
-            <h3>Lesson categories</h3>
+            <h3>{{ trainings.lesson_name }} categories</h3>
             {% for tag in object.tags.all %}
             <a href="{% url 'lessons:list' %}{% query_string tags=tag.id purchased=request.GET.purchased %}">
             {% include 'tags/partials/detail.html' with object=tag %}
@@ -177,7 +186,28 @@
   </div><!--/ .container-->
 
 </section><!--/ .lesson-detail-->
+
+{% endblock content %}
+
+{% block modal %}
   {% if user.is_authenticated and fb_group_list %}
   {% include 'includes/share_modal.html' %}
   {% endif %}
-{% endblock content %}
+
+<!-- Modal -->
+<div class="modal fade" id="incompleteModal" tabindex="-1" role="dialog" aria-labelledby="incompleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title" id="incompleteModalLabel">Complete previous {{ trainings.lesson_name }}s to start this {{ trainings.lesson_name }}.</h4>
+      </div>
+      <div class="modal-body">
+<a href="{% url 'lessons:detail' current_lesson.slug %}{% query_string request.GET course=course_pk %}" class="">{{ current_lesson.name }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock modal %}

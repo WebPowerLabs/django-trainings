@@ -9,12 +9,14 @@
 
 {% block content %}
 <section class="section-groups">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="header-container">
-          {% block cover %}{% endblock cover %}
-          <div class="header">
+      <div class="col-md-3">
+        {% block left_panel %}
+        {% endblock left_panel %}
+      </div>
+      <div class="col-md-7">
+          <div class="">
             <h1 class="page-title">
               {% block page_title %}Communities{% endblock page_title %}
             </h1>
@@ -22,17 +24,9 @@
               {% block page_description %}{% endblock page_description %}
             </p>
           </div>
+        <div class="header-container">
+          {% block cover %}{% endblock cover %}
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-2">
-        {% block left_panel %}
-        {% endblock left_panel %}
-      </div>
-      <div class="col-md-8">
         {% block feed %}{% endblock feed %}
         {% block fb_form %}{% endblock fb_form %}
       </div>

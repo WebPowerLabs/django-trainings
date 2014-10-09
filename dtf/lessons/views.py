@@ -46,6 +46,9 @@ class LessonDetailView(PermissionMixin, UpdateView):
         context = super(LessonDetailView, self).get_context_data(**kwargs)
         context['resource_list'] = Lesson.get_resource(lesson, user)
         context['homework_list'] = Lesson.get_homework(lesson, user)
+        context['can_start'] = lesson.can_start(user)
+        context['current_lesson'] = Lesson.objects.get_current(user, 
+                                                               lesson.course)
         context['next_url'] = Lesson.objects.get_next_url(lesson, tag_id,
                                                           course_id, purchased,
                                                           user)

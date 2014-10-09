@@ -54,6 +54,8 @@ function showNotification(html, time){
 }
 
 $(document).ready(function(){
+    $('#div_id_honeypot').hide();
+
     $('#shareModal').on('hidden.bs.modal', function(event){
         $('.modal-share-form').html('');
     });

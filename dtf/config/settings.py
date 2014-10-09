@@ -61,6 +61,7 @@ class Common(Configuration):
         'polymorphic',
         'djcelery',
         'localflavor',
+        'django_hstore',
     )
 
     # Apps specific for this project go here.
@@ -78,6 +79,9 @@ class Common(Configuration):
         'dtf_comments',
         'packages',
         'features',
+        'journals',
+        'affiliates',
+        'etfars',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -150,7 +154,7 @@ class Common(Configuration):
 
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf')
+    DATABASES = values.DatabaseURLValue('postgres://localhost/dtf-1')
     ########## END DATABASE CONFIGURATION
 
     ########## CACHING
@@ -198,6 +202,7 @@ class Common(Configuration):
         'django.contrib.messages.context_processors.messages',
         'django.core.context_processors.request',
         # Your stuff: custom template context processers go here
+        'courses.context_processors.trainings_names',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
@@ -255,10 +260,11 @@ class Common(Configuration):
     )
 
     # Some really nice defaults
-    ACCOUNT_AUTHENTICATION_METHOD = "username"
+    ACCOUNT_AUTHENTICATION_METHOD = "email"
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-    ACCOUNT_FORMS = {'signup': 'users.forms.UserSignupForm'}
+    ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.UserSignupForm'
+    SOCIALACCOUNT_AUTO_SIGNUP = False
     ########## END AUTHENTICATION CONFIGURATION
 
     ########## Custom user app defaults
@@ -365,6 +371,15 @@ class Common(Configuration):
     AVATAR_HASH_FILENAMES = True
     AVATAR_MAX_SIZE = 1048576*2
     ########## END AVATAR CONFIG
+
+    SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
+
+    ########## START TRAININGS CONFIG
+    COURSE_NAME = "Program"
+    LESSON_NAME = "Session"
+    RESOURCE_NAME = "Resource"
+    HOMEWORK_NAME = "Ownwork"
+    ########## END TRAININGS CONFIG
 
 class Local(Common):
 

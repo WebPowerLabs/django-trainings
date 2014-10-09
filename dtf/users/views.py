@@ -12,7 +12,6 @@ from django.views.generic import ListView
 # Only authenticated users can access views using this.
 from braces.views import LoginRequiredMixin
 
-
 # Import the form from users/forms.py
 from .forms import UserForm
 
@@ -22,6 +21,20 @@ from django.views.generic.base import TemplateView
 from allauth.account.views import LoginView
 
 
+
+def paginate_request(request, feed, user):
+    paginator = Paginator(feed, 5)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+    try:
+        return_feed = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        return_feed = paginator.page(paginator.num_pages)
+    return return_feed
+
+
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     # These next two lines tell the view to index lookups by pk
@@ -29,29 +42,53 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     slug_url_kwarg = "pk"
 
     def get_context_data(self, **kwargs):
-        from utils.comments import latest_comments
-        from courses.models import CourseFavourite
-        from lessons.models import LessonFavourite
-        from facebook_groups.models import FacebookGroup
-        from profiles.models import UserProfile
+ 
+        from profiles.models import UserProfile, UserPrivateProfile
+
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = self.get_object()
-        feed = latest_comments(self.request)  # get latest comments
-        paginator = Paginator(feed, 5)
-        try:
-            page = int(self.request.GET.get('page', '1'))
-        except ValueError:
-            page = 1
-        try:
-            feed = paginator.page(page)
-        except (EmptyPage, InvalidPage):
-            feed = paginator.page(paginator.num_pages)
-
-        context['courses'] = CourseFavourite.objects.active(user)
-        context['lessons'] = LessonFavourite.objects.active(user)
-        context['groups'] = FacebookGroup.objects.purchased(user)
-        context['comments'] = feed
         context['profile'] = UserProfile.objects.get_or_create(user=user)[0]
+        private_profile = UserPrivateProfile.objects.get_or_create(user=user)[0]
+        # if request.user is user or request.user is staff
+        if private_profile.can_view(self.request.user):
+            # import here so we avoid cyclical import errors
+            from utils.comments import latest_comments
+            from courses.models import CourseFavourite
+            from lessons.models import LessonFavourite
+            from facebook_groups.models import FacebookGroup
+            from journals.models import Journal, JournalQuestion, JournalEntry
+            from profiles.forms import UserPrivateProfileForm
+            from etfars.views import etfar_tool_form_prep
+
+            # comment feed
+            all_comments = latest_comments(self.request)  # get latest comments
+            feed = paginate_request(self.request, all_comments, user)
+
+            journal = Journal.objects.get_or_create(author=user)[0]
+            try:
+                entry = JournalEntry.objects.filter(journal=journal,
+                                                    active=True).latest()
+            except JournalEntry.DoesNotExist:
+                entry = None
+
+            # place private profile into form
+            private_form = UserPrivateProfileForm(instance=private_profile)
+
+            # get the etfar forms
+            etfar_form, etfar_form_clone = etfar_tool_form_prep()
+
+            # pass to context
+            context['courses'] = CourseFavourite.objects.active(user)
+            context['lessons'] = LessonFavourite.objects.active(user)
+            context['groups'] = FacebookGroup.objects.purchased(user)
+            context['comments'] = feed
+            context['journal'] = journal
+            context['private_profile'] = private_form   
+            context['questions'] = JournalQuestion.objects.purchased(user)
+            context['entry'] = entry
+            context['etfar_form'] = etfar_form
+            context['etfar_form_clone'] = etfar_form_clone
+        
         return context
 
 
@@ -94,7 +131,10 @@ class LoginCustomView(LoginView):
         if form.is_valid():
             try:
                 user = User.objects.get(username=form.cleaned_data['login'])
-                self.request.session['account_user'] = user.pk
+                try:
+                    self.request.session['account_user'] = user.pk
+                except KeyError:
+                    pass
             except User.DoesNotExist:
                 pass
         return LoginView.post(self, request, *args, **kwargs)

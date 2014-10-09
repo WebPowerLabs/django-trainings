@@ -1,0 +1,52 @@
+{% load crispy_forms_tags %}
+<div class="etfar-tool">
+  <div class="etfar-canvas">
+    <h1 id="event-title" class="event-title hidden"></h1>
+    <div class="row">
+      <div id="left-editor" class="left-editor col-md-12">
+        {% crispy etfar_form %}
+      </div>
+      <div id="right-editor" class="right-editor">
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-sm-3 col-sm-offset-2">
+        <a class="btn btn-primary" id="start-new-tfar">
+          Proceed
+        </a>
+        <a class="btn btn-primary hidden" id="replace-old-tfar">
+          Proceed
+        </a>
+      </div>
+    </div>
+  <div id="progress-check" class="progress-check hidden">
+    <div class="text-center">
+      <h1>Are you satisfied with your new story?</h1>
+      <div class="row">
+        <div class="col-sm-3 col-sm-offset-2">
+          <a class="btn btn-lg btn-block btn-success" id="progress-yes" href="#">Yes</a>
+        </div>
+        <div class="col-sm-3 col-sm-offset-2">
+          <a class="btn btn-lg btn-block btn-danger" id="progress-no" href="#">No</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="reevaluate" class="hidden">
+    <div class="text-center">
+      <h1>Is there another thought you would like to exchange?</h1>
+      <div class="row">
+        <div class="col-sm-3 col-sm-offset-2">
+          <a class="btn btn-lg btn-block btn-success" id="reevaluate-yes" href="#">Yes</a>
+        </div>
+        <div class="col-sm-3 col-sm-offset-2">
+          <a class="btn btn-lg btn-block btn-primary" id="reevaluate-no" href="#">No</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+{% crispy etfar_form_clone %}

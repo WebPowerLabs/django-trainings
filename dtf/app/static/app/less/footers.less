@@ -102,3 +102,29 @@ footer.contact-footer {
 	textarea { border-radius: 6px; }
 	.bottom-footer { background-color: darken(@gray-dark, 5%); }
 }
+
+
+.bottom-menu {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	.bottom-menu-trigger {
+		background-color: @gray-dark;
+		color: #fff;
+		padding: 10px;
+		>a {
+			width: 100%;
+			margin: 0;
+			color: #fff;
+			font-size: 0.9em;
+		}
+	}
+	.bottom-menu-content {
+		display: none;
+		&.active {
+			display: block;
+		}
+	}
+}

@@ -8,9 +8,35 @@ from packages.models import InfusionsoftTag, PackagePurchase
 
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    archetype = models.CharField(max_length=255, blank=True, verbose_name=u'My Archetype')
+    archetype = models.CharField(max_length=255, blank=True, 
+                                 verbose_name=u'My Archetype')
     anthem = models.TextField(blank=True, verbose_name=u'My Anthem')
     about = models.TextField(blank=True, verbose_name=u'I am...')
+    support = models.TextField(blank=True, 
+                               verbose_name=u'I need support in achieving:')
+
+    def __unicode__(self):
+        return self.user.username
+
+
+class UserPrivateProfile(models.Model):
+    '''
+    Private profile for users. Other users are not able to view this unless
+    they are staff
+    '''
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, 
+                                related_name='private_profile')
+    dream = models.TextField(blank=True,
+                             verbose_name=u'My BIG WHY is:')
+
+    def __unicode__(self):
+        return self.user.username
+
+    def can_view(self, user):
+        '''
+        Other users are not able to view this unless they are staff
+        '''
+        return user == self.user or user.is_staff
 
 
 class FacebookProfile(models.Model):
@@ -72,17 +98,17 @@ class InfusionsoftProfile(models.Model):
 
             return self.save()
 
-    def update_profile(self):
+    def update_profile(self, referral_code=None):
         """
         updates profile fields from infusionsoft server
         """
-        provider_data = self._get_provider_data()
+        provider_data = self._get_provider_data(referral_code=referral_code)
         if len(provider_data):
             self.remote_id = provider_data["Id"]
             return self.save()
 
 
-    def _get_provider_data(self):
+    def _get_provider_data(self, referral_code=None):
         """
         Gets a profiles user's data from infusionsoft
         """
@@ -91,15 +117,19 @@ class InfusionsoftProfile(models.Model):
             ["Id", ]);
         if not len(results):
             #TODO:FIX THIS java.lang.String ERROR
-#            remote_id = server.ContactService.add(key, [
-#                {"djUserID": unicode(self.user.id)},
-#                {"Email": self.user.email},
-#                {"FirstName": self.user.first_name},
-#                {"LastName": self.user.last_name}])
-
-#            return {"Id": remote_id}
-            return []
-        return results[0]
+            remote_id = server.ContactService.add(key, {
+                "Email": self.user.email,
+                "FirstName": self.user.first_name,
+                "LastName": self.user.last_name})
+            infusionsoft_id = {"Id": remote_id}
+        else:
+            infusionsoft_id = results[0]
+        # incase there was a referral code passed, we need to to update
+        # infusionsoft
+        if referral_code:
+            server.ContactService.update(key, infusionsoft_id["Id"], 
+                                         {"ReferralCode": referral_code})
+        return infusionsoft_id
 
 
 class InstructorProfile(models.Model):
@@ -107,6 +137,14 @@ class InstructorProfile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+
+class NotificationProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    new_community_post = models.BooleanField(default=True)
+    new_lesson = models.BooleanField(default=True)
+    new_course = models.BooleanField(default=True)
+    news = models.BooleanField(default=True)
 
 
 from allauth.account.signals import user_logged_in
@@ -118,6 +156,7 @@ def infusionsoft_sync_user(sender, **kwargs):
     if settings.DJNFUSION_COMPANY:
         user = kwargs['user']
         profile = InfusionsoftProfile.objects.get_or_create(user=user)[0]
+        profile.update_profile()
         profile.update_tags()
 
 

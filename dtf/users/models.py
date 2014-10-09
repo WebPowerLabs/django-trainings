@@ -2,6 +2,7 @@
 from django.db import models
 # Import the AbstractUser model
 from django.contrib.auth.models import AbstractUser
+from django.core.urlresolvers import reverse_lazy
 
 from localflavor.us.models import USStateField, PhoneNumberField
 from allauth.socialaccount.models import SocialAccount
@@ -21,6 +22,9 @@ class User(AbstractUser):
 
     def __unicode__(self):
         return self.username
+
+    def get_absolute_url(self):
+        return reverse_lazy('users:detail', kwargs={'pk':self.pk})
 
     def get_fb_profile_img_url(self):
     	fb_uid = SocialAccount.objects.filter(user_id=self.id, provider='facebook')

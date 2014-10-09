@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="course-list">
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-xs-12 text-center">
+        <h1 class="section-title">Resources</h1>
+        <!--h3 class="section-subtitle"></h3-->
+        <hr>
+      </div><!--/ .section-header-->
+    </div><!--/ .row-->
+    <div class="row">
+      {% for partner in object_list %}
+        <div class="col-md-4">
+          {% include "affiliates/partner_card.html" %}
+        </div><!--/ .col-md-4-->
+      {% endfor %}
+    </div><!--/ .row-->
+  </div><!--/ .container-->
+</section><!--/ .course-list-->
+
+{% endblock %}

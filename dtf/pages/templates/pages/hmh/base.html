@@ -34,6 +34,7 @@
     .navbar.video-nav .navbar-header {
       padding: 0;
   }
+  .text-red {color:red;}
     </style>
   </head>
   <body>
@@ -66,14 +67,8 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="text-center{% block nav_video_1 %}{% endblock nav_video_1 %}">
                 <a class="video-nav-item" href="{% block link_video_1 %}{% url 'hmh-video' %}?access_code=aly8b34yafn1{% endblock link_video_1 %}">
-                  <h4 class="item-title">Video 1</h4>
+                  <h4 class="item-title">Video</h4>
                   <p class="description">You Are Not Alone</p>
-                </a>
-              </li>
-              <li class="text-center{% block nav_video_2 %}{% endblock nav_video_2 %}">
-                <a class="video-nav-item" href="{% block link_video_2 %}{% url 'hmh-video' %}?access_code=aly8b34yafn2{% endblock link_video_2 %}">
-                  <h4 class="item-title">Video 2</h4>
-                  <p class="description">Find the Peace and Joy</p>
                 </a>
               </li>
               <li class="text-center{% block nav_video_3 %}{% endblock nav_video_3 %}">
@@ -140,7 +135,7 @@
         <div class="container">
           <div class="row">
             <div class="section-header col-xs-12 text-center">
-                <h1 class="section-title">Tell me about how you feel since your loss?</h1>
+                <h1 class="section-title">If you could wave a magic Wand, what would you like your life to look and feel like today?</h1>
                 <hr>
             </div><!--/ .section-header-->
           </div><!--/ .row-->
@@ -154,61 +149,26 @@
     <!-- END BOXED HIGHLIGHTS SECTION
     ================================================== -->
 
-    <!-- CONTACT SECTION
-    ================================================== -->
-      <section class="contact block bg-primary text-white">
-        <div class="container text-center">
-          <div class="row">
-            <div class="section-header col-xs-12">
-              <h1 class="section-title">Contact Us</h1>
-              <hr><!--/ .separator-->
-            </div><!--/ .section-header-->
-          </div><!--/ .row-->
-          <div class="row">
-            <div class="col-md-4 col-md-offset-2">
-              <a class="phone" href="tel:5203690500"><i class="fa fa-mobile"></i>(520) 369-0500</a>
-            </div><!--/ .col-md-4-->
-            <div class="col-md-4">
-              <a class="email" href="mailto:info@decidetofly.com"><i class="fa fa-envelope-o"></i>info@decidetofly.com</a>
-            </div><!--/ .col-md-4-->
-          </div><!--/ .row-->
-          <div class="contact-form">
-            <form role="form">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="text" class="form-control input-lg" id="InputName1" placeholder="Name">
-                </div><!--/ .form-group-->
-                <div class="form-group">
-                  <input type="email" class="form-control input-lg" id="InputEmail1" placeholder="Email">
-                </div><!--/ .form-group-->
-                <div class="form-group">
-                  <input type="tel" class="form-control input-lg" id="InputPhone1" placeholder="Phone">
-                </div><!--/ .form-group-->
-              </div><!--/ .col-md-6-->
-              <div class="col-md-6">
-                <div class="form-group">
-                  <textarea class="form-control" rows="5" placeholder="Send a message..."></textarea>
-                </div><!--/ .form-group-->
-                <button type="submit" class="btn btn-default btn-lg btn-block">Submit</button>
-              </div><!--/ .col-md-6-->
-            </form>
-          </div><!--/ .contact-form-->
-        </div><!--/ .container-->
-      </section>
-    <!-- END CONTACT SECTION
-    ================================================== -->
-
     <!-- COPYRIGHT FOOTER SECTION
     ================================================== -->
-      <section class="copyright-footer bg-primary-dark text-white">
-        <div class="container">
-          <div class="row">
-            <div class="copyright col-sm-6">
-              <p>2014 &copy; <a href="#">Decide to Fly&trade;</a>. All rights reserved. See our <a href="{% url 'terms-of-service' %}">Terms of Service</a></p>
-            </div><!--/ .copyright-->
-          </div><!--/ .row-->
-        </div><!--/ .container-->
-      </section>
+  
+    <section class="copyright-footer bg-primary-dark text-white">
+      <div class="container">
+        <div class="row">
+          <div class="copyright">
+            <p class="col-md-6">
+              2014 &copy; <a href="#">Decide to Fly&trade;</a>. All rights reserved. 
+              See our <a href="{% url 'terms-of-service' %}">Terms of Service.</a>
+            </p>
+            <p class="col-md-6" style="text-align:right;">
+              <span>Questions? &nbsp;</span>
+            <a class="email" href="mailto:info@decidetofly.com">&nbsp;<i class="fa fa-envelope-o">&nbsp;</i>info@decidetofly.com</a>
+            <a class="phone" href="tel:5203690500">&nbsp;<i class="fa fa-mobile">&nbsp;</i>(520) 369-0500</a>
+            </p>
+          </div><!--/ .copyright-->
+        </div><!--/ .row-->
+      </div><!--/ .container-->
+    </section>
     <!-- END COPYRIGHT FOOTER SECTION
     ================================================== -->
 

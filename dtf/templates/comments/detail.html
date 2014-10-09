@@ -15,7 +15,13 @@
 {% endif %}
 </div>
   <h3 class="fb-post-heading">
-    <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+    <a href="{% url 'users:detail' comment.user.pk %}" title="View {{ comment.user.first_name }}'s Profile">
+      {% if comment.user.fb_uid %}
+      <img src="{{ comment.user.get_fb_profile_img_url }}" class="fb-profile-img">
+      {% else %}
+        {% avatar comment.user %}
+      {% endif %}
+    </a>
     <a href="{% get_comment_permalink comment %}" class="fb-from-user">{{ comment.user.first_name }}</a>
     <small class="date">{{ comment.submit_date|date }}</small>
   </h3>

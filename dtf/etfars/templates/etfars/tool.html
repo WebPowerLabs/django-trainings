@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags staticfiles %}
+
+{% block content %}
+
+<div class="container-fluid">
+  {% include 'etfars/tool_isolate.html' %}
+</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      {% for etfar in etfars %}
+      <div class="date">
+        <p>{{ etfar.created|date:"D M d, y" }}</p>
+      </div>
+      <div class="">
+        <dl class="dl-horizontal">
+          <dt>Event:</dt>
+          <dd>{{ etfar.event }}</dd>
+          <dt>Thought:</dt>
+          <dd>{{ etfar.thought }}</dd>
+          <dt>Feeling:</dt>
+          <dd>{{ etfar.feeling }}</dd>
+          <dt>Action:</dt>
+          <dd>{{ etfar.action }}</dd>
+          <dt>Result:</dt>
+          <dd>{{ etfar.result }}</dd>
+        </dl>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block css %}
+{{ block.super }}
+<style>
+.etfar-form .help-block {display: none;}
+</style>
+{% endblock css %}
+{% block javascript %}
+{{ block.super }}
+<script src="{% static 'etfars/etfarTool.js' %}"></script>
+{% endblock javascript %}

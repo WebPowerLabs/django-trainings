@@ -1,5 +1,5 @@
 {% extends 'courses/base.html' %}
-{% load crispy_forms_tags thumbnail staticfiles user_permission_tags query_string %}
+{% load crispy_forms_tags thumbnail staticfiles user_permission_tags query_string markdown %}
 
 {% block nav_actions %}
 {{ block.super }}
@@ -9,7 +9,7 @@
     <i class="fa fa-angle-down state-closed"></i><i class="fa fa-angle-up state-open"></i>
   </a>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit Course</a></li>
+    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Edit {{ trainings.course_name }}</a></li>
     <li><a href="{% url 'lessons:add' object.slug %}">Add Lesson</a></li>
     <li><a href='{% url "courses:delete" object.slug %}'>Delete</a></li>
   </ul>
@@ -40,7 +40,7 @@
 {% block nav_secondary %}
 <li>
   <a href="{% url 'courses:list' %}{% query_string request.GET %}">
-  <i class="fa fa-arrow-left"></i> &nbsp; Courses
+  <i class="fa fa-arrow-left"></i> &nbsp; {{ trainings.course_name }}s
   </a>
 </li>
 {% endblock nav_secondary %}
@@ -51,7 +51,7 @@
     <div class="course-info">
       <h1>{{ object.name }}</h1>
       <hr>               
-      <p>{{ object.description }}</p>
+      <p>{{ object.description|markdown }}</p>
     </div><!--/ .course-info-->
   </div><!--/ .col-md-6-->
   <div class="col-md-6 bg-white">
