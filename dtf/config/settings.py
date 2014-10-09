@@ -61,7 +61,7 @@ class Common(Configuration):
         'polymorphic',
         'djcelery',
         'localflavor',
-#         'django_hstore',
+        'django_hstore',
     )
 
     # Apps specific for this project go here.
@@ -229,8 +229,6 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
     STATICFILES_DIRS = (
         join(BASE_DIR, 'static'),
-        join(BASE_DIR, '..', 'ololo'
-             ),
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
