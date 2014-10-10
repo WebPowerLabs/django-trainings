@@ -214,15 +214,28 @@
 {% block javascript %}
 {{ block.super }}
 <script>
+function hideBottomMenu() {
+  if(!($("#bottom-menu-content").hasClass('active'))) {
+   $(".bottom-menu").addClass('hidden');
+   console.log('hide');
+ };
+};
+
 $(document).ready(function(){
   $('#bottom-menu-trigger').on('click', function(e) {
     e.preventDefault();
-    $('#bottom-menu-content').toggleClass('active');
+    if($("#bottom-menu-content").hasClass('active')) {
+     $(".bottom-menu").addClass('hidden');
+     console.log('hide');
+    } else {
+      $('#bottom-menu-content').addClass('active');
+    };
   });
-if (window.navigator.standalone) {
-    // The app is running in standalone mode.
-    $('#bottom-menu-trigger').addClass('hidden');
-}
+  if (window.navigator.standalone) {
+      // The app is running in standalone mode.
+      $('#bottom-menu-trigger').addClass('hidden');
+  }
+  var timeOutId = window.setTimeout(hideBottomMenu, 8000);
 });
 </script>
 <script src="{% static 'comments/dtfComments.js' %}"></script>
