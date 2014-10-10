@@ -21,9 +21,8 @@
       </div>
       <div class="col-md-3">
         <h3>{{ trainings.lesson_name }} Categories</h3>
-        <hr />
         <a href="{% url 'lessons:list' %}{% query_string purchased=request.GET.purchased %}">
-          <span class="label label-{% if not request.GET.tags %}success{% else %}primary{% endif %}">
+          <span class="label label-{% if not request.GET.tags %}secondary{% else %}primary{% endif %}">
             All
           </span>&nbsp;
         </a>

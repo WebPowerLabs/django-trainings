@@ -1,0 +1,160 @@
+//------------------------------------//
+//--------- MARKETING PAGE -----------//
+//------------------------------------//
+
+/* Responsive Block
+/* ----------------------------------- */
+.block {
+	padding: 50px;
+	.section-title { margin-top: 0; }
+}
+@media (min-width: @screen-sm-min) {
+	.block { padding: 60px; }
+}
+@media (min-width: @screen-md-min) {
+	.block { padding: 80px; }
+}
+@media (min-width: @screen-lg-min) {
+	.block { padding: 90px; }
+}
+// Block Background Colors
+.block-white { background-color: #fff; }
+.block-softwhite { background-color: lighten(@gray-lighter, 4%) }
+.block-primary {
+	background-color: @brand-primary;
+	.text-white();
+}
+
+/* Parallax Background
+/* ----------------------------------- */
+.parallax { 
+	z-index: 0;
+	background-color: transparent;
+}
+/* BG Overlay Grid  */
+.parallax-overlay {
+	position: absolute;
+	z-index: 0;
+	left: 0;
+	top: 0;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	background-image: url(../images/overlay-pattern.png);
+	background-repeat: repeat;
+}
+#slides .parallax-overlay { z-index: 1; }
+/* BG Image */
+.full-bg-image {
+	position: absolute;
+	z-index: -1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-position: 50% 50%;
+	background-repeat: repeat;	
+	background-image: url(../images/umbrella-woman.jpg)	
+}
+.no-touch .full-bg-image { 
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+
+//-------------------------------//
+//----------- BLOCKS ------------//
+//-------------------------------//
+
+/*	Welcome
+/* ----------------------------------- */	
+.welcome {
+	padding: 140px 0;
+	.text-white();
+	.full-bg-image { background-image: url(../../images/parallax/flute-rose.jpg); }
+	.title {
+		font-size: 28px;
+		font-weight: 600;
+		letter-spacing: 2px;
+		margin-bottom: 25px;
+		text-transform: uppercase;
+	}
+	.subtitle {
+		font-size: 16px;
+		font-weight: 400;
+		letter-spacing: 2px;
+	}
+}
+@media (min-width: @screen-sm-min) {
+	.welcome {
+		.title { font-size: 56px; }
+	}
+}
+@media (min-width: @screen-md-min) {
+	.welcome {
+		.title { font-size: 72px; }
+	}
+}
+
+/* App Overview
+/* ----------------------------------- */
+.overview {
+	.block-softwhite();
+	.content-box {
+		margin-bottom: 10px;
+		.icon {
+			margin-bottom: 10px;
+			padding: 32px;
+			background-color: @brand-primary;
+			color: #fff;
+			font-size: 46px;
+			border-radius: 50%;
+			box-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+			.transition(box-shadow .25s ease);
+			&:hover { box-shadow: 1px 1px 12px rgba(0,0,0,0.7); }
+		}
+		.more-info {
+			text-transform: uppercase;
+			margin-top: 15px;
+		}
+	}
+}
+
+/* Features (Device Showcase)
+/* ----------------------------------- */
+.features {
+	.block-white();
+	.feature {
+		.column { margin-bottom: 25px; }
+		i {
+			color: @brand-primary;
+			font-size: 60px;
+		}
+		h3 { margin-top: 0; }
+		hr { border-color: @gray-light2; }
+	}
+}
+
+/* About the Instructor
+/* ----------------------------------- */
+.instructor {
+	.block-softwhite();
+}
+
+/* Signup CTA
+/* ----------------------------------- */
+.signup-cta {
+	&.block { padding-bottom: 55px; }
+	.block-primary();
+	.call-to-action { margin: 0 0 30px; }
+	.cta-button {
+		background-color: @gray-dark;
+		color: #fff;
+		font-family: 'Montserrat', Helvetica, sans-serif;
+		font-size: 14px;
+		letter-spacing: 2px;
+		padding: 12px 30px;
+		text-transform: uppercase;
+		&:hover { background-color: lighten(@gray-dark, 7%); }
+	}
+}

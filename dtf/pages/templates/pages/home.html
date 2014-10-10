@@ -3,57 +3,8 @@
 
 {% block title %}Flute Lessons{% endblock title %}
 
-{% block footer %}
-{% endblock footer %}
-
-{% block header %}
-<!-- ----------- NAV MENUS ----------- -->
-  <header>
-    <nav class="navbar nav-member navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <i class="fa fa-bars"></i>
-          </button><!--/ .navbar-toggle-->
-        </div><!--/ .navbar-header-->
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            {% block nav_user %}
-              {% include "menus/nav_user.html" %}
-            {% endblock nav_user %}
-          </ul><!--/ .nav-->
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav><!--/ .navbar-->
-    <nav class="navbar nav-marketing home navbar-static-top" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle hidden" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-            <span class="sr-only">Toggle navigation</span>
-            <i class="fa fa-bars"></i>
-          </button><!--/ .navbar-toggle-->
-          <a href="{% url 'home' %}"><img class="nav-logo" src="{% static 'images/logo-placeholder.png' %}"></a>
-        </div><!--/ .navbar-header-->
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-          <ul class="nav navbar-nav navbar-right">
-            {% block nav %}
-              {% include "menus/nav_marketing.html" %}
-            {% endblock nav %}
-          </ul><!--/ .nav-->
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav><!--/ .navbar-->
-  </header>
-<!-- -----------/ NAV MENUS ----------- -->
-{% endblock header %}
-
 {% block content %}
-  <!-- ----------- WELCOME BLOCK ----------- -->
+  <!-- ----------- WELCOME ----------- -->
   <section class="welcome">
     <section class="parallax">
       <div class="full-bg-image"></div>
@@ -66,14 +17,14 @@
       </div>
     </section><!--/ .section-->
   </section>
-  <!-- -----------/ WELCOME BLOCK ----------- -->
+  <!-- -----------/ WELCOME ----------- -->
 
-  <!-- ----------- ICON SECTIONS BLOCK ----------- -->
-  <section class="icon-sections block">
+  <!-- ----------- APP OVERVIEW ----------- -->
+  <section class="overview block" id="overview">
     <div class="container">
       <div class="row">
         <div class="section-header col-xs-12 text-center">
-          <h1 class="section-title">Our Services</h1>
+          <h1 class="section-title">App Overview</h1>
           <hr><!--/ .separator-->
         </div><!--/ .section-header-->
       </div><!--/ .row-->
@@ -101,11 +52,95 @@
       </div><!--/ .row-->
     </div><!--/ .container-->
   </section>
-  <!-- -----------/ ICON SECTIONS BLOCK ----------- -->
-  
-  {% include "includes/footer-contact.html" %}
+  <!-- -----------/ APP OVERVIEW ----------- -->
 
+  <!-- ----------- FEATURES ----------- -->
+  <section class="features block" id="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5">
+          <img class="img-responsive" src="{% static 'images/iphone-6-gold.png' %}"/>
+        </div><!--/ .col-sm-5-->
+        <div class="col-sm-7">
+          <div class="feature">
+            <div class="col-sm-2 column">
+              <i class="fa fa-anchor"></i>
+            </div><!--/ .col-sm-2-->
+            <div class="col-sm-10 column">
+              <h3>Virtual Flute Lessons</h3>
+              <hr><!-- separator-->
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a nibh et lorem elementum dictum sit amet volutpat lacus. Sed quam dolor, tristique a aliquet in, volutpat id orci. Morbi vitae ligula vulputate, sollicitudin diam placerat, fringilla sapien. Suspendisse in hendrerit ante, non vestibulum nibh.</p>
+            </div><!--/ .col-sm-10-->
+          </div><!--/ .feature-->
+          <div class="feature">
+            <div class="col-sm-2 column">
+              <i class="fa fa-camera"></i>
+            </div><!--/ .col-sm-2-->
+            <div class="col-sm-10 column">
+              <h3>In-Depth Courses</h3>
+              <hr><!-- separator-->
+              <p>Curabitur varius sed odio a condimentum. Mauris sed tellus pulvinar nibh consectetur dictum ut a odio. Integer et venenatis dolor, ac ultricies nunc. Donec urna sapien, rhoncus vel orci malesuada, scelerisque commodo tellus.</p>
+            </div><!--/ .col-sm-10-->
+          </div><!--/ .feature-->
+          <div class="feature">
+            <div class="col-sm-2 column">
+              <i class="fa fa-cog"></i>
+            </div><!--/ .col-sm-2-->
+            <div class="col-sm-10 column">
+              <h3>Topic Discussions</h3>
+              <hr><!-- separator-->
+              <p>Vivamus ipsum lorem, accumsan interdum nisl ac, aliquam tristique nibh. Nullam ultricies auctor enim ac tristique. Mauris in ullamcorper mauris. Praesent dolor lorem, euismod ornare nibh eu, faucibus commodo libero. Proin at mauris velit. Vivamus nec elit sit amet erat dapibus scelerisque eu ut nisl.</p>
+            </div><!--/ .col-sm-10-->
+          </div><!--/ .feature-->
+          <div class="feature">
+            <div class="col-sm-2 column">
+              <i class="fa fa-arrows"></i>
+            </div><!--/ .col-sm-2-->
+            <div class="col-sm-10 column">
+              <h3>Live Video Lessons</h3>
+              <hr><!-- separator-->
+              <p>In commodo dignissim facilisis. Vivamus ullamcorper rhoncus ligula, at eleifend sapien mattis quis. Aenean vitae ultrices erat. Nullam mollis quis tortor vel facilisis. Quisque sit amet mauris eu urna imperdiet pellentesque. Nullam quis molestie nisl.</p>
+            </div><!--/ .col-sm-10-->
+          </div><!--/ .feature-->
+        </div><!--/ .col-sm-7-->
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </section>
+  <!-- ----------- FEATURES ----------- -->
+
+  <!-- ----------- INSTRUCTOR ----------- -->
+  <section class="instructor block" id="instructor">
+    <div class="container">
+      <div class="row">
+        <div class="section-header col-xs-12 text-center">
+          <h1 class="section-title">Your Online Instructor</h1>
+          <hr><!--/ .separator-->
+        </div><!--/ .section-header-->
+      </div><!--/ .row-->
+      <div class="row">
+
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </section>
+  <!-- -----------/ INSTRUCTOR ----------- -->
+
+  <!-- ----------- SIGNUP CTA ----------- -->
+  <section class="signup-cta block text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h2 class="call-to-action">Aliquam nec orci pellentesque urna a sagittis mattis.</h2>
+          <a class="btn btn-default btn-lg cta-button" href="{% url 'account_signup' %}">Get Started</a>
+        </div>
+      </div><!--/ .row-->
+    </div><!--/ .container-->
+  </section>
+  <!-- -----------/ SIGNUP CTA ----------- -->
 {% endblock content %}
+
+{% block footer %}
+  {% include "includes/footer-contact.html" %}
+{% endblock footer %}
 
 {% block javascript %}
   {{ block.super }}

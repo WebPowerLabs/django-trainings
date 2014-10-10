@@ -22,11 +22,7 @@ p { font-weight: 300; }
 }
 // Links
 a {
-	// Transitions
-	transition: color .25s;
-	-moz-transition: color .25s;
-	-o-transition: color .25s;
-	-webkit-transition: color .25s;
+	.transition(color .25s ease);
 	&:hover { text-decoration: none; }
 }
 
@@ -35,10 +31,8 @@ a {
 .btn {
 	border: none;
 	// Transitions
-	transition: color .25s, background-color .25s, border-color .25s;
-	-moz-transition: color .25s, background-color .25s, border-color .25s;
-	-o-transition: color .25s, background-color .25s, border-color .25s;
-	-webkit-transition: color .25s, background-color .25s, border-color .25s;
+	.transition(color .25s ease);
+	.transition(background-color .25s ease);
 }
 .btn,
 .btn-lg,
@@ -50,48 +44,8 @@ a {
 .input-sm,
 .input-lg,
 .form-control {
+	border: none;
 	border-radius: 0;
-}
-.form-control { border: none; }
-
-/* Media
-/* ----------------------------------- */
-// Responsive Video
-.video-wrapper {
-	height: 0;
-	margin-bottom: 20px;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 25px;
-	position: relative;
-	iframe {
-		box-shadow: 0px 0px 10px 0px fadeout(#000, 30%);
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
-	}
-}
-
-/* Blocks
-/* ----------------------------------- */
-.section {
-	position: relative;
-	overflow: hidden;
-	width: 100%;
-	z-index: 2;
-	padding: 100px 0;
-	background-color: #fff;
-}
-.block { padding: 50px; }
-@media (min-width: @screen-sm-min) {
-	.block { padding: 60px; }
-}
-@media (min-width: @screen-md-min) {
-	.block { padding: 80px; }
-}
-@media (min-width: @screen-lg-min) {
-	.block { padding: 90px; }
 }
 
 /*	Pager
@@ -119,173 +73,20 @@ ul.pager {
 	}
 }
 
-/* Parallax
+/* Labels
 /* ----------------------------------- */
-.parallax { 
-	z-index: 0;
-	background-color: transparent;
-}
-/* BG Overlay Grid  */
-.parallax-overlay {
-	position: absolute;
-	z-index: 0;
-	left: 0;
-	top: 0;
-	margin: 0 auto;
-	width: 100%;
-	height: 100%;
-	background-image: url(../images/overlay-pattern.png);
-	background-repeat: repeat;
-}
-#slides .parallax-overlay { z-index: 1; }
-/* BG Image */
-.full-bg-image {
-	position: absolute;
-	z-index: -1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-position: 50% 50%;
-	background-repeat: repeat;	
-	background-image: url(../images/umbrella-woman.jpg)	
-}
-.no-touch .full-bg-image { 
-	background-attachment: fixed;
-	background-size: cover;
-}
-/* Mobile Video Image */
-.mobile-video-image .full-bg-image { 
-	display: none;
-	background-image: url(../images/temp/mobile-video-image.jpg);
-}
-.touch .mobile-video-image .full-bg-image { display: block; }
-/* Bg Video */
-.mbYTP_wrapper { z-index: -2 !important; }
-.mb-wrapper {
-	position: fixed;
-	z-index: -99;
-	min-width: 100%;
-	min-height: 100%;
-	left: 0;
-	top: 0;
-	overflow: hidden;
-	opacity: 1;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	-webkit-transition: opacity 200ms;
-	transition: opacity 200ms;
-}
-.mb-wrapper iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -2;
-	width: 120%;
-	height: 120%;
-	margin-top: -10%;
-	margin-left: -10%;
-	overflow: hidden;
-	opacity: 1;
-}
-/* Video Full Container */
-.video-full-container { 
-	display: table;
-	width: 100%; 
-}
-.video-full-entry {
-	display: inline-block;
-	padding: 70px 0;
-	width: 100%;
-}
-.video-full-container > .video-full-entry {
-	position: relative;
-	display: table-cell;
-	margin: auto;
-	padding: 115px 0 70px;
-	vertical-align: middle;
-}
-.video-title {
-	margin-bottom: 50px;
-	font-size: 80px; 
-	font-family: 'Julius Sans One', sans-serif;
-	text-transform: uppercase;
-}
-.parallax .video-title { color: #fff; }
-.video-full-entry .button { margin: 0 22px 15px; }
+.label { line-height: 2em; }
+.label-secondary { background-color: @brand-secondary; }
 
-//--------------------------------------//
-//---------- HOMEPAGE BLOCKS -----------//
-//--------------------------------------//
-
-/*	Welcome
-/* ----------------------------------- */	
-.welcome {
-	padding: 200px 0 140px;
-	.text-white();
-	.full-bg-image { background-image: url(../../images/parallax/flute-rose.jpg); }
-	.title {
-		font-size: 28px;
-		font-weight: 600;
-		letter-spacing: 2px;
-		margin-bottom: 25px;
-		text-transform: uppercase;
-	}
-	.subtitle {
-		font-size: 16px;
-		font-weight: 400;
-		letter-spacing: 2px;
-	}
-}
-@media (min-width: @screen-sm-min) {
-	.welcome {
-		.title { font-size: 56px; }
-	}
-}
-@media (min-width: @screen-md-min) {
-	.welcome {
-		.title { font-size: 72px; }
-	}
-}
-
-/* Icon Sections
+/* Panels
 /* ----------------------------------- */
-.icon-sections {
-	background-color: #fff;
-	.content-box {
-		margin-bottom: 10px;
-		.icon {
-			margin-bottom: 10px;
-			padding: 32px;
-			background-color: @brand-primary;
-			color: #fff;
-			font-size: 46px;
-			border-radius: 50%;
-			box-shadow: 1px 1px 8px rgba(0,0,0,0.4);
-			// Transition
-			transition: box-shadow 0.25s ease-in-out;
-			-moz-transition: box-shadow 0.25s ease-in-out;
-			-o-transition: box-shadow 0.25s ease-in-out;
-			-webkit-transition: box-shadow 0.25s ease-in-out;
-			&:hover { box-shadow: 1px 1px 12px rgba(0,0,0,0.7); }
-		}
-		.more-info {
-			text-transform: uppercase;
-			margin-top: 15px;
-		}
-	}
+.panel,
+.panel-heading {
+	border: none;
+	border-radius: 0;
 }
-
-/* Features Showcase
-/* ----------------------------------- */
-.features-showcase {
-	.feature {
-		.column { margin-bottom: 25px; }
-		i {
-			color: @brand-primary;
-			font-size: 60px;
-		}
-		h3 { margin-top: 0; }
-		hr { border-color: @gray-light2; }
-	}
+.panel-secondary > .panel-heading {
+	color: #ffffff;
+	background-color: @brand-secondary;
+	border-color: @brand-secondary;
 }
