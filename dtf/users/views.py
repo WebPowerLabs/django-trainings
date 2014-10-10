@@ -59,6 +59,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             from journals.models import Journal, JournalQuestion, JournalEntry
             from profiles.forms import UserPrivateProfileForm
             from etfars.views import etfar_tool_form_prep
+            from etfars.models import EtfarAccessCondition
 
             # comment feed
             all_comments = latest_comments(self.request)  # get latest comments
@@ -74,9 +75,11 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             # place private profile into form
             private_form = UserPrivateProfileForm(instance=private_profile)
 
-            # get the etfar forms
-            etfar_form, etfar_form_clone = etfar_tool_form_prep()
-
+            if EtfarAccessCondition.objects.access(self.request.user):   
+                # get the etfar forms
+                etfar_form, etfar_form_clone = etfar_tool_form_prep()
+                context['etfar_form'] = etfar_form
+                context['etfar_form_clone'] = etfar_form_clone
             # pass to context
             context['courses'] = CourseFavourite.objects.active(user)
             context['lessons'] = LessonFavourite.objects.active(user)
@@ -86,8 +89,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
             context['private_profile'] = private_form   
             context['questions'] = JournalQuestion.objects.purchased(user)
             context['entry'] = entry
-            context['etfar_form'] = etfar_form
-            context['etfar_form_clone'] = etfar_form_clone
+
         
         return context
 
