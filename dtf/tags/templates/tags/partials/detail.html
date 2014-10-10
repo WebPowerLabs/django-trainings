@@ -1,3 +1,3 @@
-<span class="label label-{% if request.GET.tags == object.id|stringformat:"i" %}success{% else %}primary{% endif %}">
+<span class="label label-{% if request.GET.tags == object.id|stringformat:"i" %}secondary{% else %}primary{% endif %}">
     {{ object.name }}
 </span>&nbsp;

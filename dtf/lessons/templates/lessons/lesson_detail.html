@@ -113,15 +113,17 @@ $(document).ready(function(){
             </div>
           {% endif %}
         {% else %}
+
           {% if resource_list or homework_list %}
             {% thumbnail object.thumbnail '640x480' crop='center' as im %}
-            <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
+            <img src="{{ im.url }}" class="img-responsive" alt="{{ object.name }}">
             {% endthumbnail %}
           {% else %}
             {% thumbnail object.thumbnail '1280x720' crop='center' as im %}
-            <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
+            <img src="{{ im.url }}" class="img-responsive" alt="{{ object.name }}">
             {% endthumbnail %}
           {% endif %}
+
           {% if object.audio %}
           <p>
             <audio src="{{ object.audio.url }}" preload="auto" />
@@ -152,7 +154,7 @@ $(document).ready(function(){
           </div>
           <div class="clearfix"></div>
         </div>
-        <div class="panel panel-success panel-resource">
+        <div class="panel panel-secondary panel-resource">
           <div class="panel-heading">
             <span>{{ trainings.homework_name }}</span>
             {% if user|can_manage_content:object %}
@@ -171,7 +173,7 @@ $(document).ready(function(){
           <div class="clearfix"></div>
         </div>
         {% if object.tags.all %}
-            <h3>{{ trainings.lesson_name }} categories</h3>
+            <h3>{{ trainings.lesson_name }} Categories</h3>
             {% for tag in object.tags.all %}
             <a href="{% url 'lessons:list' %}{% query_string tags=tag.id purchased=request.GET.purchased %}">
             {% include 'tags/partials/detail.html' with object=tag %}
