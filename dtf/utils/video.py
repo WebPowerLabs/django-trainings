@@ -1,29 +1,29 @@
-import os
-from datetime import datetime
-from subprocess import Popen
-from django.conf import settings
-import uuid
+import tempfile
+import subprocess
+from django.core.files.base import File
+from StringIO import StringIO
 
-
-def convert_video(file_path, format):
+def convert_video(in_file, vformat):
     """
-    Receives path to the video file and format in which it should be converted.
-    Returns path to converted file.
+    Receives video file object and format in which it should be converted.
+    Returns converted video file object.
     """
-    if format not in ['webm', 'mp4']:
+    if vformat not in ['webm', 'mp4']:
         raise ValueError('Argument "format" value must be "webm" or "mp4".')
-    tmp_path = 'tmp/{}'.format(datetime.now().strftime('%Y/%m/%d/'))
-    file_name = os.path.basename(file_path
-                                 ).split('.')[:-1][0] + '_{}'.format(uuid.uuid4(
-                                                                       ).hex)
-    out_file_path = os.path.join(settings.MEDIA_ROOT, tmp_path,
-                                 file_name + '.{}'.format(format))
-    mp4_cmd = ['ffmpeg', '-i', file_path, '-b:v', '1500k', '-codec:v',
-               'libx264', out_file_path]
-    webm_cmd = ['ffmpeg', '-i', file_path, '-b:v', '1500k', '-codec:v',
-                'libvpx', '-codec:a', 'libvorbis', '-b:a', '160000', '-f',
-                'webm', '-g', '30', out_file_path]
+    
+    f_out = tempfile.NamedTemporaryFile(suffix=".{}".format(vformat))
+    tmp_output_video = f_out.name
+
+    mp4_cmd = 'ffmpeg -y -i - -b:v 1500k -codec:v libx264 {}'.format(
+                                                             tmp_output_video)
+    
+    webm_cmd = 'ffmpeg -y -i - -b:v 1500k -codec:v libvpx -codec:a libvorbis \
+                 -b:a 160000 -f webm -g 30 {}'.format(tmp_output_video)
+    
     command = {'mp4': mp4_cmd, 'webm': webm_cmd}
-    pipe = Popen(command[format])
-    pipe.wait()
-    return out_file_path
+    
+    in_file.seek(0)
+    proc = subprocess.Popen(command[vformat], stdin=subprocess.PIPE,
+                            shell=True)
+    proc.communicate(bytes(in_file.read()))
+    return f_out

@@ -419,6 +419,14 @@ class LocalAndrew(Local):
     # $ export DJANGO_CONFIGURATION="LocalAndrew"
     DATABASES = values.DatabaseURLValue('postgres://postgres:postgres@localhost/dtf')
 
+    STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+    # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+    AWS_ACCESS_KEY_ID = 'AKIAICFP2ZVRVUMNSCLQ'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'dtf-heroku'
+
+
 
 class Production(Common):
 
