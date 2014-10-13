@@ -1,7 +1,5 @@
 import tempfile
 import subprocess
-from django.core.files.base import File
-from StringIO import StringIO
 
 def convert_video(in_file, vformat):
     """
