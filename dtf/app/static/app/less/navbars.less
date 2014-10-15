@@ -114,15 +114,15 @@
 // ---------------------------------------
 .nav-secondary,
 .nav-marketing {
-	background-color: @gray-dark;
+	background-color: @brand-primary-dark;
 	.navbar-nav > li > a {
-		color: @gray-light2;
-		.caret { color: @gray-light2; }
+		color: #fff;
+		.caret { color: #fff; }
 		&:hover,
 		&:focus {
-			color: #fff;
+			color: @brand-secondary;
 			background-color: transparent;
-			.caret { color: #fff; }
+			.caret { color: @brand-secondary; }
 		}
 	}
 	.dropdown-menu {
@@ -159,14 +159,9 @@
     > li {
       float: left;
       > a {
-      	color: @gray-light2;
       	cursor: pointer;
         padding-top:    @navbar-padding-vertical;
         padding-bottom: @navbar-padding-vertical;
-				&:hover {
-					background-color: transparent;
-					color: #fff;
-				}
       }
     }
     &:first-child { margin-left: -@navbar-padding-horizontal; }
@@ -182,10 +177,4 @@
 		padding-top: 24px;
 	}
 	.navbar-nav > li > a { line-height: 50px; }
-	// Homepage Marketing Nav
-	&.home {
-		background-color: fadeout(@gray-darker, 30%);
-		margin-bottom: -80px;
-		.dropdown-menu { background-color: fadeout(@gray-darker, 30%); }
-	}
 }

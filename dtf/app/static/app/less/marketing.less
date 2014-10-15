@@ -24,6 +24,10 @@
 	background-color: @brand-primary;
 	.text-white();
 }
+.block-secondary {
+	background-color: @brand-secondary;
+	.text-white();
+}
 
 /* Parallax Background
 /* ----------------------------------- */
@@ -145,16 +149,14 @@
 /* ----------------------------------- */
 .signup-cta {
 	&.block { padding-bottom: 55px; }
-	.block-primary();
+	.block-secondary();
 	.call-to-action { margin: 0 0 30px; }
 	.cta-button {
-		background-color: @gray-dark;
 		color: #fff;
 		font-family: 'Montserrat', Helvetica, sans-serif;
 		font-size: 14px;
 		letter-spacing: 2px;
 		padding: 12px 30px;
 		text-transform: uppercase;
-		&:hover { background-color: lighten(@gray-dark, 7%); }
 	}
 }
