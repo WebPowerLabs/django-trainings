@@ -5,15 +5,18 @@
 /* ------ Universal Styles
 /* --------------------------------------- */
 footer {
-	background-color:@gray-darker;
+	background-color: darken(@brand-primary-dark, 12%);
 	.text-white();
-	a:hover { color: #fff; }
+	a {
+		color: @brand-secondary;
+		&:hover { color: #fff; }
+	}
 	.widget-title { margin-bottom: 20px; }
 	.contact-widget p { margin: 0; }
 }
 .bottom-footer {
 	background-color: transparent;
-	color: @gray-light;
+	color: fadeout(#fff, 17%);
 	padding: 35px 0;
 	font-size: 12px;
 }
@@ -23,7 +26,7 @@ footer {
 .footer-main,
 .footer-app { margin-top: 60px; }
 .footer-content {
-	background-color: @gray-dark;
+	background-color: @brand-primary-dark;
 	padding: 50px 0 70px;
 	text-align: left;
 	// Box Shadow
@@ -40,34 +43,10 @@ footer {
 // ------ Contact Footer (Homepage)
 // ---------------------------------------
 .contact-footer {
-	.flute-divider { background-color: @brand-primary; }
+	.flute-divider { background-color: @brand-secondary; }
 	.contact-section {
 		padding: 60px 0 30px;
-		background-color: @gray-dark;
+		background-color: @brand-primary-dark;
 	}
-}
-
-.bottom-menu {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	background-color: #fff;
-	.bottom-menu-trigger {
-		background-color: @gray-dark;
-		color: #fff;
-		padding: 10px;
-		>a {
-			width: 100%;
-			margin: 0;
-			color: #fff;
-			font-size: 0.9em;
-		}
-	}
-	.bottom-menu-content {
-		display: none;
-		&.active {
-			display: block;
-		}
-	}
+	.btn-lg.submit { line-height: 1.45; }
 }
