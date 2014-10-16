@@ -29,25 +29,12 @@
 	.text-white();
 }
 
-/* Parallax Background
+/* Parallax
 /* ----------------------------------- */
-.parallax { 
+.parallax {
 	z-index: 0;
 	background-color: transparent;
 }
-/* BG Overlay Grid  */
-.parallax-overlay {
-	position: absolute;
-	z-index: 0;
-	left: 0;
-	top: 0;
-	margin: 0 auto;
-	width: 100%;
-	height: 100%;
-	background-image: url(../images/overlay-pattern.png);
-	background-repeat: repeat;
-}
-#slides .parallax-overlay { z-index: 1; }
 /* BG Image */
 .full-bg-image {
 	position: absolute;
@@ -64,6 +51,11 @@
 	background-attachment: fixed;
 	background-size: cover;
 }
+.overlay-dark-1 { background-color: fadeout(#000, 90%); }
+.overlay-dark-2 { background-color: fadeout(#000, 80%); }
+.overlay-dark-3 { background-color: fadeout(#000, 70%); }
+.overlay-dark-4 { background-color: fadeout(#000, 60%); }
+.overlay-dark-5 { background-color: fadeout(#000, 50%); }
 
 
 //-------------------------------//
@@ -73,21 +65,25 @@
 /*	Welcome
 /* ----------------------------------- */	
 .welcome {
-	padding: 140px 0;
+	padding: 50px 0 0;
 	.text-white();
-	.full-bg-image { background-image: url(../../images/parallax/flute-rose.jpg); }
+	.full-bg-image { background-image: url(../../images/parallax/sandy-flute.jpg); }
+	.welcome-header { padding-left: 20px; }
 	.title {
 		font-size: 28px;
 		font-weight: 600;
 		letter-spacing: 2px;
-		margin-bottom: 25px;
+		margin: 10px 0 20px;
 		text-transform: uppercase;
+		text-shadow: 1px 1px 8px fadeout(#000, 70%);
 	}
 	.subtitle {
 		font-size: 16px;
 		font-weight: 400;
 		letter-spacing: 2px;
 	}
+	.description { font-weight: 400; }
+	.ipad { margin-top: 40px; }
 }
 @media (min-width: @screen-sm-min) {
 	.welcome {
