@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.db.models import Q, Count, Max
 from django.core.urlresolvers import reverse
@@ -47,6 +48,19 @@ class LessonManager(PolymorphicManager):
                               Q(package__count=0, course__package__count=0),
                               published=True, course__published=True
                               ).distinct()
+
+
+
+    def public(self, course=None):
+        if course:
+            lesson_qs = self.filter(published=True, course=course)
+        else:
+            lesson_qs = self.filter(published=True)
+
+        today = datetime.date.today()
+        public_lessons = lesson_qs.filter(public_start__lte=today,
+                                         public_expire__gte=today)
+        return public_lessons
 
     def owned(self, user):
         return self.filter(owner=user)

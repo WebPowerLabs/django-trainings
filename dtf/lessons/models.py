@@ -45,13 +45,19 @@ class Lesson(Content):
     a video, and multiple resources/homework resources.
     """
     objects = LessonManager()
-
+    thumbnail = models.ImageField(upload_to='courses/thumbs/%Y/%m/%d',
+                height_field='thumbnail_height', width_field='thumbnail_width',
+                blank=True, null=True)
+    thumbnail_height = models.CharField(max_length=255, blank=True)
+    thumbnail_width = models.CharField(max_length=255, blank=True)
     video = models.OneToOneField('Video', blank=True, null=True)
     audio = models.FileField(upload_to='lessons/audio/%Y/%m/%d', blank=True,
                             null=True)
     homework = models.TextField(blank=True)
     course = models.ForeignKey('courses.Course')
     tags = models.ManyToManyField('tags.Tag', null=True, blank=True)
+    public_start = models.DateField(blank=True, null=True)
+    public_expire = models.DateField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         order = None

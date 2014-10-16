@@ -3,7 +3,7 @@ from django.core.mail import mail_admins
 from django.views.generic.base import TemplateView
 from jsonview.decorators import json_view
 from .forms import ContactForm, EmailForm
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from utils.search import EsClient
 
 
@@ -32,6 +32,23 @@ class HMHPageView(PageView):
             video_template_name = "pages/hmh/hmh_video_{}.html".format(video_id)
             template_names.insert(0, video_template_name)
         return template_names
+
+
+class PublicCoursePageView(PageView):
+    template_name = "courses/public_page.html"
+
+    def get_context_data(self, **kwargs):
+        from courses.models import Course
+        from lessons.models import Lesson
+        context = super(PublicCoursePageView, self).get_context_data(**kwargs)
+        course = get_object_or_404(Course, slug=self.kwargs['slug'])
+        context['course'] = course
+        public_lessons = Lesson.objects.public(course=course)
+        if len(public_lessons):
+            context['lesson'] = public_lessons[0]
+            print public_lessons
+        return context
+
 
 
 @csrf_exempt

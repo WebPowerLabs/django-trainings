@@ -8,7 +8,7 @@ from resources.models import Resource
 class ResourceCreateFrom(forms.ModelForm):
     class Meta:
         model = Resource
-        fields = ['name', 'description', 'published', 'thumbnail', 'type',
+        fields = ['name', 'description', 'published', 'type',
                   'file']
 
     helper = FormHelper()

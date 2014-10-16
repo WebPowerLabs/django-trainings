@@ -24,10 +24,7 @@ class Content(PolymorphicModel):
                             help_text='users will only see published courses')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    thumbnail = models.ImageField(upload_to='courses/thumbs/%Y/%m/%d',
-                height_field='thumbnail_height', width_field='thumbnail_width')
-    thumbnail_height = models.CharField(max_length=255, blank=True)
-    thumbnail_width = models.CharField(max_length=255, blank=True)
+
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
 
@@ -38,6 +35,13 @@ class Course(Content):
 
     objects = CourseManager()
 
+    thumbnail = models.ImageField(upload_to='courses/thumbs/%Y/%m/%d',
+                height_field='thumbnail_height', width_field='thumbnail_width',
+                blank=True, null=True)
+    thumbnail_height = models.CharField(max_length=255, blank=True)
+    thumbnail_width = models.CharField(max_length=255, blank=True)
+    force_progess = models.BooleanField(default=False, 
+                    help_text='Force users to complete lessons in order?')
     order = models.IntegerField(editable=False)
 
     def save(self, *args, **kwargs):

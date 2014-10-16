@@ -42,8 +42,9 @@ class LessonCreateFrom(forms.ModelForm):
                 'video_path',
                 'video_pk',
                 'audio',
-                'homework',
-                'tags'),
+                'tags',
+                'public_start',
+                'public_expire',),
                 ButtonHolder(Submit('save_changes',
                                     'Save changes',
                                     css_class="btn-success")))

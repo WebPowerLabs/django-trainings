@@ -84,16 +84,20 @@ $(document).ready(function(){
 {% endblock nav_secondary %}
 
 {% block content %}
+
 <section class="lesson-detail">
   <div class="container">
     <div id="collapseOne" class="panel-collapse collapse">
       {% if user|can_manage_content:object %}{% crispy form %}{% endif %}
     </div><!--/ .panel-collapse-->
-
-    <h2>{{ object.name }}</h2>
-
+    <div class="section-header{% if not resource_list and not homework_list %} text-center{% endif %}">
+      <h2 class="section-title">{{ object.name }}</h2>
+      <h3 class="section-subtitle">{{ object.subtitle }}</h3>
+      {% if not resource_list and not homework_list %}<hr>{% endif %}
+    </div>
     <div class="row">
-      <div class="content col-sm-7">
+      <div class="content{% if resource_list and homework_list %} col-sm-7{% else %} col-sm-12{% endif %}">
+
         {% if object.video %}
           {% if object.video.status == object.video.CONVERTED %}
             {% video_player object %}
@@ -109,19 +113,26 @@ $(document).ready(function(){
             </div>
           {% endif %}
         {% else %}
-          {% thumbnail object.thumbnail '640x480' crop='center' as im %}
-          <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
-          {% endthumbnail %}
+          {% if resource_list or homework_list %}
+            {% thumbnail object.thumbnail '640x480' crop='center' as im %}
+            <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
+            {% endthumbnail %}
+          {% else %}
+            {% thumbnail object.thumbnail '1280x720' crop='center' as im %}
+            <img src="{{ im.url }}" class="img-rounded img-responsive" alt="{{ object.name }}">
+            {% endthumbnail %}
+          {% endif %}
           {% if object.audio %}
           <p>
             <audio src="{{ object.audio.url }}" preload="auto" />
           </p>
           {% endif %}
-        {% endif %}
+        {% endif %}{# if object.video #}
       <p>
         {{ object.description|markdown }}
       </p>
       </div><!--/ .content-->
+      {% if resource_list or homework_list %}
       <div class="col-sm-5">
         <div class="panel panel-primary panel-resource">
           <div class="panel-heading">
@@ -168,6 +179,7 @@ $(document).ready(function(){
             {% endfor %}
         {% endif %}
       </div><!--/ .col-sm-5-->
+      {% endif %}{# if resource_list or homework_list #}
     </div><!--/ .row-->
     <div class="row">
       <div class="col-md-4 col-md-offset-4">

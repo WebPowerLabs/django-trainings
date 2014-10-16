@@ -34,6 +34,9 @@
       <li><a href="{% url 'lessons:history' %}">History</a></li>
     </ul>
   </li>
+  <li class="">
+    <a href="{% url 'affiliates:partner_list' %}" title="Jami's List">Jami's List</a>
+  </li>
 {% endif %}
 {% if user.is_staff %}
 	<li><a href="{% url 'admin:index' %}">Admin</a></li>
