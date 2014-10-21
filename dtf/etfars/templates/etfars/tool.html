@@ -1,53 +1,13 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags staticfiles %}
 
 {% block content %}
 
 <div class="container-fluid">
-  <div id="progress-check" class="hidden">
-    <div class="text-center">
-      <h1>Are you satisfied with your new story?</h1>
-      <div class="row">
-        <div class="col-sm-3 col-sm-offset-2">
-          <a class="btn btn-lg btn-block btn-success" id="progress-yes" href="#">Yes</a>
-        </div>
-        <div class="col-sm-3 col-sm-offset-2">
-          <a class="btn btn-lg btn-block btn-danger" id="progress-no" href="#">No</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="reevaluate" class="hidden">
-    <div class="text-center">
-      <h1>Is there another thought you would like to exchange?</h1>
-      <div class="row">
-        <div class="col-sm-3 col-sm-offset-2">
-          <a class="btn btn-lg btn-block btn-success" id="reevaluate-yes" href="#">Yes</a>
-        </div>
-        <div class="col-sm-3 col-sm-offset-2">
-          <a class="btn btn-lg btn-block btn-primary" id="reevaluate-no" href="#">No</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h1 id="event-title" class="hidden"></h1>
-  <div class="row">
-    <div id="left-editor" class="col-md-12">
-      {% crispy form %}
-    </div>
-    <div id="right-editor" class="">
-    </div>
-  </div>
-  <div class="clearfix">
-    <a class="btn btn-primary" id="start-new-tfar">
-      Proceed
-    </a>
-    <a class="btn btn-primary hidden" id="replace-old-tfar">
-      Proceed
-    </a>
-  </div>
+  {% include 'etfars/tool_isolate.html' %}
 </div>
+
 
 <div class="container-fluid">
   <div class="row">
@@ -77,107 +37,10 @@
 
 
 
-{% crispy form_clone %}
-
 {% endblock content %}
 
-{% block css %}
-{{ block.super }}
-<style>
-.etfar-form .help-block {display: none;}
-</style>
-{% endblock css %}
+
 {% block javascript %}
 {{ block.super }}
-<script>
-function splitScreen() {
-  // show right editor, make left editor half width
-  $("#right-editor").addClass('col-md-6').removeClass('hidden');
-  $("#left-editor").addClass('col-md-6');
-};
-function singleScreen() {
-  // hide right editor, make left editor full width
-  $("#right-editor").removeClass('col-md-6').addClass('hidden');
-  $("#left-editor").removeClass('col-md-6');  
-}
-function cloneForm() {
-  // clone from the hidden form clone
-  $('#etfar_tool_clone').clone().appendTo($("#right-editor")).removeClass('hidden').attr('id', 'etfar_tool');
-  // populate hidden event input with event title value
-  $('#right-editor #id_event').val($('#event-title').text());
-};
-function saveEvent(eventInput) {
-  // hide event field and move to clone.
-  eventInput.parents('.form-group').addClass('hidden').appendTo($("#etfar_tool_clone"));
-  // move event input to page title
-  $('#event-title').removeClass('hidden').text(eventInput.val());
-};
-function moveRightFormToLeft() {
-  $("#left-editor #etfar_tool").replaceWith($("#right-editor #etfar_tool"));
-};
-function moveLeftFormToRight() {
-  $("#right-editor #etfar_tool").replaceWith($("#left-editor #etfar_tool"));
-};
-function toggleObj(obj, toggle) {
-  // toggle an objects 'hidden' css class
-  // optionally pass toggle as 'show' or 'hide' string
-  var toggle = toggle || false;
-  if(toggle) {
-    if(toggle=='show'){
-      obj.removeClass('hidden');
-    };
-    if(toggle=='hide'){
-      obj.addClass('hidden');
-    }
-  } else {
-    obj.toggleClass('hidden');
-  };
-};
-
-function progressCheckNo() {
-  // user selects no in progress box
-  // this starts a new "tfar"
-  toggleObj($('#progress-check'), 'hide');
-  toggleObj($('#replace-old-tfar'), 'show');
-  splitScreen();
-  cloneForm();
-};
-function progressCheckYes() {
-  // user selects yes in progress box
-  toggleObj($('#progress-check'), 'hide');
-  // save etfar
-  $("#left-editor #etfar_tool").submit();
-};
-
-function startNewTfar() {
-  var $eventInput = $("#left-editor #etfar_tool #id_event");
-    $('#start-new-tfar').addClass('hidden');
-    $('#replace-old-tfar').removeClass('hidden');
-    saveEvent($eventInput);
-    splitScreen();
-    cloneForm();
-};
-
-$(document).ready(function(){
-  $('#start-new-tfar').on('click', function(e) {
-    e.preventDefault();
-    startNewTfar(e);
-  });
-  $('#replace-old-tfar').on('click', function(e) {
-    moveRightFormToLeft();
-    singleScreen();
-    $('#replace-old-tfar').addClass('hidden');
-    // start progress check
-    toggleObj($('#progress-check'), 'show');
-  });
-  $('#progress-yes').on('click', function(e) {
-    e.preventDefault();
-    progressCheckYes();
-  });
-  $('#progress-no').on('click', function(e) {
-    e.preventDefault();
-    progressCheckNo();
-  });
-});
-</script>
+<script src="{% static 'etfars/js/etfarTool.js' %}"></script>
 {% endblock javascript %}

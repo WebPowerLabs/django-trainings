@@ -31,7 +31,8 @@ class LessonManager(PolymorphicManager):
             return not_completed[0] # return the next lesson
         # if there are no uncomplete lessons, the course is complete
         else:
-            return self.published(user, course=course).order_by('-_order')[0]
+            latest = self.published().filter(course=course).order_by('-_order')
+            return latest[0] if latest else None
 
     def published(self):
         return self.filter(published=True, course__published=True)

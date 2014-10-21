@@ -413,6 +413,11 @@ class Local(Common):
     ########## end django-debug-toolbar
 
     ########## Your local stuff: Below this line define 3rd party libary settings
+    STATICFILES_DIRS = (
+        join(BASE_DIR, 'static'),
+        join(BASE_DIR, '..', 'bower_components'),
+    )
+
 
 class LocalAndrew(Local):
     # Andrews Local settings
@@ -542,3 +547,4 @@ class Production(Common):
 
     INFUSIONSOFT_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
     INFUSIONSOFT_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
+    BROKER_URL = 'redis://redistogo:ae0406a227274aa7681acdf0fec01783@hoki.redistogo.com:11015/'

@@ -195,6 +195,7 @@ $(document).ready(function(){
   {% endif %}
 
 <!-- Modal -->
+{% if current_lesson %}
 <div class="modal fade" id="incompleteModal" tabindex="-1" role="dialog" aria-labelledby="incompleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -208,6 +209,6 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
-
+{% endif %}
 
 {% endblock modal %}

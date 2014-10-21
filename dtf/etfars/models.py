@@ -1,7 +1,7 @@
 from django.db import models
-
 from django.conf import settings
 
+from .managers import EtfarManager
 
 class Etfar(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -20,3 +20,20 @@ class Etfar(models.Model):
 
     def __unicode__(self):
         return u'{}: {}'.format(self.owner.username, self.event)
+
+
+class EtfarAccessCondition(models.Model):
+    '''
+    a condition that must be met to access etfar tool.
+    a user object will be tested in manager. All conditions must be met to 
+    access the etfar tool.
+    '''
+    package = models.ForeignKey("packages.Package")
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    objects = EtfarManager()
+
+    def __unicode__(self):
+        return u"{}".format(self.package.name)

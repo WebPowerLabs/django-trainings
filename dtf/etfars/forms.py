@@ -1,5 +1,5 @@
 from django import forms
-
+from django.core.urlresolvers import reverse
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Fieldset, Field
 from crispy_forms.bootstrap import FormActions
@@ -20,7 +20,7 @@ class EtfarForm(forms.ModelForm):
         self.helper.form_id = kwargs.get('form_id', 'etfar_tool')
         self.helper.label_class='col-md-3'
         self.helper.field_class='col-md-7'
-        self.helper.form_action='.'
+        self.helper.form_action=reverse('etfars:tool')
         self.helper.layout = Layout(
             Field('event', rows=2, placeholder=self.fields['event'].help_text),
             Field('thought', rows=2, placeholder=self.fields['thought'].help_text),
