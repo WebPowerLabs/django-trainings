@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}<!DOCTYPE html>
+{% load staticfiles i18n payments_tags %}<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -165,8 +165,8 @@
       <!-- place project specific Javascript in this file -->
       <script src="{% static 'js/jquery.qs.js' %}"></script>
       <script src="{% static 'js/jquery.goTo.js' %}"></script>
+      <script src="{% static 'eldarion-ajax/js/eldarion-ajax.min.js' %}"></script>
       <script src="{% static 'js/project.js' %}"></script>
-
     {% endblock javascript %}
   </body>
 </html>

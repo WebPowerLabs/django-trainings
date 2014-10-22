@@ -7,40 +7,20 @@
 
 <div class="container">
     <h1 class="page-header">
-      {{ object.first_name }}
-    </h1>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Profile
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-3">
-          {% if request.user == object %}
-            <a class="" href="{% url 'avatar_add' %}">
-          {% else %}
-            <a>
-          {% endif %}
-          {% if object.fb_uid and not object|has_avatar %}
-            <img src="{{ object.get_fb_profile_img_url }}" class="img-circle img-responsive">
-          {% else %}
-          <img src="{% avatar_url object 160 %}" class="img-circle img-responsive">
-          {% endif %}
-            </a>
-        </div>
-        <div class="col-md-9">
-          <p><strong>My Archetype: </strong>{{ profile.archetype }}</p>
-          <p><strong>My Anthem: </strong>{{ profile.anthem }}</p>
-          <p><strong>I am ... </strong>{{ profile.about }} </p>
-        </div>
-      </div>
-    </div>
+      
     {% if request.user == object %}
-    <div class="panel-footer">
-      <a class="btn btn-link" href="{% url 'profiles:update_user_profile' %}">Update Profile</a>
-    </div>
+      <a class="pull-right" href="{% url 'avatar_add' %}">
+    {% else %}
+      <a class="pull-right">
     {% endif %}
-  </div>
+    {% if object.fb_uid and not object|has_avatar %}
+      <img src="{{ object.get_fb_profile_img_url }}" class="img-circle img-responsive">
+    {% else %}
+      <img src="{% avatar_url object 160 %}" class="img-circle img-responsive">
+    {% endif %}
+    </a>
+    <span class="">{{ object.first_name }}</span>
+    </h1>
 </div>
 
 {% if request.user == object or request.user.is_staff %}
@@ -49,18 +29,6 @@
     <h2 class="page-header">
       My Dashboard
     </h2>
-    {% if etfar_form %}
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        Navigation Tool
-      </div>
-      <div class="panel-body">
-        {% include 'etfars/tool_isolate.html' %}
-      </div>
-    </div>
-    {% endif %}
-
-
     <div class="row">
       <div class="col-md-7">
         <div class="panel panel-primary">
@@ -88,56 +56,6 @@
         </div>
       </div>
       <div class="col-md-5">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            My Private Profile
-          </div>
-          <div class="panel-body">
-              <form class="form form-horizontal" action="{% url 'profiles:update_user_private_profile' %}" method="POST">
-                {% csrf_token %}
-              {{ private_profile }}
-              <input type="submit" class="btn btn-primary" value="Save">
-              </form>
-          </div>
-        </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <a href="{% url 'journals:entries' %}" title="View My Journal" style="color:#fff;text-decoration:underline;">My Journal</a>
-          </div>
-          <div class="panel-body">
-            {% if journal.can_submit %}
-            <form class="form" action="{% url 'journals:entries' %}" method="POST">
-              {% csrf_token %}
-            {% for question in questions %}
-              {% include "journals/journal_question.html" %}
-              {% if forloop.last %}
-              <input type="hidden" name="next" id="id_next" value="{% url 'users:detail' request.user.id %}">
-              <input class="btn btn-primary" type="submit" value="Submit">
-              {% endif %}
-            {% empty %}
-              <p>Your journal questions will appear here.</p>
-            {% endfor %}
-            
-            </form>
-            {% else %}
-            <form class="form" action="{% url 'journals:entries_edit' entry.pk %}" method="POST">
-              {% csrf_token %}
-            {% for question, response in entry.data.iteritems %}
-            <div id="div_id_{{ question }}" class="form-group">
-              <label for="id_{{ question }}" class="control-label">{{ question }}</label>
-              <div class="controls">
-                <input class="textinput form-control" id="id_{{ question }}" maxlength="255" name="{{ question }}" type="text" value="{{ response }}"> 
-              </div>
-            </div>
-              {% if forloop.last %}
-              <input type="hidden" name="next" id="id_next" value="{% url 'users:detail' request.user.id %}">
-              <input class="btn btn-primary" type="submit" value="Save Changes">
-              {% endif %}
-            {% endfor %}
-            </form>
-            {% endif %}
-          </div>
-        </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
             My Communities

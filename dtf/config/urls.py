@@ -18,9 +18,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # User management
     url(r'^users/', include("users.urls", namespace="users")),
-    url(r"^accounts/login/$", LoginCustomView.as_view(), name="account_login"),
-    url(r'^accounts/confirm-email/$', EmailVerificationSentView.as_view(),
-                                      name='account_email_verification_sent'),
+
     url(r'^accounts/', include('allauth.urls')),
 
     # Uncomment the next line to enable avatars
@@ -46,6 +44,7 @@ urlpatterns = patterns('',
     url(r'^journals/', include('journals.urls', namespace="journals")),
     url(r'^affiliates/', include('affiliates.urls', namespace="affiliates")),
     url(r'^etfar/', include('etfars.urls', namespace='etfars')),
+    url(r"^payments/", include("payments.urls")),
     url(r'^', include('pages.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
