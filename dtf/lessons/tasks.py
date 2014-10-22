@@ -1,6 +1,6 @@
+import uuid
 from config.celery import app
 from utils.video import convert_video
-from django.core.files.storage import default_storage
 from django.core.files import File
 import os
 
@@ -18,7 +18,8 @@ def process_video(video_obj):
             converted = convert_video(video_obj.orig.file, vformat) 
             print 'Saving video object...'
             djangofile = File(converted)
-            field.save(base_name + '.{}'.format(vformat), djangofile)
+            field.save(base_name + '_{}.{}'.format(uuid.uuid4().hex, vformat),
+                       djangofile)
             converted.close()
         video_obj.save()
         print 'Done.'
