@@ -10,15 +10,8 @@ from allauth.socialaccount.models import SocialAccount
 
 # Subclass AbstractUser
 class User(AbstractUser):
-    street1 = models.CharField(max_length=255, 
-                               verbose_name=u'Street Address 1')
-    street2 = models.CharField(max_length=255, 
-                               verbose_name=u'Street Address 2', blank=True)
-    city = models.CharField(max_length=255)
-    state = USStateField()
     phone = PhoneNumberField()
-    postal_code = models.CharField(max_length=10)
-    country = models.CharField(max_length=255, default="US")
+
 
     def __unicode__(self):
         return self.username

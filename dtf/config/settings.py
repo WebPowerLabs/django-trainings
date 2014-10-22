@@ -62,6 +62,8 @@ class Common(Configuration):
         'djcelery',
         'localflavor',
         'django_hstore',
+        'payments',
+        'django_forms_bootstrap',
     )
 
     # Apps specific for this project go here.
@@ -381,6 +383,32 @@ class Common(Configuration):
     HOMEWORK_NAME = "Homework"
     ########## END TRAININGS CONFIG
 
+
+    
+    ########### Begin Stripe configuration
+    STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', 'pk_test_4XMRbU6H6Jf5B2TXmICnvXS7')
+    STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'sk_test_4XMRnH3aMfrhHN1nZO2uzcDE')
+
+    # stripe payment plans
+    PAYMENTS_PLANS = {
+        "monthly-test": {
+            "stripe_plan_id": "test-plan",
+            "name": "Test Plan",
+            "description": "",
+            "price": 1,
+            "currency": "usd",
+            "interval": "month"
+        },
+    }
+    PAYMENTS_DEFAULT_PLAN = "monthly-test"
+
+    MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ("utils.middleware.ActiveSubscriptionMiddleware",)
+    SUBSCRIPTION_REQUIRED_URLS = ["detail",]
+    SUBSCRIPTION_REQUIRED_REDIRECT = "payments_subscribe"
+    SUBSCRIPTION_REQUIRED_NAMESPACES = ["lessons",]
+    ########### End Stripe configuration
+
+
 class Local(Common):
 
     ########## DEBUG
@@ -417,7 +445,8 @@ class Local(Common):
         join(BASE_DIR, 'static'),
         join(BASE_DIR, '..', 'bower_components'),
     )
-
+    STRIPE_PUBLIC_KEY = 'pk_test_4XMRbU6H6Jf5B2TXmICnvXS7'
+    STRIPE_SECRET_KEY = 'sk_test_4XMRnH3aMfrhHN1nZO2uzcDE'
 
 class LocalAndrew(Local):
     # Andrews Local settings

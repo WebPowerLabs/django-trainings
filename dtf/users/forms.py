@@ -2,6 +2,10 @@
 from django import forms
 from localflavor.us.forms import USStateField, USZipCodeField, USPhoneNumberField
 
+from crispy_forms.bootstrap import FormActions
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Div, Field, Submit, Button, Fieldset, HTML
+
 from affiliates.models import Affiliate
 
 from .models import User
@@ -14,36 +18,37 @@ class UserForm(forms.ModelForm):
         model = User
 
         # Constrain the UserForm to just these fields.
-        fields = ("first_name", "last_name", "street1", "street2", "city", "state", "postal_code", "country")
+        fields = ("phone", )
 
 
 class UserSignupForm(forms.Form):
     first_name = forms.CharField(max_length=255)
     last_name = forms.CharField(max_length=255)
     phone = USPhoneNumberField()
-    street1 = forms.CharField(label=u'Street Address 1')
-    street2 = forms.CharField(label=u'Street Address 2', required=False)
-    city = forms.CharField()
-    state = USStateField()
-    postal_code = USZipCodeField()
-    country = forms.CharField()
-    referral_code = forms.CharField(required=False, widget=forms.HiddenInput)
+
+    def __init__(self, *args, **kwargs):
+        super(UserSignupForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = True
+        self.helper.form_class = 'form'
+        self.helper.form_action = '.'
+        self.helper.layout = Layout(
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'phone',
+            'password1',
+            'password2',
+            FormActions(
+                Submit('submit', 'Submit')
+                )
+            )
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.phone = self.cleaned_data['phone']
-        user.street1 = self.cleaned_data['street1']
-        user.street2 = self.cleaned_data['street2']
-        user.city = self.cleaned_data['city']
-        user.state = self.cleaned_data['state']
-        user.postal_code = self.cleaned_data['postal_code']
-        user.country = self.cleaned_data['country']
         user.save()
-        referral_code = self.cleaned_data['referral_code']
-        if referral_code:
-            Affiliate.objects.sign_up_affiliate_user_with_code(user, 
-                                                               referral_code)
-        else:
-            Affiliate.objects.sign_up_affiliate_user_with_zip(user)
+
 
