@@ -37,6 +37,9 @@ class Package(models.Model):
                                     blank=True)
     journals = models.ManyToManyField("journals.JournalQuestion", null=True,
                                       blank=True)
+    custom_template = models.CharField(max_length=255, blank=True, 
+        help_text="Example: 'packages/mypackage.html'. If this isn't provided,\
+        the system will use 'packages/detail.html'.")
 
     objects = PackageManager()
 

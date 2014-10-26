@@ -1,0 +1,52 @@
+{% extends "sell_pages_base.html" %}
+
+
+{% block content %}
+
+<section class="section-hmh">
+  <div class="container">
+    <h1 class="page-heading">Heal My Heart</h1>
+    <p class="lead"><a class="" href="#" data-toggle="modal" data-target="#connectedModal">Stay connected</a> and we’ll be in touch when registration for the next HMH course is open. (This course is currently full.) You’ll receive our mentorship moments and a sneak peek into what we’re up to inside the Decide to Fly community.</p>
+  </div>
+</section>
+{% endblock content %}
+
+
+{% block modal %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="connectedModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="connectedModalLabel">Stay Connected</h4>
+      </div>
+      <div class="modal-body">
+        <p>Stay connected and we’ll be in touch when registration for the next HMH course is open. (This course is currently full.) You’ll receive our mentorship moments and a sneak peek into what we’re up to inside the Decide to Fly community.</p>
+
+          <!--TODO: infusionsoft form here -->
+<form accept-charset="UTF-8" action="https://kb140.infusionsoft.com/app/form/process/e74a54ec36026bde848d6930d06fb1b6" class="infusion-form form" id="connect-form" method="POST">
+    <input name="inf_form_xid" type="hidden" value="e74a54ec36026bde848d6930d06fb1b6" />
+    <input name="inf_form_name" type="hidden" value="Opt-in to&#a;&quot;Stay Connected&quot;" />
+    <input name="infusionsoft_version" type="hidden" value="1.32.0.68" />
+
+   <div class="infusion-field form-group">
+        <label class="control-label" for="inf_field_FirstName">First Name</label>
+        <input class="infusion-field-input-container form-control" id="inf_field_FirstName" name="inf_field_FirstName" type="text" />
+    </div>
+    <div class="infusion-field form-group">
+        <label class="control-label" for="inf_field_Email">Email</label>
+        <input class="infusion-field-input-container form-control" id="inf_field_Email" name="inf_field_Email" type="text" />
+    </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--TODO: submit to infusionsoft -->
+        <button type="button" class="btn btn-success" id="connect-submit">Connect &nbsp; <i class="fa fa-check"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock modal %}

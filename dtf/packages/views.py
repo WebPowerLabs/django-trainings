@@ -23,18 +23,32 @@ class PackageDetailView(DetailView):
         context = super(PackageDetailView, self).get_context_data(**kwargs)
 
         package = self.get_object()
-        purchased = PackagePurchase.objects.purchased(self.request.user
-                                                      ).filter(package=package)
+        if self.request.user.is_authenticated():
+            purchased = PackagePurchase.objects.purchased(self.request.user
+                                                          ).filter(
+                                                          package=package)
+            context['purchased'] = purchased[0] if purchased else False
+        
         try:
             # if infusionsoft package, use that instead of package_package
             package = package.infusionsoftpackage
         except  InfusionsoftPackage.DoesNotExist:
             pass
-
-        context['purchased'] = purchased[0] if purchased else False
+            
         context['class_name'] = package.__class__.__name__
         context['package'] = package
         return context
+
+    def get_template_names(self):
+        '''
+        Looks for a custom_template value and prepends it to template_names 
+        if it exists otherwise 'packages/detail.html' is used
+        '''
+        template_names = super(PackageDetailView, self).get_template_names()
+        if self.get_object().custom_template:
+            # there is a custom template, insert it before 'template_name'
+            template_names.insert(0, self.get_object().custom_template)
+        return template_names
 
 
 class PackageListForContentView(ListView):
