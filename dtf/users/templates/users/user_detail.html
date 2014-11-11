@@ -21,6 +21,10 @@
     </a>
     <span class="">{{ object.first_name }}</span>
     </h1>
+    {% if request.user.is_staff %}
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<div class="g-hangout" data-render="createhangout" data-invites="[{id:'{{ object.email }}',invite_type:'EMAIL'},]"></div>
+{% endif %}
 </div>
 
 {% if request.user == object or request.user.is_staff %}
@@ -160,6 +164,7 @@ $(document).ready(function(){
 {% if etfar_form %}
 <script src="{% static 'etfars/js/etfarTool.js' %}"></script>
 {% endif %}
+
 {% endblock javascript %}
 
 
