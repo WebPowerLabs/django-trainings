@@ -102,12 +102,12 @@ Run these commands to deploy the project to Heroku:
 
 .. code-block:: bash
 
-    heroku create --buildpack https://github.com/ddollar/heroku-buildpack-multi.git
+    heroku create --buildpack https://github.com/integricho/heroku-buildpack-python-ffmpeg2.1-with-codecs.git
     heroku addons:add heroku-postgresql:dev
-    heroku addons:add pgbackups:auto-month
-    heroku addons:add sendgrid:starter
-    heroku addons:add memcachier:dev
-    heroku pg:promote DATABASE_URL
+    heroku addons:add pgbackups:auto-month;
+    heroku addons:add sendgrid:starter;
+    heroku addons:add memcachier:dev;
+    heroku pg:promote HEROKU_POSTGRESQL_COPPER_URL
     heroku config:set DJANGO_CONFIGURATION=Production
     heroku config:set DJANGO_SECRET_KEY=RANDOM_SECRET_KEY_HERE
     heroku config:set DJANGO_AWS_ACCESS_KEY_ID=YOUR_AWS_ID_HERE
