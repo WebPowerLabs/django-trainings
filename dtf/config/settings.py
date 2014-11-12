@@ -61,7 +61,6 @@ class Common(Configuration):
         'polymorphic',
         'djcelery',
         'localflavor',
-        'django_hstore',
         'payments',
         'django_forms_bootstrap',
     )
@@ -81,9 +80,6 @@ class Common(Configuration):
         'dtf_comments',
         'packages',
         'features',
-        'journals',
-        'affiliates',
-        'etfars',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -576,12 +572,5 @@ class Production(Common):
 
     ########## Your production stuff: Below this line define 3rd party libary settings
 
-    ########## Djnfusion CONFIG
-    DJNFUSION_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
-    DJNFUSION_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_API_KEY")
-    ########## END Djnfusion CONFIG
 
-
-    INFUSIONSOFT_COMPANY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
-    INFUSIONSOFT_API_KEY = values.SecretValue(environ_prefix="", environ_name="INFUSIONSOFT_COMPANY_ID")
-    BROKER_URL = 'redis://redistogo:ae0406a227274aa7681acdf0fec01783@hoki.redistogo.com:11015/'
+    BROKER_URL = os.environ.get('BROKER_URL', None)
