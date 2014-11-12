@@ -152,7 +152,7 @@ class Common(Configuration):
 
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://localhost/trainings')
+    DATABASES = values.DatabaseURLValue('postgres://localhost/trainings-1')
     ########## END DATABASE CONFIGURATION
 
     ########## CACHING
@@ -280,15 +280,15 @@ class Common(Configuration):
     #ELASTICSEARCH_SETTINGS = [{'host': BONSAI_URL}]
     #ELASTICSEARCH_INDEX = os.environ.get('BONSAI_INDEX', 'dtf')
 
-    ELASTICSEARCH_SETTINGS = [{'host': 'privet-1821403.us-east-1.bonsai.io',
+    ELASTICSEARCH_SETTINGS = [{'host': 'boxwood-8259015.us-east-1.bonsai.io',
                                'port': 443,
                                'use_ssl': True,
-                               'username': 'ae3c3lfd',
-                               'password': '61zwio5idcs8zyzi'
+                               'username': 'm1rnfb62',
+                               'password': '19kwzzhypo67ete7'
                                }]
     # Don't forget to create index in cluster.
     # Run: curl -XPUT 'url_to_elastic_search_cluster/index_name'
-    ELASTICSEARCH_INDEX = 'dtf'
+    ELASTICSEARCH_INDEX = 'trainings'
     
     ########## CELERY SETTINGS
     BROKER_URL = 'redis://localhost'
@@ -528,12 +528,12 @@ class Production(Common):
 
     ########## EMAIL
     DEFAULT_FROM_EMAIL = values.Value(
-            'd2f <noreply@localhost:8000>')
+            'Training <noreply@webpowerlabs.com>')
     EMAIL_HOST = values.Value('smtp.sendgrid.com')
     EMAIL_HOST_PASSWORD = values.SecretValue(environ_prefix="", environ_name="SENDGRID_PASSWORD")
     EMAIL_HOST_USER = values.SecretValue(environ_prefix="", environ_name="SENDGRID_USERNAME")
     EMAIL_PORT = values.IntegerValue(587, environ_prefix="", environ_name="EMAIL_PORT")
-    EMAIL_SUBJECT_PREFIX = values.Value('[d2f] ', environ_name="EMAIL_SUBJECT_PREFIX")
+    EMAIL_SUBJECT_PREFIX = values.Value('Training ', environ_name="EMAIL_SUBJECT_PREFIX")
     EMAIL_USE_TLS = True
     SERVER_EMAIL = EMAIL_HOST_USER
     ########## END EMAIL
@@ -573,4 +573,4 @@ class Production(Common):
     ########## Your production stuff: Below this line define 3rd party libary settings
 
 
-    BROKER_URL = os.environ.get('BROKER_URL', None)
+    BROKER_URL = os.environ.get('REDISTOGO_URL', None)
