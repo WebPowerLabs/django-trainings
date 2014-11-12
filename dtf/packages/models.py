@@ -35,8 +35,7 @@ class Package(models.Model):
     lessons = models.ManyToManyField("lessons.Lesson", null=True, blank=True)
     groups = models.ManyToManyField("facebook_groups.FacebookGroup", null=True,
                                     blank=True)
-    journals = models.ManyToManyField("journals.JournalQuestion", null=True,
-                                      blank=True)
+
     custom_template = models.CharField(max_length=255, blank=True, 
         help_text="Example: 'packages/mypackage.html'. If this isn't provided,\
         the system will use 'packages/detail.html'.")
