@@ -43,52 +43,27 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
  
-        from profiles.models import UserProfile, UserPrivateProfile
-
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = self.get_object()
-        context['profile'] = UserProfile.objects.get_or_create(user=user)[0]
-        private_profile = UserPrivateProfile.objects.get_or_create(user=user)[0]
+
         # if request.user is user or request.user is staff
-        if private_profile.can_view(self.request.user):
+        if self.request.user == user:
             # import here so we avoid cyclical import errors
             from utils.comments import latest_comments
             from courses.models import CourseFavourite
             from lessons.models import LessonFavourite
             from facebook_groups.models import FacebookGroup
-            from journals.models import Journal, JournalQuestion, JournalEntry
-            from profiles.forms import UserPrivateProfileForm
-            from etfars.views import etfar_tool_form_prep
-            from etfars.models import EtfarAccessCondition
+
 
             # comment feed
             all_comments = latest_comments(self.request)  # get latest comments
             feed = paginate_request(self.request, all_comments, user)
 
-            journal = Journal.objects.get_or_create(author=user)[0]
-            try:
-                entry = JournalEntry.objects.filter(journal=journal,
-                                                    active=True).latest()
-            except JournalEntry.DoesNotExist:
-                entry = None
 
-            # place private profile into form
-            private_form = UserPrivateProfileForm(instance=private_profile)
-
-            if EtfarAccessCondition.objects.access(self.request.user):   
-                # get the etfar forms
-                etfar_form, etfar_form_clone = etfar_tool_form_prep()
-                context['etfar_form'] = etfar_form
-                context['etfar_form_clone'] = etfar_form_clone
-            # pass to context
             context['courses'] = CourseFavourite.objects.active(user)
             context['lessons'] = LessonFavourite.objects.active(user)
             context['groups'] = FacebookGroup.objects.purchased(user)
             context['comments'] = feed
-            context['journal'] = journal
-            context['private_profile'] = private_form   
-            context['questions'] = JournalQuestion.objects.purchased(user)
-            context['entry'] = entry
 
         
         return context

@@ -18,6 +18,7 @@
     "bootstrap": "~3.2.0"
   },
   "resolutions": {
-    "jquery": ">= 1.9.0"
+    "jquery": ">= 1.9.0",
+    "bootstrap": "~3.3.0"
   }
 }
