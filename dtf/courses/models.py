@@ -108,7 +108,7 @@ class CourseFavourite(Favourite):
     class Meta:
         verbose_name_plural = 'Course Favourites'
 
-
+'''
 @receiver(post_save, sender=Course)
 def index_es_doc(instance, **kwarg):
     EsClient(instance).index()
@@ -117,3 +117,4 @@ def index_es_doc(instance, **kwarg):
 @receiver(post_delete, sender=Course)
 def delete_es_doc(instance, **kwarg):
     EsClient(instance).delete()
+'''
